@@ -1,0 +1,72 @@
+name: Treasure Data FinOps
+description: FinOps Framework alignment for Treasure Data (Treasure AI) API and platform cost management. Covers cost visibility, optimization, and governance for enterprise CDP deployments.
+specificationVersion: '1.0'
+url: https://www.treasure.ai/product/pricing/
+framework: FinOps Framework
+focusAlignment:
+  - domain: Understand
+    capabilities:
+      - name: Cost Allocation
+        description: Treasure AI pricing is based on unified customer profiles and behavioral events, enabling clear cost attribution per profile tier or event volume. Enterprise contracts define fixed annual spend.
+        maturityLevel: crawl
+      - name: Data Ingestion Cost Visibility
+        description: Ingestion costs are implicit in the no-compute pricing model — profile and event counts drive billing, not individual API call volume or query compute.
+        maturityLevel: crawl
+      - name: Usage Reporting
+        description: Treasure AI provides account dashboards showing profile counts, segment sizes, and activated audiences. Detailed consumption data informs forecast vs. actuals for FinOps reviews.
+        maturityLevel: walk
+  - domain: Optimize
+    capabilities:
+      - name: Rate Limit Optimization
+        description: Batch import requests up to 500 records and 5 MiB per call to maximize throughput efficiency. Use bulk load sessions rather than streaming where possible to control per-record overhead.
+        maturityLevel: walk
+      - name: Query Cost Management
+        description: Use Presto for interactive queries and Hive for large-batch workloads. Query length limits (1M chars Presto, 2M chars Hive) and concurrent job scheduling govern compute efficiency.
+        maturityLevel: walk
+      - name: Profile Tier Right-Sizing
+        description: Since billing is tied to unified profiles and events, archiving inactive profiles and pruning stale event streams directly reduces contract renewal costs.
+        maturityLevel: walk
+      - name: AI Credit Consumption
+        description: Treasure AI Suites bill by AI credits (600 conversations per credit). Monitor AI Studio usage and restrict access to avoid overrun of included credit allocations.
+        maturityLevel: crawl
+  - domain: Operate
+    capabilities:
+      - name: Budgeting and Forecasting
+        description: Annual enterprise contracts ($100K–$750K range) provide predictable baseline spend. Profile growth and event volume forecasts should drive annual budget planning cycles.
+        maturityLevel: walk
+      - name: Anomaly Detection
+        description: Monitor profile count growth, bulk import session counts (max 2,448), and workflow task concurrency (max 30) via status.treasure.ai and account dashboards to detect unexpected cost spikes.
+        maturityLevel: crawl
+      - name: Chargeback and Showback
+        description: Allocate CDP costs across business units by mapping customer profile segments or database/table usage to product lines or marketing teams.
+        maturityLevel: crawl
+      - name: Vendor Negotiation
+        description: Treasure AI Trade-Up Program provides discounted pricing for switching from legacy platforms. Annual renewal negotiations should benchmark profile-per-dollar metrics against alternatives.
+        maturityLevel: walk
+costDrivers:
+  - name: Unified Customer Profiles
+    description: Primary billing unit. The number of active unified customer profiles in the platform drives the base annual subscription cost.
+    type: primary
+  - name: Behavioral Events
+    description: Volume of behavioral events ingested and processed contributes to the annual plan tier selection.
+    type: primary
+  - name: AI Credits
+    description: Consumption metric for Treasure AI Suites features — 600 conversations per credit. Credits are consumed per AI-driven activation task.
+    type: secondary
+  - name: AI Suite Licenses
+    description: Fixed annual license fees per AI Suite (Engagement, Personalization, Creative, Paid Media, Service) added on top of CDP base cost.
+    type: secondary
+  - name: Professional Services
+    description: Implementation, onboarding, and managed services engagements are billed separately from platform subscriptions.
+    type: ancillary
+pricingModel: no-compute
+billingCycle: annual
+estimatedRange:
+  low: 100000
+  high: 750000
+  currency: USD
+  unit: per year
+notes:
+  - Treasure AI's no-compute pricing model provides more predictable FinOps planning than traditional compute-based CDPs.
+  - QA and Dev sandboxes are included with plans, reducing the cost of non-production environments.
+  - Status monitoring at status.treasure.ai supports operational cost awareness for SLA management.

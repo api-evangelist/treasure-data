@@ -1,0 +1,106 @@
+name: Treasure Data Rate Limits
+description: Rate limits, upper bounds, and usage quotas for the Treasure Data (Treasure AI) platform APIs and data processing capabilities.
+specificationVersion: '0.1'
+url: https://docs.treasure.ai/requirements-and-limitations/list-of-upper-limits-max-on-treasure-data
+limits:
+  - name: Event Import Records Per Request
+    description: Maximum number of records per POST request to the event import endpoint.
+    value: 500
+    unit: records
+    scope: request
+    endpoint: records.in
+  - name: Event Size Per Record
+    description: Maximum size of a single event record submitted via the import endpoint.
+    value: 1000
+    unit: kilobytes
+    scope: record
+    endpoint: records.in
+  - name: Total Batch Size Per Request
+    description: Maximum total batch payload size per import request.
+    value: 5
+    unit: megabytes
+    scope: request
+    endpoint: records.in
+  - name: Profile API Attributes Per Call
+    description: Maximum number of attributes that can be retrieved in a single Profile API call.
+    value: 5
+    unit: attributes
+    scope: request
+    endpoint: Profile API
+  - name: Profile API Payload Size
+    description: Maximum payload size for Profile API responses per call.
+    value: 10
+    unit: kilobytes
+    scope: request
+    endpoint: Profile API
+  - name: Profile API Tokens Per Call
+    description: Maximum number of tokens allowed per Profile API call.
+    value: 5
+    unit: tokens
+    scope: request
+    endpoint: Profile API
+  - name: Concurrent Workflow Tasks
+    description: Maximum number of tasks that can run concurrently within a Treasure Workflow.
+    value: 30
+    unit: tasks
+    scope: account
+    endpoint: Treasure Workflow API
+  - name: Bulk Import Sessions
+    description: Maximum number of bulk import sessions per account.
+    value: 2448
+    unit: sessions
+    scope: account
+    endpoint: Bulk Import API
+  - name: Job Lifetime
+    description: Maximum lifetime of a job in the Treasure Data platform before expiration.
+    value: 90
+    unit: days
+    scope: job
+    endpoint: TD API Jobs
+  - name: Result Download (Browser)
+    description: Maximum result download size via the browser interface.
+    value: 50
+    unit: megabytes
+    scope: download
+  - name: Result Download (CLI)
+    description: Maximum result download size via the command-line interface.
+    value: 16
+    unit: gigabytes
+    scope: download
+  - name: Columns Per Table
+    description: Soft limit on the number of columns per table (streaming import).
+    value: 512
+    unit: columns
+    scope: table
+    endpoint: Streaming Import
+  - name: Columns Per Table (Bulk)
+    description: Column limit for bulk import and data connector import.
+    value: 4096
+    unit: columns
+    scope: table
+    endpoint: Bulk Import API
+  - name: Presto Query Length
+    description: Maximum character length for a Presto query.
+    value: 1000000
+    unit: characters
+    scope: query
+  - name: Hive Query Length
+    description: Maximum character length for a Hive query.
+    value: 2097152
+    unit: characters
+    scope: query
+  - name: Data Connector Input Config
+    description: Maximum byte size of a data connector input configuration.
+    value: 65535
+    unit: bytes
+    scope: configuration
+    endpoint: Bulk Loads API
+  - name: Segment IDs Array
+    description: Maximum size of a segment IDs array in API responses.
+    value: 1
+    unit: kilobytes
+    scope: response
+notes:
+  - Treasure Data does not publicly document per-second or per-minute API request rate limits for the TD API. Contact Treasure AI support for account-specific throttling thresholds.
+  - All limits are subject to change and may be adjustable by the platform on request for enterprise accounts.
+  - Source: https://docs.treasure.ai/requirements-and-limitations/list-of-upper-limits-max-on-treasure-data
