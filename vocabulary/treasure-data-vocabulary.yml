@@ -1,0 +1,107 @@
+vocabulary:
+  - term: CDP
+    label: Customer Data Platform
+    definition: >
+      A software system that creates a persistent, unified customer database
+      accessible to other systems. Treasure Data is an enterprise CDP enabling
+      data collection, unification, and activation.
+
+  - term: database
+    label: Database
+    definition: >
+      A logical container in Treasure Data that holds tables of data.
+      Analogous to a schema in relational databases.
+
+  - term: table
+    label: Table
+    definition: >
+      A collection of records within a Treasure Data database. Tables store
+      time-series event data and can be queried using Presto or Hive.
+
+  - term: job
+    label: Job
+    definition: >
+      An asynchronous unit of work in Treasure Data, typically a query
+      execution (Presto or Hive) or bulk import operation. Jobs are identified
+      by a unique job_id.
+
+  - term: bulk_import
+    label: Bulk Import
+    definition: >
+      A session-based mechanism for uploading large volumes of data to Treasure
+      Data in msgpack.gz format. Sessions progress through uploading, frozen,
+      and committed states.
+
+  - term: bulk_load
+    label: Bulk Load
+    definition: >
+      A scheduled or on-demand data ingestion session that pulls data from
+      external sources (databases, cloud storage, SaaS apps) into Treasure Data.
+
+  - term: presto
+    label: Presto Query Engine
+    definition: >
+      A distributed SQL query engine used in Treasure Data for fast, interactive
+      analytics on large datasets. Supports standard ANSI SQL syntax.
+
+  - term: hive
+    label: Hive Query Engine
+    definition: >
+      An Apache Hive-compatible query engine in Treasure Data for batch
+      processing of large datasets using HiveQL.
+
+  - term: connector
+    label: Output Connector
+    definition: >
+      An integration endpoint that allows Treasure Data job results to be
+      written to external destinations such as data warehouses, marketing
+      platforms, or storage services.
+
+  - term: workflow
+    label: Workflow
+    definition: >
+      An orchestrated sequence of tasks defined using the Digdag workflow engine
+      for automating data pipelines and transformations in Treasure Data.
+
+  - term: digdag
+    label: Digdag
+    definition: >
+      An open-source workflow orchestration engine used by Treasure Data for
+      defining and executing complex multi-step data pipelines.
+
+  - term: api_key
+    label: API Key
+    definition: >
+      A secret credential used to authenticate requests to the Treasure Data
+      API. Passed in the Authorization header as "TD1 <api-key>".
+
+  - term: account_owner
+    label: Account Owner
+    definition: >
+      A user with full administrative privileges over a Treasure Data account,
+      including the ability to manage users, SSO settings, and billing.
+
+  - term: sso
+    label: Single Sign-On
+    definition: >
+      Identity federation capability allowing users to authenticate to Treasure
+      Data using an external Identity Provider (IdP) via SAML.
+
+  - term: msgpack
+    label: MessagePack
+    definition: >
+      A binary serialization format used for efficient data transfer in Treasure
+      Data bulk import operations. Files are typically gzip-compressed (.msgpack.gz).
+
+  - term: postback_api
+    label: Postback API
+    definition: >
+      A JSON-based HTTP event ingestion API for submitting individual records to
+      Treasure Data from systems that cannot use the JavaScript SDK.
+
+  - term: td_audit_log
+    label: TD Audit Log
+    definition: >
+      A built-in Treasure Data database that records all account activity,
+      including queries, user actions, and API calls for compliance and
+      monitoring purposes.

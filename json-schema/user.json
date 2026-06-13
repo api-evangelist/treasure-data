@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/treasure-data/main/json-schema/user.json",
+  "title": "User",
+  "description": "A Treasure Data account user.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique numeric identifier for the user"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "User's email address (also used as login)"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "User's first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "User's last name"
+    },
+    "name": {
+      "type": "string",
+      "description": "User's full display name"
+    },
+    "account_owner": {
+      "type": "boolean",
+      "description": "Whether the user is the account owner"
+    },
+    "administrator": {
+      "type": "boolean",
+      "description": "Whether the user has admin privileges"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Organization the user belongs to"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of roles assigned to the user"
+    },
+    "identifier": {
+      "type": "string",
+      "description": "SSO identifier for the user"
+    },
+    "gravatar_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the user's Gravatar profile image"
+    },
+    "phone": {
+      "type": "string",
+      "description": "User's phone number"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the user account was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the user account was last updated"
+    }
+  },
+  "required": ["id", "email"]
+}

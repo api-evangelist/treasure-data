@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/treasure-data/main/json-schema/bulk-import.json",
+  "title": "BulkImport",
+  "description": "A session-based bulk data import in Treasure Data.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name of the bulk import session"
+    },
+    "database": {
+      "type": "string",
+      "description": "Target database name"
+    },
+    "table": {
+      "type": "string",
+      "description": "Target table name"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current state of the bulk import session",
+      "enum": ["uploading", "frozen", "committed"]
+    },
+    "upload_frozen": {
+      "type": "boolean",
+      "description": "Whether the session is frozen (no further uploads allowed)"
+    },
+    "job_id": {
+      "type": "string",
+      "description": "Job ID of the import execution job"
+    },
+    "valid_records": {
+      "type": "integer",
+      "description": "Number of successfully imported records",
+      "minimum": 0
+    },
+    "error_records": {
+      "type": "integer",
+      "description": "Number of records that failed to import",
+      "minimum": 0
+    },
+    "valid_parts": {
+      "type": "integer",
+      "description": "Number of successfully uploaded parts",
+      "minimum": 0
+    },
+    "error_parts": {
+      "type": "integer",
+      "description": "Number of parts with upload errors",
+      "minimum": 0
+    }
+  },
+  "required": ["name", "database", "table"]
+}

@@ -1,0 +1,1114 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD API
+  description: >
+    Core REST API for managing databases, tables, jobs, bulk imports,
+    connectors, and users within the Treasure Data Customer Data Platform.
+    Supports Presto and Hive query execution on big data warehouses.
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+  - url: https://api.treasuredata.com/v3
+    description: Treasure Data API v3
+security:
+  - TDAuth: []
+tags:
+  - name: Databases
+    description: Manage Treasure Data databases
+  - name: Tables
+    description: Manage tables within databases
+  - name: Jobs
+    description: Submit and manage query jobs
+  - name: Connectors
+    description: Manage output connectors
+  - name: System
+    description: System health and status
+  - name: Users
+    description: User management
+  - name: Bulk Import
+    description: Bulk data import sessions
+  - name: Bulk Loads
+    description: Bulk load sessions from external sources
+  - name: SSO
+    description: Identity federation and SSO settings
+paths:
+  /database/list:
+    get:
+      operationId: listDatabases
+      summary: List databases
+      description: Returns a list of all databases in the account.
+      tags:
+        - Databases
+      responses:
+        '200':
+          description: List of databases
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  databases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Database'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /table/list/{database_name}:
+    get:
+      operationId: listTables
+      summary: List tables in a database
+      description: Returns a list of all tables within the specified database.
+      tags:
+        - Tables
+      parameters:
+        - name: database_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the database
+      responses:
+        '200':
+          description: List of tables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tables:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Table'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /job/issue/presto/{database_name}:
+    post:
+      operationId: issuePrestoQuery
+      summary: Issue a Presto query job
+      description: Submits a Presto SQL query against the specified database.
+      tags:
+        - Jobs
+      parameters:
+        - name: database_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the database to query
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: SQL query string
+                result:
+                  type: string
+                  description: Result output connector URI
+                priority:
+                  type: integer
+                  description: Job priority (-2 to 2)
+      responses:
+        '200':
+          description: Job issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /job/issue/hive/{database_name}:
+    post:
+      operationId: issueHiveQuery
+      summary: Issue a Hive query job
+      description: Submits a Hive query against the specified database.
+      tags:
+        - Jobs
+      parameters:
+        - name: database_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the database to query
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: HiveQL query string
+                result:
+                  type: string
+                  description: Result output connector URI
+                priority:
+                  type: integer
+                  description: Job priority (-2 to 2)
+      responses:
+        '200':
+          description: Job issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /job/result/{job_id}:
+    get:
+      operationId: getJobResult
+      summary: Get job results
+      description: Retrieves the results of a completed query job.
+      tags:
+        - Jobs
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the job
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, msgpack, tsv, csv]
+          description: Output format for results
+      responses:
+        '200':
+          description: Job results
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /result/list:
+    get:
+      operationId: listConnectors
+      summary: List output connectors
+      description: Returns a list of available output connectors.
+      tags:
+        - Connectors
+      responses:
+        '200':
+          description: List of connectors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Connector'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /system/server_status:
+    get:
+      operationId: getServerStatus
+      summary: Check server health
+      description: Checks the health status of the API load balancer.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+        '503':
+          description: Service unavailable
+
+  /user/list:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: Returns the list of users in the account.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/show:
+    get:
+      operationId: showCurrentUser
+      summary: Show current user
+      description: Returns information about the currently authenticated user.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Current user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/remove/{user_email}:
+    post:
+      operationId: removeUser
+      summary: Remove a user
+      description: Deletes the specified user account.
+      tags:
+        - Users
+      parameters:
+        - name: user_email
+          in: path
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Email address of the user to remove
+      responses:
+        '200':
+          description: User removed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /bulk_import/list:
+    get:
+      operationId: listBulkImports
+      summary: List bulk import sessions
+      description: Returns the list of available bulk import sessions.
+      tags:
+        - Bulk Import
+      responses:
+        '200':
+          description: List of bulk imports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bulk_imports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BulkImport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/create/{name}/{database_name}/{table_name}:
+    post:
+      operationId: createBulkImport
+      summary: Create bulk import session
+      description: Creates a new bulk import session targeting the specified database and table.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+        - name: database_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Target database name
+        - name: table_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Target table name
+      responses:
+        '200':
+          description: Bulk import session created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/show/{name}:
+    get:
+      operationId: showBulkImport
+      summary: Show bulk import session
+      description: Returns details of the specified bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkImport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /bulk_import/upload_part/{name}:
+    put:
+      operationId: uploadBulkImportPart
+      summary: Upload bulk import part
+      description: Uploads a msgpack.gz file as a part of the bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              description: msgpack.gz formatted data file
+      responses:
+        '200':
+          description: Part uploaded successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/list_parts/{name}:
+    get:
+      operationId: listBulkImportParts
+      summary: List bulk import parts
+      description: Returns the list of uploaded parts for the specified bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: List of parts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parts:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/perform/{name}:
+    post:
+      operationId: performBulkImport
+      summary: Perform bulk import
+      description: Executes the bulk import job for the specified session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import job started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/commit/{name}:
+    post:
+      operationId: commitBulkImport
+      summary: Commit bulk import
+      description: Finalizes the bulk import session and makes data available.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import committed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/freeze/{name}:
+    post:
+      operationId: freezeBulkImport
+      summary: Freeze bulk import session
+      description: Prevents further uploads to the specified bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session frozen
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/unfreeze/{name}:
+    post:
+      operationId: unfreezeBulkImport
+      summary: Unfreeze bulk import session
+      description: Resumes uploads to the specified frozen bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session unfrozen
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_import/delete/{name}:
+    post:
+      operationId: deleteBulkImport
+      summary: Delete bulk import session
+      description: Removes the specified bulk import session.
+      tags:
+        - Bulk Import
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_loads:
+    get:
+      operationId: listBulkLoads
+      summary: List bulk load sessions
+      description: Returns the list of available bulk load sessions.
+      tags:
+        - Bulk Loads
+      responses:
+        '200':
+          description: List of bulk loads
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BulkLoad'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bulk_loads/{name}:
+    get:
+      operationId: getBulkLoad
+      summary: Get bulk load session
+      description: Retrieves a specific bulk load session by name.
+      tags:
+        - Bulk Loads
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk load session
+      responses:
+        '200':
+          description: Bulk load session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkLoad'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /bulk_loads/{name}/jobs:
+    get:
+      operationId: listBulkLoadJobs
+      summary: List bulk load jobs
+      description: Lists the executed job history for the specified bulk load session.
+      tags:
+        - Bulk Loads
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Name of the bulk load session
+      responses:
+        '200':
+          description: List of bulk load jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BulkLoadJob'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /account/sso_setting:
+    get:
+      operationId: getSSOSetting
+      summary: Get SSO settings
+      description: Gets account settings for their SSO configuration.
+      tags:
+        - SSO
+      responses:
+        '200':
+          description: SSO settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSSOSetting
+      summary: Create SSO settings
+      description: Allows admin to create and configure an IdP for an account.
+      tags:
+        - SSO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOSettingRequest'
+      responses:
+        '200':
+          description: SSO settings created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateSSOSetting
+      summary: Update SSO settings
+      description: Allows admin to make updates to an IdP account setting.
+      tags:
+        - SSO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOSettingRequest'
+      responses:
+        '200':
+          description: SSO settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteSSOSetting
+      summary: Delete SSO settings
+      description: Allows admin to delete an IdP account setting.
+      tags:
+        - SSO
+      responses:
+        '200':
+          description: SSO settings deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/create_with_sso/{user_first_name}:
+    post:
+      operationId: createUserWithSSO
+      summary: Create user with SSO
+      description: Allows the admin to create a user with SSO authentication.
+      tags:
+        - SSO
+        - Users
+      parameters:
+        - name: user_first_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: First name of the new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - identifier
+              properties:
+                email:
+                  type: string
+                  format: email
+                identifier:
+                  type: string
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/enforce_sso/{user_email}:
+    post:
+      operationId: enforceSSOForUser
+      summary: Enforce SSO for user
+      description: Allows admin to make it mandatory for a user to login with SSO.
+      tags:
+        - SSO
+        - Users
+      parameters:
+        - name: user_email
+          in: path
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOUserRequest'
+      responses:
+        '200':
+          description: SSO enforced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/enable_sso/{user_email}:
+    post:
+      operationId: enableSSOForUser
+      summary: Enable SSO for user
+      description: Allows admin to permit a user to login with SSO.
+      tags:
+        - SSO
+        - Users
+      parameters:
+        - name: user_email
+          in: path
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOUserRequest'
+      responses:
+        '200':
+          description: SSO enabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/disable_sso/{user_email}:
+    post:
+      operationId: disableSSOForUser
+      summary: Disable SSO for user
+      description: Allows admin to prohibit a user from logging in with SSO.
+      tags:
+        - SSO
+        - Users
+      parameters:
+        - name: user_email
+          in: path
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sso_setting:
+                  type: object
+                  properties:
+                    user_email:
+                      type: string
+      responses:
+        '200':
+          description: SSO disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        Treasure Data API key authentication. Set header value to
+        "TD1 <your-api-key>".
+
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+
+  schemas:
+    Database:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Database name
+        count:
+          type: integer
+          description: Number of tables
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        permission:
+          type: string
+
+    Table:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        estimated_storage_size:
+          type: integer
+
+    JobIssueResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          description: Unique identifier of the submitted job
+        type:
+          type: string
+          description: Query type (presto or hive)
+        database:
+          type: string
+
+    Connector:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        name:
+          type: string
+        account_owner:
+          type: boolean
+        administrator:
+          type: boolean
+        organization:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        gravatar_url:
+          type: string
+        phone:
+          type: string
+        identifier:
+          type: string
+
+    BulkImport:
+      type: object
+      properties:
+        name:
+          type: string
+        database:
+          type: string
+        table:
+          type: string
+        status:
+          type: string
+          enum: [uploading, frozen, committed]
+        upload_frozen:
+          type: boolean
+        job_id:
+          type: string
+        valid_records:
+          type: integer
+        error_records:
+          type: integer
+        valid_parts:
+          type: integer
+        error_parts:
+          type: integer
+
+    BulkLoad:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        cron:
+          type: string
+          description: Cron schedule expression
+        timezone:
+          type: string
+        delay:
+          type: integer
+        database:
+          type: string
+        table:
+          type: string
+        config:
+          type: object
+          description: Bulk load source configuration
+        config_diff:
+          type: object
+          description: Configuration diff from last run
+
+    BulkLoadJob:
+      type: object
+      properties:
+        account_id:
+          type: integer
+        status:
+          type: string
+        records:
+          type: integer
+        schema:
+          type: string
+        job_id:
+          type: string
+        type:
+          type: string
+        config:
+          type: object
+        database:
+          type: string
+        table:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        start_at:
+          type: string
+          format: date-time
+        end_at:
+          type: string
+          format: date-time
+
+    SSOSettingRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+              nullable: true
+            cert:
+              type: string
+
+    SSOSettingResponse:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            cert:
+              type: string
+            identity_provider_name:
+              type: string
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+            strategy:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
+
+    SSOUserRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            user_email:
+              type: string
+            identifier:
+              type: string
+
+    SSOUserResponse:
+      type: object
+      properties:
+        first_name:
+          type: string
+        email:
+          type: string
+        identifier:
+          type: string

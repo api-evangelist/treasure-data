@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/treasure-data/main/json-schema/job.json",
+  "title": "Job",
+  "description": "An asynchronous query or import job in Treasure Data.",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "description": "Unique identifier for the job"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of job",
+      "enum": ["presto", "hive", "bulk_import"]
+    },
+    "database": {
+      "type": "string",
+      "description": "Database against which the job runs"
+    },
+    "query": {
+      "type": "string",
+      "description": "SQL or HiveQL query string"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the job",
+      "enum": ["queued", "running", "success", "error", "killed"]
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Job scheduling priority (-2 = lowest, 2 = highest)",
+      "minimum": -2,
+      "maximum": 2
+    },
+    "result": {
+      "type": "string",
+      "description": "Output connector URI for job results"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "start_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration": {
+      "type": "number",
+      "description": "Job execution duration in seconds"
+    },
+    "result_size": {
+      "type": "integer",
+      "description": "Size of job result in bytes"
+    },
+    "num_records": {
+      "type": "integer",
+      "description": "Number of records in the result"
+    }
+  },
+  "required": ["job_id", "type"]
+}
