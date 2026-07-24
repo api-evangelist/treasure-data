@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD Bulk Import System API
+  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
+
+    '
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+- url: https://api.treasuredata.com/v3
+  description: Treasure Data API v3
+security:
+- TDAuth: []
+tags:
+- name: System
+  description: System health and status
+paths:
+  /system/server_status:
+    get:
+      operationId: getServerStatus
+      summary: Check server health
+      description: Checks the health status of the API load balancer.
+      tags:
+      - System
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+        '503':
+          description: Service unavailable
+components:
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+
+        '

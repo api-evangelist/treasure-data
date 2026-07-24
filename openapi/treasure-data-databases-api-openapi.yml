@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD Bulk Import Databases API
+  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
+
+    '
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+- url: https://api.treasuredata.com/v3
+  description: Treasure Data API v3
+security:
+- TDAuth: []
+tags:
+- name: Databases
+  description: Manage Treasure Data databases
+paths:
+  /database/list:
+    get:
+      operationId: listDatabases
+      summary: List databases
+      description: Returns a list of all databases in the account.
+      tags:
+      - Databases
+      responses:
+        '200':
+          description: List of databases
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  databases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Database'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    Database:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Database name
+        count:
+          type: integer
+          description: Number of tables
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        permission:
+          type: string
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+
+        '

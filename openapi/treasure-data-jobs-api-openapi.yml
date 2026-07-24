@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD Bulk Import Jobs API
+  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
+
+    '
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+- url: https://api.treasuredata.com/v3
+  description: Treasure Data API v3
+security:
+- TDAuth: []
+tags:
+- name: Jobs
+  description: Submit and manage query jobs
+paths:
+  /job/issue/presto/{database_name}:
+    post:
+      operationId: issuePrestoQuery
+      summary: Issue a Presto query job
+      description: Submits a Presto SQL query against the specified database.
+      tags:
+      - Jobs
+      parameters:
+      - name: database_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the database to query
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: SQL query string
+                result:
+                  type: string
+                  description: Result output connector URI
+                priority:
+                  type: integer
+                  description: Job priority (-2 to 2)
+      responses:
+        '200':
+          description: Job issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /job/issue/hive/{database_name}:
+    post:
+      operationId: issueHiveQuery
+      summary: Issue a Hive query job
+      description: Submits a Hive query against the specified database.
+      tags:
+      - Jobs
+      parameters:
+      - name: database_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the database to query
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: HiveQL query string
+                result:
+                  type: string
+                  description: Result output connector URI
+                priority:
+                  type: integer
+                  description: Job priority (-2 to 2)
+      responses:
+        '200':
+          description: Job issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /job/result/{job_id}:
+    get:
+      operationId: getJobResult
+      summary: Get job results
+      description: Retrieves the results of a completed query job.
+      tags:
+      - Jobs
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the job
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - msgpack
+          - tsv
+          - csv
+        description: Output format for results
+      responses:
+        '200':
+          description: Job results
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    JobIssueResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          description: Unique identifier of the submitted job
+        type:
+          type: string
+          description: Query type (presto or hive)
+        database:
+          type: string
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+
+        '

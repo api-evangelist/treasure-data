@@ -1,0 +1,329 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD Bulk Import API
+  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
+
+    '
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+- url: https://api.treasuredata.com/v3
+  description: Treasure Data API v3
+security:
+- TDAuth: []
+tags:
+- name: Bulk Import
+  description: Bulk data import sessions
+paths:
+  /bulk_import/list:
+    get:
+      operationId: listBulkImports
+      summary: List bulk import sessions
+      description: Returns the list of available bulk import sessions.
+      tags:
+      - Bulk Import
+      responses:
+        '200':
+          description: List of bulk imports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bulk_imports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BulkImport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/create/{name}/{database_name}/{table_name}:
+    post:
+      operationId: createBulkImport
+      summary: Create bulk import session
+      description: Creates a new bulk import session targeting the specified database and table.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      - name: database_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Target database name
+      - name: table_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Target table name
+      responses:
+        '200':
+          description: Bulk import session created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/show/{name}:
+    get:
+      operationId: showBulkImport
+      summary: Show bulk import session
+      description: Returns details of the specified bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkImport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /bulk_import/upload_part/{name}:
+    put:
+      operationId: uploadBulkImportPart
+      summary: Upload bulk import part
+      description: Uploads a msgpack.gz file as a part of the bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              description: msgpack.gz formatted data file
+      responses:
+        '200':
+          description: Part uploaded successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/list_parts/{name}:
+    get:
+      operationId: listBulkImportParts
+      summary: List bulk import parts
+      description: Returns the list of uploaded parts for the specified bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: List of parts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parts:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/perform/{name}:
+    post:
+      operationId: performBulkImport
+      summary: Perform bulk import
+      description: Executes the bulk import job for the specified session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import job started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobIssueResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/commit/{name}:
+    post:
+      operationId: commitBulkImport
+      summary: Commit bulk import
+      description: Finalizes the bulk import session and makes data available.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Bulk import committed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/freeze/{name}:
+    post:
+      operationId: freezeBulkImport
+      summary: Freeze bulk import session
+      description: Prevents further uploads to the specified bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session frozen
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/unfreeze/{name}:
+    post:
+      operationId: unfreezeBulkImport
+      summary: Unfreeze bulk import session
+      description: Resumes uploads to the specified frozen bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session unfrozen
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bulk_import/delete/{name}:
+    post:
+      operationId: deleteBulkImport
+      summary: Delete bulk import session
+      description: Removes the specified bulk import session.
+      tags:
+      - Bulk Import
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the bulk import session
+      responses:
+        '200':
+          description: Session deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    BulkImport:
+      type: object
+      properties:
+        name:
+          type: string
+        database:
+          type: string
+        table:
+          type: string
+        status:
+          type: string
+          enum:
+          - uploading
+          - frozen
+          - committed
+        upload_frozen:
+          type: boolean
+        job_id:
+          type: string
+        valid_records:
+          type: integer
+        error_records:
+          type: integer
+        valid_parts:
+          type: integer
+        error_parts:
+          type: integer
+    JobIssueResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          description: Unique identifier of the submitted job
+        type:
+          type: string
+          description: Query type (presto or hive)
+        database:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+
+        '

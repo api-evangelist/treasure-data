@@ -1,0 +1,295 @@
+openapi: 3.0.3
+info:
+  title: Treasure Data TD Bulk Import SSO API
+  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
+
+    '
+  version: v3
+  contact:
+    url: https://docs.treasure.ai/apis/td-api
+  license:
+    name: Treasure Data Terms of Service
+    url: https://www.treasure.ai/
+servers:
+- url: https://api.treasuredata.com/v3
+  description: Treasure Data API v3
+security:
+- TDAuth: []
+tags:
+- name: SSO
+  description: Identity federation and SSO settings
+paths:
+  /account/sso_setting:
+    get:
+      operationId: getSSOSetting
+      summary: Get SSO settings
+      description: Gets account settings for their SSO configuration.
+      tags:
+      - SSO
+      responses:
+        '200':
+          description: SSO settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSSOSetting
+      summary: Create SSO settings
+      description: Allows admin to create and configure an IdP for an account.
+      tags:
+      - SSO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOSettingRequest'
+      responses:
+        '200':
+          description: SSO settings created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateSSOSetting
+      summary: Update SSO settings
+      description: Allows admin to make updates to an IdP account setting.
+      tags:
+      - SSO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOSettingRequest'
+      responses:
+        '200':
+          description: SSO settings updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOSettingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteSSOSetting
+      summary: Delete SSO settings
+      description: Allows admin to delete an IdP account setting.
+      tags:
+      - SSO
+      responses:
+        '200':
+          description: SSO settings deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/create_with_sso/{user_first_name}:
+    post:
+      operationId: createUserWithSSO
+      summary: Create user with SSO
+      description: Allows the admin to create a user with SSO authentication.
+      tags:
+      - SSO
+      parameters:
+      - name: user_first_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: First name of the new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - identifier
+              properties:
+                email:
+                  type: string
+                  format: email
+                identifier:
+                  type: string
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/enforce_sso/{user_email}:
+    post:
+      operationId: enforceSSOForUser
+      summary: Enforce SSO for user
+      description: Allows admin to make it mandatory for a user to login with SSO.
+      tags:
+      - SSO
+      parameters:
+      - name: user_email
+        in: path
+        required: true
+        schema:
+          type: string
+          format: email
+        description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOUserRequest'
+      responses:
+        '200':
+          description: SSO enforced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/enable_sso/{user_email}:
+    post:
+      operationId: enableSSOForUser
+      summary: Enable SSO for user
+      description: Allows admin to permit a user to login with SSO.
+      tags:
+      - SSO
+      parameters:
+      - name: user_email
+        in: path
+        required: true
+        schema:
+          type: string
+          format: email
+        description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSOUserRequest'
+      responses:
+        '200':
+          description: SSO enabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/disable_sso/{user_email}:
+    post:
+      operationId: disableSSOForUser
+      summary: Disable SSO for user
+      description: Allows admin to prohibit a user from logging in with SSO.
+      tags:
+      - SSO
+      parameters:
+      - name: user_email
+        in: path
+        required: true
+        schema:
+          type: string
+          format: email
+        description: Email address of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sso_setting:
+                  type: object
+                  properties:
+                    user_email:
+                      type: string
+      responses:
+        '200':
+          description: SSO disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    SSOSettingResponse:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            cert:
+              type: string
+            identity_provider_name:
+              type: string
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+            strategy:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
+    SSOUserResponse:
+      type: object
+      properties:
+        first_name:
+          type: string
+        email:
+          type: string
+        identifier:
+          type: string
+    SSOUserRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            user_email:
+              type: string
+            identifier:
+              type: string
+    SSOSettingRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+              nullable: true
+            cert:
+              type: string
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  securitySchemes:
+    TDAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+
+        '
