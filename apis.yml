@@ -1,5 +1,14 @@
 name: Treasure Data
-description: Enterprise customer data platform (now Treasure AI) with a REST API for managing jobs, databases, tables, bulk import, authentication, and running Presto or Hive queries on big data.
+description: >-
+  Treasure Data — rebranded Treasure AI in April 2026 — is an enterprise customer data platform that
+  unifies first-party customer data and activates it across marketing, service and AI agent workloads.
+  It publishes eight OpenAPI descriptions covering 405 operations: the Treasure Data API v3 for
+  databases, tables, query jobs, schedules and access control; the CDP (Audience) API for parent
+  segments, segments, journeys, funnels, predictive segments and activations; the LLM API for AI agents,
+  chats and knowledge bases; Treasure Workflow for Digdag orchestration; a Data Warehouse Integration
+  API for Snowflake and Databricks; the Personalization Service for real-time offers; and Postback v1
+  and v2 for event ingestion. Queries run on Trino/Presto and Hive. An official MCP server exposes 23
+  tools over stdio and the documentation site serves a live remote MCP endpoint.
 type: Index
 accessModel:
   pricing: freemium
@@ -17,7 +26,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/treasure-data.png
 url: https://raw.githubusercontent.com/api-evangelist/treasure-data/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 aid: treasure-data
 tags:
@@ -77,8 +86,8 @@ apis:
     JSON-based event ingestion API for submitting data records to Treasure Data from systems that cannot
     use the JavaScript SDK.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.treasure.ai/apis
-  baseURL: https://api.treasuredata.com
+  humanURL: https://docs.treasure.ai/apis/postback/quickstart
+  baseURL: https://in.treasuredata.com
   tags:
   - Events
   - Data Ingestion
@@ -91,8 +100,8 @@ apis:
     REST API for orchestrating and automating data workflows within the Treasure Data platform using Digdag-based
     workflow engine.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.treasure.ai/apis
-  baseURL: https://api.treasuredata.com
+  humanURL: https://docs.treasure.ai/apis/workflow
+  baseURL: https://api-workflow.treasuredata.com
   tags:
   - Workflows
   - Orchestration
@@ -209,6 +218,195 @@ apis:
     url: openapi/treasure-data-users-api-openapi.yml
   - type: Documentation
     url: https://docs.treasure.ai/apis/td-api
+- aid: treasure-data:treasure-data-api-v3
+  name: Treasure Data API v3
+  description: >-
+    The provider-published Treasure Data API v3 — 79 operations across databases, tables, query jobs,
+    schedules, result connections, access-control policies and policy groups, users and delegated admins.
+    Harvested verbatim from the OpenAPI description Treasure AI publishes on its documentation site.
+  humanURL: https://docs.treasure.ai/apis/td_api_v3-public
+  baseURL: https://api.treasuredata.com/v3
+  tags:
+  - Databases
+  - Tables
+  - Jobs
+  - Schedules
+  - Access Control
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-td-api-v3-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-td-api-v3-overlay.yaml
+  - type: Documentation
+    url: https://docs.treasure.ai/apis/td-api
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/td_api_v3-public
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/td-api
+- aid: treasure-data:treasure-data-cdp-api
+  name: Treasure Data CDP API
+  description: >-
+    The CDP (Audience) API — 183 operations covering parent segments, segments, activations and
+    syndications, journeys and realtime journeys, funnels, predictive segments, folders, tokens and
+    activation templates. REST endpoints plus a JSON:API-shaped surface under /entities.
+  humanURL: https://docs.treasure.ai/apis/td_cdp_api-public
+  baseURL: https://api-cdp.treasuredata.com
+  tags:
+  - CDP
+  - Audiences
+  - Segments
+  - Activations
+  - Journeys
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-cdp-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-cdp-api-overlay.yaml
+  - type: Documentation
+    url: https://docs.treasure.ai/apis/audience-api/overview
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/td_cdp_api-public
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/audience-api
+- aid: treasure-data:treasure-data-llm-api
+  name: Treasure Data LLM API
+  description: >-
+    The LLM API — 87 operations for AI agents, agent schedules, chats and chat interfaces, actions,
+    knowledge bases, artifacts, image generation, integrations and projects. The programmatic surface
+    behind AI Agent Foundry and Treasure AI Studio.
+  humanURL: https://docs.treasure.ai/apis/llm_api-public
+  baseURL: https://llm-api.treasuredata.com
+  tags:
+  - AI
+  - Agents
+  - LLM
+  - Knowledge Base
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-llm-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-llm-api-overlay.yaml
+  - type: Documentation
+    url: https://docs.treasure.ai/apis/llm-api
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/llm_api-public
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/llm-api
+- aid: treasure-data:treasure-data-workflow-api
+  name: Treasure Workflow API
+  description: >-
+    Treasure Workflow — the Digdag-based orchestration API. 43 operations over projects, workflow
+    definitions, revisions, schedules, sessions, attempts, tasks, logs, secrets and resource pools.
+  humanURL: https://docs.treasure.ai/apis/workflow
+  baseURL: https://api-workflow.treasuredata.com
+  tags:
+  - Workflows
+  - Orchestration
+  - Digdag
+  - Scheduling
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-workflow-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-workflow-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/workflow
+- aid: treasure-data:treasure-data-dwh-integration-api
+  name: Treasure Data Data Warehouse Integration API
+  description: >-
+    First class Data Warehouse Integration API — 10 operations for creating and running bulkload sessions
+    against Snowflake and Databricks, with schedules, session attempts and workflow runs.
+  humanURL: https://docs.treasure.ai/apis/dwh_integration_api-public
+  baseURL: https://dwh-integration-api.treasuredata.com
+  tags:
+  - Data Warehouse
+  - Snowflake
+  - Databricks
+  - ETL
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-dwh-integration-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-dwh-integration-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/dwh_integration_api-public
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/dwh-integration-api/quickstart
+- aid: treasure-data:treasure-data-personalization-api
+  name: Treasure Data Personalization Service
+  description: >-
+    Real-time personalization — ingest a single event and receive personalization offers from the
+    real-time engines. Versioned by content type (Accept application/vnd.treasuredata.v1+json) and
+    routed by a WP13n-Token header.
+  humanURL: https://docs.treasure.ai/apis/p13n-api
+  baseURL: https://us01.p13n.in.treasuredata.com
+  tags:
+  - Personalization
+  - Real-time
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-personalization-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-personalization-api-overlay.yaml
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/p13n-api
+- aid: treasure-data:treasure-data-postback-api
+  name: Treasure Data Postback API
+  description: >-
+    JSON event ingestion endpoint used by the JavaScript, iOS, Android, React Native and Cordova SDKs for
+    small, frequent payloads.
+  humanURL: https://docs.treasure.ai/apis/postback/quickstart
+  baseURL: https://in.treasuredata.com
+  tags:
+  - Events
+  - Data Ingestion
+  - JSON
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-postback-api-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-postback-api-overlay.yaml
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/postback/quickstart
+- aid: treasure-data:treasure-data-postback-api-v2
+  name: Treasure Data Postback API v2
+  description: >-
+    Next-generation event ingestion on records.in.treasuredata.com with header-based authentication
+    (X-TD-Write-Key or a full TD1 key) and a region-templated host.
+  humanURL: https://docs.treasure.ai/apis/postback-v2
+  baseURL: https://us01.records.in.treasuredata.com
+  tags:
+  - Events
+  - Data Ingestion
+  - JSON
+  properties:
+  - type: OpenAPI
+    url: openapi/treasure-data-postback-api-v2-openapi.yml
+  - type: Overlay
+    url: overlays/treasure-data-postback-api-v2-overlay.yaml
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/postback-v2/quickstart
+- aid: treasure-data:treasure-data-mcp
+  name: Treasure Data MCP Servers
+  description: >-
+    Two Model Context Protocol servers — the official @treasuredata/mcp-server (23 tools, local stdio,
+    public preview) and a live remote documentation MCP endpoint on the docs host whose six tools return
+    Treasure AI's own OpenAPI descriptions.
+  humanURL: https://github.com/treasure-data/td-mcp-server
+  baseURL: https://docs.treasure.ai/mcp
+  tags:
+  - MCP
+  - Agents
+  - AI
+  properties:
+  - type: MCPServer
+    url: mcp/treasure-data-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/treasure-data-tool-crosswalk.yml
+  - type: Documentation
+    url: https://github.com/treasure-data/td-mcp-server
 common:
   - type: AgenticAccess
     url: agentic-access/treasure-data-agentic-access.yml
@@ -222,8 +420,6 @@ common:
     url: https://www.treasure.ai/
   - type: Documentation
     url: https://docs.treasure.ai/
-  - type: GitHubOrg
-    url: https://github.com/treasure-data
   - type: LinkedIn
     url: https://www.linkedin.com/company/treasure-data-inc-
   - type: Blog
@@ -240,6 +436,67 @@ common:
     url: rate-limits/treasure-data-rate-limits.yml
   - type: FinOps
     url: finops/treasure-data-finops.yml
+  - type: Packages
+    url: packages/treasure-data-packages.yml
+  - type: SDKs
+    url: packages/treasure-data-packages.yml
+  - type: CLI
+    url: cli/treasure-data-cli.yml
+  - type: MCPServer
+    url: mcp/treasure-data-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/treasure-data-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/treasure-data-llms.txt
+  - type: WellKnown
+    url: well-known/treasure-data-well-known.yml
+  - type: OAuthScopes
+    url: scopes/treasure-data-scopes.yml
+  - type: Conventions
+    url: conventions/treasure-data-conventions.yml
+  - type: Idempotency
+    url: conventions/treasure-data-conventions.yml
+  - type: ErrorCatalog
+    url: errors/treasure-data-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/treasure-data-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/treasure-data-changelog.yml
+  - type: Conformance
+    url: conformance/treasure-data-conformance.yml
+  - type: Compliance
+    url: https://www.treasure.ai/security/
+  - type: DataModel
+    url: data-model/treasure-data-data-model.yml
+  - type: Webhooks
+    url: asyncapi/treasure-data-webhooks.yml
+  - type: Sandbox
+    url: sandbox/treasure-data-sandbox.yml
+  - type: Vocabulary
+    url: vocabulary/treasure-data-vocabulary.yml
+  - type: DeveloperPortal
+    url: https://docs.treasure.ai/apis
+  - type: APIReference
+    url: https://docs.treasure.ai/apis/td_api_v3-public
+  - type: GettingStarted
+    url: https://docs.treasure.ai/apis/td-api
+  - type: ReleaseNotes
+    url: https://docs.treasure.ai/release-notes
+  - type: Login
+    url: https://console.treasuredata.com/users/sign_in
+  - type: TermsOfService
+    url: https://www.treasure.ai/terms
+  - type: PrivacyPolicy
+    url: https://www.treasure.ai/privacy
+  - type: GitHubOrganization
+    url: https://github.com/treasure-data
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 32
+  pass: local-v1
