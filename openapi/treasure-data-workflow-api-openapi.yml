@@ -1,0 +1,2441 @@
+openapi: 3.0.1
+info:
+  description: Treasure Workflow
+  title: Treasure Workflow
+  version: '1.0'
+servers:
+  - description: aws
+    url: https://api-workflow.treasuredata.com
+  - description: aws-tokyo
+    url: https://api-workflow.treasuredata.co.jp
+  - description: eu01
+    url: https://api-workflow.eu01.treasuredata.com
+  - description: ap02
+    url: https://api-workflow.ap02.treasuredata.com
+  - description: ap03
+    url: https://api-workflow.ap03.treasuredata.com
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/attempts:
+    get:
+      operationId: getAttempts
+      parameters:
+        - description: exact matching filter on project name
+          in: query
+          name: project
+          schema:
+            type: string
+        - description: exact matching filter on workflow name
+          in: query
+          name: workflow
+          schema:
+            type: string
+        - description: list more than 1 attempts per session
+          in: query
+          name: include_retried
+          schema:
+            type: boolean
+        - description: >-
+            List attempts whose ID is smaller than this ID for pagination.
+            Attempts are returned in descending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int64
+        - description: number of attempts to return
+          in: query
+          name: page_size
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttemptCollection'
+          description: default response
+      summary: List attempts with filters
+      tags:
+        - Attempt
+    put:
+      description: >-
+        "resume" is used to rerun an attempt. It is used in the case an attempt
+        failed then users want to resume it from the middle.It has two modes
+        "failed" or "from" to set the way to resume.In "failed" mode, the
+        attempt specified by "attemptId" is resumed from the failed tasks.In
+        "from" mode, the attempt is resumed from the task which is set in "from"
+        field.
+      operationId: startAttempt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestSessionAttemptRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttempt'
+          description: return an attempt
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttempt'
+          description: session or attempt already exist. return the existing attempt.
+      summary: >-
+        Start a workflow execution as a new session or a new attempt of an
+        existing session
+      tags:
+        - Attempt
+  /api/attempts/{id}:
+    get:
+      operationId: getAttempt
+      parameters:
+        - description: attempt id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttempt'
+          description: default response
+      summary: Get an attempt
+      tags:
+        - Attempt
+  /api/attempts/{id}/kill:
+    post:
+      operationId: killAttempt
+      parameters:
+        - description: attempt id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttempt'
+          description: return an attempt
+      summary: Set a cancel-requested flag on a running attempt
+      tags:
+        - Attempt
+  /api/attempts/{id}/retries:
+    get:
+      operationId: getAttemptRetries
+      parameters:
+        - description: attempt id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttemptCollection'
+          description: default response
+      summary: List attempts of a session of a given attempt
+      tags:
+        - Attempt
+  /api/attempts/{id}/tasks:
+    get:
+      operationId: getTasks
+      parameters:
+        - description: attempt id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestTaskCollection'
+          description: default response
+      summary: List tasks of an attempt
+      tags:
+        - Attempt
+  /api/logs/{attempt_id}/files:
+    get:
+      operationId: getFileHandles
+      parameters:
+        - description: attempt id
+          in: path
+          name: attempt_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: partial prefix match filter on task name
+          in: query
+          name: task
+          schema:
+            type: string
+        - description: enable returning direct download handle
+          in: query
+          name: direct_download
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestLogFileHandleCollection'
+          description: default response
+      summary: List log files of an attempt with filters
+      tags:
+        - Log
+  /api/logs/{attempt_id}/files/{file_name}:
+    get:
+      operationId: getFile
+      parameters:
+        - description: attempt id
+          in: path
+          name: attempt_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: log file name
+          in: path
+          name: file_name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: byte
+          description: default response
+      summary: Download a log file
+      tags:
+        - Log
+  /api/pool_rules:
+    get:
+      description: List pool rules.
+      operationId: getPoolRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRuleCollection'
+          description: List of pool rules
+      summary: List pool rules
+      tags:
+        - Pool
+    post:
+      description: >-
+        Create a rule that assigns an attempt to a pool based on conditions. A
+        rule consists of a priority, conditions, and a pool ID. Rules are
+        evaluated in priority order, from the lowest value to the highest value.
+        Multiple rules cannot have the same priority. If all of a rule's
+        conditions are met, an attempt is assigned to its pool. If none of the
+        rules are met, an attempt is assigned to a default pool.
+      operationId: createPoolRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule created
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+      summary: Create a pool rule
+      tags:
+        - Pool
+  /api/pool_rules/{poolRuleId}:
+    delete:
+      description: Delete a pool rule.
+      operationId: deletePoolRule
+      parameters:
+        - in: path
+          name: poolRuleId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the rule
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule deleted
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool rule not found
+      summary: Delete a pool rule
+      tags:
+        - Pool
+    get:
+      description: Get a pool rule.
+      operationId: getPoolRule
+      parameters:
+        - in: path
+          name: poolRuleId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the rule
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule
+        '404':
+          description: Pool rule not found
+      summary: Get a pool rule
+      tags:
+        - Pool
+    patch:
+      description: Update a rule that assigns an attempt to a pool based on conditions.
+      operationId: updatePoolRule
+      parameters:
+        - in: path
+          name: poolRuleId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule updated
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool rule not found
+      summary: Update a pool rule
+      tags:
+        - Pool
+  /api/pools:
+    get:
+      description: List pools.
+      operationId: getPools
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolCollection'
+          description: List of pools
+      summary: List pools
+      tags:
+        - Pool
+    post:
+      description: >-
+        Create a pool with the specified name and concurrency limit. A default
+        pool is created with the account's concurrency limit if it does not
+        exist. The default pool’s concurrency limit is reduced by the new pool’s
+        concurrency limit. You cannot create a pool if the default pool has more
+        running attempts than its new reduced concurrency limit.
+      operationId: createPool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool created
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '409':
+          description: Pool name is already used
+      summary: Create a pool
+      tags:
+        - Pool
+  /api/pools/{poolId}:
+    delete:
+      description: >-
+        Delete a pool. You cannot delete a pool if there are any attempts
+        running or queued in the pool, if a pool rule references it, or if it is
+        the default pool. The deleted pool’s concurrency limit is added to the
+        default pool’s concurrency limit.
+      operationId: deletePool
+      parameters:
+        - in: path
+          name: poolId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the pool.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool deleted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool not found
+      summary: Delete a pool
+      tags:
+        - Pool
+    get:
+      description: Get a pool.
+      operationId: getPool
+      parameters:
+        - in: path
+          name: poolId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the pool
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool
+        '404':
+          description: Pool not found
+      summary: Get a pool
+      tags:
+        - Pool
+    patch:
+      description: >-
+        Update a pool with the specified name and concurrency limit. You cannot
+        update the default pool. The default pool’s concurrency limit is
+        adjusted to accommodate the new concurrency limit. A pool’s concurrency
+        limit cannot be reduced if it has more running attempts than its new
+        reduced concurrency limit.
+      operationId: updatePool
+      parameters:
+        - in: path
+          name: poolId
+          required: true
+          schema:
+            type: integer
+            format: int32
+            description: ID of the pool.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool updated
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool not found
+      summary: Update a pool
+      tags:
+        - Pool
+  /api/projects:
+    get:
+      operationId: getProjects
+      parameters:
+        - description: exact matching filter on project name
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: >-
+            List projects whose ID is greater than this ID for pagination.
+            Projects are returned in ascending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int32
+        - description: number of projects to return
+          in: query
+          name: count
+          schema:
+            type: integer
+            format: int32
+        - description: name pattern to be partially matched
+          in: query
+          name: name_pattern
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestProjectCollection'
+          description: default response
+      summary: List projects with filters
+      tags:
+        - Project
+    put:
+      operationId: putProject
+      parameters:
+        - description: project name
+          in: query
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: revision
+          in: query
+          name: revision
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Content-Length
+          schema:
+            type: integer
+            format: int64
+        - description: >-
+            start scheduling of new workflows from the given time instead of
+            current time
+          in: query
+          name: schedule_from
+          schema:
+            type: string
+        - description: clear_schedule
+          in: query
+          name: clear_schedule
+          schema:
+            type: array
+            items:
+              type: string
+        - description: clear_schedule_all
+          in: query
+          name: clear_schedule_all
+          schema:
+            type: boolean
+            default: false
+        - description: >-
+            skip schedules to current time for workflows whose schedule
+            definition changed. Ignored when clear_schedule or
+            clear_schedule_all is specified.
+          in: query
+          name: skip_schedule
+          schema:
+            type: boolean
+            default: true
+      requestBody:
+        content:
+          application/gzip:
+            schema:
+              type: string
+              format: binary
+        description: project archive data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestProject'
+          description: default response
+      summary: >-
+        Upload a project archive as a new project or a new revision of an
+        existing project
+      tags:
+        - Project
+  /api/projects/{id}:
+    delete:
+      operationId: deleteProject
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestProject'
+          description: default response
+      summary: Delete a project
+      tags:
+        - Project
+    get:
+      operationId: getProject
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestProject'
+          description: default response
+      summary: Get a project
+      tags:
+        - Project
+  /api/projects/{id}/archive:
+    get:
+      operationId: getArchive
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: use a given revision of a project instead of the latest revision
+          in: query
+          name: revision
+          required: true
+          schema:
+            type: string
+        - description: enable returning direct download handle
+          in: query
+          name: direct_download
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: archive of files of a project.
+      summary: Download a project archive file
+      tags:
+        - Project
+  /api/projects/{id}/revisions:
+    get:
+      operationId: getRevisions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: deprecated - do not use
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int32
+        - description: revision name
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: cursor to next page
+          in: query
+          name: page[after]
+          schema:
+            type: string
+        - description: page size
+          in: query
+          name: page[size]
+          schema:
+            type: integer
+            format: int32
+            default: 100
+            maximum: 100
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestRevisionCollection'
+          description: default response
+      summary: List revisions of a project
+      tags:
+        - Project
+  /api/projects/{id}/schedules:
+    get:
+      operationId: getProjectSchedules
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: exact matching filter on workflow name
+          in: query
+          name: workflow
+          schema:
+            type: string
+        - description: >-
+            List schedules whose ID is greater than this ID for pagination.
+            Schedules are returned in ascending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleCollection'
+          description: default response
+      summary: List schedules of a project with filters
+      tags:
+        - Project
+  /api/projects/{id}/secrets:
+    get:
+      operationId: getProjectSecrets
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSecretList'
+          description: default response
+      summary: List secret keys of a project
+      tags:
+        - Project
+  /api/projects/{id}/secrets/{key}:
+    delete:
+      operationId: deleteProjectSecret
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: secret key
+          in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Treasure Workflow never returns content
+      summary: Delete a secret from a project
+      tags:
+        - Project
+    put:
+      operationId: putProjectSecret
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: secret key
+          in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestSetSecretRequest'
+      responses:
+        '204':
+          description: Treasure Workflow never returns content
+      summary: Set a secret to a project
+      tags:
+        - Project
+  /api/projects/{id}/sessions:
+    get:
+      operationId: getProjectSessions
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: exact matching filter on workflow name
+          in: query
+          name: workflow
+          schema:
+            type: string
+        - description: >-
+            List sessions whose ID is smaller than this ID for pagination.
+            Sessions are returned in descending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int64
+        - description: number of sessions to return
+          in: query
+          name: page_size
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionCollection'
+          description: default response
+      summary: List sessions of a project with filters
+      tags:
+        - Project
+  /api/projects/{id}/workflows:
+    get:
+      operationId: getWorkflows
+      parameters:
+        - description: project id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: use a given revision of the project instead of the latest revision
+          in: query
+          name: revision
+          required: true
+          schema:
+            type: string
+        - description: exact matching filter on workflow name
+          in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinitionCollection'
+          description: default response
+      summary: List workflows of a project with filters
+      tags:
+        - Project
+  /api/projects/{id}/workflows/{name}:
+    get:
+      operationId: getWorkflowByName
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: revision
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinition'
+          description: default response
+      tags:
+        - Project
+  /api/schedules:
+    get:
+      operationId: getSchedules
+      parameters:
+        - description: >-
+            List schedules whose ID is greater than this ID for pagination.
+            Schedules are returned in ascending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleCollection'
+          description: default response
+      summary: List schedules
+      tags:
+        - Schedule
+  /api/schedules/{id}:
+    get:
+      operationId: getSchedule
+      parameters:
+        - description: schedule id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSchedule'
+          description: default response
+      summary: Get a schedule
+      tags:
+        - Schedule
+  /api/schedules/{id}/backfill:
+    post:
+      operationId: backfillSchedule
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestScheduleBackfillRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleAttemptCollection'
+          description: default response
+      summary: Backfill sessions for past schedule times
+      tags:
+        - Schedule
+  /api/schedules/{id}/disable:
+    post:
+      operationId: disableSchedule
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Disable scheduling of new sessions
+      tags:
+        - Schedule
+  /api/schedules/{id}/enable:
+    post:
+      operationId: enableSchedule
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/RestScheduleEnableRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Re-enable disabled scheduling
+      tags:
+        - Schedule
+  /api/schedules/{id}/skip:
+    post:
+      operationId: skipSchedule
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestScheduleSkipRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Skip future sessions by count or time
+      tags:
+        - Schedule
+  /api/sessions:
+    get:
+      operationId: getSessions
+      parameters:
+        - description: >-
+            List sessions whose ID is smaller than this ID for pagination.
+            Sessions are returned in descending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int64
+        - description: number of sessions to return
+          in: query
+          name: page_size
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionCollection'
+          description: default response
+      summary: List sessions
+      tags:
+        - Session
+  /api/sessions/{id}:
+    get:
+      operationId: getSession
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSession'
+          description: default response
+      summary: Get a session
+      tags:
+        - Session
+  /api/sessions/{id}/attempts:
+    get:
+      operationId: getSessionAttempts
+      parameters:
+        - description: session id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: >-
+            List attempts whose ID is smaller than this ID for pagination.
+            Attempts are returned in descending order by ID.
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int64
+        - description: number of attempts to return
+          in: query
+          name: page_size
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttemptCollection'
+          description: default response
+      summary: List attempts of a session
+      tags:
+        - Session
+  /api/workflows:
+    get:
+      operationId: getWorkflowDefinitions
+      parameters:
+        - description: >-
+            pagination. return workflows which id are greater than last_id with
+            order 'asc', which id are less than the last_id with order 'desc'
+          in: query
+          name: last_id
+          schema:
+            type: integer
+            format: int64
+        - description: number of workflows to return
+          in: query
+          name: count
+          schema:
+            type: integer
+            format: int32
+        - description: Sort order. 'asc' or 'desc'
+          in: query
+          name: order
+          schema:
+            type: string
+            default: asc
+        - description: name pattern to be partially matched
+          in: query
+          name: name_pattern
+          schema:
+            type: string
+        - description: name pattern to be partially matched
+          in: query
+          name: search_project_name
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinitionCollection'
+          description: default response
+      summary: List workflows
+      tags:
+        - Workflow
+  /api/workflows/{id}:
+    get:
+      operationId: getWorkflowDefinition
+      parameters:
+        - description: workflow id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinition'
+          description: default response
+      summary: Get a workflow
+      tags:
+        - Workflow
+  /api/workflows/{id}/truncated_session_time:
+    get:
+      operationId: getWorkflowTruncatedSessionTime
+      parameters:
+        - description: workflow id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: session time to be truncated
+          in: query
+          name: session_time
+          required: true
+          schema:
+            type: string
+        - description: >-
+            truncation mode - second, minute, hour, day, schedule, or
+            next_schedule
+          in: query
+          name: mode
+          schema:
+            type: string
+            enum:
+              - second
+              - minute
+              - hour
+              - day
+              - schedule
+              - next_schedule
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowSessionTime'
+          description: default response
+      summary: Get truncated local time based on the time zone of a workflow
+      tags:
+        - Workflow
+components:
+  schemas:
+    Attempt:
+      type: object
+      description: Attempts of session
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        retryAttemptName:
+          type: string
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+            - blocked
+            - queued
+            - running
+            - canceling
+            - success
+            - error
+            - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+      required:
+        - cancelRequested
+        - createdAt
+        - done
+        - id
+        - params
+        - status
+        - success
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+        - id
+        - name
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+        - name
+    RestLogFileHandle:
+      type: object
+      description: A log file for a task
+      properties:
+        agentId:
+          type: string
+          description: internal information
+          example: 452660@ip-10-20-161-114
+        direct:
+          type: string
+          description: path to download log directly
+          example: >-
+            https://digdag-server-development-eu01.s3.eu-central-1.amazonaws.com/log/2023-08-22/1.264c...
+        fileName:
+          type: string
+          description: file name of log
+          example: +wf1+t1@64e44ee12f7e43a0.452660@ip-10-20-161-114.log.gz
+        fileSize:
+          type: integer
+          format: int64
+          description: log size
+          example: 65535
+        fileTime:
+          type: string
+          format: date-time
+          description: file timestamp
+          example: '2023-08-18T06:52:33Z'
+        fileTimestamp:
+          type: string
+          format: date-time
+          description: timestamp with sub second precision in ISO8601 format
+          example: '1970-01-23T04:56:01.23456Z'
+        taskName:
+          type: string
+          description: task name
+          example: +wf1+t1
+      required:
+        - agentId
+        - direct
+        - fileName
+        - fileSize
+        - fileTime
+        - fileTimestamp
+        - taskName
+    RestLogFileHandleCollection:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestLogFileHandle'
+    RestPagination:
+      type: object
+      description: Pagination information
+      properties:
+        nextPage:
+          type: string
+          description: next page URL
+          example: /api/console/projects?last_id=123&count=300
+    RestPool:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: >-
+            Maximum number of concurrent attempts that can run in this pool.
+            Total concurrency limit of all pools cannot exceed the account's
+            concurrency limit.
+          example: 10
+          minimum: 1
+        default:
+          type: boolean
+          description: Whether the pool is the default pool.
+          example: true
+        id:
+          type: string
+          description: ID of the pool.
+          example: '42'
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+      required:
+        - concurrencyLimit
+        - default
+        - id
+        - name
+    RestPoolCollection:
+      type: object
+      properties:
+        pools:
+          type: array
+          description: List of pools.
+          items:
+            $ref: '#/components/schemas/RestPool'
+      required:
+        - pools
+    RestPoolCreateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: >-
+            Maximum number of concurrent attempts that can run in this pool.
+            Total concurrency limit of all pools cannot exceed the account's
+            concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+      required:
+        - concurrencyLimit
+        - name
+    RestPoolRule:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: >-
+            Conditions that must be met for the rule to assign an attempt to a
+            pool. If multiple conditions are specified, all conditions must be
+            met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        id:
+          type: string
+          description: ID of the pool rule.
+          example: '42'
+          minimum: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: >-
+            Priority of the rule. Rules are evaluated in priority order, from
+            the lowest value to the highest value. Multiple rules cannot have
+            the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+      required:
+        - conditions
+        - id
+        - poolId
+        - priority
+    RestPoolRuleCollection:
+      type: object
+      properties:
+        poolRules:
+          type: array
+          description: List of pool rules.
+          items:
+            $ref: '#/components/schemas/RestPoolRule'
+      required:
+        - poolRules
+    RestPoolRuleCondition:
+      type: object
+      anyOf:
+        - $ref: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+        - $ref: '#/components/schemas/RestPoolRuleProjectNameCondition'
+        - $ref: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+        - $ref: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+      discriminator:
+        mapping:
+          invocation_type: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+          project_name: '#/components/schemas/RestPoolRuleProjectNameCondition'
+          workflow_name: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+          workflow_type: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+        - type
+    RestPoolRuleCreateRequest:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: >-
+            Conditions that must be met for the rule to assign an attempt to a
+            pool. If multiple conditions are specified, all conditions must be
+            met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: >-
+            Priority of the rule. Rules are evaluated in priority order, from
+            the lowest value to the highest value. Multiple rules cannot have
+            the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+      required:
+        - conditions
+        - poolId
+        - priority
+    RestPoolRuleInvocationTypeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+            - invocation_type
+            - project_name
+            - workflow_name
+            - workflow_type
+        values:
+          type: array
+          description: >-
+            Invocation types to match against. If multiple values are provided,
+            the condition is met if the invocation type is one of the provided
+            invocation types.
+          items:
+            type: string
+            description: >-
+              Invocation types to match against. If multiple values are
+              provided, the condition is met if the invocation type is one of
+              the provided invocation types.
+            enum:
+              - on_demand
+              - scheduled
+      required:
+        - type
+        - values
+    RestPoolRuleProjectNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the project name.
+          enum:
+            - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+            - invocation_type
+            - project_name
+            - workflow_name
+            - workflow_type
+        values:
+          type: array
+          description: >-
+            Values to match against the project name. If multiple values are
+            provided, the condition is met if the project name matches one of
+            the provided values.
+          items:
+            type: string
+            description: >-
+              Values to match against the project name. If multiple values are
+              provided, the condition is met if the project name matches one of
+              the provided values.
+      required:
+        - operator
+        - type
+        - values
+    RestPoolRuleUpdateRequest:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: >-
+            Conditions that must be met for the rule to assign an attempt to a
+            pool. If multiple conditions are specified, all conditions must be
+            met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: >-
+            Priority of the rule. Rules are evaluated in priority order, from
+            the lowest value to the highest value. Multiple rules cannot have
+            the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+    RestPoolRuleWorkflowNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the workflow name.
+          enum:
+            - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+            - invocation_type
+            - project_name
+            - workflow_name
+            - workflow_type
+        values:
+          type: array
+          description: >-
+            Values to match against the workflow name. If multiple values are
+            provided, the condition is met if the workflow name matches one of
+            the provided values.
+          items:
+            type: string
+            description: >-
+              Values to match against the workflow name. If multiple values are
+              provided, the condition is met if the workflow name matches one of
+              the provided values.
+      required:
+        - operator
+        - type
+        - values
+    RestPoolRuleWorkflowTypeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+            - invocation_type
+            - project_name
+            - workflow_name
+            - workflow_type
+        values:
+          type: array
+          description: >-
+            Workflow types to match against. If multiple values are provided,
+            the condition is met if the workflow type is one of the provided
+            workflow types.
+          items:
+            type: string
+            description: >-
+              Workflow types to match against. If multiple values are provided,
+              the condition is met if the workflow type is one of the provided
+              workflow types.
+            enum:
+              - ab_test
+              - audience
+              - customer_journey
+              - engage
+              - predictive_scoring
+              - realtime
+              - segment_insights
+              - syndication
+      required:
+        - type
+        - values
+    RestPoolUpdateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: >-
+            Maximum number of concurrent attempts that can run in this pool.
+            Total concurrency limit of all pools cannot exceed the account's
+            concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+    RestProject:
+      type: object
+      description: Response of a project
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        deletedAt:
+          type: string
+          format: date-time
+          description: deleted time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: project ID
+          example: '123456'
+        metadata:
+          type: array
+          description: project metadata
+          items:
+            $ref: '#/components/schemas/RestProjectMetadata'
+        name:
+          type: string
+          description: project name
+          example: project-a
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+      required:
+        - archiveType
+        - createdAt
+        - id
+        - name
+        - revision
+        - updatedAt
+    RestProjectCollection:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestProject'
+    RestProjectMetadata:
+      type: object
+      description: project metadata
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    RestRevision:
+      type: object
+      description: Response of a revision
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        userInfo:
+          type: object
+          description: User information as json
+          example: >-
+            "td": {"user": {"id": 94,"name": "Your name","email":
+            "example@treasure-data.com"}
+      required:
+        - archiveType
+        - revision
+    RestRevisionCollection:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/RestPagination'
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestRevision'
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+        - id
+        - nextRunTime
+        - nextScheduleTime
+        - project
+        - workflow
+    RestScheduleAttemptCollection:
+      type: object
+      description: Response of a schedule with its attempts
+      properties:
+        attempts:
+          type: array
+          description: List of attempts
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+        - attempts
+        - id
+        - project
+        - workflow
+    RestScheduleBackfillRequest:
+      type: object
+      description: Request body for backfill
+      properties:
+        advanceSchedule:
+          type: boolean
+          description: >-
+            If true, advance nextScheduleTime/nextRunTime. When fromTime is not
+            set, uses the current schedule's nextRunTime as starting point.
+            Requires skipExisting to be true.
+        attemptName:
+          type: string
+          description: >-
+            attempt name. Optional when skipExisting is true. Cannot be
+            specified when advanceSchedule is true.
+        count:
+          type: integer
+          format: int32
+          description: starts given number of sessions. run all sessions if not set.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: backfill from
+          example: '2023-08-18T06:52:33Z'
+        skipExisting:
+          type: boolean
+          description: >-
+            If true, silently skip sessions that already have attempts instead
+            of returning 409 conflict error. Note that when count is set,
+            skipped sessions are still counted towards the count.
+      required:
+        - dryRun
+    RestScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSchedule'
+    RestScheduleEnableRequest:
+      type: object
+      description: Request body for enabling a schedule
+      properties:
+        nextTime:
+          type: string
+          description: time to skip
+          example: '2022-12-31T23:59:00+00:00'
+        skipSchedule:
+          type: boolean
+          default: true
+          description: skip schedules
+    RestScheduleSkipRequest:
+      type: object
+      description: Request body for skipping a schedule
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: >-
+            skip given number of sessions. nextTime or (fromTime and count) are
+            required.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: skip before the time. nextTime or (fromTime and count) are required.
+          example: '2023-08-18T06:52:33Z'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextTime:
+          type: string
+          description: next time. nextTime or (fromTime and count) are required.
+          example: '2022-12-31T23:59:00+00:00'
+      required:
+        - dryRun
+    RestScheduleSummary:
+      type: object
+      description: Response of a schedule with summary
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+        - createdAt
+        - id
+        - nextRunTime
+        - nextScheduleTime
+        - project
+        - updatedAt
+        - workflow
+    RestSecretList:
+      type: object
+      description: Response of a secret
+      properties:
+        secrets:
+          type: array
+          description: 'array of RestSecretMetadata "{ key: key1 }"'
+          example: '[{key: key1}, {key: key2}]'
+          items:
+            $ref: '#/components/schemas/RestSecretMetadata'
+      required:
+        - secrets
+    RestSecretMetadata:
+      type: object
+      description: Response of a secret
+      properties:
+        key:
+          type: string
+          description: key name
+          example: td.apikey
+      required:
+        - key
+    RestSession:
+      type: object
+      description: Response of a session
+      properties:
+        id:
+          type: string
+          description: session ID
+          example: '123456'
+        lastAttempt:
+          $ref: '#/components/schemas/Attempt'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+        - id
+        - project
+        - sessionTime
+        - workflow
+    RestSessionAttempt:
+      type: object
+      description: Response of an attempt
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        index:
+          type: integer
+          format: int32
+          description: index for multiple attempts
+          example: 1
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        retryAttemptName:
+          type: string
+          description: attempt name for retry
+          example: retry-12345
+        sessionId:
+          type: string
+          description: session ID
+          example: '123456'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+          description: unique UUID of this session
+          example: 2b91a014-076e-4c6d-8b51-f4f91089cab2
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+            - blocked
+            - queued
+            - running
+            - canceling
+            - success
+            - error
+            - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+        - cancelRequested
+        - createdAt
+        - done
+        - id
+        - index
+        - params
+        - project
+        - retryAttemptName
+        - sessionId
+        - sessionTime
+        - sessionUuid
+        - status
+        - success
+        - workflow
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    RestSessionAttemptRequest:
+      type: object
+      description: Request body for new attempt
+      properties:
+        allowQueueing:
+          type: boolean
+          description: >-
+            Whether an attempt can be queued when the maximum attempt limit is
+            reached.
+        params:
+          type: object
+          description: parameters as json
+          example:
+            key1: 12345
+        projectName:
+          type: string
+          description: >-
+            project name. workflowId or (projectName and workflowName) are
+            required
+          example: project-a
+        resume:
+          $ref: '#/components/schemas/Resume'
+        retryAttemptName:
+          type: string
+          description: unique attempt name for retry
+        sessionTime:
+          type: string
+          format: date-time
+          description: session time
+          example: '2023-08-17T18:56:24+09:00'
+        workflowId:
+          type: string
+          description: >-
+            workflow ID. workflowId or (projectName and workflowName) are
+            required
+          example: '123456'
+        workflowName:
+          type: string
+          description: >-
+            workflow name. workflowId or (projectName and workflowName) are
+            required
+          example: workflow-a
+      required:
+        - params
+        - sessionTime
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    RestSetSecretRequest:
+      type: object
+      description: Request body to set a secret
+      properties:
+        value:
+          type: string
+          description: value of the secret
+          example: TD1 12345...
+      required:
+        - value
+    RestTask:
+      type: object
+      description: Response of a task
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        config:
+          type: object
+          description: task definition
+          example:
+            echo>: test
+        error:
+          type: object
+          description: error information as JSON
+        exportParams:
+          type: object
+          description: export parameters as JSON
+        fullName:
+          type: string
+          description: full name of task
+          example: +wf1+g1+t1
+        group:
+          type: boolean
+          description: flag of group task or not
+        id:
+          type: string
+          description: task ID
+          example: '123456'
+        parentId:
+          type: string
+          description: parent task ID
+          example: '123455'
+        retryAt:
+          type: string
+          format: date-time
+          description: retried time
+          example: '2023-08-18T06:52:33Z'
+        startedAt:
+          type: string
+          format: date-time
+          description: started time
+          example: '2023-08-18T06:52:33Z'
+        state:
+          type: string
+          description: state of task
+          example: running
+        stateParams:
+          type: object
+          description: state parameters as JSON
+        storeParams:
+          type: object
+          description: store parameters as JSON
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+        upstreams:
+          type: array
+          description: upstream tasks
+          example:
+            - '1547841'
+          items:
+            type: string
+      required:
+        - cancelRequested
+        - config
+        - error
+        - exportParams
+        - fullName
+        - group
+        - id
+        - state
+        - stateParams
+        - storeParams
+        - updatedAt
+        - upstreams
+    RestTaskCollection:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestTask'
+    RestWorkflowDefinition:
+      type: object
+      description: Response of a workflow definition
+      properties:
+        config:
+          type: object
+        id:
+          type: string
+          description: workflow definition ID
+          example: '123456'
+        name:
+          type: string
+          description: workflow name
+          example: wf-123
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        revision:
+          type: string
+          description: revision
+        timezone:
+          type: string
+          description: timezone
+          example: UTC
+      required:
+        - id
+        - name
+        - project
+        - revision
+        - timezone
+    RestWorkflowDefinitionCollection:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestWorkflowDefinition'
+    RestWorkflowSessionTime:
+      type: object
+      description: Response of truncated_session_time API of workflows
+      properties:
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        timezone:
+          type: string
+          description: timezone
+          example: UTC
+      required:
+        - project
+        - revision
+        - sessionTime
+        - timezone
+    Resume:
+      type: object
+      anyOf:
+        - $ref: '#/components/schemas/ResumeFrom'
+        - $ref: '#/components/schemas/ResumeFailed'
+      description: >-
+        Configuration to resume an attempt. {"mode": "failed", "attemptId":
+        "12345"} or {"mode": "from", "attemptId": "12345", "from": "+t1"}
+      discriminator:
+        mapping:
+          failed: '#/components/schemas/ResumeFailed'
+          from: '#/components/schemas/ResumeFrom'
+        propertyName: mode
+      properties:
+        mode:
+          type: string
+          description: 'mode: "from" or "failed"'
+          enum:
+            - from
+            - failed
+          example: failed
+      required:
+        - attemptId
+        - mode
+    ResumeFailed:
+      type: object
+      description: Configuration to resume an attempt from the failed task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        mode:
+          type: string
+          description: '"failed" (fixed value)'
+          enum:
+            - from
+            - failed
+      required:
+        - attemptId
+        - mode
+    ResumeFrom:
+      type: object
+      description: Configuration to resume an attempt from the specified task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        from:
+          type: string
+          description: the task name to resume
+        mode:
+          type: string
+          description: '"from" (fixed value)'
+          enum:
+            - from
+            - failed
+      required:
+        - attemptId
+        - from
+        - mode
+  securitySchemes:
+    ApiKeyAuth:
+      scheme: TD1
+      type: http

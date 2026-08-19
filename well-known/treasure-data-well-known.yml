@@ -1,0 +1,140 @@
+name: Treasure Data Well-Known Discovery Surface
+description: >-
+  Result of probing the RFC 8615 /.well-known/ discovery surface on every Treasure Data / Treasure AI host
+  named in apis.yml and in the harvested OpenAPI servers[] blocks. Two real documents were served: the
+  OpenID Connect discovery document and the RFC 8414 OAuth 2.0 authorization server metadata on
+  api.treasuredata.com (identical bodies, issuer https://console.us01.treasuredata.com), plus a
+  Redocly-issued OAuth authorization server document backing the documentation MCP server on docs.treasure.ai.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: live HTTP probes, 2026-08-13
+hosts:
+  - https://api.treasuredata.com
+  - https://docs.treasure.ai
+  - https://www.treasure.ai
+  - https://treasuredata.com
+documents:
+  - host: https://api.treasuredata.com
+    path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: treasure-data-openid-configuration.json
+    document: true
+    note: >-
+      Real OIDC discovery document. issuer https://console.us01.treasuredata.com; authorization_code and
+      refresh_token grants; PKCE S256; scopes public, openid, email, profile.
+  - host: https://api.treasuredata.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: treasure-data-oauth-authorization-server.json
+    document: true
+    note: RFC 8414 metadata. Byte-identical to the openid-configuration document on the same host.
+  - host: https://docs.treasure.ai
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: treasure-data-docs-oauth-authorization-server.json
+    document: true
+    note: >-
+      Authorization server metadata for the documentation MCP server at https://docs.treasure.ai/mcp.
+      Issuer is https://auth.cloud.redocly.com (Treasure AI's documentation platform vendor); the
+      authorization, token and dynamic client registration endpoints are all served from
+      docs.treasure.ai. Anonymous tools/list on the MCP endpoint succeeds, so this OAuth surface is
+      optional rather than required.
+  - host: https://api.treasuredata.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    document: false
+    note: >-
+      SOFT 200 — api.treasuredata.com answers 200 with the console login HTML for every unmatched path,
+      including /openapi.json, /api-docs, /llms.txt, /.well-known/api-catalog, /.well-known/ai-plugin.json,
+      /.well-known/agent-card.json and /.well-known/agent.json. Not a document; treated as a miss.
+  - host: https://docs.treasure.ai
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/agent.json
+    status: 404
+    document: false
+  - host: https://docs.treasure.ai
+    path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    document: false
+    note: SPA shell, not JSON. Treated as a miss.
+  - host: https://www.treasure.ai
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: https://www.treasure.ai
+    path: /.well-known/agent.json
+    status: 404
+    document: false
+  - host: https://treasuredata.com
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: https://treasuredata.com
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: https://treasuredata.com
+    path: /.well-known/agent.json
+    status: 404
+    document: false
+summary:
+  documents_served: 3
+  security_txt: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false
+  openid_configuration: true
+  oauth_authorization_server: true
+notes:
+  - >-
+    No security.txt (RFC 9116) is served on any Treasure Data or Treasure AI host, so no SecurityTxt
+    pointer is emitted.
+  - >-
+    No A2A Agent Card was found at either /.well-known/agent-card.json or the legacy /.well-known/agent.json
+    on any host. api.treasuredata.com returns a 200 HTML login page for both paths; every other host 404s.
+    No a2a/ artifact was written.

@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Treasure Data TD Bulk Import Bulk Loads API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Loads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bulk load sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/bulk_loads"
+          },
+          "docs": "Returns the list of available bulk load sessions."
+        },
+        {
+          "info": {
+            "name": "Get bulk load session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/bulk_loads/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the bulk load session"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific bulk load session by name."
+        },
+        {
+          "info": {
+            "name": "List bulk load jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/bulk_loads/:name/jobs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the bulk load session"
+              }
+            ]
+          },
+          "docs": "Lists the executed job history for the specified bulk load session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

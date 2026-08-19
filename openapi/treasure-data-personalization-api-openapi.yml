@@ -1,0 +1,273 @@
+openapi: 3.0.1
+info:
+  description: |
+    Service to ingest single events and request personalization offers from
+    Real-Time engines.
+
+    ### Versioning
+    Endpoint versions are defined through content-type. Use
+    `Accept: application/vnd.treasuredata.v1+json` to specify version 1
+  title: Personalization Service
+  version: '1.0'
+servers:
+  - url: https://us01.p13n.in.treasuredata.com
+  - url: https://eu01.p13n.in.treasuredata.com
+  - url: https://ap01.p13n.in.treasuredata.com
+security:
+  - td1: []
+    wp13n: []
+paths:
+  /{database}/{table}:
+    post:
+      summary: Get offers for server request
+      description: Ingest an event and receive personalization response from RT engine.
+      operationId: personalize
+      parameters:
+        - name: database
+          in: path
+          required: true
+          description: name of the destination database
+          example: alpha
+          schema:
+            type: string
+            pattern: '[0-9a-z_]{3,128}'
+        - name: table
+          in: path
+          required: true
+          description: name of the destination table
+          example: bravo
+          schema:
+            type: string
+            pattern: '[0-9a-z_]{3,128}'
+      requestBody:
+        description: Event to be ingested
+        content:
+          application/vnd.treasuredata.v1+json:
+            example:
+              time: 1700760737
+              uuid: 5505C764-00FC-469B-8EEF-F85A0FC85794
+              string: hello
+              number: 3
+            schema:
+              $ref: '#/components/schemas/event'
+      responses:
+        '200':
+          description: Successful ingestion
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                code: 3002
+                message: RT token is unknown
+              schema:
+                $ref: '#/components/schemas/requestErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              example:
+                code: 2003
+                message: Kinesis error due to limit being exceeded
+              schema:
+                $ref: '#/components/schemas/tooManyRequestsResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                code: 2001
+                message: Unable to reach downstream component
+              schema:
+                $ref: '#/components/schemas/serverErrorResponse'
+components:
+  schemas:
+    event:
+      type: object
+      additionalProperties: true
+      required:
+        - time
+        - uuid
+      properties:
+        time:
+          type: integer
+          format: int64
+          description: >-
+            Time in seconds since Epoch. Must be between `00:00:00 1 Jan 1970
+            UTC` and `23:59:59 31 Dec 9999 UTC`.
+          example: 1647376522
+        uuid:
+          type: string
+          format: uuid
+          description: >-
+            ID of the record in
+            [UUID](https://docs.oracle.com/javase/7/docs/api/java/util/UUID.html)
+            format.
+          example: b82aad42-481b-4ca7-87c0-848a34f3c85f
+    requestErrorResponse:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: >-
+            Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            3000: RT token was not provided (WP13n-Token header).
+
+            3001: RT token is not in configuration.
+
+            3002: RT token account conflicts with Authed user account.
+
+            3003: RT token is in an invalid format.
+
+            3004: Invalid event object.
+
+            3005: Request origin not in IP whitelist.
+
+            3006: Invalid token type. Token type is not matching the one in the
+            configuration.
+
+            3007: Invalid or missing Origin.
+
+            3008: Request method is required.
+
+            3009: Unsupported method.
+
+            </pre>
+          enum:
+            - 3000
+            - 3001
+            - 3002
+            - 3003
+            - 3004
+            - 3005
+            - 3006
+            - 3007
+            - 3008
+            - 3009
+        message:
+          type: string
+          description: General explanation for users
+    serverErrorResponse:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: >-
+            Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            9999: Unknown/undiagnosed
+
+            1001: TD API is unreachable or timed out
+
+            1002: Table API is unreachable or timed out
+
+            1003: Kinesis is unreachable or timed out
+
+            1004: Lambda is unreachable or timed out
+
+            1005: MemoryDB is unreachable or timed out
+
+            2001: Kinesis stream was not found
+
+            2002: Kinesis operation threw an error
+
+            2011: Lambda function was not found
+
+            2012: Lambda function threw an error, or response was unhandled
+
+            2014: Lambda invocation failed
+
+            2015: Lambda reactor configuration doesn't have the token yet
+
+            2021: MemoryDB operation threw an error
+
+            3010: RT Token is configured with a reactor whose token is
+            inconsistent (account or reactor ID mismatch)
+
+            3011: RT Token is configured with a reactor whose name is
+            inconsistent (site or stage different from this API)
+
+            3012: RT Token is configured with a reactor whose name is completely
+            invalid
+
+            3013: Unable to retrieve Client IP from request
+
+            </pre>
+          enum:
+            - 1001
+            - 1002
+            - 1003
+            - 1004
+            - 1005
+            - 2001
+            - 2002
+            - 2011
+            - 2012
+            - 2014
+            - 2015
+            - 2021
+            - 3010
+            - 3011
+            - 3012
+            - 3013
+            - 9999
+        message:
+          type: string
+          description: General explanation for users
+    tooManyRequestsResponse:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: >-
+            Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            2003: Kinesis error due to limit being exceeded (status 429)
+
+            2013: Lambda total concurrent execution exceeds the reserved
+            concurrency (status 429)
+
+            </pre>
+          enum:
+            - 2003
+            - 2013
+        message:
+          type: string
+          description: General explanation for users
+  securitySchemes:
+    td1:
+      type: http
+      scheme: bearer
+      bearerFormat: TD1
+      description: |-
+        The API token is accepted as a `TD1` token. The TD API token
+        is an account number prefix, slash, and 40-character
+        hexadecimal string.
+        A valid authorization header looks like this:
+        - `Authorization: TD1 1/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`
+    wp13n:
+      type: apiKey
+      in: header
+      name: WP13n-Token
+      description: |-
+        The RT token is used to route to the correct RT engine. The
+        web personalization token is an account number, index number
+        and 32-character hexadecimal string, joined with slashes.
+        A valid token header looks like this:
+        - `WP13n-Token: 1/2/6b6ea5f8df5845fa8e7962f9e1ba84a3`

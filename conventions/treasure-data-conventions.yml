@@ -1,0 +1,160 @@
+name: Treasure Data API Conventions
+description: >-
+  Cross-cutting request/response semantics for the Treasure Data (Treasure AI) API estate — how you
+  authenticate, how you page, how idempotency works, how errors are shaped, how versions are signalled
+  and how rate limiting is surfaced. Derived from the eight OpenAPI descriptions Treasure AI publishes
+  and searched against the developer documentation.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: >-
+  openapi/treasure-data-td-api-v3-openapi.yml, openapi/treasure-data-cdp-api-openapi.yml,
+  openapi/treasure-data-workflow-api-openapi.yml, openapi/treasure-data-llm-api-openapi.yml,
+  openapi/treasure-data-personalization-api-openapi.yml, openapi/treasure-data-postback-api-v2-openapi.yml
+docs: https://docs.treasure.ai/apis
+
+authentication:
+  style: static-api-key
+  header: Authorization
+  format: 'TD1 <account_number>/<40-hex-key>'
+  alternatives:
+    - {header: X-TD-Write-Key, used_by: postback-api-v2, purpose: write-only ingestion key}
+    - {header: WP13n-Token, used_by: Personalization Service, purpose: routes the request to the correct real-time engine}
+  oauth: >-
+    An OAuth 2.0 / OIDC authorization server exists (see authentication/ and scopes/) but no published
+    OpenAPI declares an oauth2 scheme; REST calls use the static key.
+  detail: authentication/treasure-data-authentication.yml
+
+idempotency:
+  supported: true
+  mechanism: request-parameter
+  parameters:
+    - name: idempotent_key
+      in: query
+      applies_to:
+        - createTableWithTableType
+        - createTable
+      spec: openapi/treasure-data-td-api-v3-openapi.yml
+      schema: IdempotentKey (string)
+      description: A unique key to ensure idempotency of requests.
+    - name: idempotent_key
+      in: requestBody
+      applies_to:
+        - transferTable
+      spec: openapi/treasure-data-td-api-v3-openapi.yml
+      schema: IdempotentKey (string)
+  domain_key:
+    parameter: domain_key
+    schema: DomainKey (string)
+    lookup_operation: getJobStatusByDomainKey
+    lookup_path: GET /job/status_by_domain_key/{domain_key}
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    description: >-
+      Job de-duplication key. A caller attaches a domain_key when issuing a job and can afterwards resolve
+      the job's status by that key instead of by job_id, which makes a retried submission safe to reconcile.
+  scope: per-operation
+  retention: not published
+  header_based: false
+  note: >-
+    Treasure Data does not implement a global Idempotency-Key request header. Idempotency is opt-in on
+    specific write operations — table creation and transfer take an idempotent_key, and job submission
+    takes a domain_key that can be looked up afterwards. Real, but narrow: the CDP, LLM, Workflow, DWH
+    and ingestion APIs publish no idempotency mechanism at all.
+
+pagination:
+  styles:
+    - style: cursor
+      api: cdp-api
+      params: ['page[after]', 'page[size]']
+      response_field: pagination.nextPage
+      description: >-
+        Opaque cursor pagination. The value for the next request is carried at pagination.nextPage in the
+        previous response when more pages exist.
+    - style: page-number
+      api: cdp-api
+      params: [page]
+      description: A minority of CDP list endpoints take a 1-based numeric `page` instead of a cursor.
+    - style: next-page-url
+      api: Treasure Workflow
+      response_field: nextPage
+      example: /api/console/projects?last_id=123&count=300
+      description: >-
+        Digdag-style pagination — the response carries a fully-formed next page URL built from last_id
+        and count.
+    - style: envelope
+      api: Treasure Data API v3
+      schema: PaginatedResult
+      response_fields: [data, pagination]
+      description: Paginated records plus a pagination metadata object.
+  consistent: false
+  note: >-
+    Four pagination shapes across four APIs. A client library cannot page the estate with one strategy.
+
+versioning:
+  schemes:
+    - {api: Treasure Data API, style: uri-path, current: v3, base: 'https://api.treasuredata.com/v3'}
+    - {api: cdp-api, style: none, note: 'unversioned host api-cdp.treasuredata.com; JSON:API-shaped resources under /entities'}
+    - {api: Treasure Workflow, style: uri-path, current: /api}
+    - {api: postback-api-v2, style: uri-path, current: /postback/v3}
+    - {api: Personalization Service, style: content-type, header: 'Accept: application/vnd.treasuredata.v1+json'}
+  note: >-
+    Five APIs, four versioning strategies, including one content-type negotiated version. The
+    Personalization Service is the only surface where the version is a media type.
+
+regions:
+  style: host-prefix
+  docs: https://docs.treasure.ai/apis/endpoints/endpoints
+  regions: [us01, jp01 (treasuredata.co.jp), eu01, ap02, ap03]
+  note: >-
+    Every API is region-scoped by hostname, not by path or header. The correct base URL depends on where
+    the account is provisioned; calling the wrong region fails rather than redirecting.
+
+error_envelope:
+  shapes:
+    - api: Treasure Data API v3
+      schema: ErrorResponse
+      note: Most operations declare only 4XX/5XX range responses without a per-status body.
+    - api: cdp-api
+      schemas: [Error, GenericError, JsonApiValidationError, JsonApiBadParameterError, JsonApiMaskedValueError, JsonApiPermissionError, JsonApiNotFoundError, JsonApiConflictError, JsonApiUnprocessableEntityError, JsonApiGenericError]
+      note: JSON:API-style error objects on the /entities surface, plain errors elsewhere.
+    - api: llm-api
+      fields: [status, error]
+      example: {status: '404', error: Not Found}
+  rfc9457: false
+  note: >-
+    No API in the estate returns application/problem+json. Errors are bespoke JSON objects.
+  detail: errors/treasure-data-problem-types.yml
+
+rate_limits:
+  published_headers:
+    - {header: retry-after, api: llm-api, status: 429, unit: seconds, description: Number of seconds to wait before retrying}
+  x_ratelimit_headers: false
+  note: >-
+    Only the LLM API documents a 429 with a retry-after header. No API publishes RateLimit-* or
+    X-RateLimit-* headers. Everything else in rate-limits/ is a documented ceiling (records per request,
+    payload size, columns per table, query length), not a runtime throttle signal.
+  detail: rate-limits/treasure-data-rate-limits.yml
+
+request_tracing:
+  header: null
+  note: >-
+    No request-id / correlation-id header is declared in any published spec or documented in the API
+    reference. The documentation platform returns x-request-id, but that is the docs CDN, not the API.
+
+field_expansion:
+  supported: false
+  note: No expand / fields[] sparse-fieldset parameter is published on any API.
+
+metadata:
+  supported: partial
+  note: >-
+    Projects in Treasure Workflow carry RestProjectMetadata; there is no general customer-supplied
+    metadata object on TD API resources.
+
+cross_links:
+  authentication: authentication/treasure-data-authentication.yml
+  scopes: scopes/treasure-data-scopes.yml
+  errors: errors/treasure-data-problem-types.yml
+  lifecycle: lifecycle/treasure-data-lifecycle.yml
+  rate_limits: rate-limits/treasure-data-rate-limits.yml
+  conformance: conformance/treasure-data-conformance.yml

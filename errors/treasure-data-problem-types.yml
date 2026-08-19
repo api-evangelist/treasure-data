@@ -1,0 +1,107 @@
+name: Treasure Data Error Catalog
+description: >-
+  Error responses declared across the eight OpenAPI descriptions Treasure AI publishes. Derived
+  mechanically from the 4xx/5xx responses in each spec, then enriched from the response descriptions the
+  provider wrote. No API in the estate returns RFC 9457 application/problem+json.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/treasure-data-td-api-v3-openapi.yml, openapi/treasure-data-cdp-api-openapi.yml,
+  openapi/treasure-data-workflow-api-openapi.yml, openapi/treasure-data-llm-api-openapi.yml,
+  openapi/treasure-data-dwh-integration-api-openapi.yml,
+  openapi/treasure-data-personalization-api-openapi.yml,
+  openapi/treasure-data-postback-api-openapi.yml, openapi/treasure-data-postback-api-v2-openapi.yml
+format: bespoke-json
+rfc9457: false
+envelope:
+  td_api: {schema: ErrorResponse, spec: openapi/treasure-data-td-api-v3-openapi.yml}
+  cdp_api: {schemas: [Error, GenericError, JsonApiValidationError, JsonApiBadParameterError, JsonApiMaskedValueError, JsonApiPermissionError, JsonApiNotFoundError, JsonApiConflictError, JsonApiUnprocessableEntityError, JsonApiGenericError], spec: openapi/treasure-data-cdp-api-openapi.yml}
+  llm_api: {fields: [status, error], spec: openapi/treasure-data-llm-api-openapi.yml}
+  dwh_api: {schemas: [Error, ErrorResponse], spec: openapi/treasure-data-dwh-integration-api-openapi.yml}
+  personalization: {schemas: [requestErrorResponse, tooManyRequestsResponse, serverErrorResponse], spec: openapi/treasure-data-personalization-api-openapi.yml}
+problems:
+  - status: 400
+    title: Bad Request
+    occurrences: 104
+    remediation: >-
+      Validate query parameters and request body against the spec. On the CDP API a 400 is returned as a
+      JsonApiBadParameterError or JsonApiValidationError object.
+    specs: [cdp-api, llm-api, dwh-integration-api, personalization, postback-api, postback-api-v2, workflow]
+  - status: 401
+    title: Unauthorized
+    occurrences: 115
+    remediation: >-
+      Send `Authorization: TD1 <account>/<key>`. A missing or malformed TD1 prefix produces the same 401
+      as an invalid key.
+    specs: [cdp-api, llm-api, dwh-integration-api]
+  - status: 403
+    title: Forbidden
+    occurrences: 97
+    remediation: >-
+      The key is valid but the account lacks permission. Check the Access Control policy attached to the
+      user (GET /access_control/users/{user_id}/policies). On the CDP API this is a JsonApiPermissionError.
+    specs: [cdp-api, llm-api, dwh-integration-api, postback-api, postback-api-v2]
+  - status: 404
+    title: Not Found
+    occurrences: 117
+    remediation: >-
+      The resource does not exist in this account — or the request was sent to the wrong region host.
+      Region is encoded in the hostname, so a correct id against the wrong region 404s.
+    specs: [cdp-api, llm-api, dwh-integration-api, workflow]
+  - status: 409
+    title: Conflict
+    occurrences: 5
+    remediation: >-
+      Resource is in a state that forbids the operation — for example deleting a folder that still
+      contains entities. Returned as JsonApiConflictError on the CDP API.
+    specs: [cdp-api, workflow]
+  - status: 413
+    title: Payload Too Large
+    occurrences: 1
+    remediation: >-
+      Postback v2 rejects oversized event payloads. Keep a record under 1000 KB and a batch under 5 MB
+      (see rate-limits/).
+    specs: [postback-api-v2]
+  - status: 422
+    title: Unprocessable Entity
+    occurrences: 38
+    example_description: Journey is not eligible for on-demand execution
+    remediation: >-
+      Semantically invalid request — the payload parses but the operation is not permitted for the
+      resource's current state. Returned as JsonApiUnprocessableEntityError on the CDP API.
+    specs: [cdp-api, llm-api]
+  - status: 429
+    title: Too Many Requests
+    occurrences: 3
+    headers: [retry-after]
+    remediation: >-
+      The only rate-limited surface that publishes a runtime signal. Wait the number of seconds in the
+      retry-after response header before retrying.
+    specs: [llm-api, personalization]
+  - status: 500
+    title: Internal Server Error
+    occurrences: 11
+    remediation: Retry with backoff; if persistent, check https://status.treasure.ai/ and contact support.
+    specs: [dwh-integration-api, personalization]
+  - status: 4XX
+    title: Client error (range response)
+    occurrences: 55
+    remediation: >-
+      The Treasure Data API v3 spec declares most failures as an undifferentiated 4XX range rather than
+      per-status responses, so a generated client cannot branch on the specific code from the contract
+      alone.
+    specs: [td-api-v3]
+  - status: 5XX
+    title: Server error (range response)
+    occurrences: 61
+    remediation: As above — declared as a range on the TD API v3 spec.
+    specs: [td-api-v3]
+notes:
+  - >-
+    Contract gap worth reporting to the provider — the flagship Treasure Data API v3 spec uses 4XX/5XX
+    range responses on 116 operations instead of enumerated statuses with bodies, while the CDP API
+    enumerates them properly. An agent calling the TD API cannot tell a 403 from a 404 from the contract.
+  - >-
+    No application/problem+json anywhere in the estate. Adopting RFC 9457 would make error handling
+    uniform across five differently-shaped envelopes.

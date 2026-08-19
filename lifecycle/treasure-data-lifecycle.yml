@@ -1,0 +1,82 @@
+name: Treasure Data API Lifecycle
+description: >-
+  Versioning, deprecation, release cadence, status and support posture for the Treasure Data (Treasure AI)
+  API estate.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.treasure.ai/release-notes, https://status.treasure.ai/,
+  https://docs.treasure.ai/apis/endpoints/endpoints,
+  openapi/treasure-data-td-api-v3-openapi.yml, openapi/treasure-data-cdp-api-openapi.yml
+versioning:
+  scheme: mixed
+  detail: conventions/treasure-data-conventions.yml
+  apis:
+    - {api: Treasure Data API, scheme: uri-path, current: v3, base: 'https://api.treasuredata.com/v3'}
+    - {api: cdp-api, scheme: none, current: '1.0.0 (info.version)', base: 'https://api-cdp.treasuredata.com'}
+    - {api: Treasure Workflow, scheme: uri-path, current: '/api', base: 'https://api-workflow.treasuredata.com'}
+    - {api: llm-api, scheme: uri-path, current: '/api', base: 'https://llm-api.treasuredata.com'}
+    - {api: postback-api, scheme: host, current: '1.0.0', base: 'https://in.treasuredata.com'}
+    - {api: postback-api-v2, scheme: uri-path, current: '/postback/v3', base: 'https://{region}.records.in.treasuredata.com'}
+    - {api: Personalization Service, scheme: content-type, current: 'application/vnd.treasuredata.v1+json'}
+    - {api: DWH Integration API, scheme: uri-path, current: /v1}
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  in_spec: true
+  evidence:
+    - >-
+      openapi/treasure-data-cdp-api-openapi.yml marks 15 elements deprecated: true and
+      openapi/treasure-data-td-api-v3-openapi.yml marks 5 — all at the parameter/property level, none at
+      the whole-operation level.
+    - >-
+      Release notes retire integrations by name over time (for example the AdRoll export connector is
+      documented as deprecated), so retirements are announced in prose.
+  note: >-
+    Treasure Data publishes no standalone deprecation or sunset policy page, and no API returns RFC 8594
+    Sunset or Deprecation response headers. Deprecation is signalled inside the OpenAPI descriptions and
+    narrated in the monthly release notes. This is a real gap: a client has no runtime signal that a
+    field or endpoint is on the way out.
+deprecated_operations: []
+deprecated_elements:
+  - {spec: openapi/treasure-data-cdp-api-openapi.yml, count: 15, level: parameter-or-property}
+  - {spec: openapi/treasure-data-td-api-v3-openapi.yml, count: 5, level: parameter-or-property}
+release_cadence:
+  scheme: monthly
+  url: https://docs.treasure.ai/release-notes
+  format: dated monthly release notes grouped by product area
+  history_from: '2023-01'
+  latest: '2026-08'
+  detail: changelog/treasure-data-changelog.yml
+status_page:
+  url: https://status.treasure.ai/
+  status: 200
+  probed: '2026-08-13'
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment was found. Treasure Data sells annual enterprise contracts, so
+    availability terms are presumed contractual rather than published.
+support:
+  docs: https://docs.treasure.ai/
+  email: support@treasuredata.com
+  note: >-
+    support@treasuredata.com is published as the owner contact on the td-skills marketplace manifest.
+regions:
+  docs: https://docs.treasure.ai/apis/endpoints/endpoints
+  list:
+    - {code: us01, api: 'https://api.treasuredata.com/v3', console: 'https://console.us01.treasuredata.com'}
+    - {code: jp01, api: 'https://api.treasuredata.co.jp/v3'}
+    - {code: eu01, api: 'https://api.eu01.treasuredata.com/v3'}
+    - {code: ap02, api: 'https://api.ap02.treasuredata.com/v3'}
+    - {code: ap03, api: 'https://api-workflow.ap03.treasuredata.com', note: 'ap03 appears on the Workflow, CDP and DWH APIs; the TD API v3 spec lists only us01, jp01, eu01 and ap02.'}
+brand:
+  rename: Treasure Data -> Treasure AI
+  announced: '2026-04-20'
+  source: https://www.treasure.ai/blog
+  note: >-
+    The corporate brand and documentation moved to treasure.ai. Every API host remains on
+    treasuredata.com / treasuredata.co.jp, so the API estate was not renamed with the company.

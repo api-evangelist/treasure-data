@@ -1,0 +1,107 @@
+name: Treasure Data Event and Webhook Surface
+description: >-
+  Treasure AI publishes no AsyncAPI document. It does document a real event surface in both directions —
+  inbound event ingestion through the Postback APIs and the Personalization Service, and outbound
+  webhook activation that streams customer data to a third-party endpoint in real time, optionally with
+  cryptographic signature verification. This artifact catalogues that surface as documented; nothing here
+  is inferred beyond what the provider publishes.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.treasure.ai/int/webhook-output-streaming-integration,
+  https://docs.treasure.ai/int/ss-webhook-streaming-export-integration,
+  https://docs.treasure.ai/apis/postback/quickstart,
+  https://docs.treasure.ai/apis/postback-v2,
+  openapi/treasure-data-postback-api-openapi.yml,
+  openapi/treasure-data-postback-api-v2-openapi.yml,
+  openapi/treasure-data-personalization-api-openapi.yml
+asyncapi_spec: null
+asyncapi_published: false
+
+outbound_webhooks:
+  supported: true
+  model: activation
+  note: >-
+    Treasure AI does not emit platform lifecycle webhooks (no "job.completed" or "segment.updated" event
+    to subscribe to). Outbound HTTP is configured as an activation destination inside a real-time journey,
+    so the customer chooses the endpoint, headers and payload rather than receiving a fixed event schema.
+  integrations:
+    - name: Webhook Output Streaming Integration
+      docs: https://docs.treasure.ai/int/webhook-output-streaming-integration
+      direction: outbound
+      trigger: real-time triggered activation inside a Real-time Journey
+      configuration:
+        - {field: URL prefix, note: 'set on the Authentication; every activation using it must match this baseURL'}
+        - {field: API Key, note: 'referenced in headers, URL or body as {{auth.api_key}}'}
+        - {field: endpoint URL, note: per-activation}
+        - {field: custom headers, note: 'per-activation, maximum 32'}
+        - {field: output payload, note: per-activation}
+      limitations:
+        - OAuth 2.0 is not supported
+        - Duplicate request headers are not detected
+        - Request payloads cannot exceed 250 KB
+        - Maximum 32 custom request headers
+        - RT 2.0 triggered activation does not support PII hiding
+    - name: Realtime Secure Signed Webhook Streaming Export Integration
+      docs: https://docs.treasure.ai/int/ss-webhook-streaming-export-integration
+      direction: outbound
+      security: cryptographic signature verification on the delivered payload
+      trigger: real-time activation workflow
+
+inbound_events:
+  supported: true
+  note: >-
+    The ingestion side is a synchronous HTTP POST API rather than a broker, which is why no AsyncAPI
+    document exists. It is nonetheless the event surface for every SDK.
+  endpoints:
+    - name: Postback API
+      spec: openapi/treasure-data-postback-api-openapi.yml
+      base: https://in.treasuredata.com
+      operations: 1
+      auth: none declared in spec (write key travels in the path/payload)
+      used_by: [JavaScript SDK, iOS SDK, Android SDK, React Native SDK, Cordova SDK]
+      docs: https://docs.treasure.ai/apis/postback/quickstart
+    - name: Postback API v2
+      spec: openapi/treasure-data-postback-api-v2-openapi.yml
+      base: https://{region}.records.in.treasuredata.com
+      path: /postback/v3/event/{database_name}/{table_name}
+      operations: 1
+      auth: [X-TD-Write-Key, 'Authorization: TD1 ...']
+      errors: [400, 403, 413]
+      docs: https://docs.treasure.ai/apis/postback-v2
+    - name: Personalization Service
+      spec: openapi/treasure-data-personalization-api-openapi.yml
+      base: https://us01.p13n.in.treasuredata.com
+      operations: 1
+      purpose: >-
+        Ingest single events and request personalization offers from real-time engines.
+      versioning: 'Accept: application/vnd.treasuredata.v1+json'
+      errors: [400, 429, 500]
+  streaming_import:
+    name: Streaming / Stream Import API
+    host_prefix: api-import
+    format: gzipped msgpack
+    used_by: [td-agent, TD Toolbelt, Fluentd collector, most client libraries]
+    docs: https://docs.treasure.ai/apis
+
+third_party_webhook_ingestion:
+  note: >-
+    Several import integrations receive webhooks from other platforms into Treasure AI rather than out of
+    it — Branch Metrics, mParticle, Shopify streaming, LINE OA streaming and Zapier. These are connector
+    configurations, not a Treasure AI event contract.
+  examples:
+    - https://docs.treasure.ai/int/shopify-streaming-import-integration
+    - https://docs.treasure.ai/int/mparticle-import-integration
+    - https://docs.treasure.ai/int/branch-metrics-import-integration
+    - https://docs.treasure.ai/int/zapier-import-integration
+
+gaps:
+  - >-
+    No AsyncAPI document, no event catalogue, and no subscribable platform events. A customer cannot be
+    notified that a query job finished, a segment refreshed or a workflow attempt failed except by
+    polling the REST APIs.
+  - >-
+    The outbound webhook payload is entirely customer-defined, so there is no schema to publish — which
+    is exactly why an AsyncAPI would help: it could describe the envelope, the signature scheme and the
+    delivery guarantees rather than the body.

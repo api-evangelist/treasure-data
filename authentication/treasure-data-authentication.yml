@@ -1,16 +1,132 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/treasure-data-td-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/treasure-data-td-api-v3-openapi.yml, openapi/treasure-data-cdp-api-openapi.yml,
+  openapi/treasure-data-llm-api-openapi.yml, openapi/treasure-data-workflow-api-openapi.yml,
+  openapi/treasure-data-dwh-integration-api-openapi.yml, openapi/treasure-data-personalization-api-openapi.yml,
+  openapi/treasure-data-postback-api-v2-openapi.yml, openapi/treasure-data-postback-api-openapi.yml,
+  well-known/treasure-data-openid-configuration.json
+docs: https://docs.treasure.ai/tools/cli-and-sdks/configuring-authentication-for-td-using-the-td-toolbelt
 summary:
   types:
   - apiKey
+  - http
+  - openIdConnect
   api_key_in:
   - header
+  oauth2_flows:
+  - authorization_code
+  - refresh_token
+  primary_scheme: >-
+    Static TD API key sent as `Authorization: TD1 <account>/<40-hex>`. Every REST API in the estate uses
+    this one credential; the only variations are how the spec models it (apiKey-in-header vs http scheme
+    TD1) and the two write-key variants on the ingestion endpoints.
 schemes:
+- name: ApiKeyAuth
+  type: http
+  scheme: TD1
+  description: >-
+    Treasure Data API key. The header value is the literal `TD1` followed by a space and the key, which is
+    an account-number prefix, a slash, and a 40-character hexadecimal string.
+  sources:
+  - openapi/treasure-data-td-api-v3-openapi.yml
+  - openapi/treasure-data-llm-api-openapi.yml
+  - openapi/treasure-data-workflow-api-openapi.yml
+- name: TdApikeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Same TD1 API key, modelled as an apiKey header scheme by the CDP API spec.
+  sources:
+  - openapi/treasure-data-cdp-api-openapi.yml
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Same TD1 API key, modelled as an apiKey header scheme by the DWH Integration API spec.
+  sources:
+  - openapi/treasure-data-dwh-integration-api-openapi.yml
+- name: td1
+  type: http
+  scheme: bearer
+  bearerFormat: TD1
+  description: |-
+    The API token is accepted as a `TD1` token. The TD API token
+    is an account number prefix, slash, and 40-character
+    hexadecimal string.
+  sources:
+  - openapi/treasure-data-personalization-api-openapi.yml
+- name: wp13n
+  type: apiKey
+  in: header
+  parameter: WP13n-Token
+  description: >-
+    Web personalization routing token — account number, index number and a 32-character hexadecimal
+    string joined with slashes. Routes the request to the correct real-time engine.
+  sources:
+  - openapi/treasure-data-personalization-api-openapi.yml
+- name: XTDWriteKey
+  type: apiKey
+  in: header
+  parameter: X-TD-Write-Key
+  description: Write-only ingestion key for the Postback API v2 event endpoint.
+  sources:
+  - openapi/treasure-data-postback-api-v2-openapi.yml
+- name: TD1Authorization
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Full TD1 API key accepted as an alternative to the write key on Postback API v2.
+  sources:
+  - openapi/treasure-data-postback-api-v2-openapi.yml
 - name: TDAuth
   type: apiKey
   in: header
   parameter: Authorization
-  description: Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
+  description: >-
+    TD1 API key as modelled by the API-Evangelist-derived TD API split specs harvested before the
+    provider's own OpenAPI descriptions were located.
   sources:
-  - openapi/treasure-data-td-api-openapi.yml
+  - openapi/treasure-data-bulk-import-api-openapi.yml
+  - openapi/treasure-data-bulk-loads-api-openapi.yml
+  - openapi/treasure-data-connectors-api-openapi.yml
+  - openapi/treasure-data-databases-api-openapi.yml
+  - openapi/treasure-data-jobs-api-openapi.yml
+  - openapi/treasure-data-sso-api-openapi.yml
+  - openapi/treasure-data-system-api-openapi.yml
+  - openapi/treasure-data-tables-api-openapi.yml
+  - openapi/treasure-data-users-api-openapi.yml
+openid_connect:
+  discovery: https://api.treasuredata.com/.well-known/openid-configuration
+  file: well-known/treasure-data-openid-configuration.json
+  issuer: https://console.us01.treasuredata.com
+  authorization_endpoint: https://console.us01.treasuredata.com/oauth/authorize
+  token_endpoint: https://console.us01.treasuredata.com/oauth/token
+  revocation_endpoint: https://console.us01.treasuredata.com/oauth/revoke
+  introspection_endpoint: https://console.us01.treasuredata.com/oauth/introspect
+  userinfo_endpoint: https://console.us01.treasuredata.com/oauth/userinfo
+  jwks_uri: https://console.us01.treasuredata.com/oauth/discovery/keys
+  grant_types: [authorization_code, refresh_token]
+  response_types: [code]
+  pkce: [plain, S256]
+  token_endpoint_auth_methods: [client_secret_basic, client_secret_post]
+  id_token_signing_alg: [RS256]
+  claims: [iss, sub, aud, exp, iat, email, email_verified, td_account_id, administrator]
+  note: >-
+    Treasure Data runs an OAuth 2.0 / OpenID Connect authorization server on the console host and
+    advertises it from api.treasuredata.com. None of the eight published OpenAPI descriptions declares an
+    oauth2 securityScheme, so OAuth is not (yet) the documented path for calling the REST APIs — it backs
+    console sign-in and third-party app authorization. API calls use the static TD1 key.
+sso:
+  supported: true
+  docs: https://docs.treasure.ai/apis/td-api/identity-federation
+  note: >-
+    SAML identity federation with per-user SSO enforcement is managed through /account/sso_setting and
+    the /user/*_sso endpoints. Multiple IdPs have been supported since the April 2023 release.
+notes:
+  - >-
+    One credential, many spec shapes. The same TD1 key authenticates the TD API, CDP API, LLM API,
+    Workflow API and DWH Integration API; each spec models it differently, which is a real interoperability
+    friction for generated clients.
+  - >-
+    postback-api (v1) declares no securityScheme at all — the write key travels in the path/payload. v2
+    fixed this with the X-TD-Write-Key header.

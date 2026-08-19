@@ -1,0 +1,62 @@
+name: Treasure Data Sandbox and Test Data
+description: >-
+  Treasure Data has no test-mode/live-mode key separation and publishes no synthetic test credentials.
+  What it does publish is a preset sample database seeded into every account, plus contractual QA and Dev
+  sandbox environments and an AI Studio execution sandbox. Recorded as documented; no test values were
+  invented.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.treasure.ai/products/customer-data-platform/data-workbench/getting-started/run-a-query-and-download-results,
+  https://docs.treasure.ai/products/customer-data-platform/data-workbench/getting-started/querying-a-sample-table,
+  https://github.com/treasure-data/td-mcp-server,
+  https://www.treasure.ai/product/pricing/,
+  https://docs.treasure.ai/products/ai-studio/security
+test_live_separation:
+  supported: false
+  note: >-
+    One TD1 API key per user, one set of hosts. There is no test key prefix, no test mode flag and no
+    sandbox host. Isolation is achieved by using a separate account/database, not by a mode switch.
+key_prefixes:
+  live: 'TD1 <account_number>/<40-hex>'
+  test: null
+sample_data:
+  database: sample_datasets
+  provisioned: preset in every account
+  docs: https://docs.treasure.ai/products/customer-data-platform/data-workbench/getting-started/run-a-query-and-download-results
+  tables:
+    - {name: www_access, note: 'web access log sample, cited in the official MCP server README query examples'}
+    - {name: nasdaq, note: 'NASDAQ stock price sample, used in the workflow and daily-query tutorials'}
+  note: >-
+    sample_datasets is the closest thing to a fixture set — it is real, preset, queryable on a fresh
+    account, and it is what Treasure Data's own tutorials, the MCP server README and the td-skills
+    examples all query.
+environments:
+  - name: QA and Dev sandboxes
+    availability: included in the Intelligent Customer Data Platform plan
+    source: https://www.treasure.ai/product/pricing/
+    note: >-
+      Listed as a plan feature rather than a self-serve developer facility — provisioned as additional
+      accounts/environments under an enterprise contract, not signed up for.
+  - name: AI Studio Agent Sandbox
+    scope: per-chat isolated execution environment inside Treasure AI Studio
+    docs: https://docs.treasure.ai/products/ai-studio/security
+    note: >-
+      Not an API sandbox. It is where server-side tdx commands and agent-generated code execute;
+      credentials are held server-side and network access is restricted to Treasure AI APIs. Since the
+      August 2026 release every chat gets a clean environment and non-work-folder files are destroyed
+      with the chat.
+test_fixtures: []
+test_clocks: false
+trial:
+  self_serve: false
+  note: >-
+    No free trial or self-serve signup page was found (www.treasure.ai/free-trial and /get-started both
+    404). Console sign-in exists at https://console.treasuredata.com/users/sign_in but account creation
+    runs through sales.
+notes:
+  - >-
+    For a platform whose core operation is running SQL against customer data, the absence of a test mode
+    is a real integration cost: there is no way to exercise a write path (createTable, createJob with
+    result export, activation runs) without touching a live account.

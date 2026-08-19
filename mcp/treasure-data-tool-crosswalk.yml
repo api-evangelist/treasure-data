@@ -1,0 +1,277 @@
+name: Treasure Data MCP Tool Crosswalk
+description: >-
+  Binds every tool exposed by Treasure Data's two MCP servers to the OpenAPI operation(s) that back it,
+  so an agent inherits a real input contract from the spec rather than a guessed one. Covers the 23 tools
+  of the official @treasuredata/mcp-server (stdio) and the 6 tools of the live documentation MCP server at
+  https://docs.treasure.ai/mcp.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/treasure-data-mcp.yml, mcp/treasure-data-docs-mcp-tools.json,
+  openapi/treasure-data-td-api-v3-openapi.yml, openapi/treasure-data-cdp-api-openapi.yml,
+  openapi/treasure-data-workflow-api-openapi.yml
+note: >-
+  The product MCP server's live tools/list is not anonymously reachable — it is stdio only and requires
+  TD_API_KEY — so its tool names and parameters were read from the provider's own README rather than from
+  an introspection call. Bindings are therefore by name and documented semantics; confidence is recorded
+  honestly per row. The documentation MCP server's tools WERE introspected live and carry their real
+  inputSchema in mcp/treasure-data-docs-mcp-tools.json.
+
+surfaces:
+  openapi:
+    - {file: openapi/treasure-data-td-api-v3-openapi.yml, api: Treasure Data API v3, operations: 79, gated: false}
+    - {file: openapi/treasure-data-cdp-api-openapi.yml, api: cdp-api (Audience API), operations: 183, gated: false}
+    - {file: openapi/treasure-data-workflow-api-openapi.yml, api: Treasure Workflow, operations: 43, gated: false}
+    - {file: openapi/treasure-data-llm-api-openapi.yml, api: llm-api, operations: 87, gated: false}
+    - {file: openapi/treasure-data-dwh-integration-api-openapi.yml, api: DWH Integration API, operations: 10, gated: false}
+    - {file: openapi/treasure-data-personalization-api-openapi.yml, api: Personalization Service, operations: 1, gated: false}
+    - {file: openapi/treasure-data-postback-api-openapi.yml, api: postback-api, operations: 1, gated: false}
+    - {file: openapi/treasure-data-postback-api-v2-openapi.yml, api: postback-api-v2, operations: 1, gated: false}
+  graphql: null
+  mcp:
+    - {name: treasuredata, url: null, transport: stdio, gated: true, note: 'tools/list requires TD_API_KEY; tool set read from the provider README'}
+    - {name: treasure-ai-docs, url: 'https://docs.treasure.ai/mcp', transport: http, gated: false, note: 'anonymous tools/list returned 200 with 6 tools'}
+
+crosswalk:
+  - tool: list_databases
+    server: treasuredata
+    category: data
+    rest: [getDatabases]
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: list_tables
+    server: treasuredata
+    category: data
+    rest: [getTablesByDatabaseName]
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: describe_table
+    server: treasuredata
+    category: data
+    rest: [getTableByDatabaseNameAndTableName]
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    binding: rest
+    confidence: high
+    note: >-
+      The README says describe_table returns column names and types; the TD API exposes the schema on the
+      table show response rather than on a dedicated schema endpoint. The MCP server may instead issue a
+      DESCRIBE query via createJob — both paths exist in the spec.
+  - tool: query
+    server: treasuredata
+    category: data
+    rest: [createJob, getJobStatusById, getJobResults]
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    binding: rest
+    confidence: high
+    note: >-
+      Composite. A read-only SQL tool call fans out to POST /job/issue/{job_type}/{database_name}, then
+      polls GET /job/status/{job_id}, then reads GET /job/result/{job_id}. Row limiting (default 40,
+      max 10000) is applied by the MCP server, not by the REST API.
+  - tool: execute
+    server: treasuredata
+    category: data
+    rest: [createJob, getJobStatusById, getJobResults]
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    binding: rest
+    confidence: medium
+    note: >-
+      Same three operations as `query` but permits write DDL/DML. Disabled unless TD_ENABLE_UPDATES=true.
+      This is the only write-capable tool in the product server.
+  - tool: list_parent_segments
+    server: treasuredata
+    category: cdp
+    rest: ['audiences#index']
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: A CDP "parent segment" is an `audience` in the cdp-api vocabulary.
+  - tool: get_parent_segment
+    server: treasuredata
+    category: cdp
+    rest: ['audiences#show']
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: list_segments
+    server: treasuredata
+    category: cdp
+    rest: ['segments#index']
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: get_segment
+    server: treasuredata
+    category: cdp
+    rest: ['segments#show']
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: list_activations
+    server: treasuredata
+    category: cdp
+    rest: ['activation#index', 'syndications#index', 'audience_syndications#index']
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    binding: rest
+    confidence: medium
+    note: >-
+      Activations are exposed under three REST shapes — JSON:API under /entities/segments/{id}/syndications
+      and two REST endpoints under /audiences. Which one the tool calls is not stated in the README.
+  - tool: list_projects
+    server: treasuredata
+    category: workflow
+    rest: [getProjects]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: list_workflows
+    server: treasuredata
+    category: workflow
+    rest: [getWorkflows, getWorkflowDefinitions]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: list_sessions
+    server: treasuredata
+    category: workflow
+    rest: [getSessions, getProjectSessions]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: get_session_attempts
+    server: treasuredata
+    category: workflow
+    rest: [getSessionAttempts]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: get_attempt_tasks
+    server: treasuredata
+    category: workflow
+    rest: [getTasks]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: get_task_logs
+    server: treasuredata
+    category: workflow
+    rest: [getFileHandles, getFile]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: Composite — list the log file handles for an attempt, then fetch each file.
+  - tool: kill_attempt
+    server: treasuredata
+    category: workflow
+    rest: [killAttempt]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: high
+  - tool: retry_session
+    server: treasuredata
+    category: workflow
+    rest: [startAttempt]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: medium
+    note: >-
+      Digdag models a retry as a new attempt on an existing session, so PUT /api/attempts with a resume
+      payload is the backing operation. The README does not name the endpoint.
+  - tool: retry_attempt
+    server: treasuredata
+    category: workflow
+    rest: [startAttempt, getAttemptRetries]
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    binding: rest
+    confidence: medium
+
+mcp_only:
+  - tool: use_database
+    server: treasuredata
+    reason: >-
+      Sets server-side session context (the "current database"). No REST operation exists — the TD API is
+      stateless and takes database_name on every path.
+  - tool: current_database
+    server: treasuredata
+    reason: Reads the same server-side session context. No REST equivalent.
+  - tool: parent_segment_sql
+    server: treasuredata
+    reason: >-
+      Generates the SQL behind a parent segment definition. The cdp-api exposes segment queries
+      (segments#query, segments#new_query) but no operation that returns the generated SQL for an
+      audience, so this is a server-side composite.
+  - tool: segment_sql
+    server: treasuredata
+    reason: Same as parent_segment_sql, at the child-segment level.
+  - tool: list-apis
+    server: treasure-ai-docs
+    reason: Documentation-platform tool. Enumerates the eight published OpenAPI descriptions; no TD REST equivalent.
+  - tool: get-endpoints
+    server: treasure-ai-docs
+    reason: Documentation-platform tool over the published specs.
+  - tool: get-endpoint-info
+    server: treasure-ai-docs
+    reason: Documentation-platform tool over the published specs.
+  - tool: get-security-schemes
+    server: treasure-ai-docs
+    reason: Documentation-platform tool over the published specs.
+  - tool: get-full-api-description
+    server: treasure-ai-docs
+    reason: >-
+      Returns a complete OpenAPI document. This is the tool that surfaced all eight Treasure AI specs
+      during this enrichment pass.
+  - tool: search
+    server: treasure-ai-docs
+    reason: Full-text documentation search (en, ja). No TD REST equivalent.
+
+rest_only:
+  - capability: Access control (policies, policy groups, permissions, delegated admins)
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    operations: 31
+    note: No MCP tool touches access control. Governance is REST/console only.
+  - capability: Schedules and scheduled query management
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    operations: 6
+  - capability: Table lifecycle (create, rename, swap, transfer, schema append/update, delete, recover)
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    operations: 14
+    note: >-
+      Includes the only idempotent operations in the estate — table create and transfer accept an
+      idempotent_key.
+  - capability: Result connections and connector config validation
+    spec: openapi/treasure-data-td-api-v3-openapi.yml
+    operations: 5
+  - capability: Journeys, realtime journeys, funnels, predictive segments, tokens, folders, activation templates
+    spec: openapi/treasure-data-cdp-api-openapi.yml
+    operations: 140
+    note: The largest uncovered surface — the whole journey/orchestration half of the CDP API has no MCP tool.
+  - capability: LLM API — agents, chats, actions, knowledge bases, artifacts, integrations
+    spec: openapi/treasure-data-llm-api-openapi.yml
+    operations: 87
+    note: Entirely absent from both MCP servers.
+  - capability: Data warehouse integration (Snowflake, Databricks bulkload sessions)
+    spec: openapi/treasure-data-dwh-integration-api-openapi.yml
+    operations: 10
+  - capability: Event ingestion (Postback v1 and v2, Personalization events)
+    specs:
+      - openapi/treasure-data-postback-api-openapi.yml
+      - openapi/treasure-data-postback-api-v2-openapi.yml
+      - openapi/treasure-data-personalization-api-openapi.yml
+    operations: 3
+  - capability: Workflow projects/secrets/revisions/pools/schedules not surfaced as tools
+    spec: openapi/treasure-data-workflow-api-openapi.yml
+    operations: 22
+
+coverage:
+  tools_named: 29
+  tools_bound: 19
+  mcp_only: 10
+  rest_operations_total: 405
+  rest_operations_with_a_tool: 21
+  rest_coverage_percent: 5.2
+  note: >-
+    Roughly one in twenty published Treasure Data operations is reachable through an MCP tool. The agent
+    surface is deliberately narrow — query, browse, and monitor — with the entire LLM API, the journey
+    half of the CDP API and all access-control operations left to REST.

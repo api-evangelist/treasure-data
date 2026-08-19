@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Treasure Data TD Bulk Import Users API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/user/list"
+          },
+          "docs": "Returns the list of users in the account."
+        },
+        {
+          "info": {
+            "name": "Show current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/user/show"
+          },
+          "docs": "Returns information about the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Remove a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/user/remove/:user_email",
+            "params": [
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "path",
+                "description": "Email address of the user to remove"
+              }
+            ]
+          },
+          "docs": "Deletes the specified user account."
+        },
+        {
+          "info": {
+            "name": "Create user with SSO",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/user/create_with_sso/:user_first_name",
+            "params": [
+              {
+                "name": "user_first_name",
+                "value": "",
+                "type": "path",
+                "description": "First name of the new user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows the admin to create a user with SSO authentication."
+        },
+        {
+          "info": {
+            "name": "Enforce SSO for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/user/enforce_sso/:user_email",
+            "params": [
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "path",
+                "description": "Email address of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows admin to make it mandatory for a user to login with SSO."
+        },
+        {
+          "info": {
+            "name": "Enable SSO for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/user/enable_sso/:user_email",
+            "params": [
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "path",
+                "description": "Email address of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows admin to permit a user to login with SSO."
+        },
+        {
+          "info": {
+            "name": "Disable SSO for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/user/disable_sso/:user_email",
+            "params": [
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "path",
+                "description": "Email address of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows admin to prohibit a user from logging in with SSO."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

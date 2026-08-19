@@ -1,0 +1,65 @@
+name: Treasure Data Agent Skills
+description: >-
+  Treasure Data publishes its own Agent Skills. github.com/treasure-data/td-skills is a Claude Code plugin
+  marketplace carrying 15 plugins and 83 skills covering SQL on Trino/Hive, real-time personalization,
+  the tdx CLI, Treasure Workflow, the SDKs, the semantic layer, Studio and Treasure Work. The same
+  marketplace is installable from inside Treasure AI Studio's Plugin Marketplace (shipped June 2026).
+  This index is a catalogue of what the provider publishes; nothing here was authored on their behalf.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: https://github.com/treasure-data/td-skills
+marketplace:
+  name: td-skills
+  owner: Treasure Data
+  contact: support@treasuredata.com
+  version: 1.0.0
+  repository: https://github.com/treasure-data/td-skills
+  manifest: https://github.com/treasure-data/td-skills/blob/main/.claude-plugin/marketplace.json
+  manifest_file: treasure-data-skills-marketplace.json
+  last_pushed: '2026-08-13'
+  plugin_count: 15
+  skill_count: 83
+  install_surfaces:
+    - Claude Code plugin marketplace
+    - 'Treasure AI Studio → Settings → Marketplace (Plugin Marketplace, released 2026-06-17)'
+plugins:
+  - {name: sql-skills, skills: 5, description: 'Trino and Hive query optimization, td_interval time filtering, Trino-to-Hive migration'}
+  - {name: realtime-skills, skills: 18, description: 'RT 2.0 real-time personalization — parent segment config, personalization services, real-time journeys, identity graph, activation logs'}
+  - {name: tdx-skills, skills: 14, description: 'tdx CLI — databases, parent segments, segments, journeys, connector config, Foundry agents, workflows, Engage'}
+  - {name: studio-skills, skills: 9, description: 'Treasure AI Studio — work folders, skill creation, dashboards, scheduled tasks, web search'}
+  - {name: treasure-work-skills, skills: 9, description: 'Treasure Work — work folders, agents, dashboards, action reports'}
+  - {name: aps-doc-skills, skills: 7, description: 'Modular technical documentation generation per pipeline layer — ingestion, staging, hist-union, id-unification, golden, master-segment'}
+  - {name: creative-skills, skills: 5, description: 'Multi-channel ad ideation, brand compliance, brand onboarding, creative brief architect'}
+  - {name: workflow-skills, skills: 3, description: 'Treasure Workflow orchestration — digdag, llm-workflow, dbt'}
+  - {name: field-agent-skills, skills: 3, description: 'Field agent deployment, documentation, Plotly visualization'}
+  - {name: document-skills, skills: 3, description: 'PowerPoint via HTML-to-PPTX, Google Slides authoring and review'}
+  - {name: sdk-skills, skills: 2, description: 'JavaScript SDK for browser event collection and Python SDK usage'}
+  - {name: semantic-layer, skills: 2, description: 'Data dictionary helper and schema auto-tagger for governance and catalog management'}
+  - {name: analysis-skills, skills: 1, description: 'Unified SEO/AEO audit using GSC and SerpAPI'}
+  - {name: email-campaign-skills, skills: 1, description: 'Enterprise HTML email campaign generation with strategy briefs and live previews'}
+  - {name: template-skill, skills: 1, description: 'Template for authoring new TD-specific Claude Code skills'}
+skills:
+  - file: treasure-data-sdk-skills-javascript.md
+    name: Treasure Data JavaScript SDK
+    plugin: sdk-skills
+    source: https://github.com/treasure-data/td-skills/blob/main/sdk-skills/javascript/SKILL.md
+    api: openapi/treasure-data-postback-api-openapi.yml
+    method: searched
+    verbatim: true
+  - file: treasure-data-sdk-skills-python.md
+    name: Treasure Data Python SDK
+    plugin: sdk-skills
+    source: https://github.com/treasure-data/td-skills/blob/main/sdk-skills/python/SKILL.md
+    api: openapi/treasure-data-td-api-v3-openapi.yml
+    method: searched
+    verbatim: true
+notes:
+  - >-
+    Two SKILL.md files are saved verbatim here because they bind directly to APIs catalogued in this repo.
+    The remaining 81 skills live in the provider's repository and are indexed above rather than copied —
+    they are product/console workflows (Studio, Treasure Work, creative, documents) rather than API
+    operating instructions, and the repository is the source of truth for them.
+  - >-
+    No API-Evangelist-authored skills were generated for Treasure Data. The provider publishes a larger and
+    more current skill set than this pipeline would produce, so the searched artifact stands on its own.

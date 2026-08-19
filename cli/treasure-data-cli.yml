@@ -1,0 +1,88 @@
+name: Treasure Data Command Line Interfaces
+description: >-
+  Treasure Data ships two first-party CLIs. TD Toolbelt (`td`) is the long-standing Ruby command line
+  interface distributed as the `td` gem and as native installers. `tdx` is the newer CLI that also runs
+  server-side inside Treasure AI Studio's sandbox, so an AI agent can invoke it on the user's behalf
+  without a terminal.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.treasure.ai/tools/cli-and-sdks/quickstart,
+  https://docs.treasure.ai/tools/cli-and-sdks/api,
+  https://docs.treasure.ai/products/ai-studio/query/tdx-commands,
+  https://rubygems.org/gems/td
+clis:
+  - name: td
+    label: TD Toolbelt
+    docs: https://docs.treasure.ai/tools/cli-and-sdks/quickstart
+    reference: https://docs.treasure.ai/tools/cli-and-sdks/api
+    repository: https://github.com/treasure-data/td
+    package: {registry: rubygems, name: td, version: 0.19.1, published: '2025-08-28'}
+    install:
+      - {method: rubygems, command: gem install td}
+      - {method: native-installer, docs: 'https://docs.treasure.ai/tools/cli-and-sdks/obtaining-td-toolbelt-and-treasure-agent-for-linux'}
+    auth:
+      docs: https://docs.treasure.ai/tools/cli-and-sdks/configuring-authentication-for-td-using-the-td-toolbelt
+      note: TD1 API key; endpoint/region configured separately.
+    endpoint_config: https://docs.treasure.ai/tools/cli-and-sdks/configuring-your-td-endpoint-using-td-toolbelt
+    proxy: https://docs.treasure.ai/tools/cli-and-sdks/proxy-access
+    man_pages: https://docs.treasure.ai/tools/cli-and-sdks/accessing-the-td-toolbelt-man-pages
+    modules:
+      - {name: workflow, docs: 'https://docs.treasure.ai/tools/cli-and-sdks/install-td-toolbelt-workflow-module', description: 'adds `td workflow` for Treasure Workflow (Digdag)'}
+    key_flows:
+      - Bulk and legacy imports from S3, MySQL, MongoDB, JSON and CSV files
+      - Data connector configuration via seed.yml with `guess` for format detection
+      - Scheduling and managing query jobs
+      - Outputting query results directly to third-party destinations
+    docs_note: >-
+      The bulk of the integration documentation ships a CLI variant per connector — dozens of
+      "<integration> Import/Export Integration CLI" pages drive TD Toolbelt with a seed/config YAML.
+
+  - name: tdx
+    label: tdx CLI
+    docs: https://docs.treasure.ai/products/ai-studio/query/tdx-commands
+    repository: null
+    package: {registry: null, name: null, version: null, published: null}
+    note: >-
+      No public package registry entry was found for tdx during this pass. It is documented as running
+      inside Treasure AI Studio's server-side sandbox ("the same commands you already use locally"),
+      which implies a local distribution exists, but the docs page does not link an install method.
+    execution:
+      - {mode: server-side, surface: 'Treasure AI Studio (Web and Desktop; not Mobile)', note: 'runs in an isolated sandbox; credentials managed server-side, network restricted to Treasure AI APIs'}
+      - {mode: local, note: implied by the documentation but not documented with an install command}
+    output_formats: ['--table (default)', '--json', '--jsonl', '--tsv']
+    command_groups:
+      - group: data
+        commands:
+          - {command: tdx databases, description: List all databases, alias: tdx database list}
+          - {command: 'tdx tables <db>', description: List tables in a database, alias: 'tdx table list <db>'}
+          - {command: 'tdx describe <db.table>', description: Show table schema (columns and types)}
+          - {command: 'tdx show <db.table>', description: Preview table contents}
+          - {command: 'tdx query "<sql>"', description: Run a Trino SQL query}
+          - {command: tdx job list, description: List recent query jobs}
+      - group: cdp
+        commands:
+          - {command: tdx segment list, description: List CDP audience segments, alias: tdx segments}
+          - {command: 'tdx sg validate <file>', description: Validate a segment YAML file}
+          - {command: tdx parent-segment list, description: List parent segments}
+          - {command: tdx journey list, description: List journeys}
+          - {command: 'tdx journey validate <file>', description: Validate a journey YAML file}
+          - {command: 'tdx activations <segment>', description: List activations for a segment}
+      - group: ai
+        commands:
+          - {command: tdx agents, description: List agents in the current project}
+          - {command: tdx llm projects, description: List LLM projects}
+      - group: context-and-utility
+        commands:
+          - {command: tdx status, description: Show auth status and current context}
+          - {command: 'tdx use database <db>', description: Set the active database for the session}
+          - {command: 'tdx api <endpoint>', description: 'Make a raw API request, e.g. tdx api --type td /v3/job/list'}
+    agent_skills: >-
+      github.com/treasure-data/td-skills ships a 14-skill `tdx-skills` plugin covering tdx-basic,
+      parent-segment, segment, validate-segment, cas, journey, validate-journey, connector-config,
+      foundry-agent, foundry-agent-test, foundry-agent-prompt, workflow, parent-segment-analysis and engage.
+notes:
+  - >-
+    `tdx api --type td /v3/job/list` is an escape hatch that puts the whole REST estate behind the CLI,
+    which is how the tdx skills reach endpoints tdx has no first-class command for.

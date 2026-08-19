@@ -1,0 +1,4778 @@
+openapi: 3.0.1
+info:
+  title: Treasure Data API
+  version: '3'
+servers:
+  - url: https://api.treasuredata.com/v3
+  - url: https://api.treasuredata.co.jp/v3
+  - url: https://api.ap02.treasuredata.com/v3
+  - url: https://api.eu01.treasuredata.com/v3
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+  schemas:
+    AnyValue:
+      description: Can be any value, including `null`.
+      anyOf:
+        - type: string
+          nullable: true
+        - type: number
+        - type: integer
+        - type: boolean
+        - type: array
+          items:
+            $ref: '#/components/schemas/AnyValue'
+        - type: object
+    EmptyObject:
+      type: object
+      additionalProperties: false
+    EmptyString:
+      type: string
+      pattern: ^$
+    HexValue:
+      type: string
+      pattern: '[0-9a-f]+'
+      example: 2ac30b788fd813e9ac7a3af9d395e109
+    DomainKey:
+      type: string
+      example: domain_key_123
+    IdempotentKey:
+      type: string
+    DateTimeISO8601:
+      description: >-
+        Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or
+        `2020-12-31T11:22:33Z` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    DateTimeAsString:
+      description: >-
+        Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31
+        11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+    Timestamp:
+      type: integer
+      example: 1356998400
+    ErrorResponse:
+      title: Error Response
+      description: A generic error response
+      type: object
+      additionalProperties: false
+      required:
+        - error
+        - message
+        - text
+        - severity
+        - status_code
+      properties:
+        error:
+          type: string
+          example: error
+        message:
+          type: string
+          example: message
+        severity:
+          type: string
+          example: error
+        text:
+          type: string
+          example: text
+        status_code:
+          type: integer
+          example: 422
+    PaginatedResult:
+      description: Paginated records and pagination metadata.
+      type: object
+      additionalProperties: false
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          description: Array of paginated records.
+          type: array
+          items:
+            type: object
+        pagination:
+          description: Pagination metadata.
+          type: object
+          additionalProperties: false
+          required:
+            - next_page
+          properties:
+            next_page:
+              description: URL to the next page. `null` means there is no next page.
+              type: string
+              nullable: true
+              example: /resources?page[after]=eyJpZCI6IjEyMyJ9
+    Timezone:
+      type: string
+      example: UTC
+    AccessControlProfileOptions:
+      title: Access Control Profile Options
+      description: >-
+        A map of profile option keys to their resolved values. A value is null
+        when the option is unset and has no default. Returned both by the list
+        endpoint (all keys) and by the single-option endpoint (one key).
+      type: object
+      additionalProperties:
+        type: string
+        nullable: true
+    AccessControlProfileOptionUpdateRequest:
+      title: Access Control Profile Option Update Request
+      description: >-
+        The value to set for the profile option (e.g. "full_access" for
+        treasure_ai_studio).
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: string
+    AccessControlColumnPermission:
+      type: object
+      additionalProperties: false
+      required:
+        - tags
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        except:
+          type: boolean
+          nullable: true
+        masking:
+          type: string
+          enum:
+            - hash
+          nullable: true
+    AccessControlPermission:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - permission_set_id
+        - resource_type
+        - filter_expression
+        - filter_operator
+        - filter_value
+        - can_create
+        - can_read
+        - can_update
+        - can_delete
+        - can_execute
+        - custom_operation
+      properties:
+        id:
+          type: integer
+        permission_set_id:
+          type: integer
+        resource_type:
+          type: string
+        filter_expression:
+          type: string
+        filter_operator:
+          type: string
+        filter_value:
+          type: string
+        can_create:
+          type: boolean
+        can_read:
+          type: boolean
+        can_update:
+          type: boolean
+        can_delete:
+          type: boolean
+        can_execute:
+          type: boolean
+        custom_operation:
+          type: string
+    CreateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    CreateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+    UpdateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    UpdateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+        description:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
+    UpdateAccessControlPolicyGroupPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - policy_ids
+      properties:
+        policy_ids:
+          $ref: >-
+            #/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids
+    UpdateAccessControlPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - policy_ids
+      properties:
+        policy_ids:
+          type: array
+          items:
+            type: string
+          example:
+            - '1'
+            - '2'
+            - '42'
+    UpdateAccessControlPolicyUsersRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
+    AccessControlUnpaidPermissions:
+      title: Access Control Permissions
+      type: object
+      additionalProperties: false
+      properties:
+        WorkflowProject:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - run
+                  - edit
+        Segmentation:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+        MasterSegmentConfigs:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+        MasterSegmentConfig:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              id:
+                type: string
+                example: '42'
+        SegmentAllFolders:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              audience_id:
+                type: string
+                example: '42'
+        SegmentFolder:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              id:
+                type: string
+                example: '42'
+        ActivationTemplate:
+          description: Permissions on ActivationTemplate
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - full
+                  - template_access
+    AccessControlPermissions:
+      title: Access Control Permissions
+      type: object
+      additionalProperties: false
+      properties:
+        WorkflowProject:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - run
+                  - edit
+        WorkflowProjectLevel:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - name
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - run
+                  - edit
+              name:
+                type: string
+                example: my_wf
+        WorkflowRestrictedOperators:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - edit
+        Segmentation:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+        PersonalizationStudio:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+        MasterSegmentConfigs:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+                  - owner_manage
+        MasterSegmentConfig:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              id:
+                type: string
+                example: '42'
+        MasterSegmentColumn:
+          description: Permissions on MasterSegmentColumn
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view_clear
+                  - view_pii
+                  - blocked
+              column_identifiers:
+                type: string
+                description: comma-separated audience_id and column_name
+                example: 1$attribute.customers.age,1$attribute.customers.first_name
+        MasterSegmentAllColumns:
+          description: Permissions on MasterSegmentAllColumns
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view_clear
+                  - view_pii
+                  - blocked_only_for_migration_purpose
+              audience_id:
+                type: string
+                description: audience_id
+                example: '1'
+        CookieConsent:
+          description: Permissions on CookieConsent
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+                  - full
+        SegmentAllFolders:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              audience_id:
+                type: string
+                example: '42'
+        SegmentFolder:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - edit
+              id:
+                type: string
+                example: '42'
+        Profiles:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+              audience_id:
+                type: string
+                example: '42'
+        ProfilesApiToken:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+              audience_id:
+                type: string
+                example: '42'
+        ActivationTemplate:
+          description: Permissions on ActivationTemplate
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - view
+                  - full
+                  - template_access
+        Authentications:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - use_limited
+                  - use
+                  - full
+                  - owner_manage
+              ids:
+                type: string
+                description: >-
+                  comma-separated IDs of authentications, required when
+                  `operation = 'use_limited'`
+                example: 1,2,3
+        Sources:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - restricted
+                  - full
+        Destinations:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - restricted
+                  - full
+        Databases:
+          description: Permissions on databases
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - query
+                  - edit
+                  - import
+                  - manage
+                  - owner_manage
+                  - download
+              ids:
+                type: string
+                description: >-
+                  comma-separated IDs of databases, required when operation is
+                  `query`, `edit`, and `import`
+                example: 1,2,3
+        UniversalConsent:
+          description: Permissions on UniversalConsent
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+        TrafficControls:
+          description: Permissions on TrafficControl
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+                  - view
+        TrafficControl:
+          description: Permissions on TrafficControl
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+                  - view
+              audience_id:
+                type: string
+                example: '42'
+        Journeys:
+          description: Permissions on Journeys
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+                  - edit
+                  - view
+        Journey:
+          description: Permissions on Journeys in the audience
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+              - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+                  - edit
+                  - view
+              audience_id:
+                type: string
+                example: '42'
+        LlmProject:
+          description: Permissions on LLM Projects
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - full
+                  - edit
+                  - chat
+                  - publish_internal_integration
+                  - publish_external_integration
+              project_id:
+                type: string
+                description: >-
+                  IDs of LLM Project, required when operation is `edit`, `chat`,
+                  `publish_internal_integration` and
+                  `publish_external_integration`
+                example: '1'
+        RawDataAccess:
+          description: Permissions on Raw Data Access for Audience Studio
+          type: array
+          items:
+            type: object
+            required:
+              - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                  - query
+              audience_id:
+                type: string
+                description: >-
+                  ID of the Audience (MasterSegmentConfig) to grant raw data
+                  access
+                example: '123'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccessControlPolicyGroupId:
+      type: integer
+      example: 10
+    AccessControlPolicyGroupTaggableName:
+      type: string
+      description: Policy Group's taggable name
+      example: some_policy_group
+    AccessControlPolicy:
+      title: Access Control Policy
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - account_id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy's name
+          type: string
+          example: some_policy
+        description:
+          description: Policy's description
+          type: string
+          example: written about the policy
+        user_count:
+          description: The number of users which the policy attaches to
+          type: integer
+          example: 3
+    AccessControlPolicyGroup:
+      title: Access Control Policy Group
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyGroupId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy Group's name
+          type: string
+          example: some_policy_group
+        taggable_name:
+          $ref: '#/components/schemas/AccessControlPolicyGroupTaggableName'
+        description:
+          description: Policy Group's description
+          type: string
+          example: some_policy_group_description
+          nullable: true
+        policy_count:
+          description: Policy Group's policy count
+          type: integer
+          example: 1
+        created_at:
+          description: when the policy group was created
+          type: string
+          format: date-time
+          example: '2012-01-01T12:00:00Z'
+        updated_at:
+          description: when policy group was updated
+          type: string
+          format: date-time
+          example: '2012-01-01T12:00:00Z'
+    AccessControlPolicyGroupPolicies:
+      title: Access Control Policy Group Policies
+      type: object
+      additionalProperties: false
+      required:
+        - policy_ids
+      properties:
+        policy_ids:
+          description: Policy Group's Policies
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicyId'
+    AccessControlUser:
+      title: Access Control User
+      type: object
+      additionalProperties: false
+      required:
+        - user_id
+        - account_id
+        - permissions
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        permissions:
+          $ref: '#/components/schemas/AccessControlPermissions'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicy'
+    AccessControlUserReference:
+      title: Access Control User Reference
+      type: object
+      additionalProperties: false
+      required:
+        - user_id
+        - account_id
+        - email
+        - name
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        email:
+          $ref: '#/components/schemas/User/properties/email'
+        name:
+          $ref: '#/components/schemas/User/properties/name'
+    PayingAccount:
+      title: Account
+      description: account
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - plan_id
+        - guaranteed_maps
+        - max_maps
+        - guaranteed_reduces
+        - max_reduces
+        - max_queued_tasks
+        - max_concurrent_jobs
+        - resource_pools
+      properties:
+        id:
+          $ref: '#/components/schemas/AccountId'
+        plan_id:
+          description: the plan id
+          type: integer
+          example: 123
+        guaranteed_maps:
+          description: the guaranteed number of maps
+          type: integer
+          example: 3
+        max_maps:
+          description: the max number of maps
+          type: integer
+          example: 5
+        guaranteed_reduces:
+          description: the guaranteed number of reduces
+          type: integer
+          example: 3
+        max_reduces:
+          description: the max number of reduces
+          type: integer
+          example: 5
+        max_queued_tasks:
+          description: the max number of queued tasks
+          type: integer
+          example: 10
+        max_concurrent_jobs:
+          description: the max number of concurrent jobs
+          type: integer
+          example: 5
+        resource_pools:
+          type: array
+          items:
+            type: object
+    AccountId:
+      type: integer
+      example: 123
+    Account:
+      title: Account
+      description: account
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - created_at
+        - encrypt_start_at
+        - guaranteed_cores
+        - maximum_cores
+        - plan
+        - presto_plan
+        - storage_size
+      properties:
+        id:
+          $ref: '#/components/schemas/AccountId'
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        encrypt_start_at:
+          anyOf:
+            - nullable: true
+              type: string
+            - $ref: '#/components/schemas/DateTimeISO8601'
+        guaranteed_cores:
+          description: the guaranteed number of maps
+          type: integer
+          example: 3
+        maximum_cores:
+          description: the max number of maps
+          type: integer
+          example: 5
+        plan:
+          description: the plan id
+          type: integer
+          example: 123
+        presto_plan:
+          description: the presto plan id
+          type: integer
+          example: 123
+        storage_size:
+          description: the storage size
+          type: integer
+          nullable: true
+          example: 1000
+    ClusterType:
+      description: the cluster type
+      type: string
+      example: hdp2
+    ApiKey:
+      title: Api Key
+      description: api key
+      type: object
+      required:
+        - type
+        - name
+        - value
+      properties:
+        type:
+          description: Api Key type
+          type: string
+          enum:
+            - master
+            - write
+            - write-only
+          example: master
+        name:
+          description: Api Key name
+          type: string
+          nullable: true
+          example: ABC Key
+        value:
+          description: the actual Api key value
+          type: string
+          example: 123/456789xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    BulkImportPartName:
+      type: string
+      example: part_1
+    BulkImportReference:
+      type: object
+      required:
+        - bulk_import
+        - name
+      properties:
+        bulk_import:
+          $ref: '#/components/schemas/BulkImport/properties/name'
+        name:
+          $ref: '#/components/schemas/BulkImport/properties/name'
+        job_id:
+          $ref: '#/components/schemas/JobId'
+    BulkImport:
+      type: object
+      additionalProperties: false
+      required:
+        - database
+        - error_parts
+        - error_records
+        - name
+        - status
+        - table
+        - upload_frozen
+        - valid_parts
+        - valid_records
+      properties:
+        database:
+          anyOf:
+            - $ref: '#/components/schemas/Database/properties/name'
+            - nullable: true
+              type: string
+        error_parts:
+          type: integer
+          nullable: true
+        error_records:
+          type: integer
+          nullable: true
+        name:
+          type: string
+        status:
+          type: string
+        table:
+          anyOf:
+            - $ref: '#/components/schemas/Table/properties/name'
+            - nullable: true
+              type: string
+        upload_frozen:
+          type: boolean
+          nullable: true
+          example: true
+        valid_parts:
+          type: integer
+          nullable: true
+        valid_records:
+          type: integer
+          nullable: true
+    CreateBulkLoadRequest:
+      title: CreateBulkLoadRequest
+      allOf:
+        - $ref: '#/components/schemas/CreateOrUpdateJobRequest'
+        - type: object
+          additionalProperties: false
+          required:
+            - in_settings
+          properties:
+            in_settings:
+              anyOf:
+                - type: string
+                - type: object
+                  additionalProperties: false
+                  required:
+                    - bucket
+                    - path_prefix
+                  properties:
+                    bucket:
+                      description: bucket name
+                      type: string
+                      example: bucket_A
+                    path_prefix:
+                      type: string
+                      example: /logs
+                    parser:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                            - csv
+                        columns:
+                          type: array
+                          items:
+                            type: object
+                            additionalProperties: false
+                            required:
+                              - name
+                              - type
+                            properties:
+                              name:
+                                type: string
+                                example: user
+                              type:
+                                type: string
+                                example: string
+            out_settings:
+              anyOf:
+                - type: string
+                - type: object
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                        - append
+                        - replace
+            filter_settings:
+              anyOf:
+                - type: string
+                - type: array
+                  items:
+                    type: object
+                    additionalProperties: true
+                    required:
+                      - type
+                    properties:
+                      type:
+                        type: string
+                        description: The filter plugin type
+                        example: rename
+                    example:
+                      type: add_time
+                      to_column: start_date
+    BulkLoad:
+      title: BulkLoad
+      description: bulk load
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - cron
+        - timezone
+        - delay
+        - start_at
+        - database
+        - table
+        - config
+        - config_diff
+      properties:
+        id:
+          description: the bulk load's unique identifier
+          type: integer
+        name:
+          type: string
+        cron:
+          type: string
+          nullable: true
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        delay:
+          type: integer
+        start_at:
+          description: the start date
+          type: string
+          nullable: true
+          format: date-time
+          example: '2019-01-01T12:00:00Z'
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        config:
+          $ref: '#/components/schemas/BulkLoadConfig'
+        config_diff:
+          type: object
+          additionalProperties: false
+    BulkLoadConfig:
+      title: BulkLoadConfig
+      description: bulk load config
+      type: object
+      additionalProperties: true
+      properties:
+        in:
+          type: object
+          additionalProperties: true
+          properties:
+            connection_prop:
+              type: string
+              example: connection_prop
+            connection_secret:
+              type: string
+              example: secret
+            basic_prop:
+              type: string
+              example: basic
+            basic_secret:
+              type: string
+              example: secret
+            advanced_prop:
+              type: string
+              example: advanced
+            advanced_secret:
+              type: string
+              example: secret
+            type:
+              type: string
+              example: some_type
+            td_authentication_id:
+              type: integer
+              example: 1234
+        filters:
+          type: array
+          items:
+            type: object
+        exec:
+          type: object
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              example: some_type
+            basic_prop:
+              type: string
+              example: basic
+            secret_prop:
+              type: string
+              example: secret
+        out:
+          type: object
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              example: some_type
+            mode:
+              type: string
+              example: mode
+            plazma_dataset:
+              type: string
+              example: plazma
+            time_column:
+              type: string
+              example: time
+    RunBulkloadSessionRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        scheduled_time:
+          type: integer
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+    RunBulkloadSessionResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - job_id
+      properties:
+        job_id:
+          $ref: '#/components/schemas/JobId'
+    CreateBulkloadSessionRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - database
+      properties:
+        config:
+          $ref: '#/components/schemas/BulkLoadConfig'
+        cron:
+          type: string
+        name:
+          type: string
+        delay:
+          type: integer
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        database:
+          type: string
+        table:
+          type: string
+        time_column:
+          type: string
+    BulkLoadSession:
+      title: BulkLoadSession
+      description: Bulk load session
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/BulkLoadSessionId'
+        name:
+          type: string
+        cron:
+          type: string
+          nullable: true
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        delay:
+          type: integer
+        start_at:
+          anyOf:
+            - nullable: true
+              type: string
+            - $ref: '#/components/schemas/DateTimeISO8601'
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        config:
+          $ref: '#/components/schemas/BulkLoadConfig'
+        config_diff:
+          type: object
+          additionalProperties: true
+    BulkLoadSessionId:
+      type: integer
+      example: 43
+    BulkLoadSessionJob:
+      type: object
+      additionalProperties: false
+      required:
+        - account_id
+        - config
+        - cpu_time
+        - created_at
+        - database
+        - end_at
+        - job_id
+        - priority
+        - records
+        - schema
+        - start_at
+        - status
+        - table
+        - type
+        - updated_at
+      properties:
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        config:
+          type: object
+        created_at:
+          anyOf:
+            - nullable: true
+              type: integer
+            - $ref: '#/components/schemas/Timestamp'
+        cpu_time:
+          $ref: '#/components/schemas/Job/properties/cpu_time'
+        database:
+          type: object
+          additionalProperties: false
+          required:
+            - id
+            - name
+          properties:
+            id:
+              $ref: '#/components/schemas/DatabaseId'
+            name:
+              $ref: '#/components/schemas/Database/properties/name'
+        end_at:
+          anyOf:
+            - nullable: true
+              type: integer
+            - $ref: '#/components/schemas/Timestamp'
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        priority:
+          $ref: '#/components/schemas/Job/properties/priority'
+        records:
+          anyOf:
+            - nullable: true
+              type: array
+        schema:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/Job/properties/status'
+        start_at:
+          anyOf:
+            - nullable: true
+              type: integer
+            - $ref: '#/components/schemas/Timestamp'
+        table:
+          type: object
+          additionalProperties: false
+          required:
+            - id
+            - name
+          properties:
+            id:
+              $ref: '#/components/schemas/TableId'
+            name:
+              $ref: '#/components/schemas/Table/properties/name'
+        type:
+          $ref: '#/components/schemas/Job/properties/type'
+        updated_at:
+          anyOf:
+            - nullable: true
+              type: integer
+            - $ref: '#/components/schemas/Timestamp'
+    ConnectionId:
+      description: the connection id
+      type: integer
+      example: 17
+    Connection:
+      title: Connection
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectionId'
+        name:
+          type: string
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+        - count
+        - created_at
+        - delete_protected
+        - name
+        - organization
+        - permission
+        - updated_at
+      properties:
+        count:
+          description: '???'
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type: string
+          nullable: true
+          example: Treasure Data
+        permission:
+          description: permissions
+          type: string
+          nullable: true
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    DatabaseWithoutIdAndDatatank:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+        - count
+        - created_at
+        - delete_protected
+        - name
+        - organization
+        - permission
+        - updated_at
+      properties:
+        count:
+          description: the number of records in the database
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: whether the database is delete protected
+          type: boolean
+          example: true
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type: string
+          nullable: true
+          example: Treasure Data
+        permission:
+          description: permissions
+          type: string
+          nullable: true
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    DatabaseId:
+      type: integer
+      example: 7
+    DatabaseIdAsString:
+      type: string
+      example: '7'
+    JobStatus:
+      type: object
+      additionalProperties: false
+      required:
+        - job_id
+        - cpu_time
+        - created_at
+        - duration
+        - end_at
+        - num_records
+        - result_size
+        - start_at
+        - status
+        - updated_at
+      properties:
+        job_id:
+          $ref: '#/components/schemas/JobIdAsString'
+        cpu_time:
+          $ref: '#/components/schemas/Job/properties/cpu_time'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        end_at:
+          $ref: '#/components/schemas/Job/properties/end_at'
+        duration:
+          $ref: '#/components/schemas/Job/properties/duration'
+        num_records:
+          $ref: '#/components/schemas/Job/properties/num_records'
+        result_size:
+          $ref: '#/components/schemas/Job/properties/result_size'
+        start_at:
+          $ref: '#/components/schemas/Job/properties/start_at'
+        status:
+          $ref: '#/components/schemas/Job/properties/status'
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    Job:
+      title: Job
+      description: an execution of a query
+      type: object
+      required:
+        - cpu_time
+        - created_at
+        - database
+        - duration
+        - end_at
+        - hive_result_schema
+        - job_id
+        - linked_result_export_job_id
+        - num_records
+        - organization
+        - priority
+        - query
+        - result_export_target_job_id
+        - result_size
+        - retry_limit
+        - start_at
+        - status
+        - type
+        - updated_at
+        - url
+        - user_name
+      properties:
+        cpu_time:
+          nullable: true
+          type: integer
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        database:
+          description: database name
+          nullable: true
+          type: string
+        duration:
+          description: Duration
+          type: integer
+          nullable: true
+          example: 10
+        end_at:
+          oneOf:
+            - $ref: '#/components/schemas/DateTimeAsString'
+            - $ref: '#/components/schemas/EmptyString'
+        hive_result_schema:
+          description: the schema for the job's result table
+          type: string
+          nullable: true
+        job_id:
+          $ref: '#/components/schemas/JobIdAsString'
+        linked_result_export_job_id:
+          anyOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: result job id
+              nullable: true
+              type: integer
+        num_records:
+          description: >-
+            the number of records in the result. Will be `null` until job has
+            finished, and may not be set for all query types
+          type: integer
+          nullable: true
+          example: 100
+        organization:
+          description: always "null"
+          type: string
+          nullable: true
+          deprecated: true
+        priority:
+          description: job execution priority
+          type: integer
+          minimum: -2
+          maximum: 2
+          example: 0
+        query:
+          anyOf:
+            - nullable: true
+              type: string
+            - $ref: '#/components/schemas/QueryAsString'
+            - $ref: '#/components/schemas/BulkLoadConfig'
+        result:
+          description: URL of the result output destination
+          type: string
+        result_export_target_job_id:
+          anyOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: result export job id
+              nullable: true
+              type: integer
+        result_size:
+          description: size in bytes of the job's result, in `msgpack.gz` format
+          type: integer
+          nullable: true
+          example: 1048576
+        retry_limit:
+          description: automatically retry this many times on failure
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 32
+          example: 3
+        start_at:
+          oneOf:
+            - $ref: '#/components/schemas/DateTimeAsString'
+            - $ref: '#/components/schemas/EmptyString'
+        status:
+          description: current status of the job
+          type: string
+          enum:
+            - queued
+            - running
+            - killed
+            - success
+            - error
+          example: success
+        type:
+          type: string
+          example: presto
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        url:
+          type: string
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
+    JobId:
+      description: unique identifier of job
+      type: integer
+      example: 19
+    JobIdAsString:
+      description: unique identifier of job
+      type: string
+      example: '19'
+    QueryAsString:
+      description: the raw SQL query
+      type: string
+      example: SELECT * FROM my_table;
+    CreateOrUpdateJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Job/properties/priority'
+        query:
+          $ref: '#/components/schemas/QueryAsString'
+        retry_limit:
+          $ref: '#/components/schemas/Job/properties/retry_limit'
+        scheduled_time:
+          $ref: '#/components/schemas/DateTimeISO8601'
+    CreateExportJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        access_key_id:
+          type: string
+          example: a_key
+        assume_role:
+          type: string
+        bucket:
+          type: string
+          example: test_bucket
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        encryption:
+          type: string
+        file_format:
+          type: string
+          enum:
+            - jsonl.gz
+            - tsv.gz
+            - json.gz
+            - line-json.gz
+          example: json.gz
+        file_prefix:
+          type: string
+        from:
+          $ref: '#/components/schemas/Timestamp'
+        pool_name:
+          type: string
+          example: pool_1
+        secret_access_key:
+          type: string
+          example: secret_abc
+        storage_type:
+          type: string
+          enum:
+            - s3
+          example: s3
+        to:
+          $ref: '#/components/schemas/Timestamp'
+    Tag:
+      type: string
+      example: APAC
+    UserIds:
+      type: object
+      additionalProperties: false
+      required:
+        - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+            example: '234'
+    ScheduledJob:
+      type: object
+      additionalProperties: false
+      required:
+        - job_id
+        - type
+        - scheduled_at
+      properties:
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        type:
+          $ref: '#/components/schemas/Job/properties/type'
+        scheduled_at:
+          oneOf:
+            - $ref: '#/components/schemas/DateTimeAsString'
+            - $ref: '#/components/schemas/EmptyString'
+    CreateOrUpdateScheduleRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        executing_user_id:
+          $ref: '#/components/schemas/Schedule/properties/executing_user_id'
+        engine_version:
+          $ref: '#/components/schemas/Schedule/properties/engine_version'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Schedule/properties/priority'
+        retry_limit:
+          $ref: '#/components/schemas/Schedule/properties/retry_limit'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        result:
+          description: url of the result
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
+    ScheduleReference:
+      type: object
+      required:
+        - created_at
+        - cron
+        - database
+        - delay
+        - name
+        - query
+        - timezone
+        - type
+        - user_name
+      properties:
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Schedule/properties/database'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
+    Schedule:
+      type: object
+      required:
+        - created_at
+        - cron
+        - database
+        - delay
+        - name
+        - query
+        - timezone
+        - type
+        - user_name
+      properties:
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        cron:
+          type: string
+          nullable: true
+        database:
+          anyOf:
+            - $ref: '#/components/schemas/Database/properties/name'
+            - nullable: true
+              type: string
+        delay:
+          type: integer
+          nullable: true
+          minimum: 0
+          example: 5
+        engine_version:
+          description: >-
+            the version of the query engine for the query, can be a version
+            release name (e.g 'stable') or version number (e.g '0.205')
+          type: string
+          example: stable
+        executing_user_id:
+          type: integer
+        name:
+          type: string
+        priority:
+          type: integer
+          minimum: -2
+          maximum: 2
+          example: 1
+        query:
+          type: string
+        retry_limit:
+          type: integer
+          minimum: 0
+          maximum: 32
+          example: 3
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          type: string
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
+    SSOSetting:
+      title: SSO Setting
+      type: object
+      additionalProperties: false
+      required:
+        - cert
+        - sign_in_endpoint
+        - sign_out_endpoint
+        - strategy
+      properties:
+        cert:
+          type: string
+          nullable: true
+          example: '-----BEGIN CERTIFICATE----- xxx -----END CERTIFICATE-----'
+        identity_provider_name:
+          description: name of IdP
+          example: AzureAD
+          type: string
+          nullable: true
+        entity_id:
+          type: string
+          writeOnly: true
+          nullable: true
+          example: urn:treasuredata:sso
+        sign_in_endpoint:
+          type: string
+          nullable: true
+          example: https://login.example.com/ffffffff-ffff-ffff-ffff-ffffffffffff/saml
+        sign_out_endpoint:
+          type: string
+          nullable: true
+          example: https://login.exmple.com/signout
+        strategy:
+          type: string
+          enum:
+            - samlp
+          example: samlp
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+    CreateOrUpdateSSOSettingRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        cert:
+          $ref: '#/components/schemas/SSOSetting/properties/cert'
+        identity_provider_name:
+          $ref: '#/components/schemas/SSOSetting/properties/identity_provider_name'
+        entity_id:
+          $ref: '#/components/schemas/SSOSetting/properties/entity_id'
+        sign_in_endpoint:
+          $ref: '#/components/schemas/SSOSetting/properties/sign_in_endpoint'
+        sign_out_endpoint:
+          $ref: '#/components/schemas/SSOSetting/properties/sign_out_endpoint'
+        strategy:
+          $ref: '#/components/schemas/SSOSetting/properties/strategy'
+    ResourcePoolName:
+      title: Resource Pool Name
+      type: string
+    TableReference:
+      title: Table reference
+      type: object
+      additionalProperties: false
+      required:
+        - database
+        - table
+        - type
+      properties:
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        type:
+          $ref: '#/components/schemas/Table/properties/type'
+    RecoveredTable:
+      title: Recovered Table
+      description: >-
+        Recovered table; call GET /table/show/{database}/{table} for full
+        details including schema
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - count
+        - counter_updated_at
+        - created_at
+        - delete_protected
+        - estimated_storage_size
+        - expire_days
+        - include_v
+        - last_log_timestamp
+        - name
+        - type
+        - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        name:
+          $ref: '#/components/schemas/Table/properties/name'
+        count:
+          $ref: '#/components/schemas/Table/properties/count'
+        counter_updated_at:
+          $ref: '#/components/schemas/Table/properties/counter_updated_at'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        estimated_storage_size:
+          $ref: '#/components/schemas/Table/properties/estimated_storage_size'
+        expire_days:
+          $ref: '#/components/schemas/Table/properties/expire_days'
+        include_v:
+          $ref: '#/components/schemas/Table/properties/include_v'
+        last_log_timestamp:
+          $ref: '#/components/schemas/Table/properties/last_log_timestamp'
+        delete_protected:
+          $ref: '#/components/schemas/Table/properties/delete_protected'
+        type:
+          $ref: '#/components/schemas/Table/properties/type'
+    DeletedTable:
+      title: Deleted Table
+      description: A deleted recoverable table
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - database_id
+        - database_name
+        - deleted_at
+        - created_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        name:
+          $ref: '#/components/schemas/Table/properties/name'
+        database_id:
+          type: integer
+          example: 42
+        database_name:
+          $ref: '#/components/schemas/Database/properties/name'
+        deleted_at:
+          description: when the table was deleted
+          $ref: '#/components/schemas/DateTimeAsString'
+        created_at:
+          description: when the table was created
+          $ref: '#/components/schemas/DateTimeAsString'
+    DeletedTablesWithCursor:
+      title: Deleted Tables with Cursor
+      description: A paginated list of deleted tables
+      type: object
+      additionalProperties: false
+      required:
+        - tables
+        - cursor_id
+      properties:
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedTable'
+        cursor_id:
+          description: >-
+            ID of the last table in this page; pass as cursor_id to get the next
+            page, or null if this is the last page
+          type: integer
+          nullable: true
+          example: 456
+    TransferTableResponse:
+      type: object
+      properties:
+        database_name:
+          type: string
+        table_name:
+          type: string
+    TableId:
+      type: integer
+      example: 11
+    Table:
+      title: Table
+      description: Table
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - count
+        - counter_updated_at
+        - created_at
+        - delete_protected
+        - estimated_storage_size
+        - expire_days
+        - include_v
+        - last_log_timestamp
+        - name
+        - schema
+        - type
+        - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        count:
+          type: integer
+          example: 1000
+        counter_updated_at:
+          anyOf:
+            - nullable: true
+              type: string
+            - $ref: '#/components/schemas/DateTimeISO8601'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          type: boolean
+          example: true
+        estimated_storage_size:
+          type: integer
+          example: 1073741824
+        expire_days:
+          nullable: true
+          type: integer
+          example: 30
+        include_v:
+          description: >-
+            when true, Hive queries can access a virtual column "v" which
+            contains a map of every data column's name to its value (represented
+            as a string). Prefer to set a schema on the table instead of using
+            "v".
+          type: boolean
+          example: false
+          deprecated: true
+        last_log_timestamp:
+          type: integer
+          nullable: true
+          example: 1356998400
+        name:
+          type: string
+          example: Bravo
+        description:
+          description: user-provided description of the table
+          type: string
+          example: Click events.
+          nullable: true
+        schema:
+          type: string
+          description: >-
+            JSON-encoded table schema. When include_descriptions=true, contains
+            column descriptions in format [[name, type, alias, description],
+            ...]
+        type:
+          type: string
+          enum:
+            - log
+          example: log
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    TableSchemaAsString:
+      description: A JSON serialization of the Table Schema
+      type: string
+      example: '[["name", "string", "first_name"], ["creation_date", "long"]]'
+    TableSchemaAsArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnSchemaAsArray'
+      example:
+        - - name
+          - string
+          - first_name
+        - - creation_date
+          - long
+    ColumnSchemaAsArray:
+      description: >-
+        An array with (in order) `[name, type, alias, description]` of a column.
+        `Alias` and `description` are optional.
+      type: array
+      minItems: 2
+      maxItems: 4
+      items:
+        type: string
+      example:
+        - name
+        - string
+        - first_name
+        - User's name column
+    ColumnSchema:
+      type: object
+      additionalProperties: false
+      required:
+        - key
+        - type
+        - name
+      properties:
+        key:
+          type: string
+          example: age
+        type:
+          type: string
+          example: integer
+        name:
+          type: string
+          example: age
+    ImportResponse:
+      type: object
+      required:
+        - elapsed_time
+        - database
+        - md5_hex
+        - table
+        - unique_id
+      properties:
+        elapsed_time:
+          type: integer
+          example: 0
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        md5_hex:
+          $ref: '#/components/schemas/HexValue'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        unique_id:
+          $ref: '#/components/schemas/HexValue'
+    UserPassword:
+      title: User Password
+      description: the user's password
+      type: string
+      format: password
+      example: pa$$w0rd
+    UserId:
+      type: integer
+      example: 123
+    SSOIdentifier:
+      description: SSO identifier from IdP
+      type: string
+      minLength: 1
+      example: employee_number-00001
+    SSOFullQualifiedIdentifier:
+      description: SSO full qualified identifier from IdP
+      type: string
+      minLength: 1
+      example: employee_number-00001
+    SSOSettingName:
+      description: SSO setting name corresponding to IdP
+      type: string
+      minLength: 1
+      example: corp-idp-1
+    User:
+      title: User
+      description: User
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - account_owner
+        - administrator
+        - created_at
+        - email
+        - first_name
+        - gravatar_url
+        - last_name
+        - phone
+        - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        account_owner:
+          description: whether the user is Account owner or not
+          type: boolean
+          example: true
+        administrator:
+          description: whether the user is Administrator or not
+          type: boolean
+          example: true
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        email:
+          description: the email user uses to log in
+          type: string
+          format: email
+          example: td@example.com
+        first_name:
+          description: first name
+          type: string
+          nullable: true
+          example: Treasure
+        gravatar_url:
+          description: gravatar url
+          type: string
+          example: http://foo
+        identifier:
+          $ref: '#/components/schemas/SSOIdentifier'
+        full_qualified_identifier:
+          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
+        setting_name:
+          $ref: '#/components/schemas/SSOSettingName'
+        last_name:
+          description: last name
+          type: string
+          nullable: true
+          example: Data
+        name:
+          description: user's full name or email
+          type: string
+          example: Treasure Data
+        organization:
+          deprecated: true
+          type: string
+          nullable: true
+        phone:
+          description: phone number
+          type: string
+          nullable: true
+          example: (650) 469-3644
+        roles:
+          deprecated: true
+          type: array
+          items:
+            type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        delegated_admin:
+          description: >-
+            whether the user is a Delegated Admin or not. This attribute is
+            available if the account enables the delegated-admin feature flag.
+          type: boolean
+          example: true
+        delegated_policy_groups:
+          description: >-
+            The list of policy groups this user manages as delegated admin. This
+            attribute is available if the account enables the delegated-admin
+            feature flag.
+          type: array
+          items:
+            type: string
+        policy_group_tags:
+          description: >-
+            The list of tag names belonging to this user. This attribute is
+            available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+  parameters:
+    PageAfter:
+      name: page[after]
+      in: query
+      description: >
+        Cursor for the current page. If omitted, the first page is returned.
+
+        It must be a Base64-encoded JSON string, including an object with a
+        single entry.
+
+        For example, the cursor `eyJpZCI6IjEyMyJ9` is decoded to `{"id":"123"}`.
+      required: false
+      schema:
+        type: string
+        format: base64
+        example: eyJpZCI6IjEyMyJ9
+    PageSize:
+      name: page[size]
+      in: query
+      description: Max number of results.
+      required: false
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+        example: 30
+    ResourceTypeFilter:
+      name: resource_type
+      in: query
+      description: >
+        Filter results by resource type. Accepts a comma-separated string (e.g.
+        `WorkflowProject,Segmentation`)
+
+        or an array query param (e.g.
+        `resource_type[]=WorkflowProject&resource_type[]=Segmentation`).
+
+        Unrecognized resource types match zero results. If omitted, results are
+        not filtered by resource type.
+      required: false
+      explode: false
+      style: form
+      schema:
+        oneOf:
+          - type: string
+            example: WorkflowProject,Segmentation
+          - type: array
+            items:
+              type: string
+            example:
+              - WorkflowProject
+              - Segmentation
+    SortedBy:
+      name: sorted_by
+      in: query
+      description: >
+        Sort order for the results. If omitted, the default sort order is
+        applied.
+
+        Format: `<key>:asc` or `<key>:desc`
+      required: false
+      schema:
+        type: string
+        example: created_at:desc
+    header_authorization_TD1:
+      name: Authorization
+      description: TD1 Authorization Header
+      in: header
+      required: false
+      schema:
+        type: string
+        pattern: ^TD1 [0-9a-f/]+$
+        example: TD1 123/456789xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
+    path_access_control_policy_group_id_or_taggable_name:
+      name: policy_group_id_or_taggable_name
+      in: path
+      required: true
+      schema:
+        anyOf:
+          - $ref: '#/components/schemas/AccessControlPolicyGroupId'
+          - $ref: '#/components/schemas/AccessControlPolicyGroupTaggableName'
+        example: 67 or some_policy_group
+    path_account_id:
+      name: account_id
+      description: the account id
+      in: path
+      schema:
+        $ref: '#/components/schemas/AccountId'
+      required: true
+    path_bulk_import_name:
+      name: bulk_import_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/BulkImport/properties/name'
+    path_bulk_import_part_name:
+      name: bulk_import_part_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/BulkImportPartName'
+    path_bulk_load_session_name:
+      name: bulk_load_session_name
+      in: path
+      schema:
+        $ref: '#/components/schemas/BulkLoadSession/properties/name'
+      required: true
+    path_bulk_load_session_id:
+      name: bulk_load_session_id
+      in: path
+      schema:
+        $ref: '#/components/schemas/BulkLoadSessionId'
+      required: true
+    bulk_load_session_ids:
+      name: ids
+      in: query
+      schema:
+        oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BulkLoadSessionId'
+          - type: string
+            description: Comma-separated list of bulk load session IDs E.g. 1,2,3
+    bulk_load_session_names:
+      name: names
+      in: query
+      schema:
+        oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/BulkLoadSession/properties/name'
+          - type: string
+            description: >-
+              Comma-separated list of bulk load session names E.g.
+              bulkload1,bulkload2,bulkload3
+    path_connection_id:
+      name: connection_id
+      description: the connection id
+      required: true
+      in: path
+      schema:
+        type: integer
+    path_connection_name:
+      name: connection_name
+      description: the connection name
+      required: true
+      in: path
+      schema:
+        $ref: '#/components/schemas/Connection/properties/name'
+    path_database_name:
+      name: database_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Database/properties/name'
+    require_permissions:
+      name: require_permissions
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: 'true'
+    path_job_id:
+      name: job_id
+      description: the job id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/JobId'
+    path_job_type:
+      name: job_type
+      description: the job type
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Job/properties/type'
+    path_tag:
+      name: tag
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Tag'
+    path_schedule_id:
+      name: schedule_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 31
+    path_schedule_name:
+      name: schedule_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Schedule/properties/name'
+    path_table_id:
+      name: table_id
+      description: the table id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/TableId'
+    path_table_name:
+      name: table_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Table/properties/name'
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
+    path_user_email:
+      name: user_email
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/User/properties/email'
+    path_user_first_name:
+      name: user_first_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/User/properties/first_name'
+  responses:
+    '400':
+      description: Bad Request
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not Found
+    '406':
+      description: Unknown åFormat
+    '409':
+      description: Conflict
+    '422':
+      description: Invalid Request
+    '504':
+      description: Gateway Timeout
+    4XX:
+      description: Client Error
+    5XX:
+      description: Server Error
+  examples:
+    BulkLoadConfig:
+      value:
+        in:
+          type: abc
+          connection_prop: connection
+          basic_prop: basic
+          advanced_prop: advanced
+        out:
+          mode: append
+        exec:
+          type: abc
+          basic_prop: basic
+    CreateBulkLoadSessionRequestPostgres:
+      value: |-
+        {
+
+          "config": {
+            "in": {
+              "type": "postgresql",
+              "host": "127.0.0.1",
+              "port": 3306,
+              "user": "testuser",
+              "table": "table",
+              "password": "password",
+              "schema": "test_schema",
+              "database": "database",
+              "column_options": {
+                "id": {
+                  "type": "long"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "out": {
+              "database": "database_out",
+              "endpoint": "api.treasuredata.com",
+              "mode": "append",
+              "table": "table_out",
+              "type": "td"
+            },
+            "filters": [
+            ],
+            "exec": {
+            }
+          },
+          "cron": "@daily",
+          "name": "test",
+          "timezone": "UTC",
+          "database": "aa100bjt5",
+          "table": "av03w9klv",
+          "time_column": "test"
+        }
+paths:
+  /access_control/policies:
+    get:
+      summary: get Access Control Policies
+      description: Retrieves a list of policies.
+      operationId: getAccessControlPolicies
+      tags:
+        - Access Control - Policies
+      parameters:
+        - in: query
+          name: column_permission_tag
+          description: Return only policies that refer to the specified tag
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+    post:
+      summary: Create an Access Control Policy
+      description: Creates a policy.
+      operationId: createAccessControlPolicy
+      tags:
+        - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessControlPolicyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/policies/{policy_id}:
+    parameters:
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Get an Access Control Policy
+      description: Retrieves information about the specified policy.
+      operationId: getAccessControlPolicyById
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    patch:
+      summary: Update an Access Control Policy
+      description: Updates information related to a policy.
+      operationId: updateAccessControlPolicyById
+      tags:
+        - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Delete an Access Control Policy
+      description: Deletes a policy.
+      operationId: deleteAccessControlPolicyById
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/users/{user_id}/policies:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+    get:
+      summary: get User Policies
+      description: Retrieves a list of policies by user.
+      operationId: getAccessControlPoliciesByUserId
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+    patch:
+      summary: Update User Policies
+      description: Updates policies by user ID.
+      operationId: updateAccessControlPoliciesByUserId
+      tags:
+        - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPoliciesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/users/{user_id}/policies/{policy_id}:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+    post:
+      summary: Attach a policy to a user.
+      description: Attaches a policy to a user.
+      operationId: attachUserAndPolicy
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Detach a Policy from a User
+      description: Detaches a policy from a user.
+      operationId: detachUserAndPolicy
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/policies/{policy_id}/column_permissions:
+    parameters:
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Show Column Permissions
+      description: Shows column permission by policy ID.
+      operationId: getColumnPermissionByPolicyId
+      tags:
+        - Access Control - Permissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlColumnPermission'
+    patch:
+      summary: Update Column Permissions
+      description: Updates column permissions by policy ID.
+      operationId: updateColumnPermissionByPolicyId
+      tags:
+        - Access Control - Permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - column_permissions
+              properties:
+                column_permissions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccessControlColumnPermission'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlColumnPermission'
+  /access_control/policies/{policy_id}/permissions:
+    parameters:
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Show Policy Permissions
+      description: Shows policy permissions by policy ID.
+      operationId: gerPermissionByPolicyId
+      tags:
+        - Access Control - Permissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPermissions'
+    patch:
+      summary: Update Policy Permissions
+      description: Updates policy permissions.
+      operationId: updatePermissionByPolicyId
+      tags:
+        - Access Control - Permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessControlPermissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPermissions'
+  /access_control/users:
+    get:
+      summary: Get Access Control users.
+      description: Retrieves a list of users and their permissions.
+      operationId: getAccessControlUsers
+      tags:
+        - Access Control - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlUser'
+  /access_control/users/{user_id}:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+    get:
+      summary: Get Access Control User
+      description: Retrieves the specified user.
+      operationId: getAccessControlUserById
+      tags:
+        - Access Control - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlUser'
+  /access_control/users/{user_id}/permissions:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+    patch:
+      summary: Update Access Control User Permissions
+      description: Updates a user's permissions.
+      operationId: updateAccessControlUserPermissions
+      tags:
+        - Access Control - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessControlUnpaidPermissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - user_id
+                  - permissions
+                properties:
+                  user_id:
+                    $ref: '#/components/schemas/UserId'
+                  permissions:
+                    $ref: '#/components/schemas/AccessControlUnpaidPermissions'
+  /access_control/users/{user_id}/profile_options:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+    get:
+      summary: List Profile Options
+      description: >-
+        Retrieves all profile option keys with their resolved values for the
+        specified user.
+      operationId: getAccessControlUserProfileOptions
+      tags:
+        - Access Control - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlProfileOptions'
+  /access_control/users/{user_id}/profile_options/{key}:
+    parameters:
+      - $ref: '#/components/parameters/path_user_id'
+      - name: key
+        description: the profile option key
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get Profile Option
+      description: >-
+        Retrieves the resolved value of a single profile option for the
+        specified user.
+      operationId: getAccessControlUserProfileOption
+      tags:
+        - Access Control - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlProfileOptions'
+    put:
+      summary: Set Profile Option
+      description: Sets the value of a profile option for the specified user. Admin only.
+      operationId: updateAccessControlUserProfileOption
+      tags:
+        - Access Control - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessControlProfileOptionUpdateRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlProfileOptions'
+    delete:
+      summary: Remove Profile Option
+      description: >-
+        Removes a profile option for the specified user, reverting it to the
+        account default. Admin only.
+      operationId: deleteAccessControlUserProfileOption
+      tags:
+        - Access Control - Users
+      responses:
+        '204':
+          description: No Content
+  /access_control/policies/{policy_id}/users:
+    parameters:
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Get Policy users
+      description: Retrieves a list of users attached to a policy.
+      operationId: getAccessControlPolicyUsers
+      tags:
+        - Access Control - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlUserReference'
+    patch:
+      summary: Update Policy Users
+      description: Updates users attached to a policy.
+      operationId: updateAccessControlPolicyUsers
+      tags:
+        - Access Control - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyUsersRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlUser'
+  /access_control/policies/{policy_id}/users/{user_id}:
+    parameters:
+      - $ref: '#/components/parameters/path_access_control_policy_id'
+      - $ref: '#/components/parameters/path_user_id'
+    post:
+      summary: Attach
+      description: This operation attaches a policy to a user.
+      operationId: attachPolicyAndUser
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Detach
+      description: Detaches a user from a policy.
+      operationId: detachPolicyAndUser
+      tags:
+        - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/policy_groups:
+    get:
+      summary: get Access Control Policy Groups
+      description: Retrieves a list of policy groups.
+      operationId: getAccessControlPolicyGroups
+      tags:
+        - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicyGroup'
+    post:
+      summary: Create an Access Control Policy Group
+      description: Creates a policy group.
+      operationId: createAccessControlPolicyGroup
+      tags:
+        - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessControlPolicyGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+  /access_control/policy_groups/{policy_group_id_or_taggable_name}:
+    parameters:
+      - $ref: >-
+          #/components/parameters/path_access_control_policy_group_id_or_taggable_name
+    get:
+      summary: Get an Access Control Policy Group
+      description: Retrieves information about the specified policy group.
+      operationId: getAccessControlPolicyGroupById
+      tags:
+        - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+    patch:
+      summary: Update an Access Control Policy Group
+      description: Updates information related to a policy group.
+      operationId: updateAccessControlPolicyGroupById
+      tags:
+        - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+    delete:
+      summary: Delete an Access Control Policy Group
+      description: Deletes a policy group.
+      operationId: deleteAccessControlPolicyGroupById
+      tags:
+        - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+  /access_control/policy_groups/{policy_group_id_or_taggable_name}/policies:
+    parameters:
+      - $ref: >-
+          #/components/parameters/path_access_control_policy_group_id_or_taggable_name
+    get:
+      summary: Get an Access Control Policy Group's Policies
+      description: Retrieves the list of the specified policy group's policies.
+      operationId: getAccessControlPolicyGroupPoliciesById
+      tags:
+        - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
+    patch:
+      summary: Update an Access Control Policy Group's Policies
+      description: Updates the policies attached to a policy group.
+      operationId: updateAccessControlPolicyGroupPolicies
+      tags:
+        - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/UpdateAccessControlPolicyGroupPoliciesRequest
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
+  /result/list:
+    get:
+      summary: Get connections
+      description: Retrieves a list of connections.
+      operationId: getConnections
+      tags:
+        - Connections
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - results
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      required:
+                        - name
+                        - url
+                        - organization
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                        organization:
+                          type: string
+                          deprecated: true
+                          nullable: true
+  /result/create/{connection_name}:
+    post:
+      summary: Create connection
+      description: Creates a connection.
+      operationId: createConnection
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/path_connection_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - name
+                  - result
+                properties:
+                  name:
+                    $ref: '#/components/schemas/Connection/properties/name'
+                  result:
+                    $ref: '#/components/schemas/Connection/properties/name'
+  /result/delete/{connection_name}:
+    post:
+      summary: Delete connection
+      description: Deletes a connection.
+      operationId: deleteConnection
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/path_connection_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - name
+                  - result
+                properties:
+                  name:
+                    $ref: '#/components/schemas/Connection/properties/name'
+                  result:
+                    $ref: '#/components/schemas/Connection/properties/name'
+  /connections/lookup:
+    get:
+      summary: Get connection id by name
+      description: Retrieves the specified connection.
+      operationId: getConnectionIdByName
+      tags:
+        - Connections
+      parameters:
+        - name: name
+          required: true
+          in: query
+          schema:
+            $ref: '#/components/schemas/Connection/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - id
+                properties:
+                  id:
+                    $ref: '#/components/schemas/ConnectionId'
+  /connector_configs/validate_with_connection:
+    post:
+      summary: Validate connector config
+      description: Validates a connector configuration.
+      operationId: validateConnectorConfig
+      tags:
+        - Connections
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                type:
+                  type: string
+                settings:
+                  type: object
+                connection_id:
+                  $ref: '#/components/schemas/ConnectionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - type
+                  - settings
+                properties:
+                  type:
+                    type: string
+                  settings:
+                    type: object
+  /database/list:
+    get:
+      summary: Get databases
+      description: Retrieves a list of databases.
+      operationId: getDatabases
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/require_permissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - databases
+                properties:
+                  databases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatabaseWithoutIdAndDatatank'
+  /database/show/{database_name}:
+    get:
+      summary: Get database
+      description: Retrieves a specified database.
+      operationId: getDatabaseByName
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/require_permissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
+  /database/create/{database_name}:
+    post:
+      summary: Create database
+      description: Creates a database.
+      operationId: createDatabase
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - database
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+  /database/delete/{database_name}:
+    post:
+      summary: Delete database
+      description: Deletes a specified database.
+      operationId: deleteDatabase
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - database
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+  /job/list:
+    get:
+      summary: Get jobs
+      description: Retrieves a list of jobs.
+      operationId: getJobs
+      tags:
+        - Jobs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - jobs
+                  - count
+                  - from
+                  - to
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+                  count:
+                    type: integer
+                  from:
+                    type: integer
+                    nullable: true
+                  to:
+                    type: integer
+                    nullable: true
+  /job/show/{job_id}:
+    get:
+      summary: Get job
+      description: Retrieves a list of jobs with specified job id.
+      operationId: getJobById
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Job'
+                  - type: object
+                    additionalProperties: false
+                    required:
+                      - debug
+                    properties:
+                      debug:
+                        type: object
+                        additionalProperties: false
+                        required:
+                          - cmdout
+                          - stderr
+                        properties:
+                          cmdout:
+                            type: string
+                            nullable: true
+                          stderr:
+                            type: string
+                            nullable: true
+  /job/status/{job_id}:
+    get:
+      summary: Get job status by id
+      description: >-
+        Show the status information of the given job id at last execution as
+        well as other related information.
+      operationId: getJobStatusById
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+  /job/status_by_domain_key/{domain_key}:
+    get:
+      summary: Get job status by domain_key
+      description: Checks the status of a job using the domain key.
+      operationId: getJobStatusByDomainKey
+      tags:
+        - Jobs
+      parameters:
+        - name: domain_key
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/DomainKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+  /job/statistics/{job_id}:
+    get:
+      summary: Get job statistics by id
+      description: Show the statistics of the job, including records inserted.
+      operationId: getJobStatisticsById
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records_inserted:
+                    type: string
+                    example: '28345'
+  /job/issue/{job_type}/{database_name}:
+    post:
+      summary: Create job
+      description: Creates a job of a given type under a specified database.
+      operationId: createJob
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_type'
+        - $ref: '#/components/parameters/path_database_name'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              properties:
+                query:
+                  type: string
+                  description: the raw SQL query
+                  example: SELECT COUNT(1) FROM www_access
+                priority:
+                  type: integer
+                  description: job execution priority
+                  minimum: -2
+                  maximum: 2
+                  example: 0
+                result:
+                  type: string
+                  description: Export Connector location
+                retry_limit:
+                  type: integer
+                  description: the number of automatic retries on failure
+                  minimum: 0
+                  maximum: 32
+                  example: 0
+                pool_name:
+                  type: string
+                  description: resource pool name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - job
+                  - job_id
+                  - database
+                properties:
+                  job:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  job_id:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+  /job/kill/{job_id}:
+    post:
+      summary: kill job by id
+      description: Stops a specified job ID.
+      operationId: killJobById
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/EmptyObject'
+                  - type: object
+                    additionalProperties: false
+                    properties:
+                      job_id:
+                        $ref: '#/components/schemas/JobIdAsString'
+                      former_status:
+                        $ref: '#/components/schemas/Job/properties/status'
+  /job/result_export/{job_id}:
+    post:
+      summary: Set result export
+      description: Sets the results of a specified job ID.
+      operationId: setResultExport
+      tags:
+        - Jobs
+      x-codeSamples:
+        - lang: Shell
+          source: |
+            curl --request POST \
+              --url 'https://api.treasuredata.com/v3/job/result_export/22616062?=' \
+              --header 'authorization: TD1 {APIKEY}' \
+              --header 'content-type: application/x-www-form-urlencoded' \
+              --data 'result=td://api.treasuredata.com/test_db/test_table?legacy=true&mode=null&time=0&apikey={APIKEY}&mode=append'
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateOrUpdateJobRequest'
+                - type: object
+                  additionalProperties: false
+                  properties:
+                    target_job_id:
+                      $ref: '#/components/schemas/JobId'
+                    result_connection_id:
+                      $ref: '#/components/schemas/ConnectionId'
+                    result:
+                      $ref: '#/components/schemas/Job/properties/result'
+                    database:
+                      $ref: '#/components/schemas/Database/properties/name'
+                    table:
+                      $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Job'
+                  - type: object
+                    additionalProperties: false
+                    required:
+                      - debug
+                    properties:
+                      debug:
+                        type: object
+                        additionalProperties: false
+                        required:
+                          - cmdout
+                          - stderr
+                        properties:
+                          cmdout:
+                            type: string
+                            nullable: true
+                          stderr:
+                            type: string
+                            nullable: true
+  /export/run/{database_name}/{table_name}:
+    post:
+      summary: Create export job
+      description: Creates an export job.
+      operationId: createExportJob
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateExportJobRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - job
+                  - job_id
+                  - database
+                properties:
+                  job:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  job_id:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+  /job/result/{job_id}:
+    get:
+      summary: Get job results
+      description: Retrieves job results.
+      operationId: getJobResults
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/path_job_id'
+        - name: header
+          in: query
+          required: false
+          description: whether to show the headers or not
+          schema:
+            type: boolean
+        - name: nullify_special
+          in: query
+          required: false
+          description: >-
+            convert `NaN` and `Infinity` values into `null`. Not available for
+            formats `msgpack` or `msgpack.gz`
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/*:
+              schema:
+                type: string
+                format: binary
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            application/x-msgpack:
+              schema:
+                type: string
+                format: binary
+            application/x-gzip:
+              schema:
+                type: object
+                format: binary
+  /policy_group_tags/{tag}/delegated_admins:
+    parameters:
+      - $ref: '#/components/parameters/path_tag'
+    get:
+      summary: Get the delegated admins of a policy group
+      description: Returns a list of delegated admin user ids that manage a policy group.
+      operationId: getPolicyGroupTagsDelegatedAdmins
+      tags:
+        - Policy Group Tags
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIds'
+    patch:
+      summary: Update the delegated admins of a policy group
+      description: Tags a list of delegated admin user ids to manage a policy group.
+      operationId: updatePolicyGroupTagsDelegatedAdmins
+      tags:
+        - Policy Group Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIds'
+      responses:
+        '204':
+          description: OK
+  /policy_group_tags/{tag}/users:
+    parameters:
+      - $ref: '#/components/parameters/path_tag'
+    get:
+      summary: Get the users of a policy group
+      description: Returns a list of user ids that are tagged with a policy group.
+      operationId: getPolicyGroupTagsUsers
+      tags:
+        - Policy Group Tags
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIds'
+    patch:
+      summary: Update the users of a policy group
+      description: Tags a list of user ids with a policy group.
+      operationId: updatePolicyGroupTagsUsers
+      tags:
+        - Policy Group Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIds'
+      responses:
+        '204':
+          description: OK
+  /schedule/list:
+    get:
+      summary: Get schedules
+      description: Gets a list of schedules.
+      operationId: getSchedules
+      tags:
+        - Schedules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - schedules
+                properties:
+                  schedules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schedule'
+  /schedule/create/{schedule_name}:
+    post:
+      summary: Create schedule
+      description: Creates a schedule.
+      operationId: createSchedule
+      tags:
+        - Schedules
+      parameters:
+        - $ref: '#/components/parameters/path_schedule_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateOrUpdateScheduleRequest'
+                - type: object
+                  required:
+                    - database
+                    - query
+                    - type
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleReference'
+  /schedule/delete/{schedule_name}:
+    post:
+      summary: Delete schedule
+      description: Deletes a specified schedule.
+      operationId: deleteScheduleByName
+      tags:
+        - Schedules
+      parameters:
+        - $ref: '#/components/parameters/path_schedule_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleReference'
+  /schedule/update/{schedule_name}:
+    post:
+      summary: Update schedule
+      description: Updates a schedule.
+      operationId: updateSchedule
+      tags:
+        - Schedules
+      parameters:
+        - $ref: '#/components/parameters/path_schedule_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateScheduleRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleReference'
+  /schedule/run/{schedule_name}/{schedule_time}:
+    post:
+      summary: Run schedule
+      description: Schedules a run.
+      operationId: runSchedule
+      tags:
+        - Schedules
+      parameters:
+        - $ref: '#/components/parameters/path_schedule_name'
+        - name: schedule_time
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Timestamp'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                num:
+                  type: integer
+                  default: 1
+                  maximum: 10
+                domain_key:
+                  $ref: '#/components/schemas/DomainKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - jobs
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledJob'
+  /schedule/history/{schedule_name}:
+    get:
+      summary: Get execution history
+      description: Gets a history of scheduled executions by name.
+      operationId: getScheduleExecutionHistoryByName
+      tags:
+        - Schedules
+      parameters:
+        - $ref: '#/components/parameters/path_schedule_name'
+        - name: from
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: to
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - count
+                  - from
+                  - to
+                  - history
+                properties:
+                  count:
+                    type: integer
+                    example: 20
+                  from:
+                    type: integer
+                    example: 5
+                  to:
+                    type: integer
+                    example: 15
+                  history:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/Job'
+                        - type: object
+                          required:
+                            - scheduled_at
+                          properties:
+                            scheduled_at:
+                              oneOf:
+                                - $ref: '#/components/schemas/DateTimeAsString'
+                                - $ref: '#/components/schemas/EmptyString'
+  /table/list/{database_name}:
+    get:
+      summary: Get tables
+      description: Retrieves a list of tables according to database specified.
+      operationId: getTablesByDatabaseName
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - name: include_descriptions
+          in: query
+          description: >-
+            When true, includes table descriptions and column descriptions in
+            the schema field
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - database
+                  - tables
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+                  tables:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Table'
+  /table/show/{database_name}/{table_name}:
+    get:
+      summary: Get table
+      description: Shows a table according to specified database and table.
+      operationId: getTableByDatabaseNameAndTableName
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+        - name: include_descriptions
+          in: query
+          description: >-
+            When true, includes table descriptions and column descriptions in
+            the schema field
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+  /table/delete/{database_name}/{table_name}:
+    post:
+      summary: Delete table
+      description: Deletes specified table.
+      operationId: deleteTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/create/{database_name}/{table_name}/{table_type}:
+    post:
+      summary: Create table with specified type
+      description: >-
+        Creates a table of a specified type. Currently only 'log' is supported
+        as table_type. This endpoint supports creating tables with schema,
+        options, and can copy properties from existing tables. Schema can
+        include column descriptions in the format `[name, type, alias,
+        description]`.
+      operationId: createTableWithTableType
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+        - name: table_type
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Table/properties/type'
+        - name: idempotent_key
+          in: query
+          description: A unique key to ensure idempotency of requests
+          schema:
+            $ref: '#/components/schemas/IdempotentKey'
+        - name: source_table
+          in: query
+          description: Name of an existing table to copy metadata from
+          schema:
+            type: string
+        - name: including_properties
+          in: query
+          description: >-
+            When true, distribution and other properties will be copied from
+            source_table
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/TableSchemaAsArray'
+                    - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/create/{database_name}/{table_name}:
+    post:
+      summary: Create table
+      description: >-
+        Creates a table with default type 'log'. This endpoint offers the same
+        functionality as the typed endpoint but without explicitly specifying
+        the table type. Schema can include column descriptions in the format
+        `[name, type, alias, description]`.
+      operationId: createTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+        - name: idempotent_key
+          in: query
+          description: A unique key to ensure idempotency of requests
+          schema:
+            $ref: '#/components/schemas/IdempotentKey'
+        - name: source_table
+          in: query
+          description: Name of an existing table to copy metadata from
+          schema:
+            type: string
+        - name: including_properties
+          in: query
+          description: >-
+            When true, distribution and other properties will be copied from
+            source_table
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/TableSchemaAsArray'
+                    - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/update/{database_name}/{table_name}:
+    post:
+      summary: Update table
+      description: Updates a table.
+      operationId: updateTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                detect_schema:
+                  type: boolean
+                  example: true
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                name:
+                  $ref: '#/components/schemas/Table/properties/name'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/TableSchemaAsArray'
+                    - $ref: '#/components/schemas/TableSchemaAsString'
+                ignore_duplicate_schema:
+                  type: boolean
+                  example: true
+                overwrite:
+                  description: >-
+                    whether to override a possible existing table in case of
+                    updating the name
+                  type: boolean
+                  example: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/rename/{database_name}/{current_table_name}/{new_table_name}:
+    post:
+      summary: Rename table
+      description: Renames a specified table.
+      operationId: renameTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - name: current_table_name
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Table/properties/name'
+        - name: new_table_name
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/swap/{database_name}/{table_name_1}/{table_name_2}:
+    post:
+      summary: Swap tables
+      description: Swaps specified tables.
+      operationId: swapTables
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - name: table_name_1
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Table/properties/name'
+        - name: table_name_2
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - database
+                  - table1
+                  - table2
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+                  table1:
+                    $ref: '#/components/schemas/Table/properties/name'
+                  table2:
+                    $ref: '#/components/schemas/Table/properties/name'
+  /table/tail/{database_name}/{table_name}{path_format}:
+    get:
+      summary: Tail table
+      description: Shows the last record in a table.
+      operationId: tailTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+        - name: path_format
+          in: path
+          style: label
+          required: true
+          schema:
+            type: string
+            enum:
+              - json
+              - msgpack
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - json
+              - msgpack
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyValue'
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyValue'
+  /table/distribution/{database_name}/{table_name}:
+    get:
+      summary: Get table distribution
+      description: Retrieve a table distribution.
+      operationId: getTableDistribution
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - bucket_count
+                  - partition_function
+                  - columns
+                properties:
+                  bucket_count:
+                    type: integer
+                    example: 50
+                  partition_function:
+                    type: string
+                    example: hash
+                  columns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ColumnSchema'
+  /table/change_database/{database_name}/{table_name}:
+    post:
+      summary: Change database
+      description: Changes to the specified table database.
+      operationId: changeTableDatabase
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - dest_database_name
+              properties:
+                dest_database_name:
+                  $ref: '#/components/schemas/Database/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/transfer/{database_name}/{table_name}:
+    post:
+      summary: Transfer table to a different account
+      description: Transfer the specified table to a different account. (Limited Access)
+      operationId: transferTable
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/header_authorization_TD1'
+          required: true
+          name: Secondary-Authorization
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - dest_database_name
+                - dest_table_name
+              properties:
+                dest_database_name:
+                  $ref: '#/components/schemas/Database/properties/name'
+                dest_table_name:
+                  $ref: '#/components/schemas/Table/properties/name'
+                idempotent_key:
+                  $ref: '#/components/schemas/IdempotentKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferTableResponse'
+  /table/append-schema/{database_name}/{table_name}:
+    post:
+      summary: Append table schema
+      description: Appends the specified table schema.
+      operationId: appendTableSchema
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - schema
+              properties:
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/TableSchemaAsArray'
+                    - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/update-schema/{database_name}/{table_name}:
+    post:
+      summary: Update table schema
+      description: >-
+        Updates the specified table schema. Schema can include column
+        descriptions in the format `[name, type, alias, description]`.
+      operationId: updateTableSchema
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/path_database_name'
+        - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - schema
+              properties:
+                name:
+                  type: string
+                  example: table1_new_name
+                schema:
+                  oneOf:
+                    - $ref: '#/components/schemas/TableSchemaAsArray'
+                    - $ref: '#/components/schemas/TableSchemaAsString'
+                ignore_duplicate_schema:
+                  type: boolean
+                  example: true
+                detect_schema:
+                  type: boolean
+                  example: true
+                include_v:
+                  type: boolean
+                  example: true
+                expire_days:
+                  type: integer
+                  example: 1
+                overwrite:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+  /table/deleted:
+    get:
+      summary: List deleted tables
+      description: >-
+        Returns a paginated list of deleted recoverable tables for the
+        authenticated account.
+      operationId: listDeletedTables
+      tags:
+        - Tables
+      parameters:
+        - name: cursor_id
+          in: query
+          description: ID of the last table from the previous page; omit for the first page
+          required: false
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          description: Number of tables to return per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 25
+        - name: database_id
+          in: query
+          description: Filter deleted tables by database ID
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedTablesWithCursor'
+  /table/recover/{table_id}:
+    post:
+      summary: Recover deleted table
+      description: >-
+        Recovers a deleted table. If the parent database is also deleted, with
+        proper permissions it will be recovered automatically.
+      operationId: recoverTableById
+      tags:
+        - Tables
+      parameters:
+        - name: table_id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/TableId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                table_name:
+                  description: >-
+                    Alternative name for the recovered table to avoid conflicts
+                    with existing tables
+                  $ref: '#/components/schemas/Table/properties/name'
+                database_name:
+                  description: >-
+                    Alternative name for the recovered parent database to avoid
+                    conflicts with existing databases
+                  $ref: '#/components/schemas/Database/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoveredTable'
+        4XX:
+          $ref: '#/components/responses/4XX'
+        5XX:
+          $ref: '#/components/responses/5XX'
+  /user/delegated_admin/add/{user_email}:
+    parameters:
+      - $ref: '#/components/parameters/path_user_email'
+    post:
+      summary: Promote a user to a delegated Admin
+      description: Promotes a user to a delegated admin.
+      operationId: promoteDelegatedAdmin
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  user_email:
+                    $ref: '#/components/schemas/User/properties/email'
+                  delegated_admin:
+                    type: boolean
+                    example: true
+  /user/delegated_admin/remove/{user_email}:
+    parameters:
+      - $ref: '#/components/parameters/path_user_email'
+    post:
+      summary: Demote a user from a delegated admin
+      description: Demotes a user from a delegated admin.
+      operationId: demoteDelegatedAdmin
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  user_email:
+                    $ref: '#/components/schemas/User/properties/email'
+                  delegated_admin:
+                    type: boolean
+                    example: false
+  /data_connector_restrictions:
+    get:
+      summary: Get data connector restrictions
+      description: Returns an object of data connector restrictions
+      operationId: getDataConnectorRestrictions
+      tags:
+        - Data Connector Restrictions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: boolean
+              example:
+                mysql:
+                  import: true
+                  export: false
+                snowflake:
+                  streaming_in: false
+                  streaming_out: false

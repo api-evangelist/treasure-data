@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Treasure Data TD Bulk Import Jobs API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue a Presto query job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/job/issue/presto/:database_name",
+            "params": [
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database to query"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "query",
+                  "value": ""
+                },
+                {
+                  "name": "result",
+                  "value": ""
+                },
+                {
+                  "name": "priority",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a Presto SQL query against the specified database."
+        },
+        {
+          "info": {
+            "name": "Issue a Hive query job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.treasuredata.com/v3/job/issue/hive/:database_name",
+            "params": [
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database to query"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "query",
+                  "value": ""
+                },
+                {
+                  "name": "result",
+                  "value": ""
+                },
+                {
+                  "name": "priority",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a Hive query against the specified database."
+        },
+        {
+          "info": {
+            "name": "Get job results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/job/result/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the job"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for results"
+              }
+            ]
+          },
+          "docs": "Retrieves the results of a completed query job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

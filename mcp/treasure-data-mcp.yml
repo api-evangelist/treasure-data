@@ -1,0 +1,118 @@
+name: Treasure Data MCP Servers
+description: >-
+  Treasure Data ships two distinct Model Context Protocol servers. The official product server,
+  @treasuredata/mcp-server, is a local stdio server run with npx that exposes 23 tools over the TD API,
+  the CDP API and the Digdag Workflow API. Separately, the documentation site docs.treasure.ai serves a
+  live remote MCP endpoint at https://docs.treasure.ai/mcp whose 6 tools search the docs and return the
+  provider's own OpenAPI descriptions; anonymous tools/list on it succeeds.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+status: published
+source: >-
+  https://github.com/treasure-data/td-mcp-server,
+  https://www.npmjs.com/package/@treasuredata/mcp-server,
+  https://docs.treasure.ai/mcp (probed 2026-08-13)
+
+deployment:
+  mode: both
+  endpoint: https://docs.treasure.ai/mcp
+  install: npx -y @treasuredata/mcp-server
+  package: https://www.npmjs.com/package/@treasuredata/mcp-server
+  auth: api-key
+  verified: probed
+  note: >-
+    The two fields describe two DIFFERENT servers, not two transports of one server. `endpoint` is the
+    documentation MCP server on docs.treasure.ai — remote, callable by an agent right now, no credential
+    required for tools/list (an optional OAuth authorization server is advertised at
+    /.well-known/oauth-authorization-server). `install` is the official product MCP server, which is
+    local stdio only: a human must run npx on a machine with TD_API_KEY set before any agent sees it.
+    Treasure Data publishes no remote endpoint for the product MCP server.
+
+servers:
+  - name: treasuredata
+    label: Official Treasure Data MCP Server
+    transport: stdio
+    mode: local-stdio
+    status: public-preview
+    package: '@treasuredata/mcp-server'
+    package_url: https://www.npmjs.com/package/@treasuredata/mcp-server
+    version: 0.4.5
+    published: '2025-10-27'
+    repository: https://github.com/treasure-data/td-mcp-server
+    install: npx -y @treasuredata/mcp-server
+    claude_code_install: claude mcp add td -e TD_API_KEY=$TD_API_KEY -- npx @treasuredata/mcp-server
+    auth: api-key
+    verified: searched
+    configuration:
+      TD_API_KEY: required — Treasure Data API key
+      TD_SITE: 'optional — us01 (default), jp01, eu01, ap02, ap03, dev'
+      TD_ENABLE_UPDATES: 'optional — enables the write-capable execute tool; false by default'
+      TD_DATABASE: optional — default database for queries
+    security_posture: >-
+      Read-only by default. Write operations are gated behind TD_ENABLE_UPDATES=true. The README states
+      all operations are audit logged. Pricing is free during public preview with usage-based pricing
+      announced as planned.
+    tool_count: 23
+    tools:
+      - {name: list_databases, category: data, backing_api: td-api}
+      - {name: list_tables, category: data, backing_api: td-api}
+      - {name: describe_table, category: data, backing_api: td-api}
+      - {name: query, category: data, backing_api: td-api, note: read-only SQL (SELECT/SHOW/DESCRIBE)}
+      - {name: execute, category: data, backing_api: td-api, note: write-capable; requires TD_ENABLE_UPDATES=true}
+      - {name: use_database, category: context, backing_api: none, note: server-side session context}
+      - {name: current_database, category: context, backing_api: none, note: server-side session context}
+      - {name: list_parent_segments, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: get_parent_segment, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: list_segments, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: list_activations, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: get_segment, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: parent_segment_sql, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: segment_sql, category: cdp, backing_api: cdp-api, status: experimental}
+      - {name: list_projects, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: list_workflows, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: list_sessions, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: get_session_attempts, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: get_attempt_tasks, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: get_task_logs, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: kill_attempt, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: retry_session, category: workflow, backing_api: workflow-api, status: experimental}
+      - {name: retry_attempt, category: workflow, backing_api: workflow-api, status: experimental}
+
+  - name: treasure-ai-docs
+    label: Treasure AI Documentation MCP Server
+    transport: http
+    mode: remote
+    status: live
+    url: https://docs.treasure.ai/mcp
+    auth: none
+    verified: probed
+    protocol_version: '2025-06-18'
+    server_info: {name: MCP server, version: '2026-08-13'}
+    capabilities: {logging: {}, tools: {listChanged: true}}
+    oauth_metadata: https://docs.treasure.ai/.well-known/oauth-authorization-server
+    tool_count: 6
+    tools_file: treasure-data-docs-mcp-tools.json
+    tools:
+      - {name: list-apis, description: Lists available APIs with their context and purpose, read_only: true}
+      - {name: get-endpoints, description: Get all endpoints for a specific API, read_only: true}
+      - {name: get-endpoint-info, description: 'Get comprehensive information about a specific endpoint including parameters, security, and examples', read_only: true}
+      - {name: get-security-schemes, description: Get the security schemes for a specific API, read_only: true}
+      - {name: get-full-api-description, description: Get the complete OpenAPI description, read_only: true}
+      - {name: search, description: 'Search across the documentation (locales: en, ja)', read_only: true}
+    x-evidence:
+      probed: '2026-08-13'
+      initialize: 200 text/event-stream
+      tools_list: 200 text/event-stream
+      note: >-
+        This server is how the eight published Treasure AI OpenAPI descriptions in openapi/ were located.
+        get-full-api-description returned each one; the direct public download URLs on
+        https://docs.treasure.ai/_bundle/apis/ were then used as the canonical harvest source.
+
+notes:
+  - >-
+    A remote endpoint and a stdio package are not the same product. An agent can call
+    https://docs.treasure.ai/mcp today with no setup. The 23-tool product server requires a human to
+    install Node 18+, obtain a TD API key and run npx before any agent can reach Treasure Data itself.
+  - >-
+    No MCP endpoint responds on www.treasure.ai/mcp (404) or api.treasuredata.com/mcp (soft 200 HTML).

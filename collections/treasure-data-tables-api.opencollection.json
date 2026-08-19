@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Treasure Data TD Bulk Import Tables API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tables in a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.treasuredata.com/v3/table/list/:database_name",
+            "params": [
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the database"
+              }
+            ]
+          },
+          "docs": "Returns a list of all tables within the specified database."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

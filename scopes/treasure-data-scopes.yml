@@ -1,0 +1,65 @@
+name: Treasure Data OAuth Scopes
+description: >-
+  OAuth 2.0 / OpenID Connect scopes advertised by Treasure Data's authorization server. Read from the
+  provider's own discovery document rather than from an OpenAPI securityScheme — none of the eight
+  published Treasure AI OpenAPI descriptions declares an oauth2 flow, so the discovery document is the
+  only machine-readable source for the scope set.
+specificationVersion: '0.1'
+generated: '2026-08-13'
+method: probed
+source: https://api.treasuredata.com/.well-known/openid-configuration
+file: well-known/treasure-data-openid-configuration.json
+issuer: https://console.us01.treasuredata.com
+schemes:
+  - name: TreasureDataOAuth
+    type: openIdConnect
+    source: well-known/treasure-data-openid-configuration.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://console.us01.treasuredata.com/oauth/authorize
+        tokenUrl: https://console.us01.treasuredata.com/oauth/token
+        refreshUrl: https://console.us01.treasuredata.com/oauth/token
+        pkce: [S256, plain]
+scopes:
+  - scope: public
+    description: >-
+      Treasure Data's own application scope. Advertised alongside the three standard OIDC scopes; the
+      authorization server does not publish a description for it and no docs page documents it further.
+    flows: [authorizationCode]
+    sources: [well-known/treasure-data-openid-configuration.json]
+    standard: false
+  - scope: openid
+    description: Request an ID token — standard OpenID Connect Core scope.
+    flows: [authorizationCode]
+    sources: [well-known/treasure-data-openid-configuration.json]
+    standard: true
+  - scope: email
+    description: Release the email and email_verified claims.
+    flows: [authorizationCode]
+    sources: [well-known/treasure-data-openid-configuration.json]
+    standard: true
+  - scope: profile
+    description: Release the standard profile claims.
+    flows: [authorizationCode]
+    sources: [well-known/treasure-data-openid-configuration.json]
+    standard: true
+scope_count: 4
+claims:
+  - iss
+  - sub
+  - aud
+  - exp
+  - iat
+  - email
+  - email_verified
+  - td_account_id
+  - administrator
+notes:
+  - >-
+    Only one non-standard scope (`public`) exists. There is no read/write or per-resource scope model —
+    an access token issued by this server is coarse-grained, and fine-grained authorization is handled
+    separately by the Access Control policy/permission system in the TD API
+    (/access_control/policies, /access_control/permissions).
+  - >-
+    No public scopes reference page was found in the documentation; the discovery document is the
+    authoritative published list. Absence of a docs page is recorded, not guessed around.
