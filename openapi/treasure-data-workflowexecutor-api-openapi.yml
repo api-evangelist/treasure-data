@@ -1,0 +1,179 @@
+openapi: 3.2.0
+info:
+  title: llm-api Workflow Executor API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: WorkflowExecutor
+paths:
+  /api/workflow_executors/{id}:
+    get:
+      summary: show
+      tags:
+      - WorkflowExecutor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      responses:
+        '200':
+          description: includes by created_by and updated_by
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          tdAccountId:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          createdByUserId:
+                            type: string
+                          updatedByUserId:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - tdAccountId
+                        - projectId
+                        - name
+                        - createdByUserId
+                        - updatedByUserId
+                      relationships:
+                        type: object
+                        properties:
+                          createdBy:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                          updatedBy:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                        required:
+                        - createdBy
+                        - updatedBy
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                          required:
+                          - name
+                          - email
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: workflowExecutors
+                  links:
+                    self: http://www.example.com/api/workflow_executors/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    tdAccountId: '100'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Project Workflow Executor
+                    createdByUserId: 00000000-0000-0000-0000-000000000001
+                    updatedByUserId: 00000000-0000-0000-0000-000000000001
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

@@ -1,0 +1,505 @@
+openapi: 3.2.0
+info:
+  title: llm-api Chat Attachment API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: ChatAttachment
+paths:
+  /api/chat_attachments:
+    get:
+      summary: index
+      tags:
+      - ChatAttachment
+      responses:
+        '200':
+          description: sorts by attachment_index
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            chatId:
+                              type: string
+                            attachmentIndex:
+                              type: integer
+                            attachmentType:
+                              type: string
+                            contentFormatMode:
+                              type: string
+                            inputFieldName: {}
+                            contentType:
+                              type: string
+                            imageWidth:
+                              type: integer
+                            imageHeight:
+                              type: integer
+                            pdfPageCount: {}
+                            binaryBase64:
+                              type: string
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - chatId
+                          - attachmentIndex
+                          - attachmentType
+                          - contentFormatMode
+                          - inputFieldName
+                          - contentType
+                          - imageWidth
+                          - imageHeight
+                          - pdfPageCount
+                          - binaryBase64
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatAttachments
+                  links:
+                    self: http://www.example.com/api/chat_attachments/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    chatId: 00000000-0000-0000-0000-000000000001
+                    attachmentIndex: 1
+                    attachmentType: USER_INPUT_DRAFT
+                    contentFormatMode: ID_AND_CONTENT
+                    inputFieldName: null
+                    contentType: image/png
+                    imageWidth: 225
+                    imageHeight: 225
+                    pdfPageCount: null
+                    binaryBase64: <BASE64_CONTENT>=
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatAttachments
+                  links:
+                    self: http://www.example.com/api/chat_attachments/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    chatId: 00000000-0000-0000-0000-000000000001
+                    attachmentIndex: 2
+                    attachmentType: USER_INPUT
+                    contentFormatMode: ID_AND_CONTENT
+                    inputFieldName: null
+                    contentType: image/png
+                    imageWidth: 225
+                    imageHeight: 225
+                    pdfPageCount: null
+                    binaryBase64: <BASE64_CONTENT>=
+                meta:
+                  total: 2
+                links:
+                  first: http://www.example.com/api/chat_attachments?page%5Blimit%5D=20&page%5Boffset%5D=0&sort=attachment_index
+                  last: http://www.example.com/api/chat_attachments?page%5Blimit%5D=20&page%5Boffset%5D=0&sort=attachment_index
+      parameters:
+      - name: filter[attachment_type]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: USER_INPUT_DRAFT
+      - name: filter[chat_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: attachment_index
+    post:
+      summary: create
+      tags:
+      - ChatAttachment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        chatId:
+                          type: string
+                        contentType:
+                          type: string
+                        inputFieldName:
+                          type: string
+                        binaryBase64:
+                          type: string
+                      required:
+                      - chatId
+                      - contentType
+                      - inputFieldName
+                      - binaryBase64
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: chat_attachments
+                attributes:
+                  chatId: 00000000-0000-0000-0000-000000000001
+                  contentType: image/png
+                  inputFieldName: screenshot
+                  binaryBase64: iVBORw0KGgoAAAAAAAAAAAAABAAAAAMAAAAAAAAAAAAAAA==
+      responses:
+        '201':
+          description: Chat attachment successfully created
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          chatId:
+                            type: string
+                          attachmentIndex:
+                            type: integer
+                          attachmentType:
+                            type: string
+                          contentFormatMode:
+                            type: string
+                          inputFieldName:
+                            type: string
+                          contentType:
+                            type: string
+                          imageWidth:
+                            type: integer
+                          imageHeight:
+                            type: integer
+                          pdfPageCount: {}
+                          binaryBase64:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - chatId
+                        - attachmentIndex
+                        - attachmentType
+                        - contentFormatMode
+                        - inputFieldName
+                        - contentType
+                        - imageWidth
+                        - imageHeight
+                        - pdfPageCount
+                        - binaryBase64
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chatAttachments
+                  links:
+                    self: http://www.example.com/api/chat_attachments/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    chatId: 00000000-0000-0000-0000-000000000001
+                    attachmentIndex: 1
+                    attachmentType: USER_INPUT_DRAFT
+                    contentFormatMode: ID_AND_CONTENT
+                    inputFieldName: screenshot
+                    contentType: image/png
+                    imageWidth: 1024
+                    imageHeight: 768
+                    pdfPageCount: null
+                    binaryBase64: iVBORw0KGgoAAAAAAAAAAAAABAAAAAMAAAAAAAAAAAAAAA==
+        '422':
+          description: returns validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            originalType:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must exist
+                  detail: project - must exist
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/project
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+                - title: can't be blank
+                  detail: projectId - can't be blank
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/projectId
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+                - title: must exist
+                  detail: chat - must exist
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/chat
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+  /api/chat_attachments/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - ChatAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Chat attachment successfully deleted
+        '403':
+          description: Forbidden - insufficient permissions to delete this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+    get:
+      summary: show
+      tags:
+      - ChatAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: returns the specific chat attachment
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          chatId:
+                            type: string
+                          attachmentIndex:
+                            type: integer
+                          attachmentType:
+                            type: string
+                          contentFormatMode:
+                            type: string
+                          inputFieldName: {}
+                          contentType:
+                            type: string
+                          imageWidth:
+                            type: integer
+                          imageHeight:
+                            type: integer
+                          pdfPageCount: {}
+                          binaryBase64:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - chatId
+                        - attachmentIndex
+                        - attachmentType
+                        - contentFormatMode
+                        - inputFieldName
+                        - contentType
+                        - imageWidth
+                        - imageHeight
+                        - pdfPageCount
+                        - binaryBase64
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chatAttachments
+                  links:
+                    self: http://www.example.com/api/chat_attachments/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    chatId: 00000000-0000-0000-0000-000000000001
+                    attachmentIndex: 1
+                    attachmentType: USER_INPUT_DRAFT
+                    contentFormatMode: ID_AND_CONTENT
+                    inputFieldName: null
+                    contentType: image/png
+                    imageWidth: 225
+                    imageHeight: 225
+                    pdfPageCount: null
+                    binaryBase64: <BASE64_CONTENT>=
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

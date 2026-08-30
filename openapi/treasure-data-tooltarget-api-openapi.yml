@@ -1,0 +1,398 @@
+openapi: 3.2.0
+info:
+  title: llm-api Tool Target API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: ToolTarget
+paths:
+  /api/tool_targets:
+    get:
+      summary: index
+      tags:
+      - ToolTarget
+      parameters:
+      - name: filter[name]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: duzdfzfd
+      - name: filter[project_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[target_type]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: WorkflowExecutor
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      - name: targetType
+        in: query
+        required: false
+        schema:
+          type: string
+        example: ExperimentalKnowledgeBase
+      responses:
+        '200':
+          description: includes by created_by and updated_by
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            name:
+                              type: string
+                            tdDatabaseName:
+                              type:
+                              - string
+                              - 'null'
+                            formatType:
+                              type:
+                              - string
+                              - 'null'
+                            maxRows:
+                              type:
+                              - integer
+                              - 'null'
+                            timeoutSeconds:
+                              type:
+                              - integer
+                              - 'null'
+                            isManaged:
+                              type:
+                              - boolean
+                              - 'null'
+                            tables:
+                              type:
+                              - array
+                              - 'null'
+                              items: {}
+                            lastJob:
+                              type:
+                              - object
+                              - 'null'
+                              properties:
+                                status:
+                                  type: string
+                                message: {}
+                                finishedAt: {}
+                                logs: {}
+                              required:
+                              - status
+                              - message
+                              - finishedAt
+                              - logs
+                            text:
+                              type:
+                              - string
+                              - 'null'
+                            tdAccountId:
+                              type:
+                              - string
+                              - 'null'
+                            createdByUserId:
+                              type:
+                              - string
+                              - 'null'
+                            updatedByUserId:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - name
+                        relationships:
+                          type: object
+                          properties:
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                          required:
+                          - createdBy
+                          - updatedBy
+                      required:
+                      - id
+                      - type
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                          required:
+                          - name
+                          - email
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBaseToolTargets
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: zmohxxyy
+                    tdDatabaseName: uwocaenb
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: false
+                    tables: []
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBaseToolTargets
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: pthvwfok
+                    tdDatabaseName: nfrueigh
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: false
+                    tables: []
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: textKnowledgeBaseToolTargets
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: atsmmlxa
+                    text: This is a sample text for the TextKnowledgeBase.
+                    isManaged: false
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: workflowExecutorToolTargets
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    tdAccountId: '100'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Project Workflow Executor
+                    createdByUserId: 00000000-0000-0000-0000-000000000001
+                    updatedByUserId: 00000000-0000-0000-0000-000000000001
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                meta:
+                  total: 4
+                links:
+                  first: http://www.example.com/api/tool_targets?include=createdBy%2CupdatedBy&page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/tool_targets?include=createdBy%2CupdatedBy&page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+  /api/tool_targets/{id}:
+    get:
+      summary: show
+      tags:
+      - ToolTarget
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: returns the details of a specific tool target
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          text:
+                            type: string
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - text
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: textKnowledgeBaseToolTargets
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: sklvtlti
+                    text: This is a sample text for the TextKnowledgeBase.
+                    isManaged: false
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

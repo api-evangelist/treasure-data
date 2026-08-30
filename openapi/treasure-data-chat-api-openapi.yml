@@ -1,0 +1,1151 @@
+openapi: 3.2.0
+info:
+  title: llm-api Chat API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: Chat
+paths:
+  /api/chats:
+    get:
+      summary: index
+      tags:
+      - Chat
+      parameters:
+      - name: filter[chat_interface_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[form_interface_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[has_artifacts]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 'true'
+      - name: filter[parent_segment_id]
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 978814
+      - name: filter[project_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[service_type]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: HOGE_HOGE
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: last_conversation_at
+      responses:
+        '200':
+          description: Empty chat list when no chat sessions exist
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            agentId:
+                              type: string
+                            promptId:
+                              type:
+                              - string
+                              - 'null'
+                            integrationId:
+                              type:
+                              - string
+                              - 'null'
+                            actionId:
+                              type:
+                              - string
+                              - 'null'
+                            formInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            chatInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            inputParameters:
+                              type:
+                              - string
+                              - 'null'
+                            textResourceId:
+                              type:
+                              - string
+                              - 'null'
+                            userProperties:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  value:
+                                    type: string
+                                required:
+                                - name
+                                - value
+                            firstInputContent:
+                              type:
+                              - string
+                              - 'null'
+                            createdByChatId:
+                              type:
+                              - string
+                              - 'null'
+                            createdByToolCallId:
+                              type:
+                              - string
+                              - 'null'
+                            lastConversationAt:
+                              type: string
+                            attachments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  binaryBase64:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                  inputFieldName:
+                                    type: string
+                                required:
+                                - binaryBase64
+                                - contentType
+                                - inputFieldName
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - agentId
+                          - promptId
+                          - integrationId
+                          - actionId
+                          - formInterfaceId
+                          - chatInterfaceId
+                          - inputParameters
+                          - textResourceId
+                          - userProperties
+                          - firstInputContent
+                          - createdByChatId
+                          - createdByToolCallId
+                          - lastConversationAt
+                          - attachments
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data: []
+                meta:
+                  total: 0
+                links:
+                  first: http://www.example.com/api/chats?page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/chats?page%5Blimit%5D=20&page%5Boffset%5D=0
+        '400':
+          description: GET /api/chats filters invalid parent_segment_id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Invalid filter value
+                  detail: invalid type is not a valid value for parent_segment_id.
+                  code: '107'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+    post:
+      summary: create
+      tags:
+      - Chat
+      responses:
+        '201':
+          description: POST /api/chats normalizes null userProperties to empty array
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          promptId:
+                            type:
+                            - string
+                            - 'null'
+                          integrationId:
+                            type:
+                            - string
+                            - 'null'
+                          actionId:
+                            type:
+                            - string
+                            - 'null'
+                          formInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          chatInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          inputParameters:
+                            type:
+                            - string
+                            - 'null'
+                          textResourceId:
+                            type:
+                            - string
+                            - 'null'
+                          userProperties:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                              required:
+                              - name
+                              - value
+                          firstInputContent: {}
+                          createdByChatId: {}
+                          createdByToolCallId: {}
+                          lastConversationAt:
+                            type: string
+                          attachments:
+                            type: array
+                            items: {}
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - promptId
+                        - integrationId
+                        - actionId
+                        - formInterfaceId
+                        - chatInterfaceId
+                        - inputParameters
+                        - textResourceId
+                        - userProperties
+                        - firstInputContent
+                        - createdByChatId
+                        - createdByToolCallId
+                        - lastConversationAt
+                        - attachments
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chats
+                  links:
+                    self: http://www.example.com/api/chats/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    promptId: null
+                    integrationId: null
+                    actionId: null
+                    formInterfaceId: null
+                    chatInterfaceId: null
+                    inputParameters: null
+                    textResourceId: null
+                    userProperties: []
+                    firstInputContent: null
+                    createdByChatId: null
+                    createdByToolCallId: null
+                    lastConversationAt: '2025-05-01T05:05:14.000Z'
+                    attachments: []
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: returns 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '422':
+          description: POST /api/chats rejects userProperties with more than 10 items
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            originalType:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is too long (maximum is 10 characters)
+                  detail: userProperties - is too long (maximum is 10 characters)
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/userProperties
+                  status: '422'
+                  meta:
+                    validationCode: IS_TOO_LONG
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        agentId:
+                          type: string
+                        promptId:
+                          type: string
+                        integrationId:
+                          type: string
+                        attachments:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              binaryBase64:
+                                type: string
+                              contentType:
+                                type: string
+                              inputFieldName:
+                                type: string
+                            required:
+                            - binaryBase64
+                            - contentType
+                            - inputFieldName
+                        actionId:
+                          type: string
+                        formInterfaceId:
+                          type: string
+                        inputParameters:
+                          type: string
+                        chatInterfaceId:
+                          type: string
+                        textResourceId:
+                          type: string
+                        userProperties:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - name
+                            - value
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: chats
+                attributes:
+                  agentId: 00000000-0000-0000-0000-000000000001
+                  promptId: 00000000-0000-0000-0000-000000000001
+                  integrationId: 00000000-0000-0000-0000-000000000001
+                  attachments:
+                  - binaryBase64: <BASE64_CONTENT>=
+                    contentType: image/png
+                    inputFieldName: input_field_name
+                  actionId: 00000000-0000-0000-0000-000000000001
+                  formInterfaceId: 00000000-0000-0000-0000-000000000001
+                  inputParameters: '{"subject":"Welcome to our newest gummy bear","topic":"New lemon flavored gummy bear in our collection"}'
+                  chatInterfaceId: 00000000-0000-0000-0000-000000000001
+                  textResourceId: 00000000-0000-0000-0000-000000000001
+                  userProperties: null
+  /api/chats/{id}:
+    get:
+      summary: show
+      tags:
+      - Chat
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: GET /api/chats/:id returns userProperties in response
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          promptId: {}
+                          integrationId: {}
+                          actionId: {}
+                          formInterfaceId: {}
+                          chatInterfaceId: {}
+                          inputParameters: {}
+                          textResourceId: {}
+                          userProperties:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                              required:
+                              - name
+                              - value
+                          firstInputContent: {}
+                          createdByChatId: {}
+                          createdByToolCallId: {}
+                          lastConversationAt:
+                            type: string
+                          attachments:
+                            type: array
+                            items: {}
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - promptId
+                        - integrationId
+                        - actionId
+                        - formInterfaceId
+                        - chatInterfaceId
+                        - inputParameters
+                        - textResourceId
+                        - userProperties
+                        - firstInputContent
+                        - createdByChatId
+                        - createdByToolCallId
+                        - lastConversationAt
+                        - attachments
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chats
+                  links:
+                    self: http://www.example.com/api/chats/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    promptId: null
+                    integrationId: null
+                    actionId: null
+                    formInterfaceId: null
+                    chatInterfaceId: null
+                    inputParameters: null
+                    textResourceId: null
+                    userProperties:
+                    - name: browser_language
+                      value: ja
+                    firstInputContent: null
+                    createdByChatId: null
+                    createdByToolCallId: null
+                    lastConversationAt: '2025-05-01T05:05:14.000Z'
+                    attachments: []
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: GET /api/chats/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+  /api/chats/{id}/continue:
+    post:
+      summary: continue
+      tags:
+      - Chat
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: POST /api/chats/:id/continue embeds prompt template variables
+          content:
+            text/event-stream:
+              schema:
+                type: string
+              example: 'data: {"user_content":"Template: value1, 123, [\"serized\",{\"to\":\"json\"}], ","at":"2026-04-06T07:15:33Z"}
+
+
+                '
+        '403':
+          description: returns 403
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: returns 404
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: 404
+                error: Not Found
+        '422':
+          description: POST /api/chats/:id/continue rejects setting both input and inputParams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - status
+                - error
+              example:
+                status: '422'
+                error: setting both input and inputParams is invalid
+                details:
+                - attachments - exceeds the maximum number of attachments allowed
+        '429':
+          description: returns a 429 status with the correct error message and headers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '429'
+                error: Rate limit exceeded. Please wait 60 seconds before trying again.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: string
+                inputParams:
+                  type: object
+                  properties:
+                    foo:
+                      type: string
+                    var1:
+                      type: string
+                    var2:
+                      type: integer
+                    var3:
+                      type: array
+                      items:
+                        type: string
+                attachments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      binaryBase64:
+                        type: string
+                      contentType:
+                        type: string
+                      inputFieldName:
+                        type:
+                        - string
+                        - 'null'
+                    required:
+                    - binaryBase64
+                    - contentType
+            example:
+              input: Hi
+              inputParams:
+                foo: bar
+                var1: value1
+                var2: 123
+                var3:
+                - serized
+                - to: json
+              attachments:
+              - binaryBase64: <BASE64_CONTENT>=
+                contentType: image/png
+                inputFieldName: input_field_name
+              - binaryBase64: <BASE64_CONTENT>==
+                contentType: application/pdf
+  /api/chats/{id}/download_files:
+    post:
+      summary: download_files
+      tags:
+      - Chat
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                method:
+                  type: string
+                prefix:
+                  type: string
+              required:
+              - method
+            example:
+              method: multipart
+              prefix: /tmp/
+      responses:
+        '200':
+          description: POST /api/chats/:id/download_files downloads with prefix
+          content:
+            multipart/mixed:
+              schema:
+                type: string
+              example: '--B-<BASE64_CONTENT>
+
+                Content-Type: text/plain
+
+                Content-Disposition: attachment; filename=attachment; filename="dir1%2Ff2.txt"; filename*=UTF-8''''dir1%2Ff2.txt
+
+
+                v2
+
+                --B-<BASE64_CONTENT>
+
+                Content-Type: text/plain
+
+                Content-Disposition: attachment; filename=attachment; filename="dir1%2Ff3.txt"; filename*=UTF-8''''dir1%2Ff3.txt
+
+
+                v3
+
+                --B-<BASE64_CONTENT>--
+
+                '
+        '404':
+          description: GET /api/chats/:id/*files* returns 404 if the chat is not visible by the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: 404
+                error: Not Found
+  /api/chats/{id}/history:
+    get:
+      summary: history
+      tags:
+      - Chat
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: createArtifact call creates an artifact
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        input:
+                          type:
+                          - string
+                          - 'null'
+                        at:
+                          type: string
+                        tool:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            id:
+                              type: string
+                            functionName:
+                              type: string
+                            functionArguments:
+                              type: string
+                            content:
+                              type: string
+                            status:
+                              type: string
+                            output:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                              required:
+                              - name
+                            targetKnowledgeBase:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                              required:
+                              - id
+                              - name
+                            targetFunction:
+                              type: string
+                            toolTarget:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                type:
+                                  type: string
+                                name:
+                                  type: string
+                              required:
+                              - id
+                              - type
+                              - name
+                            targetAgent:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                              required:
+                              - id
+                              - name
+                            newChat:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                              required:
+                              - id
+                          required:
+                          - id
+                          - functionName
+                          - functionArguments
+                          - content
+                          - status
+                        output:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            name:
+                              type: string
+                            content:
+                              type: string
+                          required:
+                          - name
+                          - content
+                        content:
+                          type:
+                          - string
+                          - 'null'
+                        artifact:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            id:
+                              type: string
+                            output:
+                              type: string
+                            chatId:
+                              type: string
+                            contentType:
+                              type: string
+                            artifactType:
+                              type: string
+                            chatFilePathPrefix:
+                              type: string
+                            experimentalArtifactId:
+                              type: string
+                          required:
+                          - id
+                          - output
+                          - chatId
+                          - contentType
+                          - artifactType
+                        reasoning:
+                          type:
+                          - string
+                          - 'null'
+                      required:
+                      - at
+                required:
+                - data
+              example:
+                data:
+                - input: Hi
+                  at: '2026-04-06T07:15:33Z'
+                - tool:
+                    id: id-1
+                    functionName: call_create_artifact
+                    functionArguments: '
+
+                      {}
+
+                      '
+                    content: '{"id":"00000000-0000-0000-0000-000000000001","pathPrefix":"/experimental/1/"}'
+                    status: OK
+                    targetFunction: func_create_artifact
+                    toolTarget:
+                      id: 00000000-0000-0000-0000-000000000001
+                      type: ExperimentalKnowledgeBase
+                      name: experimental_knowledge_base_17
+                  at: '2026-04-06T07:15:33Z'
+                - artifact:
+                    id: 00000000-0000-0000-0000-000000000001
+                    output: '# OK'
+                    chatId: 00000000-0000-0000-0000-000000000001
+                    chatFilePathPrefix: /experimental/1/
+                    contentType: EXPERIMENTAL
+                    artifactType: EXPERIMENTAL
+                    experimentalArtifactId: 00000000-0000-0000-0000-000000000001
+                  at: '2026-04-06T07:15:33Z'
+                - content: done
+                  at: '2026-04-06T07:15:33Z'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

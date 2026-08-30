@@ -1,0 +1,1375 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Parent Segment Configurations API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Parent Segment Configurations
+  description: Defining a data model for customer data is done by defining parent segments. Parent segments give you an ability to build a single view of a customer, including capturing all interactions, such as attributes and behaviors associated with your brand. In parent segments, you unify your customer data. When the customer data is unified, you can create customer segments without writing any SQL queries. You can personalize customer communications and conversations of any size and in any channel.<br> <br> <br>_Treasure Data is making an effort to use more inclusive language in its product, content, and customer solutions. As we gradually make the move to replace insensitive language beginning in our UI, you may continue to see parent segments in the UI, for example, referenced as master segment in portions of Treasure Data APIs._
+paths:
+  /audiences:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of parent segment configurations
+      description: Retrieve a list of parent segment configurations by name. You can get the parent segment's schedules, created_by, the parent database name and tables, its attributes and behaviors, as well as the population for the retrieved Parent Segment.
+      operationId: audiences#index
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audience'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Parent Segment Configurations
+      summary: Create new parent segment configuration
+      description: Create a new parent segment configuration.
+      operationId: audiences#create
+      requestBody:
+        description: Create a new Master Segment Config
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audience'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve parent segment configuration by ID
+      description: Search and find a specified parent segment configuration by its identifier.
+      operationId: audiences#show
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/Audience'
+                - $ref: '#/components/schemas/ComposableAudience'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    put:
+      tags:
+      - Parent Segment Configurations
+      summary: Update parent segment configuration
+      description: "Update the specified parent segment configuration by its identifier.\n\n**Important: Update Behavior and the `master` Field**\n\nThis endpoint supports two different update modes depending on whether the `master` field is included in the request body:\n\n1. **Partial Update (without `master` field)**: When the `master` field is omitted, only the scalar fields (e.g., `name`, `description`, `scheduleType`) in the request body are updated. The `attributes`, `behaviors`, and `audienceFilters` collections are left untouched, even if they are omitted or set to `null` or `[]` in the request.\n\n2. **Full Replacement (with `master` field)**: When the `master` field is included in the request body, the endpoint performs a full replacement of `attributes`, `behaviors`, and `audienceFilters`. All existing entries in these collections are deleted and replaced with exactly what is provided in the request:\n   - If `attributes`, `behaviors`, or `audienceFilters` are omitted, set to `null`, or set to `[]`, those collections will be **cleared** (all existing entries deleted).\n   - Only the items explicitly included in the request body will exist after the update.\n   - This is a destructive operation that cannot be undone.\n\n**Recommendations**:\n- For partial updates of scalar fields only: omit the `master` field from the request body.\n- For full replacement: include the `master` field and provide complete definitions for `attributes`, `behaviors`, and `audienceFilters` to avoid unintended data loss.\n"
+      operationId: audiences#update
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config that needs to be updated
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audience'
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Parent Segment Configurations
+      summary: Delete parent segment configuration
+      description: Delete a previously created parent segment configuration.
+      operationId: audiences#delete
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment Config id to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '404':
+          description: Master Segment Config not found
+          content: {}
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/attributes:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of audience attributes
+      description: Retrieve a list of parent segment attributes. You can also specify the visibility level for sensitive attributes.
+      operationId: audience_attributes#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/AudienceAttributeWithVisibility'
+                  - $ref: '#/components/schemas/AudienceMasterAttribute'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/behaviors:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of audience behaviors
+      description: Retrieve a list of parent segment behaviors.
+      operationId: audience_behaviors#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: realtime
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudienceBehaviorWithVisibility'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/run:
+    x-external: true
+    post:
+      tags:
+      - Parent Segment Configurations
+      summary: Run workflow to (re)generate parent segment
+      description: Run the workflow to generate or regenerate a parent segment.
+      operationId: audiences#run
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment Config id to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the workflow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceExecution'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/executions:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of executions using audienceId
+      description: Retrieve a list of workflow executions, whether they were succesful or not, and their status.
+      operationId: audiences#executions
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment Config id to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the workflow
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudienceExecution'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/statistics:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve population statistics audience
+      description: Retrieve the population history of the audience. The history is returned per day and those days are calculated in the timezone of the audience.
+      operationId: audiences#statistics
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment Config id to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 1234
+      - name: from
+        in: query
+        description: from date
+        schema:
+          type: string
+          format: date
+          example: '2019-01-01'
+      - name: to
+        in: query
+        description: to date (inclusive)
+        schema:
+          type: string
+          format: date
+          example: '2019-04-30'
+      responses:
+        '200':
+          description: array of tuple of statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistic'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/sample_values:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of values for a parent segment configuration's attribute
+      description: Retrieve a list of sample values associated with the attributes of a parent segment configuration.
+      operationId: audiences#sample_values
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: query
+        name: column
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: number
+          minimum: 1
+      - in: query
+        name: samples
+        schema:
+          type: number
+          minimum: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleValuesPayload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/behaviors/{audienceBehaviorId}/sample_values:
+    x-external: true
+    get:
+      tags:
+      - Parent Segment Configurations
+      summary: Retrieve list of sample values for a parent segment configuration's behavior
+      description: Retrieve a list of sample values for a parent segment's behavior that are useful in understanding data syntax or patterns for further analysis or activation.
+      operationId: audiences_behaviors#sample_values
+      parameters:
+      - name: audienceId
+        in: path
+        description: ID of Master Segment Config to operate on
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: audienceBehaviorId
+        in: path
+        description: ID of Master Segment Config behavior to operate on
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: query
+        name: column
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: number
+          minimum: 1
+      - in: query
+        name: samples
+        schema:
+          type: number
+          minimum: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleValuesPayload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+components:
+  schemas:
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    ComposableAudienceBehavior:
+      required:
+      - name
+      - schema
+      - table
+      - tableKey
+      - masterKey
+      - columnMapping
+      type: object
+      description: Exactly one of federatedQueryConfigId or connectionId must be provided.
+      properties:
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        federatedQueryConfigId:
+          type: string
+          format: integer
+          description: Federated query config ID for Snowflake. Mutually exclusive with connectionId.
+        connectionId:
+          type: string
+          format: integer
+          description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
+        schema:
+          type: string
+        table:
+          type: string
+        tableKey:
+          type: string
+        masterKey:
+          type: string
+        timeColumn:
+          type: string
+        columnMapping:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            - cdwColumn
+            properties:
+              name:
+                type: string
+              type:
+                $ref: '#/components/schemas/ColumnType'
+              cdwColumn:
+                type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    SampleValuesPayload:
+      description: array of tuple of sample values
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are (1) value itself whose type depends on source column (2) percentage of the value
+        example:
+        - Japan
+        - 0.14285714285714285
+        items:
+          anyOf:
+          - type: integer
+          - type: number
+            format: float
+          - type: string
+    AudienceBehaviorSchema:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type: string
+          description: Column name of the behavior table
+    AudienceAttributeWithVisibility:
+      required:
+      - name
+      - audienceId
+      - type
+      - parentDatabaseName
+      - parentTableName
+      - parentColumn
+      - parentKey
+      - foreignKey
+      type: object
+      properties:
+        audienceId:
+          type: string
+          description: ID of Master Segment for this attribute
+        id:
+          type:
+          - string
+          - 'null'
+          description: This can be null when the attribute is an enriched attribute
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the attribute table
+        parentTableName:
+          type: string
+          description: Table name of the attribute table
+        parentColumn:
+          type: string
+          description: Column name of the attribute table which is imported into customer table
+        parentKey:
+          type:
+          - string
+          - 'null'
+          description: Join key of the attribute table (This can be null when the attribute is an enriched attribute)
+        foreignKey:
+          type:
+          - string
+          - 'null'
+          description: Foreign key of the master table (This can be null when the attribute is an enriched attribute)
+        matrixColumnName:
+          type: string
+        matrixColumnDescription:
+          type:
+          - string
+          - 'null'
+          description: Description of the column in attribute table
+        usedBySegmentInsight:
+          type: boolean
+        groupingName:
+          type:
+          - string
+          - 'null'
+          description: Group name of the attribute
+        visibility:
+          type: string
+          enum:
+          - clear
+          - pii
+          - non_pii
+          - blocked
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    ComposableAudienceAttribute:
+      required:
+      - name
+      - schema
+      - table
+      - tableKey
+      - masterKey
+      - column
+      type: object
+      description: Exactly one of federatedQueryConfigId or connectionId must be provided.
+      properties:
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        federatedQueryConfigId:
+          type: string
+          format: integer
+          description: Federated query config ID for Snowflake. Mutually exclusive with connectionId.
+        connectionId:
+          type: string
+          format: integer
+          description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
+        schema:
+          type: string
+        table:
+          type: string
+        tableKey:
+          type: string
+        masterKey:
+          type: string
+        column:
+          type: string
+        type:
+          description: Optional. If omitted, the ION type is auto-filled from the CDW column's native type.
+          allOf:
+          - $ref: '#/components/schemas/ColumnType'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Statistic:
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
+        example:
+        - 1556382847
+        - 1234
+        - true
+        items:
+          oneOf:
+          - type: integer
+            format: int64
+          - type: boolean
+    AudienceExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          audienceId:
+            type: string
+            format: integer
+    AudienceMasterAttribute:
+      description: Attribute of master table, not attribute tables. Similar to AudienceAttribute but some properties are null
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the attribute table
+        parentTableName:
+          type: string
+          description: Table name of the attribute table
+        parentColumn:
+          type: string
+          description: Column name of the attribute table which is imported into customer table
+        parentKey:
+          type: string
+          description: Join key of the attribute table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+    ComposableAudience:
+      required:
+      - name
+      - masterSchema
+      - masterTable
+      - timezone
+      type: object
+      description: A composable audience for zero-copy segments using CDW tables via federated queries (Snowflake) or direct connections (Databricks). Exactly one of federatedQueryConfigId or connectionId must be provided.
+      properties:
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        federatedQueryConfigId:
+          type: string
+          format: integer
+          description: Federated query config ID for Snowflake. Mutually exclusive with connectionId.
+        connectionId:
+          type: string
+          format: integer
+          description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
+        masterCatalog:
+          type:
+          - string
+          - 'null'
+          description: Catalog name for the master table. Required for Databricks, null for Snowflake.
+        masterSchema:
+          type: string
+        masterTable:
+          type: string
+        masterKeyColumn:
+          type: string
+        timezone:
+          type: string
+        allowActivationBehavior:
+          type: boolean
+          description: whether activation behaviors are allowed for this audience
+        maxActivationBehaviorRow:
+          type: integer
+          format: int64
+          description: maximum number of activation behavior rows
+        isComposable:
+          type: boolean
+        kind:
+          type: string
+          enum:
+          - composable
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComposableAudienceAttribute'
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComposableAudienceBehavior'
+        population:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: the population of the composable audience
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+    Audience:
+      required:
+      - name
+      type: object
+      description: An audience handles a Master Segment and a related Master Segment Config.
+      properties:
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        description:
+          type: string
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+          example: 00:00
+        timezone:
+          type: string
+          example: UTC
+        matrixUpdatedAt:
+          type:
+          - string
+          - 'null'
+          format: datetime
+        workflowHiveOnly:
+          type: boolean
+          description: Whether the workflow mainly use Hive or not. Default is false
+        hiveEngineVersion:
+          type: string
+          description: Hive engine version used in audience workflows
+          enum:
+          - '0.13'
+          - cdpaudience
+        hivePoolName:
+          type:
+          - string
+          - 'null'
+        prestoPoolName:
+          type:
+          - string
+          - 'null'
+        allowActivationBehavior:
+          type:
+          - boolean
+          - 'null'
+        maxActivationBehaviorRow:
+          type:
+          - integer
+          - 'null'
+          description: 'Only null is acceptable when allowActivationBehavior is false.
+
+            '
+        llmEnabled:
+          type:
+          - boolean
+          - 'null'
+          description: 'llmEnabled indicates whether customer has enabled llm (true or false).
+
+            '
+        llmState:
+          type: string
+          enum:
+          - enabling
+          - enabled
+          - disabling
+          - disabled
+          description: 'llmState indicates more detailed state including updating.
+
+            '
+        population:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: the population of the audience
+        enrichmentWordTaggingEnabled:
+          type: boolean
+        enrichmentIpEnabled:
+          type: boolean
+        enrichmentTdJsSdkEnabled:
+          type: boolean
+        master:
+          $ref: '#/components/schemas/AudienceMaster'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceAttribute'
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceBehavior'
+        customerGroup:
+          $ref: '#/components/schemas/CustomerGroup'
+        audienceFilters:
+          type: array
+          maxItems: 2
+          items:
+            $ref: '#/components/schemas/AudienceFilter'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+    AudienceFilter:
+      required:
+      - columnName
+      - rightValues
+      type: object
+      additionalProperties: false
+      properties:
+        columnName:
+          type: string
+          description: Column name to filter source data
+          example: Country
+        rightValues:
+          type: array
+          items:
+            type: string
+          description: Values of the column to filter source data
+          example:
+          - Japan
+    AudienceBehaviorSchemaWithVisibility:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type:
+          - string
+          - 'null'
+          description: Column name of the behavior table (This can be null when the column is an enriched column)
+        matrixColumnName:
+          type: string
+          description: Column name of the behavior table
+        matrixColumnDescription:
+          type:
+          - string
+          - 'null'
+          description: Description of the column in behavior table
+        visibility:
+          type: string
+          enum:
+          - clear
+          - pii
+          - non_pii
+          - blocked
+    CustomerGroupBehaviorSchema:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type: string
+          description: Column name of the customer_group behavior table
+    AudienceBehavior:
+      required:
+      - id
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      - schema
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of Master Segment Config behavior
+        name:
+          type: string
+          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
+        parentDatabaseName:
+          type: string
+          description: Database name of the behavior table
+        parentTableName:
+          type: string
+          description: Table name of the behavior table
+        parentKey:
+          type: string
+          description: Join key of the behavior table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+        schema:
+          type: array
+          description: Columns of behavior
+          items:
+            $ref: '#/components/schemas/AudienceBehaviorSchema'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        defaultTimeFilterEnabled:
+          type: boolean
+        isRealtime:
+          type: boolean
+    CustomerGroupAttribute:
+      required:
+      - name
+      - type
+      - parentDatabaseName
+      - parentTableName
+      - parentColumn
+      - parentKey
+      - foreignKey
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the customer_group attribute table
+        parentTableName:
+          type: string
+          description: Table name of the customer_group attribute table
+        parentColumn:
+          type: string
+          description: Column name of the customer_group attribute table which is imported into customer table
+        parentKey:
+          type: string
+          description: Join key of the customer_group attribute table
+        foreignKey:
+          type: string
+          description: Foreign key of the customer_group table
+    AudienceBehaviorWithVisibility:
+      required:
+      - id
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      - schema
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of Master Segment Config behavior
+        name:
+          type: string
+          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
+        parentDatabaseName:
+          type: string
+          description: Database name of the behavior table
+        parentTableName:
+          type: string
+          description: Table name of the behavior table
+        parentKey:
+          type: string
+          description: Join key of the behavior table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+        schema:
+          type: array
+          description: Columns of behavior
+          items:
+            $ref: '#/components/schemas/AudienceBehaviorSchemaWithVisibility'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        defaultTimeFilterEnabled:
+          type: boolean
+    ColumnType:
+      type: string
+      description: Type of the column
+      enum:
+      - string
+      - number
+      - timestamp
+      - date
+      - string_array
+      - number_array
+      - boolean
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    AudienceAttribute:
+      required:
+      - name
+      - audienceId
+      - type
+      - parentDatabaseName
+      - parentTableName
+      - parentColumn
+      - parentKey
+      - foreignKey
+      - groupingName
+      type: object
+      properties:
+        audienceId:
+          type: string
+          description: ID of Master Segment for this attribute
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the attribute table
+        parentTableName:
+          type: string
+          description: Table name of the attribute table
+        parentColumn:
+          type: string
+          description: Column name of the attribute table which is imported into customer table
+        parentKey:
+          type: string
+          description: Join key of the attribute table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+        groupingName:
+          type:
+          - string
+          - 'null'
+          description: Group name of the attribute
+    CustomerGroupBehavior:
+      required:
+      - id
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      - schema
+      type: object
+      properties:
+        name:
+          type: string
+          description: Behavior name
+        parentDatabaseName:
+          type: string
+          description: Database name of the customer_group behavior table
+        parentTableName:
+          type: string
+          description: Table name of the customer_group behavior table
+        parentKey:
+          type: string
+          description: Join key of the customer_group behavior table
+        foreignKey:
+          type: string
+          description: Foreign key of the customer_group table
+        schema:
+          type: array
+          description: Columns of behavior
+          items:
+            $ref: '#/components/schemas/CustomerGroupBehaviorSchema'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    CustomerGroup:
+      required:
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      type: object
+      description: A group of customers within an audience
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        audienceId:
+          type: integer
+        name:
+          type: string
+          description: group name that is to be used for table name
+          pattern: '[A-Za-z_][A-Za-z0-9_ ]*'
+        parentDatabaseName:
+          type: string
+          description: Database name of the customer_group table
+        parentTableName:
+          type: string
+          description: Table name of the customer_group table
+        parentKey:
+          type: string
+          description: Join key of the customer_group table
+        foreignKey:
+          type: string
+          description: Foreign key of the customers table
+        customerGroupAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupAttribute'
+        customerGroupBehaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupBehavior'
+    AudienceMaster:
+      required:
+      - parentDatabaseName
+      - parentTableName
+      type: object
+      properties:
+        parentDatabaseName:
+          type: string
+          description: Source database name of the audience master
+        parentTableName:
+          type: string
+          description: Source table name of the audience master
+  responses:
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

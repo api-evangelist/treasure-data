@@ -1,0 +1,579 @@
+openapi: 3.2.0
+info:
+  title: llm-api Plazma Query Tool API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: PlazmaQueryTool
+paths:
+  /api/plazma_query_tools:
+    post:
+      summary: create
+      tags:
+      - PlazmaQueryTool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        maxRows:
+                          type: integer
+                        timeoutSeconds:
+                          type: integer
+                      required:
+                      - projectId
+                      - name
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: plazmaQueryTools
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  name: Minimal Plazma Tool
+                  maxRows: 75
+                  timeoutSeconds: 120
+      responses:
+        '201':
+          description: creates a new PlazmaQueryTool with minimal parameters (uses defaults)
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: plazmaQueryTools
+                  links:
+                    self: http://www.example.com/api/plazma_query_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Minimal Plazma Tool
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: false
+        '400':
+          description: POST /api/plazma_query_tools rejects {"updatedAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: updatedAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '422':
+          description: POST /api/plazma_query_tools rejects {"timeoutSeconds":60.5}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be an integer
+                  detail: timeoutSeconds - must be an integer
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/timeoutSeconds
+                  status: '422'
+                  meta:
+                    validationCode: NOT_AN_INTEGER
+  /api/plazma_query_tools/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - PlazmaQueryTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: deletes a PlazmaQueryTool
+        '404':
+          description: returns 404 when trying to delete non-existent PlazmaQueryTool
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    get:
+      summary: show
+      tags:
+      - PlazmaQueryTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: retrieves a PlazmaQueryTool
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: plazmaQueryTools
+                  links:
+                    self: http://www.example.com/api/plazma_query_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: TestPlazmaQuery
+                    maxRows: 25
+                    timeoutSeconds: 90
+                    isManaged: false
+        '404':
+          description: returns 404 when PlazmaQueryTool doesn't exist
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - PlazmaQueryTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: updates only specified fields
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: plazmaQueryTools
+                  links:
+                    self: http://www.example.com/api/plazma_query_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: TestPlazma Query
+                    maxRows: 10
+                    timeoutSeconds: 90
+                    isManaged: false
+        '400':
+          description: PATCH /api/plazma_query_tools rejects {"updatedAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: updatedAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '422':
+          description: validates updated values
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be in 1..100
+                  detail: maxRows - must be in 1..100
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/maxRows
+                  status: '422'
+                  meta:
+                    validationCode: INVALID_FORMAT_OR_ASSOCIATION
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        maxRows:
+                          type: integer
+                        timeoutSeconds:
+                          type: integer
+                      required:
+                      - maxRows
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: plazmaQueryTools
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: Updated Plazma Query Tool
+                  maxRows: 10
+                  timeoutSeconds: 180
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

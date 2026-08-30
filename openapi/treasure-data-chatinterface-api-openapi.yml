@@ -1,0 +1,1046 @@
+openapi: 3.2.0
+info:
+  title: llm-api Chat Interface API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: ChatInterface
+paths:
+  /api/chat_interfaces:
+    get:
+      summary: index
+      tags:
+      - ChatInterface
+      responses:
+        '200':
+          description: includes by created_by and updated_by
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            name:
+                              type: string
+                            starterMessage:
+                              type: string
+                            textInputEnabled:
+                              type: boolean
+                            textInputAgentId:
+                              type:
+                              - string
+                              - 'null'
+                            isManaged:
+                              type: boolean
+                            chatInterfaceButtons:
+                              type: array
+                              items: {}
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - name
+                          - starterMessage
+                          - textInputEnabled
+                          - textInputAgentId
+                          - isManaged
+                          - chatInterfaceButtons
+                        relationships:
+                          type: object
+                          properties:
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                          required:
+                          - createdBy
+                          - updatedBy
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                          required:
+                          - name
+                          - email
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Chat Interface 1
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Chat Interface 2
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                meta:
+                  total: 2
+                links:
+                  first: http://www.example.com/api/chat_interfaces?include=createdBy%2CupdatedBy&page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/chat_interfaces?include=createdBy%2CupdatedBy&page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Restricted User
+                    email: user@example.com
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+      parameters:
+      - name: filter[name]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[project_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - ChatInterface
+      responses:
+        '201':
+          description: creates a chat_interface with buttons
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          starterMessage:
+                            type: string
+                          textInputEnabled:
+                            type: boolean
+                          textInputAgentId:
+                            type:
+                            - string
+                            - 'null'
+                          isManaged:
+                            type: boolean
+                          chatInterfaceButtons:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                agentId:
+                                  type: string
+                                label:
+                                  type: string
+                                prompt:
+                                  type: string
+                              required:
+                              - agentId
+                              - label
+                              - prompt
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - starterMessage
+                        - textInputEnabled
+                        - textInputAgentId
+                        - isManaged
+                        - chatInterfaceButtons
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Test Chat Interface
+                    starterMessage: ''
+                    textInputEnabled: true
+                    textInputAgentId: 00000000-0000-0000-0000-000000000001
+                    isManaged: false
+                    chatInterfaceButtons:
+                    - agentId: 00000000-0000-0000-0000-000000000001
+                      label: Help
+                      prompt: Please help me with this task
+                    - agentId: 00000000-0000-0000-0000-000000000001
+                      label: Info
+                      prompt: Tell me more information
+        '400':
+          description: POST /api/chat_interfaces rejects {"createdAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: createdAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '422':
+          description: returns button index in validation errors for labels longer than 100 characters
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is too long (maximum is 50 characters)
+                  detail: chatInterfaceButtons/1/label - is too long (maximum is 50 characters)
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/chatInterfaceButtons/1/label
+                  status: '422'
+                  meta:
+                    validationCode: IS_TOO_LONG
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        textInputEnabled:
+                          type: boolean
+                        textInputAgentId:
+                          type:
+                          - string
+                          - 'null'
+                        chatInterfaceButtons:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              agentId:
+                                type: string
+                              label:
+                                type: string
+                              prompt:
+                                type: string
+                            required:
+                            - agentId
+                            - label
+                            - prompt
+                      required:
+                      - projectId
+                      - name
+                      - textInputEnabled
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: chat_interfaces
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  name: Test Chat Interface
+                  textInputEnabled: true
+                  textInputAgentId: 00000000-0000-0000-0000-000000000001
+                  chatInterfaceButtons:
+                  - agentId: 00000000-0000-0000-0000-000000000001
+                    label: Help
+                    prompt: Please help me with this task
+                  - agentId: 00000000-0000-0000-0000-000000000001
+                    label: Info
+                    prompt: Tell me more information
+  /api/chat_interfaces/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - ChatInterface
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Chat interface deleted successfully
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Chat interface not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    get:
+      summary: show
+      tags:
+      - ChatInterface
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Chat interface details and configuration
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          starterMessage:
+                            type: string
+                          textInputEnabled:
+                            type: boolean
+                          textInputAgentId:
+                            type:
+                            - string
+                            - 'null'
+                          isManaged:
+                            type: boolean
+                          chatInterfaceButtons:
+                            type: array
+                            items: {}
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - starterMessage
+                        - textInputEnabled
+                        - textInputAgentId
+                        - isManaged
+                        - chatInterfaceButtons
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: avpughte
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Chat interface not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - ChatInterface
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Chat interface updated successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          starterMessage:
+                            type: string
+                          textInputEnabled:
+                            type: boolean
+                          textInputAgentId:
+                            type: string
+                          isManaged:
+                            type: boolean
+                          chatInterfaceButtons:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                agentId:
+                                  type: string
+                                label:
+                                  type: string
+                                prompt:
+                                  type: string
+                              required:
+                              - agentId
+                              - label
+                              - prompt
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - starterMessage
+                        - textInputEnabled
+                        - textInputAgentId
+                        - isManaged
+                        - chatInterfaceButtons
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Updated Chat Interface
+                    starterMessage: ''
+                    textInputEnabled: true
+                    textInputAgentId: 00000000-0000-0000-0000-000000000001
+                    isManaged: false
+                    chatInterfaceButtons:
+                    - agentId: 00000000-0000-0000-0000-000000000001
+                      label: Submit
+                      prompt: Submit your request
+        '400':
+          description: PATCH /api/chat_interfaces rejects {"createdAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: createdAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Chat interface not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: validates button label length when updating
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is too long (maximum is 50 characters)
+                  detail: chatInterfaceButtons/0/label - is too long (maximum is 50 characters)
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/chatInterfaceButtons/0/label
+                  status: '422'
+                  meta:
+                    validationCode: IS_TOO_LONG
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        textInputEnabled:
+                          type: boolean
+                        textInputAgentId:
+                          type: string
+                        chatInterfaceButtons:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              agentId:
+                                type: string
+                              label:
+                                type: string
+                              prompt:
+                                type: string
+                            required:
+                            - agentId
+                            - label
+                            - prompt
+                      required:
+                      - name
+                      - textInputEnabled
+                      - textInputAgentId
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: chat_interfaces
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  name: Updated Chat Interface
+                  textInputEnabled: true
+                  textInputAgentId: 00000000-0000-0000-0000-000000000001
+                  chatInterfaceButtons:
+                  - agentId: 00000000-0000-0000-0000-000000000001
+                    label: Submit
+                    prompt: Submit your request
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

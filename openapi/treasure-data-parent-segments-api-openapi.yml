@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Parent Segments API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Parent Segments
+  description: After you have created the parent segment, you can view data about the parent segment, such as details about a single segment, audience data, the list of segment folders it contains, or a list of parent segments available.
+paths:
+  /audiences/{audienceId}/folders:
+    x-external: true
+    get:
+      tags:
+      - Parent Segments
+      summary: Retrieve list of segment folders
+      description: Retrieve a list of segment folders based on a parent segment's identifier.
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Retrieves a list of segment folders.
+
+
+            N.B. that `createdAt` can be `null`, meaning that it is not known
+
+            which user created the folder.
+
+
+            N.B. that `updatedAt` can be `null`, meaning that is is not known
+
+            which user last updated the folder.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentFolderReadRepresentation'
+      security:
+      - TdApikeyAuth: []
+  /master_segments:
+    x-external: true
+    get:
+      tags:
+      - Parent Segments
+      summary: Retrieve audience data
+      description: Retrieve the audiences for which the current user can view its produced data e.g. segments, profiles, activations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    population:
+                      type:
+                      - number
+                      - 'null'
+                    updatedAt:
+                      type: string
+                    updatedBy:
+                      $ref: '#/components/schemas/User'
+                    matrixUpdatedAt:
+                      type:
+                      - string
+                      - 'null'
+                    scheduleType:
+                      $ref: '#/components/schemas/ScheduleType'
+  /entities/parent_segments:
+    x-external: true
+    get:
+      tags:
+      - Parent Segments
+      summary: Retrieve list of parent segments
+      description: Retrieve a list of parent segments.
+      responses:
+        '200':
+          description: Returns a list of audiences (parent segments).
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntitiesGetParentSegmentJsonApiResponse'
+  /entities/parent_segments/{id}:
+    x-external: true
+    get:
+      tags:
+      - Parent Segments
+      summary: Retrieve parent segment by ID
+      description: Retrieve an parent segment by ID.
+      parameters:
+      - name: id
+        in: path
+        description: ID of an audience (parent segment) to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns an audience (parent segment).
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetParentSegmentJsonApiResponse'
+components:
+  schemas:
+    ParentSegmentJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - parentSegment
+        attributes:
+          type: object
+          required:
+          - name
+          - description
+          - matrixUpdatedAt
+          - population
+          - scheduleType
+          - createdAt
+          - updatedAt
+          - v4Id
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            matrixUpdatedAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+            population:
+              type:
+              - number
+              - 'null'
+            scheduleType:
+              $ref: '#/components/schemas/ScheduleType'
+            timezone:
+              type: string
+              default: UTC
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            v4Id:
+              type: number
+            allowActivationBehavior:
+              type: boolean
+              default: false
+            maxActivationBehaviorRow:
+              type: integer
+              default: 7
+            customerGroup:
+              type:
+              - object
+              - 'null'
+              required:
+              - name
+              - population
+              properties:
+                name:
+                  type: string
+                population:
+                  type: number
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            parentSegmentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
+      properties:
+        thisKeyNeverHit:
+          type: string
+    EntitiesGetParentSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
+    SegmentFolderReadRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: 'ID of the parent audience. For composable folders this carries
+
+            the composable audience id; the complete-vs-composable
+
+            discriminator lives on the parent audience entity, not on the
+
+            folder.
+
+            '
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
+        updatedBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

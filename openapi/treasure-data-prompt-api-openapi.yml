@@ -1,0 +1,931 @@
+openapi: 3.2.0
+info:
+  title: llm-api Prompt API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: Prompt
+paths:
+  /api/prompts:
+    get:
+      summary: index
+      tags:
+      - Prompt
+      responses:
+        '200':
+          description: allows GET /api/prompts
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            agentId:
+                              type: string
+                            name:
+                              type: string
+                            systemPrompt:
+                              type: string
+                            template:
+                              type: string
+                            isManaged:
+                              type: boolean
+                            jsonSchemaHint:
+                              type: string
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - agentId
+                          - name
+                          - systemPrompt
+                          - template
+                          - isManaged
+                          - jsonSchemaHint
+                        relationships:
+                          type: object
+                          properties:
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                          required:
+                          - createdBy
+                          - updatedBy
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                          required:
+                          - name
+                          - email
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: prompts
+                  links:
+                    self: http://www.example.com/api/prompts/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: ypjzahsd
+                    systemPrompt: ''
+                    template: 'Prompt text: {{text}}'
+                    isManaged: true
+                    jsonSchemaHint: '{"type":"object","properties":{"text":{"type":"string"}}}'
+                meta:
+                  total: 1
+                links:
+                  first: http://www.example.com/api/prompts?page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/prompts?page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+      parameters:
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - Prompt
+      responses:
+        '201':
+          description: Prompt created successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          template:
+                            type: string
+                          isManaged:
+                            type: boolean
+                          jsonSchemaHint:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - name
+                        - systemPrompt
+                        - template
+                        - isManaged
+                        - jsonSchemaHint
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: prompts
+                  links:
+                    self: http://www.example.com/api/prompts/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: name1
+                    systemPrompt: ''
+                    template: '{{text}}'
+                    isManaged: false
+                    jsonSchemaHint: '{"type":"object","properties":{"text":{"type":"string"}}}'
+        '400':
+          description: rejects POST /api/prompts
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '422':
+          description: POST /api/prompts rejects {"systemPrompt":"<BASE64_CONTENT>"}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is too long (maximum is 9000 characters)
+                  detail: systemPrompt - is too long (maximum is 9000 characters)
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/systemPrompt
+                  status: '422'
+                  meta:
+                    validationCode: IS_TOO_LONG
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        projectId:
+                          type: string
+                        agentId:
+                          type: string
+                        systemPrompt:
+                          type: string
+                        template:
+                          type: string
+                      required:
+                      - name
+                      - agentId
+                      - template
+                      - projectId
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: prompts
+                attributes:
+                  name: name1
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  agentId: 00000000-0000-0000-0000-000000000001
+                  systemPrompt: <BASE64_CONTENT>
+                  template: '{{text}}'
+  /api/prompts/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - Prompt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Prompt deleted successfully
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: Forbidden - insufficient permissions to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: Prompt not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    get:
+      summary: show
+      tags:
+      - Prompt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Prompt details and configuration
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          template:
+                            type: string
+                          isManaged:
+                            type: boolean
+                          jsonSchemaHint:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - name
+                        - systemPrompt
+                        - template
+                        - isManaged
+                        - jsonSchemaHint
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: prompts
+                  links:
+                    self: http://www.example.com/api/prompts/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: bsfvrllg
+                    systemPrompt: ''
+                    template: 'Prompt text: {{text}}'
+                    isManaged: true
+                    jsonSchemaHint: '{"type":"object","properties":{"text":{"type":"string"}}}'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Prompt not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - Prompt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Prompt updated successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          template:
+                            type: string
+                          isManaged:
+                            type: boolean
+                          jsonSchemaHint:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - name
+                        - systemPrompt
+                        - template
+                        - isManaged
+                        - jsonSchemaHint
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: prompts
+                  links:
+                    self: http://www.example.com/api/prompts/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: new-name
+                    systemPrompt: ''
+                    template: 'Prompt text: {{text}}'
+                    isManaged: false
+                    jsonSchemaHint: '{"type":"object","properties":{"text":{"type":"string"}}}'
+        '400':
+          description: rejects PATCH /api/prompts/:id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: PATCH /api/prompts/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: rejects updating agent_id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is immutable
+                  detail: agentId - is immutable
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/agentId
+                  status: '422'
+                  meta:
+                    validationCode: LLM_IMMUTABLE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        agentId:
+                          type: string
+                        template:
+                          type: string
+                        projectId:
+                          type: string
+                      required:
+                      - name
+                      - template
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: prompts
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: new-name
+                  agentId: 00000000-0000-0000-0000-000000000001
+                  template: 'Prompt text: {{text}}'
+                  projectId: 00000000-0000-0000-0000-000000000001
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

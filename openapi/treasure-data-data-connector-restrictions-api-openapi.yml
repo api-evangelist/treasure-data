@@ -1,0 +1,44 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Data Connector Restrictions API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Data Connector Restrictions
+paths:
+  /data_connector_restrictions:
+    get:
+      summary: Get data connector restrictions
+      description: Returns an object of data connector restrictions
+      operationId: getDataConnectorRestrictions
+      tags:
+      - Data Connector Restrictions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: boolean
+              example:
+                mysql:
+                  import: true
+                  export: false
+                snowflake:
+                  streaming_in: false
+                  streaming_out: false
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

@@ -1,0 +1,801 @@
+openapi: 3.2.0
+info:
+  title: llm-api Web Search Tool API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: WebSearchTool
+paths:
+  /api/web_search_tools:
+    post:
+      summary: create
+      tags:
+      - WebSearchTool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        name:
+                          type: string
+                        modelType:
+                          type: string
+                          enum:
+                          - gpt-5
+                          - gpt-5-mini
+                        searchContextSize:
+                          type:
+                          - string
+                          - 'null'
+                          enum:
+                          - low
+                          - medium
+                          - high
+                        userLocation:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - approximate
+                            country:
+                              type: string
+                            city:
+                              type: string
+                            region:
+                              type: string
+                            timezone:
+                              type: string
+                          required:
+                          - type
+                          - country
+                          - city
+                          - region
+                          - timezone
+                        systemPrompt:
+                          type:
+                          - string
+                          - 'null'
+                        filters:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            allowed_domains:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - allowed_domains
+                      required:
+                      - projectId
+                      - name
+                      - modelType
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: webSearchTools
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  name: Sample Web Search Tool
+                  modelType: gpt-5
+                  searchContextSize: medium
+                  userLocation:
+                    type: approximate
+                    country: JP
+                    city: Minato
+                    region: Tokyo
+                    timezone: Asia/Tokyo
+                  systemPrompt: You are a helpful search assistant.
+                  filters:
+                    allowed_domains:
+                    - medical.example.test
+                    - research.example.test
+                    - health.example.test
+      responses:
+        '201':
+          description: creates a new WebSearchTool
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          modelType:
+                            type: string
+                            enum:
+                            - gpt-5
+                            - gpt-5-mini
+                          searchContextSize:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - low
+                            - medium
+                            - high
+                          userLocation:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              city:
+                                type: string
+                              type:
+                                type: string
+                                enum:
+                                - approximate
+                              region:
+                                type: string
+                              country:
+                                type: string
+                              timezone:
+                                type: string
+                            required:
+                            - city
+                            - type
+                            - region
+                            - country
+                            - timezone
+                          filters:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              allowed_domains:
+                                type: array
+                                items:
+                                  type: string
+                            required:
+                            - allowed_domains
+                          isManaged:
+                            type: boolean
+                          systemPrompt:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - modelType
+                        - searchContextSize
+                        - userLocation
+                        - filters
+                        - isManaged
+                        - systemPrompt
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: webSearchTools
+                  links:
+                    self: http://www.example.com/api/web_search_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Sample Web Search Tool
+                    modelType: gpt-5
+                    searchContextSize: medium
+                    userLocation:
+                      city: Minato
+                      type: approximate
+                      region: Tokyo
+                      country: JP
+                      timezone: Asia/Tokyo
+                    filters:
+                      allowed_domains:
+                      - medical.example.test
+                      - research.example.test
+                      - health.example.test
+                    isManaged: false
+                    systemPrompt: You are a helpful search assistant.
+        '400':
+          description: POST /api/web_search_tools rejects {"updatedAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: updatedAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '422':
+          description: POST /api/web_search_tools rejects {"filters":{}}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: 'invalid JSON: allowed_domains is required'
+                  detail: 'filters - invalid JSON: allowed_domains is required'
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/filters
+                  status: '422'
+                  meta:
+                    validationCode: LLM_INVALID_JSON
+  /api/web_search_tools/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - WebSearchTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Web search tool successfully deleted
+    get:
+      summary: show
+      tags:
+      - WebSearchTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: returns the details of a specific web_search_tool
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          modelType:
+                            type: string
+                            enum:
+                            - gpt-5
+                            - gpt-5-mini
+                          searchContextSize:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - low
+                            - medium
+                            - high
+                          userLocation:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              city:
+                                type: string
+                              type:
+                                type: string
+                                enum:
+                                - approximate
+                              region:
+                                type: string
+                              country:
+                                type: string
+                              timezone:
+                                type: string
+                            required:
+                            - city
+                            - type
+                            - region
+                            - country
+                            - timezone
+                          filters:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              allowed_domains:
+                                type: array
+                                items:
+                                  type: string
+                            required:
+                            - allowed_domains
+                          isManaged:
+                            type: boolean
+                          systemPrompt:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - modelType
+                        - searchContextSize
+                        - userLocation
+                        - filters
+                        - isManaged
+                        - systemPrompt
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: webSearchTools
+                  links:
+                    self: http://www.example.com/api/web_search_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: TestSearch
+                    modelType: gpt-5
+                    searchContextSize: medium
+                    userLocation:
+                      city: Minato
+                      type: approximate
+                      region: Tokyo
+                      country: JP
+                      timezone: Asia/Tokyo
+                    filters:
+                      allowed_domains:
+                      - medical.example.test
+                      - research.example.test
+                      - health.example.test
+                    isManaged: false
+                    systemPrompt: You are a helpful search assistant.
+    patch:
+      summary: update
+      tags:
+      - WebSearchTool
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: updates the web_search_tool
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          modelType:
+                            type: string
+                            enum:
+                            - gpt-5
+                            - gpt-5-mini
+                          searchContextSize:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - low
+                            - medium
+                            - high
+                          userLocation:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              city:
+                                type: string
+                              type:
+                                type: string
+                                enum:
+                                - approximate
+                              region:
+                                type: string
+                              country:
+                                type: string
+                              timezone:
+                                type: string
+                            required:
+                            - city
+                            - type
+                            - region
+                            - country
+                            - timezone
+                          filters:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              allowed_domains:
+                                type: array
+                                items:
+                                  type: string
+                            required:
+                            - allowed_domains
+                          isManaged:
+                            type: boolean
+                          systemPrompt:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - modelType
+                        - searchContextSize
+                        - userLocation
+                        - filters
+                        - isManaged
+                        - systemPrompt
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: webSearchTools
+                  links:
+                    self: http://www.example.com/api/web_search_tools/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Updated Name
+                    modelType: gpt-5-mini
+                    searchContextSize: high
+                    userLocation: null
+                    filters: null
+                    isManaged: false
+                    systemPrompt: Updated prompt
+        '400':
+          description: PATCH /api/web_search_tools rejects {"updatedAt":1}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: updatedAt is not allowed.
+                  code: '105'
+                  status: '400'
+        '422':
+          description: PATCH /api/web_search_tools rejects {"filters":{}}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: 'invalid JSON: allowed_domains is required'
+                  detail: 'filters - invalid JSON: allowed_domains is required'
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/filters
+                  status: '422'
+                  meta:
+                    validationCode: LLM_INVALID_JSON
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        modelType:
+                          type: string
+                          enum:
+                          - gpt-5
+                          - gpt-5-mini
+                        searchContextSize:
+                          type:
+                          - string
+                          - 'null'
+                          enum:
+                          - low
+                          - medium
+                          - high
+                        userLocation:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - approximate
+                            country:
+                              type: string
+                            city:
+                              type: string
+                            region:
+                              type: string
+                            timezone:
+                              type: string
+                          required:
+                          - type
+                          - country
+                          - city
+                          - region
+                          - timezone
+                        systemPrompt:
+                          type:
+                          - string
+                          - 'null'
+                        filters:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            allowed_domains:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - allowed_domains
+                      required:
+                      - name
+                      - modelType
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: webSearchTools
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: Updated Name
+                  modelType: gpt-5-mini
+                  searchContextSize: high
+                  userLocation: null
+                  systemPrompt: Updated prompt
+                  filters: null
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

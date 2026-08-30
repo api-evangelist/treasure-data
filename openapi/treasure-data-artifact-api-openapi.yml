@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  title: llm-api Artifact API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: Artifact
+paths:
+  /api/artifacts:
+    get:
+      summary: index
+      tags:
+      - Artifact
+      responses:
+        '200':
+          description: filters by chat_interface_id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            chatId:
+                              type: string
+                            projectId:
+                              type: string
+                            formInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            chatInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            artifactType:
+                              type: string
+                              enum:
+                              - IMAGE_ID_OUTPUT
+                              - MARKDOWN_TEXT_OUTPUT
+                              - REACT_OUTPUT
+                              - PRESENTATION
+                            textContent:
+                              type:
+                              - string
+                              - 'null'
+                            contentType:
+                              type: string
+                            binaryContent:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - createdAt
+                          - chatId
+                          - projectId
+                          - formInterfaceId
+                          - chatInterfaceId
+                          - artifactType
+                          - textContent
+                          - contentType
+                          - binaryContent
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data: []
+                meta:
+                  total: 0
+                links:
+                  first: http://www.example.com/api/artifacts?filter%5Bchat_interface_id%5D=00000000-0000-0000-0000-000000000001&page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/artifacts?filter%5Bchat_interface_id%5D=00000000-0000-0000-0000-000000000001&page%5Blimit%5D=20&page%5Boffset%5D=0
+      parameters:
+      - name: filter[chat_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[chat_interface_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[form_interface_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

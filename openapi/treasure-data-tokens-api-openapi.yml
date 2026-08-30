@@ -1,0 +1,803 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Tokens API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Tokens
+  description: The Profiles API Token enables your ability to increase personalized content based on detailed customer information. This REST API returns customer data in real-time and updates your segment information. The ability to create a Profiles API token is based on your <a href="https://docs.treasuredata.com/display/public/PD/Folder-based+Permissions">folder permissions.</a> <br> <br> You can also use Profiles API Token to personalize your customers' experience on your website. You can combine Treasure Data’s personalization feature with A/B Testing tools such as Adobe Target, Optimizely, or Google Optimize, to determine the version of your website that yields results. <br> <br> When the underlying personalization workflow completes, the personalization data set is refreshed. You can see a current list of the segments to which a specific profile belongs. You can also see a list of attributes associated with the specific profile.<br> <br> The parent segment must already exist. The parent segment is the basis for all data accessed by Profiles API Tokens. <br> <br> The use of the Profiles API Token with your tools requires the use of the Treasure Data JavaScript SDK and support or services consultation.
+paths:
+  /audiences/{audienceId}/tokens:
+    x-external: true
+    get:
+      tags:
+      - Tokens
+      summary: Retrieve list of Profile API tokens
+      description: Retrieve a list of Profile API tokens associated with a parent segment ID.
+      operationId: tokens#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Tokens
+      summary: Create new Profiles API token (legacy)
+      description: Create a new Profiles API token. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: tokens#create
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Token parameters to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenParameters'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/tokens/{tokenId}:
+    x-external: true
+    get:
+      tags:
+      - Tokens
+      summary: Retrieve Profiles API token by ID
+      description: Retrieve a specific Profiles API token by its identifier.
+      operationId: tokens#show
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tokenId
+        in: path
+        description: ID of Token to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    put:
+      tags:
+      - Tokens
+      summary: Update Profiles API token (legacy)
+      description: Update a Profiles API token. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: tokens#update
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tokenId
+        in: path
+        description: ID of Token to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenParameters'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Tokens
+      summary: Delete a Profiles API token (legacy)
+      description: Delete a Profiles API token. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: tokens#delete
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tokenId
+        in: path
+        description: ID of Token to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /entities/tokens:
+    x-external: true
+    post:
+      tags:
+      - Tokens
+      summary: Create Profiles API token
+      description: Create a Profiles API token.
+      requestBody:
+        description: parameters to create a Token
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesTokenUpdateRepresentation'
+        required: true
+      responses:
+        '200':
+          description: Succeeded to create a Token
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetTokenJsonApiResponse'
+  /entities/tokens/{id}:
+    x-external: true
+    get:
+      tags:
+      - Tokens
+      summary: Retrieve Profiles API token by ID
+      description: Retrieve the specified Profiles API token.
+      parameters:
+      - name: id
+        in: path
+        description: Token ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a token by ID
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetTokenJsonApiResponse'
+    patch:
+      tags:
+      - Tokens
+      summary: Update Profiles API token
+      description: Update a Profiles API token.
+      parameters:
+      - name: id
+        in: path
+        description: Token to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesTokenUpdateRepresentation'
+      responses:
+        '200':
+          description: Update a token
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetTokenJsonApiResponse'
+    delete:
+      tags:
+      - Tokens
+      summary: Delete Profiles API token
+      description: Delete the specified Profiles API token.
+      parameters:
+      - name: id
+        in: path
+        description: Delete a token
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Delete a token
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetTokenJsonApiResponse'
+components:
+  schemas:
+    RealtimeSegmentSummaryJsonApiResource:
+      allOf:
+      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - segment-realtime
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    TokenJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - token
+        attributes:
+          type: object
+          required:
+          - name
+          - attributeColumns
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            token:
+              description: UUID of the token
+              type: string
+              format: uuid
+            description:
+              type: string
+            keyColumn:
+              description: A key column name to fetch the information of a customer.
+              example: td_client_id
+              type: string
+            attributeColumns:
+              description: associated attribute column names.
+              example:
+              - gender
+              - country
+              type: array
+              items:
+                type: string
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+        relationships:
+          type: object
+          properties:
+            segments:
+              $ref: '#/components/schemas/RelationshipsSegmentJsonApiResource'
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    Token:
+      type: object
+      properties:
+        id:
+          type: string
+          format: integer
+        audienceId:
+          type: string
+          format: integer
+        token:
+          description: UUID of the token
+          type: string
+          format: uuid
+        description:
+          type: string
+        keyColumn:
+          description: A key column name to fetch the information of a customer.
+          example: td_client_id
+          type: string
+        segments:
+          description: associated segments
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentSummary'
+        attributeColumns:
+          description: associated attribute column names.
+          example:
+          - gender
+          - country
+          type: array
+          items:
+            type: string
+        v2:
+          description: whether the token is v2 or not
+          example: true
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    RelationshipsRealtimeSegmentJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - segment-realtime
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    EntitiesTokenUpdateRepresentation:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          example: '1'
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - token
+        attributes:
+          type: object
+          required:
+          - name
+          - attrributeColumns
+          properties:
+            name:
+              type: string
+              pattern: '[A-Za-z_][A-Za-z0-9_ ]*'
+              description: Name for a Token
+            description:
+              description: description
+              example: blah blah blah
+              type: string
+            keyColumn:
+              description: A key column name to fetch the information of a customer. If empty, cdp-api fills "td_global_id" as default value.
+              example: td_client_id
+              type: string
+            attributeColumns:
+              description: associated attribute column names. Max the number of attribute columns is 5. You must specify empty array if you don't need attributes.
+              example:
+              - gender
+              - country
+              type: array
+              items:
+                type: string
+        relationships:
+          type: object
+          required:
+          - parentFolder
+          properties:
+            segments:
+              type:
+              - object
+              - 'null'
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    properties:
+                      id:
+                        type: string
+                        pattern: '[1-9][0-9]*'
+                      type:
+                        type: string
+                        enum:
+                        - segment-batch
+                        - segment-realtime
+                        - segment-funnel-stage
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    TokenParameters:
+      type: object
+      properties:
+        description:
+          description: description
+          example: description
+          type: string
+        token:
+          description: UUID of the token
+          type: string
+          format: uuid
+        keyColumn:
+          description: A key column name to fetch the information of a customer.
+          example: td_client_id
+          type: string
+        segments:
+          description: associated segments
+          example:
+          - id: 1234
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+        attributeColumns:
+          description: associated attribute column names. Max the number of attribute columns is 5. You must specify empty array if you don't need attributes.
+          example:
+          - gender
+          - country
+          type: array
+          items:
+            type: string
+      required:
+      - keyColumn
+      - attributeColumns
+    BatchSegmentSummaryJsonApiResource:
+      allOf:
+      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - segment-batch
+    SegmentSummaryJsonApiResource:
+      type: object
+      required:
+      - id
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        attributes:
+          type:
+          - object
+          - 'null'
+          description: If user doesn't have a permission for the resource, attributes field doesn't exist.
+          required:
+          - name
+          - description
+          - population
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            population:
+              type:
+              - number
+              - 'null'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    FunnelStageSegmentSummaryJsonApiResource:
+      allOf:
+      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - segment-funnel-stage
+    RelationshipsBatchSegmentJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - segment-batch
+    SegmentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        realtime:
+          type: boolean
+          deprecated: true
+          description: use `kind` instead
+        kind:
+          type: integer
+          description: '0: batch, 1: realtime, 2: funnel_stage'
+        description:
+          type: string
+        segmentFolderId:
+          type: integer
+          format: int64
+        population:
+          type: integer
+          format: int64
+          description: The population of the segment
+    RelationshipsSegmentJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/RelationshipsBatchSegmentJsonApiResource'
+            - $ref: '#/components/schemas/RelationshipsRealtimeSegmentJsonApiResource'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    EntitiesGetTokenJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/TokenJsonApiResource'
+        included:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/BatchSegmentSummaryJsonApiResource'
+            - $ref: '#/components/schemas/RealtimeSegmentSummaryJsonApiResource'
+            - $ref: '#/components/schemas/FunnelStageSegmentSummaryJsonApiResource'
+  responses:
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

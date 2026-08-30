@@ -1,0 +1,2328 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Activations API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Activations
+  description: Activation is the process that allows marketers to personalize communication to users interested in your brand. <br> <ul> <li> **Funnel activation** &mdash; Create a funnel activation for each funnel stage. The activation exports to external marketing tools for campaigns or BI tools for analysis and reporting.</li> <li> **Segment activation** &mdash; Activate the segment data (export) to external tools for activities such as marketing campaigns, business analysis, and social media. Targets include Email Marketing Systems, Marketing Automation Systems, Advertising Platforms, CRM, ERP, Cloud Services, and SFTP.</li> </ul><br>_Known formerly as syndication in Audience Studio Legacy. You may continue to see syndication referenced in Treasure Data APIs._
+paths:
+  /audiences/{audienceId}/folders/{folderId}/syndications:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations recursively under a folder
+      description: Retrieve a list of activations (formerly syndications) recursively under a folder.
+      operationId: segment_folders#syndications
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the syndications
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: folderId
+        in: path
+        description: Segment Folder ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: sorted_by
+        in: query
+        required: false
+        description: a sort key with an option
+        schema:
+          type: string
+          format: '{sort_key}:{option}'
+        examples:
+          connection_type_asc:
+            value: connection_type:asc
+            summary: Sorted by connection_type in an ascending order (Note that Pagination parameters page[size] and page[after] are ignored if sorted by connection_type)
+          segment_id_asc:
+            value: segment_id:asc
+            summary: Sorted by segment_id in an ascending order
+          segment_name_desc:
+            value: segment_name:desc
+            summary: Sorted by segment_name in an descending order
+          activation_template_id_desc:
+            value: activation_template_id:desc
+            summary: Sorted by activation_template_id in an descending order
+          activation_template_name_asc:
+            value: activation_template_name:asc
+            summary: Sorted by activation_template_name in an ascending order
+          start_at_desc:
+            value: start_at:desc
+            summary: Sorted by start_at in an descending order
+          repeat_unit_asc:
+            value: repeat_unit:asc
+            summary: Sorted by repeat_unit in an ascending alphabetical order
+          created_by_td_user_id_asc:
+            value: created_by_td_user_id:asc
+            summary: Sorted by the User ID of created_by in an ascending order
+          created_by_user_name_desc:
+            value: created_by_user_name:desc
+            summary: Sorted by the User Name of created_by in an descending order
+          updated_at_desc:
+            value: updated_at:desc
+            summary: Sorted by updated_at in an descending order
+          created_at_desc:
+            value: created_at:desc
+            summary: Sorted by created_at in an descending order
+      - name: name_include
+        in: query
+        required: false
+        description: filter by Activation's name to return only Activations whose name includes the value
+        schema:
+          type: string
+      - name: segment_name_include
+        in: query
+        required: false
+        description: filter by Segment's name to return only Activations whose Segment name includes the value
+        schema:
+          type: string
+      - name: start_after
+        in: query
+        required: false
+        description: filter by start_at to return only Activations that starts after
+        schema:
+          type: string
+          format: date-time
+      - name: start_before
+        in: query
+        required: false
+        description: filter by start_at to return only Activations that starts before
+        schema:
+          type: string
+          format: date-time
+      - name: connection_type
+        in: query
+        required: false
+        description: filter by Connection Type return only Activations whose Connection Types match (Note that Pagination parameters page[size] and page[after] are ignored if connection_type is specified)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: schedule_status
+        in: query
+        required: false
+        description: filter by schedule_status
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - none
+            - inactive
+            - scheduled
+            - active
+        style: form
+        explode: false
+      - name: created_by_td_user_id
+        in: query
+        required: false
+        description: filter by the User ID of created_by
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+        style: form
+        explode: false
+      - name: activation_template_id
+        in: query
+        required: false
+        description: filter by activation_template_id, "none" matches with an Activation that has no Activation Template, but it does not match with an Activation that has a deleted Activation Template
+        schema:
+          type: array
+          items:
+            oneOf:
+            - type: integer
+              format: int64
+            - type: string
+              enum:
+              - none
+        style: form
+        explode: false
+      - name: repeat_unit
+        in: query
+        required: false
+        description: filter by repeat_unit
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - hour
+            - day
+            - week
+            - month
+            - minute
+            - once
+            - none
+        style: form
+        explode: false
+      - name: page[after]
+        in: query
+        description: An opaque cursor to get the next syndications
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: The paginated number of syndications to get
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  syndications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SyndicationOverview'
+                  pagination:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      hasNext:
+                        type: boolean
+                      nextPage:
+                        type: string
+                      approximateCount:
+                        type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/{segmentId}/syndications:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations in segment
+      description: Retrieve a list of activations (formerly syndications) associated with a segment.
+      operationId: syndications#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Syndication'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Activations
+      summary: Create activation
+      description: Create a new activation (formerly syndication).
+      operationId: syndications#create
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Syndication parameters to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyndicationParameters'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/{segmentId}/syndications/{syndicationId}:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve activation by ID
+      description: Retrieve an activation (formerly syndication) based on its identifier.
+      operationId: syndications#show
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: syndicationId
+        in: path
+        description: ID of Syndication to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Syndication'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    put:
+      tags:
+      - Activations
+      summary: Update activation
+      description: Update an activation (formerly syndication).
+      operationId: syndications#update
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: syndicationId
+        in: path
+        description: ID of Syndication to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyndicationParameters'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Syndication'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Activations
+      summary: Delete activation
+      description: Delete an activation (formerly syndication).
+      operationId: syndications#delete
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: syndicationId
+        in: path
+        description: ID of Syndication to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/{segmentId}/syndications/{syndicationId}/run:
+    x-external: true
+    post:
+      tags:
+      - Activations
+      summary: Run activation (legacy)
+      description: Run an activation (formerly syndication). <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: syndications#run
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: syndicationId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the Syndication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyndicationExecution'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/syndications:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations in audience
+      description: Retrieve a list of activations (formerly syndications) associated with a parent segment ID and view their status and/or schedules.
+      operationId: audience_syndications#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment ID of the syndication
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: without_detail
+        in: query
+        description: If true, the response does not include the detail of the syndication, such as valid, and executions.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Syndication'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /entities/segments/{segmentId}/syndications:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations
+      description: Retrieve a list of activations for a particular segment ID.
+      operationId: activation#index
+      parameters:
+      - name: segmentId
+        in: path
+        description: Segment to list Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a list of Activations.
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesSyndicationIndexJsonApiResponse'
+    post:
+      tags:
+      - Activations
+      summary: Create activation
+      description: Create an activation (formerly syndication).
+      operationId: activation#create
+      parameters:
+      - name: segmentId
+        in: path
+        description: Segment to create Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesSyndicationUpdateRepresentation'
+      responses:
+        '200':
+          description: Created Activation
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSyndicationJsonApiResponse'
+  /entities/segments/{segmentId}/syndications/{id}:
+    x-external: true
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations
+      description: Retrieve a list of activations for a segment ID.
+      operationId: activation#show
+      parameters:
+      - name: segmentId
+        in: path
+        description: Segment associated with the Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: path
+        description: Activation ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns an activation by ID
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSyndicationJsonApiResponse'
+    patch:
+      tags:
+      - Activations
+      summary: Update activation
+      description: Update an activation.
+      operationId: activation#update
+      parameters:
+      - name: id
+        in: path
+        description: Activation to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment associated with the Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesSyndicationUpdateRepresentation'
+      responses:
+        '200':
+          description: Updated Activation
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSyndicationJsonApiResponse'
+    delete:
+      tags:
+      - Activations
+      summary: Delete activation
+      description: Delete an activation.
+      operationId: activation#delete
+      parameters:
+      - name: id
+        in: path
+        description: Activation to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment associated with the Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Deleted Activation
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSyndicationJsonApiResponse'
+  /entities/segments/{segmentId}/syndications/{id}/run:
+    x-external: true
+    post:
+      tags:
+      - Activations
+      summary: Run activation
+      description: Run an activation by specifying its ID and segment ID.
+      parameters:
+      - name: segmentId
+        in: path
+        description: Segment to run Activation
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: path
+        description: Activation id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the Syndication
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/SyndicationExecutionJsonApiResource'
+  /entities/parent_segments/{parentSegmentId}/syndications:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/ParentSegmentId'
+    get:
+      tags:
+      - Activations
+      summary: Retrieve list of activations by parent segment
+      description: 'Retrieve a list of activations based on a parent segment.
+
+        This endpoint returns a summary representation of each activation;
+
+        detail-only fields (e.g. executions, runStatus, schedule details) are
+
+        not included.
+
+        '
+      responses:
+        '200':
+          description: Returns a list of Activations.
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesParentSegmentSyndicationIndexJsonApiResponse'
+  /entities/parent_segments/{parentSegmentId}/user_defined_workflow_projects:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/ParentSegmentId'
+    get:
+      tags:
+      - Activations
+      summary: List of workflow project names
+      description: Returns a list of workflow project names
+      parameters:
+      - name: namePattern
+        in: query
+        description: name pattern to filter user-defined workflow projects
+        schema:
+          type: string
+      - name: lastId
+        in: query
+        description: fetch workflow projects whose id is greater than this ID for pagination
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to get workflow project names
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/partial_pagination.yaml-PaginatedResponse'
+                - $ref: '#/components/schemas/EntitiesGetWorkflowProjectsJsonApiResult'
+        '400':
+          $ref: '#/components/responses/JsonApiBadRequest'
+        '403':
+          $ref: '#/components/responses/JsonApiForbiddenRequest'
+        '404':
+          $ref: '#/components/responses/JsonApiNotFoundRequest'
+  /entities/parent_segments/{parentSegmentId}/user_defined_workflows:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/ParentSegmentId'
+    get:
+      tags:
+      - Activations
+      summary: List of workflow names
+      description: Returns a list of workflow names
+      parameters:
+      - name: workflowProjectName
+        in: query
+        description: Workflow Project Name to filter
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Succeeded to get workflow names
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetWorkflowsJsonApiResult'
+        '400':
+          $ref: '#/components/responses/JsonApiBadRequest'
+        '403':
+          $ref: '#/components/responses/JsonApiForbiddenRequest'
+        '404':
+          $ref: '#/components/responses/JsonApiNotFoundRequest'
+components:
+  schemas:
+    Columns:
+      description: 'Syndication column detail. Basic syntax is `{"column": "alias_name", "source": {...}}`. `source` accepts various definitions. See ColumnExpression/StringExpression for details. example value is using ColumnExpression without `function` property.
+
+        '
+      example:
+      - column: alias_name
+        source:
+          column: real_column_name
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          column:
+            type: string
+          source:
+            anyOf:
+            - $ref: '#/components/schemas/ColumnExpression'
+            - $ref: '#/components/schemas/StringExpression'
+        required:
+        - column
+        - source
+    EntitiesSyndicationIndexJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyndicationJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
+      properties:
+        thisKeyNeverHit:
+          type: string
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    SyndicationSummaryJsonApiResource:
+      description: 'Summary representation of an activation (syndication) returned by the
+
+        parent segment activations list endpoint. Compared to
+
+        SyndicationJsonApiResource, the detail-only fields (valid, executions,
+
+        notifyOn, emailRecipients, runStatus, startAt, endOn, repeatUnit,
+
+        repeatFrequency, and repeatSubFrequency) are omitted because that
+
+        endpoint serializes with without_detail: true.
+
+        '
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - syndication
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - columns
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            allColumns:
+              description: syndication all column flag  ('true' means that you use all attribute data)
+              type: boolean
+            columns:
+              $ref: '#/components/schemas/Columns'
+            scheduleType:
+              $ref: '#/components/schemas/DeprecatedScheduleType'
+            scheduleOption:
+              type: string
+              deprecated: true
+            timezone:
+              type: string
+            connectionId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            connectorConfig:
+              type:
+              - object
+              - 'null'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            nestedWorkflowProjectName:
+              type: string
+            nestedWorkflowName:
+              type: string
+            activationActionsEnabled:
+              type: boolean
+            lockEnabled:
+              type: boolean
+            activationTemplateId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            syndicationBehavior:
+              deprecated: true
+              description: Deprecated. Use syndicationBehaviors instead.
+              allOf:
+              - $ref: '#/components/schemas/SyndicationBehavior'
+            syndicationBehaviors:
+              type:
+              - array
+              - 'null'
+              maxItems: 4
+              description: Behavior activation configurations
+              items:
+                $ref: '#/components/schemas/SyndicationBehavior'
+        relationships:
+          type: object
+          properties:
+            segment:
+              $ref: '#/components/schemas/RelationshipsBatchSegmentJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    partial_pagination.yaml-PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            nextPage:
+              type:
+              - string
+              - 'null'
+              description: The path part of URL of the next page
+          required:
+          - nextPage
+      required:
+      - data
+      - pagination
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    StringExpression:
+      type: object
+      properties:
+        string:
+          type: string
+        parameters:
+          type: array
+          description: Values for the placeholders ($1, $2, $3, ...) in the string
+          items:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - String
+                string:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Timestamp
+                format:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - SegmentName
+                  - SegmentId
+                  - AudienceId
+                  - FunnelName
+                  - StageName
+      required:
+      - string
+    EntitiesGetWorkflowProjectsJsonApiResult:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - type
+            properties:
+              id:
+                type: string
+                pattern: '[1-9][0-9]*'
+              type:
+                type: string
+                enum:
+                - workflow-project
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+    RepeatUnit:
+      type: string
+      description: Setting an activation repetition cycle such as "day" or "week".
+      enum:
+      - none
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - once
+    SyndicationParameters:
+      type: object
+      not:
+        required:
+        - syndicationBehavior
+        - syndicationBehaviors
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        allColumns:
+          description: syndication all column flag  ('true' means  that you use all attribute data)
+          type: boolean
+        columns:
+          $ref: '#/components/schemas/Columns'
+        scheduleType:
+          $ref: '#/components/schemas/DeprecatedScheduleType'
+        scheduleOption:
+          type: string
+          deprecated: true
+          description: Deprecated. Old parameter for setting schedule. Use startAt instead.
+        repeatUnit:
+          $ref: '#/components/schemas/RepeatUnit'
+        repeatFrequency:
+          $ref: '#/components/schemas/RepeatFrequency'
+        repeatSubFrequency:
+          $ref: '#/components/schemas/RepeatSubFrequency'
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        runAt:
+          type: string
+        cron:
+          type: string
+        timezone:
+          type: string
+        connectionId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        connectorConfig:
+          type:
+          - object
+          - 'null'
+        notifyOn:
+          type: array
+          items:
+            type: string
+            enum:
+            - onSuccess
+            - onFailure
+        emailRecipients:
+          type: array
+          items:
+            description: User ID of td-api. Not CDP-API's one.
+            type: integer
+            format: int64
+        nestedWorkflowProjectName:
+          type: string
+        nestedWorkflowName:
+          type: string
+        lockEnabled:
+          type: boolean
+        activationTemplateId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+        syndicationBehavior:
+          deprecated: true
+          description: Deprecated. Use syndicationBehaviors instead. Cannot be specified together with syndicationBehaviors.
+          allOf:
+          - $ref: '#/components/schemas/SyndicationBehavior'
+        syndicationBehaviors:
+          type:
+          - array
+          - 'null'
+          maxItems: 4
+          description: Behavior activation configurations. Cannot be specified together with syndicationBehavior.
+          items:
+            $ref: '#/components/schemas/SyndicationBehavior'
+      required:
+      - name
+      - connection_id
+      - connector_config
+    RepeatFrequency:
+      type: integer
+      description: 'Setting an activation repeat frequency.
+
+        Currently, it is set only when the repeat unit is "minute". If the repeat unit is "minute", the interval is set in minutes.
+
+        '
+      default: 1
+    JsonApiPermissionError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - permission-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '403'
+        detail:
+          type: string
+          description: Detailed error message
+          example: SegmentFolder View Permission Required
+        meta:
+          type: object
+          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
+          properties:
+            permissionCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - SEGMENT_FOLDER_VIEW_REQUIRED
+              - SEGMENT_FOLDER_EDIT_REQUIRED
+          required:
+          - permissionCode
+      required:
+      - code
+      - status
+      - detail
+    SyndicationOverview:
+      type: object
+      additionalProperties: false
+      properties:
+        scheduleStatus:
+          type: string
+          enum:
+          - active
+          - scheduled
+          - inactive
+          - none
+        runStatus:
+          type:
+          - string
+          - 'null'
+          description: Tag should be shown in "Run Status". If the workflow never run before and future schedule is set, 'scheduled' will be shown.
+          enum:
+          - scheduled
+          - success
+          - error
+          - canceling
+          - canceled
+          - running
+          - waiting
+        id:
+          type: string
+          description: Activation ID
+          format: integer
+        name:
+          type: string
+          description: Activation Name
+        segmentId:
+          type: string
+          format: integer
+        segmentName:
+          type: string
+        folder:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: integer
+              name:
+                type: string
+        activationTemplateId:
+          type:
+          - string
+          - 'null'
+          format: integer
+        activationTemplateName:
+          type:
+          - string
+          - 'null'
+        connectionId:
+          type: string
+          format: integer
+        connectionType:
+          type:
+          - string
+          - 'null'
+        connectionTypeDescription:
+          type:
+          - string
+          - 'null'
+        connectionName:
+          type:
+          - string
+          - 'null'
+        connectionValid:
+          type: boolean
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        endOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        workflowProjectName:
+          type:
+          - string
+          - 'null'
+        workflowName:
+          type:
+          - string
+          - 'null'
+        lastExecution:
+          oneOf:
+          - type:
+            - object
+            - 'null'
+          - $ref: '#/components/schemas/SyndicationExecution'
+        lastRecordCount:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        repeatUnit:
+          $ref: '#/components/schemas/RepeatUnit'
+        repeatFrequency:
+          $ref: '#/components/schemas/RepeatFrequency'
+        timezone:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+    EntitiesGetSyndicationJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/SyndicationJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JsonApiValidationError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - validation-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '400'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Name has already been taken
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: Pointer to invalid model attribute
+              example: /attributes/id
+          required:
+          - pointer
+        meta:
+          type: object
+          properties:
+            validationCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - VIOLATES_UNIQUENESS_CONSTRAINT
+              - IS_TOO_SHORT
+              - IS_TOO_LONG
+              - CANNOT_BE_BLANK
+              - INVALID_FORMAT_OR_ASSOCIATION
+              - COMPOSITE_CONDITION_TOO_FEW_RULES_REFERENCED
+              - COMPOSITE_CONDITION_TOO_FEW_RULE_SETS_REFERENCED
+              - COMPOSITE_CONDITION_MISSING_RULE_IDENTIFIER
+              - COMPOSITE_CONDITION_SYNTAX_ERROR
+              - COMPOSITE_CONDITION_TOO_LONG_ALPHABETICAL_IDENTIFIER
+              - COMPOSITE_CONDITION_TOO_LONG_NUMERICAL_IDENTIFIER
+              - PREDICTIVE_SEGMENT_NOT_YET_SCORED
+              - PREDICTIVE_SEGMENT_NOT_YET_TRAINED
+              - IS_IMMUTABLE
+              - UNKNOWN
+              - TOO_MANY_BEHAVIOR_RULES
+              - INVALID_WINDOW_DURATION
+              - UNDEFINED_ENTRY_CRITERIA
+              - UNDEFINED_MILESTONE
+              - UNDEFINED_ACTIVATION_STEP
+              - UNDEFINED_WAIT_STEP
+              - UNDEFINED_EXIT_CRITERIA
+              - UNDEFINED_DECISION_CONDITION
+              - UNDEFINED_MERGE_POINT
+              - UNUSED_IN_ID_LINK
+              - TOO_MANY_PRIMARY_KNOWN_IDS
+              - TOO_LESS_PRIMARY_KNOWN_IDS
+              - TOO_MANY_RT_SEGMENTS
+          required:
+          - validationCode
+      required:
+      - code
+      - status
+      - detail
+      - source
+      - meta
+    DeprecatedScheduleType:
+      type: string
+      deprecated: true
+      description: Deprecated. Old parameter for setting schedule type. See/Use RepeatUnit instead.
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    EntitiesSyndicationUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - syndication
+        attributes:
+          $ref: '#/components/schemas/SyndicationJsonApiParameters'
+    StartAt:
+      type:
+      - string
+      - 'null'
+      format: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
+      description: cdp-api will fill some value for old syndications with ScheduleType is not NoneType. '%Y-%M-%DT%h:%m:%s' is expected.
+    ColumnExpression:
+      type: object
+      properties:
+        column:
+          type: string
+        customerGroup:
+          type:
+          - string
+          - 'null'
+        functions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FunctionExpression'
+      required:
+      - column
+    RepeatSubFrequency:
+      type: array
+      description: 'Parameter for more detailed frequency settings. Values are array of integers.
+
+        Currently, this parameter is only valid for repeat unit "week".
+
+        For multiple days of the week, each value should be 1 to 7.
+
+        1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday, 7: Sunday
+
+        '
+      example:
+      - 1
+      - 5
+      - 6
+      default: []
+      items:
+        type: integer
+        format: int64
+    SyndicationExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          syndicationId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    SyndicationJsonApiResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - syndication
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - columns
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            allColumns:
+              description: syndication all column flag  ('true' means that you use all attribute data)
+              type: boolean
+            columns:
+              $ref: '#/components/schemas/Columns'
+            scheduleType:
+              $ref: '#/components/schemas/DeprecatedScheduleType'
+            scheduleOption:
+              type: string
+              deprecated: true
+            timezone:
+              type: string
+            startAt:
+              $ref: '#/components/schemas/StartAt'
+            endOn:
+              type:
+              - string
+              - 'null'
+              format: date
+            runStatus:
+              type:
+              - string
+              - 'null'
+              description: Tag should be shown in "Run Status". If the workflow never run before and future schedule is set, 'scheduled' will be shown.
+              enum:
+              - scheduled
+              - success
+              - error
+              - canceling
+              - canceled
+              - running
+              - waiting
+            repeatUnit:
+              $ref: '#/components/schemas/RepeatUnit'
+            repeatFrequency:
+              $ref: '#/components/schemas/RepeatFrequency'
+            repeatSubFrequency:
+              $ref: '#/components/schemas/RepeatSubFrequency'
+            connectionId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            connectorConfig:
+              type:
+              - object
+              - 'null'
+            valid:
+              type: boolean
+            notifyOn:
+              type: array
+              items:
+                type: string
+                enum:
+                - onSuccess
+                - onFailure
+            emailRecipients:
+              type: array
+              items:
+                description: User ID of td-api. Not CDP-API's one.
+                type: integer
+                format: int64
+            executions:
+              type: array
+              items:
+                $ref: '#/components/schemas/SyndicationExecution'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            nestedWorkflowProjectName:
+              type: string
+            nestedWorkflowName:
+              type: string
+            activationActionsEnabled:
+              type: boolean
+            lockEnabled:
+              type: boolean
+            activationTemplateId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            syndicationBehavior:
+              deprecated: true
+              description: Deprecated. Use syndicationBehaviors instead.
+              allOf:
+              - $ref: '#/components/schemas/SyndicationBehavior'
+            syndicationBehaviors:
+              type:
+              - array
+              - 'null'
+              maxItems: 4
+              description: Behavior activation configurations
+              items:
+                $ref: '#/components/schemas/SyndicationBehavior'
+        relationships:
+          type: object
+          properties:
+            segment:
+              $ref: '#/components/schemas/RelationshipsBatchSegmentJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    EntitiesParentSegmentSyndicationIndexJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyndicationSummaryJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JsonApiMaskedValueError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - bad-parameter-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - 400
+        detail:
+          type: string
+          description: Detailed error message
+          example: masked value is used
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: Pointer to invalid parameter
+              example: /attributes/syndication/columns/0
+          required:
+          - pointer
+        meta:
+          type: object
+          properties:
+            parameterCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - MASKED_VALUE_IS_USED
+          required:
+          - parameterCode
+      required:
+      - code
+      - status
+      - detail
+      - source
+      - meta
+    SyndicationBehavior:
+      type:
+      - object
+      - 'null'
+      properties:
+        columns:
+          $ref: '#/components/schemas/Columns'
+        behaviorTableName:
+          type: string
+          description: Behavior table name which contains behavior records
+          example: purchase_history
+        joinRow:
+          type:
+          - integer
+          - 'null'
+          description: How much rows would be joined (value is N for Top-N join)
+          example: 3
+        joinStrategy:
+          type: string
+          description: Label of what is the wanted record(s).
+          example: Last
+          enum:
+          - All
+          - First
+          - Last
+          - Top-N
+        formatting:
+          type: string
+          enum:
+          - rows
+          - cols
+        orderBy:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              order:
+                type: string
+                enum:
+                - ascending
+                - descending
+            example:
+              key: purchased_at
+              order: descending
+          example:
+          - key: purchased_at
+            order: descending
+          - key: price
+            order: ascending
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    SyndicationJsonApiParameters:
+      type: object
+      not:
+        required:
+        - syndicationBehavior
+        - syndicationBehaviors
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        allColumns:
+          description: syndication all column flag  ('true' means  that you use all attribute data)
+          type: boolean
+        columns:
+          $ref: '#/components/schemas/Columns'
+        scheduleType:
+          $ref: '#/components/schemas/DeprecatedScheduleType'
+        scheduleOption:
+          type: string
+          deprecated: true
+          description: Deprecated. Old parameter for setting schedule. See startAt instead.
+        runAt:
+          type: string
+        cron:
+          type: string
+        timezone:
+          type: string
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        endOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        repeatUnit:
+          $ref: '#/components/schemas/RepeatUnit'
+        repeatFrequency:
+          $ref: '#/components/schemas/RepeatFrequency'
+        repeatSubFrequency:
+          $ref: '#/components/schemas/RepeatSubFrequency'
+        connectionId:
+          type: integer
+          format: int64
+        connectorConfig:
+          type: object
+        notifyOn:
+          type: array
+          items:
+            type: string
+            enum:
+            - onSuccess
+            - onFailure
+        emailRecipients:
+          type: array
+          items:
+            description: User ID of td-api. Not CDP-API's one.
+            type: integer
+            format: int64
+        activationTemplateId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        syndicationBehavior:
+          deprecated: true
+          description: Deprecated. Use syndicationBehaviors instead. Cannot be specified together with syndicationBehaviors.
+          allOf:
+          - $ref: '#/components/schemas/SyndicationBehavior'
+        syndicationBehaviors:
+          type:
+          - array
+          - 'null'
+          maxItems: 4
+          description: Behavior activation configurations. Cannot be specified together with syndicationBehavior.
+          items:
+            $ref: '#/components/schemas/SyndicationBehavior'
+      required:
+      - name
+      - connection_id
+      - connector_config
+    RelationshipsBatchSegmentJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - segment-batch
+    EntitiesGetWorkflowsJsonApiResult:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - type
+            properties:
+              id:
+                type: string
+                pattern: '[1-9][0-9]*'
+              type:
+                type: string
+                enum:
+                - workflow
+              attributes:
+                type: object
+                properties:
+                  name:
+                    type: string
+    JsonApiNotFoundError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - record-not-found-error
+        status:
+          type: string
+          enum:
+          - '404'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Record not found
+      required:
+      - code
+      - status
+      - detail
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    JsonApiBadParameterError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - bad-parameter-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '400'
+        detail:
+          type: string
+          description: Detailed error message
+          example: SegmentFolder View Permission Required
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: Pointer to invalid parameter
+              example: /attributes/segments/
+          required:
+          - pointer
+        meta:
+          type: object
+          properties:
+            parameterCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - SHOULD_BE_ARRAY
+              - INVALID_FORMAT
+          required:
+          - parameterCode
+      required:
+      - code
+      - status
+      - detail
+    FunctionExpression:
+      oneOf:
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - +
+            - '-'
+            - '*'
+            - /
+          arg:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - replace
+          search:
+            type: string
+          replacement:
+            type:
+            - string
+            - 'null'
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - substr
+          start:
+            type: number
+          length:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - regexp_extract
+          pattern:
+            type: string
+          group:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - day_of_week
+            - from_iso8601_timestamp
+            - ln
+            - elapsed_days
+            - td_ip_to_least_specific_subdivision_name
+            - td_ip_to_country_name
+            - td_ip_to_city_name
+            - td_ip_to_connection_type
+            - td_ip_to_domain
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_quantitative
+          default:
+            type: number
+            format: float
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical
+          default:
+            type: string
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical_array
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - if
+          op:
+            type: string
+            enum:
+            - '>'
+            - <
+            - <=
+            - '>='
+            - '='
+            - '!='
+            - is
+            - is\
+            - not
+          right_value:
+            type:
+            - number
+            - 'null'
+          then:
+            type: number
+          else:
+            type: number
+        required:
+        - function
+    SyndicationExecutionJsonApiResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: workflowAttemptId is used as id
+        type:
+          type: string
+          enum:
+          - execution-syndication
+        attributes:
+          $ref: '#/components/schemas/SyndicationExecution'
+    Syndication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: integer
+        audienceId:
+          type: string
+          format: integer
+        segmentId:
+          type: string
+          format: integer
+        name:
+          type: string
+        description:
+          type: string
+        allColumns:
+          description: syndication all column flag  ('true' means  that you use all attribute data)
+          type: boolean
+        columns:
+          oneOf:
+          - $ref: '#/components/schemas/Columns'
+          - $ref: '#/components/schemas/NullValue'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        endOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        repeatUnit:
+          type:
+          - string
+          - 'null'
+        repeatFrequency:
+          type:
+          - integer
+          - 'null'
+        repeatSubFrequency:
+          $ref: '#/components/schemas/RepeatSubFrequency'
+        timezone:
+          type: string
+        connectionId:
+          type:
+          - string
+          - 'null'
+          format: integer
+        connectorConfig:
+          type:
+          - object
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        valid:
+          type: boolean
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyndicationExecution'
+        notifyOn:
+          type: array
+          items:
+            type: string
+            enum:
+            - onSuccess
+            - onFailure
+        emailRecipients:
+          type: array
+          items:
+            description: User ID of td-api. Not CDP-API's one.
+            type: integer
+            format: int64
+        activationTemplateId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+  responses:
+    JsonApiNotFoundRequest:
+      description: The specified resource is not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiNotFoundError'
+            required:
+            - errors
+    JsonApiBadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/JsonApiBadParameterError'
+                  - $ref: '#/components/schemas/JsonApiMaskedValueError'
+                  - $ref: '#/components/schemas/JsonApiValidationError'
+            required:
+            - errors
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    JsonApiForbiddenRequest:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiPermissionError'
+            required:
+            - errors
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ParentSegmentId:
+      name: parentSegmentId
+      in: path
+      description: Parent Segment ID (audience id)
+      required: true
+      schema:
+        type: integer
+        format: int64
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

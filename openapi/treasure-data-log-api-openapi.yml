@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  description: Treasure Workflow
+  title: Treasure Workflow Log API
+  version: '1.0'
+servers:
+- description: aws
+  url: https://api-workflow.treasuredata.com
+- description: aws-tokyo
+  url: https://api-workflow.treasuredata.co.jp
+- description: eu01
+  url: https://api-workflow.eu01.treasuredata.com
+- description: ap02
+  url: https://api-workflow.ap02.treasuredata.com
+- description: ap03
+  url: https://api-workflow.ap03.treasuredata.com
+security:
+- ApiKeyAuth: []
+tags:
+- name: Log
+paths:
+  /api/logs/{attempt_id}/files:
+    get:
+      operationId: getFileHandles
+      parameters:
+      - description: attempt id
+        in: path
+        name: attempt_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: partial prefix match filter on task name
+        in: query
+        name: task
+        schema:
+          type: string
+      - description: enable returning direct download handle
+        in: query
+        name: direct_download
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestLogFileHandleCollection'
+          description: default response
+      summary: List log files of an attempt with filters
+      tags:
+      - Log
+  /api/logs/{attempt_id}/files/{file_name}:
+    get:
+      operationId: getFile
+      parameters:
+      - description: attempt id
+        in: path
+        name: attempt_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: log file name
+        in: path
+        name: file_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: byte
+          description: default response
+      summary: Download a log file
+      tags:
+      - Log
+components:
+  schemas:
+    RestLogFileHandleCollection:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestLogFileHandle'
+    RestLogFileHandle:
+      type: object
+      description: A log file for a task
+      properties:
+        agentId:
+          type: string
+          description: internal information
+          example: 452660@ip-10-20-161-114
+        direct:
+          type: string
+          description: path to download log directly
+          example: https://digdag-server-development-eu01.s3.eu-central-1.amazonaws.com/log/2023-08-22/1.264c...
+        fileName:
+          type: string
+          description: file name of log
+          example: +wf1+t1@64e44ee12f7e43a0.452660@ip-10-20-161-114.log.gz
+        fileSize:
+          type: integer
+          format: int64
+          description: log size
+          example: 65535
+        fileTime:
+          type: string
+          format: date-time
+          description: file timestamp
+          example: '2023-08-18T06:52:33Z'
+        fileTimestamp:
+          type: string
+          format: date-time
+          description: timestamp with sub second precision in ISO8601 format
+          example: '1970-01-23T04:56:01.23456Z'
+        taskName:
+          type: string
+          description: task name
+          example: +wf1+t1
+      required:
+      - agentId
+      - direct
+      - fileName
+      - fileSize
+      - fileTime
+      - fileTimestamp
+      - taskName
+  securitySchemes:
+    ApiKeyAuth:
+      scheme: TD1
+      type: http

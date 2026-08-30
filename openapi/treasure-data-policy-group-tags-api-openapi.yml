@@ -1,0 +1,101 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Policy Group Tags API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Policy Group Tags
+paths:
+  /policy_group_tags/{tag}/delegated_admins:
+    parameters:
+    - $ref: '#/components/parameters/path_tag'
+    get:
+      summary: Get the delegated admins of a policy group
+      description: Returns a list of delegated admin user ids that manage a policy group.
+      operationId: getPolicyGroupTagsDelegatedAdmins
+      tags:
+      - Policy Group Tags
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIds'
+    patch:
+      summary: Update the delegated admins of a policy group
+      description: Tags a list of delegated admin user ids to manage a policy group.
+      operationId: updatePolicyGroupTagsDelegatedAdmins
+      tags:
+      - Policy Group Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIds'
+      responses:
+        '204':
+          description: OK
+  /policy_group_tags/{tag}/users:
+    parameters:
+    - $ref: '#/components/parameters/path_tag'
+    get:
+      summary: Get the users of a policy group
+      description: Returns a list of user ids that are tagged with a policy group.
+      operationId: getPolicyGroupTagsUsers
+      tags:
+      - Policy Group Tags
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIds'
+    patch:
+      summary: Update the users of a policy group
+      description: Tags a list of user ids with a policy group.
+      operationId: updatePolicyGroupTagsUsers
+      tags:
+      - Policy Group Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIds'
+      responses:
+        '204':
+          description: OK
+components:
+  parameters:
+    path_tag:
+      name: tag
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Tag'
+  schemas:
+    Tag:
+      type: string
+      example: APAC
+    UserIds:
+      type: object
+      additionalProperties: false
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+            example: '234'
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

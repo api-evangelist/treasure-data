@@ -1,0 +1,447 @@
+openapi: 3.2.0
+info:
+  title: llm-api Text Knowledge Base API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: TextKnowledgeBase
+paths:
+  /api/text_knowledge_bases:
+    post:
+      summary: create
+      tags:
+      - TextKnowledgeBase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        text:
+                          type: string
+                        projectId:
+                          type: string
+                      required:
+                      - name
+                      - text
+                      - projectId
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: textKnowledgeBases
+                attributes:
+                  name: Text Knowledge Base
+                  text: This is a sample text for the knowledge base.
+                  projectId: 00000000-0000-0000-0000-000000000001
+      responses:
+        '201':
+          description: creates a new TextKnowledgeBase
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          text:
+                            type: string
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - text
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: textKnowledgeBases
+                  links:
+                    self: http://www.example.com/api/text_knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Text Knowledge Base
+                    text: This is a sample text for the knowledge base.
+                    isManaged: false
+        '422':
+          description: returns errors for invalid parameters
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: can't be blank
+                  detail: text - can't be blank
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/text
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+  /api/text_knowledge_bases/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - TextKnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: deletes the TextKnowledgeBase
+    get:
+      summary: show
+      tags:
+      - TextKnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: returns the details of a specific TextKnowledgeBase
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          text:
+                            type: string
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - text
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: textKnowledgeBases
+                  links:
+                    self: http://www.example.com/api/text_knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Sample Knowledge Base
+                    text: This is a sample text for the TextKnowledgeBase.
+                    isManaged: false
+    patch:
+      summary: update
+      tags:
+      - TextKnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        text:
+                          type: string
+                      required:
+                      - name
+                      - text
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: textKnowledgeBases
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: Updated Name
+                  text: Updated text
+      responses:
+        '200':
+          description: updates the TextKnowledgeBase successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          text:
+                            type: string
+                          isManaged:
+                            type: boolean
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - text
+                        - isManaged
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: textKnowledgeBases
+                  links:
+                    self: http://www.example.com/api/text_knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: Updated Name
+                    text: Updated text
+                    isManaged: false
+        '422':
+          description: returns detailed errors for invalid updates
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: can't be blank
+                  detail: name - can't be blank
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/name
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+                - title: can't be blank
+                  detail: toolTarget/name - can't be blank
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/toolTarget/name
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+                - title: can't be blank
+                  detail: text - can't be blank
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/text
+                  status: '422'
+                  meta:
+                    validationCode: CANNOT_BE_BLANK
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

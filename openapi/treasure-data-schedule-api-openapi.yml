@@ -1,0 +1,454 @@
+openapi: 3.2.0
+info:
+  description: Treasure Workflow
+  title: Treasure Workflow Schedule API
+  version: '1.0'
+servers:
+- description: aws
+  url: https://api-workflow.treasuredata.com
+- description: aws-tokyo
+  url: https://api-workflow.treasuredata.co.jp
+- description: eu01
+  url: https://api-workflow.eu01.treasuredata.com
+- description: ap02
+  url: https://api-workflow.ap02.treasuredata.com
+- description: ap03
+  url: https://api-workflow.ap03.treasuredata.com
+security:
+- ApiKeyAuth: []
+tags:
+- name: Schedule
+paths:
+  /api/schedules:
+    get:
+      operationId: getSchedules
+      parameters:
+      - description: List schedules whose ID is greater than this ID for pagination. Schedules are returned in ascending order by ID.
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleCollection'
+          description: default response
+      summary: List schedules
+      tags:
+      - Schedule
+  /api/schedules/{id}:
+    get:
+      operationId: getSchedule
+      parameters:
+      - description: schedule id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSchedule'
+          description: default response
+      summary: Get a schedule
+      tags:
+      - Schedule
+  /api/schedules/{id}/backfill:
+    post:
+      operationId: backfillSchedule
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestScheduleBackfillRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleAttemptCollection'
+          description: default response
+      summary: Backfill sessions for past schedule times
+      tags:
+      - Schedule
+  /api/schedules/{id}/disable:
+    post:
+      operationId: disableSchedule
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Disable scheduling of new sessions
+      tags:
+      - Schedule
+  /api/schedules/{id}/enable:
+    post:
+      operationId: enableSchedule
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/RestScheduleEnableRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Re-enable disabled scheduling
+      tags:
+      - Schedule
+  /api/schedules/{id}/skip:
+    post:
+      operationId: skipSchedule
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestScheduleSkipRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleSummary'
+          description: default response
+      summary: Skip future sessions by count or time
+      tags:
+      - Schedule
+components:
+  schemas:
+    RestScheduleEnableRequest:
+      type: object
+      description: Request body for enabling a schedule
+      properties:
+        nextTime:
+          type: string
+          description: time to skip
+          example: '2022-12-31T23:59:00+00:00'
+        skipSchedule:
+          type: boolean
+          default: true
+          description: skip schedules
+    RestScheduleSkipRequest:
+      type: object
+      description: Request body for skipping a schedule
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: skip given number of sessions. nextTime or (fromTime and count) are required.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: skip before the time. nextTime or (fromTime and count) are required.
+          example: '2023-08-18T06:52:33Z'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextTime:
+          type: string
+          description: next time. nextTime or (fromTime and count) are required.
+          example: '2022-12-31T23:59:00+00:00'
+      required:
+      - dryRun
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - workflow
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    RestScheduleSummary:
+      type: object
+      description: Response of a schedule with summary
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - createdAt
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - updatedAt
+      - workflow
+    RestScheduleBackfillRequest:
+      type: object
+      description: Request body for backfill
+      properties:
+        advanceSchedule:
+          type: boolean
+          description: If true, advance nextScheduleTime/nextRunTime. When fromTime is not set, uses the current schedule's nextRunTime as starting point. Requires skipExisting to be true.
+        attemptName:
+          type: string
+          description: attempt name. Optional when skipExisting is true. Cannot be specified when advanceSchedule is true.
+        count:
+          type: integer
+          format: int32
+          description: starts given number of sessions. run all sessions if not set.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: backfill from
+          example: '2023-08-18T06:52:33Z'
+        skipExisting:
+          type: boolean
+          description: If true, silently skip sessions that already have attempts instead of returning 409 conflict error. Note that when count is set, skipped sessions are still counted towards the count.
+      required:
+      - dryRun
+    RestSessionAttempt:
+      type: object
+      description: Response of an attempt
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        index:
+          type: integer
+          format: int32
+          description: index for multiple attempts
+          example: 1
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        retryAttemptName:
+          type: string
+          description: attempt name for retry
+          example: retry-12345
+        sessionId:
+          type: string
+          description: session ID
+          example: '123456'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+          description: unique UUID of this session
+          example: 2b91a014-076e-4c6d-8b51-f4f91089cab2
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+          - blocked
+          - queued
+          - running
+          - canceling
+          - success
+          - error
+          - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - cancelRequested
+      - createdAt
+      - done
+      - id
+      - index
+      - params
+      - project
+      - retryAttemptName
+      - sessionId
+      - sessionTime
+      - sessionUuid
+      - status
+      - success
+      - workflow
+    RestScheduleAttemptCollection:
+      type: object
+      description: Response of a schedule with its attempts
+      properties:
+        attempts:
+          type: array
+          description: List of attempts
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - attempts
+      - id
+      - project
+      - workflow
+    RestScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSchedule'
+  securitySchemes:
+    ApiKeyAuth:
+      scheme: TD1
+      type: http

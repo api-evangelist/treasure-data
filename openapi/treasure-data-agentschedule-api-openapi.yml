@@ -1,0 +1,2204 @@
+openapi: 3.2.0
+info:
+  title: llm-api Agent Schedule API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: AgentSchedule
+paths:
+  /api/agent_schedules:
+    get:
+      summary: index
+      tags:
+      - AgentSchedule
+      responses:
+        '200':
+          description: Empty result set when interface type filter does not match any resources values
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            agentId:
+                              type: string
+                            formInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            chatInterfaceId:
+                              type:
+                              - string
+                              - 'null'
+                            interfaceType:
+                              type: string
+                              enum:
+                              - form
+                              - chat
+                            name:
+                              type: string
+                            description:
+                              type:
+                              - string
+                              - 'null'
+                            status:
+                              type: string
+                              enum:
+                              - active
+                              - paused
+                              - disabled
+                            repeatUnit:
+                              type: string
+                              enum:
+                              - no_repeat
+                              - daily
+                              - weekly
+                              - monthly
+                            repeatFrequency:
+                              type: integer
+                            repeatSubFrequency:
+                              type: array
+                              items:
+                                type: integer
+                            timezone:
+                              type: string
+                            startAt:
+                              type: string
+                            endAt:
+                              type:
+                              - string
+                              - 'null'
+                            parameterValues:
+                              type: object
+                              properties:
+                                param1:
+                                  type:
+                                  - string
+                                  - 'null'
+                                param2:
+                                  type:
+                                  - string
+                                  - 'null'
+                                input:
+                                  type:
+                                  - string
+                                  - 'null'
+                            sendEmailNotification:
+                              type: boolean
+                            emailRecipients:
+                              type: array
+                              items:
+                                type: string
+                            textResourceId:
+                              type:
+                              - string
+                              - 'null'
+                            workflowProjectId:
+                              type:
+                              - string
+                              - 'null'
+                            workflowSessionId:
+                              type:
+                              - string
+                              - 'null'
+                            workflowAttemptId:
+                              type:
+                              - string
+                              - 'null'
+                            lastExecutedAt:
+                              type:
+                              - string
+                              - 'null'
+                            executionCount:
+                              type: integer
+                            lastRunStatus:
+                              type:
+                              - string
+                              - 'null'
+                              enum:
+                              - success
+                              - failure
+                            lastRunErrorMessage:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - agentId
+                          - formInterfaceId
+                          - chatInterfaceId
+                          - interfaceType
+                          - name
+                          - description
+                          - status
+                          - repeatUnit
+                          - repeatFrequency
+                          - repeatSubFrequency
+                          - timezone
+                          - startAt
+                          - endAt
+                          - parameterValues
+                          - sendEmailNotification
+                          - emailRecipients
+                          - textResourceId
+                          - workflowProjectId
+                          - workflowSessionId
+                          - workflowAttemptId
+                          - lastExecutedAt
+                          - executionCount
+                          - lastRunStatus
+                          - lastRunErrorMessage
+                        relationships:
+                          type: object
+                          properties:
+                            project:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            agent:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            formInterface:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            chatInterface:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type:
+                              - string
+                              - 'null'
+                            updatedAt:
+                              type:
+                              - string
+                              - 'null'
+                            name:
+                              type: string
+                            description: {}
+                            useRuntimeTextResource:
+                              type:
+                              - boolean
+                              - 'null'
+                            useParentSegment:
+                              type:
+                              - boolean
+                              - 'null'
+                            useWorkflowExecutor:
+                              type:
+                              - boolean
+                              - 'null'
+                            isManaged:
+                              type:
+                              - boolean
+                              - 'null'
+                            managedType:
+                              type:
+                              - string
+                              - 'null'
+                            email:
+                              type:
+                              - string
+                              - 'null'
+                            projectId:
+                              type: string
+                            agentId:
+                              type: string
+                            promptTemplate:
+                              type: string
+                            formJsonSchema:
+                              type: string
+                            formUiSchema: {}
+                            useTextResource:
+                              type: boolean
+                            starterMessage:
+                              type: string
+                            textInputEnabled:
+                              type: boolean
+                            textInputAgentId:
+                              type: string
+                            chatInterfaceButtons:
+                              type: array
+                              items: {}
+                          required:
+                          - name
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data: []
+                meta:
+                  total: 0
+                links:
+                  first: http://www.example.com/api/agent_schedules?filter%5BinterfaceType%5D=nonexistent&page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/agent_schedules?filter%5BinterfaceType%5D=nonexistent&page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: hsniqued
+                    starterMessage: ''
+                    textInputEnabled: true
+                    textInputAgentId: 00000000-0000-0000-0000-000000000001
+                    isManaged: false
+                    chatInterfaceButtons: []
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: ijpodbmo
+                    starterMessage: ''
+                    textInputEnabled: true
+                    textInputAgentId: 00000000-0000-0000-0000-000000000001
+                    isManaged: false
+                    chatInterfaceButtons: []
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+      parameters:
+      - name: filter[agentId]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[formInterfaceId]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[chatInterfaceId]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[interfaceType]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: nonexistent
+      - name: filter[projectId]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: chatInterface
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - AgentSchedule
+      responses:
+        '201':
+          description: Agent schedule successfully created
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          formInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          chatInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          interfaceType:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          status:
+                            type: string
+                          repeatUnit:
+                            type: string
+                          repeatFrequency:
+                            type: integer
+                          repeatSubFrequency:
+                            type: array
+                            items:
+                              type: integer
+                          timezone:
+                            type: string
+                          startAt:
+                            type: string
+                          endAt:
+                            type:
+                            - string
+                            - 'null'
+                          parameterValues:
+                            type: object
+                            properties:
+                              param2:
+                                type: string
+                              param1:
+                                type: string
+                              image_param:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    contentType:
+                                      type: string
+                                    binaryBase64:
+                                      type: string
+                                  required:
+                                  - contentType
+                                  - binaryBase64
+                              array_param:
+                                type: array
+                                items:
+                                  type: string
+                              mixed_param:
+                                type: array
+                                items:
+                                  type: string
+                                  oneOf:
+                                  - type: string
+                                  - type: object
+                                    properties:
+                                      contentType:
+                                        type: string
+                                      binaryBase64:
+                                        type: string
+                                    required:
+                                    - contentType
+                                    - binaryBase64
+                              regular_param:
+                                type: string
+                              attachment_param:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    contentType:
+                                      type: string
+                                    binaryBase64:
+                                      type: string
+                                  required:
+                                  - contentType
+                                  - binaryBase64
+                              button_id:
+                                type: string
+                              input:
+                                type: string
+                              test:
+                                type: string
+                              report_description:
+                                type: string
+                              report_title:
+                                type: string
+                          sendEmailNotification:
+                            type: boolean
+                          emailRecipients:
+                            type: array
+                            items:
+                              type: string
+                          textResourceId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowProjectId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowSessionId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowAttemptId:
+                            type:
+                            - string
+                            - 'null'
+                          lastExecutedAt:
+                            type:
+                            - string
+                            - 'null'
+                          executionCount:
+                            type: integer
+                          lastRunStatus:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - success
+                            - failure
+                          lastRunErrorMessage:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - formInterfaceId
+                        - chatInterfaceId
+                        - interfaceType
+                        - name
+                        - description
+                        - status
+                        - repeatUnit
+                        - repeatFrequency
+                        - repeatSubFrequency
+                        - timezone
+                        - startAt
+                        - endAt
+                        - parameterValues
+                        - sendEmailNotification
+                        - emailRecipients
+                        - textResourceId
+                        - workflowProjectId
+                        - workflowSessionId
+                        - workflowAttemptId
+                        - lastExecutedAt
+                        - executionCount
+                        - lastRunStatus
+                        - lastRunErrorMessage
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agentSchedules
+                  links:
+                    self: http://www.example.com/api/agent_schedules/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    formInterfaceId: null
+                    chatInterfaceId: 00000000-0000-0000-0000-000000000001
+                    interfaceType: chat
+                    name: Test Chat Schedule
+                    description: null
+                    status: active
+                    repeatUnit: daily
+                    repeatFrequency: 1
+                    repeatSubFrequency: []
+                    timezone: UTC
+                    startAt: '2026-01-23T02:17:36'
+                    endAt: null
+                    parameterValues:
+                      param2: value2
+                      param1: value1
+                      image_param:
+                      - contentType: image/jpeg
+                        binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      array_param:
+                      - item1
+                      - item2
+                      mixed_param:
+                      - regular_item
+                      - contentType: application/pdf
+                        binaryBase64: pdf_data_here
+                      regular_param: regular_value
+                      attachment_param:
+                      - contentType: image/jpeg
+                        binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      button_id: 00000000-0000-0000-0000-000000000001
+                      input: user text input
+                      test: value
+                      report_description: Weekly team status report
+                      report_title: Team Status
+                    sendEmailNotification: true
+                    emailRecipients:
+                    - 00000000-0000-0000-0000-000000000001
+                    textResourceId: null
+                    workflowProjectId: test-project-id
+                    workflowSessionId: null
+                    workflowAttemptId: null
+                    lastExecutedAt: null
+                    executionCount: 0
+                    lastRunStatus: null
+                    lastRunErrorMessage: null
+        '400':
+          description: rejects emailRecipients in request payload with validation error
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: emailRecipients is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: returns 403 Forbidden when trying to use chat_interface and agent from different account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '422':
+          description: rejects neither form_interface nor chat_interface
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            originalType:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: Either form_interface_id or chat_interface_id must be provided
+                  detail: Either form_interface_id or chat_interface_id must be provided
+                  code: '100'
+                  source:
+                    pointer: /data
+                  status: '422'
+                  meta:
+                    validationCode: LLM_EXACTLY_ONE_INTERFACE_REQUIRED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        agentId:
+                          type: string
+                        formInterfaceId:
+                          type: string
+                        name:
+                          type: string
+                        repeatUnit:
+                          type: string
+                        repeatFrequency:
+                          type: integer
+                        repeatSubFrequency:
+                          type: array
+                          items:
+                            type: integer
+                        timezone:
+                          type: string
+                        startAt:
+                          type: string
+                        description:
+                          type: string
+                        parameterValues:
+                          type: object
+                          properties:
+                            param2:
+                              type: string
+                            param1:
+                              type: string
+                            image_param:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  binaryBase64:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                required:
+                                - binaryBase64
+                                - contentType
+                            regular_param:
+                              type: string
+                            array_param:
+                              type: array
+                              items:
+                                type: string
+                            attachment_param:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  binaryBase64:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                required:
+                                - binaryBase64
+                                - contentType
+                            mixed_param:
+                              type: array
+                              items:
+                                type: string
+                                oneOf:
+                                - type: string
+                                - type: object
+                                  properties:
+                                    contentType:
+                                      type: string
+                                    binaryBase64:
+                                      type: string
+                                  required:
+                                  - contentType
+                                  - binaryBase64
+                            button_id:
+                              type: string
+                            input:
+                              type: string
+                            test:
+                              type: string
+                            report_description:
+                              type: string
+                            report_title:
+                              type: string
+                        sendEmailNotification:
+                          type: boolean
+                        endAt:
+                          type: string
+                        textResourceId:
+                          type: string
+                        chatInterfaceId:
+                          type: string
+                      required:
+                      - projectId
+                      - agentId
+                      - name
+                      - repeatUnit
+                      - repeatFrequency
+                      - timezone
+                      - startAt
+                      - parameterValues
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: agent_schedules
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  agentId: 00000000-0000-0000-0000-000000000001
+                  formInterfaceId: 00000000-0000-0000-0000-000000000001
+                  name: Test Chat Schedule
+                  repeatUnit: daily
+                  repeatFrequency: 1
+                  repeatSubFrequency: []
+                  timezone: UTC
+                  startAt: '2026-01-23T02:17:36Z'
+                  description: Automated schedule for reports
+                  parameterValues:
+                    param2: value2
+                    param1: value1
+                    image_param:
+                    - binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      contentType: image/jpeg
+                    regular_param: regular_value
+                    array_param:
+                    - item1
+                    - item2
+                    attachment_param:
+                    - binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      contentType: image/jpeg
+                    mixed_param:
+                    - regular_item
+                    - binaryBase64: pdf_data_here
+                      contentType: application/pdf
+                    button_id: 00000000-0000-0000-0000-000000000001
+                    input: user text input
+                    test: value
+                    report_description: Weekly team status report
+                    report_title: Team Status
+                  sendEmailNotification: true
+                  endAt: '2025-12-31T23:59:00'
+                  textResourceId: 00000000-0000-0000-0000-000000000001
+                  chatInterfaceId: 00000000-0000-0000-0000-000000000001
+  /api/agent_schedules/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - AgentSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: allows creator to delete their own agent schedule
+        '401':
+          description: denies non-creator admin from deleting agent schedule in same account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: DELETE /api/agent_schedules/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: blocks deletion when workflow API fails
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: 'Failed to delete workflow: Workflow deletion failed with status 500'
+                  detail: 'Failed to delete workflow: Workflow deletion failed with status 500'
+                  code: '100'
+                  source:
+                    pointer: /data
+                  status: '422'
+                  meta:
+                    validationCode: LLM_SOMETHING_ERROR
+    get:
+      summary: show
+      tags:
+      - AgentSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: agent
+      responses:
+        '200':
+          description: retrieves a specific agent_schedule with agent included
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          formInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          chatInterfaceId:
+                            type:
+                            - string
+                            - 'null'
+                          interfaceType:
+                            type: string
+                            enum:
+                            - form
+                            - chat
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          status:
+                            type: string
+                            enum:
+                            - active
+                            - paused
+                            - disabled
+                          repeatUnit:
+                            type: string
+                            enum:
+                            - no_repeat
+                            - daily
+                            - weekly
+                            - monthly
+                          repeatFrequency:
+                            type: integer
+                          repeatSubFrequency:
+                            type: array
+                            items:
+                              type: integer
+                          timezone:
+                            type: string
+                          startAt:
+                            type: string
+                          endAt:
+                            type:
+                            - string
+                            - 'null'
+                          parameterValues:
+                            type: object
+                            properties:
+                              param1:
+                                type: string
+                              test_param:
+                                type: string
+                          sendEmailNotification:
+                            type: boolean
+                          emailRecipients:
+                            type: array
+                            items:
+                              type: string
+                          textResourceId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowProjectId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowSessionId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowAttemptId:
+                            type:
+                            - string
+                            - 'null'
+                          lastExecutedAt:
+                            type:
+                            - string
+                            - 'null'
+                          executionCount:
+                            type: integer
+                          lastRunStatus:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - success
+                            - failure
+                          lastRunErrorMessage:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - formInterfaceId
+                        - chatInterfaceId
+                        - interfaceType
+                        - name
+                        - description
+                        - status
+                        - repeatUnit
+                        - repeatFrequency
+                        - repeatSubFrequency
+                        - timezone
+                        - startAt
+                        - endAt
+                        - parameterValues
+                        - sendEmailNotification
+                        - emailRecipients
+                        - textResourceId
+                        - workflowProjectId
+                        - workflowSessionId
+                        - workflowAttemptId
+                        - lastExecutedAt
+                        - executionCount
+                        - lastRunStatus
+                        - lastRunErrorMessage
+                      relationships:
+                        type: object
+                        properties:
+                          project:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                          createdBy:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                          updatedBy:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                          agent:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                                required:
+                                - type
+                                - id
+                            required:
+                            - data
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type:
+                              - string
+                              - 'null'
+                            updatedAt:
+                              type:
+                              - string
+                              - 'null'
+                            name:
+                              type: string
+                            description: {}
+                            useRuntimeTextResource:
+                              type:
+                              - boolean
+                              - 'null'
+                            useParentSegment:
+                              type:
+                              - boolean
+                              - 'null'
+                            useWorkflowExecutor:
+                              type:
+                              - boolean
+                              - 'null'
+                            isManaged:
+                              type:
+                              - boolean
+                              - 'null'
+                            managedType:
+                              type:
+                              - string
+                              - 'null'
+                            email:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - name
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agentSchedules
+                  links:
+                    self: http://www.example.com/api/agent_schedules/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    formInterfaceId: 00000000-0000-0000-0000-000000000001
+                    chatInterfaceId: null
+                    interfaceType: form
+                    name: Test Schedule
+                    description: Automated schedule for reports
+                    status: active
+                    repeatUnit: daily
+                    repeatFrequency: 1
+                    repeatSubFrequency: []
+                    timezone: UTC
+                    startAt: '2025-12-25T11:42:00'
+                    endAt: '2025-12-31'
+                    parameterValues:
+                      param1: value1
+                      test_param: test_value
+                      name: Monthly Report
+                    sendEmailNotification: false
+                    emailRecipients: []
+                    textResourceId: null
+                    workflowProjectId: test-project-id
+                    workflowSessionId: null
+                    workflowAttemptId: null
+                    lastExecutedAt: null
+                    executionCount: 0
+                    lastRunStatus: null
+                    lastRunErrorMessage: null
+                  relationships:
+                    project:
+                      data:
+                        type: projects
+                        id: 00000000-0000-0000-0000-000000000001
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    agent:
+                      data:
+                        type: agents
+                        id: 00000000-0000-0000-0000-000000000001
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: agents
+                  links:
+                    self: http://www.example.com/api/agents/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    name: bznwfidk
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: returns 404 for non-existent agent_schedule
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - AgentSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: allows creator to edit their own agent schedule
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          agentId:
+                            type: string
+                          formInterfaceId:
+                            type: string
+                          chatInterfaceId: {}
+                          interfaceType:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          status:
+                            type: string
+                          repeatUnit:
+                            type: string
+                          repeatFrequency:
+                            type: integer
+                          repeatSubFrequency:
+                            type: array
+                            items:
+                              type: integer
+                          timezone:
+                            type: string
+                          startAt:
+                            type: string
+                          endAt:
+                            type:
+                            - string
+                            - 'null'
+                          parameterValues:
+                            type: object
+                            properties:
+                              param1:
+                                type: string
+                              test_param:
+                                type: string
+                              updated_param:
+                                type: string
+                              new_image_param:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    contentType:
+                                      type: string
+                                    binaryBase64:
+                                      type: string
+                                  required:
+                                  - contentType
+                                  - binaryBase64
+                              regular_param1:
+                                type: string
+                              attachment_param:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    contentType:
+                                      type: string
+                                    binaryBase64:
+                                      type: string
+                                  required:
+                                  - contentType
+                                  - binaryBase64
+                              subject:
+                                type: string
+                              notes:
+                                type: string
+                          sendEmailNotification:
+                            type: boolean
+                          emailRecipients:
+                            type: array
+                            items:
+                              type: string
+                          textResourceId: {}
+                          workflowProjectId:
+                            type: string
+                          workflowSessionId:
+                            type:
+                            - string
+                            - 'null'
+                          workflowAttemptId:
+                            type:
+                            - string
+                            - 'null'
+                          lastExecutedAt:
+                            type:
+                            - string
+                            - 'null'
+                          executionCount:
+                            type: integer
+                          lastRunStatus:
+                            type:
+                            - string
+                            - 'null'
+                            enum:
+                            - success
+                            - failure
+                          lastRunErrorMessage:
+                            type:
+                            - string
+                            - 'null'
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - agentId
+                        - formInterfaceId
+                        - chatInterfaceId
+                        - interfaceType
+                        - name
+                        - description
+                        - status
+                        - repeatUnit
+                        - repeatFrequency
+                        - repeatSubFrequency
+                        - timezone
+                        - startAt
+                        - endAt
+                        - parameterValues
+                        - sendEmailNotification
+                        - emailRecipients
+                        - textResourceId
+                        - workflowProjectId
+                        - workflowSessionId
+                        - workflowAttemptId
+                        - lastExecutedAt
+                        - executionCount
+                        - lastRunStatus
+                        - lastRunErrorMessage
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agentSchedules
+                  links:
+                    self: http://www.example.com/api/agent_schedules/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    formInterfaceId: 00000000-0000-0000-0000-000000000001
+                    chatInterfaceId: null
+                    interfaceType: form
+                    name: Updated Schedule
+                    description: Updated schedule configuration
+                    status: active
+                    repeatUnit: daily
+                    repeatFrequency: 1
+                    repeatSubFrequency: []
+                    timezone: America/New_York
+                    startAt: '2026-01-23T02:17:28'
+                    endAt: null
+                    parameterValues:
+                      param1: value1
+                      test_param: test_value
+                      updated_param: updated_value
+                      new_image_param:
+                      - contentType: image/jpeg
+                        binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      regular_param1: value1
+                      attachment_param:
+                      - contentType: image/jpeg
+                        binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      subject: Team Update
+                      notes: Additional scheduling notes
+                    sendEmailNotification: false
+                    emailRecipients: []
+                    textResourceId: null
+                    workflowProjectId: test-project-id
+                    workflowSessionId: null
+                    workflowAttemptId: null
+                    lastExecutedAt: null
+                    executionCount: 0
+                    lastRunStatus: null
+                    lastRunErrorMessage: null
+        '400':
+          description: rejects emailRecipients in request payload for updates
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: emailRecipients is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: denies non-creator admin from editing agent schedule in same account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: returns 403 Forbidden when trying to update to cross-account agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: PATCH /api/agent_schedules/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: returns validation error when updating parameter_values with invalid attachments
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            originalType:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: attachments/0 - attachment content is corrupted
+                  detail: parameterValues - attachments/0 - attachment content is corrupted
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/parameterValues
+                  status: '422'
+                  meta:
+                    validationCode: UNDEFINED_TYPE
+                    originalType: attachments/0 - attachment content is corrupted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        projectId:
+                          type: string
+                        agentId:
+                          type: string
+                        formInterfaceId:
+                          type: string
+                        name:
+                          type: string
+                        repeatUnit:
+                          type: string
+                        repeatFrequency:
+                          type: integer
+                        repeatSubFrequency:
+                          type: array
+                          items:
+                            type: integer
+                        timezone:
+                          type: string
+                        startAt:
+                          type: string
+                        description:
+                          type: string
+                        parameterValues:
+                          type: object
+                          properties:
+                            param1:
+                              type: string
+                            updated_param:
+                              type: string
+                            new_image_param:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  binaryBase64:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                required:
+                                - binaryBase64
+                                - contentType
+                            regular_param1:
+                              type: string
+                            attachment_param:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  binaryBase64:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                required:
+                                - binaryBase64
+                                - contentType
+                            category:
+                              type: string
+                            notes:
+                              type: string
+                        sendEmailNotification:
+                          type: boolean
+                        endAt:
+                          type: string
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: agent_schedules
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  agentId: 00000000-0000-0000-0000-000000000001
+                  formInterfaceId: 00000000-0000-0000-0000-000000000001
+                  name: Updated Schedule
+                  repeatUnit: daily
+                  repeatFrequency: 1
+                  repeatSubFrequency: []
+                  timezone: America/New_York
+                  startAt: '2025-12-25T15:30:00'
+                  description: Updated schedule parameters
+                  parameterValues:
+                    param1: value1
+                    updated_param: updated_value
+                    new_image_param:
+                    - binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      contentType: image/jpeg
+                    regular_param1: value1
+                    attachment_param:
+                    - binaryBase64: /9j/4AAQSkZJRgABAQEBLAEsAAD/4QClRXhpZgAASUkqAAgAA
+                      contentType: image/jpeg
+                    category: Project Status
+                    notes: Final project review
+                  sendEmailNotification: true
+                  endAt: '2026-01-15T18:45:00'
+  /api/agent_schedules/{id}/callback:
+    post:
+      summary: callback
+      tags:
+      - AgentSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                session_id:
+                  type: string
+                attempt_id:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - success
+                  - failure
+                  - unknown
+                executed_at:
+                  type: string
+                  format: date-time
+                error_message:
+                  type:
+                  - string
+                  - 'null'
+              required:
+              - session_id
+              - attempt_id
+              - status
+            example:
+              session_id: session_123
+              attempt_id: attempt_456
+              status: failure
+              executed_at: '2026-01-22T02:17:35Z'
+              error_message: Something went wrong
+      responses:
+        '200':
+          description: calls update_workflow_project! when expired on failure too
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Agent schedule not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '404'
+                error: Not Found
+  /api/agent_schedules/{id}/execute:
+    post:
+      summary: Execute agent schedule - returns workflow YAML
+      tags:
+      - AgentSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Agent schedule execution initiated successfully
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+              example:
+                active_schedule:
+                  summary: Active schedule - returns execution workflow
+                  value: "---\n\"+create_chat\":\n  http>: /api/chats\n  method: POST\n  content:\n    data:\n      type: chats\n      attributes:\n        formInterfaceId: \"12345\"\n        inputParameters: '{\"param\": \"value\"}'\n\"+with_chat_id\":\n  _do:\n    \"+continue_chat\":\n      py>: continue_chat_handler.handle_sse_request\n      url: /api/chats/${chat_id}/continue\n\"+callback_success\":\n  http>: /api/agent_schedules/00000000-0000-0000-0000-000000000001/callback\n  method: POST\n"
+                expired_schedule:
+                  summary: Expired schedule - returns expiration log
+                  value: "---\n\"+log_expired\":\n  echo>: Schedule 00000000-0000-0000-0000-000000000001 has expired and was disabled\n"
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Agent schedule not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: 404
+                error: Not Found
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

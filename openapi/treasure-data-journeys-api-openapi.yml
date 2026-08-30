@@ -1,0 +1,3561 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Journeys API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Journeys
+  description: In Audience Studio, a journey represents a timeline of events that can help you motivate a customer’s behavior about your product. After marketers create journey stages, they can further analyze and refine the stages and activate specific stages for campaigns. <br><br> _Journeys is a premium feature. Contact your Customer Success Representative for more information._
+paths:
+  /entities/journeys:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: List journeys
+      description: List journeys under the specified folder.
+      parameters:
+      - name: folder_id
+        in: query
+        description: Folder ID specifying the folder where journeys are listed
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: permission
+        in: query
+        description: Permission to filter
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - edit
+      responses:
+        '200':
+          description: Returns the list of the journeys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesIndexJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Journeys
+      summary: Create journey
+      description: Create a journey.
+      requestBody:
+        description: parameters to create a journey
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesJourneyCreateRepresentation'
+            example:
+              type: journey
+              attributes:
+                name: My new journey
+                description: ''
+                state: draft
+                journeyStages:
+                - name: stage1
+                - name: stage2
+              relationships:
+                parentFolder:
+                  data:
+                    id: '688641'
+                    type: folder-segment
+        required: true
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve summary of specified journey
+      description: Retrieve the summary of a specified journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    patch:
+      tags:
+      - Journeys
+      summary: Update journey entity
+      description: Update a journey entity.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to update a journey
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesJourneyUpdateRepresentation'
+        required: true
+      responses:
+        '200':
+          description: Returns a summary of the updated journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Journeys
+      summary: Delete journey entity
+      description: Delete a journey entity.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Empty if deletion is successful
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/detail:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Update meta field
+      description: Update the meta field of the journey in draft.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to validate a journey
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/JourneyDetailJsonApiResource'
+        required: true
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/available_behaviors_for_step:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Retrieve a list of available behavior table of specified step
+      description: Retrieve a list of available behavior table of specified step.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: stepId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: parameters to retrieve a list of available behavior table
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesJourneyUpdateRepresentation'
+        required: true
+      responses:
+        '200':
+          description: Returns a list of available behavior table of specified journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesAudienceBehaviorIndexJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/activation_templates_for_step:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Retrieve a list of journey activation templates of specified step
+      description: Retrieve a list of journey activation templates of specified step.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: stepId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: parameters to retrieve a list of journey activation templates
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesJourneyUpdateRepresentation'
+        required: true
+      responses:
+        '200':
+          description: Returns a list of available behavior table of specified journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesActivationTemplateIndexJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/duplicate:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Create a duplicate of the specified journey
+      description: Create a duplicate of the specified journey
+      requestBody:
+        description: parameters to duplicate a journey
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/JourneyDuplicateJsonApiResource'
+        required: true
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/statistics:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve journey statistics
+      description: Retrieve the specified journey statistics.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the statistical summary of the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyStatisticsJsonApiResponse'
+        '403':
+          $ref: '#/components/responses/NonJsonApiForbiddenRequest'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/run:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Trigger on-demand journey workflow execution
+      description: 'Triggers the journey workflow to execute immediately using the most recent completed Parent Segment output data. Does not initiate a Parent Segment refresh. Returns 409 Conflict if a PS refresh or journey workflow is already in progress. Returns 422 if the journey is not eligible for on-demand execution (e.g., not active, belongs to Priority Group).
+
+        '
+      operationId: runJourney
+      parameters:
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ID of the journey to trigger
+      responses:
+        '200':
+          description: Journey workflow execution has been triggered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-JourneyOnDemandExecutionJsonApiResponse'
+        '403':
+          $ref: '#/components/responses/NonJsonApiForbiddenRequest'
+        '404':
+          description: Journey not found
+        '409':
+          description: 'Conflict - Parent Segment refresh or journey workflow is already in progress
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-JourneyOnDemandExecutionErrorResponse'
+        '422':
+          description: 'Journey is not eligible for on-demand execution
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-JourneyOnDemandExecutionErrorResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/conversion_sankey_charts:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve the list of conversion sankey chart source data
+      description: Retrieve the list of conversion sankey chart source data
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Retrieve the list of conversion sankey chart source data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyConversionSankeyChartsJsonApiResponse'
+        '403':
+          $ref: '#/components/responses/NonJsonApiForbiddenRequest'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/activation_sankey_charts:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve the list of activation sankey chart source data
+      description: Retrieve the list of activation sankey chart source data
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Retrieve the list of conversion sankey chart source data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyActivationSankeyChartsJsonApiResponse'
+        '403':
+          $ref: '#/components/responses/NonJsonApiForbiddenRequest'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/customers:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve list of profiles in journey
+      description: Retrieve a list of profiles in a journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of profiles in the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyCustomersJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/segment_rules:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve list of segment rules available in audience
+      description: Retrieve a list of segment rules available in an audience. It returns the viewable journeys only.
+      parameters:
+      - name: audience_id
+        in: query
+        description: Audience the journey belongs to
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of segment rules available in the audience
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneySegmentRulesJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/activations:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve list of journey activations in journey
+      description: Retrieve a list of journey activations for the specified journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of journey activation step in the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesListJourneyActivationStepJsonApiResponse'
+    post:
+      tags:
+      - Journeys
+      summary: Create an activation step in journey
+      description: Create an activation step in a journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to configure the journey activation step
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+      responses:
+        '200':
+          description: Returns a summary of the activation step in the journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyActivationStepJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/activations/{journeyActivationStepId}:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve summary of activation node in journey
+      description: Retrieve a summary of the activation node in a journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: journeyActivationStepId
+        in: path
+        description: JourneyActivationStep ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a summary of the activation node in the journey
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyActivationStepJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    patch:
+      tags:
+      - Journeys
+      summary: Update the configuration of the activation step in journey
+      description: Update the configuration of the activation step in journey.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: journeyActivationStepId
+        in: path
+        description: JourneyActivationStep ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to edit the journey activation step
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+      responses:
+        '200':
+          description: Returns a summary of the activation node in the journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyActivationStepJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/pause:
+    x-external: true
+    patch:
+      tags:
+      - Journeys
+      summary: Pause journey and associated activations schedules.
+      description: Pause journey and associated activations schedules.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/resume:
+    x-external: true
+    patch:
+      tags:
+      - Journeys
+      summary: Resume journey and associated activations schedules.
+      description: Resume journey and associated activations schedules.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a summary of the journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journeys/{journeyId}/journey_stages/{journeyStageId}/customers:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Retrieve list of profiles in the journey stage
+      description: Retrieve a list of profiles in a journey stage.
+      parameters:
+      - name: journeyId
+        in: path
+        description: Journey ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: journeyStageId
+        in: path
+        description: Journey stage ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of profiles in the journey stage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JourneyProfilesJsonApiResource'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Return the journey bundle information
+      description: Return the journey bundle information which contains the list of journey versions
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of the journeys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    patch:
+      tags:
+      - Journeys
+      summary: Update the metadata of the journey bundle
+      description: "Update the editable journey bundle information. The following fields are editable with this API.\n  - name\n  - description\n  - latestJourneyId\nTo update the latest journey, the following validation checks the validity of the operation.\n  - The journey must exist and belong to this journey bundle\n  - The journey must be launched\nThe case when launching new journey as the latest is treated by the POST journey endpoint with the \njourneyBundleId.\n"
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to edit the name and description of the journey bundle
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleUpdateRepresentation'
+        required: true
+      responses:
+        '200':
+          description: Returns the list of the journeys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Journeys
+      summary: Delete the journey bundle
+      description: Delete the journey bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Empty if deletion is successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleDestroyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/latest:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Returns the latest journey in the bundle
+      description: Returns the latest journey in the bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the latest journey in the bundle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/statistics:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Return the list of statistics of jouney under the bundle
+      description: Return the statistics under the journey bundle.
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of the journey statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleStatisticsJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/conversion_sankey_charts:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Return the list of conversion sankey charts of journey under the bundle
+      description: Return the list of conversion sankey charts of journey under the bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of the journey statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleConversionSankeyChartsJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/activation_sankey_charts:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Return the list of activation sankey charts of journey under the bundle
+      description: Return the list of activation sankey charts of journey under the bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of the journey statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleActivationSankeyChartsJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/activations:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Returns the list of activations associated with the journey bundle
+      description: Returns the list of activations associated with the journey bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns the list of activations associated with the journey bundle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleActivationsJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/journeys:
+    x-external: true
+    post:
+      tags:
+      - Journeys
+      summary: Create the new journey under the bundle with copying the latest journey
+      description: Return the journey bundle information which contains the list of journey versions
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: parameters to specify the source journey copy from
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partial_journey.yaml-JourneyBundleNewJourneyAttributes'
+      responses:
+        '200':
+          description: Returns the journey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetJourneyJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+  /entities/journey_bundles/{journeyBundleId}/journeys_appendable:
+    x-external: true
+    get:
+      tags:
+      - Journeys
+      summary: Validate the journey can be appended to the bundle
+      description: Validate the journey can be appended to the bundle
+      parameters:
+      - name: journeyBundleId
+        in: path
+        description: Journey Bundle ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: New journey can be appendable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleNewJourneyAppendableJsonApiResponse'
+        '400':
+          description: New journey can not be appendable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partial_journey.yaml-EntitiesJourneyBundleNewJourneyNotAppendableJsonApiResponse'
+      security:
+      - TdApikeyAuth: []
+components:
+  schemas:
+    partial_journey.yaml-EntitiesJourneyBundleStatisticsJsonApiResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyStatisticsJsonApiResource'
+        included:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+    JourneySankeyCharts:
+      type: array
+      items:
+        $ref: '#/components/schemas/JourneySankeyChart'
+    EntitiesGetJourneySegmentRulesJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneySegmentRulesJsonApiResource'
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    JourneyJumpFromJourney:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - journey
+          - journeyStage
+        attributes:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+            jumpType:
+              type: string
+            jumpName:
+              type:
+              - string
+              - 'null'
+            sourceJourneyId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            folderName:
+              type: string
+            targetJourneyId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            targetStageId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            targetStageName:
+              type: string
+            deletedBy:
+              type:
+              - string
+              - 'null'
+    EntitiesListJourneyActivationStepJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    ActivationTemplateSyndicationBehaviorProperties:
+      type: object
+      properties:
+        columns:
+          $ref: '#/components/schemas/Columns'
+        behaviorTableName:
+          type: string
+          description: Behavior table name which contains behavior records
+          example: purchase_history
+        joinRow:
+          type:
+          - integer
+          - 'null'
+          description: How much rows would be joined (value is N for Top-N join)
+          example: 3
+        joinStrategy:
+          type: string
+          example: Last
+          enum:
+          - All
+          - First
+          - Last
+          - Top-N
+        formatting:
+          type: string
+          enum:
+          - rows
+          - cols
+        orderBy:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              order:
+                type: string
+                enum:
+                - ascending
+                - descending
+            example:
+              key: purchased_at
+              order: descending
+          example:
+          - key: purchased_at
+            order: descending
+          - key: price
+            order: ascending
+    ActivationTemplateIndexJsonApiResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - activation-template
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            kind:
+              type: integer
+              description: '0: batch, 1: batch_journey'
+            allColumns:
+              description: activation all column flag  ('true' means that you use all attribute data)
+              type: boolean
+            columns:
+              oneOf:
+              - $ref: '#/components/schemas/Columns'
+              - $ref: '#/components/schemas/NullValue'
+            scheduleType:
+              $ref: '#/components/schemas/DeprecatedScheduleType'
+            scheduleOption:
+              type:
+              - string
+              - 'null'
+            timezone:
+              type:
+              - string
+              - 'null'
+            startAt:
+              $ref: '#/components/schemas/StartAt'
+            endOn:
+              type:
+              - string
+              - 'null'
+              format: date
+            repeatUnit:
+              $ref: '#/components/schemas/RepeatUnit'
+            repeatFrequency:
+              $ref: '#/components/schemas/RepeatFrequency'
+            repeatSubFrequency:
+              $ref: '#/components/schemas/RepeatSubFrequency'
+            connectionId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+            connectorConfig:
+              type:
+              - object
+              - 'null'
+            notifyOn:
+              type: array
+              items:
+                type: string
+                enum:
+                - onSuccess
+                - onFailure
+            emailRecipients:
+              type: array
+              items:
+                description: User ID of td-api. Not CDP-API's one.
+                type: integer
+                format: int64
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            state:
+              type: string
+              enum:
+              - draft
+              - published
+            nestedWorkflowProjectName:
+              type:
+              - string
+              - 'null'
+            nestedWorkflowName:
+              type:
+              - string
+              - 'null'
+            activationActionsEnabled:
+              type: boolean
+            lockEnabled:
+              type: boolean
+            runAfterJourneyRefresh:
+              description: If true, this activation step will be executed immediately after the journey is refreshed. Only available for kind of journey.
+              type:
+              - boolean
+              - 'null'
+            syndicationBehavior:
+              allOf:
+              - $ref: '#/components/schemas/ActivationTemplateSyndicationBehaviorProperties'
+            fieldProperties:
+              $ref: '#/components/schemas/ActivationTemplateFieldProperties'
+            activationCount:
+              type: integer
+              description: Number of related activations
+            available:
+              type: boolean
+              description: This template is available or not (It contains PBP PII BLOCKED columns or not)
+            availableBySegment:
+              type: boolean
+              description: This template is available by the segment or not (It return only with `availableBySegmentId` parameter)
+            availableByStep:
+              type: boolean
+              description: This template is available by the step or not (It is returned only when `/entities/journeys/{journeyId}/activation_templates_for_step` is called)
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    RepeatUnit:
+      type: string
+      description: Setting an activation repetition cycle such as "day" or "week".
+      enum:
+      - none
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - once
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    JourneyStep:
+      type:
+      - object
+      - 'null'
+      properties:
+        uuid:
+          oneOf:
+          - $ref: '#/components/schemas/JourneyWaitStep'
+          - $ref: '#/components/schemas/JourneyActivationStep'
+          - $ref: '#/components/schemas/JourneyDecisionPointStep'
+          - $ref: '#/components/schemas/JourneyMergeStep'
+          - $ref: '#/components/schemas/JourneyJumpStep'
+          - $ref: '#/components/schemas/JourneyEndStep'
+          - $ref: '#/components/schemas/JourneyAbTestStep'
+    EntitiesGetJourneyConversionSankeyChartsJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneySankeyCharts'
+    DeprecatedScheduleType:
+      type: string
+      deprecated: true
+      description: Deprecated. Old parameter for setting schedule type. See/Use RepeatUnit instead.
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    StartAt:
+      type:
+      - string
+      - 'null'
+      format: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
+      description: cdp-api will fill some value for old syndications with ScheduleType is not NoneType. '%Y-%M-%DT%h:%m:%s' is expected.
+    partial_journey_activation_step.yaml-JourneyActivationParams:
+      type: object
+      not:
+        required:
+        - syndicationBehavior
+        - syndicationBehaviors
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        allColumns:
+          description: syndication all column flag  ('true' means  that you use all attribute data)
+          type: boolean
+        columns:
+          $ref: '#/components/schemas/Columns'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type: string
+        runAt:
+          type: string
+        cron:
+          type: string
+        timezone:
+          type: string
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        endOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        repeatUnit:
+          $ref: '#/components/schemas/RepeatUnit'
+        repeatFrequency:
+          $ref: '#/components/schemas/RepeatFrequency'
+        connectionId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+        connectorConfig:
+          type:
+          - object
+          - 'null'
+        notifyOn:
+          type: array
+          items:
+            type: string
+            enum:
+            - onSuccess
+            - onFailure
+        emailRecipients:
+          type: array
+          items:
+            description: User ID of td-api. Not CDP-API's one.
+            type: integer
+            format: int64
+        activationTemplateId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        nestedWorkflowProjectName:
+          type: string
+        nestedWorkflowName:
+          type: string
+        lockEnabled:
+          type: boolean
+        activationActionsEnabled:
+          type: boolean
+        syndicationBehavior:
+          deprecated: true
+          description: Deprecated. Use syndicationBehaviors instead. Cannot be specified together with syndicationBehaviors.
+          allOf:
+          - $ref: '#/components/schemas/SyndicationBehavior'
+        syndicationBehaviors:
+          type:
+          - array
+          - 'null'
+          maxItems: 4
+          description: Behavior activation configurations. Cannot be specified together with syndicationBehavior.
+          items:
+            $ref: '#/components/schemas/SyndicationBehavior'
+      required:
+      - name
+      - connectionId
+      - connectorConfig
+    JourneyWaitStep:
+      type: object
+      oneOf:
+      - $ref: '#/components/schemas/JourneyWaitStepDuration'
+      - $ref: '#/components/schemas/JourneyWaitStepDate'
+      - $ref: '#/components/schemas/JourneyWaitStepDaysOfTheWeek'
+      - $ref: '#/components/schemas/JourneyWaitStepCondition'
+    JourneyAbTestStep:
+      type: object
+      required:
+      - type
+      - name
+      - customizedSplit
+      - variants
+      properties:
+        type:
+          enum:
+          - AbTest
+        name:
+          type: string
+        customizedSplit:
+          type: boolean
+        uniqueId:
+          type: string
+        enabledCapping:
+          type: boolean
+          description: Enables profile capping on the step
+        winnerVariantId:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Set when a winner variant is declared via PATCH .../ab_test_winner. Response-only; cannot be set through a journey create/update request.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyAbTestVariant'
+    ActivationTemplateFieldPropertiesLocked:
+      description: activation template field properties locked
+      type: object
+      properties:
+        allColumns:
+          type: boolean
+        columns:
+          type: object
+          example:
+            b24bf298-4f8c-4e8a-8187-38f2efc781d9:
+              column: true
+              source: true
+              lockDeleteColumn: false
+            c97c5711-31dd-4563-aca9-795c0b429593:
+              column: true
+              source: true
+              lockDeleteColumn: false
+        connectionId:
+          type: boolean
+        connectorConfig:
+          type:
+          - object
+          - 'null'
+          example:
+            userDatabaseName: true
+            userTableName: true
+            legacy: false
+            mode: false
+        activationActionsEnabled:
+          type: boolean
+        syndicationBehavior:
+          type:
+          - object
+          - 'null'
+          properties:
+            tableName:
+              type: string
+              description: Behavior table name which contains behavior records
+              example: purchase_history
+            columns:
+              type: object
+              example:
+                0ae6e876-9d9d-4217-8be2-f8646000d0c2:
+                  column: true
+                  source: true
+                  lockDeleteColumn: false
+                b71d422e-4f29-47d5-b072-7e598275a402:
+                  column: true
+                  source: true
+                  lockDeleteColumn: false
+            lockAddColumn:
+              type: boolean
+            lockDeleteBehaviorTable:
+              type: boolean
+            lockEditBehaviorTable:
+              type: boolean
+            lockEditJoinRow:
+              type: boolean
+            lockEditJoinStrategy:
+              type: boolean
+            lockEditFormatting:
+              type: boolean
+            lockEditOrderBy:
+              type: boolean
+        lockAddColumn:
+          type: boolean
+        lockAddString:
+          type: boolean
+        lockAddBehavior:
+          type: boolean
+        lockEditSchedule:
+          type: boolean
+        lockEditNotification:
+          type: boolean
+        lockEditWorkflowExecution:
+          type: boolean
+        lockEditSequentialActivation:
+          type: boolean
+    SyndicationJsonApiResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - syndication
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - columns
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            allColumns:
+              description: syndication all column flag  ('true' means that you use all attribute data)
+              type: boolean
+            columns:
+              $ref: '#/components/schemas/Columns'
+            scheduleType:
+              $ref: '#/components/schemas/DeprecatedScheduleType'
+            scheduleOption:
+              type: string
+              deprecated: true
+            timezone:
+              type: string
+            startAt:
+              $ref: '#/components/schemas/StartAt'
+            endOn:
+              type:
+              - string
+              - 'null'
+              format: date
+            runStatus:
+              type:
+              - string
+              - 'null'
+              description: Tag should be shown in "Run Status". If the workflow never run before and future schedule is set, 'scheduled' will be shown.
+              enum:
+              - scheduled
+              - success
+              - error
+              - canceling
+              - canceled
+              - running
+              - waiting
+            repeatUnit:
+              $ref: '#/components/schemas/RepeatUnit'
+            repeatFrequency:
+              $ref: '#/components/schemas/RepeatFrequency'
+            repeatSubFrequency:
+              $ref: '#/components/schemas/RepeatSubFrequency'
+            connectionId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            connectorConfig:
+              type:
+              - object
+              - 'null'
+            valid:
+              type: boolean
+            notifyOn:
+              type: array
+              items:
+                type: string
+                enum:
+                - onSuccess
+                - onFailure
+            emailRecipients:
+              type: array
+              items:
+                description: User ID of td-api. Not CDP-API's one.
+                type: integer
+                format: int64
+            executions:
+              type: array
+              items:
+                $ref: '#/components/schemas/SyndicationExecution'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            nestedWorkflowProjectName:
+              type: string
+            nestedWorkflowName:
+              type: string
+            activationActionsEnabled:
+              type: boolean
+            lockEnabled:
+              type: boolean
+            activationTemplateId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            syndicationBehavior:
+              deprecated: true
+              description: Deprecated. Use syndicationBehaviors instead.
+              allOf:
+              - $ref: '#/components/schemas/SyndicationBehavior'
+            syndicationBehaviors:
+              type:
+              - array
+              - 'null'
+              maxItems: 4
+              description: Behavior activation configurations
+              items:
+                $ref: '#/components/schemas/SyndicationBehavior'
+        relationships:
+          type: object
+          properties:
+            segment:
+              $ref: '#/components/schemas/RelationshipsBatchSegmentJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    EntitiesGetJourneyCustomersJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneyProfilesJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JourneyWaitStepDaysOfTheWeek:
+      type: object
+      required:
+      - type
+      - name
+      - waitStepType
+      - waitUntilDaysOfTheWeek
+      - timezone
+      properties:
+        type:
+          enum:
+          - WaitStep
+        name:
+          type: string
+        waitStepType:
+          enum:
+          - DaysOfTheWeek
+        waitUntilDaysOfTheWeek:
+          type: array
+          description: 'Array of integer representing the day of the week.
+
+            1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday, 7: Sunday
+
+            '
+          example:
+          - 1
+          - 5
+          - 6
+          items:
+            type: integer
+            minimum: 1
+            maximum: 7
+          minItems: 1
+          uniqueItems: true
+        timezone:
+          type: string
+        next:
+          type: string
+    EntitiesIndexJourneyJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyJsonApiResource'
+        included:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/JourneyJumpFromJourney'
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+    partial_journey.yaml-EntitiesJourneyBundleActivationSankeyChartsJsonApiResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyActivationSankeyCharts'
+        included:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+    JourneyJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - journey
+        attributes:
+          type: object
+          required:
+          - name
+          - description
+          - state
+          - audienceId
+          - goal
+          - createdAt
+          - updatedAt
+          - launchedAt
+          - journeyStages
+          - paused
+          - pausedAt
+          - allowReentry
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            state:
+              type: string
+              enum:
+              - draft
+              - simulation
+              - launched
+            goal:
+              $ref: '#/components/schemas/JourneyCriteria'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            launchedAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+            journeyStages:
+              type: array
+              minLength: 1
+              maxLength: 8
+              items:
+                $ref: '#/components/schemas/JourneyStageJsonApiResource'
+            paused:
+              type: boolean
+            pausedAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+            allowReentry:
+              type: boolean
+            reentryMode:
+              type: string
+              enum:
+              - no_reentry
+              - reentry_unless_goal_achieved
+              - reentry_always
+            journeyBundleId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+            journeyBundleName:
+              type:
+              - string
+              - 'null'
+            versionNumber:
+              type: integer
+              format: int64
+            journeyBundleDescription:
+              type:
+              - string
+              - 'null'
+            latestExecution:
+              description: 'The most recent execution of the journey workflow. If no executions have been created, this will be null. '
+              allOf:
+              - $ref: '#/components/schemas/Execution'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    JourneyWaitStepConditionPath:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        segmentId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+          description: required if timedOutPath = false
+        timedOutPath:
+          type: boolean
+        moveAfter:
+          type: integer
+          minimum: 1
+        unit:
+          type: string
+          enum:
+          - day
+          - week
+        next:
+          type: string
+    EntitiesActivationTemplateIndexJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivationTemplateIndexJsonApiResponse'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JourneyActivationStepJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - journeyActivationStep
+        attributes:
+          type: object
+          required:
+          - activationId
+          - activationParams
+          properties:
+            activationId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+            activationParams:
+              $ref: '#/components/schemas/partial_journey_activation_step.yaml-JourneyActivationParams'
+        relationships:
+          type: object
+          properties:
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    EntitiesGetJourneyJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneyJsonApiResource'
+        included:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/JourneyJumpFromJourney'
+            - $ref: '#/components/schemas/SyndicationJsonApiResource'
+            - $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    JourneyJumpStep:
+      type: object
+      required:
+      - type
+      - name
+      - target
+      properties:
+        type:
+          enum:
+          - Jump
+        name:
+          type: string
+        target:
+          $ref: '#/components/schemas/JourneyJumpTarget'
+    JourneyStageDetailJsonApiResource:
+      type: object
+      properties:
+        name:
+          type: string
+    JourneyStageStatistic:
+      type: object
+      required:
+      - id
+      - enteredSize
+      - milestoneSize
+      - completeMilestoneRate
+      - exitOrJumpSize
+      - exitOrJumpRate
+      - history
+      - stepSizes
+      - stepInfluxes
+      - size
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        enteredSize:
+          type: number
+        milestoneSize:
+          type: number
+        completeMilestoneRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        exitOrJumpSize:
+          type: number
+        exitOrJumpRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        history:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyStageStatisticHistory'
+        stepSizes:
+          type: object
+          description: Current number of profiles in each step (blocking and wait steps)
+          additionalProperties:
+            type: number
+          example:
+            wait_step_abc123: 150
+            activation_def456: 75
+        stepInfluxes:
+          type: object
+          description: Number of profiles entering each step at the current timestamp
+          additionalProperties:
+            type: number
+          example:
+            wait_step_abc123: 25
+            activation_def456: 12
+        size:
+          type: number
+          description: Current total number of profiles in this stage
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    partial_journey.yaml-EntitiesJourneyBundleUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - journeyBundle
+        attributes:
+          $ref: '#/components/schemas/partial_journey.yaml-JourneyBundleMetaAttributes'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    AudienceBehaviorWithVisibilityJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - audience-behavior
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - parentDatabaseName
+          - parentTableName
+          - parentKey
+          - foreignKey
+          - matrixDatabaseName
+          - matrixTableName
+          - allColumns
+          - defaultTimeFilterEnabled
+          - isRealtime
+          - schema
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+              description: Behavior name user defined on Master Segment Configuration page of Data Workbench
+            parentDatabaseName:
+              type: string
+              description: Database name of the behavior table
+            parentTableName:
+              type: string
+              description: Table name of the behavior table
+            parentKey:
+              type: string
+              description: Join key of the behavior table
+            foreignKey:
+              type: string
+              description: Foreign key of the master table
+            matrixDatabaseName:
+              type: string
+              description: Matrix database name of the behavior table
+            matrixTableName:
+              type: string
+              description: Matrix table name of the behavior table
+            allColumns:
+              type: boolean
+            defaultTimeFilterEnabled:
+              type: boolean
+            isRealtime:
+              type: boolean
+            schema:
+              type: array
+              description: Columns of behavior
+              items:
+                $ref: '#/components/schemas/AudienceBehaviorSchemaWithVisibility'
+    EntitiesGetJourneyActivationStepJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JourneySankeyChartLink:
+      type: object
+      required:
+      - source
+      - target
+      - value
+      properties:
+        source:
+          type: string
+        target:
+          type: string
+        value:
+          type: number
+        conversionRate:
+          type: number
+    JourneyDecisionPointBranch:
+      type: object
+      required:
+      - name
+      - segmentId
+      properties:
+        name:
+          type: string
+        segmentId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        excludedPath:
+          type: boolean
+        next:
+          type: string
+    JourneyWaitStepDate:
+      type: object
+      required:
+      - type
+      - name
+      - waitStepType
+      - waitUntilDate
+      - timezone
+      properties:
+        type:
+          enum:
+          - WaitStep
+        name:
+          type: string
+        waitStepType:
+          enum:
+          - Date
+        waitUntilDate:
+          type: string
+          format: date
+        timezone:
+          type: string
+        next:
+          type: string
+    EntitiesJourneyCreateRepresentation:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - journey
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            state:
+              type: string
+              enum:
+              - draft
+              - simulation
+              - launched
+            goal:
+              $ref: '#/components/schemas/JourneyCriteria'
+            journeyStages:
+              type: array
+              minLength: 1
+              maxLength: 8
+              items:
+                $ref: '#/components/schemas/JourneyStageJsonApiResource'
+            allowReentry:
+              type: boolean
+            reentryMode:
+              type: string
+              enum:
+              - no_reentry
+              - reentry_unless_goal_achieved
+              - reentry_always
+            journeyBundleId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+              description: Attach the new journey to an existing journey bundle as its next version. Omit to create a new bundle.
+            journeyBundleName:
+              type:
+              - string
+              - 'null'
+            journeyBundleDescription:
+              type:
+              - string
+              - 'null'
+          required:
+          - name
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+          required:
+          - parentFolder
+    partial_journey.yaml-EntitiesJourneyBundleActivationsJsonApiResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyActivationStepJsonApiResource'
+        included:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/Syndication'
+    JourneyStageStatisticsJsonApiResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/JourneyStageStatistic'
+    JourneyStatisticsHistory:
+      type: object
+      required:
+      - updatedAt
+      - size
+      - entryInflux
+      - goalInflux
+      - exitInflux
+      - jumpInflux
+      properties:
+        updatedAt:
+          type: string
+          format: datetime
+        size:
+          type: number
+        entryInflux:
+          type: number
+        goalInflux:
+          type: number
+        exitInflux:
+          type: number
+        jumpInflux:
+          type: number
+    ColumnType:
+      type: string
+      description: Type of the column
+      enum:
+      - string
+      - number
+      - timestamp
+      - date
+      - string_array
+      - number_array
+      - boolean
+    partial_journey.yaml-EntitiesJourneyBundleNewJourneyAppendableJsonApiResponse:
+      type: object
+    JourneySankeyChartNode:
+      type: object
+      required:
+      - label
+      - value
+      properties:
+        label:
+          type: string
+        value:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - stage
+              - goal
+              - exit
+              - jump
+              - activation
+              - milestone
+    RelationshipsBatchSegmentJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - segment-batch
+    JourneyEndStep:
+      type:
+      - object
+      - 'null'
+      properties:
+        type:
+          enum:
+          - End
+        name:
+          type: string
+    JourneyActivationStep:
+      type: object
+      required:
+      - type
+      - name
+      - journeyActivationStepId
+      properties:
+        type:
+          enum:
+          - Activation
+        name:
+          type: string
+        journeyActivationStepId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        next:
+          type: string
+    JourneyDecisionPointStep:
+      type: object
+      required:
+      - type
+      - name
+      - branches
+      properties:
+        type:
+          enum:
+          - DecisionPoint
+        name:
+          type: string
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyDecisionPointBranch'
+    partial_journey.yaml-JourneyOnDemandExecutionJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/partial_journey.yaml-JourneyExecutionJsonApiResource'
+    JourneyCriteria:
+      type:
+      - object
+      - 'null'
+      required:
+      - name
+      - segmentId
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        segmentId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        target:
+          $ref: '#/components/schemas/JourneyJumpTarget'
+    EntitiesGetJourneyStatisticsJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneyStatisticsJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    JourneyMergeStep:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          enum:
+          - Merge
+        name:
+          type: string
+        next:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    StringExpression:
+      type: object
+      properties:
+        string:
+          type: string
+        parameters:
+          type: array
+          description: Values for the placeholders ($1, $2, $3, ...) in the string
+          items:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - String
+                string:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Timestamp
+                format:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - SegmentName
+                  - SegmentId
+                  - AudienceId
+                  - FunnelName
+                  - StageName
+      required:
+      - string
+    JourneyWaitStepDuration:
+      type: object
+      required:
+      - type
+      - name
+      - waitStepType
+      - waitStep
+      - waitStepUnit
+      properties:
+        type:
+          enum:
+          - WaitStep
+        name:
+          type: string
+        waitStepType:
+          enum:
+          - Duration
+        waitStep:
+          type: integer
+        waitStepUnit:
+          type: string
+          enum:
+          - day
+          - week
+        next:
+          type: string
+    RepeatFrequency:
+      type: integer
+      description: 'Setting an activation repeat frequency.
+
+        Currently, it is set only when the repeat unit is "minute". If the repeat unit is "minute", the interval is set in minutes.
+
+        '
+      default: 1
+    partial_journey.yaml-JourneyBundleNewJourneyAttributes:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: ID of the journey to be copied
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the new journey
+    JourneyStageStatisticHistory:
+      type: object
+      required:
+      - updatedAt
+      - journeyStageId
+      - size
+      - exitSizes
+      - entryInflux
+      - milestoneInflux
+      - exitInflux
+      - jumpInflux
+      properties:
+        updatedAt:
+          type: string
+          format: datetime
+        journeyStageId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        size:
+          type: number
+        exitSizes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: number
+        entryInflux:
+          type: number
+        milestoneInflux:
+          type: number
+        exitInflux:
+          type: number
+        jumpInflux:
+          type: number
+    EntitiesGetJourneyActivationSankeyChartsJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/JourneySankeyCharts'
+    partial_journey.yaml-JourneyBundleMetaAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the journey bundle
+        description:
+          type: string
+          description: Description of the journey bundle
+        latestJourneyId:
+          type: string
+    ColumnExpression:
+      type: object
+      properties:
+        column:
+          type: string
+        customerGroup:
+          type:
+          - string
+          - 'null'
+        functions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FunctionExpression'
+      required:
+      - column
+    SyndicationExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          syndicationId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    JourneyJumpTarget:
+      type: object
+      required:
+      - journeyId
+      - journeyStageId
+      properties:
+        journeyId:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: ID of an existing journey to jump to.
+        journeyStageId:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: ID of an existing stage within the target journey to jump to.
+        journeyBundleId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+          readOnly: true
+        stageOrderIndex:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        jumpReferenceId:
+          description: The reference id of the jump target. This is used to identify the jump entity in the included field.
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    JourneyStatisticsJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - journeyStatistic
+        attributes:
+          type: object
+          required:
+          - size
+          - goalSize
+          - enteredSize
+          - completionRate
+          - exitOrJumpSize
+          - exitOrJumpRate
+          - history
+          - journeyStageStatistics
+          properties:
+            size:
+              type: number
+            goalSize:
+              type: number
+            enteredSize:
+              type: number
+            completionRate:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 100
+            exitOrJumpSize:
+              type: number
+            exitOrJumpRate:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 100
+            history:
+              type: array
+              items:
+                $ref: '#/components/schemas/JourneyStatisticsHistory'
+            journeyStageStatistics:
+              $ref: '#/components/schemas/JourneyStageStatisticsJsonApiResource'
+            simulationLog:
+              type:
+              - object
+              - 'null'
+              properties:
+                simulationLaunchedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                parentSegmentRefreshStartedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                parentSegmentRefreshFinishedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                journeyWorkflowStartedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                journeyWorkflowFinishedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+    EntitiesJourneyUpdateRepresentation:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - journey
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            state:
+              type: string
+              enum:
+              - draft
+              - simulation
+              - launched
+            goal:
+              $ref: '#/components/schemas/JourneyCriteria'
+            journeyStages:
+              type: array
+              minLength: 1
+              maxLength: 8
+              items:
+                $ref: '#/components/schemas/JourneyStageJsonApiResource'
+            allowReentry:
+              type: boolean
+            reentryMode:
+              type: string
+              enum:
+              - no_reentry
+              - reentry_unless_goal_achieved
+              - reentry_always
+            journeyBundleId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+              description: Attach the journey to an existing journey bundle as its next version.
+            journeyBundleName:
+              type:
+              - string
+              - 'null'
+            journeyBundleDescription:
+              type:
+              - string
+              - 'null'
+          required:
+          - name
+    SyndicationBehavior:
+      type:
+      - object
+      - 'null'
+      properties:
+        columns:
+          $ref: '#/components/schemas/Columns'
+        behaviorTableName:
+          type: string
+          description: Behavior table name which contains behavior records
+          example: purchase_history
+        joinRow:
+          type:
+          - integer
+          - 'null'
+          description: How much rows would be joined (value is N for Top-N join)
+          example: 3
+        joinStrategy:
+          type: string
+          description: Label of what is the wanted record(s).
+          example: Last
+          enum:
+          - All
+          - First
+          - Last
+          - Top-N
+        formatting:
+          type: string
+          enum:
+          - rows
+          - cols
+        orderBy:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              order:
+                type: string
+                enum:
+                - ascending
+                - descending
+            example:
+              key: purchased_at
+              order: descending
+          example:
+          - key: purchased_at
+            order: descending
+          - key: price
+            order: ascending
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    partial_journey.yaml-EntitiesJourneyBundleDestroyJsonApiResponse:
+      type: object
+    JourneySegmentRulesJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - journeySegmentRule
+        attributes:
+          type: object
+          required:
+          - journeyId
+          - journeyStageId
+          - name
+          - location
+          - journeyBundleName
+          - journeyBundleId
+          properties:
+            journeyId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            journeyStageId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            location:
+              type: string
+            journeyBundleName:
+              type: string
+            journeyState:
+              type: string
+              enum:
+              - draft
+              - launched
+            journeyPaused:
+              type: boolean
+            journeyVersionNumber:
+              type: integer
+            journeyIsLatestVersion:
+              type: boolean
+    Syndication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: integer
+        audienceId:
+          type: string
+          format: integer
+        segmentId:
+          type: string
+          format: integer
+        name:
+          type: string
+        description:
+          type: string
+        allColumns:
+          description: syndication all column flag  ('true' means  that you use all attribute data)
+          type: boolean
+        columns:
+          oneOf:
+          - $ref: '#/components/schemas/Columns'
+          - $ref: '#/components/schemas/NullValue'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        startAt:
+          $ref: '#/components/schemas/StartAt'
+        endOn:
+          type:
+          - string
+          - 'null'
+          format: date
+        repeatUnit:
+          type:
+          - string
+          - 'null'
+        repeatFrequency:
+          type:
+          - integer
+          - 'null'
+        repeatSubFrequency:
+          $ref: '#/components/schemas/RepeatSubFrequency'
+        timezone:
+          type: string
+        connectionId:
+          type:
+          - string
+          - 'null'
+          format: integer
+        connectorConfig:
+          type:
+          - object
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        valid:
+          type: boolean
+        executions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyndicationExecution'
+        notifyOn:
+          type: array
+          items:
+            type: string
+            enum:
+            - onSuccess
+            - onFailure
+        emailRecipients:
+          type: array
+          items:
+            description: User ID of td-api. Not CDP-API's one.
+            type: integer
+            format: int64
+        activationTemplateId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+    JourneyActivationSankeyCharts:
+      type: object
+      properties:
+        stageId:
+          $ref: '#/components/schemas/JourneySankeyCharts'
+    Columns:
+      description: 'Syndication column detail. Basic syntax is `{"column": "alias_name", "source": {...}}`. `source` accepts various definitions. See ColumnExpression/StringExpression for details. example value is using ColumnExpression without `function` property.
+
+        '
+      example:
+      - column: alias_name
+        source:
+          column: real_column_name
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          column:
+            type: string
+          source:
+            anyOf:
+            - $ref: '#/components/schemas/ColumnExpression'
+            - $ref: '#/components/schemas/StringExpression'
+        required:
+        - column
+        - source
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
+      properties:
+        thisKeyNeverHit:
+          type: string
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    partial_journey.yaml-EntitiesJourneyBundleConversionSankeyChartsJsonApiResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneySankeyChart'
+        included:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+    JourneyStageJsonApiResource:
+      type: object
+      required:
+      - name
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: Server-generated. Omit when creating a stage; supply to target an existing stage when updating.
+        name:
+          type: string
+        description:
+          type: string
+        steps:
+          $ref: '#/components/schemas/JourneyStep'
+        rootStep:
+          type: string
+        entryCriteria:
+          $ref: '#/components/schemas/JourneyCriteria'
+        milestone:
+          $ref: '#/components/schemas/JourneyCriteria'
+        exitCriterias:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyCriteria'
+    EntitiesAudienceBehaviorIndexJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceBehaviorWithVisibilityJsonApiResource'
+    JourneyWaitStepCondition:
+      type: object
+      required:
+      - type
+      - name
+      - waitStepType
+      - conditions
+      properties:
+        type:
+          enum:
+          - WaitStep
+        waitStepType:
+          enum:
+          - Condition
+        conditions:
+          type: array
+          minItems: 1
+          maxItems: 2
+          description: the path with segment is required, but the path with moveAfter as timedOutPath = true is optional
+          items:
+            $ref: '#/components/schemas/JourneyWaitStepConditionPath'
+        description:
+          type:
+          - string
+          - 'null'
+    JsonApiValidationError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - validation-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '400'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Name has already been taken
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: Pointer to invalid model attribute
+              example: /attributes/id
+          required:
+          - pointer
+        meta:
+          type: object
+          properties:
+            validationCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - VIOLATES_UNIQUENESS_CONSTRAINT
+              - IS_TOO_SHORT
+              - IS_TOO_LONG
+              - CANNOT_BE_BLANK
+              - INVALID_FORMAT_OR_ASSOCIATION
+              - COMPOSITE_CONDITION_TOO_FEW_RULES_REFERENCED
+              - COMPOSITE_CONDITION_TOO_FEW_RULE_SETS_REFERENCED
+              - COMPOSITE_CONDITION_MISSING_RULE_IDENTIFIER
+              - COMPOSITE_CONDITION_SYNTAX_ERROR
+              - COMPOSITE_CONDITION_TOO_LONG_ALPHABETICAL_IDENTIFIER
+              - COMPOSITE_CONDITION_TOO_LONG_NUMERICAL_IDENTIFIER
+              - PREDICTIVE_SEGMENT_NOT_YET_SCORED
+              - PREDICTIVE_SEGMENT_NOT_YET_TRAINED
+              - IS_IMMUTABLE
+              - UNKNOWN
+              - TOO_MANY_BEHAVIOR_RULES
+              - INVALID_WINDOW_DURATION
+              - UNDEFINED_ENTRY_CRITERIA
+              - UNDEFINED_MILESTONE
+              - UNDEFINED_ACTIVATION_STEP
+              - UNDEFINED_WAIT_STEP
+              - UNDEFINED_EXIT_CRITERIA
+              - UNDEFINED_DECISION_CONDITION
+              - UNDEFINED_MERGE_POINT
+              - UNUSED_IN_ID_LINK
+              - TOO_MANY_PRIMARY_KNOWN_IDS
+              - TOO_LESS_PRIMARY_KNOWN_IDS
+              - TOO_MANY_RT_SEGMENTS
+          required:
+          - validationCode
+      required:
+      - code
+      - status
+      - detail
+      - source
+      - meta
+    JourneyProfilesJsonApiResource:
+      type: object
+      required:
+      - names
+      - rows
+      properties:
+        names:
+          type: array
+          items:
+            type: string
+        rows:
+          type: array
+          items:
+            type: array
+            description: a tuple whose values corresponding names property
+            example:
+            - 003171af29a5f0ac890fed022d9e5366dea5d68e
+            - a@example.com
+            items:
+              oneOf:
+              - type:
+                - string
+                - 'null'
+              - type: integer
+                format: int64
+              - type: number
+                format: float
+    partial_journey.yaml-JourneyOnDemandExecutionErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              detail:
+                type: string
+              meta:
+                type: object
+                properties:
+                  validationCode:
+                    type: string
+    partial_journey.yaml-EntitiesJourneyBundleNewJourneyNotAppendableJsonApiResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonApiValidationError'
+    partial_journey.yaml-EntitiesJourneyBundleJsonApiResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the journey bundle
+        description:
+          type: string
+          description: Description of the journey bundle
+        latestJourneyId:
+          description: Derived from the initial journey version name
+        lastVersionNumber:
+          type: integer
+          description: 'The version number of the most recently created journey. If no journey has been created, this will be 0.
+
+            '
+        journeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JourneyJsonApiResource'
+        latestExecution:
+          description: 'The most recent execution of the latest journey. If no executions have been created, this will be null. '
+          allOf:
+          - $ref: '#/components/schemas/Execution'
+        parentSegmentLatestExecution:
+          description: 'The most recent execution of the latest journey. If no executions have been created, this will be null. '
+          allOf:
+          - $ref: '#/components/schemas/Execution'
+          - type: object
+            properties:
+              audienceId:
+                type: string
+                format: integer
+        included:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/JourneyJsonApiResource'
+    ActivationTemplateFieldProperties:
+      description: activation template field properties
+      type: object
+      properties:
+        locked:
+          $ref: '#/components/schemas/ActivationTemplateFieldPropertiesLocked'
+      required:
+      - locked
+    RepeatSubFrequency:
+      type: array
+      description: 'Parameter for more detailed frequency settings. Values are array of integers.
+
+        Currently, this parameter is only valid for repeat unit "week".
+
+        For multiple days of the week, each value should be 1 to 7.
+
+        1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday, 7: Sunday
+
+        '
+      example:
+      - 1
+      - 5
+      - 6
+      default: []
+      items:
+        type: integer
+        format: int64
+    partial_journey.yaml-JourneyExecutionJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: workflowAttemptId is used as id
+        type:
+          type: string
+          enum:
+          - execution-journey
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionCore'
+          - type: object
+            properties:
+              journeyId:
+                type: string
+                pattern: '[1-9][0-9]*'
+    JourneySankeyChart:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            updatedAt:
+              type: string
+              format: datetime
+            journeyStageId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+            chart:
+              type: object
+              properties:
+                title:
+                  type: string
+                chartType:
+                  type: string
+                  enum:
+                  - sankey
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JourneySankeyChartNode'
+                metaData:
+                  type: object
+                  properties:
+                    links:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/JourneySankeyChartLink'
+    JourneyAbTestVariant:
+      type: object
+      required:
+      - id
+      - name
+      - percentage
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        percentage:
+          type: number
+        next:
+          type: string
+        isControlGroup:
+          type: boolean
+          description: Marks a variant as the control group (required when enabledCapping is true)
+        cappingAt:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          description: Capping threshold per variant (required for non-control variants when capping is enabled)
+    AudienceBehaviorSchemaWithVisibility:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type:
+          - string
+          - 'null'
+          description: Column name of the behavior table (This can be null when the column is an enriched column)
+        matrixColumnName:
+          type: string
+          description: Column name of the behavior table
+        matrixColumnDescription:
+          type:
+          - string
+          - 'null'
+          description: Description of the column in behavior table
+        visibility:
+          type: string
+          enum:
+          - clear
+          - pii
+          - non_pii
+          - blocked
+    JourneyDuplicateJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: source journey id
+        type:
+          type: string
+          enum:
+          - journey
+        attributes:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    FunctionExpression:
+      oneOf:
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - +
+            - '-'
+            - '*'
+            - /
+          arg:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - replace
+          search:
+            type: string
+          replacement:
+            type:
+            - string
+            - 'null'
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - substr
+          start:
+            type: number
+          length:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - regexp_extract
+          pattern:
+            type: string
+          group:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - day_of_week
+            - from_iso8601_timestamp
+            - ln
+            - elapsed_days
+            - td_ip_to_least_specific_subdivision_name
+            - td_ip_to_country_name
+            - td_ip_to_city_name
+            - td_ip_to_connection_type
+            - td_ip_to_domain
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_quantitative
+          default:
+            type: number
+            format: float
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical
+          default:
+            type: string
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical_array
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - if
+          op:
+            type: string
+            enum:
+            - '>'
+            - <
+            - <=
+            - '>='
+            - '='
+            - '!='
+            - is
+            - is\
+            - not
+          right_value:
+            type:
+            - number
+            - 'null'
+          then:
+            type: number
+          else:
+            type: number
+        required:
+        - function
+    JourneyDetailJsonApiResource:
+      type: object
+      required:
+      - attributes
+      - relationships
+      properties:
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            journeyStages:
+              type: array
+              minLength: 1
+              maxLength: 8
+              items:
+                $ref: '#/components/schemas/JourneyStageDetailJsonApiResource'
+            journeyBundleName:
+              type:
+              - string
+              - 'null'
+              description: Name of the journey bundle if it is assumed to be changed.
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+  responses:
+    NonJsonApiForbiddenRequest:
+      description: non-JSON:API formatted error for insufficient permission to access a resource
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: string
+            required:
+            - errors
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

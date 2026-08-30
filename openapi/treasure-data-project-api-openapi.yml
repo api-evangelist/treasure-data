@@ -1,0 +1,2157 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Project API
+  version: '1.0'
+  description: 'Operations tagged Project across 2 of this provider''s published API definitions: treasure-data-llm-api-openapi.yml, treasure-data-workflow-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+- description: aws
+  url: https://api-workflow.treasuredata.com
+- description: aws-tokyo
+  url: https://api-workflow.treasuredata.co.jp
+- description: eu01
+  url: https://api-workflow.eu01.treasuredata.com
+- description: ap02
+  url: https://api-workflow.ap02.treasuredata.com
+- description: ap03
+  url: https://api-workflow.ap03.treasuredata.com
+security:
+- ApiKeyAuth: []
+tags:
+- name: Project
+paths:
+  /api/projects:
+    get:
+      summary: index
+      tags:
+      - Project
+      responses:
+        '200':
+          description: allows GET /api/projects
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            name:
+                              type: string
+                            description: {}
+                            useRuntimeTextResource:
+                              type: boolean
+                            useParentSegment:
+                              type: boolean
+                            useWorkflowExecutor:
+                              type: boolean
+                            isManaged:
+                              type: boolean
+                            managedType:
+                              type: string
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - name
+                          - description
+                          - useRuntimeTextResource
+                          - useParentSegment
+                          - useWorkflowExecutor
+                          - isManaged
+                          - managedType
+                        relationships:
+                          type: object
+                          properties:
+                            overview:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            formInterfaces:
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      id:
+                                        type: string
+                                    required:
+                                    - type
+                                    - id
+                              required:
+                              - data
+                            chatInterfaces:
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items: {}
+                              required:
+                              - data
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            firstAgentName:
+                              type: string
+                            firstIntegrationServiceType:
+                              type: string
+                            firstKnowledgeBaseName:
+                              type: string
+                            totalAgentCount:
+                              type: integer
+                            totalIntegrationCount:
+                              type: integer
+                            totalKnowledgeBaseCount:
+                              type: integer
+                            name:
+                              type: string
+                            email:
+                              type: string
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            agentId:
+                              type:
+                              - string
+                              - 'null'
+                            promptTemplate:
+                              type:
+                              - string
+                              - 'null'
+                            formJsonSchema:
+                              type:
+                              - string
+                              - 'null'
+                            formUiSchema: {}
+                            useTextResource:
+                              type:
+                              - boolean
+                              - 'null'
+                            starterMessage:
+                              type:
+                              - string
+                              - 'null'
+                            textInputEnabled:
+                              type:
+                              - boolean
+                              - 'null'
+                            textInputAgentId: {}
+                            isManaged:
+                              type:
+                              - boolean
+                              - 'null'
+                            chatInterfaceButtons:
+                              type:
+                              - array
+                              - 'null'
+                              items: {}
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        relationships:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            project:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                          required:
+                          - project
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: projects
+                  links:
+                    self: http://www.example.com/api/projects/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    name: cefwatpd
+                    description: null
+                    useRuntimeTextResource: false
+                    useParentSegment: false
+                    useWorkflowExecutor: false
+                    isManaged: true
+                    managedType: PARENT_SEGMENT
+                meta:
+                  total: 1
+                links:
+                  first: http://www.example.com/api/projects?page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/projects?page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: formInterfaces
+                  links:
+                    self: http://www.example.com/api/form_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: ffyhntyh
+                    promptTemplate: 'This is a test prompt template that parses arguments. subject: {{subject}}. topic: {{topic}}.'
+                    formJsonSchema: '{"type":"object","properties":{"subject":{"type":"string","title":"Subject"},"topic":{"title":"Topic","type":"string"}},"required":[]}'
+                    formUiSchema: null
+                    useTextResource: false
+                  relationships:
+                    project:
+                      data:
+                        type: projects
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: formInterfaces
+                  links:
+                    self: http://www.example.com/api/form_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: gkqnpzio
+                    promptTemplate: 'This is a test prompt template that parses arguments. subject: {{subject}}. topic: {{topic}}.'
+                    formJsonSchema: '{"type":"object","properties":{"subject":{"type":"string","title":"Subject"},"topic":{"title":"Topic","type":"string"}},"required":[]}'
+                    formUiSchema: null
+                    useTextResource: false
+                  relationships:
+                    project:
+                      data:
+                        type: projects
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: vznhgcqt
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: fytqacsk
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+      parameters:
+      - name: filter[fulltext]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: nothing
+      - name: filter[hasInterfaces]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: form,chat
+      - name: filter[has_form_interfaces]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 'false'
+      - name: filter[is_managed]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 'false'
+      - name: filter[manage_type]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: PARENT_SEGMENT,PACKAGE
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: formInterfaces,chatInterfaces
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - Project
+      responses:
+        '201':
+          description: creates a project with useWorkflowExecutor set to true
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          useRuntimeTextResource:
+                            type: boolean
+                          useParentSegment:
+                            type: boolean
+                          useWorkflowExecutor:
+                            type: boolean
+                          isManaged:
+                            type: boolean
+                          managedType:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - name
+                        - description
+                        - useRuntimeTextResource
+                        - useParentSegment
+                        - useWorkflowExecutor
+                        - isManaged
+                        - managedType
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: projects
+                  links:
+                    self: http://www.example.com/api/projects/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    name: workflow_project
+                    description: project with workflow executor
+                    useRuntimeTextResource: false
+                    useParentSegment: false
+                    useWorkflowExecutor: true
+                    isManaged: false
+                    managedType: NONE
+        '400':
+          description: rejects POST /api/projects
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: managedType is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '422':
+          description: Validation error - invalid or conflicting parameters provided
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: has already been taken
+                  detail: name - has already been taken
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/name
+                  status: '422'
+                  meta:
+                    validationCode: VIOLATES_UNIQUENESS_CONSTRAINT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        useRuntimeTextResource:
+                          type: boolean
+                        useWorkflowExecutor:
+                          type: boolean
+                      required:
+                      - name
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: projects
+                attributes:
+                  name: workflow_project
+                  description: project with workflow executor
+                  useRuntimeTextResource: true
+                  useWorkflowExecutor: true
+    put:
+      operationId: putProject
+      parameters:
+      - description: project name
+        in: query
+        name: project
+        required: true
+        schema:
+          type: string
+      - description: revision
+        in: query
+        name: revision
+        required: true
+        schema:
+          type: string
+      - in: header
+        name: Content-Length
+        schema:
+          type: integer
+          format: int64
+      - description: start scheduling of new workflows from the given time instead of current time
+        in: query
+        name: schedule_from
+        schema:
+          type: string
+      - description: clear_schedule
+        in: query
+        name: clear_schedule
+        schema:
+          type: array
+          items:
+            type: string
+      - description: clear_schedule_all
+        in: query
+        name: clear_schedule_all
+        schema:
+          type: boolean
+          default: false
+      - description: skip schedules to current time for workflows whose schedule definition changed. Ignored when clear_schedule or clear_schedule_all is specified.
+        in: query
+        name: skip_schedule
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/gzip:
+            schema:
+              type: string
+              format: binary
+        description: project archive data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestProject'
+          description: default response
+      summary: Upload a project archive as a new project or a new revision of an existing project
+      tags:
+      - Project
+    servers:
+    - url: https://llm-api.treasuredata.com
+    - url: https://llm-api.eu01.treasuredata.com
+    - url: https://llm-api.ap02.treasuredata.com
+    - url: https://llm-api.treasuredata.co.jp
+  /api/projects/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Project deleted successfully
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: Forbidden - insufficient permissions to delete this project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: Project not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    get:
+      summary: show
+      tags:
+      - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: formInterfaces.createdBy,formInterfaces.updatedBy,chatInterfaces.createdBy,chatInterfaces.updatedBy
+      responses:
+        '200':
+          description: allows GET /api/projects/:id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          name:
+                            type: string
+                          description: {}
+                          useRuntimeTextResource:
+                            type: boolean
+                          useParentSegment:
+                            type: boolean
+                          useWorkflowExecutor:
+                            type: boolean
+                          isManaged:
+                            type: boolean
+                          managedType:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - name
+                        - description
+                        - useRuntimeTextResource
+                        - useParentSegment
+                        - useWorkflowExecutor
+                        - isManaged
+                        - managedType
+                      relationships:
+                        type: object
+                        properties:
+                          formInterfaces:
+                            type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                            required:
+                            - data
+                          chatInterfaces:
+                            type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                            required:
+                            - data
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type:
+                              - string
+                              - 'null'
+                            updatedAt:
+                              type:
+                              - string
+                              - 'null'
+                            projectId:
+                              type:
+                              - string
+                              - 'null'
+                            agentId:
+                              type:
+                              - string
+                              - 'null'
+                            name:
+                              type: string
+                            promptTemplate:
+                              type:
+                              - string
+                              - 'null'
+                            formJsonSchema:
+                              type:
+                              - string
+                              - 'null'
+                            formUiSchema: {}
+                            useTextResource:
+                              type:
+                              - boolean
+                              - 'null'
+                            starterMessage:
+                              type:
+                              - string
+                              - 'null'
+                            textInputEnabled:
+                              type:
+                              - boolean
+                              - 'null'
+                            textInputAgentId: {}
+                            isManaged:
+                              type:
+                              - boolean
+                              - 'null'
+                            chatInterfaceButtons:
+                              type:
+                              - array
+                              - 'null'
+                              items: {}
+                            email:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - name
+                        relationships:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            project:
+                              type:
+                              - object
+                              - 'null'
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: projects
+                  links:
+                    self: http://www.example.com/api/projects/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    name: zqvusnib
+                    description: null
+                    useRuntimeTextResource: false
+                    useParentSegment: false
+                    useWorkflowExecutor: false
+                    isManaged: true
+                    managedType: PARENT_SEGMENT
+                  relationships:
+                    formInterfaces:
+                      data:
+                      - type: formInterfaces
+                        id: 00000000-0000-0000-0000-000000000001
+                    chatInterfaces:
+                      data:
+                      - type: chatInterfaces
+                        id: 00000000-0000-0000-0000-000000000001
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: formInterfaces
+                  links:
+                    self: http://www.example.com/api/form_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    agentId: 00000000-0000-0000-0000-000000000001
+                    name: snyxrfzb
+                    promptTemplate: 'This is a test prompt template that parses arguments. subject: {{subject}}. topic: {{topic}}.'
+                    formJsonSchema: '{"type":"object","properties":{"subject":{"type":"string","title":"Subject"},"topic":{"title":"Topic","type":"string"}},"required":[]}'
+                    formUiSchema: null
+                    useTextResource: false
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    project:
+                      data:
+                        type: projects
+                        id: 00000000-0000-0000-0000-000000000001
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: chatInterfaces
+                  links:
+                    self: http://www.example.com/api/chat_interfaces/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: zqtzwrlp
+                    starterMessage: ''
+                    textInputEnabled: false
+                    textInputAgentId: null
+                    isManaged: false
+                    chatInterfaceButtons: []
+                  relationships:
+                    createdBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+                    updatedBy:
+                      data:
+                        type: users
+                        id: 00000000-0000-0000-0000-000000000001
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: GET /api/projects/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: updates a project with and toggles the managed RuntimeTextResourceKnowledgeBase
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type:
+                            - string
+                            - 'null'
+                          useRuntimeTextResource:
+                            type: boolean
+                          useParentSegment:
+                            type: boolean
+                          useWorkflowExecutor:
+                            type: boolean
+                          isManaged:
+                            type: boolean
+                          managedType:
+                            type: string
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - name
+                        - description
+                        - useRuntimeTextResource
+                        - useParentSegment
+                        - useWorkflowExecutor
+                        - isManaged
+                        - managedType
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: projects
+                  links:
+                    self: http://www.example.com/api/projects/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    name: new-name
+                    description: null
+                    useRuntimeTextResource: false
+                    useParentSegment: false
+                    useWorkflowExecutor: false
+                    isManaged: false
+                    managedType: NONE
+        '400':
+          description: rejects PATCH /api/projects/:id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: managedType is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: PATCH /api/projects/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: PATCH /api/projects rejects {"description":"<BASE64_CONTENT>"}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: is too long (maximum is 2000 characters)
+                  detail: description - is too long (maximum is 2000 characters)
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/description
+                  status: '422'
+                  meta:
+                    validationCode: IS_TOO_LONG
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        useRuntimeTextResource:
+                          type: boolean
+                      required:
+                      - name
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: projects
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: new-name
+                  description: new-description
+                  useRuntimeTextResource: false
+    servers:
+    - url: https://llm-api.treasuredata.com
+    - url: https://llm-api.eu01.treasuredata.com
+    - url: https://llm-api.ap02.treasuredata.com
+    - url: https://llm-api.treasuredata.co.jp
+  /api/projects/{id}/archive:
+    get:
+      operationId: getArchive
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: use a given revision of a project instead of the latest revision
+        in: query
+        name: revision
+        required: true
+        schema:
+          type: string
+      - description: enable returning direct download handle
+        in: query
+        name: direct_download
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: archive of files of a project.
+      summary: Download a project archive file
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/revisions:
+    get:
+      operationId: getRevisions
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: deprecated - do not use
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int32
+      - description: revision name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: cursor to next page
+        in: query
+        name: page[after]
+        schema:
+          type: string
+      - description: page size
+        in: query
+        name: page[size]
+        schema:
+          type: integer
+          format: int32
+          default: 100
+          maximum: 100
+          minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestRevisionCollection'
+          description: default response
+      summary: List revisions of a project
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/schedules:
+    get:
+      operationId: getProjectSchedules
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: exact matching filter on workflow name
+        in: query
+        name: workflow
+        schema:
+          type: string
+      - description: List schedules whose ID is greater than this ID for pagination. Schedules are returned in ascending order by ID.
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestScheduleCollection'
+          description: default response
+      summary: List schedules of a project with filters
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/secrets:
+    get:
+      operationId: getProjectSecrets
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSecretList'
+          description: default response
+      summary: List secret keys of a project
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/secrets/{key}:
+    delete:
+      operationId: deleteProjectSecret
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: secret key
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Treasure Workflow never returns content
+      summary: Delete a secret from a project
+      tags:
+      - Project
+    put:
+      operationId: putProjectSecret
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: secret key
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestSetSecretRequest'
+      responses:
+        '204':
+          description: Treasure Workflow never returns content
+      summary: Set a secret to a project
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/sessions:
+    get:
+      operationId: getProjectSessions
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: exact matching filter on workflow name
+        in: query
+        name: workflow
+        schema:
+          type: string
+      - description: List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int64
+      - description: number of sessions to return
+        in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionCollection'
+          description: default response
+      summary: List sessions of a project with filters
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/workflows:
+    get:
+      operationId: getWorkflows
+      parameters:
+      - description: project id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - description: use a given revision of the project instead of the latest revision
+        in: query
+        name: revision
+        required: true
+        schema:
+          type: string
+      - description: exact matching filter on workflow name
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinitionCollection'
+          description: default response
+      summary: List workflows of a project with filters
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+  /api/projects/{id}/workflows/{name}:
+    get:
+      operationId: getWorkflowByName
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: revision
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestWorkflowDefinition'
+          description: default response
+      tags:
+      - Project
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
+components:
+  schemas:
+    RestSecretMetadata:
+      type: object
+      description: Response of a secret
+      properties:
+        key:
+          type: string
+          description: key name
+          example: td.apikey
+      required:
+      - key
+    RestWorkflowDefinitionCollection:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestWorkflowDefinition'
+    RestProject:
+      type: object
+      description: Response of a project
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        deletedAt:
+          type: string
+          format: date-time
+          description: deleted time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: project ID
+          example: '123456'
+        metadata:
+          type: array
+          description: project metadata
+          items:
+            $ref: '#/components/schemas/RestProjectMetadata'
+        name:
+          type: string
+          description: project name
+          example: project-a
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+      required:
+      - archiveType
+      - createdAt
+      - id
+      - name
+      - revision
+      - updatedAt
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    RestPagination:
+      type: object
+      description: Pagination information
+      properties:
+        nextPage:
+          type: string
+          description: next page URL
+          example: /api/console/projects?last_id=123&count=300
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - workflow
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    RestSetSecretRequest:
+      type: object
+      description: Request body to set a secret
+      properties:
+        value:
+          type: string
+          description: value of the secret
+          example: TD1 12345...
+      required:
+      - value
+    RestSession:
+      type: object
+      description: Response of a session
+      properties:
+        id:
+          type: string
+          description: session ID
+          example: '123456'
+        lastAttempt:
+          $ref: '#/components/schemas/Attempt'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - id
+      - project
+      - sessionTime
+      - workflow
+    RestScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSchedule'
+    Attempt:
+      type: object
+      description: Attempts of session
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        retryAttemptName:
+          type: string
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+          - blocked
+          - queued
+          - running
+          - canceling
+          - success
+          - error
+          - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+      required:
+      - cancelRequested
+      - createdAt
+      - done
+      - id
+      - params
+      - status
+      - success
+    RestRevision:
+      type: object
+      description: Response of a revision
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        userInfo:
+          type: object
+          description: User information as json
+          example: '"td": {"user": {"id": 94,"name": "Your name","email": "example@treasure-data.com"}'
+      required:
+      - archiveType
+      - revision
+    RestSecretList:
+      type: object
+      description: Response of a secret
+      properties:
+        secrets:
+          type: array
+          description: 'array of RestSecretMetadata "{ key: key1 }"'
+          example: '[{key: key1}, {key: key2}]'
+          items:
+            $ref: '#/components/schemas/RestSecretMetadata'
+      required:
+      - secrets
+    RestProjectCollection:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestProject'
+    RestProjectMetadata:
+      type: object
+      description: project metadata
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    RestWorkflowDefinition:
+      type: object
+      description: Response of a workflow definition
+      properties:
+        config:
+          type: object
+        id:
+          type: string
+          description: workflow definition ID
+          example: '123456'
+        name:
+          type: string
+          description: workflow name
+          example: wf-123
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        revision:
+          type: string
+          description: revision
+        timezone:
+          type: string
+          description: timezone
+          example: UTC
+      required:
+      - id
+      - name
+      - project
+      - revision
+      - timezone
+    RestRevisionCollection:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/RestPagination'
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestRevision'
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+x-refined-from:
+- treasure-data-llm-api-openapi.yml
+- treasure-data-workflow-api-openapi.yml

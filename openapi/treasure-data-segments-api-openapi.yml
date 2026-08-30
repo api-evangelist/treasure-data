@@ -1,0 +1,2907 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Segments API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Segments
+  description: In marketing, a segment is a container that groups profiles (usually people) who share one or more common characteristics. In Treasure Data, the parent segment is your total population of people, accounts, or other type of collection and can be both existing and potential customers. <br> <br>You create segments to divide the population into subgroups of consumers based on some type of shared characteristics. Segments and subsegments enable more specific targeting for your marketing campaigns. <br> <br> <br>_Treasure Data is making an effort to use more inclusive language in its product, content, and customer solutions. As we gradually make the move to replace insensitive language beginning in our UI, you may continue to see parent segments in the UI, for example, referenced as master segment in portions of Treasure Data APIs._
+paths:
+  /audiences/{audienceId}/segments:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve list of segments
+      description: Retrieve a list of segments.
+      operationId: segments#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Segments
+      summary: Create new segment
+      description: Create a new segment.
+      operationId: segments#create
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Segment parameters to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentParameters'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/folders/{folderId}/segments:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve list of segments in a folder
+      description: Retrieve a list of segments in a folder.
+      operationId: segment_folders#segments
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: folderId
+        in: path
+        description: Segment Folder ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/query:
+    x-external: true
+    post:
+      tags:
+      - Segments
+      summary: Retrieve SQL from segment rule
+      description: Retrieve a SQL from a segment rule.
+      operationId: segments#query
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Segment parameters to create
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                format:
+                  type: string
+                  enum:
+                  - sql
+                realtime:
+                  type: boolean
+                  deprecated: true
+                  description: use `kind` instead
+                kind:
+                  type: integer
+                  description: '0: batch, 1: realtime, 2: funnel_stage'
+                rule:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+                funnel_stage:
+                  type: object
+                  properties:
+                    funnel_id:
+                      type: integer
+                      format: int64
+                    stage_id:
+                      type: integer
+                      format: int64
+                  description: required if creating segment as a rule of funnel_stage
+        required: true
+      responses:
+        '200':
+          description: batch segment query
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: batch segment query; return if the requestBody is realtime=false
+                  additionalProperties: false
+                  properties:
+                    sql:
+                      type: string
+                - type: object
+                  description: realtime segment query; return if the requestBody is realtime=true
+                  required:
+                  - sql
+                  - statement
+                  - batch_workflows
+                  properties:
+                    sql:
+                      type: string
+                    statement:
+                      type: object
+                      description: an object tree which will be sent to cdp-kvs-server
+                    batch_workflows:
+                      type: object
+                      description: workflow definition; key is file namd and value is file content of the generating workflow.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/queries:
+    x-external: true
+    post:
+      tags:
+      - Segments
+      summary: Retrieve number of profiles based on set of segment rules
+      description: Retrieve the number of profiles produced by a set of segment rules.
+      operationId: segments#new_query
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: string
+                realtime:
+                  type: boolean
+                  deprecated: true
+                  description: use `kind` instead
+                kind:
+                  type: integer
+                  description: '0: batch, 1: realtime, 2: funnel_stage'
+                rule:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+                funnel_stage:
+                  type: object
+                  properties:
+                    funnel_id:
+                      type: integer
+                      format: int64
+                    stage_id:
+                      type: integer
+                      format: int64
+                  description: required if creating segment as a rule of funnel_stage
+                pageSize:
+                  type: integer
+                maxPage:
+                  type: integer
+                enableMv:
+                  type: string
+                  description: '"true", "false"'
+                filterString:
+                  type: string
+                  example: Alex
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentQueryStatus'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/{segmentId}:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve segment by ID
+      description: Retrieve a segment based on its identifier.
+      operationId: segments#show
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: ID of Segment to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    put:
+      tags:
+      - Segments
+      summary: Update segment
+      description: Update a segment.
+      operationId: segments#update
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: ID of Segment that needs to be updated
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentParameters'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Segments
+      summary: Delete segment (legacy)
+      description: Delete a segment. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: segments#delete
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: Segment id to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/queries/{queryId}:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve status of query
+      description: Retrieve the status of a query.
+      operationId: segments#query_status
+      parameters:
+      - name: audienceId
+        in: path
+        description: Audience ID of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: queryId
+        in: path
+        description: ID of query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentQueryStatus'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/queries/{queryId}/kill:
+    x-external: true
+    post:
+      tags:
+      - Segments
+      summary: Kill current running query of segment
+      description: Kill the current running query associated with the segment.
+      operationId: segments#kill_query
+      parameters:
+      - name: audienceId
+        in: path
+        description: Audience ID of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: queryId
+        in: path
+        description: ID of query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicates canceling query didn't complete successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/queries/{queryId}/customers:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve profiles of query
+      description: Retrieve the profiles of a query.
+      operationId: segments#index_query_customers
+      parameters:
+      - name: audienceId
+        in: path
+        description: Audience ID of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: queryId
+        in: path
+        description: ID of query
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: number
+          minimum: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentQueryCustomers'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/segments/{segmentId}/statistics:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve population statistics of segment
+      description: Retrieve the population history of the segment. The history is returned per day and those days are calculated in the timezone of the audience. Note that funnel_stage kind doesn't have statistics via this endpoint.
+      operationId: segments#statistics
+      parameters:
+      - name: audienceId
+        in: path
+        description: Audience ID of the segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: path
+        description: ID of Segment to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: from
+        in: query
+        description: from date
+        schema:
+          type: string
+          format: date
+          example: '2019-01-01'
+      - name: to
+        in: query
+        description: to date (inclusive)
+        schema:
+          type: string
+          format: date
+          example: '2019-04-30'
+      responses:
+        '200':
+          description: array of tuple of statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistic'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /entities/segments:
+    x-external: true
+    post:
+      tags:
+      - Segments
+      summary: Create segment
+      description: Create a new segment.
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesSegmentUpdateRepresentation'
+      responses:
+        '200':
+          description: Create a segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSegmentJsonApiResponse'
+  /entities/segments/{id}:
+    x-external: true
+    get:
+      tags:
+      - Segments
+      summary: Retrieve segment by ID
+      description: Retrieve a segment by ID.
+      parameters:
+      - name: id
+        in: path
+        description: Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a segment by ID
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSegmentJsonApiResponse'
+    patch:
+      tags:
+      - Segments
+      summary: Update segment
+      description: Update a segment.
+      parameters:
+      - name: id
+        in: path
+        description: Segment to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesSegmentUpdateRepresentation'
+      responses:
+        '200':
+          description: Update a segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSegmentJsonApiResponse'
+    delete:
+      tags:
+      - Segments
+      summary: Delete segment
+      description: Delete a segment.
+      parameters:
+      - name: id
+        in: path
+        description: Delete a segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Delete a segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetSegmentJsonApiResponse'
+components:
+  schemas:
+    EntitiesSegmentUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - segment-batch
+          - segment-realtime
+          - segment-funnel-stage
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            rule:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+            funnel_stage:
+              type: object
+              properties:
+                funnel_id:
+                  type: integer
+                  format: int64
+                stage_id:
+                  type: integer
+                  format: int64
+              description: required if type is segment-funnel-stage to create segment as a rule of funnel_stage
+            segmentInsightDashboardId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    partial_v5_rule.yaml-v5IonRule-ionRule:
+      properties:
+        conditions:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueConditionSet'
+          type: array
+        expr:
+          type: string
+        limit:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueLimit'
+        type:
+          enum:
+          - Or
+          - And
+          - Composite
+          type: string
+      required:
+      - conditions
+      - type
+      type: object
+    partial_v5_rule.yaml-v5IonRule:
+      oneOf:
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-ionRule'
+      - additionalProperties: false
+        maxProperties: 0
+        minProperties: 0
+        type:
+        - object
+        - 'null'
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    partial_v5_rule.yaml-v5IonRule-attributeNameValue:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    partial_v5_rule.yaml-v5IonRule-valueOperator:
+      oneOf:
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            properties:
+              last:
+                oneOf:
+                - type: number
+                - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+              unit:
+                $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            required:
+            - last
+            - unit
+            type: object
+          type:
+            enum:
+            - GreaterEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - anyOf:
+        - properties:
+            duration:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-duration'
+            from:
+              properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+            not:
+              type: boolean
+            reverse:
+              type: boolean
+            type:
+              enum:
+              - TimeRange
+              type: string
+          required:
+          - duration
+          - from
+          - not
+          - reverse
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            not:
+              enum:
+              - false
+              type: boolean
+            type:
+              enum:
+              - TimeRange
+              type: string
+          required:
+          - from
+          - not
+          - type
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeToday
+              type: string
+          required:
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeThis
+              type: string
+          required:
+          - from
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeNext
+              type: string
+          required:
+          - from
+          - type
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeWithinNext
+              type: string
+            unit:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            value:
+              type: string
+          required:
+          - type
+          - unit
+          - value
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeWithinPast
+              type: string
+            unit:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            value:
+              type: string
+          required:
+          - type
+          - unit
+          - value
+          type: object
+        - properties:
+            from:
+              properties:
+                next:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - next
+              - unit
+              type: object
+            not:
+              enum:
+              - false
+              type: boolean
+            to:
+              properties:
+                next:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - next
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeInBetweenNext
+              type: string
+          required:
+          - from
+          - not
+          - to
+          - type
+          type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            properties:
+              timestamp:
+                type: string
+            required:
+            - timestamp
+            type: object
+          type:
+            enum:
+            - Equal
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - Greater
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            properties:
+              timestamp:
+                type: string
+            required:
+            - timestamp
+            type: object
+          type:
+            enum:
+            - GreaterEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - Less
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - LessEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - additionalProperties: false
+        properties:
+          maxValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          minValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          not:
+            type: boolean
+          type:
+            enum:
+            - Between
+            type: string
+        required:
+        - maxValue
+        - minValue
+        - not
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - Equal
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - IsNull
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValues:
+            items:
+              oneOf:
+              - type: number
+              - type: string
+            type: array
+          type:
+            enum:
+            - In
+            type: string
+        required:
+        - not
+        - rightValues
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - Greater
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - Less
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - GreaterEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+          type:
+            enum:
+            - LessEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          maxValue:
+            oneOf:
+            - type: number
+            - type: string
+          minValue:
+            oneOf:
+            - type: number
+            - type: string
+          not:
+            type: boolean
+          rightValue:
+            type: number
+          type:
+            enum:
+            - Between
+            type: string
+        required:
+        - maxValue
+        - minValue
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValues:
+            items:
+              oneOf:
+              - type: string
+            type: array
+          type:
+            enum:
+            - Contain
+            type: string
+        required:
+        - not
+        - rightValues
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValues:
+            items:
+              oneOf:
+              - type: string
+            type: array
+          type:
+            enum:
+            - StartWith
+            type: string
+        required:
+        - not
+        - rightValues
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValues:
+            items:
+              oneOf:
+              - type: string
+            type: array
+          type:
+            enum:
+            - EndWith
+            type: string
+        required:
+        - not
+        - rightValues
+        - type
+        type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            type: string
+          type:
+            enum:
+            - Regexp
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+    ArrayMatching:
+      oneOf:
+      - type: string
+        enum:
+        - any
+        - all
+      - type: object
+        properties:
+          atLeast:
+            type: number
+      - type: object
+        properties:
+          atMost:
+            type: number
+      - type: object
+        properties:
+          exactly:
+            type: number
+    partial_v5_rule.yaml-v5IonRule-valueLimit:
+      properties:
+        number:
+          type: number
+        orderColumns:
+          items:
+            oneOf:
+            - properties:
+                column:
+                  type: string
+                order:
+                  enum:
+                  - ascending
+                  - descending
+                  type: string
+                type:
+                  enum:
+                  - Column
+                  type: string
+              required:
+              - column
+              - order
+              - type
+              type: object
+            - properties:
+                order:
+                  enum:
+                  - ascending
+                  - descending
+                  type: string
+                type:
+                  enum:
+                  - Aggregation
+                  type: string
+              required:
+              - order
+              - type
+              type: object
+          type: array
+        type:
+          enum:
+          - Count
+          - Percent
+          type: string
+      required:
+      - number
+      - type
+      type: object
+    EntitiesGetSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/BatchSegmentJsonApiResource'
+          - $ref: '#/components/schemas/RealtimeSegmentJsonApiResource'
+          - $ref: '#/components/schemas/FunnelStageSegmentJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    SegmentQueryStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Query identifier (may be UUID or platform-specific ID like job ID or statement handle)
+        queryId:
+          type: string
+          description: Same value as `id`.
+        status:
+          type: string
+          enum:
+          - success
+          - killed
+          - error
+          - running
+        count:
+          type:
+          - integer
+          - 'null'
+          description: Number of profiles produced by the given segment rules
+        maxPage:
+          type:
+          - integer
+          - 'null'
+        error:
+          type:
+          - string
+          - 'null'
+        jobid:
+          type: string
+          format: integer
+        countJobid:
+          type:
+          - string
+          - 'null'
+          format: integer
+        customerGroupCount:
+          type:
+          - integer
+          - 'null'
+          description: Number of customer groups related by the given segment rules
+    ReferenceCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - FunnelStageReference
+          - Reference
+          - AbTestVariantReference
+          - PredictiveScoreReference
+          - MlAttributeReference
+    partial_v5_rule.yaml-v5IonRule-valueLeftValue:
+      oneOf:
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-attributeNameValue'
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-customerGroupAttributeValue'
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-aggregationValue'
+    partial_v5_rule.yaml-v5IonRule-filter:
+      oneOf:
+      - additionalProperties: false
+        maxProperties: 0
+        minProperties: 0
+        type:
+        - object
+        - 'null'
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-andFilter'
+      - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-orFilter'
+    SegmentParameters:
+      type: object
+      properties:
+        audienceId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        realtime:
+          type: boolean
+          deprecated: true
+          description: use `kind` instead
+        kind:
+          type: integer
+          description: '0: batch, 1: realtime, 2: funnel_stage'
+        funnel_stage:
+          type: object
+          properties:
+            funnel_id:
+              type: integer
+              format: int64
+            stage_id:
+              type: integer
+              format: int64
+          description: required if creating segment as a rule of funnel_stage
+        description:
+          type: string
+        segmentFolderId:
+          type: integer
+          format: int64
+        rule:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+        countPopulation:
+          type: boolean
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    Operator:
+      type: object
+    Value: {}
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    partial_v5_rule.yaml-v5IonRule-referenceCondition:
+      oneOf:
+      - properties:
+          exclude:
+            type: boolean
+          id:
+            type: string
+          type:
+            enum:
+            - FunnelStageReference
+            - Reference
+            - AbTestVariantReference
+            type: string
+        required:
+        - exclude
+        - id
+        - type
+        type: object
+      - properties:
+          id:
+            type: string
+          includeConvertedCustomers:
+            type: boolean
+          maxGrade:
+            type: number
+          minGrade:
+            type: number
+          type:
+            enum:
+            - PredictiveScoreReference
+            type: string
+        required:
+        - id
+        - includeConvertedCustomers
+        - maxGrade
+        - minGrade
+        - type
+        type: object
+      - properties:
+          id:
+            type: string
+          leftValue:
+            properties:
+              attribute:
+                enum:
+                - r_quartile
+                - f_quartile
+                - m_quartile
+                - rfm_segment
+                - rfm_score
+                - rfm_cluster_rank
+                - rfm_quartile
+                type: string
+            required:
+            - attribute
+            type: object
+          operator:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueOperator'
+          solutionType:
+            enum:
+            - rfm
+            type: string
+          type:
+            enum:
+            - MlAttributeReference
+            type: string
+        required:
+        - id
+        - leftValue
+        - operator
+        - solutionType
+        - type
+        type: object
+      - properties:
+          id:
+            type: string
+          leftValue:
+            properties:
+              attribute:
+                enum:
+                - cltv_1m
+                - cltv_1m_pctile
+                - cltv_3m
+                - cltv_3m_pctile
+                - cltv_6m
+                - cltv_6m_pctile
+                - cltv_12m
+                - cltv_12m_pctile
+                - cltv_24m
+                - cltv_24m_pctile
+                - alive_prob
+                - cltv_segment
+                type: string
+            required:
+            - attribute
+            type: object
+          operator:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueOperator'
+          solutionType:
+            enum:
+            - cltv
+            type: string
+          type:
+            enum:
+            - MlAttributeReference
+            type: string
+        required:
+        - id
+        - leftValue
+        - operator
+        - solutionType
+        - type
+        type: object
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    partial_v5_rule.yaml-v5IonRule-localDuration:
+      properties:
+        day:
+          type: number
+        hour:
+          type: number
+        minute:
+          type: number
+        month:
+          type: number
+        quarter:
+          type: number
+        second:
+          type: number
+        week:
+          type: number
+        year:
+          type: number
+      type: object
+    partial_v5_rule.yaml-v5IonRule-timeframeOperator:
+      oneOf:
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            properties:
+              last:
+                oneOf:
+                - type: number
+                - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+              unit:
+                $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            required:
+            - last
+            - unit
+            type: object
+          type:
+            enum:
+            - GreaterEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - anyOf:
+        - properties:
+            duration:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-duration'
+            from:
+              properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+            not:
+              type: boolean
+            reverse:
+              type: boolean
+            type:
+              enum:
+              - TimeRange
+              type: string
+          required:
+          - duration
+          - from
+          - not
+          - reverse
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            not:
+              enum:
+              - false
+              type: boolean
+            type:
+              enum:
+              - TimeRange
+              type: string
+          required:
+          - from
+          - not
+          - type
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeToday
+              type: string
+          required:
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeThis
+              type: string
+          required:
+          - from
+          - type
+          type: object
+        - properties:
+            from:
+              properties:
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeNext
+              type: string
+          required:
+          - from
+          - type
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeWithinNext
+              type: string
+            unit:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            value:
+              type: string
+          required:
+          - type
+          - unit
+          - value
+          type: object
+        - properties:
+            type:
+              enum:
+              - TimeWithinPast
+              type: string
+            unit:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+            value:
+              type: string
+          required:
+          - type
+          - unit
+          - value
+          type: object
+        - properties:
+            from:
+              properties:
+                next:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - next
+              - unit
+              type: object
+            not:
+              enum:
+              - false
+              type: boolean
+            to:
+              properties:
+                next:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - next
+              - unit
+              type: object
+            type:
+              enum:
+              - TimeInBetweenNext
+              type: string
+          required:
+          - from
+          - not
+          - to
+          - type
+          type: object
+      - properties:
+          not:
+            type: boolean
+          rightValue:
+            properties:
+              timestamp:
+                type: string
+            required:
+            - timestamp
+            type: object
+          type:
+            enum:
+            - Equal
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - Greater
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            properties:
+              timestamp:
+                type: string
+            required:
+            - timestamp
+            type: object
+          type:
+            enum:
+            - GreaterEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - Less
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - properties:
+          not:
+            enum:
+            - false
+            type: boolean
+          rightValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          type:
+            enum:
+            - LessEqual
+            type: string
+        required:
+        - not
+        - rightValue
+        - type
+        type: object
+      - additionalProperties: false
+        properties:
+          maxValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          minValue:
+            oneOf:
+            - properties:
+                timestamp:
+                  type: string
+              required:
+              - timestamp
+              type: object
+            - properties:
+                last:
+                  oneOf:
+                  - type: number
+                  - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-localDuration'
+                unit:
+                  $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-unit'
+              required:
+              - last
+              - unit
+              type: object
+          not:
+            type: boolean
+          type:
+            enum:
+            - Between
+            type: string
+        required:
+        - maxValue
+        - minValue
+        - not
+        - type
+        type: object
+    RealtimeSegmentJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - segment-realtime
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - population
+          - rule
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            population:
+              type:
+              - number
+              - 'null'
+            numSyndications:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            rule:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            countPopulation:
+              type: boolean
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    Statistic:
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
+        example:
+        - 1556382847
+        - 1234
+        - true
+        items:
+          oneOf:
+          - type: integer
+            format: int64
+          - type: boolean
+    Segment:
+      type: object
+      properties:
+        audienceId:
+          type: string
+          format: integer
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        realtime:
+          type: boolean
+          description: Whether the segment is realtime segment or not
+          deprecated: true
+        kind:
+          type: integer
+          description: '0: batch, 1: realtime, 2: funnel_stage'
+        description:
+          type:
+          - string
+          - 'null'
+        segmentFolderId:
+          type: string
+          format: integer
+        population:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        rule:
+          anyOf:
+          - $ref: '#/components/schemas/SegmentRule'
+          - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+    partial_v5_rule.yaml-v5IonRule-columnFilter:
+      anyOf:
+      - properties:
+          arrayMatching:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueArrayMatching'
+          column:
+            type: string
+          operator:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueOperator'
+          type:
+            enum:
+            - Column
+            type: string
+        required:
+        - arrayMatching
+        - column
+        - operator
+        - type
+        type: object
+      - properties:
+          arrayMatching:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueArrayMatching'
+          column:
+            enum:
+            - timestamp
+            type: string
+          operator:
+            $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-timeframeOperator'
+          type:
+            enum:
+            - Column
+            type: string
+        required:
+        - arrayMatching
+        - column
+        - operator
+        - type
+        type: object
+    OrCondition:
+      type: object
+      required:
+      - type
+      - conditions
+      properties:
+        type:
+          type: string
+          enum:
+          - Or
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+    SegmentRule:
+      oneOf:
+      - $ref: '#/components/schemas/EmptyCondition'
+      - $ref: '#/components/schemas/AndCondition'
+      - $ref: '#/components/schemas/OrCondition'
+      - $ref: '#/components/schemas/CompositeCondition'
+    partial_v5_rule.yaml-v5IonRule-orFilter:
+      properties:
+        conditions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-andFilter'
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-orFilter'
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-columnFilter'
+          type: array
+        type:
+          enum:
+          - Or
+          type: string
+      required:
+      - conditions
+      - type
+      type: object
+    EmptyCondition:
+      type: object
+      additionalProperties: false
+    Condition:
+      oneOf:
+      - $ref: '#/components/schemas/AndCondition'
+      - $ref: '#/components/schemas/OrCondition'
+      - $ref: '#/components/schemas/ValueCondition'
+      - $ref: '#/components/schemas/ReferenceCondition'
+    partial_v5_rule.yaml-v5IonRule-valueArrayMatching:
+      oneOf:
+      - {}
+      - enum:
+        - all
+        - any
+        type: string
+      - properties:
+          atLeast:
+            type: number
+        required:
+        - atLeast
+        type: object
+      - properties:
+          atMost:
+            type: number
+        required:
+        - atMost
+        type: object
+      - properties:
+          exactly:
+            type: number
+        required:
+        - exactly
+        type: object
+    partial_v5_rule.yaml-v5IonRule-duration:
+      oneOf:
+      - properties:
+          year:
+            type: number
+        required:
+        - year
+        type: object
+      - properties:
+          quarter:
+            type: number
+        required:
+        - quarter
+        type: object
+      - properties:
+          month:
+            type: number
+        required:
+        - month
+        type: object
+      - properties:
+          week:
+            type: number
+        required:
+        - week
+        type: object
+      - properties:
+          day:
+            type: number
+        required:
+        - day
+        type: object
+      - properties:
+          hour:
+            type: number
+        required:
+        - hour
+        type: object
+      - properties:
+          minute:
+            type: number
+        required:
+        - minute
+        type: object
+      - properties:
+          second:
+            type: number
+        required:
+        - second
+        type: object
+    ValueCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Value
+        leftValue:
+          $ref: '#/components/schemas/Value'
+        operator:
+          $ref: '#/components/schemas/Operator'
+        arrayMatching:
+          $ref: '#/components/schemas/ArrayMatching'
+    partial_v5_rule.yaml-v5IonRule-customerGroupAttributeValue:
+      properties:
+        customerGroup:
+          type: string
+        name:
+          type: string
+      required:
+      - customerGroup
+      - name
+      type: object
+    partial_v5_rule.yaml-v5IonRule-valueConditionSet:
+      properties:
+        conditions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-referenceCondition'
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueCondition'
+          type: array
+        description:
+          type: string
+        expr:
+          type: string
+        type:
+          enum:
+          - Or
+          - And
+          - Composite
+          type: string
+      required:
+      - conditions
+      - type
+      type: object
+    partial_v5_rule.yaml-v5IonRule-aggregationValue:
+      properties:
+        aggregation:
+          oneOf:
+          - properties:
+              column:
+                type: string
+              groupingColumns:
+                items:
+                  oneOf:
+                  - type: string
+                type: array
+              type:
+                enum:
+                - Sum
+                - Min
+                - Max
+                - Average
+                type: string
+            required:
+            - column
+            - type
+            type: object
+          - properties:
+              groupingColumns:
+                items:
+                  oneOf:
+                  - type: string
+                type: array
+              type:
+                enum:
+                - Count
+                type: string
+            required:
+            - groupingColumns
+            - type
+            type: object
+          - properties:
+              columns:
+                items:
+                  oneOf:
+                  - type: string
+                type: array
+              type:
+                enum:
+                - CountDistinct
+                type: string
+            required:
+            - columns
+            - type
+            type: object
+          - properties:
+              column:
+                type: string
+              groupingColumns:
+                items:
+                  oneOf:
+                  - type: string
+                type: array
+              orderColumn:
+                type: string
+              type:
+                enum:
+                - First
+                - Last
+                type: string
+            required:
+            - column
+            - orderColumn
+            - type
+            type: object
+        filter:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-filter'
+        source:
+          properties:
+            name:
+              type: string
+          required:
+          - name
+          type: object
+        window:
+          properties:
+            duration:
+              properties:
+                day:
+                  type: number
+                hour:
+                  type: number
+                minute:
+                  type: number
+                second:
+                  type: number
+              type: object
+            type:
+              enum:
+              - TimeSliding
+              type: string
+          required:
+          - duration
+          - type
+          type: object
+      required:
+      - aggregation
+      - filter
+      - source
+      type: object
+    FunnelStageSegmentJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - segment-funnel-stage
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - population
+          - rule
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            population:
+              type:
+              - number
+              - 'null'
+            numSyndications:
+              type: integer
+              format: int64
+            rule:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            countPopulation:
+              type: boolean
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    AndCondition:
+      type: object
+      required:
+      - type
+      - conditions
+      properties:
+        type:
+          type: string
+          enum:
+          - And
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+    SegmentQueryCustomers:
+      type: object
+      properties:
+        error:
+          description: Error message
+          type:
+          - string
+          - 'null'
+        names:
+          description: Column names
+          example:
+          - cdp_customer_id
+          - email
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        queryId:
+          description: ID of query
+          example: 970937b9-98b1-45b1-ba9b-10905846476e
+          type: string
+        rows:
+          description: Array of profiles
+          type:
+          - array
+          - 'null'
+          items:
+            type:
+            - array
+            - 'null'
+            description: a tuple whose values corresponding names property
+            example:
+            - 003171af29a5f0ac890fed022d9e5366dea5d68e
+            - a@example.com
+            items:
+              oneOf:
+              - type:
+                - string
+                - 'null'
+              - type: integer
+                format: int64
+              - type: number
+                format: float
+        type:
+          type: string
+          enum:
+          - rows
+          - end
+          - killed
+          - error
+          - pending
+    CompositeCondition:
+      type: object
+      required:
+      - type
+      - conditions
+      - expr
+      properties:
+        type:
+          type: string
+          enum:
+          - Composite
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        expr:
+          type: string
+    partial_v5_rule.yaml-v5IonRule-valueCondition:
+      properties:
+        arrayMatching:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueArrayMatching'
+        exclude:
+          type: boolean
+        leftValue:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueLeftValue'
+        limit:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueLimit'
+        operator:
+          $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-valueOperator'
+        type:
+          enum:
+          - Value
+          type: string
+      required:
+      - arrayMatching
+      - exclude
+      - leftValue
+      - operator
+      - type
+      type: object
+    partial_v5_rule.yaml-v5IonRule-unit:
+      enum:
+      - year
+      - quarter
+      - month
+      - week
+      - day
+      - hour
+      - minute
+      - second
+      type: string
+    partial_v5_rule.yaml-v5IonRule-andFilter:
+      properties:
+        conditions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-andFilter'
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-orFilter'
+            - $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule-columnFilter'
+          type: array
+        type:
+          enum:
+          - And
+          type: string
+      required:
+      - conditions
+      - type
+      type: object
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    BatchSegmentJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - segment-batch
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - population
+          - rule
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            population:
+              type:
+              - number
+              - 'null'
+            numSyndications:
+              type: integer
+              format: int64
+            rule:
+              $ref: '#/components/schemas/partial_v5_rule.yaml-v5IonRule'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            countPopulation:
+              type: boolean
+            segmentInsightDashboardId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            isEmptyRule:
+              type: boolean
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+  responses:
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

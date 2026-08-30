@@ -1,0 +1,539 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Access Control - Permissions API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Access Control - Permissions
+paths:
+  /access_control/policies/{policy_id}/column_permissions:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Show Column Permissions
+      description: Shows column permission by policy ID.
+      operationId: getColumnPermissionByPolicyId
+      tags:
+      - Access Control - Permissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlColumnPermission'
+    patch:
+      summary: Update Column Permissions
+      description: Updates column permissions by policy ID.
+      operationId: updateColumnPermissionByPolicyId
+      tags:
+      - Access Control - Permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - column_permissions
+              properties:
+                column_permissions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccessControlColumnPermission'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlColumnPermission'
+  /access_control/policies/{policy_id}/permissions:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Show Policy Permissions
+      description: Shows policy permissions by policy ID.
+      operationId: gerPermissionByPolicyId
+      tags:
+      - Access Control - Permissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPermissions'
+    patch:
+      summary: Update Policy Permissions
+      description: Updates policy permissions.
+      operationId: updatePermissionByPolicyId
+      tags:
+      - Access Control - Permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessControlPermissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPermissions'
+components:
+  parameters:
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
+  schemas:
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccessControlPermissions:
+      title: Access Control Permissions
+      type: object
+      additionalProperties: false
+      properties:
+        WorkflowProject:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - run
+                - edit
+        WorkflowProjectLevel:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - name
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - run
+                - edit
+              name:
+                type: string
+                example: my_wf
+        WorkflowRestrictedOperators:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - edit
+        Segmentation:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+        PersonalizationStudio:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+        MasterSegmentConfigs:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+                - owner_manage
+        MasterSegmentConfig:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              id:
+                type: string
+                example: '42'
+        MasterSegmentColumn:
+          description: Permissions on MasterSegmentColumn
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view_clear
+                - view_pii
+                - blocked
+              column_identifiers:
+                type: string
+                description: comma-separated audience_id and column_name
+                example: 1$attribute.customers.age,1$attribute.customers.first_name
+        MasterSegmentAllColumns:
+          description: Permissions on MasterSegmentAllColumns
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view_clear
+                - view_pii
+                - blocked_only_for_migration_purpose
+              audience_id:
+                type: string
+                description: audience_id
+                example: '1'
+        CookieConsent:
+          description: Permissions on CookieConsent
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+                - full
+        SegmentAllFolders:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              audience_id:
+                type: string
+                example: '42'
+        SegmentFolder:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              id:
+                type: string
+                example: '42'
+        Profiles:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+              audience_id:
+                type: string
+                example: '42'
+        ProfilesApiToken:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+              audience_id:
+                type: string
+                example: '42'
+        ActivationTemplate:
+          description: Permissions on ActivationTemplate
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - full
+                - template_access
+        Authentications:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - use_limited
+                - use
+                - full
+                - owner_manage
+              ids:
+                type: string
+                description: comma-separated IDs of authentications, required when `operation = 'use_limited'`
+                example: 1,2,3
+        Sources:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - restricted
+                - full
+        Destinations:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - restricted
+                - full
+        Databases:
+          description: Permissions on databases
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - query
+                - edit
+                - import
+                - manage
+                - owner_manage
+                - download
+              ids:
+                type: string
+                description: comma-separated IDs of databases, required when operation is `query`, `edit`, and `import`
+                example: 1,2,3
+        UniversalConsent:
+          description: Permissions on UniversalConsent
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+        TrafficControls:
+          description: Permissions on TrafficControl
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+                - view
+        TrafficControl:
+          description: Permissions on TrafficControl
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+                - view
+              audience_id:
+                type: string
+                example: '42'
+        Journeys:
+          description: Permissions on Journeys
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+                - edit
+                - view
+        Journey:
+          description: Permissions on Journeys in the audience
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+                - edit
+                - view
+              audience_id:
+                type: string
+                example: '42'
+        LlmProject:
+          description: Permissions on LLM Projects
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+                - edit
+                - chat
+                - publish_internal_integration
+                - publish_external_integration
+              project_id:
+                type: string
+                description: IDs of LLM Project, required when operation is `edit`, `chat`, `publish_internal_integration` and `publish_external_integration`
+                example: '1'
+        RawDataAccess:
+          description: Permissions on Raw Data Access for Audience Studio
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - query
+              audience_id:
+                type: string
+                description: ID of the Audience (MasterSegmentConfig) to grant raw data access
+                example: '123'
+    AccessControlColumnPermission:
+      type: object
+      additionalProperties: false
+      required:
+      - tags
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        except:
+          type:
+          - boolean
+          - 'null'
+        masking:
+          type:
+          - string
+          - 'null'
+          enum:
+          - hash
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

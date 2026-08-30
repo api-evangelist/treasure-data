@@ -1,0 +1,1887 @@
+openapi: 3.2.0
+info:
+  title: llm-api Knowledge Base API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: KnowledgeBase
+paths:
+  /api/knowledge_bases:
+    get:
+      summary: index
+      tags:
+      - KnowledgeBase
+      responses:
+        '200':
+          description: allows GET /api/knowledge_bases
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            name:
+                              type: string
+                            tdDatabaseName:
+                              type: string
+                            formatType:
+                              type: string
+                            maxRows:
+                              type: integer
+                            timeoutSeconds:
+                              type: integer
+                            isManaged:
+                              type: boolean
+                            tables:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  tdQuery:
+                                    type: string
+                                  enableData:
+                                    type: boolean
+                                  enableDataIndex:
+                                    type: boolean
+                                required:
+                                - name
+                                - tdQuery
+                                - enableData
+                                - enableDataIndex
+                            lastJob:
+                              type:
+                              - object
+                              - 'null'
+                              properties:
+                                status:
+                                  type: string
+                                message: {}
+                                finishedAt: {}
+                                logs: {}
+                              required:
+                              - status
+                              - message
+                              - finishedAt
+                              - logs
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - name
+                          - tdDatabaseName
+                          - formatType
+                          - maxRows
+                          - timeoutSeconds
+                          - isManaged
+                          - tables
+                          - lastJob
+                        relationships:
+                          type: object
+                          properties:
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                          required:
+                          - createdBy
+                          - updatedBy
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            email:
+                              type: string
+                          required:
+                          - name
+                          - email
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBases
+                  links:
+                    self: http://www.example.com/api/knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: ygpozuds
+                    tdDatabaseName: dhjcmdvy
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: true
+                    tables: []
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+                meta:
+                  total: 1
+                links:
+                  first: http://www.example.com/api/knowledge_bases?page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/knowledge_bases?page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+      parameters:
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - KnowledgeBase
+      responses:
+        '201':
+          description: Knowledge base created successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          tdDatabaseName:
+                            type: string
+                          formatType:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                          tables:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                tdQuery:
+                                  type: string
+                                enableData:
+                                  type: boolean
+                                enableDataIndex:
+                                  type: boolean
+                              required:
+                              - name
+                              - tdQuery
+                              - enableData
+                              - enableDataIndex
+                          lastJob:
+                            type:
+                            - object
+                            - 'null'
+                            properties:
+                              status:
+                                type: string
+                              message: {}
+                              finishedAt: {}
+                              logs: {}
+                            required:
+                            - status
+                            - message
+                            - finishedAt
+                            - logs
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - tdDatabaseName
+                        - formatType
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                        - tables
+                        - lastJob
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBases
+                  links:
+                    self: http://www.example.com/api/knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: name1
+                    tdDatabaseName: db1
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: false
+                    tables:
+                    - name: tbl1
+                      tdQuery: select 1
+                      enableData: false
+                      enableDataIndex: false
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+        '400':
+          description: rejects POST /api/knowledge_bases
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '422':
+          description: POST /api/knowledge_bases rejects {"formatType":"MARKDOWN_KV","timeoutSeconds":700}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be in 10..300
+                  detail: timeoutSeconds - must be in 10..300
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/timeoutSeconds
+                  status: '422'
+                  meta:
+                    validationCode: INVALID_FORMAT_OR_ASSOCIATION
+                - title: can be set only if format type is LEGACY_JSON
+                  detail: tables - can be set only if format type is LEGACY_JSON
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/tables
+                  status: '422'
+                  meta:
+                    validationCode: LLM_KNOWLEDGE_BASE_TABLES_AVAILABLE_ONLY_WITH_LEGACY_JSON
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        projectId:
+                          type: string
+                        tdDatabaseName:
+                          type: string
+                        formatType:
+                          type: string
+                        tables:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              tdQuery:
+                                type: string
+                              enableData:
+                                type: boolean
+                              enableDataIndex:
+                                type: boolean
+                            required:
+                            - name
+                            - tdQuery
+                            - enableData
+                            - enableDataIndex
+                      required:
+                      - name
+                      - tdDatabaseName
+                      - projectId
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: knowledge_bases
+                attributes:
+                  name: name1
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  tdDatabaseName: db1
+                  formatType: MARKDOWN_KV
+                  tables:
+                  - name: tbl1
+                    tdQuery: select 1
+                    enableData: false
+                    enableDataIndex: false
+  /api/knowledge_bases/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - KnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: submits a RAG REMOVE job even with formatType=MARKDOWN_KV
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: rejects DELETE /api/knowledge_bases/:id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: DELETE /api/knowledge_bases/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: restricts deletion of a knowledge base if it is referenced by a variable
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            referencedByTools:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                required:
+                                - id
+                            referencedByVariables:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                required:
+                                - id
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: Cannot delete record because dependent referenced by variables exist
+                  detail: Cannot delete record because dependent referenced by variables exist
+                  code: '100'
+                  source:
+                    pointer: /data
+                  status: '422'
+                  meta:
+                    validationCode: DEPENDENT_DESTROY_RESTRICTED_HAS_MANY
+                    referencedByVariables:
+                    - id: 00000000-0000-0000-0000-000000000001
+    get:
+      summary: show
+      tags:
+      - KnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Knowledge base details and configuration
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          tdDatabaseName:
+                            type: string
+                          formatType:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                          tables:
+                            type: array
+                            items: {}
+                          lastJob:
+                            type: object
+                            properties:
+                              status:
+                                type: string
+                              message: {}
+                              finishedAt: {}
+                              logs: {}
+                            required:
+                            - status
+                            - message
+                            - finishedAt
+                            - logs
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - tdDatabaseName
+                        - formatType
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                        - tables
+                        - lastJob
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBases
+                  links:
+                    self: http://www.example.com/api/knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: sfimdaoe
+                    tdDatabaseName: awqjtevx
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: true
+                    tables: []
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Knowledge base not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - KnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Knowledge base updated successfully
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          tdDatabaseName:
+                            type: string
+                          formatType:
+                            type: string
+                          maxRows:
+                            type: integer
+                          timeoutSeconds:
+                            type: integer
+                          isManaged:
+                            type: boolean
+                          tables:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                tdQuery:
+                                  type: string
+                                enableData:
+                                  type: boolean
+                                enableDataIndex:
+                                  type: boolean
+                              required:
+                              - name
+                              - tdQuery
+                              - enableData
+                              - enableDataIndex
+                          lastJob:
+                            type: object
+                            properties:
+                              status:
+                                type: string
+                              message: {}
+                              finishedAt: {}
+                              logs: {}
+                            required:
+                            - status
+                            - message
+                            - finishedAt
+                            - logs
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - tdDatabaseName
+                        - formatType
+                        - maxRows
+                        - timeoutSeconds
+                        - isManaged
+                        - tables
+                        - lastJob
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: knowledgeBases
+                  links:
+                    self: http://www.example.com/api/knowledge_bases/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: new_name
+                    tdDatabaseName: new_db
+                    formatType: LEGACY_JSON
+                    maxRows: 50
+                    timeoutSeconds: 60
+                    isManaged: false
+                    tables:
+                    - name: tab
+                      tdQuery: select 1 from ttt
+                      enableData: false
+                      enableDataIndex: false
+                    lastJob:
+                      status: IN_PROGRESS
+                      message: null
+                      finishedAt: null
+                      logs: null
+        '400':
+          description: rejects PATCH /api/knowledge_bases/:id
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: PATCH /api/knowledge_bases/:id returns 404 Not Found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: PATCH /api/knowledge_bases rejects {"formatType":"MARKDOWN_KV","timeoutSeconds":700}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be in 10..300
+                  detail: timeoutSeconds - must be in 10..300
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/timeoutSeconds
+                  status: '422'
+                  meta:
+                    validationCode: INVALID_FORMAT_OR_ASSOCIATION
+                - title: can be set only if format type is LEGACY_JSON
+                  detail: tables - can be set only if format type is LEGACY_JSON
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/tables
+                  status: '422'
+                  meta:
+                    validationCode: LLM_KNOWLEDGE_BASE_TABLES_AVAILABLE_ONLY_WITH_LEGACY_JSON
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        tdDatabaseName:
+                          type: string
+                        tables:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              tdQuery:
+                                type: string
+                            required:
+                            - name
+                            - tdQuery
+                        projectId:
+                          type: string
+                      required:
+                      - name
+                      - tdDatabaseName
+                      - tables
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: knowledge_bases
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: new_name
+                  tdDatabaseName: new_db
+                  tables:
+                  - name: tab
+                    tdQuery: select 1 from ttt
+                  projectId: 00000000-0000-0000-0000-000000000001
+  /api/knowledge_bases/{id}/query:
+    post:
+      summary: query
+      tags:
+      - KnowledgeBase
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                function:
+                  type: string
+                arguments:
+                  type: object
+                  properties:
+                    query:
+                      type: string
+                    keywords:
+                      type: string
+                    tables:
+                      type:
+                      - string
+                      - 'null'
+                    statement:
+                      type: string
+              required:
+              - function
+              - arguments
+            example:
+              function: QUERY_DATA_DIRECT
+              arguments:
+                query: test query
+                keywords: kwd
+                tables: null
+                statement: select * from tab1
+      responses:
+        '200':
+          description: formats using formatType=MARKDOWN_KV with a truncated message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                required:
+                - content
+              example:
+                content: '# Records
+
+
+                  ## Record 1
+
+
+                  ```
+
+                  c1: 0
+
+                  c2: t-0
+
+                  ```
+
+
+                  ## Record 2
+
+
+                  ```
+
+                  c1: 1
+
+                  c2: t-1
+
+                  ```
+
+
+                  ## Record 3
+
+
+                  ```
+
+                  c1: 2
+
+                  c2: t-2
+
+                  ```
+
+
+                  ## Record 4
+
+
+                  ```
+
+                  c1: 3
+
+                  c2: t-3
+
+                  ```
+
+
+                  ## Record 5
+
+
+                  ```
+
+                  c1: 4
+
+                  c2: t-4
+
+                  ```
+
+
+                  ## Record 6
+
+
+                  ```
+
+                  c1: 5
+
+                  c2: t-5
+
+                  ```
+
+
+                  ## Record 7
+
+
+                  ```
+
+                  c1: 6
+
+                  c2: t-6
+
+                  ```
+
+
+                  ## Record 8
+
+
+                  ```
+
+                  c1: 7
+
+                  c2: t-7
+
+                  ```
+
+
+                  ## Record 9
+
+
+                  ```
+
+                  c1: 8
+
+                  c2: t-8
+
+                  ```
+
+
+                  ## Record 10
+
+
+                  ```
+
+                  c1: 9
+
+                  c2: t-9
+
+                  ```
+
+
+                  ## Record 11
+
+
+                  ```
+
+                  c1: 10
+
+                  c2: t-10
+
+                  ```
+
+
+                  ## Record 12
+
+
+                  ```
+
+                  c1: 11
+
+                  c2: t-11
+
+                  ```
+
+
+                  ## Record 13
+
+
+                  ```
+
+                  c1: 12
+
+                  c2: t-12
+
+                  ```
+
+
+                  ## Record 14
+
+
+                  ```
+
+                  c1: 13
+
+                  c2: t-13
+
+                  ```
+
+
+                  ## Record 15
+
+
+                  ```
+
+                  c1: 14
+
+                  c2: t-14
+
+                  ```
+
+
+                  ## Record 16
+
+
+                  ```
+
+                  c1: 15
+
+                  c2: t-15
+
+                  ```
+
+
+                  ## Record 17
+
+
+                  ```
+
+                  c1: 16
+
+                  c2: t-16
+
+                  ```
+
+
+                  ## Record 18
+
+
+                  ```
+
+                  c1: 17
+
+                  c2: t-17
+
+                  ```
+
+
+                  ## Record 19
+
+
+                  ```
+
+                  c1: 18
+
+                  c2: t-18
+
+                  ```
+
+
+                  ## Record 20
+
+
+                  ```
+
+                  c1: 19
+
+                  c2: t-19
+
+                  ```
+
+
+                  ## Record 21
+
+
+                  ```
+
+                  c1: 20
+
+                  c2: t-20
+
+                  ```
+
+
+                  ## Record 22
+
+
+                  ```
+
+                  c1: 21
+
+                  c2: t-21
+
+                  ```
+
+
+                  ## Record 23
+
+
+                  ```
+
+                  c1: 22
+
+                  c2: t-22
+
+                  ```
+
+
+                  ## Record 24
+
+
+                  ```
+
+                  c1: 23
+
+                  c2: t-23
+
+                  ```
+
+
+                  ## Record 25
+
+
+                  ```
+
+                  c1: 24
+
+                  c2: t-24
+
+                  ```
+
+
+                  ## Record 26
+
+
+                  ```
+
+                  c1: 25
+
+                  c2: t-25
+
+                  ```
+
+
+                  ## Record 27
+
+
+                  ```
+
+                  c1: 26
+
+                  c2: t-26
+
+                  ```
+
+
+                  ## Record 28
+
+
+                  ```
+
+                  c1: 27
+
+                  c2: t-27
+
+                  ```
+
+
+                  ## Record 29
+
+
+                  ```
+
+                  c1: 28
+
+                  c2: t-28
+
+                  ```
+
+
+                  ## Record 30
+
+
+                  ```
+
+                  c1: 29
+
+                  c2: t-29
+
+                  ```
+
+
+                  ## Record 31
+
+
+                  ```
+
+                  c1: 30
+
+                  c2: t-30
+
+                  ```
+
+
+                  ## Record 32
+
+
+                  ```
+
+                  c1: 31
+
+                  c2: t-31
+
+                  ```
+
+
+                  ## Record 33
+
+
+                  ```
+
+                  c1: 32
+
+                  c2: t-32
+
+                  ```
+
+
+                  ## Record 34
+
+
+                  ```
+
+                  c1: 33
+
+                  c2: t-33
+
+                  ```
+
+
+                  ## Record 35
+
+
+                  ```
+
+                  c1: 34
+
+                  c2: t-34
+
+                  ```
+
+
+                  ## Record 36
+
+
+                  ```
+
+                  c1: 35
+
+                  c2: t-35
+
+                  ```
+
+
+                  ## Record 37
+
+
+                  ```
+
+                  c1: 36
+
+                  c2: t-36
+
+                  ```
+
+
+                  ## Record 38
+
+
+                  ```
+
+                  c1: 37
+
+                  c2: t-37
+
+                  ```
+
+
+                  ## Record 39
+
+
+                  ```
+
+                  c1: 38
+
+                  c2: t-38
+
+                  ```
+
+
+                  ## Record 40
+
+
+                  ```
+
+                  c1: 39
+
+                  c2: t-39
+
+                  ```
+
+
+                  ## Record 41
+
+
+                  ```
+
+                  c1: 40
+
+                  c2: t-40
+
+                  ```
+
+
+                  ## Record 42
+
+
+                  ```
+
+                  c1: 41
+
+                  c2: t-41
+
+                  ```
+
+
+                  ## Record 43
+
+
+                  ```
+
+                  c1: 42
+
+                  c2: t-42
+
+                  ```
+
+
+                  ## Record 44
+
+
+                  ```
+
+                  c1: 43
+
+                  c2: t-43
+
+                  ```
+
+
+                  ## Record 45
+
+
+                  ```
+
+                  c1: 44
+
+                  c2: t-44
+
+                  ```
+
+
+                  ## Record 46
+
+
+                  ```
+
+                  c1: 45
+
+                  c2: t-45
+
+                  ```
+
+
+                  ## Record 47
+
+
+                  ```
+
+                  c1: 46
+
+                  c2: t-46
+
+                  ```
+
+
+                  ## Record 48
+
+
+                  ```
+
+                  c1: 47
+
+                  c2: t-47
+
+                  ```
+
+
+                  ## Record 49
+
+
+                  ```
+
+                  c1: 48
+
+                  c2: t-48
+
+                  ```
+
+
+                  ## Record 50
+
+
+                  ```
+
+                  c1: 49
+
+                  c2: t-49
+
+                  ```
+
+
+                  # Warning
+
+
+                  [TRUNCATED] Results limited to 50 rows. To retrieve more data, add pagination to your SQL query using OFFSET N LIMIT M (OFFSET must come before LIMIT), or add WHERE conditions to narrow the results.
+
+                  '
+        '422':
+          description: rejects unknown function
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '422'
+                error: function must be LIST_COLUMNS, SEARCH_SCHEMA, QUERY_DATA_DIRECT
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

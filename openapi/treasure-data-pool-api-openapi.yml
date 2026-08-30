@@ -1,0 +1,554 @@
+openapi: 3.2.0
+info:
+  description: Treasure Workflow
+  title: Treasure Workflow Pool API
+  version: '1.0'
+servers:
+- description: aws
+  url: https://api-workflow.treasuredata.com
+- description: aws-tokyo
+  url: https://api-workflow.treasuredata.co.jp
+- description: eu01
+  url: https://api-workflow.eu01.treasuredata.com
+- description: ap02
+  url: https://api-workflow.ap02.treasuredata.com
+- description: ap03
+  url: https://api-workflow.ap03.treasuredata.com
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pool
+paths:
+  /api/pool_rules:
+    get:
+      description: List pool rules.
+      operationId: getPoolRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRuleCollection'
+          description: List of pool rules
+      summary: List pool rules
+      tags:
+      - Pool
+    post:
+      description: Create a rule that assigns an attempt to a pool based on conditions. A rule consists of a priority, conditions, and a pool ID. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority. If all of a rule's conditions are met, an attempt is assigned to its pool. If none of the rules are met, an attempt is assigned to a default pool.
+      operationId: createPoolRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule created
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+      summary: Create a pool rule
+      tags:
+      - Pool
+  /api/pool_rules/{poolRuleId}:
+    delete:
+      description: Delete a pool rule.
+      operationId: deletePoolRule
+      parameters:
+      - in: path
+        name: poolRuleId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the rule
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule deleted
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool rule not found
+      summary: Delete a pool rule
+      tags:
+      - Pool
+    get:
+      description: Get a pool rule.
+      operationId: getPoolRule
+      parameters:
+      - in: path
+        name: poolRuleId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the rule
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule
+        '404':
+          description: Pool rule not found
+      summary: Get a pool rule
+      tags:
+      - Pool
+    patch:
+      description: Update a rule that assigns an attempt to a pool based on conditions.
+      operationId: updatePoolRule
+      parameters:
+      - in: path
+        name: poolRuleId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolRule'
+          description: Pool rule updated
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool rule not found
+      summary: Update a pool rule
+      tags:
+      - Pool
+  /api/pools:
+    get:
+      description: List pools.
+      operationId: getPools
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPoolCollection'
+          description: List of pools
+      summary: List pools
+      tags:
+      - Pool
+    post:
+      description: Create a pool with the specified name and concurrency limit. A default pool is created with the account's concurrency limit if it does not exist. The default pool’s concurrency limit is reduced by the new pool’s concurrency limit. You cannot create a pool if the default pool has more running attempts than its new reduced concurrency limit.
+      operationId: createPool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool created
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '409':
+          description: Pool name is already used
+      summary: Create a pool
+      tags:
+      - Pool
+  /api/pools/{poolId}:
+    delete:
+      description: Delete a pool. You cannot delete a pool if there are any attempts running or queued in the pool, if a pool rule references it, or if it is the default pool. The deleted pool’s concurrency limit is added to the default pool’s concurrency limit.
+      operationId: deletePool
+      parameters:
+      - in: path
+        name: poolId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the pool.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool deleted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool not found
+      summary: Delete a pool
+      tags:
+      - Pool
+    get:
+      description: Get a pool.
+      operationId: getPool
+      parameters:
+      - in: path
+        name: poolId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the pool
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool
+        '404':
+          description: Pool not found
+      summary: Get a pool
+      tags:
+      - Pool
+    patch:
+      description: Update a pool with the specified name and concurrency limit. You cannot update the default pool. The default pool’s concurrency limit is adjusted to accommodate the new concurrency limit. A pool’s concurrency limit cannot be reduced if it has more running attempts than its new reduced concurrency limit.
+      operationId: updatePool
+      parameters:
+      - in: path
+        name: poolId
+        required: true
+        schema:
+          type: integer
+          format: int32
+          description: ID of the pool.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestPoolUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestPool'
+          description: Pool updated
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '404':
+          description: Pool not found
+      summary: Update a pool
+      tags:
+      - Pool
+components:
+  schemas:
+    RestPoolRuleInvocationTypeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
+          items:
+            type: string
+            description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
+            enum:
+            - on_demand
+            - scheduled
+      required:
+      - type
+      - values
+    RestPool:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        default:
+          type: boolean
+          description: Whether the pool is the default pool.
+          example: true
+        id:
+          type: string
+          description: ID of the pool.
+          example: '42'
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+      required:
+      - concurrencyLimit
+      - default
+      - id
+      - name
+    RestPoolRuleUpdateRequest:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+    RestPoolRuleProjectNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the project name.
+          enum:
+          - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Values to match against the project name. If multiple values are provided, the condition is met if the project name matches one of the provided values.
+          items:
+            type: string
+            description: Values to match against the project name. If multiple values are provided, the condition is met if the project name matches one of the provided values.
+      required:
+      - operator
+      - type
+      - values
+    RestPoolRuleCollection:
+      type: object
+      properties:
+        poolRules:
+          type: array
+          description: List of pool rules.
+          items:
+            $ref: '#/components/schemas/RestPoolRule'
+      required:
+      - poolRules
+    RestPoolRuleCreateRequest:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+      required:
+      - conditions
+      - poolId
+      - priority
+    RestPoolCreateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+      required:
+      - concurrencyLimit
+      - name
+    RestPoolRuleWorkflowTypeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
+          items:
+            type: string
+            description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
+            enum:
+            - ab_test
+            - audience
+            - customer_journey
+            - engage
+            - predictive_scoring
+            - realtime
+            - segment_insights
+            - syndication
+      required:
+      - type
+      - values
+    RestPoolUpdateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+    RestPoolRule:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        id:
+          type: string
+          description: ID of the pool rule.
+          example: '42'
+          minimum: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+      required:
+      - conditions
+      - id
+      - poolId
+      - priority
+    RestPoolRuleWorkflowNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the workflow name.
+          enum:
+          - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+          items:
+            type: string
+            description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+      required:
+      - operator
+      - type
+      - values
+    RestPoolCollection:
+      type: object
+      properties:
+        pools:
+          type: array
+          description: List of pools.
+          items:
+            $ref: '#/components/schemas/RestPool'
+      required:
+      - pools
+    RestPoolRuleCondition:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+      - $ref: '#/components/schemas/RestPoolRuleProjectNameCondition'
+      - $ref: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+      - $ref: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+      discriminator:
+        mapping:
+          invocation_type: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+          project_name: '#/components/schemas/RestPoolRuleProjectNameCondition'
+          workflow_name: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+          workflow_type: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+      - type
+  securitySchemes:
+    ApiKeyAuth:
+      scheme: TD1
+      type: http

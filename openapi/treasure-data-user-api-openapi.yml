@@ -1,0 +1,254 @@
+openapi: 3.2.0
+info:
+  title: llm-api User API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: User
+paths:
+  /api/users/current:
+    get:
+      summary: current
+      tags:
+      - User
+      responses:
+        '200':
+          description: returns TD user and account IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - id
+                    - name
+                  account:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                    required:
+                    - id
+                required:
+                - user
+                - account
+              example:
+                user:
+                  id: '1000'
+                  name: Admin User
+                account:
+                  id: '100'
+  /api/users/current_settings:
+    get:
+      summary: current_settings
+      tags:
+      - User
+      responses:
+        '200':
+          description: Available AI models and configuration settings for current user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  availableModels:
+                    type: object
+                    properties:
+                      nova-pro-v1:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      nova-lite-v1:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      nova-micro-v1:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-3.5-sonnet:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-4-sonnet:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-4.5-haiku:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-4.5-sonnet:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-4.6-sonnet:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      claude-4.6-opus:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-5:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-5-mini:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-5-nano:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-4.1:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-4.1-mini:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-4.1-nano:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                      gpt-5.5:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                    required:
+                    - nova-pro-v1
+                    - nova-lite-v1
+                    - nova-micro-v1
+                    - claude-3.5-sonnet
+                    - claude-4-sonnet
+                    - claude-4.5-haiku
+                    - claude-4.5-sonnet
+                    - claude-4.6-sonnet
+                    - claude-4.6-opus
+                    - gpt-5
+                    - gpt-5-mini
+                    - gpt-5-nano
+                    - gpt-4.1
+                    - gpt-4.1-mini
+                    - gpt-4.1-nano
+                  availableImageModels:
+                    type: object
+                    properties:
+                      nova-canvas:
+                        type: object
+                        properties:
+                          displayName:
+                            type: string
+                        required:
+                        - displayName
+                    required:
+                    - nova-canvas
+                required:
+                - availableModels
+                - availableImageModels
+              example:
+                availableModels:
+                  nova-pro-v1:
+                    displayName: Nova Pro
+                  nova-lite-v1:
+                    displayName: Nova Lite
+                  nova-micro-v1:
+                    displayName: Nova Micro
+                  claude-3.5-sonnet:
+                    displayName: Claude 3.5 Sonnet
+                  claude-4-sonnet:
+                    displayName: Claude 4 Sonnet
+                  claude-4.5-haiku:
+                    displayName: Claude 4.5 Haiku
+                  claude-4.5-sonnet:
+                    displayName: Claude 4.5 Sonnet
+                  claude-4.6-sonnet:
+                    displayName: Claude 4.6 Sonnet
+                  claude-4.6-opus:
+                    displayName: Claude 4.6 Opus
+                  gpt-5:
+                    displayName: GPT-5
+                  gpt-5-mini:
+                    displayName: GPT-5 mini
+                  gpt-5-nano:
+                    displayName: GPT-5 nano
+                  gpt-4.1:
+                    displayName: GPT 4.1
+                  gpt-4.1-mini:
+                    displayName: GPT 4.1 mini
+                  gpt-4.1-nano:
+                    displayName: GPT 4.1 nano
+                  gpt-5.5:
+                    displayName: GPT-5.5
+                availableImageModels:
+                  nova-canvas:
+                    displayName: Nova Canvas
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

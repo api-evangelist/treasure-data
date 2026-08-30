@@ -1,0 +1,1751 @@
+openapi: 3.2.0
+info:
+  title: llm-api Agent API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: Agent
+paths:
+  /api/agents:
+    get:
+      summary: index
+      tags:
+      - Agent
+      responses:
+        '200':
+          description: List of available agents for the current user
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            projectId:
+                              type: string
+                            name:
+                              type: string
+                            systemPrompt:
+                              type: string
+                            starterMessage:
+                              type:
+                              - string
+                              - 'null'
+                            modelType:
+                              type: string
+                            maxToolIterations:
+                              type: integer
+                            temperature:
+                              type: number
+                              format: float
+                            reasoningEffort:
+                              type: string
+                              enum:
+                              - NONE
+                              - MINIMAL
+                              - LOW
+                              - MEDIUM
+                              - HIGH
+                            isManaged:
+                              type: boolean
+                            outputs:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  functionName:
+                                    type: string
+                                  functionDescription:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  jsonSchema:
+                                    type: string
+                                  artifactType:
+                                    type:
+                                    - string
+                                    - 'null'
+                                    enum:
+                                    - IMAGE_ID_OUTPUT
+                                    - MARKDOWN_TEXT_OUTPUT
+                                    - REACT_OUTPUT
+                                    - PRESENTATION
+                                  artifactContentType:
+                                    type:
+                                    - string
+                                    - 'null'
+                                    enum:
+                                    - IMAGE_ID_OUTPUT
+                                    - MARKDOWN_TEXT_OUTPUT
+                                    - REACT_OUTPUT
+                                    - PRESENTATION
+                                required:
+                                - name
+                                - functionName
+                                - functionDescription
+                                - jsonSchema
+                                - artifactType
+                                - artifactContentType
+                            tools:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  toolTargetId:
+                                    type: string
+                                  targetFunction:
+                                    type: string
+                                  functionName:
+                                    type: string
+                                  functionDescription:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  agentOutputMode:
+                                    type: string
+                                    enum:
+                                    - RETURN
+                                    - SHOW
+                                  agentPromptSchema:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  agentPromptTemplate:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  toolTargetType:
+                                    type: string
+                                  inheritChatFiles:
+                                    type: boolean
+                                  targetType:
+                                    type: string
+                                  targetKnowledgeBaseId:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  targetAgentId:
+                                    type:
+                                    - string
+                                    - 'null'
+                                required:
+                                - toolTargetId
+                                - targetFunction
+                                - functionName
+                                - functionDescription
+                                - agentOutputMode
+                                - agentPromptSchema
+                                - agentPromptTemplate
+                                - toolTargetType
+                                - inheritChatFiles
+                                - targetType
+                                - targetKnowledgeBaseId
+                                - targetAgentId
+                            variables:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  toolTargetId:
+                                    type: string
+                                  targetFunction:
+                                    type: string
+                                  functionArgumentsText:
+                                    type:
+                                    - string
+                                    - 'null'
+                                  toolTargetType:
+                                    type: string
+                                  targetKnowledgeBaseId:
+                                    type:
+                                    - string
+                                    - 'null'
+                                required:
+                                - name
+                                - toolTargetId
+                                - targetFunction
+                                - functionArgumentsText
+                                - toolTargetType
+                                - targetKnowledgeBaseId
+                          required:
+                          - createdAt
+                          - updatedAt
+                          - projectId
+                          - name
+                          - systemPrompt
+                          - starterMessage
+                          - modelType
+                          - maxToolIterations
+                          - temperature
+                          - reasoningEffort
+                          - isManaged
+                          - outputs
+                          - tools
+                          - variables
+                        relationships:
+                          type: object
+                          properties:
+                            overview:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            createdBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                            updatedBy:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    id:
+                                      type: string
+                                  required:
+                                  - type
+                                  - id
+                              required:
+                              - data
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                    required:
+                    - first
+                    - last
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            firstReferencingAgentName:
+                              type:
+                              - string
+                              - 'null'
+                            firstReferencedByAgentName:
+                              type: string
+                            firstReferencedByPromptName:
+                              type:
+                              - string
+                              - 'null'
+                            totalReferencingAgentCount:
+                              type: integer
+                            totalReferencedByAgentCount:
+                              type: integer
+                            totalReferencedByPromptCount:
+                              type: integer
+                            name:
+                              type: string
+                            email:
+                              type: string
+                      required:
+                      - id
+                      - type
+                      - attributes
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data: []
+                meta:
+                  total: 0
+                links:
+                  first: http://www.example.com/api/agents?page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/agents?page%5Blimit%5D=20&page%5Boffset%5D=0
+                included:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: users
+                  attributes:
+                    name: Admin User
+                    email: admin@example.com
+        '401':
+          description: Authentication credentials are invalid or missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: 'Unauthorized: {"status":401,"error":"Unauthorized: Invalid credentials."}'
+        '403':
+          description: User is not authorized to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: User is not authorized to access this service
+      parameters:
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+        example: createdBy,updatedBy
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        example: id
+    post:
+      summary: create
+      tags:
+      - Agent
+      responses:
+        '201':
+          description: Agent successfully created
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          starterMessage:
+                            type:
+                            - string
+                            - 'null'
+                          modelType:
+                            type: string
+                          maxToolIterations:
+                            type: integer
+                          temperature:
+                            type: number
+                            format: float
+                          reasoningEffort:
+                            type: string
+                            enum:
+                            - NONE
+                            - MINIMAL
+                            - LOW
+                            - MEDIUM
+                            - HIGH
+                          isManaged:
+                            type: boolean
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                functionName:
+                                  type: string
+                                functionDescription:
+                                  type:
+                                  - string
+                                  - 'null'
+                                jsonSchema:
+                                  type: string
+                                artifactType:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  enum:
+                                  - IMAGE_ID_OUTPUT
+                                  - MARKDOWN_TEXT_OUTPUT
+                                  - REACT_OUTPUT
+                                  - PRESENTATION
+                                artifactContentType:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  enum:
+                                  - IMAGE_ID_OUTPUT
+                                  - MARKDOWN_TEXT_OUTPUT
+                                  - REACT_OUTPUT
+                                  - PRESENTATION
+                              required:
+                              - name
+                              - functionName
+                              - functionDescription
+                              - jsonSchema
+                              - artifactType
+                              - artifactContentType
+                          tools:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                toolTargetId:
+                                  type: string
+                                targetFunction:
+                                  type: string
+                                functionName:
+                                  type: string
+                                functionDescription:
+                                  type:
+                                  - string
+                                  - 'null'
+                                agentOutputMode:
+                                  type: string
+                                  enum:
+                                  - RETURN
+                                  - SHOW
+                                agentPromptSchema:
+                                  type:
+                                  - string
+                                  - 'null'
+                                agentPromptTemplate:
+                                  type:
+                                  - string
+                                  - 'null'
+                                toolTargetType:
+                                  type: string
+                                inheritChatFiles:
+                                  type: boolean
+                                targetType:
+                                  type: string
+                                targetKnowledgeBaseId:
+                                  type:
+                                  - string
+                                  - 'null'
+                                targetAgentId:
+                                  type:
+                                  - string
+                                  - 'null'
+                              required:
+                              - toolTargetId
+                              - targetFunction
+                              - functionName
+                              - functionDescription
+                              - agentOutputMode
+                              - agentPromptSchema
+                              - agentPromptTemplate
+                              - toolTargetType
+                              - inheritChatFiles
+                              - targetType
+                              - targetKnowledgeBaseId
+                              - targetAgentId
+                          variables:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                toolTargetId:
+                                  type: string
+                                targetFunction:
+                                  type: string
+                                functionArgumentsText:
+                                  type:
+                                  - string
+                                  - 'null'
+                                toolTargetType:
+                                  type: string
+                                targetKnowledgeBaseId:
+                                  type:
+                                  - string
+                                  - 'null'
+                              required:
+                              - name
+                              - toolTargetId
+                              - targetFunction
+                              - toolTargetType
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - systemPrompt
+                        - starterMessage
+                        - modelType
+                        - maxToolIterations
+                        - temperature
+                        - reasoningEffort
+                        - isManaged
+                        - outputs
+                        - tools
+                        - variables
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agents
+                  links:
+                    self: http://www.example.com/api/agents/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: name1
+                    systemPrompt: ''
+                    starterMessage: ''
+                    modelType: claude-4.5-haiku
+                    maxToolIterations: 4
+                    temperature: 0
+                    reasoningEffort: NONE
+                    isManaged: false
+                    outputs: []
+                    tools: []
+                    variables: []
+        '400':
+          description: Bad request - invalid agent parameters provided
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: Forbidden - cannot reference agents from other users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '422':
+          description: Validation error - temperature must be between 0 and 2
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be in 0..1
+                  detail: temperature - must be in 0..1
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/temperature
+                  status: '422'
+                  meta:
+                    validationCode: INVALID_FORMAT_OR_ASSOCIATION
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        projectId:
+                          type: string
+                        modelType:
+                          type: string
+                        maxToolIterations:
+                          type: integer
+                        temperature:
+                          type: number
+                          format: float
+                        variables:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              targetKnowledgeBaseId:
+                                type: string
+                              targetFunction:
+                                type: string
+                              toolTargetId:
+                                type: string
+                              toolTargetType:
+                                type: string
+                              functionArgumentsText:
+                                type: string
+                            required:
+                            - name
+                            - toolTargetId
+                            - toolTargetType
+                            - targetFunction
+                        reasoningEffort:
+                          type: string
+                          enum:
+                          - NONE
+                          - MINIMAL
+                          - LOW
+                          - MEDIUM
+                          - HIGH
+                          description: 'Overall reasoning effort for the agent.
+
+                            For models whose name matches "gpt-oss-*", only "LOW", "MEDIUM", and "HIGH"
+
+                            are supported; "NONE" and "MINIMAL" are not valid for gpt-oss-* models.
+
+                            '
+                        systemPrompt:
+                          type:
+                          - string
+                          - 'null'
+                        starterMessage:
+                          type:
+                          - string
+                          - 'null'
+                        outputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              functionName:
+                                type: string
+                              functionDescription:
+                                type: string
+                              jsonSchema:
+                                type: string
+                              artifactType:
+                                type: string
+                                enum:
+                                - IMAGE_ID_OUTPUT
+                                - MARKDOWN_TEXT_OUTPUT
+                                - REACT_OUTPUT
+                                - PRESENTATION
+                              artifactContentType:
+                                type: string
+                                enum:
+                                - IMAGE_ID_OUTPUT
+                                - MARKDOWN_TEXT_OUTPUT
+                                - REACT_OUTPUT
+                                - PRESENTATION
+                            required:
+                            - name
+                            - functionName
+                            - jsonSchema
+                        tools:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              toolTargetId:
+                                type: string
+                              toolTargetType:
+                                type: string
+                              targetFunction:
+                                type: string
+                              functionName:
+                                type: string
+                              functionDescription:
+                                type: string
+                              agentOutputMode:
+                                type:
+                                - string
+                                - 'null'
+                                enum:
+                                - RETURN
+                                - SHOW
+                              agentPromptSchema:
+                                type: string
+                              agentPromptTemplate:
+                                type: string
+                              inheritChatFiles:
+                                type: boolean
+                            required:
+                            - toolTargetId
+                            - toolTargetType
+                            - targetFunction
+                            - functionName
+                      required:
+                      - name
+                      - projectId
+                      - modelType
+                  required:
+                  - type
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: agents
+                attributes:
+                  name: name1
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  modelType: claude-4.5-haiku
+                  maxToolIterations: 4
+                  temperature: 0
+                  variables:
+                  - name: columns
+                    toolTargetId: 00000000-0000-0000-0000-000000000001
+                    toolTargetType: knowledge_base
+                    targetFunction: LIST_COLUMNS
+                  reasoningEffort: LOW
+  /api/agents/{id}:
+    delete:
+      summary: destroy
+      tags:
+      - Agent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '204':
+          description: Agent deleted successfully
+        '401':
+          description: Unauthorized - authentication credentials are missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '403':
+          description: Forbidden - insufficient permissions to delete this agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '403'
+                error: Forbidden
+        '404':
+          description: Agent not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: restricts deletion of an agent if it is referenced by a prompt
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                            referencedByTools:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                required:
+                                - id
+                            referencedByPrompts:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                required:
+                                - id
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: Cannot delete record because dependent referenced by prompts exist
+                  detail: Cannot delete record because dependent referenced by prompts exist
+                  code: '100'
+                  source:
+                    pointer: /data
+                  status: '422'
+                  meta:
+                    validationCode: DEPENDENT_DESTROY_RESTRICTED_HAS_MANY
+                    referencedByPrompts:
+                    - id: 00000000-0000-0000-0000-000000000001
+    get:
+      summary: show
+      tags:
+      - Agent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Agent details and configuration
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          starterMessage:
+                            type:
+                            - string
+                            - 'null'
+                          modelType:
+                            type: string
+                          maxToolIterations:
+                            type: integer
+                          temperature:
+                            type: number
+                            format: float
+                          reasoningEffort:
+                            type: string
+                            enum:
+                            - NONE
+                            - MINIMAL
+                            - LOW
+                            - MEDIUM
+                            - HIGH
+                          isManaged:
+                            type: boolean
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                functionName:
+                                  type: string
+                                functionDescription:
+                                  type:
+                                  - string
+                                  - 'null'
+                                jsonSchema:
+                                  type: string
+                                artifactType:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  enum:
+                                  - IMAGE_ID_OUTPUT
+                                  - MARKDOWN_TEXT_OUTPUT
+                                  - REACT_OUTPUT
+                                  - PRESENTATION
+                                artifactContentType:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  enum:
+                                  - IMAGE_ID_OUTPUT
+                                  - MARKDOWN_TEXT_OUTPUT
+                                  - REACT_OUTPUT
+                                  - PRESENTATION
+                              required:
+                              - name
+                              - functionName
+                              - functionDescription
+                              - jsonSchema
+                              - artifactType
+                              - artifactContentType
+                          tools:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                toolTargetId:
+                                  type: string
+                                targetFunction:
+                                  type: string
+                                functionName:
+                                  type: string
+                                functionDescription:
+                                  type:
+                                  - string
+                                  - 'null'
+                                agentOutputMode:
+                                  type: string
+                                  enum:
+                                  - RETURN
+                                  - SHOW
+                                agentPromptSchema:
+                                  type:
+                                  - string
+                                  - 'null'
+                                agentPromptTemplate:
+                                  type:
+                                  - string
+                                  - 'null'
+                                toolTargetType:
+                                  type: string
+                                inheritChatFiles:
+                                  type: boolean
+                                targetType:
+                                  type: string
+                                targetKnowledgeBaseId:
+                                  type:
+                                  - string
+                                  - 'null'
+                                targetAgentId:
+                                  type:
+                                  - string
+                                  - 'null'
+                              required:
+                              - toolTargetId
+                              - targetFunction
+                              - functionName
+                              - functionDescription
+                              - agentOutputMode
+                              - agentPromptSchema
+                              - agentPromptTemplate
+                              - toolTargetType
+                              - inheritChatFiles
+                              - targetType
+                              - targetKnowledgeBaseId
+                              - targetAgentId
+                          variables:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                toolTargetId:
+                                  type: string
+                                targetFunction:
+                                  type: string
+                                functionArgumentsText:
+                                  type:
+                                  - string
+                                  - 'null'
+                                toolTargetType:
+                                  type: string
+                                targetKnowledgeBaseId:
+                                  type:
+                                  - string
+                                  - 'null'
+                              required:
+                              - name
+                              - toolTargetId
+                              - targetFunction
+                              - toolTargetType
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - systemPrompt
+                        - starterMessage
+                        - modelType
+                        - maxToolIterations
+                        - temperature
+                        - reasoningEffort
+                        - isManaged
+                        - outputs
+                        - tools
+                        - variables
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agents
+                  links:
+                    self: http://www.example.com/api/agents/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: mteewcrk
+                    systemPrompt: ''
+                    starterMessage: ''
+                    modelType: claude-4.5-haiku
+                    maxToolIterations: 4
+                    temperature: 0
+                    reasoningEffort: NONE
+                    isManaged: true
+                    outputs: []
+                    tools: []
+                    variables: []
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Agent not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+    patch:
+      summary: update
+      tags:
+      - Agent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: updates an agent if the modelType to a non-deprecated model_type
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                        required:
+                        - self
+                      attributes:
+                        type: object
+                        properties:
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          projectId:
+                            type: string
+                          name:
+                            type: string
+                          systemPrompt:
+                            type: string
+                          starterMessage:
+                            type: string
+                          modelType:
+                            type: string
+                          maxToolIterations:
+                            type: integer
+                          temperature:
+                            type: number
+                            format: float
+                          reasoningEffort:
+                            type: string
+                          isManaged:
+                            type: boolean
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                functionName:
+                                  type: string
+                                functionDescription: {}
+                                jsonSchema:
+                                  type: string
+                                artifactType:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  enum:
+                                  - IMAGE_ID_OUTPUT
+                                  - MARKDOWN_TEXT_OUTPUT
+                                  - REACT_OUTPUT
+                                  - PRESENTATION
+                                artifactContentType: {}
+                              required:
+                              - name
+                              - functionName
+                              - functionDescription
+                              - jsonSchema
+                              - artifactType
+                              - artifactContentType
+                          tools:
+                            type: array
+                            items: {}
+                          variables:
+                            type: array
+                            items: {}
+                        required:
+                        - createdAt
+                        - updatedAt
+                        - projectId
+                        - name
+                        - systemPrompt
+                        - starterMessage
+                        - modelType
+                        - maxToolIterations
+                        - temperature
+                        - reasoningEffort
+                        - isManaged
+                        - outputs
+                        - tools
+                        - variables
+                    required:
+                    - id
+                    - type
+                    - links
+                    - attributes
+                required:
+                - data
+              example:
+                data:
+                  id: 00000000-0000-0000-0000-000000000001
+                  type: agents
+                  links:
+                    self: http://www.example.com/api/agents/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    createdAt: '2025-05-01T05:05:14.000Z'
+                    updatedAt: '2025-05-01T05:05:14.000Z'
+                    projectId: 00000000-0000-0000-0000-000000000001
+                    name: new_name
+                    systemPrompt: ''
+                    starterMessage: ''
+                    modelType: claude-4.5-haiku
+                    maxToolIterations: 4
+                    temperature: 0
+                    reasoningEffort: NONE
+                    isManaged: false
+                    outputs: []
+                    tools: []
+                    variables: []
+        '400':
+          description: Forbidden - insufficient permissions to modify this agent
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Param not allowed
+                  detail: isManaged is not allowed.
+                  code: '105'
+                  status: '400'
+        '401':
+          description: Rejected by 401
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: User credentials aren't set on the request
+        '404':
+          description: Agent not found
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - status
+                required:
+                - errors
+              example:
+                errors:
+                - title: Record not found
+                  detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
+                  code: '404'
+                  status: '404'
+        '422':
+          description: PATCH /api/agents rejects {"temperature":-2}
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        detail:
+                          type: string
+                        code:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                          required:
+                          - pointer
+                        status:
+                          type: string
+                        meta:
+                          type: object
+                          properties:
+                            validationCode:
+                              type: string
+                          required:
+                          - validationCode
+                      required:
+                      - title
+                      - detail
+                      - code
+                      - source
+                      - status
+                      - meta
+                required:
+                - errors
+              example:
+                errors:
+                - title: must be in 0..1
+                  detail: temperature - must be in 0..1
+                  code: '100'
+                  source:
+                    pointer: /data/attributes/temperature
+                  status: '422'
+                  meta:
+                    validationCode: INVALID_FORMAT_OR_ASSOCIATION
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    id:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        projectId:
+                          type: string
+                        modelType:
+                          type: string
+                        maxToolIterations:
+                          type: integer
+                        temperature:
+                          type: number
+                          format: float
+                        outputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              functionName:
+                                type: string
+                              jsonSchema:
+                                type: string
+                              functionDescription:
+                                type: string
+                              artifactType:
+                                type: string
+                                enum:
+                                - IMAGE_ID_OUTPUT
+                                - MARKDOWN_TEXT_OUTPUT
+                                - REACT_OUTPUT
+                                - PRESENTATION
+                              artifactContentType:
+                                type: string
+                                enum:
+                                - IMAGE_ID_OUTPUT
+                                - MARKDOWN_TEXT_OUTPUT
+                                - REACT_OUTPUT
+                                - PRESENTATION
+                            required:
+                            - name
+                            - functionName
+                            - jsonSchema
+                        systemPrompt:
+                          type:
+                          - string
+                          - 'null'
+                        starterMessage:
+                          type:
+                          - string
+                          - 'null'
+                        reasoningEffort:
+                          type: string
+                          enum:
+                          - NONE
+                          - MINIMAL
+                          - LOW
+                          - MEDIUM
+                          - HIGH
+                        tools:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              toolTargetId:
+                                type: string
+                              toolTargetType:
+                                type: string
+                              targetFunction:
+                                type: string
+                              functionName:
+                                type: string
+                              functionDescription:
+                                type: string
+                              agentOutputMode:
+                                type:
+                                - string
+                                - 'null'
+                                enum:
+                                - RETURN
+                                - SHOW
+                              agentPromptSchema:
+                                type: string
+                              agentPromptTemplate:
+                                type: string
+                              inheritChatFiles:
+                                type: boolean
+                            required:
+                            - toolTargetId
+                            - toolTargetType
+                            - targetFunction
+                            - functionName
+                        variables:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              toolTargetId:
+                                type: string
+                              toolTargetType:
+                                type: string
+                              targetFunction:
+                                type: string
+                              functionArgumentsText:
+                                type: string
+                            required:
+                            - name
+                            - toolTargetId
+                            - toolTargetType
+                            - targetFunction
+                      required:
+                      - name
+                      - modelType
+                  required:
+                  - type
+                  - id
+                  - attributes
+              required:
+              - data
+            example:
+              data:
+                type: agents
+                id: 00000000-0000-0000-0000-000000000001
+                attributes:
+                  name: new_name
+                  projectId: 00000000-0000-0000-0000-000000000001
+                  modelType: claude-4.5-haiku
+                  maxToolIterations: 4
+                  temperature: 1
+                  outputs:
+                  - name: out1
+                    functionName: func1
+                    jsonSchema: '{}'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

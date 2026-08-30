@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Access Control - Policy Groups API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Access Control - Policy Groups
+paths:
+  /access_control/policy_groups:
+    get:
+      summary: get Access Control Policy Groups
+      description: Retrieves a list of policy groups.
+      operationId: getAccessControlPolicyGroups
+      tags:
+      - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicyGroup'
+    post:
+      summary: Create an Access Control Policy Group
+      description: Creates a policy group.
+      operationId: createAccessControlPolicyGroup
+      tags:
+      - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessControlPolicyGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+  /access_control/policy_groups/{policy_group_id_or_taggable_name}:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_group_id_or_taggable_name'
+    get:
+      summary: Get an Access Control Policy Group
+      description: Retrieves information about the specified policy group.
+      operationId: getAccessControlPolicyGroupById
+      tags:
+      - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+    patch:
+      summary: Update an Access Control Policy Group
+      description: Updates information related to a policy group.
+      operationId: updateAccessControlPolicyGroupById
+      tags:
+      - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyGroupRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroup'
+    delete:
+      summary: Delete an Access Control Policy Group
+      description: Deletes a policy group.
+      operationId: deleteAccessControlPolicyGroupById
+      tags:
+      - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+  /access_control/policy_groups/{policy_group_id_or_taggable_name}/policies:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_group_id_or_taggable_name'
+    get:
+      summary: Get an Access Control Policy Group's Policies
+      description: Retrieves the list of the specified policy group's policies.
+      operationId: getAccessControlPolicyGroupPoliciesById
+      tags:
+      - Access Control - Policy Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
+    patch:
+      summary: Update an Access Control Policy Group's Policies
+      description: Updates the policies attached to a policy group.
+      operationId: updateAccessControlPolicyGroupPolicies
+      tags:
+      - Access Control - Policy Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyGroupPoliciesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
+components:
+  schemas:
+    UpdateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+        description:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
+    AccessControlPolicyGroup:
+      title: Access Control Policy Group
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyGroupId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy Group's name
+          type: string
+          example: some_policy_group
+        taggable_name:
+          $ref: '#/components/schemas/AccessControlPolicyGroupTaggableName'
+        description:
+          description: Policy Group's description
+          type:
+          - string
+          - 'null'
+          example: some_policy_group_description
+        policy_count:
+          description: Policy Group's policy count
+          type: integer
+          example: 1
+        created_at:
+          description: when the policy group was created
+          type: string
+          format: date-time
+          example: '2012-01-01T12:00:00Z'
+        updated_at:
+          description: when policy group was updated
+          type: string
+          format: date-time
+          example: '2012-01-01T12:00:00Z'
+    UpdateAccessControlPolicyGroupPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
+    AccessControlPolicyGroupPolicies:
+      title: Access Control Policy Group Policies
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          description: Policy Group's Policies
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicyId'
+    AccessControlPolicyGroupId:
+      type: integer
+      example: 10
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    CreateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+    AccessControlPolicyGroupTaggableName:
+      type: string
+      description: Policy Group's taggable name
+      example: some_policy_group
+    AccountId:
+      type: integer
+      example: 123
+  parameters:
+    path_access_control_policy_group_id_or_taggable_name:
+      name: policy_group_id_or_taggable_name
+      in: path
+      required: true
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/AccessControlPolicyGroupId'
+        - $ref: '#/components/schemas/AccessControlPolicyGroupTaggableName'
+        example: 67 or some_policy_group
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

@@ -1,0 +1,297 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Access Control - Policies API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Access Control - Policies
+paths:
+  /access_control/policies:
+    get:
+      summary: get Access Control Policies
+      description: Retrieves a list of policies.
+      operationId: getAccessControlPolicies
+      tags:
+      - Access Control - Policies
+      parameters:
+      - in: query
+        name: column_permission_tag
+        description: Return only policies that refer to the specified tag
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+    post:
+      summary: Create an Access Control Policy
+      description: Creates a policy.
+      operationId: createAccessControlPolicy
+      tags:
+      - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessControlPolicyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/policies/{policy_id}:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_id'
+    get:
+      summary: Get an Access Control Policy
+      description: Retrieves information about the specified policy.
+      operationId: getAccessControlPolicyById
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    patch:
+      summary: Update an Access Control Policy
+      description: Updates information related to a policy.
+      operationId: updateAccessControlPolicyById
+      tags:
+      - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPolicyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Delete an Access Control Policy
+      description: Deletes a policy.
+      operationId: deleteAccessControlPolicyById
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/users/{user_id}/policies:
+    parameters:
+    - $ref: '#/components/parameters/path_user_id'
+    get:
+      summary: get User Policies
+      description: Retrieves a list of policies by user.
+      operationId: getAccessControlPoliciesByUserId
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+    patch:
+      summary: Update User Policies
+      description: Updates policies by user ID.
+      operationId: updateAccessControlPoliciesByUserId
+      tags:
+      - Access Control - Policies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessControlPoliciesRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/users/{user_id}/policies/{policy_id}:
+    parameters:
+    - $ref: '#/components/parameters/path_user_id'
+    - $ref: '#/components/parameters/path_access_control_policy_id'
+    post:
+      summary: Attach a policy to a user.
+      description: Attaches a policy to a user.
+      operationId: attachUserAndPolicy
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Detach a Policy from a User
+      description: Detaches a policy from a user.
+      operationId: detachUserAndPolicy
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+  /access_control/policies/{policy_id}/users/{user_id}:
+    parameters:
+    - $ref: '#/components/parameters/path_access_control_policy_id'
+    - $ref: '#/components/parameters/path_user_id'
+    post:
+      summary: Attach
+      description: This operation attaches a policy to a user.
+      operationId: attachPolicyAndUser
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+    delete:
+      summary: Detach
+      description: Detaches a user from a policy.
+      operationId: detachPolicyAndUser
+      tags:
+      - Access Control - Policies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessControlPolicy'
+components:
+  schemas:
+    AccessControlPolicy:
+      title: Access Control Policy
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_id
+      - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy's name
+          type: string
+          example: some_policy
+        description:
+          description: Policy's description
+          type: string
+          example: written about the policy
+        user_count:
+          description: The number of users which the policy attaches to
+          type: integer
+          example: 3
+    UpdateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    CreateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          required:
+          - name
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    AccountId:
+      type: integer
+      example: 123
+    UserId:
+      type: integer
+      example: 123
+    UpdateAccessControlPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+          - '42'
+  parameters:
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

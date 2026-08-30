@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  title: Treasure Data Connections API
+  version: '3'
+servers:
+- url: https://api.treasuredata.com/v3
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
+security:
+- ApiKeyAuth: []
+tags:
+- name: Connections
+paths:
+  /result/list:
+    get:
+      summary: Get connections
+      description: Retrieves a list of connections.
+      operationId: getConnections
+      tags:
+      - Connections
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - results
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - name
+                      - url
+                      - organization
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                        organization:
+                          type:
+                          - string
+                          - 'null'
+                          deprecated: true
+  /result/create/{connection_name}:
+    post:
+      summary: Create connection
+      description: Creates a connection.
+      operationId: createConnection
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/path_connection_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - name
+                - result
+                properties:
+                  name:
+                    $ref: '#/components/schemas/Connection/properties/name'
+                  result:
+                    $ref: '#/components/schemas/Connection/properties/name'
+  /result/delete/{connection_name}:
+    post:
+      summary: Delete connection
+      description: Deletes a connection.
+      operationId: deleteConnection
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/path_connection_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - name
+                - result
+                properties:
+                  name:
+                    $ref: '#/components/schemas/Connection/properties/name'
+                  result:
+                    $ref: '#/components/schemas/Connection/properties/name'
+  /connections/lookup:
+    get:
+      summary: Get connection id by name
+      description: Retrieves the specified connection.
+      operationId: getConnectionIdByName
+      tags:
+      - Connections
+      parameters:
+      - name: name
+        required: true
+        in: query
+        schema:
+          $ref: '#/components/schemas/Connection/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - id
+                properties:
+                  id:
+                    $ref: '#/components/schemas/ConnectionId'
+  /connector_configs/validate_with_connection:
+    post:
+      summary: Validate connector config
+      description: Validates a connector configuration.
+      operationId: validateConnectorConfig
+      tags:
+      - Connections
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                type:
+                  type: string
+                settings:
+                  type: object
+                connection_id:
+                  $ref: '#/components/schemas/ConnectionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - type
+                - settings
+                properties:
+                  type:
+                    type: string
+                  settings:
+                    type: object
+components:
+  schemas:
+    ConnectionId:
+      description: the connection id
+      type: integer
+      example: 17
+    Connection:
+      title: Connection
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectionId'
+        name:
+          type: string
+  parameters:
+    path_connection_name:
+      name: connection_name
+      description: the connection name
+      required: true
+      in: path
+      schema:
+        $ref: '#/components/schemas/Connection/properties/name'
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1

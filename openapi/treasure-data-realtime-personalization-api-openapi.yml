@@ -1,0 +1,1125 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Realtime Personalization API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Realtime Personalization
+paths:
+  /audiences/{audienceId}/realtime_personalization_services:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/AudienceId'
+    get:
+      parameters:
+      - $ref: '#/components/parameters/partial_pagination.yaml-PageAfter'
+      - $ref: '#/components/parameters/partial_pagination.yaml-PageSize'
+      - $ref: '#/components/parameters/partial_pagination.yaml-SortedBy'
+      - $ref: '#/components/parameters/NameInclude'
+      tags:
+      - Realtime Personalization
+      summary: Return a list of Realtime Personalization Services for the Audience
+      description: Return a list of Realtime Personalization Services for the Audience
+      responses:
+        '200':
+          description: A list of Realtime Key Events for the Audience
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/partial_pagination.yaml-PaginatedResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        allOf:
+                        - type: object
+                          properties:
+                            id:
+                              type: string
+                          required:
+                          - id
+                          additionalProperties: false
+                        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes'
+                        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Realtime Personalization
+      summary: Create a Realtime Personalization Service for the Audience
+      description: Create a Realtime Personalization Service for the Audience
+      requestBody:
+        description: parameters to create a realtime personalization service
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type:
+                  - string
+                  - 'null'
+                public:
+                  type: boolean
+                  default: false
+              required:
+              - name
+              additionalProperties: false
+        required: true
+      responses:
+        '200':
+          description: A Realtime Personalization Service for the Audience
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes'
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/realtime_personalization_services/{realtimePersonalizationServiceId}:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/AudienceId'
+    - $ref: '#/components/parameters/partial_realtime_journey.yaml-RealtimePersonalizationServiceId'
+    get:
+      tags:
+      - Realtime Personalization
+      summary: Return the specified Realtime Personalization Service
+      description: Return the specified Realtime Personalization Service
+      responses:
+        '200':
+          description: The specified Realtime Personalization Service
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes'
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes'
+      security:
+      - TdApikeyAuth: []
+    patch:
+      tags:
+      - Realtime Personalization
+      summary: Edit the specified Realtime Personalization Service
+      description: Edit the specified Realtime Personalization Service
+      requestBody:
+        description: parameters to edit the realtime personalization service
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type:
+                  - string
+                  - 'null'
+              required:
+              - name
+              additionalProperties: false
+        required: true
+      responses:
+        '200':
+          description: A Realtime Key Events for the Audience
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes'
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Realtime Personalization
+      summary: Delete the specified Realtime Personalization Service
+      description: Delete the specified Realtime Personalization Service
+      responses:
+        '200':
+          description: A Realtime Personalization Service for the Audience
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes'
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/realtime_personalization_services/{realtimePersonalizationServiceId}/tokens:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/AudienceId'
+    - $ref: '#/components/parameters/partial_realtime_journey.yaml-RealtimePersonalizationServiceId'
+    post:
+      tags:
+      - Realtime Personalization
+      summary: Create a new Personalization Token
+      description: Create a new Personalization Token
+      requestBody:
+        description: parameters to create a personalization service token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                allowedIps:
+                  type: array
+                  items:
+                    type: string
+                  minLength: 0
+                description:
+                  type:
+                  - string
+                  - 'null'
+              required:
+              - name
+              additionalProperties: false
+      responses:
+        '200':
+          description: The created Token
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceTokenAttributes'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/realtime_personalization_services/{realtimePersonalizationServiceId}/tokens/{tokenId}:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/AudienceId'
+    - $ref: '#/components/parameters/partial_realtime_journey.yaml-RealtimePersonalizationServiceId'
+    - $ref: '#/components/parameters/partial_realtime_journey.yaml-RealtimePersonalizationTokenId'
+    delete:
+      tags:
+      - Realtime Personalization
+      summary: Delete the specified Realtime Personalization Token
+      description: Delete the specified Realtime Personalization Token
+      responses:
+        '200':
+          description: A Realtime Personalization Token for the Audience
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceTokenAttributes'
+  /entities/realtime_personalizations:
+    x-external: true
+    post:
+      tags:
+      - Realtime Personalization
+      summary: Create a realtime personalization
+      description: Create a realtime personalization.
+      requestBody:
+        description: parameters to create a realtime personalization
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              type: object
+              required:
+              - attributes
+              properties:
+                attributes:
+                  type: object
+                  required:
+                  - name
+                  - description
+                  properties:
+                    audienceId:
+                      type: string
+                      pattern: '[1-9][0-9]*'
+                    name:
+                      type: string
+                    description:
+                      type:
+                      - string
+                      - 'null'
+                    sections:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationSectionAttributes'
+                  additionalProperties: false
+                relationships:
+                  type: object
+                  properties:
+                    parentFolder:
+                      $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+        required: true
+      responses:
+        '200':
+          description: Returns a realtime personalization
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationResource'
+      security:
+      - TdApikeyAuth: []
+  /entities/realtime_personalizations/{realtimePersonalizationId}:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/partial_realtime_journey.yaml-RealtimePersonalizationId'
+    get:
+      tags:
+      - Realtime Personalization
+      summary: Get a realtime personalization
+      description: Get a realtime personalization.
+      responses:
+        '200':
+          description: Returns a realtime personalization
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationResource'
+    patch:
+      tags:
+      - Realtime Personalization
+      summary: Update a realtime personalization
+      description: Update a realtime personalization.
+      requestBody:
+        description: parameters to update a realtime personalization
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              type: object
+              required:
+              - attributes
+              properties:
+                attributes:
+                  $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationAttributes'
+        required: true
+      responses:
+        '200':
+          description: Returns a realtime personalization
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationResource'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Realtime Personalization
+      summary: Delete realtime personalization entity
+      description: Delete a realtime personalization entity.
+      responses:
+        '200':
+          description: Empty if deletion is successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+      security:
+      - TdApikeyAuth: []
+  /entities/parent_segments/{parentSegmentId}/realtime_personalizations:
+    x-external: true
+    parameters:
+    - $ref: '#/components/parameters/ParentSegmentId'
+    get:
+      tags:
+      - Realtime Personalization
+      summary: Retrieve a list of realtime personalizations under the Parent Segment
+      description: Retrieve a list of realtime personalizations under the Parent Segment
+      parameters:
+      - $ref: '#/components/parameters/partial_pagination.yaml-PageSize'
+      - $ref: '#/components/parameters/partial_pagination.yaml-PageAfter'
+      - name: permissions
+        in: query
+        description: filter by the resource's permission. Default to 'view'
+        required: false
+        schema:
+          type: string
+          enum:
+          - edit
+          - view
+      responses:
+        '200':
+          description: Returns a list of realtime personalizations under the Parent Segment
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/partial_pagination.yaml-PaginatedResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationResource'
+      security:
+      - TdApikeyAuth: []
+components:
+  schemas:
+    partial_realtime_journey.yaml-RealtimePersonalizationSectionReadonlyAttributes:
+      type: object
+      required:
+      - id
+      - includeSensitive
+      properties:
+        id:
+          type: string
+        includeSensitive:
+          type: boolean
+          enum:
+          - true
+          - false
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeListAttributeFields:
+      type: array
+      items:
+        type: string
+        minLength: 1
+    partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - single
+        notation:
+          type: string
+        realtimeKeyEventId:
+          type: string
+        sensitive:
+          type: boolean
+          enum:
+          - true
+          - false
+        filterRule:
+          type: object
+        valueColumn:
+          type: string
+        dataType:
+          type: string
+          enum:
+          - number
+          - string
+        duration:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+        backfill:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
+      required:
+      - name
+      - identifier
+      - type
+      - notation
+      - realtimeKeyEventId
+      - filterRule
+      - valueColumn
+      - dataType
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyCriteria:
+      type:
+      - object
+      - 'null'
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        keyEventCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria'
+        profileCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
+        acceptUnknownProfiles:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - name
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeAttributeDurationSetting:
+      type: object
+      properties:
+        value:
+          type: integer
+        unit:
+          type: string
+          enum:
+          - hour
+          - day
+          - minute
+      required:
+      - value
+      - unit
+    partial_realtime_journey.yaml-RealtimeListAttributeAggregation:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        aggregationType:
+          type: string
+          enum:
+          - first
+          - last
+          - sum
+          - min
+          - max
+          - distinct_list
+        column:
+          type: string
+    partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - lookupCatalog
+        notation:
+          type: string
+        lookupCatalogTableName:
+          type: string
+        lookupCatalogColumns:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              dataType:
+                type: string
+            required:
+            - name
+            - dataType
+        lookupKeys:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+            required:
+            - id
+            - type
+      required:
+      - name
+      - identifier
+      - type
+      - notation
+      - lookupCatalogTableName
+      - lookupCatalogColumns
+      - lookupKeys
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimePersonalizationSectionAttributes:
+      type: object
+      required:
+      - name
+      - entryCriteria
+      - payload
+      properties:
+        name:
+          type: string
+        entryCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
+        payload:
+          type:
+          - object
+          - 'null'
+      additionalProperties: false
+    partial_pagination.yaml-PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            nextPage:
+              type:
+              - string
+              - 'null'
+              description: The path part of URL of the next page
+          required:
+          - nextPage
+      required:
+      - data
+      - pagination
+    partial_realtime_journey.yaml-RealtimePersonalizationServiceReadonlyAttributes:
+      type: object
+      required:
+      - tokens
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationServiceTokenAttributes'
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    partial_realtime_journey.yaml-RealtimeAndBatchIon:
+      type: object
+    partial_realtime_journey.yaml-ParentSegmentRealtimeAttributeAttributes:
+      oneOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
+      discriminator:
+        propertyName: type
+        mapping:
+          single: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
+          list: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
+          counter: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
+          imported: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
+          lookupCatalog: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    partial_realtime_journey.yaml-RealtimePersonalizationResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - realtime-personalization
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationAttributes'
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationReadonlyAttributes'
+        relationships:
+          type: object
+          properties:
+            createdBy:
+              $ref: '#/components/schemas/User'
+            updatedBy:
+              $ref: '#/components/schemas/User'
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting:
+      type:
+      - object
+      - 'null'
+      properties:
+        attributeIdentifier:
+          type: string
+        timestampIdentifier:
+          type: string
+      required:
+      - attributeIdentifier
+      - timestampIdentifier
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeListAttributeActions:
+      type: array
+      items:
+        type: object
+        properties:
+          action:
+            type: string
+            enum:
+            - delete_item
+            - clear
+          realtimeKeyEventId:
+            type: string
+          filterRule:
+            type: object
+        required:
+        - action
+        - realtimeKeyEventId
+        - filterRule
+        additionalProperties: false
+    partial_realtime_journey.yaml-RealtimePersonalizationServiceTokenAttributes:
+      type: object
+      required:
+      - id
+      - name
+      - value
+      - allowedIps
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        value:
+          type:
+          - string
+          - 'null'
+          description: null when masked
+        allowedIps:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - counter
+        counterType:
+          type: string
+          enum:
+          - sliding
+          - total
+        increment:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting'
+        notation:
+          type: string
+        realtimeKeyEventId:
+          type: string
+        filterRule:
+          type: object
+        duration:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+        backfill:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
+        subDurations:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+            - type: object
+              properties:
+                name:
+                  type: string
+                identifier:
+                  type: string
+                notation:
+                  type: string
+              required:
+              - name
+              - identifier
+              - notation
+      required:
+      - name
+      - identifier
+      - type
+      - counterType
+      - increment
+      - notation
+      - realtimeKeyEventId
+      - filterRule
+      - duration
+      - backfill
+      - subDurations
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - const
+        value:
+          type: number
+          format: int
+          minimum: 1
+      required:
+      - type
+      - value
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria:
+      type: object
+      properties:
+        keyEventId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        keyEventFilters:
+          type: object
+          description: 'TODO: something like ION?'
+          properties:
+            todo:
+              type: string
+    partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        realtimeAttributeKind:
+          type: string
+          enum:
+          - batch
+        type:
+          type: string
+          enum:
+          - imported
+        notation:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        column:
+          type: string
+        identifier:
+          type:
+          - string
+          - 'null'
+        dataType:
+          anyOf:
+          - $ref: '#/components/schemas/ColumnType'
+          - type:
+            - string
+            - 'null'
+            description: This can be null when the corresponding AudienceAttribute is removed.
+        sensitive:
+          type: boolean
+          enum:
+          - true
+          - false
+      required:
+      - realtimeAttributeKind
+      - column
+      - dataType
+      - notation
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimePersonalizationReadonlyAttributes:
+      type: object
+      required:
+      - createdAt
+      - updatedAt
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        referencingRealtimeAttributes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum:
+                - realtime-attribute
+              attributes:
+                $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeAttributeAttributes'
+      additionalProperties: false
+    ColumnType:
+      type: string
+      description: Type of the column
+      enum:
+      - string
+      - number
+      - timestamp
+      - date
+      - string_array
+      - number_array
+      - boolean
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - field
+        value:
+          type: string
+      required:
+      - type
+      - value
+      additionalProperties: false
+    partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - list
+        notation:
+          type: string
+        realtimeKeyEventId:
+          type: string
+        filterRule:
+          type: object
+        idColumn:
+          type: string
+        fields:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeFields'
+        duration:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+        maxItems:
+          type: number
+          format: int64
+        actions:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeActions'
+        aggregations:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeAggregation'
+            - type: object
+              properties:
+                notation:
+                  type: string
+              required:
+              - notation
+      required:
+      - name
+      - identifier
+      - type
+      - realtimeKeyEventId
+      - filterRule
+      - idColumn
+      - fields
+      - duration
+      - maxItems
+      - actions
+      - aggregations
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimePersonalizationAttributes:
+      type: object
+      required:
+      - name
+      - description
+      - sections
+      properties:
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        sections:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationSectionAttributes'
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimePersonalizationSectionReadonlyAttributes'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting:
+      oneOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
+      discriminator:
+        propertyName: type
+        mapping:
+          const: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
+          field: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
+    partial_realtime_journey.yaml-RealtimePersonalizationServiceAttributes:
+      type: object
+      required:
+      - name
+      - description
+      - public
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        public:
+          type: boolean
+      additionalProperties: false
+  parameters:
+    partial_pagination.yaml-PageAfter:
+      name: page[after]
+      in: query
+      description: A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.
+      required: false
+      schema:
+        type: string
+    partial_realtime_journey.yaml-RealtimePersonalizationTokenId:
+      name: tokenId
+      in: path
+      description: Realtime Personalization Token ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    partial_pagination.yaml-SortedBy:
+      name: sorted_by
+      in: query
+      description: Specify the sort order in the format foo:asc or foo:desc.
+      required: false
+      schema:
+        type: string
+    partial_realtime_journey.yaml-RealtimePersonalizationServiceId:
+      name: realtimePersonalizationServiceId
+      in: path
+      description: Realtime Personalization Service ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    ParentSegmentId:
+      name: parentSegmentId
+      in: path
+      description: Parent Segment ID (audience id)
+      required: true
+      schema:
+        type: integer
+        format: int64
+    AudienceId:
+      name: audienceId
+      in: path
+      description: Audience ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    partial_realtime_journey.yaml-RealtimePersonalizationId:
+      name: realtimePersonalizationId
+      in: path
+      description: Realtime Personalization ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    partial_pagination.yaml-PageSize:
+      name: page[size]
+      in: query
+      description: The maximum number of results to return per page
+      required: false
+      schema:
+        type: number
+        default: 100
+        minimum: 1
+        maximum: 1000
+    NameInclude:
+      name: name_include
+      in: query
+      required: false
+      description: filter by the resource's name
+      schema:
+        type: string
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

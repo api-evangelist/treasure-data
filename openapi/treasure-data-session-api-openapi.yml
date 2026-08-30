@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  description: Treasure Workflow
+  title: Treasure Workflow Session API
+  version: '1.0'
+servers:
+- description: aws
+  url: https://api-workflow.treasuredata.com
+- description: aws-tokyo
+  url: https://api-workflow.treasuredata.co.jp
+- description: eu01
+  url: https://api-workflow.eu01.treasuredata.com
+- description: ap02
+  url: https://api-workflow.ap02.treasuredata.com
+- description: ap03
+  url: https://api-workflow.ap03.treasuredata.com
+security:
+- ApiKeyAuth: []
+tags:
+- name: Session
+paths:
+  /api/sessions:
+    get:
+      operationId: getSessions
+      parameters:
+      - description: List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int64
+      - description: number of sessions to return
+        in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionCollection'
+          description: default response
+      summary: List sessions
+      tags:
+      - Session
+  /api/sessions/{id}:
+    get:
+      operationId: getSession
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSession'
+          description: default response
+      summary: Get a session
+      tags:
+      - Session
+  /api/sessions/{id}/attempts:
+    get:
+      operationId: getSessionAttempts
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: List attempts whose ID is smaller than this ID for pagination. Attempts are returned in descending order by ID.
+        in: query
+        name: last_id
+        schema:
+          type: integer
+          format: int64
+      - description: number of attempts to return
+        in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestSessionAttemptCollection'
+          description: default response
+      summary: List attempts of a session
+      tags:
+      - Session
+components:
+  schemas:
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    RestSession:
+      type: object
+      description: Response of a session
+      properties:
+        id:
+          type: string
+          description: session ID
+          example: '123456'
+        lastAttempt:
+          $ref: '#/components/schemas/Attempt'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - id
+      - project
+      - sessionTime
+      - workflow
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    Attempt:
+      type: object
+      description: Attempts of session
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        retryAttemptName:
+          type: string
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+          - blocked
+          - queued
+          - running
+          - canceling
+          - success
+          - error
+          - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+      required:
+      - cancelRequested
+      - createdAt
+      - done
+      - id
+      - params
+      - status
+      - success
+    RestSessionAttempt:
+      type: object
+      description: Response of an attempt
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        index:
+          type: integer
+          format: int32
+          description: index for multiple attempts
+          example: 1
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        retryAttemptName:
+          type: string
+          description: attempt name for retry
+          example: retry-12345
+        sessionId:
+          type: string
+          description: session ID
+          example: '123456'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+          description: unique UUID of this session
+          example: 2b91a014-076e-4c6d-8b51-f4f91089cab2
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+          - blocked
+          - queued
+          - running
+          - canceling
+          - success
+          - error
+          - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - cancelRequested
+      - createdAt
+      - done
+      - id
+      - index
+      - params
+      - project
+      - retryAttemptName
+      - sessionId
+      - sessionTime
+      - sessionUuid
+      - status
+      - success
+      - workflow
+  securitySchemes:
+    ApiKeyAuth:
+      scheme: TD1
+      type: http

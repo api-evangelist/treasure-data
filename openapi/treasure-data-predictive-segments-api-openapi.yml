@@ -1,0 +1,1541 @@
+openapi: 3.2.0
+info:
+  title: cdp-api Predictive Segments API
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  termsOfService: https://www.treasuredata.com/terms/
+  version: 1.0.0
+servers:
+- url: https://api-cdp.treasuredata.com
+- url: https://api-cdp.treasuredata.co.jp
+- url: https://api-cdp.eu01.treasuredata.com
+- url: https://api-cdp.ap02.treasuredata.com
+- url: https://api-cdp.ap03.treasuredata.com
+tags:
+- name: Predictive Segments
+  description: Using Treasure Data’s predictive scoring model, based on predictive segments, marketers can predict profile behavior such as who is likely to churn, purchase, click, or convert in the near future. <br> <br> A predictive model is a set of rules that makes it possible to predict an unmeasured value from other, known values. The form of the rules is suggested by reviewing the data collected. Training is then used to make some predictions. Predictive modeling uses statistics to predict outcomes. <br><br>Predictive modeling is a typically used statistical technique to predict future behavior. Predictive modeling solutions analyze historical and current data and the generated model helps predict future outcomes. In predictive modeling, data is collected, a statistical model is formulated, predictions are made, and the model is validated (or revised) as additional data becomes available. For example, risk models can be created to combine member information in complex ways with demographic and lifestyle information from external sources to improve underwriting accuracy. Predictive models analyze past performance to assess how likely a customer is to exhibit a specific behavior in the future. This category also encompasses models that seek out subtle data patterns to answer questions about customer performance, such as fraud detection models. Predictive models often perform calculations during live transactions—for example, to evaluate the risk or opportunity of a given customer or transaction to guide a decision. <br> <br> Treasure Data’s predictive scoring model uses predictive segments to customize predictive scoring models for a particular segment.
+paths:
+  /audiences/{audienceId}/predictive_segments:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve list of predictive scoring models
+      description: Retrieve a list of predictive scoring models in the specified parent segment.
+      operationId: predictive_segments#index
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the predictive segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PredictiveSegment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    post:
+      tags:
+      - Predictive Segments
+      summary: Create predictive scoring model (legacy)
+      description: Create a new predictive scoring model. <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: predictive_segments#create
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the preditive segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Predictive Segment parameters to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictiveSegmentParameters'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictiveSegment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve predictive scoring model
+      description: Retrieve a specific predictive scoring model's statistics.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictiveSegment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    patch:
+      tags:
+      - Predictive Segments
+      summary: Update predictive scoring model (legacy)
+      description: Update a predictive scoring model. <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: predictive_segments#update
+      parameters:
+      - name: audienceId
+        in: path
+        description: Master Segment id of the predictive segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Predictive Segment parameters to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictiveSegmentParameters'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictiveSegment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+    delete:
+      tags:
+      - Predictive Segments
+      summary: Delete predictive scoring model (legacy)
+      description: Delete a predictive scoring model. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: predictive_segments#destroy
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictiveSegment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}/executions:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve predictive scoring model executions
+      description: Retrieve a list of predictive scoring model executions and their status.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PredictiveSegmentExecution'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/guess_rule_async:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve guessed rule
+      description: Retrieve a list of guessed rules associated with a predictive scoring model.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: segmentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                    - running
+                  rule:
+                    $ref: '#/components/schemas/PredictiveSegmentRule'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}/model/columns:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve column list
+      description: Retrieve the column list used in a predictive scoring model.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}/model/features:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve column list of features
+      description: Retrieve features associated with a predictive scoring model.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: a tuple
+                  example:
+                  - td_ip_subdivision_names#Maharashtra
+                  - 0.4376903474330902
+                  items:
+                    oneOf:
+                    - type: string
+                    - type: number
+                      format: float
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}/score_histogram:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve histogram
+      description: Retrieve a histogram of the specified predictive scoring model.
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: with_positive_train
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: 'a tuple. [negagtive(0)/positive(1), histogram] like [1, {"50": 3, "60": 2}]'
+                  items:
+                    oneOf:
+                    - type: integer
+                    - type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        4XX:
+          $ref: '#/components/responses/ClientError'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+      security:
+      - TdApikeyAuth: []
+  /audiences/{audienceId}/predictive_segments/{predictiveSegmentId}/run:
+    x-external: true
+    post:
+      tags:
+      - Predictive Segments
+      summary: Train predictive scoring model (legacy)
+      description: Train a predictive scoring model. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      operationId: predictiveSegment#run
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: predictiveSegmentId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the Predictive Segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictiveSegmentExecution'
+  /entities/segments/{id}/predictive_segments/guess_rule_async:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve predictive scoring rules
+      description: Retrieve predictive scoring rules.
+      parameters:
+      - name: id
+        in: path
+        description: the ID of the segment as a positive segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to start to fetch rules
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesSegmentPredictiveSegmentGuessRuleAsyncJsonApiResult'
+  /entities/predictive_segments:
+    x-external: true
+    post:
+      tags:
+      - Predictive Segments
+      summary: Create predictive scoring model
+      description: Create a new predictive scoring model.
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesPredictiveSegmentUpdateRepresentation'
+      responses:
+        '200':
+          description: Create a predictive segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentJsonApiResponse'
+  /entities/predictive_segments/{id}:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve predictive scording model by ID
+      description: Retrieve a predictive scording model by ID.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Returns a predictive segment by ID
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentJsonApiResponse'
+    patch:
+      tags:
+      - Predictive Segments
+      summary: Update predictive scoring model
+      description: Update a predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive segment to update
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/vnd.treasuredata.v1+json:
+            schema:
+              $ref: '#/components/schemas/EntitiesPredictiveSegmentUpdateRepresentation'
+      responses:
+        '200':
+          description: Update a predictive segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentJsonApiResponse'
+    delete:
+      tags:
+      - Predictive Segments
+      summary: Delete predictive scoring model
+      description: Delete a predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Delete a predictive segment
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Delete a predictive segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentJsonApiResponse'
+  /entities/predictive_segments/{id}/run:
+    x-external: true
+    post:
+      tags:
+      - Predictive Segments
+      summary: Run predictive scoring model
+      description: Run a predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to run the Predictive Segment
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentExecutionJsonApiResponse'
+  /entities/predictive_segments/{id}/executions:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve executions of predictive scoring model
+      description: Retrieve executions of the specified predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to fetch the executions
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentExecutionJsonApiResponse'
+        '403':
+          $ref: '#/components/responses/JsonApiForbiddenRequest'
+        '404':
+          $ref: '#/components/responses/JsonApiNotFoundRequest'
+        5XX:
+          $ref: '#/components/responses/ServerError'
+  /entities/predictive_segments/{id}/model/features:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve features of predictive scoring model
+      description: Retrieve the list of features used in the specified predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: limit of features. With this option, features are sorted by the absolute value of weights so that a client can get top features.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        '200':
+          description: Succeeded to fetch the features
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentModelFeaturesJsonApiResult'
+  /entities/predictive_segments/{id}/model/columns:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve columns of predictive scoring model
+      description: Retrieve the columns of the specified predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: limit of columns
+        required: false
+        schema:
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        '200':
+          description: Succeeded to fetch the columns
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentModelColumnsJsonApiResult'
+  /entities/predictive_segments/{id}/model/score:
+    x-external: true
+    get:
+      tags:
+      - Predictive Segments
+      summary: Retrieve scores of predictive scoring model
+      description: Retrieve the scores of the specified predictive scoring model.
+      parameters:
+      - name: id
+        in: path
+        description: Predictive Segment ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Succeeded to fetch the scores
+          content:
+            application/vnd.treasuredata.v1+json:
+              schema:
+                $ref: '#/components/schemas/EntitiesGetPredictiveSegmentModelScoresJsonApiResult'
+components:
+  schemas:
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    EntitiesPredictiveSegmentUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - predictive-segment
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            baseSegmentId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            segmentId:
+              type: integer
+              format: int64
+            scoredSegmentId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            gradeThresholds:
+              $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+            categoricalAsColumnNames:
+              type: array
+              items:
+                type: string
+            categoricalArrayAsColumnNames:
+              type: array
+              items:
+                type: string
+            quantitativeAsColumnNames:
+              type: array
+              items:
+                type: string
+            preprocess:
+              type: array
+              description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    EntitiesGetPredictiveSegmentModelColumnsJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model
+            attributes:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+    PredictiveSegmentJsonApiResourceAttr:
+      properties:
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        baseSegmentId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+        segmentId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        scoredSegmentId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        categoricalAsColumnNames:
+          type: array
+          items:
+            type: string
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        accuracy:
+          $ref: '#/components/schemas/PredictiveSegmentAccuracy'
+        areaUnderRocCurve:
+          $ref: '#/components/schemas/PredictiveSegmentAreaUnderRocCurve'
+        gradeThresholds:
+          $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        modelUpdatedAt:
+          type: string
+          format: date-time
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    JsonApiPermissionError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - permission-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '403'
+        detail:
+          type: string
+          description: Detailed error message
+          example: SegmentFolder View Permission Required
+        meta:
+          type: object
+          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
+          properties:
+            permissionCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - SEGMENT_FOLDER_VIEW_REQUIRED
+              - SEGMENT_FOLDER_EDIT_REQUIRED
+          required:
+          - permissionCode
+      required:
+      - code
+      - status
+      - detail
+    EntitiesGetPredictiveSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/PredictiveSegmentJsonApiResourceAttr'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    PredictiveSegmentExecutionCore:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - predictiveSegmentId
+        properties:
+          predictiveSegmentId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    PredictiveSegmentPreprocessItem:
+      type: object
+      properties:
+        column:
+          type: string
+        source:
+          type: object
+          properties:
+            column:
+              type: string
+            table:
+              type: string
+            functions:
+              type: array
+              items:
+                $ref: '#/components/schemas/FunctionExpression'
+      required:
+      - column
+      - source
+    PredictiveSegmentAreaUnderRocCurve:
+      type:
+      - number
+      - 'null'
+      format: double
+      minimum: 0
+      maximum: 1
+      description: Evaluation score for the model. See also https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve
+    PredictiveSegment:
+      type: object
+      properties:
+        audienceId:
+          type: string
+          format: integer
+        id:
+          type: string
+          format: integer
+        baseSegmentId:
+          type:
+          - string
+          - 'null'
+          format: integer
+        segmentId:
+          type: string
+          format: integer
+        scoredSegmentId:
+          type:
+          - string
+          - 'null'
+          format: integer
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        categoricalAsColumnNames:
+          type: array
+          items:
+            type: string
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        accuracy:
+          $ref: '#/components/schemas/PredictiveSegmentAccuracy'
+        areaUnderRocCurve:
+          $ref: '#/components/schemas/PredictiveSegmentAreaUnderRocCurve'
+        gradeThresholds:
+          $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    EntitiesGetPredictiveSegmentExecutionJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/PredictiveSegmentExecutionJsonApiResource'
+    PredictiveSegmentModelScoreHistogram:
+      type: array
+      items:
+        type: array
+        items:
+          oneOf:
+          - type: string
+          - type: integer
+        minLength: 2
+        maxLength: 2
+      example:
+      - - '1'
+        - 300
+      - - '2'
+        - 200
+    EntitiesSegmentPredictiveSegmentGuessRuleAsyncJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-rule-guess-result
+            attributes:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - running
+                  - success
+                rule:
+                  $ref: '#/components/schemas/PredictiveSegmentRule'
+    PredictiveSegmentRule:
+      type: object
+      properties:
+        categoricalAsColumnNames:
+          type: array
+          items:
+            type: string
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        preprocess:
+          type: array
+          description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
+    PredictiveSegmentParameters:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        baseSegmentId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        segmentId:
+          type: integer
+          format: int64
+        scoredSegmentId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        gradeThresholds:
+          $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+        categoricalAsColumnNames:
+          type: array
+          items:
+            type: string
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        preprocess:
+          type: array
+          description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    EntitiesGetPredictiveSegmentModelFeaturesJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model
+            attributes:
+              type: object
+              properties:
+                features:
+                  type: array
+                  items:
+                    type: array
+                    description: a tuple of feature name and its weight. A feature name can be column name or 'column_name#category_name'. Feature weight is importance of the feature and can be positive and negative (absolute value is matter).
+                    example:
+                    - td_ip_subdivision_names#Maharashtra
+                    - 0.4376903474330902
+                    items:
+                      oneOf:
+                      - type: string
+                      - type: number
+                        format: float
+    PredictiveSegmentGradeThresholds:
+      type: array
+      minItems: 3
+      maxItems: 3
+      description: Given the items [a, b, c], they must meet the condition `a >= b >= c`
+      example:
+      - 75
+      - 50
+      - 25
+      items:
+        type: number
+        format: double
+        minimum: 0
+        maximum: 100
+    PredictiveSegmentAccuracy:
+      type:
+      - number
+      - 'null'
+      format: double
+      minimum: 0
+      maximum: 100
+      description: Accuracy for trained model evaluated on initial training.
+    PredictiveSegmentExecutionJsonApiResource:
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: workflowAttemptId is used as id
+        type:
+          type: string
+          enum:
+          - execution-predictive-segment
+        attributes:
+          $ref: '#/components/schemas/PredictiveSegmentExecutionCore'
+    PredictiveSegmentExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          predictiveSegmentId:
+            type: string
+            format: integer
+    JsonApiNotFoundError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - record-not-found-error
+        status:
+          type: string
+          enum:
+          - '404'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Record not found
+      required:
+      - code
+      - status
+      - detail
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    EntitiesGetPredictiveSegmentModelScoresJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model-score
+            attributes:
+              type: object
+              properties:
+                positives:
+                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
+                negatives:
+                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
+    FunctionExpression:
+      oneOf:
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - +
+            - '-'
+            - '*'
+            - /
+          arg:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - replace
+          search:
+            type: string
+          replacement:
+            type:
+            - string
+            - 'null'
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - substr
+          start:
+            type: number
+          length:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - regexp_extract
+          pattern:
+            type: string
+          group:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - day_of_week
+            - from_iso8601_timestamp
+            - ln
+            - elapsed_days
+            - td_ip_to_least_specific_subdivision_name
+            - td_ip_to_country_name
+            - td_ip_to_city_name
+            - td_ip_to_connection_type
+            - td_ip_to_domain
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_quantitative
+          default:
+            type: number
+            format: float
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical
+          default:
+            type: string
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical_array
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - if
+          op:
+            type: string
+            enum:
+            - '>'
+            - <
+            - <=
+            - '>='
+            - '='
+            - '!='
+            - is
+            - is\
+            - not
+          right_value:
+            type:
+            - number
+            - 'null'
+          then:
+            type: number
+          else:
+            type: number
+        required:
+        - function
+  responses:
+    JsonApiNotFoundRequest:
+      description: The specified resource is not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiNotFoundError'
+            required:
+            - errors
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    JsonApiForbiddenRequest:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiPermissionError'
+            required:
+            - errors
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    TdApikeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+externalDocs:
+  description: Treasure Data Support Site
+  url: https://support.treasuredata.com/hc/en-us

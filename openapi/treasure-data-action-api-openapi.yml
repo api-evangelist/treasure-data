@@ -1,0 +1,318 @@
+openapi: 3.2.0
+info:
+  title: llm-api Action API
+  version: 1.0.0
+servers:
+- url: https://llm-api.treasuredata.com
+- url: https://llm-api.eu01.treasuredata.com
+- url: https://llm-api.ap02.treasuredata.com
+- url: https://llm-api.treasuredata.co.jp
+security:
+- ApiKeyAuth: []
+tags:
+- name: Action
+paths:
+  /api/actions:
+    get:
+      summary: index
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of actions filtered by UI tags
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                            chat:
+                              type:
+                              - string
+                              - 'null'
+                          required:
+                          - self
+                        attributes:
+                          type: object
+                          properties:
+                            integrationId:
+                              type: string
+                            promptId:
+                              type: string
+                            chatWidgetType:
+                              type:
+                              - string
+                              - 'null'
+                            chatWidgetLabel:
+                              type:
+                              - string
+                              - 'null'
+                            webhookTextUrl:
+                              type:
+                              - string
+                              - 'null'
+                            slackRequestUrl:
+                              type:
+                              - string
+                              - 'null'
+                            uiTags:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - integrationId
+                          - promptId
+                          - chatWidgetType
+                          - chatWidgetLabel
+                          - webhookTextUrl
+                          - slackRequestUrl
+                          - uiTags
+                      required:
+                      - id
+                      - type
+                      - links
+                      - attributes
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                    required:
+                    - total
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      next:
+                        type: string
+                      prev:
+                        type: string
+                    required:
+                    - first
+                    - last
+                required:
+                - data
+                - meta
+                - links
+              example:
+                data:
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: actions
+                  links:
+                    self: http://www.example.com/api/actions/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    integrationId: 00000000-0000-0000-0000-000000000001
+                    promptId: 00000000-0000-0000-0000-000000000001
+                    chatWidgetType: null
+                    chatWidgetLabel: null
+                    webhookTextUrl: http://localhost:3000/api/actions/00000000-0000-0000-0000-000000000001/text
+                    slackRequestUrl: null
+                    uiTags: []
+                - id: 00000000-0000-0000-0000-000000000001
+                  type: actions
+                  links:
+                    self: http://www.example.com/api/actions/00000000-0000-0000-0000-000000000001
+                  attributes:
+                    integrationId: 00000000-0000-0000-0000-000000000001
+                    promptId: 00000000-0000-0000-0000-000000000001
+                    chatWidgetType: null
+                    chatWidgetLabel: null
+                    webhookTextUrl: http://localhost:3000/api/actions/00000000-0000-0000-0000-000000000001/text
+                    slackRequestUrl: null
+                    uiTags:
+                    - lang:en
+                meta:
+                  total: 45
+                links:
+                  first: http://www.example.com/api/actions?filter%5Bui_tags%5D=lang%3Aes&page%5Blimit%5D=20&page%5Boffset%5D=0
+                  last: http://www.example.com/api/actions?filter%5Bui_tags%5D=lang%3Aes&page%5Blimit%5D=20&page%5Boffset%5D=40
+                  next: http://www.example.com/api/actions?filter%5Bui_tags%5D=lang%3Aes&page%5Blimit%5D=20&page%5Boffset%5D=40
+                  prev: http://www.example.com/api/actions?filter%5Bui_tags%5D=lang%3Aes&page%5Blimit%5D=20&page%5Boffset%5D=0
+      parameters:
+      - name: filter[parent_segment_id]
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 0
+      - name: filter[project_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[prompt_id]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      - name: filter[service_type]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: HOGE_HOGE
+      - name: filter[skip_managed]
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - auto
+          - 'true'
+          - 'false'
+        example: 'false'
+      - name: filter[ui_tags]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: lang:es
+      - name: page[limit]
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+        example: 20
+  /api/actions/{id}/slack:
+    post:
+      summary: slack
+      tags:
+      - Action
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 00000000-0000-0000-0000-000000000001
+      responses:
+        '200':
+          description: Slack response containing either empty text for ephemeral mode or JSON for in-channel mode
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Empty response for ephemeral slack_response_type
+              example: ''
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response_type:
+                    type: string
+                    enum:
+                    - in_channel
+                    description: Type of Slack response
+                  text:
+                    type: string
+                    description: Response text (typically empty)
+                required:
+                - response_type
+                - text
+              example:
+                response_type: in_channel
+                text: ''
+        '401':
+          description: Unauthorized - invalid timestamp or signature
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '401'
+                error: Unauthorized
+        '404':
+          description: Not Found - integration type is not slack or action not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '404'
+                error: Not Found
+        '429':
+          description: Too Many Requests - rate limit exceeded
+          headers:
+            retry-after:
+              schema:
+                type: integer
+              description: Number of seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: string
+                required:
+                - status
+                - error
+              example:
+                status: '429'
+                error: Rate limit exceeded
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                response_url:
+                  type: string
+                  description: Slack response URL for posting delayed responses
+                text:
+                  type: string
+                  description: User input text from Slack command
+                command:
+                  type: string
+                  description: The Slack slash command that triggered this action
+              required:
+              - response_url
+              - text
+              - command
+            example:
+              response_url: https://hooks.slack.com/commands/T12345678/12345678/abcdef
+              text: user input text here
+              command: /mycommand
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
