@@ -1,0 +1,116 @@
+slug: treasure-data
+provider: Treasure Data
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Segments
+  spec_file: treasure-data-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.9
+  evidence: POST /audiences/{audienceId}/segments "Create new segment"; "Retrieve number of profiles based
+    on set of segment rules"; "Retrieve population statistics of segment"
+  reason: Operations define audience segment rules, count and retrieve matching customer profiles, and
+    report segment population statistics — squarely customer segmentation management within a CDP.
+- tag: Access Control - Policies
+  spec_file: treasure-data-access-control-policies-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: '"Create an Access Control Policy", "Attach a policy to a user.", "Detach a Policy from a
+    User"'
+  reason: Policy CRUD plus attachment of policies to users is authorisation administration — Identity
+    & Access Management. Not enterprise Policy Management (BC-130.20), which concerns corporate policy
+    documents.
+- tag: Access Control - Permissions
+  spec_file: treasure-data-access-control-permissions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '"Show Column Permissions", "Update Policy Permissions", schema AccessControlColumnPermission'
+  reason: Operations manage permissions attached to access-control policies, including column-level data
+    permissions — squarely identity and access management for the platform.
+- tag: Access Control - Policy Groups
+  spec_file: treasure-data-access-control-policy-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '"Create an Access Control Policy Group", "Get an Access Control Policy Group''s Policies"'
+  reason: Grouping of access-control policies for assignment to users is role/permission structuring within
+    IAM.
+- tag: Access Control - Users
+  spec_file: treasure-data-access-control-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '"Update Access Control User Permissions", "Get Policy users", schema AccessControlPermissions'
+  reason: User-to-permission and user-to-policy administration for platform accounts — Identity & Access
+    Management.
+- tag: SSO
+  spec_file: treasure-data-sso-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /account/sso_setting createSSOSetting "Create SSO settings"; POST /user/enforce_sso/{user_email}
+    "Enforce SSO for user"
+  reason: Configures single sign-on for the account and enables/enforces SSO per user account — federation
+    and access control, i.e. Identity & Access Management. Could alternatively be read as tenant identity
+    federation for the SaaS vendor, hence 0.8 not higher.
+- tag: Policy Group Tags
+  spec_file: treasure-data-policy-group-tags-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: '"Get the delegated admins of a policy group"; "Update the users of a policy group"; schemas
+    Tag, UserIds'
+  reason: Administration of users and delegated admins against access-policy groups is identity and access
+    management.
+- tag: Parent Segment Configurations
+  spec_file: treasure-data-parent-segment-configurations-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.7
+  evidence: '"Create new parent segment configuration"; "Retrieve list of audience attributes"; "Retrieve
+    population statistics audience"; schemas Audience, AudienceFilter, CustomerGroupAttribute'
+  reason: CDP audience (parent segment) definitions built from unified customer data, with attributes,
+    behaviors and population statistics — customer segmentation within CRM. Some ambiguity between segmentation
+    and customer master data, so L2 held at moderate confidence.
+- tag: Parent Segments
+  spec_file: treasure-data-parent-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.7
+  evidence: '"Retrieve list of parent segments"; "Retrieve list of segment folders"; schema ParentSegmentJsonApiResource'
+  reason: Read APIs over customer audience/segment entities in a customer data platform, i.e. segmentation
+    constructs in CRM; L2 choice between segmentation and customer master is somewhat ambiguous.
+- tag: Users
+  spec_file: treasure-data-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /user/create_with_sso/{user_first_name} createUserWithSSO 'Create user with SSO'; 'Enforce
+    SSO for user'; 'Promote a user to a delegated Admin'; 'Remove a user'
+  reason: Operations administer the lifecycle of platform user accounts, single-sign-on enforcement and
+    admin privilege elevation/removal — identity and access administration. Some ambiguity as to whether
+    this is better read as tenant identity federation (BC-4230.50) from the vendor's SaaS viewpoint, hence
+    moderate confidence.
