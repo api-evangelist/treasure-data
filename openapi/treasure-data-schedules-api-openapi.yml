@@ -197,41 +197,6 @@ paths:
                             - $ref: '#/components/schemas/EmptyString'
 components:
   schemas:
-    ScheduleReference:
-      type: object
-      required:
-      - created_at
-      - cron
-      - database
-      - delay
-      - name
-      - query
-      - timezone
-      - type
-      - user_name
-      properties:
-        created_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        cron:
-          $ref: '#/components/schemas/Schedule/properties/cron'
-        database:
-          $ref: '#/components/schemas/Schedule/properties/database'
-        delay:
-          $ref: '#/components/schemas/Schedule/properties/delay'
-        name:
-          $ref: '#/components/schemas/Schedule/properties/name'
-        query:
-          $ref: '#/components/schemas/Schedule/properties/query'
-        timezone:
-          $ref: '#/components/schemas/Timezone'
-        type:
-          $ref: '#/components/schemas/Schedule/properties/type'
-        user_name:
-          $ref: '#/components/schemas/User/properties/name'
-    JobId:
-      description: unique identifier of job
-      type: integer
-      example: 19
     Job:
       title: Job
       description: an execution of a query
@@ -422,9 +387,10 @@ components:
           type: string
         user_name:
           $ref: '#/components/schemas/User/properties/name'
-    EmptyString:
-      type: string
-      pattern: ^$
+    JobId:
+      description: unique identifier of job
+      type: integer
+      example: 19
     ScheduledJob:
       type: object
       additionalProperties: false
@@ -441,83 +407,44 @@ components:
           oneOf:
           - $ref: '#/components/schemas/DateTimeAsString'
           - $ref: '#/components/schemas/EmptyString'
-    QueryAsString:
-      description: the raw SQL query
-      type: string
-      example: SELECT * FROM my_table;
+    CreateOrUpdateScheduleRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        executing_user_id:
+          $ref: '#/components/schemas/Schedule/properties/executing_user_id'
+        engine_version:
+          $ref: '#/components/schemas/Schedule/properties/engine_version'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Schedule/properties/priority'
+        retry_limit:
+          $ref: '#/components/schemas/Schedule/properties/retry_limit'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        result:
+          description: url of the result
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
     DateTimeAsString:
       description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
       type: string
       pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
       example: 2020-12-31 11:22:33 UTC
-    Database:
-      title: Database
-      description: Database
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - created_at
-      - delete_protected
-      - name
-      - organization
-      - permission
-      - updated_at
-      properties:
-        count:
-          description: ???
-          type: integer
-          example: 5
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        delete_protected:
-          description: wheter the database is delete protected
-          type: boolean
-          example: true
-        datatank:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/DatabaseIdAsString'
-        name:
-          description: database name
-          type: string
-          example: Alpha
-        organization:
-          description: the organization
-          type:
-          - string
-          - 'null'
-          example: Treasure Data
-        permission:
-          description: permissions
-          type:
-          - string
-          - 'null'
-        database_permissions:
-          description: permissions
-          type: object
-          additionalProperties: true
-          properties:
-            edit:
-              description: edit permission for database
-              type: boolean
-            delete:
-              description: delete permission for database
-              type: boolean
-            query:
-              description: query permission for database
-              type: boolean
-            import:
-              description: import permission for database
-              type: boolean
-            download:
-              description: download permission for database
-              type: boolean
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-    Timezone:
-      type: string
-      example: UTC
     BulkLoadConfig:
       title: BulkLoadConfig
       description: bulk load config
@@ -585,6 +512,124 @@ components:
             time_column:
               type: string
               example: time
+    JobIdAsString:
+      description: unique identifier of job
+      type: string
+      example: '19'
+    Timezone:
+      type: string
+      example: UTC
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    EmptyString:
+      type: string
+      pattern: ^$
+    ScheduleReference:
+      type: object
+      required:
+      - created_at
+      - cron
+      - database
+      - delay
+      - name
+      - query
+      - timezone
+      - type
+      - user_name
+      properties:
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Schedule/properties/database'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
+    DomainKey:
+      type: string
+      example: domain_key_123
+    QueryAsString:
+      description: the raw SQL query
+      type: string
+      example: SELECT * FROM my_table;
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
     User:
       title: User
       description: User
@@ -677,54 +722,9 @@ components:
           type: array
           items:
             type: string
-    DomainKey:
-      type: string
-      example: domain_key_123
-    CreateOrUpdateScheduleRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/Schedule/properties/name'
-        cron:
-          $ref: '#/components/schemas/Schedule/properties/cron'
-        database:
-          $ref: '#/components/schemas/Database/properties/name'
-        delay:
-          $ref: '#/components/schemas/Schedule/properties/delay'
-        executing_user_id:
-          $ref: '#/components/schemas/Schedule/properties/executing_user_id'
-        engine_version:
-          $ref: '#/components/schemas/Schedule/properties/engine_version'
-        pool_name:
-          description: resource pool name
-          type: string
-          example: pool_1
-        priority:
-          $ref: '#/components/schemas/Schedule/properties/priority'
-        retry_limit:
-          $ref: '#/components/schemas/Schedule/properties/retry_limit'
-        query:
-          $ref: '#/components/schemas/Schedule/properties/query'
-        result:
-          description: url of the result
-          type: string
-        timezone:
-          $ref: '#/components/schemas/Timezone'
-        type:
-          $ref: '#/components/schemas/Schedule/properties/type'
     Timestamp:
       type: integer
       example: 1356998400
-    JobIdAsString:
-      description: unique identifier of job
-      type: string
-      example: '19'
-    DateTimeISO8601:
-      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
-      example: '2020-12-31T11:22:33Z'
   parameters:
     path_schedule_name:
       name: schedule_name

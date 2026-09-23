@@ -10,13 +10,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: KnowledgeBase
+- name: Knowledge Base
 paths:
   /api/knowledge_bases:
     get:
       summary: index
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       responses:
         '200':
           description: allows GET /api/knowledge_bases
@@ -255,10 +255,12 @@ paths:
         schema:
           type: string
         example: id
+      operationId: getApiKnowledgeBases
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       responses:
         '201':
           description: Knowledge base created successfully
@@ -553,11 +555,13 @@ paths:
                     tdQuery: select 1
                     enableData: false
                     enableDataIndex: false
+      operationId: postApiKnowledgeBases
+      x-operation-id-source: derived
   /api/knowledge_bases/{id}:
     delete:
       summary: destroy
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       parameters:
       - name: id
         in: path
@@ -708,10 +712,12 @@ paths:
                     validationCode: DEPENDENT_DESTROY_RESTRICTED_HAS_MANY
                     referencedByVariables:
                     - id: 00000000-0000-0000-0000-000000000001
+      operationId: deleteApiKnowledgeBasesById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       parameters:
       - name: id
         in: path
@@ -869,10 +875,12 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiKnowledgeBasesById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       parameters:
       - name: id
         in: path
@@ -1198,11 +1206,13 @@ paths:
                   - name: tab
                     tdQuery: select 1 from ttt
                   projectId: 00000000-0000-0000-0000-000000000001
+      operationId: patchApiKnowledgeBasesById
+      x-operation-id-source: derived
   /api/knowledge_bases/{id}/query:
     post:
       summary: query
       tags:
-      - KnowledgeBase
+      - Knowledge Base
       parameters:
       - name: id
         in: path
@@ -1880,6 +1890,8 @@ paths:
               example:
                 status: '422'
                 error: function must be LIST_COLUMNS, SEARCH_SCHEMA, QUERY_DATA_DIRECT
+      operationId: postApiKnowledgeBasesByIdQuery
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

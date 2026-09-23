@@ -302,6 +302,8 @@ paths:
         schema:
           type: string
         example: id
+      operationId: getApiFormInterfaces
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
@@ -534,6 +536,8 @@ paths:
                   promptTemplate: test prompt
                   formJsonSchema: '{"type": "object", "properties": {"name": {"type": "string"}}}'
                   formUiSchema: '{"ui:title": "Title", "ui:description": "Description", "ui:classNames": "my-class", "ui:submitButtonOptions": {"props": {"disabled": false,"className": "btn btn-info"}}}'
+      operationId: postApiFormInterfaces
+      x-operation-id-source: derived
   /api/form_interfaces/{id}:
     delete:
       summary: destroy
@@ -599,6 +603,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: deleteApiFormInterfacesById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -738,6 +744,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiFormInterfacesById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -1013,6 +1021,8 @@ paths:
                   promptTemplate: update_prompt_template
                   formJsonSchema: '{"type": "object", "properties": {"name": {"type": "string"}}}'
                   formUiSchema: '{"ui:title": "Title", "ui:description": "Description", "ui:classNames": "my-class", "ui:submitButtonOptions": {"props": {"disabled": false,"className": "btn btn-info"}}}'
+      operationId: patchApiFormInterfacesById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

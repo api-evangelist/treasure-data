@@ -211,6 +211,8 @@ paths:
                   status: '422'
                   meta:
                     validationCode: INVALID_FORMAT_OR_ASSOCIATION
+      operationId: postApiImageGenerators
+      x-operation-id-source: derived
   /api/image_generators/{id}:
     delete:
       summary: destroy
@@ -226,6 +228,8 @@ paths:
       responses:
         '204':
           description: Image generator deleted successfully
+      operationId: deleteApiImageGeneratorsById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -305,6 +309,8 @@ paths:
                     imageModelType: nova-canvas
                     imageReturnMode: ID
                     isManaged: false
+      operationId: getApiImageGeneratorsById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -502,6 +508,8 @@ paths:
                 id: 00000000-0000-0000-0000-000000000001
                 attributes:
                   name: Updated Name
+      operationId: patchApiImageGeneratorsById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

@@ -477,6 +477,8 @@ paths:
         schema:
           type: string
         example: id
+      operationId: getApiAgentSchedules
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
@@ -1022,6 +1024,8 @@ paths:
                   endAt: '2025-12-31T23:59:00'
                   textResourceId: 00000000-0000-0000-0000-000000000001
                   chatInterfaceId: 00000000-0000-0000-0000-000000000001
+      operationId: postApiAgentSchedules
+      x-operation-id-source: derived
   /api/agent_schedules/{id}:
     delete:
       summary: destroy
@@ -1140,6 +1144,8 @@ paths:
                   status: '422'
                   meta:
                     validationCode: LLM_SOMETHING_ERROR
+      operationId: deleteApiAgentSchedulesById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -1553,6 +1559,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiAgentSchedulesById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -2048,6 +2056,8 @@ paths:
                     notes: Final project review
                   sendEmailNotification: true
                   endAt: '2026-01-15T18:45:00'
+      operationId: patchApiAgentSchedulesById
+      x-operation-id-source: derived
   /api/agent_schedules/{id}/callback:
     post:
       summary: callback
@@ -2130,6 +2140,8 @@ paths:
               example:
                 status: '404'
                 error: Not Found
+      operationId: postApiAgentSchedulesByIdCallback
+      x-operation-id-source: derived
   /api/agent_schedules/{id}/execute:
     post:
       summary: Execute agent schedule - returns workflow YAML
@@ -2197,6 +2209,8 @@ paths:
               example:
                 status: 404
                 error: Not Found
+      operationId: postApiAgentSchedulesByIdExecute
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

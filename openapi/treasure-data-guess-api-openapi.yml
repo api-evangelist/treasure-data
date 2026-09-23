@@ -19,9 +19,7 @@ paths:
   /v1/guess:
     post:
       summary: Guess DWH Integration configuration
-      description: 'Perform Guess operation for complete DWH Integration configuration by providing basic_configs.
-
-        '
+      description: Perform Guess operation for complete DWH Integration configuration by providing basic_configs.
       security:
       - apiKey: []
       requestBody:
@@ -60,64 +58,101 @@ paths:
           $ref: '#/components/responses/500'
       tags:
       - Guess
+      operationId: postV1Guess
+      x-operation-id-source: derived
 components:
-  responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              title: Not Found
-              message: No route matches [GET] "/abc".
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              title: Parameter Error
-              message: Data validation error, verify fields and try again.
-    '401':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: API Key isn't set on the request
-              message: API Key isn't set on the request
-    '500':
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              title: Internal Server Error
-              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
-    '403':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: Forbidden
-              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
   schemas:
+    databricks:
+      type: object
+      title: Databricks
+      properties:
+        basic:
+          type: object
+          description: The parameters for the Databricks connector
+          title: Databricks basic config
+          allOf:
+          - $ref: '#/components/schemas/Basic'
+          - properties:
+              catalog:
+                title: Databricks Catalog
+                type: string
+              schema:
+                title: Schema, e.g. "default"
+                description: The schema to use for the connection. If not specified, default schema will be used.
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector. If this is enabled, you must specify the incremental_columns or Bulkload job will fail.
+                type: boolean
+                default: false
+          required:
+          - catalog
+        advanced:
+          type: object
+          description: The parameters for the Databricks connector
+          allOf:
+          - $ref: '#/components/schemas/Advanced'
+          - properties:
+              use_custom_query:
+                title: Use custom SELECT query?
+                description: If you need more than a simple SELECT (columns) FROM table WHERE (condition).
+                type: boolean
+                default: false
+              query:
+                title: SELECT Query
+                description: 'Use with (use_custom_query: true) to specify a custom query for importing.'
+                type: string
+              select:
+                title: Columns to return
+                description: 'Comma-separated list of columns to ingest. Use with (use_custom_query: false) to query for columns.'
+                type: string
+                default: '*'
+              table:
+                title: Source Table/View
+                description: 'The table/view to import from. Use with (use_custom_query: false)'
+                type: string
+              where:
+                title: Filter Conditions
+                description: 'Specify a WHERE condition to filter the data. Use with (use_custom_query: false)'
+                type: string
+              order_by:
+                title: ORDER By Columns
+                description: 'Specify the columns to order the data by. Use with (use_custom_query: false)'
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector?
+                type: boolean
+                default: false
+              incremental_columns:
+                title: Incremental Column(s)
+                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
+                type: array
+                items:
+                  type: string
+              invalid_value_option:
+                title: Invalid Value Handling Mode
+                description: Specify how to handle invalid data values.
+                type: string
+                enum:
+                - fail_job
+                - insert_null
+                - ignore_row
+                default: fail_job
+              last_record:
+                title: Start after (values)
+                description: Values for columns used in incremental loading. Ignores records with column values less than this
+                type: array
+                enum:
+                - string
+                - number
+                - boolean
+                - 'null'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
     BasicConfigs:
       type: object
       description: The basic configs of the DWH Integration.
@@ -129,12 +164,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/snowflake/properties/basic'
       - $ref: '#/components/schemas/databricks/properties/basic'
-    Advanced:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Connector type, e.g. snowflake, redshift
     Basic:
       type: object
       properties:
@@ -147,6 +176,15 @@ components:
       required:
       - type
       - td_authentication_id
+    GuessResult:
+      type: object
+      description: The result of Guess operation
+      properties:
+        basic_configs:
+          $ref: '#/components/schemas/BasicConfigs'
+        advanced_configs:
+          $ref: '#/components/schemas/AdvancedConfigs'
+      additionalProperties: false
     snowflake:
       type: object
       title: Snowflake
@@ -237,11 +275,32 @@ components:
                 - insert_null
                 - ignore_row
                 default: fail_job
-    ErrorResponse:
+    Advanced:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
+        type:
+          type: string
+          description: Connector type, e.g. snowflake, redshift
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code
+        title:
+          type: string
+          description: The error title
+        message:
+          description: The error message
+          anyOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        detail:
+          description: Any extra infomation of the error
+          type: object
+          additionalProperties: true
+      additionalProperties: false
     AdvancedConfigs:
       type: array
       description: "The DWH Integration advanced configs. The configs contain array of \nof table configs which combine with the basic configs will be used to create Connector Bulkload Session.\n"
@@ -267,121 +326,62 @@ components:
             oneOf:
             - $ref: '#/components/schemas/snowflake/properties/advanced'
             - $ref: '#/components/schemas/databricks/properties/advanced'
-    databricks:
-      type: object
-      title: Databricks
-      properties:
-        basic:
-          type: object
-          description: The parameters for the Databricks connector
-          title: Databricks basic config
-          allOf:
-          - $ref: '#/components/schemas/Basic'
-          - properties:
-              catalog:
-                title: Databricks Catalog
-                type: string
-              schema:
-                title: Schema, e.g. "default"
-                description: The schema to use for the connection. If not specified, default schema will be used.
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector. If this is enabled, you must specify the incremental_columns or Bulkload job will fail.
-                type: boolean
-                default: false
-          required:
-          - catalog
-        advanced:
-          type: object
-          description: The parameters for the Databricks connector
-          allOf:
-          - $ref: '#/components/schemas/Advanced'
-          - properties:
-              use_custom_query:
-                title: Use custom SELECT query?
-                description: If you need more than a simple SELECT (columns) FROM table WHERE (condition).
-                type: boolean
-                default: false
-              query:
-                title: SELECT Query
-                description: 'Use with (use_custom_query: true) to specify a custom query for importing.'
-                type: string
-              select:
-                title: Columns to return
-                description: 'Comma-separated list of columns to ingest. Use with (use_custom_query: false) to query for columns.'
-                type: string
-                default: '*'
-              table:
-                title: Source Table/View
-                description: 'The table/view to import from. Use with (use_custom_query: false)'
-                type: string
-              where:
-                title: Filter Conditions
-                description: 'Specify a WHERE condition to filter the data. Use with (use_custom_query: false)'
-                type: string
-              order_by:
-                title: ORDER By Columns
-                description: 'Specify the columns to order the data by. Use with (use_custom_query: false)'
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector?
-                type: boolean
-                default: false
-              incremental_columns:
-                title: Incremental Column(s)
-                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
-                type: array
-                items:
-                  type: string
-              invalid_value_option:
-                title: Invalid Value Handling Mode
-                description: Specify how to handle invalid data values.
-                type: string
-                enum:
-                - fail_job
-                - insert_null
-                - ignore_row
-                default: fail_job
-              last_record:
-                title: Start after (values)
-                description: Values for columns used in incremental loading. Ignores records with column values less than this
-                type: array
-                enum:
-                - string
-                - number
-                - boolean
-                - 'null'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code
-        title:
-          type: string
-          description: The error title
-        message:
-          description: The error message
-          anyOf:
-          - type: string
-          - type: object
-            additionalProperties: true
-        detail:
-          description: Any extra infomation of the error
-          type: object
-          additionalProperties: true
-      additionalProperties: false
-    GuessResult:
-      type: object
-      description: The result of Guess operation
-      properties:
-        basic_configs:
-          $ref: '#/components/schemas/BasicConfigs'
-        advanced_configs:
-          $ref: '#/components/schemas/AdvancedConfigs'
-      additionalProperties: false
+  responses:
+    '401':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: API Key isn't set on the request
+              message: API Key isn't set on the request
+    '403':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: Forbidden
+              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              title: Parameter Error
+              message: Data validation error, verify fields and try again.
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              title: Not Found
+              message: No route matches [GET] "/abc".
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              title: Internal Server Error
+              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
   securitySchemes:
     apiKey:
       type: apiKey

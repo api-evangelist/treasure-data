@@ -1,20 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import Tables API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
-  version: v3
-  contact:
-    url: https://docs.treasure.ai/apis/td-api
-  license:
-    name: Treasure Data Terms of Service
-    url: https://www.treasure.ai/
+  title: Treasure Data Tables API
+  version: '1.0'
+  description: 'Operations tagged Tables across 2 of this provider''s published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.treasuredata.com/v3
   description: Treasure Data API v3
-security:
-- TDAuth: []
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
 tags:
 - name: Tables
   description: Manage tables within databases
@@ -49,8 +43,668 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
+  /table/show/{database_name}/{table_name}:
+    get:
+      summary: Get table
+      description: Shows a table according to specified database and table.
+      operationId: getTableByDatabaseNameAndTableName
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      - name: include_descriptions
+        in: query
+        description: When true, includes table descriptions and column descriptions in the schema field
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table_2'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/delete/{database_name}/{table_name}:
+    post:
+      summary: Delete table
+      description: Deletes specified table.
+      operationId: deleteTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/create/{database_name}/{table_name}/{table_type}:
+    post:
+      summary: Create table with specified type
+      description: Creates a table of a specified type. Currently only 'log' is supported as table_type. This endpoint supports creating tables with schema, options, and can copy properties from existing tables. Schema can include column descriptions in the format `[name, type, alias, description]`.
+      operationId: createTableWithTableType
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      - name: table_type
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Table/properties/type'
+      - name: idempotent_key
+        in: query
+        description: A unique key to ensure idempotency of requests
+        schema:
+          $ref: '#/components/schemas/IdempotentKey'
+      - name: source_table
+        in: query
+        description: Name of an existing table to copy metadata from
+        schema:
+          type: string
+      - name: including_properties
+        in: query
+        description: When true, distribution and other properties will be copied from source_table
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                  - $ref: '#/components/schemas/TableSchemaAsArray'
+                  - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/create/{database_name}/{table_name}:
+    post:
+      summary: Create table
+      description: Creates a table with default type 'log'. This endpoint offers the same functionality as the typed endpoint but without explicitly specifying the table type. Schema can include column descriptions in the format `[name, type, alias, description]`.
+      operationId: createTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      - name: idempotent_key
+        in: query
+        description: A unique key to ensure idempotency of requests
+        schema:
+          $ref: '#/components/schemas/IdempotentKey'
+      - name: source_table
+        in: query
+        description: Name of an existing table to copy metadata from
+        schema:
+          type: string
+      - name: including_properties
+        in: query
+        description: When true, distribution and other properties will be copied from source_table
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                  - $ref: '#/components/schemas/TableSchemaAsArray'
+                  - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/update/{database_name}/{table_name}:
+    post:
+      summary: Update table
+      description: Updates a table.
+      operationId: updateTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                detect_schema:
+                  type: boolean
+                  example: true
+                expire_days:
+                  $ref: '#/components/schemas/Table/properties/expire_days'
+                include_v:
+                  $ref: '#/components/schemas/Table/properties/include_v'
+                name:
+                  $ref: '#/components/schemas/Table/properties/name'
+                description:
+                  $ref: '#/components/schemas/Table/properties/description'
+                schema:
+                  oneOf:
+                  - $ref: '#/components/schemas/TableSchemaAsArray'
+                  - $ref: '#/components/schemas/TableSchemaAsString'
+                ignore_duplicate_schema:
+                  type: boolean
+                  example: true
+                overwrite:
+                  description: whether to override a possible existing table in case of updating the name
+                  type: boolean
+                  example: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/rename/{database_name}/{current_table_name}/{new_table_name}:
+    post:
+      summary: Rename table
+      description: Renames a specified table.
+      operationId: renameTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - name: current_table_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Table/properties/name'
+      - name: new_table_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/swap/{database_name}/{table_name_1}/{table_name_2}:
+    post:
+      summary: Swap tables
+      description: Swaps specified tables.
+      operationId: swapTables
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - name: table_name_1
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Table/properties/name'
+      - name: table_name_2
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - database
+                - table1
+                - table2
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+                  table1:
+                    $ref: '#/components/schemas/Table/properties/name'
+                  table2:
+                    $ref: '#/components/schemas/Table/properties/name'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/tail/{database_name}/{table_name}{path_format}:
+    get:
+      summary: Tail table
+      description: Shows the last record in a table.
+      operationId: tailTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      - name: path_format
+        in: path
+        style: label
+        required: true
+        schema:
+          type: string
+          enum:
+          - json
+          - msgpack
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - msgpack
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyValue'
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnyValue'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/distribution/{database_name}/{table_name}:
+    get:
+      summary: Get table distribution
+      description: Retrieve a table distribution.
+      operationId: getTableDistribution
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - bucket_count
+                - partition_function
+                - columns
+                properties:
+                  bucket_count:
+                    type: integer
+                    example: 50
+                  partition_function:
+                    type: string
+                    example: hash
+                  columns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ColumnSchema'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/change_database/{database_name}/{table_name}:
+    post:
+      summary: Change database
+      description: Changes to the specified table database.
+      operationId: changeTableDatabase
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - dest_database_name
+              properties:
+                dest_database_name:
+                  $ref: '#/components/schemas/Database/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/transfer/{database_name}/{table_name}:
+    post:
+      summary: Transfer table to a different account
+      description: Transfer the specified table to a different account. (Limited Access)
+      operationId: transferTable
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/header_authorization_TD1'
+        required: true
+        name: Secondary-Authorization
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - dest_database_name
+              - dest_table_name
+              properties:
+                dest_database_name:
+                  $ref: '#/components/schemas/Database/properties/name'
+                dest_table_name:
+                  $ref: '#/components/schemas/Table/properties/name'
+                idempotent_key:
+                  $ref: '#/components/schemas/IdempotentKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferTableResponse'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/append-schema/{database_name}/{table_name}:
+    post:
+      summary: Append table schema
+      description: Appends the specified table schema.
+      operationId: appendTableSchema
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - schema
+              properties:
+                schema:
+                  oneOf:
+                  - $ref: '#/components/schemas/TableSchemaAsArray'
+                  - $ref: '#/components/schemas/TableSchemaAsString'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/update-schema/{database_name}/{table_name}:
+    post:
+      summary: Update table schema
+      description: Updates the specified table schema. Schema can include column descriptions in the format `[name, type, alias, description]`.
+      operationId: updateTableSchema
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - schema
+              properties:
+                name:
+                  type: string
+                  example: table1_new_name
+                schema:
+                  oneOf:
+                  - $ref: '#/components/schemas/TableSchemaAsArray'
+                  - $ref: '#/components/schemas/TableSchemaAsString'
+                ignore_duplicate_schema:
+                  type: boolean
+                  example: true
+                detect_schema:
+                  type: boolean
+                  example: true
+                include_v:
+                  type: boolean
+                  example: true
+                expire_days:
+                  type: integer
+                  example: 1
+                overwrite:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableReference'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/deleted:
+    get:
+      summary: List deleted tables
+      description: Returns a paginated list of deleted recoverable tables for the authenticated account.
+      operationId: listDeletedTables
+      tags:
+      - Tables
+      parameters:
+      - name: cursor_id
+        in: query
+        description: ID of the last table from the previous page; omit for the first page
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of tables to return per page
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+      - name: database_id
+        in: query
+        description: Filter deleted tables by database ID
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedTablesWithCursor'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /table/recover/{table_id}:
+    post:
+      summary: Recover deleted table
+      description: Recovers a deleted table. If the parent database is also deleted, with proper permissions it will be recovered automatically.
+      operationId: recoverTableById
+      tags:
+      - Tables
+      parameters:
+      - name: table_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/TableId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                table_name:
+                  description: Alternative name for the recovered table to avoid conflicts with existing tables
+                  $ref: '#/components/schemas/Table/properties/name'
+                database_name:
+                  description: Alternative name for the recovered parent database to avoid conflicts with existing databases
+                  $ref: '#/components/schemas/Database/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoveredTable'
+        4XX:
+          $ref: '#/components/responses/4XX'
+        5XX:
+          $ref: '#/components/responses/5XX'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
 components:
   responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
     NotFound:
       description: Resource not found
       content:
@@ -61,15 +715,10 @@ components:
               error:
                 type: string
                 example: Resource not found
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
+    5XX:
+      description: Server Error
+    4XX:
+      description: Client Error
   schemas:
     Table:
       type: object
@@ -88,6 +737,349 @@ components:
           format: date-time
         estimated_storage_size:
           type: integer
+    Table_2:
+      title: Table
+      description: Table
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - count
+      - counter_updated_at
+      - created_at
+      - delete_protected
+      - estimated_storage_size
+      - expire_days
+      - include_v
+      - last_log_timestamp
+      - name
+      - schema
+      - type
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        count:
+          type: integer
+          example: 1000
+        counter_updated_at:
+          anyOf:
+          - type:
+            - string
+            - 'null'
+          - $ref: '#/components/schemas/DateTimeISO8601'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          type: boolean
+          example: true
+        estimated_storage_size:
+          type: integer
+          example: 1073741824
+        expire_days:
+          type:
+          - integer
+          - 'null'
+          example: 30
+        include_v:
+          description: when true, Hive queries can access a virtual column "v" which contains a map of every data column's name to its value (represented as a string). Prefer to set a schema on the table instead of using "v".
+          type: boolean
+          example: false
+          deprecated: true
+        last_log_timestamp:
+          type:
+          - integer
+          - 'null'
+          example: 1356998400
+        name:
+          type: string
+          example: Bravo
+        description:
+          description: user-provided description of the table
+          type:
+          - string
+          - 'null'
+          example: Click events.
+        schema:
+          type: string
+          description: JSON-encoded table schema. When include_descriptions=true, contains column descriptions in format [[name, type, alias, description], ...]
+        type:
+          type: string
+          enum:
+          - log
+          example: log
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    TableSchemaAsArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnSchemaAsArray'
+      example:
+      - - name
+        - string
+        - first_name
+      - - creation_date
+        - long
+    DeletedTablesWithCursor:
+      title: Deleted Tables with Cursor
+      description: A paginated list of deleted tables
+      type: object
+      additionalProperties: false
+      required:
+      - tables
+      - cursor_id
+      properties:
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedTable'
+        cursor_id:
+          description: ID of the last table in this page; pass as cursor_id to get the next page, or null if this is the last page
+          type:
+          - integer
+          - 'null'
+          example: 456
+    AnyValue:
+      description: Can be any value, including `null`.
+      anyOf:
+      - type:
+        - string
+        - 'null'
+      - type: number
+      - type: integer
+      - type: boolean
+      - type: array
+        items:
+          $ref: '#/components/schemas/AnyValue'
+      - type: object
+    ColumnSchemaAsArray:
+      description: An array with (in order) `[name, type, alias, description]` of a column. `Alias` and `description` are optional.
+      type: array
+      minItems: 2
+      maxItems: 4
+      items:
+        type: string
+      example:
+      - name
+      - string
+      - first_name
+      - User's name column
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+    TableId:
+      type: integer
+      example: 11
+    TableSchemaAsString:
+      description: A JSON serialization of the Table Schema
+      type: string
+      example: '[["name", "string", "first_name"], ["creation_date", "long"]]'
+    IdempotentKey:
+      type: string
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    TableReference:
+      title: Table reference
+      type: object
+      additionalProperties: false
+      required:
+      - database
+      - table
+      - type
+      properties:
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        type:
+          $ref: '#/components/schemas/Table/properties/type'
+    ColumnSchema:
+      type: object
+      additionalProperties: false
+      required:
+      - key
+      - type
+      - name
+      properties:
+        key:
+          type: string
+          example: age
+        type:
+          type: string
+          example: integer
+        name:
+          type: string
+          example: age
+    DeletedTable:
+      title: Deleted Table
+      description: A deleted recoverable table
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - name
+      - database_id
+      - database_name
+      - deleted_at
+      - created_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        name:
+          $ref: '#/components/schemas/Table/properties/name'
+        database_id:
+          type: integer
+          example: 42
+        database_name:
+          $ref: '#/components/schemas/Database/properties/name'
+        deleted_at:
+          description: when the table was deleted
+          $ref: '#/components/schemas/DateTimeAsString'
+        created_at:
+          description: when the table was created
+          $ref: '#/components/schemas/DateTimeAsString'
+    RecoveredTable:
+      title: Recovered Table
+      description: Recovered table; call GET /table/show/{database}/{table} for full details including schema
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - count
+      - counter_updated_at
+      - created_at
+      - delete_protected
+      - estimated_storage_size
+      - expire_days
+      - include_v
+      - last_log_timestamp
+      - name
+      - type
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        name:
+          $ref: '#/components/schemas/Table/properties/name'
+        count:
+          $ref: '#/components/schemas/Table/properties/count'
+        counter_updated_at:
+          $ref: '#/components/schemas/Table/properties/counter_updated_at'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        estimated_storage_size:
+          $ref: '#/components/schemas/Table/properties/estimated_storage_size'
+        expire_days:
+          $ref: '#/components/schemas/Table/properties/expire_days'
+        include_v:
+          $ref: '#/components/schemas/Table/properties/include_v'
+        last_log_timestamp:
+          $ref: '#/components/schemas/Table/properties/last_log_timestamp'
+        delete_protected:
+          $ref: '#/components/schemas/Table/properties/delete_protected'
+        type:
+          $ref: '#/components/schemas/Table/properties/type'
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    TransferTableResponse:
+      type: object
+      properties:
+        database_name:
+          type: string
+        table_name:
+          type: string
+  parameters:
+    path_database_name:
+      name: database_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Database/properties/name'
+    header_authorization_TD1:
+      name: Authorization
+      description: TD1 Authorization Header
+      in: header
+      required: false
+      schema:
+        type: string
+        pattern: ^TD1 [0-9a-f/]+$
+        example: TD1 123/456789xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    path_table_name:
+      name: table_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Table/properties/name'
   securitySchemes:
     TDAuth:
       type: apiKey
@@ -96,3 +1088,9 @@ components:
       description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
 
         '
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+x-refined-from:
+- treasure-data-td-api-openapi.yml
+- treasure-data-td-api-v3-openapi.yml

@@ -263,29 +263,6 @@ paths:
       - Pool
 components:
   schemas:
-    RestPoolRuleInvocationTypeCondition:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the condition.
-          enum:
-          - invocation_type
-          - project_name
-          - workflow_name
-          - workflow_type
-        values:
-          type: array
-          description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
-          items:
-            type: string
-            description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
-            enum:
-            - on_demand
-            - scheduled
-      required:
-      - type
-      - values
     RestPool:
       type: object
       properties:
@@ -315,7 +292,58 @@ components:
       - default
       - id
       - name
-    RestPoolRuleUpdateRequest:
+    RestPoolRuleWorkflowNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the workflow name.
+          enum:
+          - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+          items:
+            type: string
+            description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+      required:
+      - operator
+      - type
+      - values
+    RestPoolUpdateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+    RestPoolRuleCollection:
+      type: object
+      properties:
+        poolRules:
+          type: array
+          description: List of pool rules.
+          items:
+            $ref: '#/components/schemas/RestPoolRule'
+      required:
+      - poolRules
+    RestPoolRule:
       type: object
       properties:
         conditions:
@@ -325,6 +353,11 @@ components:
             $ref: '#/components/schemas/RestPoolRuleCondition'
           maxItems: 2
           minItems: 1
+        id:
+          type: string
+          description: ID of the pool rule.
+          example: '42'
+          minimum: 1
         poolId:
           type: string
           description: ID of the pool that this rule assigns attempts to.
@@ -337,6 +370,11 @@ components:
           example: 10
           maximum: 10000
           minimum: 1
+      required:
+      - conditions
+      - id
+      - poolId
+      - priority
     RestPoolRuleProjectNameCondition:
       type: object
       properties:
@@ -363,42 +401,6 @@ components:
       - operator
       - type
       - values
-    RestPoolRuleCollection:
-      type: object
-      properties:
-        poolRules:
-          type: array
-          description: List of pool rules.
-          items:
-            $ref: '#/components/schemas/RestPoolRule'
-      required:
-      - poolRules
-    RestPoolRuleCreateRequest:
-      type: object
-      properties:
-        conditions:
-          type: array
-          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
-          items:
-            $ref: '#/components/schemas/RestPoolRuleCondition'
-          maxItems: 2
-          minItems: 1
-        poolId:
-          type: string
-          description: ID of the pool that this rule assigns attempts to.
-          example: '42'
-          minimum: 1
-        priority:
-          type: integer
-          format: int32
-          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
-          example: 10
-          maximum: 10000
-          minimum: 1
-      required:
-      - conditions
-      - poolId
-      - priority
     RestPoolCreateRequest:
       type: object
       properties:
@@ -446,22 +448,7 @@ components:
       required:
       - type
       - values
-    RestPoolUpdateRequest:
-      type: object
-      properties:
-        concurrencyLimit:
-          type: integer
-          format: int32
-          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
-          example: 10
-          minimum: 1
-        name:
-          type: string
-          description: Name of the pool. This name must be unique within the account.
-          example: activation
-          maxLength: 256
-          minLength: 1
-    RestPoolRule:
+    RestPoolRuleCreateRequest:
       type: object
       properties:
         conditions:
@@ -471,11 +458,6 @@ components:
             $ref: '#/components/schemas/RestPoolRuleCondition'
           maxItems: 2
           minItems: 1
-        id:
-          type: string
-          description: ID of the pool rule.
-          example: '42'
-          minimum: 1
         poolId:
           type: string
           description: ID of the pool that this rule assigns attempts to.
@@ -490,17 +472,11 @@ components:
           minimum: 1
       required:
       - conditions
-      - id
       - poolId
       - priority
-    RestPoolRuleWorkflowNameCondition:
+    RestPoolRuleInvocationTypeCondition:
       type: object
       properties:
-        operator:
-          type: string
-          description: Operator to use for matching the workflow name.
-          enum:
-          - starts_with
         type:
           type: string
           description: Type of the condition.
@@ -511,24 +487,38 @@ components:
           - workflow_type
         values:
           type: array
-          description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+          description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
           items:
             type: string
-            description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+            description: Invocation types to match against. If multiple values are provided, the condition is met if the invocation type is one of the provided invocation types.
+            enum:
+            - on_demand
+            - scheduled
       required:
-      - operator
       - type
       - values
-    RestPoolCollection:
+    RestPoolRuleUpdateRequest:
       type: object
       properties:
-        pools:
+        conditions:
           type: array
-          description: List of pools.
+          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
           items:
-            $ref: '#/components/schemas/RestPool'
-      required:
-      - pools
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
     RestPoolRuleCondition:
       type: object
       anyOf:
@@ -548,6 +538,16 @@ components:
           type: string
       required:
       - type
+    RestPoolCollection:
+      type: object
+      properties:
+        pools:
+          type: array
+          description: List of pools.
+          items:
+            $ref: '#/components/schemas/RestPool'
+      required:
+      - pools
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

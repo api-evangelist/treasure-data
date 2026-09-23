@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: cdp-api Funnels API
-  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
   termsOfService: https://www.treasuredata.com/terms/
   version: 1.0.0
 servers:
@@ -12,7 +12,7 @@ servers:
 - url: https://api-cdp.ap03.treasuredata.com
 tags:
 - name: Funnels
-  description: One of the challenges of targeting customers with relevant campaigns is understanding where they are in their customer journey. Many organizations use the traditional marketing funnel to understand where their customers are in the buying process. Knowing where customers are in the marketing funnel allows organizations to create campaigns and analyze customer behaviors that are specific to individual customers or customer groups. Being able to use all available customer data to accurately identify exactly in which stage customers are in gives marketers a clear advantage. <br> <br> Treasure Data offers Funnels, a premium subscription feature in Audience Studio, which provides this advantage to its users. Funnels make it easier for marketers to see exactly where their customers are in the buying process, allowing them to create more customer-tailored marketing campaigns using multi-channel activations.<br> <br> Funnels enables marketers to create and customize a marketing funnel with up to eight stages in the Audience Studio to reflect the exact buying experience of their customers. After the Funnel stages have been created, marketers can further analyze and refine the stages and activate specific stages for campaigns.
+  description: One of the challenges of targeting customers with relevant campaigns is understanding where they are in their customer journey.
 paths:
   /audiences/{audienceId}/funnels:
     x-external: true
@@ -57,7 +57,10 @@ paths:
       tags:
       - Funnels
       summary: Create funnel (legacy)
-      description: Create a new funnel, assign it a name and description matching your business needs. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      description: 'Create a new funnel, assign it a name and description matching your business needs.
+
+
+        _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._'
       operationId: funnels#create
       parameters:
       - name: audienceId
@@ -101,7 +104,7 @@ paths:
       tags:
       - Funnels
       summary: Retrieve funnel by ID
-      description: Search and find a specific funnel by its identifier. <br> <br> <br>
+      description: Search and find a specific funnel by its identifier.
       operationId: funnels#show
       parameters:
       - name: audienceId
@@ -143,7 +146,10 @@ paths:
       tags:
       - Funnels
       summary: Update funnel (legacy)
-      description: Update a funnel. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      description: 'Update a funnel.
+
+
+        _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._'
       operationId: funnels#update
       parameters:
       - name: audienceId
@@ -192,7 +198,10 @@ paths:
       tags:
       - Funnels
       summary: Delete funnel (legacy)
-      description: Delete a funnel. <br> <br> <br> _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._
+      description: 'Delete a funnel.
+
+
+        _This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._'
       operationId: funnels#delete
       parameters:
       - name: audienceId
@@ -364,6 +373,8 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesGetFunnelJsonApiResponse'
+      operationId: postEntitiesFunnels
+      x-operation-id-source: derived
   /entities/funnels/{id}:
     x-external: true
     get:
@@ -386,6 +397,8 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesGetFunnelJsonApiResponse'
+      operationId: getEntitiesFunnelsById
+      x-operation-id-source: derived
     patch:
       tags:
       - Funnels
@@ -411,6 +424,8 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesGetFunnelJsonApiResponse'
+      operationId: patchEntitiesFunnelsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Funnels
@@ -431,6 +446,8 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesGetFunnelJsonApiResponse'
+      operationId: deleteEntitiesFunnelsById
+      x-operation-id-source: derived
   /entities/funnels/{funnelId}/stages/{id}/statistics:
     x-external: true
     get:
@@ -476,6 +493,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Statistic'
+      operationId: getEntitiesFunnelsByFunnelIdStagesByIdStatistics
+      x-operation-id-source: derived
   /entities/parent_segments/{parentSegmentId}/funnels:
     x-external: true
     parameters:
@@ -492,8 +511,71 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesFunnelIndexJsonApiResponse'
+      operationId: getEntitiesParentSegmentsByParentSegmentIdFunnels
+      x-operation-id-source: derived
 components:
+  responses:
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                format: int64
+                description: Error status
+              error:
+                type: string
+                description: Error message
+              details:
+                type: string
+                description: Detailed error message
+            required:
+            - status
+            - error
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
     UserJsonApiResource:
       type: object
       required:
@@ -519,22 +601,68 @@ components:
               pattern: '[1-9][0-9]*'
             name:
               type: string
-    FunnelStageJsonApiResource:
+    FunnelParameters:
       type: object
-      required:
-      - name
       properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        segmentId:
-          type: string
-          pattern: '[1-9][0-9]*'
         name:
+          description: name
           type: string
-        numSyndications:
+        description:
+          description: description
+          type: string
+        segmentFolderId:
           type: integer
           format: int64
+        stages:
+          description: funnel stages
+          example:
+          - name: Awareness
+          - id: 1
+            name: Interest
+          - name: Conversion
+          type: array
+          minItems: 3
+          maxItems: 8
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: null means new stage, non-null means no-op or updating existing stage name or updating stage orders
+              name:
+                type: string
+            required:
+            - name
+      required:
+      - name
+      - segmentFolderId
+      - stages
+    EntitiesGetFunnelJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/FunnelJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    Statistic:
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
+        example:
+        - 1556382847
+        - 1234
+        - true
+        items:
+          oneOf:
+          - type: integer
+            format: int64
+          - type: boolean
     FunnelJsonApiResource:
       type: object
       required:
@@ -600,24 +728,6 @@ components:
               $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
             updatedBy:
               $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-    RelationshipsUserJsonApiResource:
-      type: object
-      properties:
-        data:
-          type:
-          - object
-          - 'null'
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - user
     User:
       type: object
       properties:
@@ -629,36 +739,94 @@ components:
           pattern: '[1-9][0-9]*'
         name:
           type: string
-    RelationshipsFolderJsonApiResource:
+    EntitiesFunnelIndexJsonApiResponse:
       type: object
+      required:
+      - data
+      - included
       properties:
         data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - folder-segment
-    Statistic:
-      type: array
-      items:
-        type: array
-        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
-        example:
-        - 1556382847
-        - 1234
-        - true
-        items:
-          oneOf:
-          - type: integer
-            format: int64
-          - type: boolean
+          type: array
+          items:
+            $ref: '#/components/schemas/FunnelJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    FunnelStatistic:
+      type: object
+      properties:
+        population:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: the latest population of the funnel
+        stages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: funnel stage id
+              history:
+                type: array
+                items:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: integer
+                      format: int64
+                    - type: boolean
+                  description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not
+                  example:
+                  - 1556382847
+                  - 1234
+                  - true
+      example:
+        population: 1000
+        stages:
+        - id: 44242
+          history:
+          - - 1600297704
+            - 362
+            - true
+          - - 1600383964
+            - 362
+            - true
+        - id: 44240
+          history:
+          - - 1600297667
+            - 122
+            - true
+          - - 1600383950
+            - 122
+            - true
+        - id: 44241
+          history:
+          - - 1600297690
+            - 516
+            - true
+          - - 1600383956
+            - 516
+            - true
+    FunnelCloneParameters:
+      type: object
+      properties:
+        name:
+          description: name
+          type: string
+        description:
+          description: description
+          type: string
+        segmentFolderId:
+          type: integer
+          format: int64
+      required:
+      - name
+      - segmentFolderId
     Funnel:
       type: object
       properties:
@@ -743,76 +911,6 @@ components:
           $ref: '#/components/schemas/User'
         updatedBy:
           $ref: '#/components/schemas/User'
-    EntitiesFunnelUpdateRepresentation:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - funnel
-        attributes:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type:
-              - string
-              - 'null'
-            stages:
-              type: array
-              minLength: 3
-              maxLength: 8
-              items:
-                $ref: '#/components/schemas/FunnelStageJsonApiResource'
-          required:
-          - name
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-          required:
-          - parentFolder
-    FunnelParameters:
-      type: object
-      properties:
-        name:
-          description: name
-          type: string
-        description:
-          description: description
-          type: string
-        segmentFolderId:
-          type: integer
-          format: int64
-        stages:
-          description: funnel stages
-          example:
-          - name: Awareness
-          - id: 1
-            name: Interest
-          - name: Conversion
-          type: array
-          minItems: 3
-          maxItems: 8
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: null means new stage, non-null means no-op or updating existing stage name or updating stage orders
-              name:
-                type: string
-            required:
-            - name
-      required:
-      - name
-      - segmentFolderId
-      - stages
     EntitiesFunnelCreateRepresentation:
       type: object
       properties:
@@ -848,167 +946,90 @@ components:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
           required:
           - parentFolder
-    FunnelStatistic:
+    RelationshipsUserJsonApiResource:
       type: object
-      properties:
-        population:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: the latest population of the funnel
-        stages:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                format: int64
-                description: funnel stage id
-              history:
-                type: array
-                items:
-                  type: array
-                  items:
-                    oneOf:
-                    - type: integer
-                      format: int64
-                    - type: boolean
-                  description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not
-                  example:
-                  - 1556382847
-                  - 1234
-                  - true
-      example:
-        population: 1000
-        stages:
-        - id: 44242
-          history:
-          - - 1600297704
-            - 362
-            - true
-          - - 1600383964
-            - 362
-            - true
-        - id: 44240
-          history:
-          - - 1600297667
-            - 122
-            - true
-          - - 1600383950
-            - 122
-            - true
-        - id: 44241
-          history:
-          - - 1600297690
-            - 516
-            - true
-          - - 1600383956
-            - 516
-            - true
-    EntitiesFunnelIndexJsonApiResponse:
-      type: object
-      required:
-      - data
-      - included
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FunnelJsonApiResource'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserJsonApiResource'
-    FunnelCloneParameters:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    FunnelStageJsonApiResource:
       type: object
-      properties:
-        name:
-          description: name
-          type: string
-        description:
-          description: description
-          type: string
-        segmentFolderId:
-          type: integer
-          format: int64
       required:
       - name
-      - segmentFolderId
-    Error:
-      type: object
       properties:
-        code:
+        id:
           type: string
-        message:
+          pattern: '[1-9][0-9]*'
+        segmentId:
           type: string
-      required:
-      - code
-      - message
-    EntitiesGetFunnelJsonApiResponse:
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+        numSyndications:
+          type: integer
+          format: int64
+    RelationshipsFolderJsonApiResource:
       type: object
-      required:
-      - data
-      - included
       properties:
         data:
-          $ref: '#/components/schemas/FunnelJsonApiResource'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserJsonApiResource'
-  responses:
-    ServerError:
-      description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              status:
-                type: integer
-                format: int64
-                description: Error status
-              error:
-                type: string
-                description: Error message
-              details:
-                type: string
-                description: Detailed error message
-            required:
-            - status
-            - error
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ClientError:
-      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Given parameters are not valid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Requested resource or action is not allowed because you don't have sufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    EntitiesFunnelUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - funnel
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            stages:
+              type: array
+              minLength: 3
+              maxLength: 8
+              items:
+                $ref: '#/components/schemas/FunnelStageJsonApiResource'
+          required:
+          - name
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+          required:
+          - parentFolder
   parameters:
     ParentSegmentId:
       name: parentSegmentId

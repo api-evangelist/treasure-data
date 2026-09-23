@@ -1,20 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import Databases API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
-  version: v3
-  contact:
-    url: https://docs.treasure.ai/apis/td-api
-  license:
-    name: Treasure Data Terms of Service
-    url: https://www.treasure.ai/
+  title: Treasure Data Databases API
+  version: '1.0'
+  description: 'Operations tagged Databases across 2 of this provider''s published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.treasuredata.com/v3
   description: Treasure Data API v3
-security:
-- TDAuth: []
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
 tags:
 - name: Databases
   description: Manage Treasure Data databases
@@ -40,6 +34,93 @@ paths:
                       $ref: '#/components/schemas/Database'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
+  /database/show/{database_name}:
+    get:
+      summary: Get database
+      description: Retrieves a specified database.
+      operationId: getDatabaseByName
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/require_permissions'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database_2'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /database/create/{database_name}:
+    post:
+      summary: Create database
+      description: Creates a database.
+      operationId: createDatabase
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - database
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /database/delete/{database_name}:
+    post:
+      summary: Delete database
+      description: Deletes a specified database.
+      operationId: deleteDatabase
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - database
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
 components:
   responses:
     Unauthorized:
@@ -69,6 +150,154 @@ components:
           format: date-time
         permission:
           type: string
+    Database_2:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    DatabaseIdAsString:
+      type: string
+      example: '7'
+    DatabaseWithoutIdAndDatatank:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: the number of records in the database
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: whether the database is delete protected
+          type: boolean
+          example: true
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+  parameters:
+    require_permissions:
+      name: require_permissions
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: 'true'
+    path_database_name:
+      name: database_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Database/properties/name'
   securitySchemes:
     TDAuth:
       type: apiKey
@@ -77,3 +306,9 @@ components:
       description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
 
         '
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+x-refined-from:
+- treasure-data-td-api-openapi.yml
+- treasure-data-td-api-v3-openapi.yml

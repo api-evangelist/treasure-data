@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: cdp-api Parent Segments API
-  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the [region](https://docs.treasuredata.com/display/public/PD/Sites+and+Endpoints#SitesandEndpoints-Endpoints). For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
+  description: All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under "/entities".
   termsOfService: https://www.treasuredata.com/terms/
   version: 1.0.0
 servers:
@@ -52,6 +52,8 @@ paths:
                   $ref: '#/components/schemas/SegmentFolderReadRepresentation'
       security:
       - TdApikeyAuth: []
+      operationId: getAudiencesByAudienceIdFolders
+      x-operation-id-source: derived
   /master_segments:
     x-external: true
     get:
@@ -89,6 +91,8 @@ paths:
                       - 'null'
                     scheduleType:
                       $ref: '#/components/schemas/ScheduleType'
+      operationId: getMasterSegments
+      x-operation-id-source: derived
   /entities/parent_segments:
     x-external: true
     get:
@@ -105,6 +109,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/EntitiesGetParentSegmentJsonApiResponse'
+      operationId: getEntitiesParentSegments
+      x-operation-id-source: derived
   /entities/parent_segments/{id}:
     x-external: true
     get:
@@ -127,8 +133,55 @@ paths:
             application/vnd.treasuredata.v1+json:
               schema:
                 $ref: '#/components/schemas/EntitiesGetParentSegmentJsonApiResponse'
+      operationId: getEntitiesParentSegmentsById
+      x-operation-id-source: derived
 components:
   schemas:
+    EntitiesGetParentSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
+    SegmentFolderReadRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: 'ID of the parent audience. For composable folders this carries
+
+            the composable audience id; the complete-vs-composable
+
+            discriminator lives on the parent audience entity, not on the
+
+            folder.
+
+            '
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
+        updatedBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
     ParentSegmentJsonApiResource:
       type: object
       required:
@@ -207,17 +260,6 @@ components:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
             parentSegmentFolder:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
     RelationshipsFolderJsonApiResource:
       type: object
       properties:
@@ -245,6 +287,17 @@ components:
       - monthly
       - none
       - weekly
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
     NullValue:
       type:
       - object
@@ -253,51 +306,6 @@ components:
       properties:
         thisKeyNeverHit:
           type: string
-    EntitiesGetParentSegmentJsonApiResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
-    SegmentFolderReadRepresentation:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        audienceId:
-          type: string
-          pattern: '[1-9][0-9]*'
-          description: 'ID of the parent audience. For composable folders this carries
-
-            the composable audience id; the complete-vs-composable
-
-            discriminator lives on the parent audience entity, not on the
-
-            folder.
-
-            '
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        createdBy:
-          oneOf:
-          - $ref: '#/components/schemas/User'
-          - $ref: '#/components/schemas/NullValue'
-        updatedBy:
-          oneOf:
-          - $ref: '#/components/schemas/User'
-          - $ref: '#/components/schemas/NullValue'
   securitySchemes:
     TdApikeyAuth:
       type: apiKey

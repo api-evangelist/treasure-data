@@ -10,15 +10,15 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Access Control - Users
+- name: Access Control (Users)
 paths:
   /access_control/users:
     get:
-      summary: Get Access Control users.
+      summary: Get Access Control users
       description: Retrieves a list of users and their permissions.
       operationId: getAccessControlUsers
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '200':
           description: OK
@@ -36,7 +36,7 @@ paths:
       description: Retrieves the specified user.
       operationId: getAccessControlUserById
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '200':
           description: OK
@@ -52,7 +52,7 @@ paths:
       description: Updates a user's permissions.
       operationId: updateAccessControlUserPermissions
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       requestBody:
         content:
           application/json:
@@ -82,7 +82,7 @@ paths:
       description: Retrieves all profile option keys with their resolved values for the specified user.
       operationId: getAccessControlUserProfileOptions
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '200':
           description: OK
@@ -104,7 +104,7 @@ paths:
       description: Retrieves the resolved value of a single profile option for the specified user.
       operationId: getAccessControlUserProfileOption
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '200':
           description: OK
@@ -117,7 +117,7 @@ paths:
       description: Sets the value of a profile option for the specified user. Admin only.
       operationId: updateAccessControlUserProfileOption
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       requestBody:
         content:
           application/json:
@@ -135,7 +135,7 @@ paths:
       description: Removes a profile option for the specified user, reverting it to the account default. Admin only.
       operationId: deleteAccessControlUserProfileOption
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '204':
           description: No Content
@@ -147,7 +147,7 @@ paths:
       description: Retrieves a list of users attached to a policy.
       operationId: getAccessControlPolicyUsers
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       responses:
         '200':
           description: OK
@@ -162,7 +162,7 @@ paths:
       description: Updates users attached to a policy.
       operationId: updateAccessControlPolicyUsers
       tags:
-      - Access Control - Users
+      - Access Control (Users)
       requestBody:
         content:
           application/json:
@@ -178,34 +178,48 @@ paths:
                 items:
                   $ref: '#/components/schemas/AccessControlUser'
 components:
+  parameters:
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
   schemas:
-    AccessControlUser:
-      title: Access Control User
+    AccessControlPolicy:
+      title: Access Control Policy
       type: object
       additionalProperties: false
       required:
-      - user_id
+      - id
       - account_id
-      - permissions
+      - name
       properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyId'
         account_id:
           $ref: '#/components/schemas/AccountId'
-        permissions:
-          $ref: '#/components/schemas/AccessControlPermissions'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessControlPolicy'
-    AccessControlProfileOptions:
-      title: Access Control Profile Options
-      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
-      type: object
-      additionalProperties:
-        type:
-        - string
-        - 'null'
+        name:
+          description: Policy's name
+          type: string
+          example: some_policy
+        description:
+          description: Policy's description
+          type: string
+          example: written about the policy
+        user_count:
+          description: The number of users which the policy attaches to
+          type: integer
+          example: 3
+    AccountId:
+      type: integer
+      example: 123
     User:
       title: User
       description: User
@@ -298,50 +312,6 @@ components:
           type: array
           items:
             type: string
-    UpdateAccessControlPolicyUsersRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-    AccessControlPolicyId:
-      type: integer
-      example: 67
-    AccessControlPolicy:
-      title: Access Control Policy
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      - account_id
-      - name
-      properties:
-        id:
-          $ref: '#/components/schemas/AccessControlPolicyId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        name:
-          description: Policy's name
-          type: string
-          example: some_policy
-        description:
-          description: Policy's description
-          type: string
-          example: written about the policy
-        user_count:
-          description: The number of users which the policy attaches to
-          type: integer
-          example: 3
-    UserId:
-      type: integer
-      example: 123
-    AccountId:
-      type: integer
-      example: 123
     AccessControlPermissions:
       title: Access Control Permissions
       type: object
@@ -752,6 +722,38 @@ components:
                 type: string
                 description: ID of the Audience (MasterSegmentConfig) to grant raw data access
                 example: '123'
+    UserId:
+      type: integer
+      example: 123
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccessControlUserReference:
+      title: Access Control User Reference
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - account_id
+      - email
+      - name
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        email:
+          $ref: '#/components/schemas/User/properties/email'
+        name:
+          $ref: '#/components/schemas/User/properties/name'
+    AccessControlProfileOptions:
+      title: Access Control Profile Options
+      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
+      type: object
+      additionalProperties:
+        type:
+        - string
+        - 'null'
     AccessControlProfileOptionUpdateRequest:
       title: Access Control Profile Option Update Request
       description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
@@ -870,37 +872,35 @@ components:
                 - view
                 - full
                 - template_access
-    AccessControlUserReference:
-      title: Access Control User Reference
+    UpdateAccessControlPolicyUsersRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
+    AccessControlUser:
+      title: Access Control User
       type: object
       additionalProperties: false
       required:
       - user_id
       - account_id
-      - email
-      - name
+      - permissions
       properties:
         user_id:
           $ref: '#/components/schemas/UserId'
         account_id:
           $ref: '#/components/schemas/AccountId'
-        email:
-          $ref: '#/components/schemas/User/properties/email'
-        name:
-          $ref: '#/components/schemas/User/properties/name'
-  parameters:
-    path_user_id:
-      name: user_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UserId'
-    path_access_control_policy_id:
-      name: policy_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/AccessControlPolicyId'
+        permissions:
+          $ref: '#/components/schemas/AccessControlPermissions'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicy'
   securitySchemes:
     ApiKeyAuth:
       type: http

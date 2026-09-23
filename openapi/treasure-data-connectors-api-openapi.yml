@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import Connectors API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
+  title: Treasure Data TD Connectors API
+  description: Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
   version: v3
   contact:
     url: https://docs.treasure.ai/apis/td-api
@@ -41,14 +39,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    Connector:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
   responses:
     Unauthorized:
       description: Authentication required or API key invalid
@@ -59,6 +49,14 @@ components:
             properties:
               error:
                 type: string
+  schemas:
+    Connector:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
   securitySchemes:
     TDAuth:
       type: apiKey

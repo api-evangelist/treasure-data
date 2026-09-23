@@ -73,13 +73,6 @@ paths:
         '204':
           description: OK
 components:
-  parameters:
-    path_tag:
-      name: tag
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Tag'
   schemas:
     Tag:
       type: string
@@ -95,6 +88,13 @@ components:
           items:
             type: string
             example: '234'
+  parameters:
+    path_tag:
+      name: tag
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Tag'
   securitySchemes:
     ApiKeyAuth:
       type: http

@@ -161,177 +161,28 @@ paths:
       - Schedule
 components:
   schemas:
-    RestScheduleEnableRequest:
+    RestScheduleAttemptCollection:
       type: object
-      description: Request body for enabling a schedule
+      description: Response of a schedule with its attempts
       properties:
-        nextTime:
-          type: string
-          description: time to skip
-          example: '2022-12-31T23:59:00+00:00'
-        skipSchedule:
-          type: boolean
-          default: true
-          description: skip schedules
-    RestScheduleSkipRequest:
-      type: object
-      description: Request body for skipping a schedule
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: skip given number of sessions. nextTime or (fromTime and count) are required.
-        dryRun:
-          type: boolean
-          description: dry run
-        fromTime:
-          type: string
-          format: date-time
-          description: skip before the time. nextTime or (fromTime and count) are required.
-          example: '2023-08-18T06:52:33Z'
-        nextRunTime:
-          type: string
-          format: date-time
-          description: next run time
-          example: '2023-08-18T06:52:33Z'
-        nextTime:
-          type: string
-          description: next time. nextTime or (fromTime and count) are required.
-          example: '2022-12-31T23:59:00+00:00'
-      required:
-      - dryRun
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
-    RestSchedule:
-      type: object
-      description: Response of a schedule
-      properties:
-        disabledAt:
-          type: string
-          format: date-time
-          description: disabled time
-          example: '2023-08-18T06:52:33Z'
+        attempts:
+          type: array
+          description: List of attempts
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
         id:
           type: string
           description: schedule ID
           example: '123456'
-        nextRunTime:
-          type: string
-          format: date-time
-          description: next run time
-          example: '2023-08-18T06:52:33Z'
-        nextScheduleTime:
-          type: string
-          description: next schedule time
-          example: '2022-12-31T23:59:00+00:00'
         project:
           $ref: '#/components/schemas/IdAndName'
         workflow:
           $ref: '#/components/schemas/IdAndName'
       required:
+      - attempts
       - id
-      - nextRunTime
-      - nextScheduleTime
       - project
       - workflow
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
-    RestScheduleSummary:
-      type: object
-      description: Response of a schedule with summary
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          description: created time
-          example: '2023-08-18T06:52:33Z'
-        disabledAt:
-          type: string
-          format: date-time
-          description: disabled time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: schedule ID
-          example: '123456'
-        nextRunTime:
-          type: string
-          format: date-time
-          description: next run time
-          example: '2023-08-18T06:52:33Z'
-        nextScheduleTime:
-          type: string
-          description: next schedule time
-          example: '2022-12-31T23:59:00+00:00'
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        updatedAt:
-          type: string
-          format: date-time
-          description: updated time
-          example: '2023-08-18T06:52:33Z'
-        workflow:
-          $ref: '#/components/schemas/IdAndName'
-      required:
-      - createdAt
-      - id
-      - nextRunTime
-      - nextScheduleTime
-      - project
-      - updatedAt
-      - workflow
-    RestScheduleBackfillRequest:
-      type: object
-      description: Request body for backfill
-      properties:
-        advanceSchedule:
-          type: boolean
-          description: If true, advance nextScheduleTime/nextRunTime. When fromTime is not set, uses the current schedule's nextRunTime as starting point. Requires skipExisting to be true.
-        attemptName:
-          type: string
-          description: attempt name. Optional when skipExisting is true. Cannot be specified when advanceSchedule is true.
-        count:
-          type: integer
-          format: int32
-          description: starts given number of sessions. run all sessions if not set.
-        dryRun:
-          type: boolean
-          description: dry run
-        fromTime:
-          type: string
-          format: date-time
-          description: backfill from
-          example: '2023-08-18T06:52:33Z'
-        skipExisting:
-          type: boolean
-          description: If true, silently skip sessions that already have attempts instead of returning 409 conflict error. Note that when count is set, skipped sessions are still counted towards the count.
-      required:
-      - dryRun
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -419,28 +270,145 @@ components:
       - status
       - success
       - workflow
-    RestScheduleAttemptCollection:
+    RestScheduleEnableRequest:
       type: object
-      description: Response of a schedule with its attempts
+      description: Request body for enabling a schedule
       properties:
-        attempts:
-          type: array
-          description: List of attempts
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
+        nextTime:
+          type: string
+          description: time to skip
+          example: '2022-12-31T23:59:00+00:00'
+        skipSchedule:
+          type: boolean
+          default: true
+          description: skip schedules
+    RestScheduleBackfillRequest:
+      type: object
+      description: Request body for backfill
+      properties:
+        advanceSchedule:
+          type: boolean
+          description: If true, advance nextScheduleTime/nextRunTime. When fromTime is not set, uses the current schedule's nextRunTime as starting point. Requires skipExisting to be true.
+        attemptName:
+          type: string
+          description: attempt name. Optional when skipExisting is true. Cannot be specified when advanceSchedule is true.
+        count:
+          type: integer
+          format: int32
+          description: starts given number of sessions. run all sessions if not set.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: backfill from
+          example: '2023-08-18T06:52:33Z'
+        skipExisting:
+          type: boolean
+          description: If true, silently skip sessions that already have attempts instead of returning 409 conflict error. Note that when count is set, skipped sessions are still counted towards the count.
+      required:
+      - dryRun
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    RestScheduleSkipRequest:
+      type: object
+      description: Request body for skipping a schedule
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: skip given number of sessions. nextTime or (fromTime and count) are required.
+        dryRun:
+          type: boolean
+          description: dry run
+        fromTime:
+          type: string
+          format: date-time
+          description: skip before the time. nextTime or (fromTime and count) are required.
+          example: '2023-08-18T06:52:33Z'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextTime:
+          type: string
+          description: next time. nextTime or (fromTime and count) are required.
+          example: '2022-12-31T23:59:00+00:00'
+      required:
+      - dryRun
+    RestScheduleSummary:
+      type: object
+      description: Response of a schedule with summary
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
         id:
           type: string
           description: schedule ID
           example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
         project:
           $ref: '#/components/schemas/IdAndName'
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
         workflow:
           $ref: '#/components/schemas/IdAndName'
       required:
-      - attempts
+      - createdAt
       - id
+      - nextRunTime
+      - nextScheduleTime
       - project
+      - updatedAt
       - workflow
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
     RestScheduleCollection:
       type: object
       properties:
@@ -448,6 +416,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestSchedule'
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - workflow
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

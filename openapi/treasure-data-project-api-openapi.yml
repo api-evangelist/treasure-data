@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Treasure Data Project API
   version: '1.0'
-  description: 'Operations tagged Project across 2 of this provider''s published API definitions: treasure-data-llm-api-openapi.yml, treasure-data-workflow-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Project across 2 of this provider''s published API definitions: treasure-data-llm-api-openapi.yml, treasure-data-project-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://llm-api.treasuredata.com
 - url: https://llm-api.eu01.treasuredata.com
@@ -431,6 +431,8 @@ paths:
         schema:
           type: string
         example: id
+      operationId: getApiProjects
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
@@ -653,6 +655,13 @@ paths:
                   description: project with workflow executor
                   useRuntimeTextResource: true
                   useWorkflowExecutor: true
+      operationId: postApiProjects
+      x-operation-id-source: derived
+    servers:
+    - url: https://llm-api.treasuredata.com
+    - url: https://llm-api.eu01.treasuredata.com
+    - url: https://llm-api.ap02.treasuredata.com
+    - url: https://llm-api.treasuredata.co.jp
     put:
       operationId: putProject
       parameters:
@@ -712,14 +721,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestProject'
           description: default response
-      summary: Upload a project archive as a new project or a new revision of an existing project
+      summary: Upload a project archive as a new project or a new revision of an existing…
       tags:
       - Project
-    servers:
-    - url: https://llm-api.treasuredata.com
-    - url: https://llm-api.eu01.treasuredata.com
-    - url: https://llm-api.ap02.treasuredata.com
-    - url: https://llm-api.treasuredata.co.jp
   /api/projects/{id}:
     delete:
       summary: destroy
@@ -802,6 +806,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: deleteApiProjectsById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -1178,6 +1184,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiProjectsById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -1441,12 +1449,25 @@ paths:
                   name: new-name
                   description: new-description
                   useRuntimeTextResource: false
+      operationId: patchApiProjectsById
+      x-operation-id-source: derived
     servers:
     - url: https://llm-api.treasuredata.com
     - url: https://llm-api.eu01.treasuredata.com
     - url: https://llm-api.ap02.treasuredata.com
     - url: https://llm-api.treasuredata.co.jp
   /api/projects/{id}/archive:
+    servers:
+    - description: aws
+      url: https://api-workflow.treasuredata.com
+    - description: aws-tokyo
+      url: https://api-workflow.treasuredata.co.jp
+    - description: eu01
+      url: https://api-workflow.eu01.treasuredata.com
+    - description: ap02
+      url: https://api-workflow.ap02.treasuredata.com
+    - description: ap03
+      url: https://api-workflow.ap03.treasuredata.com
     get:
       operationId: getArchive
       parameters:
@@ -1474,6 +1495,7 @@ paths:
       summary: Download a project archive file
       tags:
       - Project
+  /api/projects/{id}/revisions:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1485,7 +1507,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/revisions:
     get:
       operationId: getRevisions
       parameters:
@@ -1530,6 +1551,7 @@ paths:
       summary: List revisions of a project
       tags:
       - Project
+  /api/projects/{id}/schedules:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1541,7 +1563,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/schedules:
     get:
       operationId: getProjectSchedules
       parameters:
@@ -1573,6 +1594,7 @@ paths:
       summary: List schedules of a project with filters
       tags:
       - Project
+  /api/projects/{id}/secrets:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1584,7 +1606,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/secrets:
     get:
       operationId: getProjectSecrets
       parameters:
@@ -1605,6 +1626,7 @@ paths:
       summary: List secret keys of a project
       tags:
       - Project
+  /api/projects/{id}/secrets/{key}:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1616,7 +1638,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/secrets/{key}:
     delete:
       operationId: deleteProjectSecret
       parameters:
@@ -1666,6 +1687,7 @@ paths:
       summary: Set a secret to a project
       tags:
       - Project
+  /api/projects/{id}/sessions:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1677,7 +1699,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/sessions:
     get:
       operationId: getProjectSessions
       parameters:
@@ -1715,6 +1736,7 @@ paths:
       summary: List sessions of a project with filters
       tags:
       - Project
+  /api/projects/{id}/workflows:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1726,7 +1748,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/workflows:
     get:
       operationId: getWorkflows
       parameters:
@@ -1758,6 +1779,7 @@ paths:
       summary: List workflows of a project with filters
       tags:
       - Project
+  /api/projects/{id}/workflows/{name}:
     servers:
     - description: aws
       url: https://api-workflow.treasuredata.com
@@ -1769,7 +1791,6 @@ paths:
       url: https://api-workflow.ap02.treasuredata.com
     - description: ap03
       url: https://api-workflow.ap03.treasuredata.com
-  /api/projects/{id}/workflows/{name}:
     get:
       operationId: getWorkflowByName
       parameters:
@@ -1797,174 +1818,18 @@ paths:
           description: default response
       tags:
       - Project
-    servers:
-    - description: aws
-      url: https://api-workflow.treasuredata.com
-    - description: aws-tokyo
-      url: https://api-workflow.treasuredata.co.jp
-    - description: eu01
-      url: https://api-workflow.eu01.treasuredata.com
-    - description: ap02
-      url: https://api-workflow.ap02.treasuredata.com
-    - description: ap03
-      url: https://api-workflow.ap03.treasuredata.com
+      summary: Get workflow by name
+      x-summary-source: derived
 components:
   schemas:
-    RestSecretMetadata:
+    RestProjectMetadata:
       type: object
-      description: Response of a secret
+      description: project metadata
       properties:
         key:
           type: string
-          description: key name
-          example: td.apikey
-      required:
-      - key
-    RestWorkflowDefinitionCollection:
-      type: object
-      properties:
-        workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestWorkflowDefinition'
-    RestProject:
-      type: object
-      description: Response of a project
-      properties:
-        archiveMd5:
-          type: string
-          format: byte
-          description: MD5 of archive
-          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
-        archiveType:
-          type: string
-          description: archive type
-          example: s3
-        createdAt:
-          type: string
-          format: date-time
-          description: created time
-          example: '2023-08-18T06:52:33Z'
-        deletedAt:
-          type: string
-          format: date-time
-          description: deleted time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: project ID
-          example: '123456'
-        metadata:
-          type: array
-          description: project metadata
-          items:
-            $ref: '#/components/schemas/RestProjectMetadata'
-        name:
-          type: string
-          description: project name
-          example: project-a
-        revision:
-          type: string
-          description: revision
-          example: rev-20230101-1
-        updatedAt:
-          type: string
-          format: date-time
-          description: updated time
-          example: '2023-08-18T06:52:33Z'
-      required:
-      - archiveType
-      - createdAt
-      - id
-      - name
-      - revision
-      - updatedAt
-    RestSessionCollection:
-      type: object
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSession'
-    RestPagination:
-      type: object
-      description: Pagination information
-      properties:
-        nextPage:
-          type: string
-          description: next page URL
-          example: /api/console/projects?last_id=123&count=300
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
-    RestSchedule:
-      type: object
-      description: Response of a schedule
-      properties:
-        disabledAt:
-          type: string
-          format: date-time
-          description: disabled time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: schedule ID
-          example: '123456'
-        nextRunTime:
-          type: string
-          format: date-time
-          description: next run time
-          example: '2023-08-18T06:52:33Z'
-        nextScheduleTime:
-          type: string
-          description: next schedule time
-          example: '2022-12-31T23:59:00+00:00'
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        workflow:
-          $ref: '#/components/schemas/IdAndName'
-      required:
-      - id
-      - nextRunTime
-      - nextScheduleTime
-      - project
-      - workflow
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
-    RestSetSecretRequest:
-      type: object
-      description: Request body to set a secret
-      properties:
         value:
           type: string
-          description: value of the secret
-          example: TD1 12345...
-      required:
-      - value
     RestSession:
       type: object
       description: Response of a session
@@ -1991,13 +1856,6 @@ components:
       - project
       - sessionTime
       - workflow
-    RestScheduleCollection:
-      type: object
-      properties:
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSchedule'
     Attempt:
       type: object
       description: Attempts of session
@@ -2054,9 +1912,9 @@ components:
       - params
       - status
       - success
-    RestRevision:
+    RestProject:
       type: object
-      description: Response of a revision
+      description: Response of a project
       properties:
         archiveMd5:
           type: string
@@ -2072,44 +1930,57 @@ components:
           format: date-time
           description: created time
           example: '2023-08-18T06:52:33Z'
+        deletedAt:
+          type: string
+          format: date-time
+          description: deleted time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: project ID
+          example: '123456'
+        metadata:
+          type: array
+          description: project metadata
+          items:
+            $ref: '#/components/schemas/RestProjectMetadata'
+        name:
+          type: string
+          description: project name
+          example: project-a
         revision:
           type: string
           description: revision
           example: rev-20230101-1
-        userInfo:
-          type: object
-          description: User information as json
-          example: '"td": {"user": {"id": 94,"name": "Your name","email": "example@treasure-data.com"}'
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
       required:
       - archiveType
+      - createdAt
+      - id
+      - name
       - revision
-    RestSecretList:
+      - updatedAt
+    RestSetSecretRequest:
       type: object
-      description: Response of a secret
+      description: Request body to set a secret
       properties:
-        secrets:
-          type: array
-          description: 'array of RestSecretMetadata "{ key: key1 }"'
-          example: '[{key: key1}, {key: key2}]'
-          items:
-            $ref: '#/components/schemas/RestSecretMetadata'
-      required:
-      - secrets
-    RestProjectCollection:
-      type: object
-      properties:
-        projects:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestProject'
-    RestProjectMetadata:
-      type: object
-      description: project metadata
-      properties:
-        key:
-          type: string
         value:
           type: string
+          description: value of the secret
+          example: TD1 12345...
+      required:
+      - value
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
     RestWorkflowDefinition:
       type: object
       description: Response of a workflow definition
@@ -2139,6 +2010,86 @@ components:
       - project
       - revision
       - timezone
+    RestSecretList:
+      type: object
+      description: Response of a secret
+      properties:
+        secrets:
+          type: array
+          description: 'array of RestSecretMetadata "{ key: key1 }"'
+          example: '[{key: key1}, {key: key2}]'
+          items:
+            $ref: '#/components/schemas/RestSecretMetadata'
+      required:
+      - secrets
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - workflow
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
+    RestScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSchedule'
     RestRevisionCollection:
       type: object
       properties:
@@ -2148,10 +2099,64 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestRevision'
+    RestWorkflowDefinitionCollection:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestWorkflowDefinition'
+    RestSecretMetadata:
+      type: object
+      description: Response of a secret
+      properties:
+        key:
+          type: string
+          description: key name
+          example: td.apikey
+      required:
+      - key
+    RestRevision:
+      type: object
+      description: Response of a revision
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        userInfo:
+          type: object
+          description: User information as json
+          example: '"td": {"user": {"id": 94,"name": "Your name","email": "example@treasure-data.com"}'
+      required:
+      - archiveType
+      - revision
+    RestPagination:
+      type: object
+      description: Pagination information
+      properties:
+        nextPage:
+          type: string
+          description: next page URL
+          example: /api/console/projects?last_id=123&count=300
   securitySchemes:
     ApiKeyAuth:
       type: http
       scheme: TD1
 x-refined-from:
 - treasure-data-llm-api-openapi.yml
-- treasure-data-workflow-api-openapi.yml
+- treasure-data-project-api-openapi.yml

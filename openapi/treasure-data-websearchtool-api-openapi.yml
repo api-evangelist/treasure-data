@@ -331,6 +331,8 @@ paths:
                   status: '422'
                   meta:
                     validationCode: LLM_INVALID_JSON
+      operationId: postApiWebSearchTools
+      x-operation-id-source: derived
   /api/web_search_tools/{id}:
     delete:
       summary: destroy
@@ -346,6 +348,8 @@ paths:
       responses:
         '204':
           description: Web search tool successfully deleted
+      operationId: deleteApiWebSearchToolsById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -487,6 +491,8 @@ paths:
                       - health.example.test
                     isManaged: false
                     systemPrompt: You are a helpful search assistant.
+      operationId: getApiWebSearchToolsById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -794,6 +800,8 @@ paths:
                   userLocation: null
                   systemPrompt: Updated prompt
                   filters: null
+      operationId: patchApiWebSearchToolsById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

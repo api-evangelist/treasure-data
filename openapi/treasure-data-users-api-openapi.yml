@@ -1,20 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import Users API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
-  version: v3
-  contact:
-    url: https://docs.treasure.ai/apis/td-api
-  license:
-    name: Treasure Data Terms of Service
-    url: https://www.treasure.ai/
+  title: Treasure Data Users API
+  version: '1.0'
+  description: 'Operations tagged Users across 2 of this provider''s published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.treasuredata.com/v3
   description: Treasure Data API v3
-security:
-- TDAuth: []
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
 tags:
 - name: Users
   description: User management
@@ -40,6 +34,11 @@ paths:
                       $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/show:
     get:
       operationId: showCurrentUser
@@ -56,6 +55,11 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/remove/{user_email}:
     post:
       operationId: removeUser
@@ -85,6 +89,11 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/create_with_sso/{user_first_name}:
     post:
       operationId: createUserWithSSO
@@ -123,6 +132,11 @@ paths:
                 $ref: '#/components/schemas/SSOUserResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/enforce_sso/{user_email}:
     post:
       operationId: enforceSSOForUser
@@ -153,6 +167,11 @@ paths:
                 $ref: '#/components/schemas/SSOUserResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/enable_sso/{user_email}:
     post:
       operationId: enableSSOForUser
@@ -183,6 +202,11 @@ paths:
                 $ref: '#/components/schemas/SSOUserResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /user/disable_sso/{user_email}:
     post:
       operationId: disableSSOForUser
@@ -219,8 +243,83 @@ paths:
                 $ref: '#/components/schemas/SSOUserResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
+  /user/delegated_admin/add/{user_email}:
+    parameters:
+    - $ref: '#/components/parameters/path_user_email'
+    post:
+      summary: Promote a user to a delegated Admin
+      description: Promotes a user to a delegated admin.
+      operationId: promoteDelegatedAdmin
+      tags:
+      - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  user_email:
+                    $ref: '#/components/schemas/User/properties/email'
+                  delegated_admin:
+                    type: boolean
+                    example: true
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /user/delegated_admin/remove/{user_email}:
+    parameters:
+    - $ref: '#/components/parameters/path_user_email'
+    post:
+      summary: Demote a user from a delegated admin
+      description: Demotes a user from a delegated admin.
+      operationId: demoteDelegatedAdmin
+      tags:
+      - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  user_email:
+                    $ref: '#/components/schemas/User/properties/email'
+                  delegated_admin:
+                    type: boolean
+                    example: false
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
 components:
   schemas:
+    SSOUserRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            user_email:
+              type: string
+            identifier:
+              type: string
     User:
       type: object
       properties:
@@ -266,16 +365,98 @@ components:
           type: string
         identifier:
           type: string
-    SSOUserRequest:
+    User_2:
+      title: User
+      description: User
       type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_owner
+      - administrator
+      - created_at
+      - email
+      - first_name
+      - gravatar_url
+      - last_name
+      - phone
+      - updated_at
       properties:
-        sso_setting:
-          type: object
-          properties:
-            user_email:
-              type: string
-            identifier:
-              type: string
+        id:
+          $ref: '#/components/schemas/UserId'
+        account_owner:
+          description: whether the user is Account owner or not
+          type: boolean
+          example: true
+        administrator:
+          description: whether the user is Administrator or not
+          type: boolean
+          example: true
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        email:
+          description: the email user uses to log in
+          type: string
+          format: email
+          example: td@example.com
+        first_name:
+          description: first name
+          type:
+          - string
+          - 'null'
+          example: Treasure
+        gravatar_url:
+          description: gravatar url
+          type: string
+          example: http://foo
+        identifier:
+          $ref: '#/components/schemas/SSOIdentifier'
+        full_qualified_identifier:
+          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
+        setting_name:
+          $ref: '#/components/schemas/SSOSettingName'
+        last_name:
+          description: last name
+          type:
+          - string
+          - 'null'
+          example: Data
+        name:
+          description: user's full name or email
+          type: string
+          example: Treasure Data
+        organization:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+        phone:
+          description: phone number
+          type:
+          - string
+          - 'null'
+          example: (650) 469-3644
+        roles:
+          deprecated: true
+          type: array
+          items:
+            type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        delegated_admin:
+          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
+          type: boolean
+          example: true
+        delegated_policy_groups:
+          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+        policy_group_tags:
+          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
   responses:
     NotFound:
       description: Resource not found
@@ -296,6 +477,13 @@ components:
             properties:
               error:
                 type: string
+  parameters:
+    path_user_email:
+      name: user_email
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/User/properties/email'
   securitySchemes:
     TDAuth:
       type: apiKey
@@ -304,3 +492,9 @@ components:
       description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
 
         '
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+x-refined-from:
+- treasure-data-td-api-openapi.yml
+- treasure-data-td-api-v3-openapi.yml

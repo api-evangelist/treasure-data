@@ -81,7 +81,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestSessionAttempt'
           description: session or attempt already exist. return the existing attempt.
-      summary: Start a workflow execution as a new session or a new attempt of an existing session
+      summary: Start a workflow execution as a new session or a new attempt of an existing…
       tags:
       - Attempt
   /api/attempts/{id}:
@@ -170,202 +170,6 @@ paths:
       - Attempt
 components:
   schemas:
-    ResumeFailed:
-      type: object
-      description: Configuration to resume an attempt from the failed task
-      properties:
-        attemptId:
-          type: string
-          description: attemptId
-          example: '12345'
-        mode:
-          type: string
-          description: '"failed" (fixed value)'
-          enum:
-          - from
-          - failed
-      required:
-      - attemptId
-      - mode
-    RestTaskCollection:
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestTask'
-    RestSessionAttemptRequest:
-      type: object
-      description: Request body for new attempt
-      properties:
-        allowQueueing:
-          type: boolean
-          description: Whether an attempt can be queued when the maximum attempt limit is reached.
-        params:
-          type: object
-          description: parameters as json
-          example:
-            key1: 12345
-        projectName:
-          type: string
-          description: project name. workflowId or (projectName and workflowName) are required
-          example: project-a
-        resume:
-          $ref: '#/components/schemas/Resume'
-        retryAttemptName:
-          type: string
-          description: unique attempt name for retry
-        sessionTime:
-          type: string
-          format: date-time
-          description: session time
-          example: '2023-08-17T18:56:24+09:00'
-        workflowId:
-          type: string
-          description: workflow ID. workflowId or (projectName and workflowName) are required
-          example: '123456'
-        workflowName:
-          type: string
-          description: workflow name. workflowId or (projectName and workflowName) are required
-          example: workflow-a
-      required:
-      - params
-      - sessionTime
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
-    RestSessionAttemptCollection:
-      type: object
-      properties:
-        attempts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
-    RestTask:
-      type: object
-      description: Response of a task
-      properties:
-        cancelRequested:
-          type: boolean
-          description: true if kill requested
-        config:
-          type: object
-          description: task definition
-          example:
-            echo>: test
-        error:
-          type: object
-          description: error information as JSON
-        exportParams:
-          type: object
-          description: export parameters as JSON
-        fullName:
-          type: string
-          description: full name of task
-          example: +wf1+g1+t1
-        group:
-          type: boolean
-          description: flag of group task or not
-        id:
-          type: string
-          description: task ID
-          example: '123456'
-        parentId:
-          type: string
-          description: parent task ID
-          example: '123455'
-        retryAt:
-          type: string
-          format: date-time
-          description: retried time
-          example: '2023-08-18T06:52:33Z'
-        startedAt:
-          type: string
-          format: date-time
-          description: started time
-          example: '2023-08-18T06:52:33Z'
-        state:
-          type: string
-          description: state of task
-          example: running
-        stateParams:
-          type: object
-          description: state parameters as JSON
-        storeParams:
-          type: object
-          description: store parameters as JSON
-        updatedAt:
-          type: string
-          format: date-time
-          description: updated time
-          example: '2023-08-18T06:52:33Z'
-        upstreams:
-          type: array
-          description: upstream tasks
-          example:
-          - '1547841'
-          items:
-            type: string
-      required:
-      - cancelRequested
-      - config
-      - error
-      - exportParams
-      - fullName
-      - group
-      - id
-      - state
-      - stateParams
-      - storeParams
-      - updatedAt
-      - upstreams
-    ResumeFrom:
-      type: object
-      description: Configuration to resume an attempt from the specified task
-      properties:
-        attemptId:
-          type: string
-          description: attemptId
-          example: '12345'
-        from:
-          type: string
-          description: the task name to resume
-        mode:
-          type: string
-          description: '"from" (fixed value)'
-          enum:
-          - from
-          - failed
-      required:
-      - attemptId
-      - from
-      - mode
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -453,6 +257,79 @@ components:
       - status
       - success
       - workflow
+    RestSessionAttemptRequest:
+      type: object
+      description: Request body for new attempt
+      properties:
+        allowQueueing:
+          type: boolean
+          description: Whether an attempt can be queued when the maximum attempt limit is reached.
+        params:
+          type: object
+          description: parameters as json
+          example:
+            key1: 12345
+        projectName:
+          type: string
+          description: project name. workflowId or (projectName and workflowName) are required
+          example: project-a
+        resume:
+          $ref: '#/components/schemas/Resume'
+        retryAttemptName:
+          type: string
+          description: unique attempt name for retry
+        sessionTime:
+          type: string
+          format: date-time
+          description: session time
+          example: '2023-08-17T18:56:24+09:00'
+        workflowId:
+          type: string
+          description: workflow ID. workflowId or (projectName and workflowName) are required
+          example: '123456'
+        workflowName:
+          type: string
+          description: workflow name. workflowId or (projectName and workflowName) are required
+          example: workflow-a
+      required:
+      - params
+      - sessionTime
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
     Resume:
       type: object
       anyOf:
@@ -475,6 +352,129 @@ components:
       required:
       - attemptId
       - mode
+    ResumeFailed:
+      type: object
+      description: Configuration to resume an attempt from the failed task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        mode:
+          type: string
+          description: '"failed" (fixed value)'
+          enum:
+          - from
+          - failed
+      required:
+      - attemptId
+      - mode
+    ResumeFrom:
+      type: object
+      description: Configuration to resume an attempt from the specified task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        from:
+          type: string
+          description: the task name to resume
+        mode:
+          type: string
+          description: '"from" (fixed value)'
+          enum:
+          - from
+          - failed
+      required:
+      - attemptId
+      - from
+      - mode
+    RestTask:
+      type: object
+      description: Response of a task
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        config:
+          type: object
+          description: task definition
+          example:
+            echo>: test
+        error:
+          type: object
+          description: error information as JSON
+        exportParams:
+          type: object
+          description: export parameters as JSON
+        fullName:
+          type: string
+          description: full name of task
+          example: +wf1+g1+t1
+        group:
+          type: boolean
+          description: flag of group task or not
+        id:
+          type: string
+          description: task ID
+          example: '123456'
+        parentId:
+          type: string
+          description: parent task ID
+          example: '123455'
+        retryAt:
+          type: string
+          format: date-time
+          description: retried time
+          example: '2023-08-18T06:52:33Z'
+        startedAt:
+          type: string
+          format: date-time
+          description: started time
+          example: '2023-08-18T06:52:33Z'
+        state:
+          type: string
+          description: state of task
+          example: running
+        stateParams:
+          type: object
+          description: state parameters as JSON
+        storeParams:
+          type: object
+          description: store parameters as JSON
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+        upstreams:
+          type: array
+          description: upstream tasks
+          example:
+          - '1547841'
+          items:
+            type: string
+      required:
+      - cancelRequested
+      - config
+      - error
+      - exportParams
+      - fullName
+      - group
+      - id
+      - state
+      - stateParams
+      - storeParams
+      - updatedAt
+      - upstreams
+    RestTaskCollection:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestTask'
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

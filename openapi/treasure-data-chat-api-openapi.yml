@@ -265,6 +265,8 @@ paths:
               example:
                 status: '401'
                 error: User credentials aren't set on the request
+      operationId: getApiChats
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
@@ -569,6 +571,8 @@ paths:
                   chatInterfaceId: 00000000-0000-0000-0000-000000000001
                   textResourceId: 00000000-0000-0000-0000-000000000001
                   userProperties: null
+      operationId: postApiChats
+      x-operation-id-source: derived
   /api/chats/{id}:
     get:
       summary: show
@@ -742,6 +746,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiChatsById
+      x-operation-id-source: derived
   /api/chats/{id}/continue:
     post:
       summary: continue
@@ -891,6 +897,8 @@ paths:
                 inputFieldName: input_field_name
               - binaryBase64: <BASE64_CONTENT>==
                 contentType: application/pdf
+      operationId: postApiChatsByIdContinue
+      x-operation-id-source: derived
   /api/chats/{id}/download_files:
     post:
       summary: download_files
@@ -963,6 +971,8 @@ paths:
               example:
                 status: 404
                 error: Not Found
+      operationId: postApiChatsByIdDownloadFiles
+      x-operation-id-source: derived
   /api/chats/{id}/history:
     get:
       summary: history
@@ -1144,6 +1154,8 @@ paths:
                   at: '2026-04-06T07:15:33Z'
                 - content: done
                   at: '2026-04-06T07:15:33Z'
+      operationId: getApiChatsByIdHistory
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

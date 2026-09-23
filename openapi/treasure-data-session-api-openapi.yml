@@ -101,131 +101,6 @@ paths:
       - Session
 components:
   schemas:
-    RestSessionCollection:
-      type: object
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSession'
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
-    RestSession:
-      type: object
-      description: Response of a session
-      properties:
-        id:
-          type: string
-          description: session ID
-          example: '123456'
-        lastAttempt:
-          $ref: '#/components/schemas/Attempt'
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        sessionTime:
-          type: string
-          description: session time
-          example: '2022-12-31T23:59:00+00:00'
-        sessionUuid:
-          type: string
-          format: uuid
-        workflow:
-          $ref: '#/components/schemas/NameOptionalId'
-      required:
-      - id
-      - project
-      - sessionTime
-      - workflow
-    RestSessionAttemptCollection:
-      type: object
-      properties:
-        attempts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
-    Attempt:
-      type: object
-      description: Attempts of session
-      properties:
-        cancelRequested:
-          type: boolean
-          description: true if kill requested
-        createdAt:
-          type: string
-          format: date-time
-          description: created time
-          example: '2023-08-18T06:52:33Z'
-        done:
-          type: boolean
-          description: true if the attempt finished
-        finishedAt:
-          type: string
-          format: date-time
-          description: finished time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: attempt ID
-          example: '123456'
-        params:
-          type: object
-          description: passed parameters as JSON
-        poolId:
-          type: string
-          description: ID of the pool to which this attempt is assigned.
-          example: '42'
-        retryAttemptName:
-          type: string
-        status:
-          type: string
-          description: The current status of the attempt.
-          enum:
-          - blocked
-          - queued
-          - running
-          - canceling
-          - success
-          - error
-          - killed
-          example: running
-        success:
-          type: boolean
-          description: true if the attempt finished successfully
-      required:
-      - cancelRequested
-      - createdAt
-      - done
-      - id
-      - params
-      - status
-      - success
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -313,6 +188,131 @@ components:
       - status
       - success
       - workflow
+    RestSession:
+      type: object
+      description: Response of a session
+      properties:
+        id:
+          type: string
+          description: session ID
+          example: '123456'
+        lastAttempt:
+          $ref: '#/components/schemas/Attempt'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - id
+      - project
+      - sessionTime
+      - workflow
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    IdAndName:
+      type: object
+      description: Name and ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
+    Attempt:
+      type: object
+      description: Attempts of session
+      properties:
+        cancelRequested:
+          type: boolean
+          description: true if kill requested
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        done:
+          type: boolean
+          description: true if the attempt finished
+        finishedAt:
+          type: string
+          format: date-time
+          description: finished time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: attempt ID
+          example: '123456'
+        params:
+          type: object
+          description: passed parameters as JSON
+        poolId:
+          type: string
+          description: ID of the pool to which this attempt is assigned.
+          example: '42'
+        retryAttemptName:
+          type: string
+        status:
+          type: string
+          description: The current status of the attempt.
+          enum:
+          - blocked
+          - queued
+          - running
+          - canceling
+          - success
+          - error
+          - killed
+          example: running
+        success:
+          type: boolean
+          description: true if the attempt finished successfully
+      required:
+      - cancelRequested
+      - createdAt
+      - done
+      - id
+      - params
+      - status
+      - success
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

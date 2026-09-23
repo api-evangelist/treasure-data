@@ -10,7 +10,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Access Control - Permissions
+- name: Access Control (Permissions)
 paths:
   /access_control/policies/{policy_id}/column_permissions:
     parameters:
@@ -20,7 +20,7 @@ paths:
       description: Shows column permission by policy ID.
       operationId: getColumnPermissionByPolicyId
       tags:
-      - Access Control - Permissions
+      - Access Control (Permissions)
       responses:
         '200':
           description: OK
@@ -35,7 +35,7 @@ paths:
       description: Updates column permissions by policy ID.
       operationId: updateColumnPermissionByPolicyId
       tags:
-      - Access Control - Permissions
+      - Access Control (Permissions)
       requestBody:
         content:
           application/json:
@@ -65,7 +65,7 @@ paths:
       description: Shows policy permissions by policy ID.
       operationId: gerPermissionByPolicyId
       tags:
-      - Access Control - Permissions
+      - Access Control (Permissions)
       responses:
         '200':
           description: OK
@@ -78,7 +78,7 @@ paths:
       description: Updates policy permissions.
       operationId: updatePermissionByPolicyId
       tags:
-      - Access Control - Permissions
+      - Access Control (Permissions)
       requestBody:
         content:
           application/json:
@@ -92,17 +92,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessControlPermissions'
 components:
-  parameters:
-    path_access_control_policy_id:
-      name: policy_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/AccessControlPolicyId'
   schemas:
-    AccessControlPolicyId:
-      type: integer
-      example: 67
     AccessControlPermissions:
       title: Access Control Permissions
       type: object
@@ -533,6 +523,16 @@ components:
           - 'null'
           enum:
           - hash
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+  parameters:
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
   securitySchemes:
     ApiKeyAuth:
       type: http

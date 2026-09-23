@@ -125,16 +125,32 @@ paths:
                 $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
 components:
   schemas:
-    UpdateAccessControlPolicyGroupRequest:
+    AccessControlPolicyGroupPolicies:
+      title: Access Control Policy Group Policies
       type: object
       additionalProperties: false
       required:
-      - name
+      - policy_ids
       properties:
-        name:
-          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
-        description:
-          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
+        policy_ids:
+          description: Policy Group's Policies
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicyId'
+    AccountId:
+      type: integer
+      example: 123
+    UpdateAccessControlPolicyGroupPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
     AccessControlPolicyGroup:
       title: Access Control Policy Group
       type: object
@@ -172,32 +188,6 @@ components:
           type: string
           format: date-time
           example: '2012-01-01T12:00:00Z'
-    UpdateAccessControlPolicyGroupPoliciesRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy_ids
-      properties:
-        policy_ids:
-          $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
-    AccessControlPolicyGroupPolicies:
-      title: Access Control Policy Group Policies
-      type: object
-      additionalProperties: false
-      required:
-      - policy_ids
-      properties:
-        policy_ids:
-          description: Policy Group's Policies
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessControlPolicyId'
-    AccessControlPolicyGroupId:
-      type: integer
-      example: 10
-    AccessControlPolicyId:
-      type: integer
-      example: 67
     CreateAccessControlPolicyGroupRequest:
       type: object
       additionalProperties: false
@@ -206,13 +196,23 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+    UpdateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+        description:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
     AccessControlPolicyGroupTaggableName:
       type: string
       description: Policy Group's taggable name
       example: some_policy_group
-    AccountId:
+    AccessControlPolicyGroupId:
       type: integer
-      example: 123
+      example: 10
   parameters:
     path_access_control_policy_group_id_or_taggable_name:
       name: policy_group_id_or_taggable_name

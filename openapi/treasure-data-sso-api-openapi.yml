@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import SSO API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
+  title: Treasure Data TD SSO API
+  description: Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
   version: v3
   contact:
     url: https://docs.treasure.ai/apis/td-api
@@ -224,34 +222,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SSOSettingResponse:
-      type: object
-      properties:
-        sso_setting:
-          type: object
-          properties:
-            cert:
-              type: string
-            identity_provider_name:
-              type: string
-            sign_in_endpoint:
-              type: string
-            sign_out_endpoint:
-              type: string
-            strategy:
-              type: string
-            updated_at:
-              type: string
-              format: date-time
-    SSOUserResponse:
-      type: object
-      properties:
-        first_name:
-          type: string
-        email:
-          type: string
-        identifier:
-          type: string
     SSOUserRequest:
       type: object
       properties:
@@ -271,10 +241,39 @@ components:
             sign_in_endpoint:
               type: string
             sign_out_endpoint:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             cert:
               type: string
+    SSOUserResponse:
+      type: object
+      properties:
+        first_name:
+          type: string
+        email:
+          type: string
+        identifier:
+          type: string
+    SSOSettingResponse:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            cert:
+              type: string
+            identity_provider_name:
+              type: string
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+            strategy:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
   responses:
     Unauthorized:
       description: Authentication required or API key invalid

@@ -9,9 +9,7 @@ info:
 
     Endpoint versions are defined through content-type. Use
 
-    `Accept: application/vnd.treasuredata.v1+json` to specify version 1
-
-    '
+    `Accept: application/vnd.treasuredata.v1+json` to specify version 1'
   title: Personalization Service API
   version: '1.0'
 servers:
@@ -91,93 +89,6 @@ paths:
       - Personalization Service
 components:
   schemas:
-    event:
-      type: object
-      additionalProperties: true
-      required:
-      - time
-      - uuid
-      properties:
-        time:
-          type: integer
-          format: int64
-          description: Time in seconds since Epoch. Must be between `00:00:00 1 Jan 1970 UTC` and `23:59:59 31 Dec 9999 UTC`.
-          example: 1647376522
-        uuid:
-          type: string
-          format: uuid
-          description: ID of the record in [UUID](https://docs.oracle.com/javase/7/docs/api/java/util/UUID.html) format.
-          example: b82aad42-481b-4ca7-87c0-848a34f3c85f
-    requestErrorResponse:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: 'Error Code for engineer identification. The following are used:
-
-            <pre>
-
-            3000: RT token was not provided (WP13n-Token header).
-
-            3001: RT token is not in configuration.
-
-            3002: RT token account conflicts with Authed user account.
-
-            3003: RT token is in an invalid format.
-
-            3004: Invalid event object.
-
-            3005: Request origin not in IP whitelist.
-
-            3006: Invalid token type. Token type is not matching the one in the configuration.
-
-            3007: Invalid or missing Origin.
-
-            3008: Request method is required.
-
-            3009: Unsupported method.
-
-            </pre>'
-          enum:
-          - 3000
-          - 3001
-          - 3002
-          - 3003
-          - 3004
-          - 3005
-          - 3006
-          - 3007
-          - 3008
-          - 3009
-        message:
-          type: string
-          description: General explanation for users
-    tooManyRequestsResponse:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: 'Error Code for engineer identification. The following are used:
-
-            <pre>
-
-            2003: Kinesis error due to limit being exceeded (status 429)
-
-            2013: Lambda total concurrent execution exceeds the reserved concurrency (status 429)
-
-            </pre>'
-          enum:
-          - 2003
-          - 2013
-        message:
-          type: string
-          description: General explanation for users
     serverErrorResponse:
       type: object
       required:
@@ -243,6 +154,93 @@ components:
           - 3012
           - 3013
           - 9999
+        message:
+          type: string
+          description: General explanation for users
+    requestErrorResponse:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: 'Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            3000: RT token was not provided (WP13n-Token header).
+
+            3001: RT token is not in configuration.
+
+            3002: RT token account conflicts with Authed user account.
+
+            3003: RT token is in an invalid format.
+
+            3004: Invalid event object.
+
+            3005: Request origin not in IP whitelist.
+
+            3006: Invalid token type. Token type is not matching the one in the configuration.
+
+            3007: Invalid or missing Origin.
+
+            3008: Request method is required.
+
+            3009: Unsupported method.
+
+            </pre>'
+          enum:
+          - 3000
+          - 3001
+          - 3002
+          - 3003
+          - 3004
+          - 3005
+          - 3006
+          - 3007
+          - 3008
+          - 3009
+        message:
+          type: string
+          description: General explanation for users
+    event:
+      type: object
+      additionalProperties: true
+      required:
+      - time
+      - uuid
+      properties:
+        time:
+          type: integer
+          format: int64
+          description: Time in seconds since Epoch. Must be between `00:00:00 1 Jan 1970 UTC` and `23:59:59 31 Dec 9999 UTC`.
+          example: 1647376522
+        uuid:
+          type: string
+          format: uuid
+          description: ID of the record in [UUID](https://docs.oracle.com/javase/7/docs/api/java/util/UUID.html) format.
+          example: b82aad42-481b-4ca7-87c0-848a34f3c85f
+    tooManyRequestsResponse:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: 'Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            2003: Kinesis error due to limit being exceeded (status 429)
+
+            2013: Lambda total concurrent execution exceeds the reserved concurrency (status 429)
+
+            </pre>'
+          enum:
+          - 2003
+          - 2013
         message:
           type: string
           description: General explanation for users

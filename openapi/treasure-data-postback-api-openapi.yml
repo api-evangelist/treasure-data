@@ -1,10 +1,99 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: postback-api
-  description: This spec is for Postback-API
-  version: 1.0.0
+  title: api-v2 Postback API
+  description: This spec is for Postback API v2 (records.in.treasuredata.com)
+  version: 2.0.0
 servers:
-  - url: https://in.treasuredata.com
+- url: https://{region}.records.in.treasuredata.com
+  variables:
+    region:
+      default: us01
+      description: TD region host prefix (e.g. us01, eu01, ap02)
+security:
+- TD1Authorization: []
+- XTDWriteKey: []
+tags:
+- name: Postback
+paths:
+  /postback/v3/event/{database_name}/{table_name}:
+    parameters:
+    - in: path
+      name: database_name
+      schema:
+        type: string
+      required: true
+      description: Name of the database the table is in. Name may contain letters, numbers or _ .
+    - in: path
+      name: table_name
+      schema:
+        type: string
+      required: true
+      description: Name of the table to log data to. Name may contain letters, numbers or _ .
+    post:
+      summary: POST Postback API v2
+      operationId: postPostbackAPIv2
+      description: 'Send data in POST payload to the v2 Postback endpoint.
+
+
+        Authentication is **header-only**. Provide one of:
+
+        1. `Authorization: TD1 `
+
+        2. `X-TD-Write-Key: `
+
+
+        URL-path keys (`?td_write_key=...`) accepted by the legacy endpoint are **not** supported here. If both headers are sent, `Authorization` takes precedence.
+
+
+        Note: Requests with an invalid API key return a 200 HTTP status code. This behavior is intentional and ensures a fast response, preventing ingestion from being canceled due to slow response. After the response is returned, the endpoint performs asynchronous validations. If the API key is invalid, an authentication failure will be raised despite the initial 200 status.
+
+
+        Maximum request body size is 1,048,064 bytes; larger payloads are rejected with `413`.'
+      requestBody:
+        description: 'The body of the request can be any key value pairs you want to send. Specify JSON as a body. The JSON content immediately becomes a record in Treasure Data. Also include `Content-Type: application/json` in HTTP request headers.
+
+
+          Suggested Parameters:
+
+
+          **td_record_time**: UNIX timestamp value, to set time column in Treasure Data. If it''s not specified, the time records were received is used instead. Received timestamps that are older than 7 days, and newer than 3 days ahead of the current date are ignored.\
+
+          **td_global_id**: TD global ID \
+
+          **td_ua**: user-agent
+
+
+          Parameter values are processed as the data type string, and cannot be changed at the ingestion time.
+
+          '
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            examples:
+              generic:
+                summary: Generic Example
+                value:
+                  param1: value1
+                  param2: value2
+              td:
+                summary: TD Example
+                value:
+                  td_global_id: xxxxx
+                  td_ua: user agent
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '413':
+          $ref: '#/components/responses/413'
+      tags:
+      - Postback
 components:
   schemas:
     AllResponse:
@@ -29,8 +118,8 @@ components:
           type: string
           example: keep-alive
   responses:
-    '200':
-      description: Success.
+    '403':
+      description: Forbidden
       content:
         application/json:
           schema:
@@ -41,108 +130,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AllResponse'
-    '403':
-      description: Forbidden
+    '413':
+      description: Payload Too Large (request body exceeds 1,048,064 bytes)
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AllResponse'
-paths:
-  /postback/v3/event/{database_name}/{table_name}:
-    parameters:
-      - in: path
-        name: database_name
-        schema:
-          type: string
-        required: true
-        description: >-
-          Name of the database the table is in. Name may contain letters,
-          numbers or _ .
-      - in: path
-        name: table_name
-        schema:
-          type: string
-        required: true
-        description: >-
-          Name of the table to log data to. Name may contain letters, numbers or
-          _ .
-    post:
-      summary: POST Postback API
-      operationId: postPostbackAPI
-      description: >
-        Send data in POST payload.
-
-        Every request must contain authentication information. Authentication
-        can be provided in two ways:
-
-        1. In header with the `X-TD-Write-Key: <APIKEY>` format
-
-        2. In URL Path with the `?td_write_key=<APIKEY>` format
-
-
-        Note: Requests made with an invalid API key return a 200 HTTP status
-        code. This behavior is intentional and ensures a fast response,
-        preventing ingestion from being canceled due to slow response. After the
-        response is returned, the endpoint performs asynchronous validations. If
-        the API key is invalid, an authentication failure will be raised despite
-        the initial 200 status.
-
-
-        In case both header and URL parameter are provided, the header takes
-        precedence.
-      parameters:
-        - in: header
-          name: X-TD-Write-Key
-          required: true
+    '200':
+      description: Success.
+      content:
+        application/json:
           schema:
-            type: string
-            example: 12345/abcdef
-      requestBody:
-        description: >
-          The body of the request can be any key value pairs you want to send.
-          Specify JSON as a body. The JSON content immediately becomes a record
-          in Treasure Data. Also include Content-Type: application/json in HTTP
-          request headers.<br>
-
-
-          Suggested Parameters: \
-
-          <br>
-
-          **td_record_time**: UNIX timestamp value, to set time column in
-          Treasure Data. If it's not specified, the time records were received
-          is used instead. Received timestamps that older than 7 days, and newer
-          than 3 days ahead of the current date are ignored.\
-
-          **td_global_id**: TD global ID \
-
-          **td_ua**: user-agent \
-
-          <br>
-
-          Parameter values are processed as the data type string, and cannot be
-          changed at the ingestion time.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: string
-              additionalProperties: true
-            examples:
-              generic:
-                summary: Generic Example
-                value:
-                  param1: value1
-                  param2: value2
-              td:
-                summary: TD Example
-                value:
-                  td_global_id: xxxxx
-                  td_ua: user agent
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
+            $ref: '#/components/schemas/AllResponse'
+  securitySchemes:
+    XTDWriteKey:
+      type: apiKey
+      in: header
+      name: X-TD-Write-Key
+    TD1Authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Format: `TD1 <APIKEY>`'

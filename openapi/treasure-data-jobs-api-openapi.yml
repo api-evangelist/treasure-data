@@ -1,20 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Treasure Data TD Bulk Import Jobs API
-  description: 'Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.
-
-    '
-  version: v3
-  contact:
-    url: https://docs.treasure.ai/apis/td-api
-  license:
-    name: Treasure Data Terms of Service
-    url: https://www.treasure.ai/
+  title: Treasure Data Jobs API
+  version: '1.0'
+  description: 'Operations tagged Jobs across 2 of this provider''s published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.treasuredata.com/v3
   description: Treasure Data API v3
-security:
-- TDAuth: []
+- url: https://api.treasuredata.co.jp/v3
+- url: https://api.ap02.treasuredata.com/v3
+- url: https://api.eu01.treasuredata.com/v3
 tags:
 - name: Jobs
   description: Submit and manage query jobs
@@ -60,6 +54,11 @@ paths:
                 $ref: '#/components/schemas/JobIssueResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /job/issue/hive/{database_name}:
     post:
       operationId: issueHiveQuery
@@ -101,6 +100,11 @@ paths:
                 $ref: '#/components/schemas/JobIssueResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
   /job/result/{job_id}:
     get:
       operationId: getJobResult
@@ -136,6 +140,377 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - TDAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+      description: Treasure Data API v3
+  /job/list:
+    get:
+      summary: Get jobs
+      description: Retrieves a list of jobs.
+      operationId: getJobs
+      tags:
+      - Jobs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - jobs
+                - count
+                - from
+                - to
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+                  count:
+                    type: integer
+                  from:
+                    type:
+                    - integer
+                    - 'null'
+                  to:
+                    type:
+                    - integer
+                    - 'null'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/show/{job_id}:
+    get:
+      summary: Get job
+      description: Retrieves a list of jobs with specified job id.
+      operationId: getJobById
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Job'
+                - type: object
+                  additionalProperties: false
+                  required:
+                  - debug
+                  properties:
+                    debug:
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - cmdout
+                      - stderr
+                      properties:
+                        cmdout:
+                          type:
+                          - string
+                          - 'null'
+                        stderr:
+                          type:
+                          - string
+                          - 'null'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/status/{job_id}:
+    get:
+      summary: Get job status by id
+      description: Show the status information of the given job id at last execution as well as other related information.
+      operationId: getJobStatusById
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/status_by_domain_key/{domain_key}:
+    get:
+      summary: Get job status by domain_key
+      description: Checks the status of a job using the domain key.
+      operationId: getJobStatusByDomainKey
+      tags:
+      - Jobs
+      parameters:
+      - name: domain_key
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/DomainKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/statistics/{job_id}:
+    get:
+      summary: Get job statistics by id
+      description: Show the statistics of the job, including records inserted.
+      operationId: getJobStatisticsById
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records_inserted:
+                    type: string
+                    example: '28345'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/issue/{job_type}/{database_name}:
+    post:
+      summary: Create job
+      description: Creates a job of a given type under a specified database.
+      operationId: createJob
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_job_type'
+      - $ref: '#/components/parameters/path_database_name'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              properties:
+                query:
+                  type: string
+                  description: the raw SQL query
+                  example: SELECT COUNT(1) FROM www_access
+                priority:
+                  type: integer
+                  description: job execution priority
+                  minimum: -2
+                  maximum: 2
+                  example: 0
+                result:
+                  type: string
+                  description: Export Connector location
+                retry_limit:
+                  type: integer
+                  description: the number of automatic retries on failure
+                  minimum: 0
+                  maximum: 32
+                  example: 0
+                pool_name:
+                  type: string
+                  description: resource pool name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - job
+                - job_id
+                - database
+                properties:
+                  job:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  job_id:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/kill/{job_id}:
+    post:
+      summary: kill job by id
+      description: Stops a specified job ID.
+      operationId: killJobById
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_job_id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/EmptyObject'
+                - type: object
+                  additionalProperties: false
+                  properties:
+                    job_id:
+                      $ref: '#/components/schemas/JobIdAsString'
+                    former_status:
+                      $ref: '#/components/schemas/Job/properties/status'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /job/result_export/{job_id}:
+    post:
+      summary: Set result export
+      description: Sets the results of a specified job ID.
+      operationId: setResultExport
+      tags:
+      - Jobs
+      x-codeSamples:
+      - lang: Shell
+        source: "curl --request POST \\\n  --url 'https://api.treasuredata.com/v3/job/result_export/22616062?=' \\\n  --header 'authorization: TD1 {APIKEY}' \\\n  --header 'content-type: application/x-www-form-urlencoded' \\\n  --data 'result=td://api.treasuredata.com/test_db/test_table?legacy=true&mode=null&time=0&apikey={APIKEY}&mode=append'\n"
+      parameters:
+      - $ref: '#/components/parameters/path_job_id'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateOrUpdateJobRequest'
+              - type: object
+                additionalProperties: false
+                properties:
+                  target_job_id:
+                    $ref: '#/components/schemas/JobId'
+                  result_connection_id:
+                    $ref: '#/components/schemas/ConnectionId'
+                  result:
+                    $ref: '#/components/schemas/Job/properties/result'
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+                  table:
+                    $ref: '#/components/schemas/Table/properties/name'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Job'
+                - type: object
+                  additionalProperties: false
+                  required:
+                  - debug
+                  properties:
+                    debug:
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - cmdout
+                      - stderr
+                      properties:
+                        cmdout:
+                          type:
+                          - string
+                          - 'null'
+                        stderr:
+                          type:
+                          - string
+                          - 'null'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
+  /export/run/{database_name}/{table_name}:
+    post:
+      summary: Create export job
+      description: Creates an export job.
+      operationId: createExportJob
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/path_database_name'
+      - $ref: '#/components/parameters/path_table_name'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateExportJobRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - job
+                - job_id
+                - database
+                properties:
+                  job:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  job_id:
+                    $ref: '#/components/schemas/JobIdAsString'
+                  database:
+                    $ref: '#/components/schemas/Database/properties/name'
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.treasuredata.com/v3
+    - url: https://api.treasuredata.co.jp/v3
+    - url: https://api.ap02.treasuredata.com/v3
+    - url: https://api.eu01.treasuredata.com/v3
 components:
   responses:
     NotFound:
@@ -169,6 +544,595 @@ components:
           description: Query type (presto or hive)
         database:
           type: string
+    Table:
+      title: Table
+      description: Table
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - count
+      - counter_updated_at
+      - created_at
+      - delete_protected
+      - estimated_storage_size
+      - expire_days
+      - include_v
+      - last_log_timestamp
+      - name
+      - schema
+      - type
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/TableId'
+        count:
+          type: integer
+          example: 1000
+        counter_updated_at:
+          anyOf:
+          - type:
+            - string
+            - 'null'
+          - $ref: '#/components/schemas/DateTimeISO8601'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          type: boolean
+          example: true
+        estimated_storage_size:
+          type: integer
+          example: 1073741824
+        expire_days:
+          type:
+          - integer
+          - 'null'
+          example: 30
+        include_v:
+          description: when true, Hive queries can access a virtual column "v" which contains a map of every data column's name to its value (represented as a string). Prefer to set a schema on the table instead of using "v".
+          type: boolean
+          example: false
+          deprecated: true
+        last_log_timestamp:
+          type:
+          - integer
+          - 'null'
+          example: 1356998400
+        name:
+          type: string
+          example: Bravo
+        description:
+          description: user-provided description of the table
+          type:
+          - string
+          - 'null'
+          example: Click events.
+        schema:
+          type: string
+          description: JSON-encoded table schema. When include_descriptions=true, contains column descriptions in format [[name, type, alias, description], ...]
+        type:
+          type: string
+          enum:
+          - log
+          example: log
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    Job:
+      title: Job
+      description: an execution of a query
+      type: object
+      required:
+      - cpu_time
+      - created_at
+      - database
+      - duration
+      - end_at
+      - hive_result_schema
+      - job_id
+      - linked_result_export_job_id
+      - num_records
+      - organization
+      - priority
+      - query
+      - result_export_target_job_id
+      - result_size
+      - retry_limit
+      - start_at
+      - status
+      - type
+      - updated_at
+      - url
+      - user_name
+      properties:
+        cpu_time:
+          type:
+          - integer
+          - 'null'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        database:
+          description: database name
+          type:
+          - string
+          - 'null'
+        duration:
+          description: Duration
+          type:
+          - integer
+          - 'null'
+          example: 10
+        end_at:
+          oneOf:
+          - $ref: '#/components/schemas/DateTimeAsString'
+          - $ref: '#/components/schemas/EmptyString'
+        hive_result_schema:
+          description: the schema for the job's result table
+          type:
+          - string
+          - 'null'
+        job_id:
+          $ref: '#/components/schemas/JobIdAsString'
+        linked_result_export_job_id:
+          anyOf:
+          - $ref: '#/components/schemas/JobId'
+          - description: result job id
+            type:
+            - integer
+            - 'null'
+        num_records:
+          description: the number of records in the result. Will be `null` until job has finished, and may not be set for all query types
+          type:
+          - integer
+          - 'null'
+          example: 100
+        organization:
+          description: always "null"
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        priority:
+          description: job execution priority
+          type: integer
+          minimum: -2
+          maximum: 2
+          example: 0
+        query:
+          anyOf:
+          - type:
+            - string
+            - 'null'
+          - $ref: '#/components/schemas/QueryAsString'
+          - $ref: '#/components/schemas/BulkLoadConfig'
+        result:
+          description: URL of the result output destination
+          type: string
+        result_export_target_job_id:
+          anyOf:
+          - $ref: '#/components/schemas/JobId'
+          - description: result export job id
+            type:
+            - integer
+            - 'null'
+        result_size:
+          description: size in bytes of the job's result, in `msgpack.gz` format
+          type:
+          - integer
+          - 'null'
+          example: 1048576
+        retry_limit:
+          description: automatically retry this many times on failure
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 32
+          example: 3
+        start_at:
+          oneOf:
+          - $ref: '#/components/schemas/DateTimeAsString'
+          - $ref: '#/components/schemas/EmptyString'
+        status:
+          description: current status of the job
+          type: string
+          enum:
+          - queued
+          - running
+          - killed
+          - success
+          - error
+          example: success
+        type:
+          type: string
+          example: presto
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        url:
+          type: string
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
+    EmptyObject:
+      type: object
+      additionalProperties: false
+    CreateExportJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        access_key_id:
+          type: string
+          example: a_key
+        assume_role:
+          type: string
+        bucket:
+          type: string
+          example: test_bucket
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        encryption:
+          type: string
+        file_format:
+          type: string
+          enum:
+          - jsonl.gz
+          - tsv.gz
+          - json.gz
+          - line-json.gz
+          example: json.gz
+        file_prefix:
+          type: string
+        from:
+          $ref: '#/components/schemas/Timestamp'
+        pool_name:
+          type: string
+          example: pool_1
+        secret_access_key:
+          type: string
+          example: secret_abc
+        storage_type:
+          type: string
+          enum:
+          - s3
+          example: s3
+        to:
+          $ref: '#/components/schemas/Timestamp'
+    JobId:
+      description: unique identifier of job
+      type: integer
+      example: 19
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+    JobIdAsString:
+      description: unique identifier of job
+      type: string
+      example: '19'
+    BulkLoadConfig:
+      title: BulkLoadConfig
+      description: bulk load config
+      type: object
+      additionalProperties: true
+      properties:
+        in:
+          type: object
+          additionalProperties: true
+          properties:
+            connection_prop:
+              type: string
+              example: connection_prop
+            connection_secret:
+              type: string
+              example: secret
+            basic_prop:
+              type: string
+              example: basic
+            basic_secret:
+              type: string
+              example: secret
+            advanced_prop:
+              type: string
+              example: advanced
+            advanced_secret:
+              type: string
+              example: secret
+            type:
+              type: string
+              example: some_type
+            td_authentication_id:
+              type: integer
+              example: 1234
+        filters:
+          type: array
+          items:
+            type: object
+        exec:
+          type: object
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              example: some_type
+            basic_prop:
+              type: string
+              example: basic
+            secret_prop:
+              type: string
+              example: secret
+        out:
+          type: object
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              example: some_type
+            mode:
+              type: string
+              example: mode
+            plazma_dataset:
+              type: string
+              example: plazma
+            time_column:
+              type: string
+              example: time
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    CreateOrUpdateJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Job/properties/priority'
+        query:
+          $ref: '#/components/schemas/QueryAsString'
+        retry_limit:
+          $ref: '#/components/schemas/Job/properties/retry_limit'
+        scheduled_time:
+          $ref: '#/components/schemas/DateTimeISO8601'
+    EmptyString:
+      type: string
+      pattern: ^$
+    DomainKey:
+      type: string
+      example: domain_key_123
+    JobStatus:
+      type: object
+      additionalProperties: false
+      required:
+      - job_id
+      - cpu_time
+      - created_at
+      - duration
+      - end_at
+      - num_records
+      - result_size
+      - start_at
+      - status
+      - updated_at
+      properties:
+        job_id:
+          $ref: '#/components/schemas/JobIdAsString'
+        cpu_time:
+          $ref: '#/components/schemas/Job/properties/cpu_time'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        end_at:
+          $ref: '#/components/schemas/Job/properties/end_at'
+        duration:
+          $ref: '#/components/schemas/Job/properties/duration'
+        num_records:
+          $ref: '#/components/schemas/Job/properties/num_records'
+        result_size:
+          $ref: '#/components/schemas/Job/properties/result_size'
+        start_at:
+          $ref: '#/components/schemas/Job/properties/start_at'
+        status:
+          $ref: '#/components/schemas/Job/properties/status'
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    Timestamp:
+      type: integer
+      example: 1356998400
+    User:
+      title: User
+      description: User
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_owner
+      - administrator
+      - created_at
+      - email
+      - first_name
+      - gravatar_url
+      - last_name
+      - phone
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        account_owner:
+          description: whether the user is Account owner or not
+          type: boolean
+          example: true
+        administrator:
+          description: whether the user is Administrator or not
+          type: boolean
+          example: true
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        email:
+          description: the email user uses to log in
+          type: string
+          format: email
+          example: td@example.com
+        first_name:
+          description: first name
+          type:
+          - string
+          - 'null'
+          example: Treasure
+        gravatar_url:
+          description: gravatar url
+          type: string
+          example: http://foo
+        identifier:
+          $ref: '#/components/schemas/SSOIdentifier'
+        full_qualified_identifier:
+          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
+        setting_name:
+          $ref: '#/components/schemas/SSOSettingName'
+        last_name:
+          description: last name
+          type:
+          - string
+          - 'null'
+          example: Data
+        name:
+          description: user's full name or email
+          type: string
+          example: Treasure Data
+        organization:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+        phone:
+          description: phone number
+          type:
+          - string
+          - 'null'
+          example: (650) 469-3644
+        roles:
+          deprecated: true
+          type: array
+          items:
+            type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        delegated_admin:
+          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
+          type: boolean
+          example: true
+        delegated_policy_groups:
+          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+        policy_group_tags:
+          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+    ConnectionId:
+      description: the connection id
+      type: integer
+      example: 17
+    QueryAsString:
+      description: the raw SQL query
+      type: string
+      example: SELECT * FROM my_table;
+  parameters:
+    path_database_name:
+      name: database_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Database/properties/name'
+    path_job_id:
+      name: job_id
+      description: the job id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/JobId'
+    path_table_name:
+      name: table_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Table/properties/name'
+    path_job_type:
+      name: job_type
+      description: the job type
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Job/properties/type'
   securitySchemes:
     TDAuth:
       type: apiKey
@@ -177,3 +1141,9 @@ components:
       description: 'Treasure Data API key authentication. Set header value to "TD1 <your-api-key>".
 
         '
+    ApiKeyAuth:
+      type: http
+      scheme: TD1
+x-refined-from:
+- treasure-data-td-api-openapi.yml
+- treasure-data-td-api-v3-openapi.yml

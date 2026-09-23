@@ -383,6 +383,8 @@ paths:
         schema:
           type: string
         example: id
+      operationId: getApiAgents
+      x-operation-id-source: derived
     post:
       summary: create
       tags:
@@ -885,6 +887,8 @@ paths:
                     toolTargetType: knowledge_base
                     targetFunction: LIST_COLUMNS
                   reasoningEffort: LOW
+      operationId: postApiAgents
+      x-operation-id-source: derived
   /api/agents/{id}:
     delete:
       summary: destroy
@@ -1040,6 +1044,8 @@ paths:
                     validationCode: DEPENDENT_DESTROY_RESTRICTED_HAS_MANY
                     referencedByPrompts:
                     - id: 00000000-0000-0000-0000-000000000001
+      operationId: deleteApiAgentsById
+      x-operation-id-source: derived
     get:
       summary: show
       tags:
@@ -1321,6 +1327,8 @@ paths:
                   detail: The record identified by 00000000-0000-0000-0000-000000000001 could not be found.
                   code: '404'
                   status: '404'
+      operationId: getApiAgentsById
+      x-operation-id-source: derived
     patch:
       summary: update
       tags:
@@ -1744,6 +1752,8 @@ paths:
                   - name: out1
                     functionName: func1
                     jsonSchema: '{}'
+      operationId: patchApiAgentsById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:
