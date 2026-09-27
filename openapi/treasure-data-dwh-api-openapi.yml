@@ -390,210 +390,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    databricks:
-      type: object
-      title: Databricks
-      properties:
-        basic:
-          type: object
-          description: The parameters for the Databricks connector
-          title: Databricks basic config
-          allOf:
-          - $ref: '#/components/schemas/Basic'
-          - properties:
-              catalog:
-                title: Databricks Catalog
-                type: string
-              schema:
-                title: Schema, e.g. "default"
-                description: The schema to use for the connection. If not specified, default schema will be used.
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector. If this is enabled, you must specify the incremental_columns or Bulkload job will fail.
-                type: boolean
-                default: false
-          required:
-          - catalog
-        advanced:
-          type: object
-          description: The parameters for the Databricks connector
-          allOf:
-          - $ref: '#/components/schemas/Advanced'
-          - properties:
-              use_custom_query:
-                title: Use custom SELECT query?
-                description: If you need more than a simple SELECT (columns) FROM table WHERE (condition).
-                type: boolean
-                default: false
-              query:
-                title: SELECT Query
-                description: 'Use with (use_custom_query: true) to specify a custom query for importing.'
-                type: string
-              select:
-                title: Columns to return
-                description: 'Comma-separated list of columns to ingest. Use with (use_custom_query: false) to query for columns.'
-                type: string
-                default: '*'
-              table:
-                title: Source Table/View
-                description: 'The table/view to import from. Use with (use_custom_query: false)'
-                type: string
-              where:
-                title: Filter Conditions
-                description: 'Specify a WHERE condition to filter the data. Use with (use_custom_query: false)'
-                type: string
-              order_by:
-                title: ORDER By Columns
-                description: 'Specify the columns to order the data by. Use with (use_custom_query: false)'
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector?
-                type: boolean
-                default: false
-              incremental_columns:
-                title: Incremental Column(s)
-                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
-                type: array
-                items:
-                  type: string
-              invalid_value_option:
-                title: Invalid Value Handling Mode
-                description: Specify how to handle invalid data values.
-                type: string
-                enum:
-                - fail_job
-                - insert_null
-                - ignore_row
-                default: fail_job
-              last_record:
-                title: Start after (values)
-                description: Values for columns used in incremental loading. Ignores records with column values less than this
-                type: array
-                enum:
-                - string
-                - number
-                - boolean
-                - 'null'
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int64
-          description: The current page number, start from 1.
-        size:
-          type: integer
-          format: int64
-          description: The number of items per page
-        total_pages:
-          type: integer
-          format: int64
-          description: The total number of pages
-    BasicConfigs:
-      type: object
-      description: The basic configs of the DWH Integration.
-      discriminator:
-        propertyName: type
-        mapping:
-          snowflake: '#/components/schemas/basic'
-          databricks: '#/components/schemas/basic-2'
-      oneOf:
-      - $ref: '#/components/schemas/snowflake/properties/basic'
-      - $ref: '#/components/schemas/databricks/properties/basic'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code
-        title:
-          type: string
-          description: The error title
-        message:
-          description: The error message
-          anyOf:
-          - type: string
-          - type: object
-            additionalProperties: true
-        detail:
-          description: Any extra infomation of the error
-          type: object
-          additionalProperties: true
-      additionalProperties: false
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilterConfigs:
-      type: array
-      description: 'Config for how data will be filtered before importing into TD.
-
-        See the connector filters for more info.
-
-        '
-      items:
-        properties:
-          type:
-            type: string
-            description: The type of the filter.
-          from_column:
-            type: object
-          to_column:
-            type: object
-    BulkloadSession:
-      type: object
-      description: The Bulkload Session created by the DWH Integration.
-      properties:
-        name:
-          type: string
-          description: The Bulkload Session name, which will be used for accessing Connector Bulkload Session
-        bulkload_session_id:
-          type: integer
-          format: int64
-          description: The Bulkload Session ID
-        target_table:
-          type: string
-          description: The table where data will be imported into
-        configs_digest:
-          type: string
-          description: The digest of the configs used to create the Bulkload Session
-    OutConfigs:
-      type: object
-      description: Config for how data will be imported into TD.
-      properties:
-        database:
-          type: string
-          description: The name of the TD database to import data into. The database must be created before the DWH Integration is created.
-        mode:
-          type: string
-          description: Specify the import mode. The default value is `append`.
-        time_column:
-          type: string
-          description: The value of the column will be used as the TD timestamp column.
-    SessionAttempt:
-      type: object
-      properties:
-        attempt_id:
-          type: integer
-          format: int64
-        attempt_name:
-          type: string
-        session_id:
-          type: integer
-          format: int64
-        session_time:
-          type: string
-        status:
-          type: string
-    Advanced:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Connector type, e.g. snowflake, redshift
     snowflake:
       type: object
       title: Snowflake
@@ -684,6 +480,159 @@ components:
                 - insert_null
                 - ignore_row
                 default: fail_job
+    BulkloadSession:
+      type: object
+      description: The Bulkload Session created by the DWH Integration.
+      properties:
+        name:
+          type: string
+          description: The Bulkload Session name, which will be used for accessing Connector Bulkload Session
+        bulkload_session_id:
+          type: integer
+          format: int64
+          description: The Bulkload Session ID
+        target_table:
+          type: string
+          description: The table where data will be imported into
+        configs_digest:
+          type: string
+          description: The digest of the configs used to create the Bulkload Session
+    OutConfigs:
+      type: object
+      description: Config for how data will be imported into TD.
+      properties:
+        database:
+          type: string
+          description: The name of the TD database to import data into. The database must be created before the DWH Integration is created.
+        mode:
+          type: string
+          description: Specify the import mode. The default value is `append`.
+        time_column:
+          type: string
+          description: The value of the column will be used as the TD timestamp column.
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int64
+          description: The current page number, start from 1.
+        size:
+          type: integer
+          format: int64
+          description: The number of items per page
+        total_pages:
+          type: integer
+          format: int64
+          description: The total number of pages
+    Advanced:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Connector type, e.g. snowflake, redshift
+    FilterConfigs:
+      type: array
+      description: 'Config for how data will be filtered before importing into TD.
+
+        See the connector filters for more info.
+
+        '
+      items:
+        properties:
+          type:
+            type: string
+            description: The type of the filter.
+          from_column:
+            type: object
+          to_column:
+            type: object
+    databricks:
+      type: object
+      title: Databricks
+      properties:
+        basic:
+          type: object
+          description: The parameters for the Databricks connector
+          title: Databricks basic config
+          allOf:
+          - $ref: '#/components/schemas/Basic'
+          - properties:
+              catalog:
+                title: Databricks Catalog
+                type: string
+              schema:
+                title: Schema, e.g. "default"
+                description: The schema to use for the connection. If not specified, default schema will be used.
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector. If this is enabled, you must specify the incremental_columns or Bulkload job will fail.
+                type: boolean
+                default: false
+          required:
+          - catalog
+        advanced:
+          type: object
+          description: The parameters for the Databricks connector
+          allOf:
+          - $ref: '#/components/schemas/Advanced'
+          - properties:
+              use_custom_query:
+                title: Use custom SELECT query?
+                description: If you need more than a simple SELECT (columns) FROM table WHERE (condition).
+                type: boolean
+                default: false
+              query:
+                title: SELECT Query
+                description: 'Use with (use_custom_query: true) to specify a custom query for importing.'
+                type: string
+              select:
+                title: Columns to return
+                description: 'Comma-separated list of columns to ingest. Use with (use_custom_query: false) to query for columns.'
+                type: string
+                default: '*'
+              table:
+                title: Source Table/View
+                description: 'The table/view to import from. Use with (use_custom_query: false)'
+                type: string
+              where:
+                title: Filter Conditions
+                description: 'Specify a WHERE condition to filter the data. Use with (use_custom_query: false)'
+                type: string
+              order_by:
+                title: ORDER By Columns
+                description: 'Specify the columns to order the data by. Use with (use_custom_query: false)'
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector?
+                type: boolean
+                default: false
+              incremental_columns:
+                title: Incremental Column(s)
+                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
+                type: array
+                items:
+                  type: string
+              invalid_value_option:
+                title: Invalid Value Handling Mode
+                description: Specify how to handle invalid data values.
+                type: string
+                enum:
+                - fail_job
+                - insert_null
+                - ignore_row
+                default: fail_job
+              last_record:
+                title: Start after (values)
+                description: Values for columns used in incremental loading. Ignores records with column values less than this
+                type: array
+                enum:
+                - string
+                - number
+                - boolean
+                - 'null'
     Basic:
       type: object
       properties:
@@ -696,25 +645,6 @@ components:
       required:
       - type
       - td_authentication_id
-    Schedule:
-      type: object
-      properties:
-        schedule_type:
-          type: string
-          enum:
-          - none
-          - daily
-          - hourly
-          - weekly
-          - monthly
-          - minutes_interval
-          - cron
-        schedule_option:
-          type: string
-          description: The schedule value for the schedule_type. For example, if schedule_type is daily, schedule_option should be a time string like `10:00`.
-        timezone:
-          type: string
-          description: The timezone of the schedule. For example, `UTC` or `Asia/Tokyo`.
     DwhIntegration:
       type: object
       allOf:
@@ -749,6 +679,11 @@ components:
             type: string
             format: date-time
       additionalProperties: false
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
     AdvancedConfigs:
       type: array
       description: "The DWH Integration advanced configs. The configs contain array of \nof table configs which combine with the basic configs will be used to create Connector Bulkload Session.\n"
@@ -774,6 +709,37 @@ components:
             oneOf:
             - $ref: '#/components/schemas/snowflake/properties/advanced'
             - $ref: '#/components/schemas/databricks/properties/advanced'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code
+        title:
+          type: string
+          description: The error title
+        message:
+          description: The error message
+          anyOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        detail:
+          description: Any extra infomation of the error
+          type: object
+          additionalProperties: true
+      additionalProperties: false
+    BasicConfigs:
+      type: object
+      description: The basic configs of the DWH Integration.
+      discriminator:
+        propertyName: type
+        mapping:
+          snowflake: '#/components/schemas/basic'
+          databricks: '#/components/schemas/basic-2'
+      oneOf:
+      - $ref: '#/components/schemas/snowflake/properties/basic'
+      - $ref: '#/components/schemas/databricks/properties/basic'
     WorkflowRun:
       type: object
       properties:
@@ -818,27 +784,41 @@ components:
         finishedAt:
           type: string
           format: date-time
-  parameters:
-    dwh_id:
-      name: dwh_id
-      in: path
-      required: true
-      description: The ID of the DWH Integration.
-      schema:
-        type: integer
-        format: int64
+    Schedule:
+      type: object
+      properties:
+        schedule_type:
+          type: string
+          enum:
+          - none
+          - daily
+          - hourly
+          - weekly
+          - monthly
+          - minutes_interval
+          - cron
+        schedule_option:
+          type: string
+          description: The schedule value for the schedule_type. For example, if schedule_type is daily, schedule_option should be a time string like `10:00`.
+        timezone:
+          type: string
+          description: The timezone of the schedule. For example, `UTC` or `Asia/Tokyo`.
+    SessionAttempt:
+      type: object
+      properties:
+        attempt_id:
+          type: integer
+          format: int64
+        attempt_name:
+          type: string
+        session_id:
+          type: integer
+          format: int64
+        session_time:
+          type: string
+        status:
+          type: string
   responses:
-    '500':
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              title: Internal Server Error
-              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
     '403':
       description: Unauthorized
       content:
@@ -861,17 +841,6 @@ components:
               code: 400
               title: Parameter Error
               message: Data validation error, verify fields and try again.
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              title: Not Found
-              message: No route matches [GET] "/abc".
     '401':
       description: Bad Request
       content:
@@ -883,6 +852,37 @@ components:
               code: 401
               title: API Key isn't set on the request
               message: API Key isn't set on the request
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              title: Internal Server Error
+              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              title: Not Found
+              message: No route matches [GET] "/abc".
+  parameters:
+    dwh_id:
+      name: dwh_id
+      in: path
+      required: true
+      description: The ID of the DWH Integration.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiKey:
       type: apiKey

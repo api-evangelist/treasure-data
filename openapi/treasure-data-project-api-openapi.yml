@@ -1830,6 +1830,118 @@ components:
           type: string
         value:
           type: string
+    RestSchedule:
+      type: object
+      description: Response of a schedule
+      properties:
+        disabledAt:
+          type: string
+          format: date-time
+          description: disabled time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: schedule ID
+          example: '123456'
+        nextRunTime:
+          type: string
+          format: date-time
+          description: next run time
+          example: '2023-08-18T06:52:33Z'
+        nextScheduleTime:
+          type: string
+          description: next schedule time
+          example: '2022-12-31T23:59:00+00:00'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        workflow:
+          $ref: '#/components/schemas/IdAndName'
+      required:
+      - id
+      - nextRunTime
+      - nextScheduleTime
+      - project
+      - workflow
+    RestScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSchedule'
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    RestProject:
+      type: object
+      description: Response of a project
+      properties:
+        archiveMd5:
+          type: string
+          format: byte
+          description: MD5 of archive
+          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
+        archiveType:
+          type: string
+          description: archive type
+          example: s3
+        createdAt:
+          type: string
+          format: date-time
+          description: created time
+          example: '2023-08-18T06:52:33Z'
+        deletedAt:
+          type: string
+          format: date-time
+          description: deleted time
+          example: '2023-08-18T06:52:33Z'
+        id:
+          type: string
+          description: project ID
+          example: '123456'
+        metadata:
+          type: array
+          description: project metadata
+          items:
+            $ref: '#/components/schemas/RestProjectMetadata'
+        name:
+          type: string
+          description: project name
+          example: project-a
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        updatedAt:
+          type: string
+          format: date-time
+          description: updated time
+          example: '2023-08-18T06:52:33Z'
+      required:
+      - archiveType
+      - createdAt
+      - id
+      - name
+      - revision
+      - updatedAt
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
     RestSession:
       type: object
       description: Response of a session
@@ -1912,148 +2024,6 @@ components:
       - params
       - status
       - success
-    RestProject:
-      type: object
-      description: Response of a project
-      properties:
-        archiveMd5:
-          type: string
-          format: byte
-          description: MD5 of archive
-          example: ZGRJdysyQ3VjZXI2UUN1c1ZhRXdDUT09
-        archiveType:
-          type: string
-          description: archive type
-          example: s3
-        createdAt:
-          type: string
-          format: date-time
-          description: created time
-          example: '2023-08-18T06:52:33Z'
-        deletedAt:
-          type: string
-          format: date-time
-          description: deleted time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: project ID
-          example: '123456'
-        metadata:
-          type: array
-          description: project metadata
-          items:
-            $ref: '#/components/schemas/RestProjectMetadata'
-        name:
-          type: string
-          description: project name
-          example: project-a
-        revision:
-          type: string
-          description: revision
-          example: rev-20230101-1
-        updatedAt:
-          type: string
-          format: date-time
-          description: updated time
-          example: '2023-08-18T06:52:33Z'
-      required:
-      - archiveType
-      - createdAt
-      - id
-      - name
-      - revision
-      - updatedAt
-    RestSetSecretRequest:
-      type: object
-      description: Request body to set a secret
-      properties:
-        value:
-          type: string
-          description: value of the secret
-          example: TD1 12345...
-      required:
-      - value
-    RestSessionCollection:
-      type: object
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSession'
-    RestWorkflowDefinition:
-      type: object
-      description: Response of a workflow definition
-      properties:
-        config:
-          type: object
-        id:
-          type: string
-          description: workflow definition ID
-          example: '123456'
-        name:
-          type: string
-          description: workflow name
-          example: wf-123
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        revision:
-          type: string
-          description: revision
-        timezone:
-          type: string
-          description: timezone
-          example: UTC
-      required:
-      - id
-      - name
-      - project
-      - revision
-      - timezone
-    RestSecretList:
-      type: object
-      description: Response of a secret
-      properties:
-        secrets:
-          type: array
-          description: 'array of RestSecretMetadata "{ key: key1 }"'
-          example: '[{key: key1}, {key: key2}]'
-          items:
-            $ref: '#/components/schemas/RestSecretMetadata'
-      required:
-      - secrets
-    RestSchedule:
-      type: object
-      description: Response of a schedule
-      properties:
-        disabledAt:
-          type: string
-          format: date-time
-          description: disabled time
-          example: '2023-08-18T06:52:33Z'
-        id:
-          type: string
-          description: schedule ID
-          example: '123456'
-        nextRunTime:
-          type: string
-          format: date-time
-          description: next run time
-          example: '2023-08-18T06:52:33Z'
-        nextScheduleTime:
-          type: string
-          description: next schedule time
-          example: '2022-12-31T23:59:00+00:00'
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        workflow:
-          $ref: '#/components/schemas/IdAndName'
-      required:
-      - id
-      - nextRunTime
-      - nextScheduleTime
-      - project
-      - workflow
     IdAndName:
       type: object
       description: Name and ID
@@ -2069,27 +2039,6 @@ components:
       required:
       - id
       - name
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
-    RestScheduleCollection:
-      type: object
-      properties:
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSchedule'
     RestRevisionCollection:
       type: object
       properties:
@@ -2106,16 +2055,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestWorkflowDefinition'
-    RestSecretMetadata:
-      type: object
-      description: Response of a secret
-      properties:
-        key:
-          type: string
-          description: key name
-          example: td.apikey
-      required:
-      - key
     RestRevision:
       type: object
       description: Response of a revision
@@ -2145,6 +2084,16 @@ components:
       required:
       - archiveType
       - revision
+    RestSetSecretRequest:
+      type: object
+      description: Request body to set a secret
+      properties:
+        value:
+          type: string
+          description: value of the secret
+          example: TD1 12345...
+      required:
+      - value
     RestPagination:
       type: object
       description: Pagination information
@@ -2153,6 +2102,57 @@ components:
           type: string
           description: next page URL
           example: /api/console/projects?last_id=123&count=300
+    RestSecretMetadata:
+      type: object
+      description: Response of a secret
+      properties:
+        key:
+          type: string
+          description: key name
+          example: td.apikey
+      required:
+      - key
+    RestSecretList:
+      type: object
+      description: Response of a secret
+      properties:
+        secrets:
+          type: array
+          description: 'array of RestSecretMetadata "{ key: key1 }"'
+          example: '[{key: key1}, {key: key2}]'
+          items:
+            $ref: '#/components/schemas/RestSecretMetadata'
+      required:
+      - secrets
+    RestWorkflowDefinition:
+      type: object
+      description: Response of a workflow definition
+      properties:
+        config:
+          type: object
+        id:
+          type: string
+          description: workflow definition ID
+          example: '123456'
+        name:
+          type: string
+          description: workflow name
+          example: wf-123
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        revision:
+          type: string
+          description: revision
+        timezone:
+          type: string
+          description: timezone
+          example: UTC
+      required:
+      - id
+      - name
+      - project
+      - revision
+      - timezone
   securitySchemes:
     ApiKeyAuth:
       type: http

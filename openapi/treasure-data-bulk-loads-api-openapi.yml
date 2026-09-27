@@ -89,6 +89,30 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    BulkLoad:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        cron:
+          type: string
+          description: Cron schedule expression
+        timezone:
+          type: string
+        delay:
+          type: integer
+        database:
+          type: string
+        table:
+          type: string
+        config:
+          type: object
+          description: Bulk load source configuration
+        config_diff:
+          type: object
+          description: Configuration diff from last run
     BulkLoadJob:
       type: object
       properties:
@@ -119,40 +143,7 @@ components:
         end_at:
           type: string
           format: date-time
-    BulkLoad:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        cron:
-          type: string
-          description: Cron schedule expression
-        timezone:
-          type: string
-        delay:
-          type: integer
-        database:
-          type: string
-        table:
-          type: string
-        config:
-          type: object
-          description: Bulk load source configuration
-        config_diff:
-          type: object
-          description: Configuration diff from last run
   responses:
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     NotFound:
       description: Resource not found
       content:
@@ -163,6 +154,15 @@ components:
               error:
                 type: string
                 example: Resource not found
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   securitySchemes:
     TDAuth:
       type: apiKey

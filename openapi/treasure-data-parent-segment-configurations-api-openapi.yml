@@ -516,257 +516,34 @@ paths:
       - TdApikeyAuth: []
 components:
   schemas:
-    ColumnType:
-      type: string
-      description: Type of the column
-      enum:
-      - string
-      - number
-      - timestamp
-      - date
-      - string_array
-      - number_array
-      - boolean
-    AudienceBehaviorWithVisibility:
+    AudienceMaster:
       required:
-      - id
-      - name
       - parentDatabaseName
       - parentTableName
-      - parentKey
-      - foreignKey
+      type: object
+      properties:
+        parentDatabaseName:
+          type: string
+          description: Source database name of the audience master
+        parentTableName:
+          type: string
+          description: Source table name of the audience master
+    ComposableAudienceBehavior:
+      required:
+      - name
       - schema
+      - table
+      - tableKey
+      - masterKey
+      - columnMapping
       type: object
-      properties:
-        id:
-          type: string
-          description: ID of Master Segment Config behavior
-        name:
-          type: string
-          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
-        parentDatabaseName:
-          type: string
-          description: Database name of the behavior table
-        parentTableName:
-          type: string
-          description: Table name of the behavior table
-        parentKey:
-          type: string
-          description: Join key of the behavior table
-        foreignKey:
-          type: string
-          description: Foreign key of the master table
-        schema:
-          type: array
-          description: Columns of behavior
-          items:
-            $ref: '#/components/schemas/AudienceBehaviorSchemaWithVisibility'
-        scheduleType:
-          $ref: '#/components/schemas/ScheduleType'
-        scheduleOption:
-          type:
-          - string
-          - 'null'
-        defaultTimeFilterEnabled:
-          type: boolean
-    ExecutionCore:
-      type: object
-      required:
-      - workflowId
-      - workflowSessionId
-      - createdAt
-      - finishedAt
-      - status
-      properties:
-        workflowId:
-          type: string
-          pattern: '[1-9][0-9]*|0'
-        workflowSessionId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        createdAt:
-          type: string
-          format: date-time
-        finishedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          type: string
-          enum:
-          - success
-          - canceled
-          - error
-          - canceling
-          - blocked
-          - queued
-          - running
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - code
-      - message
-    ScheduleType:
-      type: string
-      example: daily
-      enum:
-      - cron
-      - daily
-      - hourly
-      - minutes_interval
-      - monthly
-      - none
-      - weekly
-    AudienceAttribute:
-      required:
-      - name
-      - audienceId
-      - type
-      - parentDatabaseName
-      - parentTableName
-      - parentColumn
-      - parentKey
-      - foreignKey
-      - groupingName
-      type: object
-      properties:
-        audienceId:
-          type: string
-          description: ID of Master Segment for this attribute
-        name:
-          type: string
-          description: Column name user defined on Master Segment Configuration page of Data Workbench
-        type:
-          $ref: '#/components/schemas/ColumnType'
-        parentDatabaseName:
-          type: string
-          description: Database name of the attribute table
-        parentTableName:
-          type: string
-          description: Table name of the attribute table
-        parentColumn:
-          type: string
-          description: Column name of the attribute table which is imported into customer table
-        parentKey:
-          type: string
-          description: Join key of the attribute table
-        foreignKey:
-          type: string
-          description: Foreign key of the master table
-        groupingName:
-          type:
-          - string
-          - 'null'
-          description: Group name of the attribute
-    CustomerGroup:
-      required:
-      - name
-      - parentDatabaseName
-      - parentTableName
-      - parentKey
-      - foreignKey
-      type: object
-      description: A group of customers within an audience
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        audienceId:
-          type: integer
-        name:
-          type: string
-          description: group name that is to be used for table name
-          pattern: '[A-Za-z_][A-Za-z0-9_ ]*'
-        parentDatabaseName:
-          type: string
-          description: Database name of the customer_group table
-        parentTableName:
-          type: string
-          description: Table name of the customer_group table
-        parentKey:
-          type: string
-          description: Join key of the customer_group table
-        foreignKey:
-          type: string
-          description: Foreign key of the customers table
-        customerGroupAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerGroupAttribute'
-        customerGroupBehaviors:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerGroupBehavior'
-    AudienceBehaviorSchemaWithVisibility:
-      required:
-      - name
-      - type
-      - parentColumn
-      type: object
-      properties:
-        name:
-          type: string
-          description: Column name user defined on Master Segment Configuration page of Data Workbench
-        type:
-          $ref: '#/components/schemas/ColumnType'
-        parentColumn:
-          type:
-          - string
-          - 'null'
-          description: Column name of the behavior table (This can be null when the column is an enriched column)
-        matrixColumnName:
-          type: string
-          description: Column name of the behavior table
-        matrixColumnDescription:
-          type:
-          - string
-          - 'null'
-          description: Description of the column in behavior table
-        visibility:
-          type: string
-          enum:
-          - clear
-          - pii
-          - non_pii
-          - blocked
-    Statistic:
-      type: array
-      items:
-        type: array
-        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
-        example:
-        - 1556382847
-        - 1234
-        - true
-        items:
-          oneOf:
-          - type: integer
-            format: int64
-          - type: boolean
-    ComposableAudience:
-      required:
-      - name
-      - masterSchema
-      - masterTable
-      - timezone
-      type: object
-      description: A composable audience for zero-copy segments using CDW tables via federated queries (Snowflake) or direct connections (Databricks). Exactly one of federatedQueryConfigId or connectionId must be provided.
+      description: Exactly one of federatedQueryConfigId or connectionId must be provided.
       properties:
         id:
           type: string
           format: integer
         name:
           type: string
-        description:
-          type:
-          - string
-          - 'null'
         federatedQueryConfigId:
           type: string
           format: integer
@@ -775,142 +552,36 @@ components:
           type: string
           format: integer
           description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
-        masterCatalog:
-          type:
-          - string
-          - 'null'
-          description: Catalog name for the master table. Required for Databricks, null for Snowflake.
-        masterSchema:
+        schema:
           type: string
-        masterTable:
+        table:
           type: string
-        masterKeyColumn:
+        tableKey:
           type: string
-        timezone:
+        masterKey:
           type: string
-        allowActivationBehavior:
-          type: boolean
-          description: whether activation behaviors are allowed for this audience
-        maxActivationBehaviorRow:
-          type: integer
-          format: int64
-          description: maximum number of activation behavior rows
-        isComposable:
-          type: boolean
-        kind:
+        timeColumn:
           type: string
-          enum:
-          - composable
-        attributes:
+        columnMapping:
           type: array
           items:
-            $ref: '#/components/schemas/ComposableAudienceAttribute'
-        behaviors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ComposableAudienceBehavior'
-        population:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: the population of the composable audience
+            type: object
+            required:
+            - name
+            - cdwColumn
+            properties:
+              name:
+                type: string
+              type:
+                $ref: '#/components/schemas/ColumnType'
+              cdwColumn:
+                type: string
         createdAt:
           type: string
           format: date-time
         updatedAt:
           type: string
           format: date-time
-        createdBy:
-          $ref: '#/components/schemas/User'
-        updatedBy:
-          $ref: '#/components/schemas/User'
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
-    AudienceBehavior:
-      required:
-      - id
-      - name
-      - parentDatabaseName
-      - parentTableName
-      - parentKey
-      - foreignKey
-      - schema
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of Master Segment Config behavior
-        name:
-          type: string
-          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
-        parentDatabaseName:
-          type: string
-          description: Database name of the behavior table
-        parentTableName:
-          type: string
-          description: Table name of the behavior table
-        parentKey:
-          type: string
-          description: Join key of the behavior table
-        foreignKey:
-          type: string
-          description: Foreign key of the master table
-        schema:
-          type: array
-          description: Columns of behavior
-          items:
-            $ref: '#/components/schemas/AudienceBehaviorSchema'
-        scheduleType:
-          $ref: '#/components/schemas/ScheduleType'
-        scheduleOption:
-          type:
-          - string
-          - 'null'
-        defaultTimeFilterEnabled:
-          type: boolean
-        isRealtime:
-          type: boolean
-    CustomerGroupAttribute:
-      required:
-      - name
-      - type
-      - parentDatabaseName
-      - parentTableName
-      - parentColumn
-      - parentKey
-      - foreignKey
-      type: object
-      properties:
-        name:
-          type: string
-          description: Column name
-        type:
-          $ref: '#/components/schemas/ColumnType'
-        parentDatabaseName:
-          type: string
-          description: Database name of the customer_group attribute table
-        parentTableName:
-          type: string
-          description: Table name of the customer_group attribute table
-        parentColumn:
-          type: string
-          description: Column name of the customer_group attribute table which is imported into customer table
-        parentKey:
-          type: string
-          description: Join key of the customer_group attribute table
-        foreignKey:
-          type: string
-          description: Foreign key of the customer_group table
     Audience:
       required:
       - name
@@ -1023,85 +694,74 @@ components:
           $ref: '#/components/schemas/User'
         updatedBy:
           $ref: '#/components/schemas/User'
-    CustomerGroupBehaviorSchema:
+    CustomerGroup:
+      required:
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      type: object
+      description: A group of customers within an audience
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        audienceId:
+          type: integer
+        name:
+          type: string
+          description: group name that is to be used for table name
+          pattern: '[A-Za-z_][A-Za-z0-9_ ]*'
+        parentDatabaseName:
+          type: string
+          description: Database name of the customer_group table
+        parentTableName:
+          type: string
+          description: Table name of the customer_group table
+        parentKey:
+          type: string
+          description: Join key of the customer_group table
+        foreignKey:
+          type: string
+          description: Foreign key of the customers table
+        customerGroupAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupAttribute'
+        customerGroupBehaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerGroupBehavior'
+    AudienceMasterAttribute:
+      description: Attribute of master table, not attribute tables. Similar to AudienceAttribute but some properties are null
       required:
       - name
       - type
       - parentColumn
       type: object
+      additionalProperties: false
       properties:
         name:
           type: string
-          description: Column name
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
         type:
           $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the attribute table
+        parentTableName:
+          type: string
+          description: Table name of the attribute table
         parentColumn:
           type: string
-          description: Column name of the customer_group behavior table
-    Execution:
-      allOf:
-      - $ref: '#/components/schemas/ExecutionCore'
-      - type: object
-        required:
-        - workflowAttemptId
-        properties:
-          workflowAttemptId:
-            type: string
-            pattern: '[1-9][0-9]*'
-    ComposableAudienceBehavior:
-      required:
-      - name
-      - schema
-      - table
-      - tableKey
-      - masterKey
-      - columnMapping
-      type: object
-      description: Exactly one of federatedQueryConfigId or connectionId must be provided.
-      properties:
-        id:
+          description: Column name of the attribute table which is imported into customer table
+        parentKey:
           type: string
-          format: integer
-        name:
+          description: Join key of the attribute table
+        foreignKey:
           type: string
-        federatedQueryConfigId:
-          type: string
-          format: integer
-          description: Federated query config ID for Snowflake. Mutually exclusive with connectionId.
-        connectionId:
-          type: string
-          format: integer
-          description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
-        schema:
-          type: string
-        table:
-          type: string
-        tableKey:
-          type: string
-        masterKey:
-          type: string
-        timeColumn:
-          type: string
-        columnMapping:
-          type: array
-          items:
-            type: object
-            required:
-            - name
-            - cdwColumn
-            properties:
-              name:
-                type: string
-              type:
-                $ref: '#/components/schemas/ColumnType'
-              cdwColumn:
-                type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+          description: Foreign key of the master table
     AudienceAttributeWithVisibility:
       required:
       - name
@@ -1167,52 +827,7 @@ components:
           - pii
           - non_pii
           - blocked
-    SampleValuesPayload:
-      description: array of tuple of sample values
-      type: array
-      items:
-        type: array
-        description: a tuple whose values are (1) value itself whose type depends on source column (2) percentage of the value
-        example:
-        - Japan
-        - 0.14285714285714285
-        items:
-          anyOf:
-          - type: integer
-          - type: number
-            format: float
-          - type: string
-    AudienceFilter:
-      required:
-      - columnName
-      - rightValues
-      type: object
-      additionalProperties: false
-      properties:
-        columnName:
-          type: string
-          description: Column name to filter source data
-          example: Country
-        rightValues:
-          type: array
-          items:
-            type: string
-          description: Values of the column to filter source data
-          example:
-          - Japan
-    AudienceMaster:
-      required:
-      - parentDatabaseName
-      - parentTableName
-      type: object
-      properties:
-        parentDatabaseName:
-          type: string
-          description: Source database name of the audience master
-        parentTableName:
-          type: string
-          description: Source table name of the audience master
-    AudienceBehaviorSchema:
+    CustomerGroupBehaviorSchema:
       required:
       - name
       - type
@@ -1221,29 +836,28 @@ components:
       properties:
         name:
           type: string
-          description: Column name user defined on Master Segment Configuration page of Data Workbench
+          description: Column name
         type:
           $ref: '#/components/schemas/ColumnType'
         parentColumn:
           type: string
-          description: Column name of the behavior table
-    AudienceExecution:
-      allOf:
-      - $ref: '#/components/schemas/Execution'
-      - type: object
-        properties:
-          audienceId:
-            type: string
-            format: integer
-    AudienceMasterAttribute:
-      description: Attribute of master table, not attribute tables. Similar to AudienceAttribute but some properties are null
+          description: Column name of the customer_group behavior table
+    AudienceAttribute:
       required:
       - name
+      - audienceId
       - type
+      - parentDatabaseName
+      - parentTableName
       - parentColumn
+      - parentKey
+      - foreignKey
+      - groupingName
       type: object
-      additionalProperties: false
       properties:
+        audienceId:
+          type: string
+          description: ID of Master Segment for this attribute
         name:
           type: string
           description: Column name user defined on Master Segment Configuration page of Data Workbench
@@ -1264,6 +878,70 @@ components:
         foreignKey:
           type: string
           description: Foreign key of the master table
+        groupingName:
+          type:
+          - string
+          - 'null'
+          description: Group name of the attribute
+    SampleValuesPayload:
+      description: array of tuple of sample values
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are (1) value itself whose type depends on source column (2) percentage of the value
+        example:
+        - Japan
+        - 0.14285714285714285
+        items:
+          anyOf:
+          - type: integer
+          - type: number
+            format: float
+          - type: string
+    AudienceBehavior:
+      required:
+      - id
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      - schema
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of Master Segment Config behavior
+        name:
+          type: string
+          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
+        parentDatabaseName:
+          type: string
+          description: Database name of the behavior table
+        parentTableName:
+          type: string
+          description: Table name of the behavior table
+        parentKey:
+          type: string
+          description: Join key of the behavior table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+        schema:
+          type: array
+          description: Columns of behavior
+          items:
+            $ref: '#/components/schemas/AudienceBehaviorSchema'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        defaultTimeFilterEnabled:
+          type: boolean
+        isRealtime:
+          type: boolean
     ComposableAudienceAttribute:
       required:
       - name
@@ -1308,6 +986,167 @@ components:
         updatedAt:
           type: string
           format: date-time
+    AudienceBehaviorWithVisibility:
+      required:
+      - id
+      - name
+      - parentDatabaseName
+      - parentTableName
+      - parentKey
+      - foreignKey
+      - schema
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of Master Segment Config behavior
+        name:
+          type: string
+          description: Behavior name user defined on Master Segment Configuration page of Data Workbench
+        parentDatabaseName:
+          type: string
+          description: Database name of the behavior table
+        parentTableName:
+          type: string
+          description: Table name of the behavior table
+        parentKey:
+          type: string
+          description: Join key of the behavior table
+        foreignKey:
+          type: string
+          description: Foreign key of the master table
+        schema:
+          type: array
+          description: Columns of behavior
+          items:
+            $ref: '#/components/schemas/AudienceBehaviorSchemaWithVisibility'
+        scheduleType:
+          $ref: '#/components/schemas/ScheduleType'
+        scheduleOption:
+          type:
+          - string
+          - 'null'
+        defaultTimeFilterEnabled:
+          type: boolean
+    AudienceFilter:
+      required:
+      - columnName
+      - rightValues
+      type: object
+      additionalProperties: false
+      properties:
+        columnName:
+          type: string
+          description: Column name to filter source data
+          example: Country
+        rightValues:
+          type: array
+          items:
+            type: string
+          description: Values of the column to filter source data
+          example:
+          - Japan
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    AudienceBehaviorSchema:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type: string
+          description: Column name of the behavior table
+    AudienceBehaviorSchemaWithVisibility:
+      required:
+      - name
+      - type
+      - parentColumn
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name user defined on Master Segment Configuration page of Data Workbench
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentColumn:
+          type:
+          - string
+          - 'null'
+          description: Column name of the behavior table (This can be null when the column is an enriched column)
+        matrixColumnName:
+          type: string
+          description: Column name of the behavior table
+        matrixColumnDescription:
+          type:
+          - string
+          - 'null'
+          description: Description of the column in behavior table
+        visibility:
+          type: string
+          enum:
+          - clear
+          - pii
+          - non_pii
+          - blocked
     CustomerGroupBehavior:
       required:
       - id
@@ -1339,9 +1178,182 @@ components:
           description: Columns of behavior
           items:
             $ref: '#/components/schemas/CustomerGroupBehaviorSchema'
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    AudienceExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          audienceId:
+            type: string
+            format: integer
+    CustomerGroupAttribute:
+      required:
+      - name
+      - type
+      - parentDatabaseName
+      - parentTableName
+      - parentColumn
+      - parentKey
+      - foreignKey
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        type:
+          $ref: '#/components/schemas/ColumnType'
+        parentDatabaseName:
+          type: string
+          description: Database name of the customer_group attribute table
+        parentTableName:
+          type: string
+          description: Table name of the customer_group attribute table
+        parentColumn:
+          type: string
+          description: Column name of the customer_group attribute table which is imported into customer table
+        parentKey:
+          type: string
+          description: Join key of the customer_group attribute table
+        foreignKey:
+          type: string
+          description: Foreign key of the customer_group table
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    ColumnType:
+      type: string
+      description: Type of the column
+      enum:
+      - string
+      - number
+      - timestamp
+      - date
+      - string_array
+      - number_array
+      - boolean
+    ComposableAudience:
+      required:
+      - name
+      - masterSchema
+      - masterTable
+      - timezone
+      type: object
+      description: A composable audience for zero-copy segments using CDW tables via federated queries (Snowflake) or direct connections (Databricks). Exactly one of federatedQueryConfigId or connectionId must be provided.
+      properties:
+        id:
+          type: string
+          format: integer
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        federatedQueryConfigId:
+          type: string
+          format: integer
+          description: Federated query config ID for Snowflake. Mutually exclusive with connectionId.
+        connectionId:
+          type: string
+          format: integer
+          description: Connection ID for Databricks. Mutually exclusive with federatedQueryConfigId.
+        masterCatalog:
+          type:
+          - string
+          - 'null'
+          description: Catalog name for the master table. Required for Databricks, null for Snowflake.
+        masterSchema:
+          type: string
+        masterTable:
+          type: string
+        masterKeyColumn:
+          type: string
+        timezone:
+          type: string
+        allowActivationBehavior:
+          type: boolean
+          description: whether activation behaviors are allowed for this audience
+        maxActivationBehaviorRow:
+          type: integer
+          format: int64
+          description: maximum number of activation behavior rows
+        isComposable:
+          type: boolean
+        kind:
+          type: string
+          enum:
+          - composable
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComposableAudienceAttribute'
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComposableAudienceBehavior'
+        population:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: the population of the composable audience
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+    Statistic:
+      type: array
+      items:
+        type: array
+        description: a tuple whose values are Unix epoch, the population, whether a workflow has run at that time or not. If the third value is false, it is imputed value.
+        example:
+        - 1556382847
+        - 1234
+        - true
+        items:
+          oneOf:
+          - type: integer
+            format: int64
+          - type: boolean
   responses:
     Forbidden:
       description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
       content:
         application/json:
           schema:
@@ -1378,18 +1390,6 @@ components:
             required:
             - status
             - error
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     TdApikeyAuth:
       type: apiKey

@@ -139,13 +139,6 @@ components:
       required:
       - id
       - name
-    RestWorkflowDefinitionCollection:
-      type: object
-      properties:
-        workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestWorkflowDefinition'
     RestWorkflowDefinition:
       type: object
       description: Response of a workflow definition
@@ -175,6 +168,13 @@ components:
       - project
       - revision
       - timezone
+    RestWorkflowDefinitionCollection:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestWorkflowDefinition'
     RestWorkflowSessionTime:
       type: object
       description: Response of truncated_session_time API of workflows

@@ -179,47 +179,39 @@ paths:
                   $ref: '#/components/schemas/AccessControlUser'
 components:
   parameters:
-    path_user_id:
-      name: user_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UserId'
     path_access_control_policy_id:
       name: policy_id
       in: path
       required: true
       schema:
         $ref: '#/components/schemas/AccessControlPolicyId'
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
   schemas:
-    AccessControlPolicy:
-      title: Access Control Policy
+    AccessControlProfileOptions:
+      title: Access Control Profile Options
+      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
       type: object
-      additionalProperties: false
-      required:
-      - id
-      - account_id
-      - name
-      properties:
-        id:
-          $ref: '#/components/schemas/AccessControlPolicyId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        name:
-          description: Policy's name
-          type: string
-          example: some_policy
-        description:
-          description: Policy's description
-          type: string
-          example: written about the policy
-        user_count:
-          description: The number of users which the policy attaches to
-          type: integer
-          example: 3
+      additionalProperties:
+        type:
+        - string
+        - 'null'
     AccountId:
       type: integer
       example: 123
+    AccessControlProfileOptionUpdateRequest:
+      title: Access Control Profile Option Update Request
+      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
     User:
       title: User
       description: User
@@ -312,6 +304,193 @@ components:
           type: array
           items:
             type: string
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    UserId:
+      type: integer
+      example: 123
+    AccessControlUserReference:
+      title: Access Control User Reference
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - account_id
+      - email
+      - name
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        email:
+          $ref: '#/components/schemas/User/properties/email'
+        name:
+          $ref: '#/components/schemas/User/properties/name'
+    AccessControlPolicy:
+      title: Access Control Policy
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_id
+      - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy's name
+          type: string
+          example: some_policy
+        description:
+          description: Policy's description
+          type: string
+          example: written about the policy
+        user_count:
+          description: The number of users which the policy attaches to
+          type: integer
+          example: 3
+    AccessControlUnpaidPermissions:
+      title: Access Control Permissions
+      type: object
+      additionalProperties: false
+      properties:
+        WorkflowProject:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - run
+                - edit
+        Segmentation:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - full
+        MasterSegmentConfigs:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+        MasterSegmentConfig:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              id:
+                type: string
+                example: '42'
+        SegmentAllFolders:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - audience_id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              audience_id:
+                type: string
+                example: '42'
+        SegmentFolder:
+          description: Permissions on resource
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            - id
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - edit
+              id:
+                type: string
+                example: '42'
+        ActivationTemplate:
+          description: Permissions on ActivationTemplate
+          type: array
+          items:
+            type: object
+            required:
+            - operation
+            properties:
+              operation:
+                type: string
+                enum:
+                - view
+                - full
+                - template_access
+    UpdateAccessControlPolicyUsersRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
+    AccessControlUser:
+      title: Access Control User
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - account_id
+      - permissions
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        permissions:
+          $ref: '#/components/schemas/AccessControlPermissions'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlPolicy'
     AccessControlPermissions:
       title: Access Control Permissions
       type: object
@@ -722,185 +901,6 @@ components:
                 type: string
                 description: ID of the Audience (MasterSegmentConfig) to grant raw data access
                 example: '123'
-    UserId:
-      type: integer
-      example: 123
-    AccessControlPolicyId:
-      type: integer
-      example: 67
-    AccessControlUserReference:
-      title: Access Control User Reference
-      type: object
-      additionalProperties: false
-      required:
-      - user_id
-      - account_id
-      - email
-      - name
-      properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        email:
-          $ref: '#/components/schemas/User/properties/email'
-        name:
-          $ref: '#/components/schemas/User/properties/name'
-    AccessControlProfileOptions:
-      title: Access Control Profile Options
-      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
-      type: object
-      additionalProperties:
-        type:
-        - string
-        - 'null'
-    AccessControlProfileOptionUpdateRequest:
-      title: Access Control Profile Option Update Request
-      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    AccessControlUnpaidPermissions:
-      title: Access Control Permissions
-      type: object
-      additionalProperties: false
-      properties:
-        WorkflowProject:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - run
-                - edit
-        Segmentation:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            properties:
-              operation:
-                type: string
-                enum:
-                - full
-        MasterSegmentConfigs:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - edit
-        MasterSegmentConfig:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            - id
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - edit
-              id:
-                type: string
-                example: '42'
-        SegmentAllFolders:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            - audience_id
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - edit
-              audience_id:
-                type: string
-                example: '42'
-        SegmentFolder:
-          description: Permissions on resource
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            - id
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - edit
-              id:
-                type: string
-                example: '42'
-        ActivationTemplate:
-          description: Permissions on ActivationTemplate
-          type: array
-          items:
-            type: object
-            required:
-            - operation
-            properties:
-              operation:
-                type: string
-                enum:
-                - view
-                - full
-                - template_access
-    UpdateAccessControlPolicyUsersRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-    AccessControlUser:
-      title: Access Control User
-      type: object
-      additionalProperties: false
-      required:
-      - user_id
-      - account_id
-      - permissions
-      properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        permissions:
-          $ref: '#/components/schemas/AccessControlPermissions'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessControlPolicy'
   securitySchemes:
     ApiKeyAuth:
       type: http

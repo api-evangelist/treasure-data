@@ -125,6 +125,24 @@ paths:
                 $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
 components:
   schemas:
+    AccessControlPolicyGroupTaggableName:
+      type: string
+      description: Policy Group's taggable name
+      example: some_policy_group
+    AccountId:
+      type: integer
+      example: 123
+    AccessControlPolicyGroupId:
+      type: integer
+      example: 10
+    UpdateAccessControlPolicyGroupPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
     AccessControlPolicyGroupPolicies:
       title: Access Control Policy Group Policies
       type: object
@@ -137,20 +155,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccessControlPolicyId'
-    AccountId:
-      type: integer
-      example: 123
-    UpdateAccessControlPolicyGroupPoliciesRequest:
+    UpdateAccessControlPolicyGroupRequest:
       type: object
       additionalProperties: false
       required:
-      - policy_ids
+      - name
       properties:
-        policy_ids:
-          $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
+        description:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
     AccessControlPolicyId:
       type: integer
       example: 67
+    CreateAccessControlPolicyGroupRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      properties:
+        name:
+          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
     AccessControlPolicyGroup:
       title: Access Control Policy Group
       type: object
@@ -188,31 +213,6 @@ components:
           type: string
           format: date-time
           example: '2012-01-01T12:00:00Z'
-    CreateAccessControlPolicyGroupRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - name
-      properties:
-        name:
-          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
-    UpdateAccessControlPolicyGroupRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - name
-      properties:
-        name:
-          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
-        description:
-          $ref: '#/components/schemas/AccessControlPolicyGroup/properties/description'
-    AccessControlPolicyGroupTaggableName:
-      type: string
-      description: Policy Group's taggable name
-      example: some_policy_group
-    AccessControlPolicyGroupId:
-      type: integer
-      example: 10
   parameters:
     path_access_control_policy_group_id_or_taggable_name:
       name: policy_group_id_or_taggable_name
