@@ -196,11 +196,17 @@ notes:
 tools_count: 2
 tools:
 - name: execute
-  description: ''
+  description: Run JavaScript in a sandbox against the documentation tools on the global `tools` object.
+    The only extra global is `tools` - there is no `fetch`, `console`, `setTimeout`, `require`, or Node.js
+    API; all I/O goes through `tools`.  Workflow -
 - name: describe-tools
-  description: ''
+  description: Get the exact TypeScript signatures of the sandbox tools available to `execute`. Analyze
+    the user request first, then pass `tools` with only the tool names the request needs (every name is
+    listed in this input schema / description); omit `t
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: platform
 authorship_note: 'PLATFORM-AUTHORED: this tool shape is shared with at least one other provider in the
   catalog, so it is a platform default appearing under this provider''s domain rather than an interface
   this provider designed. Shared shape: (''describe-tools'', ''execute'')'
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
