@@ -137,17 +137,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    User:
+    EntitiesGetParentSegmentJsonApiResponse:
       type: object
+      required:
+      - data
       properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
+        data:
+          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
     ScheduleType:
       type: string
       example: daily
@@ -167,13 +163,17 @@ components:
       properties:
         thisKeyNeverHit:
           type: string
-    EntitiesGetParentSegmentJsonApiResponse:
+    User:
       type: object
-      required:
-      - data
       properties:
-        data:
-          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
     RelationshipsFolderJsonApiResource:
       type: object
       properties:

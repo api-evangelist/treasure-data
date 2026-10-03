@@ -512,26 +512,6 @@ paths:
     - url: https://api.ap02.treasuredata.com/v3
     - url: https://api.eu01.treasuredata.com/v3
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Resource not found
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   schemas:
     JobIssueResponse:
       type: object
@@ -544,6 +524,13 @@ components:
           description: Query type (presto or hive)
         database:
           type: string
+    ConnectionId:
+      description: the connection id
+      type: integer
+      example: 17
+    EmptyObject:
+      type: object
+      additionalProperties: false
     Job:
       title: Job
       description: an execution of a query
@@ -677,78 +664,113 @@ components:
           type: string
         user_name:
           $ref: '#/components/schemas/User/properties/name'
-    DateTimeAsString:
-      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+    QueryAsString:
+      description: the raw SQL query
       type: string
-      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
-      example: 2020-12-31 11:22:33 UTC
-    DateTimeISO8601:
-      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
-      example: '2020-12-31T11:22:33Z'
-    CreateOrUpdateJobRequest:
+      example: SELECT * FROM my_table;
+    JobStatus:
       type: object
       additionalProperties: false
+      required:
+      - job_id
+      - cpu_time
+      - created_at
+      - duration
+      - end_at
+      - num_records
+      - result_size
+      - start_at
+      - status
+      - updated_at
       properties:
-        domain_key:
-          $ref: '#/components/schemas/DomainKey'
-        pool_name:
-          description: resource pool name
-          type: string
-          example: pool_1
-        priority:
-          $ref: '#/components/schemas/Job/properties/priority'
-        query:
-          $ref: '#/components/schemas/QueryAsString'
-        retry_limit:
-          $ref: '#/components/schemas/Job/properties/retry_limit'
-        scheduled_time:
-          $ref: '#/components/schemas/DateTimeISO8601'
-    DomainKey:
+        job_id:
+          $ref: '#/components/schemas/JobIdAsString'
+        cpu_time:
+          $ref: '#/components/schemas/Job/properties/cpu_time'
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        end_at:
+          $ref: '#/components/schemas/Job/properties/end_at'
+        duration:
+          $ref: '#/components/schemas/Job/properties/duration'
+        num_records:
+          $ref: '#/components/schemas/Job/properties/num_records'
+        result_size:
+          $ref: '#/components/schemas/Job/properties/result_size'
+        start_at:
+          $ref: '#/components/schemas/Job/properties/start_at'
+        status:
+          $ref: '#/components/schemas/Job/properties/status'
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+    EmptyString:
       type: string
-      example: domain_key_123
-    CreateExportJobRequest:
+      pattern: ^$
+    Database:
+      title: Database
+      description: Database
       type: object
       additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
       properties:
-        access_key_id:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
           type: string
-          example: a_key
-        assume_role:
-          type: string
-        bucket:
-          type: string
-          example: test_bucket
-        domain_key:
-          $ref: '#/components/schemas/DomainKey'
-        encryption:
-          type: string
-        file_format:
-          type: string
-          enum:
-          - jsonl.gz
-          - tsv.gz
-          - json.gz
-          - line-json.gz
-          example: json.gz
-        file_prefix:
-          type: string
-        from:
-          $ref: '#/components/schemas/Timestamp'
-        pool_name:
-          type: string
-          example: pool_1
-        secret_access_key:
-          type: string
-          example: secret_abc
-        storage_type:
-          type: string
-          enum:
-          - s3
-          example: s3
-        to:
-          $ref: '#/components/schemas/Timestamp'
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
     Table:
       title: Table
       description: Table
@@ -822,6 +844,31 @@ components:
           example: log
         updated_at:
           $ref: '#/components/schemas/DateTimeAsString'
+    JobId:
+      description: unique identifier of job
+      type: integer
+      example: 19
+    CreateOrUpdateJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Job/properties/priority'
+        query:
+          $ref: '#/components/schemas/QueryAsString'
+        retry_limit:
+          $ref: '#/components/schemas/Job/properties/retry_limit'
+        scheduled_time:
+          $ref: '#/components/schemas/DateTimeISO8601'
+    Timestamp:
+      type: integer
+      example: 1356998400
     User:
       title: User
       description: User
@@ -914,117 +961,9 @@ components:
           type: array
           items:
             type: string
-    JobStatus:
-      type: object
-      additionalProperties: false
-      required:
-      - job_id
-      - cpu_time
-      - created_at
-      - duration
-      - end_at
-      - num_records
-      - result_size
-      - start_at
-      - status
-      - updated_at
-      properties:
-        job_id:
-          $ref: '#/components/schemas/JobIdAsString'
-        cpu_time:
-          $ref: '#/components/schemas/Job/properties/cpu_time'
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        end_at:
-          $ref: '#/components/schemas/Job/properties/end_at'
-        duration:
-          $ref: '#/components/schemas/Job/properties/duration'
-        num_records:
-          $ref: '#/components/schemas/Job/properties/num_records'
-        result_size:
-          $ref: '#/components/schemas/Job/properties/result_size'
-        start_at:
-          $ref: '#/components/schemas/Job/properties/start_at'
-        status:
-          $ref: '#/components/schemas/Job/properties/status'
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-    ConnectionId:
-      description: the connection id
-      type: integer
-      example: 17
-    Database:
-      title: Database
-      description: Database
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - created_at
-      - delete_protected
-      - name
-      - organization
-      - permission
-      - updated_at
-      properties:
-        count:
-          description: ???
-          type: integer
-          example: 5
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        delete_protected:
-          description: wheter the database is delete protected
-          type: boolean
-          example: true
-        datatank:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/DatabaseIdAsString'
-        name:
-          description: database name
-          type: string
-          example: Alpha
-        organization:
-          description: the organization
-          type:
-          - string
-          - 'null'
-          example: Treasure Data
-        permission:
-          description: permissions
-          type:
-          - string
-          - 'null'
-        database_permissions:
-          description: permissions
-          type: object
-          additionalProperties: true
-          properties:
-            edit:
-              description: edit permission for database
-              type: boolean
-            delete:
-              description: delete permission for database
-              type: boolean
-            query:
-              description: query permission for database
-              type: boolean
-            import:
-              description: import permission for database
-              type: boolean
-            download:
-              description: download permission for database
-              type: boolean
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-    EmptyObject:
-      type: object
-      additionalProperties: false
-    JobId:
-      description: unique identifier of job
-      type: integer
-      example: 19
+    DomainKey:
+      type: string
+      example: domain_key_123
     BulkLoadConfig:
       title: BulkLoadConfig
       description: bulk load config
@@ -1092,28 +1031,88 @@ components:
             time_column:
               type: string
               example: time
-    Timestamp:
-      type: integer
-      example: 1356998400
-    QueryAsString:
-      description: the raw SQL query
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
       type: string
-      example: SELECT * FROM my_table;
-    EmptyString:
-      type: string
-      pattern: ^$
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    CreateExportJobRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        access_key_id:
+          type: string
+          example: a_key
+        assume_role:
+          type: string
+        bucket:
+          type: string
+          example: test_bucket
+        domain_key:
+          $ref: '#/components/schemas/DomainKey'
+        encryption:
+          type: string
+        file_format:
+          type: string
+          enum:
+          - jsonl.gz
+          - tsv.gz
+          - json.gz
+          - line-json.gz
+          example: json.gz
+        file_prefix:
+          type: string
+        from:
+          $ref: '#/components/schemas/Timestamp'
+        pool_name:
+          type: string
+          example: pool_1
+        secret_access_key:
+          type: string
+          example: secret_abc
+        storage_type:
+          type: string
+          enum:
+          - s3
+          example: s3
+        to:
+          $ref: '#/components/schemas/Timestamp'
     JobIdAsString:
       description: unique identifier of job
       type: string
       example: '19'
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   parameters:
-    path_job_id:
-      name: job_id
-      description: the job id
+    path_table_name:
+      name: table_name
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/JobId'
+        $ref: '#/components/schemas/Table/properties/name'
     path_job_type:
       name: job_type
       description: the job type
@@ -1121,18 +1120,19 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Job/properties/type'
+    path_job_id:
+      name: job_id
+      description: the job id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/JobId'
     path_database_name:
       name: database_name
       in: path
       required: true
       schema:
         $ref: '#/components/schemas/Database/properties/name'
-    path_table_name:
-      name: table_name
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Table/properties/name'
   securitySchemes:
     TDAuth:
       type: apiKey

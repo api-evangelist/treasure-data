@@ -197,91 +197,10 @@ paths:
                             - $ref: '#/components/schemas/EmptyString'
 components:
   schemas:
-    CreateOrUpdateScheduleRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/Schedule/properties/name'
-        cron:
-          $ref: '#/components/schemas/Schedule/properties/cron'
-        database:
-          $ref: '#/components/schemas/Database/properties/name'
-        delay:
-          $ref: '#/components/schemas/Schedule/properties/delay'
-        executing_user_id:
-          $ref: '#/components/schemas/Schedule/properties/executing_user_id'
-        engine_version:
-          $ref: '#/components/schemas/Schedule/properties/engine_version'
-        pool_name:
-          description: resource pool name
-          type: string
-          example: pool_1
-        priority:
-          $ref: '#/components/schemas/Schedule/properties/priority'
-        retry_limit:
-          $ref: '#/components/schemas/Schedule/properties/retry_limit'
-        query:
-          $ref: '#/components/schemas/Schedule/properties/query'
-        result:
-          description: url of the result
-          type: string
-        timezone:
-          $ref: '#/components/schemas/Timezone'
-        type:
-          $ref: '#/components/schemas/Schedule/properties/type'
-    DateTimeAsString:
-      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+    QueryAsString:
+      description: the raw SQL query
       type: string
-      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
-      example: 2020-12-31 11:22:33 UTC
-    ScheduleReference:
-      type: object
-      required:
-      - created_at
-      - cron
-      - database
-      - delay
-      - name
-      - query
-      - timezone
-      - type
-      - user_name
-      properties:
-        created_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        cron:
-          $ref: '#/components/schemas/Schedule/properties/cron'
-        database:
-          $ref: '#/components/schemas/Schedule/properties/database'
-        delay:
-          $ref: '#/components/schemas/Schedule/properties/delay'
-        name:
-          $ref: '#/components/schemas/Schedule/properties/name'
-        query:
-          $ref: '#/components/schemas/Schedule/properties/query'
-        timezone:
-          $ref: '#/components/schemas/Timezone'
-        type:
-          $ref: '#/components/schemas/Schedule/properties/type'
-        user_name:
-          $ref: '#/components/schemas/User/properties/name'
-    ScheduledJob:
-      type: object
-      additionalProperties: false
-      required:
-      - job_id
-      - type
-      - scheduled_at
-      properties:
-        job_id:
-          $ref: '#/components/schemas/JobId'
-        type:
-          $ref: '#/components/schemas/Job/properties/type'
-        scheduled_at:
-          oneOf:
-          - $ref: '#/components/schemas/DateTimeAsString'
-          - $ref: '#/components/schemas/EmptyString'
+      example: SELECT * FROM my_table;
     Schedule:
       type: object
       required:
@@ -339,174 +258,9 @@ components:
           type: string
         user_name:
           $ref: '#/components/schemas/User/properties/name'
-    DateTimeISO8601:
-      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
-      example: '2020-12-31T11:22:33Z'
     Timezone:
       type: string
       example: UTC
-    DomainKey:
-      type: string
-      example: domain_key_123
-    User:
-      title: User
-      description: User
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      - account_owner
-      - administrator
-      - created_at
-      - email
-      - first_name
-      - gravatar_url
-      - last_name
-      - phone
-      - updated_at
-      properties:
-        id:
-          $ref: '#/components/schemas/UserId'
-        account_owner:
-          description: whether the user is Account owner or not
-          type: boolean
-          example: true
-        administrator:
-          description: whether the user is Administrator or not
-          type: boolean
-          example: true
-        created_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        email:
-          description: the email user uses to log in
-          type: string
-          format: email
-          example: td@example.com
-        first_name:
-          description: first name
-          type:
-          - string
-          - 'null'
-          example: Treasure
-        gravatar_url:
-          description: gravatar url
-          type: string
-          example: http://foo
-        identifier:
-          $ref: '#/components/schemas/SSOIdentifier'
-        full_qualified_identifier:
-          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
-        setting_name:
-          $ref: '#/components/schemas/SSOSettingName'
-        last_name:
-          description: last name
-          type:
-          - string
-          - 'null'
-          example: Data
-        name:
-          description: user's full name or email
-          type: string
-          example: Treasure Data
-        organization:
-          deprecated: true
-          type:
-          - string
-          - 'null'
-        phone:
-          description: phone number
-          type:
-          - string
-          - 'null'
-          example: (650) 469-3644
-        roles:
-          deprecated: true
-          type: array
-          items:
-            type: string
-        updated_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        delegated_admin:
-          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
-          type: boolean
-          example: true
-        delegated_policy_groups:
-          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
-          type: array
-          items:
-            type: string
-        policy_group_tags:
-          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
-          type: array
-          items:
-            type: string
-    Database:
-      title: Database
-      description: Database
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - created_at
-      - delete_protected
-      - name
-      - organization
-      - permission
-      - updated_at
-      properties:
-        count:
-          description: ???
-          type: integer
-          example: 5
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        delete_protected:
-          description: wheter the database is delete protected
-          type: boolean
-          example: true
-        datatank:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/DatabaseIdAsString'
-        name:
-          description: database name
-          type: string
-          example: Alpha
-        organization:
-          description: the organization
-          type:
-          - string
-          - 'null'
-          example: Treasure Data
-        permission:
-          description: permissions
-          type:
-          - string
-          - 'null'
-        database_permissions:
-          description: permissions
-          type: object
-          additionalProperties: true
-          properties:
-            edit:
-              description: edit permission for database
-              type: boolean
-            delete:
-              description: delete permission for database
-              type: boolean
-            query:
-              description: query permission for database
-              type: boolean
-            import:
-              description: import permission for database
-              type: boolean
-            download:
-              description: download permission for database
-              type: boolean
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
     EmptyString:
       type: string
       pattern: ^$
@@ -643,10 +397,189 @@ components:
           type: string
         user_name:
           $ref: '#/components/schemas/User/properties/name'
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
     JobId:
       description: unique identifier of job
       type: integer
       example: 19
+    ScheduledJob:
+      type: object
+      additionalProperties: false
+      required:
+      - job_id
+      - type
+      - scheduled_at
+      properties:
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        type:
+          $ref: '#/components/schemas/Job/properties/type'
+        scheduled_at:
+          oneOf:
+          - $ref: '#/components/schemas/DateTimeAsString'
+          - $ref: '#/components/schemas/EmptyString'
+    Timestamp:
+      type: integer
+      example: 1356998400
+    User:
+      title: User
+      description: User
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_owner
+      - administrator
+      - created_at
+      - email
+      - first_name
+      - gravatar_url
+      - last_name
+      - phone
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        account_owner:
+          description: whether the user is Account owner or not
+          type: boolean
+          example: true
+        administrator:
+          description: whether the user is Administrator or not
+          type: boolean
+          example: true
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        email:
+          description: the email user uses to log in
+          type: string
+          format: email
+          example: td@example.com
+        first_name:
+          description: first name
+          type:
+          - string
+          - 'null'
+          example: Treasure
+        gravatar_url:
+          description: gravatar url
+          type: string
+          example: http://foo
+        identifier:
+          $ref: '#/components/schemas/SSOIdentifier'
+        full_qualified_identifier:
+          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
+        setting_name:
+          $ref: '#/components/schemas/SSOSettingName'
+        last_name:
+          description: last name
+          type:
+          - string
+          - 'null'
+          example: Data
+        name:
+          description: user's full name or email
+          type: string
+          example: Treasure Data
+        organization:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+        phone:
+          description: phone number
+          type:
+          - string
+          - 'null'
+          example: (650) 469-3644
+        roles:
+          deprecated: true
+          type: array
+          items:
+            type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        delegated_admin:
+          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
+          type: boolean
+          example: true
+        delegated_policy_groups:
+          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+        policy_group_tags:
+          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+    DomainKey:
+      type: string
+      example: domain_key_123
     BulkLoadConfig:
       title: BulkLoadConfig
       description: bulk load config
@@ -714,17 +647,84 @@ components:
             time_column:
               type: string
               example: time
-    Timestamp:
-      type: integer
-      example: 1356998400
-    QueryAsString:
-      description: the raw SQL query
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
       type: string
-      example: SELECT * FROM my_table;
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    ScheduleReference:
+      type: object
+      required:
+      - created_at
+      - cron
+      - database
+      - delay
+      - name
+      - query
+      - timezone
+      - type
+      - user_name
+      properties:
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Schedule/properties/database'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
+        user_name:
+          $ref: '#/components/schemas/User/properties/name'
     JobIdAsString:
       description: unique identifier of job
       type: string
       example: '19'
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
+    CreateOrUpdateScheduleRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Schedule/properties/name'
+        cron:
+          $ref: '#/components/schemas/Schedule/properties/cron'
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        delay:
+          $ref: '#/components/schemas/Schedule/properties/delay'
+        executing_user_id:
+          $ref: '#/components/schemas/Schedule/properties/executing_user_id'
+        engine_version:
+          $ref: '#/components/schemas/Schedule/properties/engine_version'
+        pool_name:
+          description: resource pool name
+          type: string
+          example: pool_1
+        priority:
+          $ref: '#/components/schemas/Schedule/properties/priority'
+        retry_limit:
+          $ref: '#/components/schemas/Schedule/properties/retry_limit'
+        query:
+          $ref: '#/components/schemas/Schedule/properties/query'
+        result:
+          description: url of the result
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          $ref: '#/components/schemas/Schedule/properties/type'
   parameters:
     path_schedule_name:
       name: schedule_name

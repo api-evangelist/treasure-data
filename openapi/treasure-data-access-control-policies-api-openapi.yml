@@ -199,43 +199,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessControlPolicy'
 components:
-  parameters:
-    path_access_control_policy_id:
-      name: policy_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/AccessControlPolicyId'
-    path_user_id:
-      name: user_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UserId'
   schemas:
-    AccountId:
-      type: integer
-      example: 123
-    UpdateAccessControlPolicyRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy
-      properties:
-        policy:
-          type: object
-          additionalProperties: false
-          properties:
-            name:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
-            description:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
-    AccessControlPolicyId:
-      type: integer
-      example: 67
-    UserId:
-      type: integer
-      example: 123
     AccessControlPolicy:
       title: Access Control Policy
       type: object
@@ -275,6 +239,9 @@ components:
           - '1'
           - '2'
           - '42'
+    UserId:
+      type: integer
+      example: 123
     CreateAccessControlPolicyRequest:
       type: object
       additionalProperties: false
@@ -291,6 +258,39 @@ components:
               $ref: '#/components/schemas/AccessControlPolicy/properties/name'
             description:
               $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    UpdateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccountId:
+      type: integer
+      example: 123
+  parameters:
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
+    path_access_control_policy_id:
+      name: policy_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/AccessControlPolicyId'
   securitySchemes:
     ApiKeyAuth:
       type: http

@@ -80,13 +80,6 @@ paths:
       - Log
 components:
   schemas:
-    RestLogFileHandleCollection:
-      type: object
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestLogFileHandle'
     RestLogFileHandle:
       type: object
       description: A log file for a task
@@ -130,6 +123,13 @@ components:
       - fileTime
       - fileTimestamp
       - taskName
+    RestLogFileHandleCollection:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestLogFileHandle'
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

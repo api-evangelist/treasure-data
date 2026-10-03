@@ -139,6 +139,29 @@ components:
       required:
       - id
       - name
+    RestWorkflowSessionTime:
+      type: object
+      description: Response of truncated_session_time API of workflows
+      properties:
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        revision:
+          type: string
+          description: revision
+          example: rev-20230101-1
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        timezone:
+          type: string
+          description: timezone
+          example: UTC
+      required:
+      - project
+      - revision
+      - sessionTime
+      - timezone
     RestWorkflowDefinition:
       type: object
       description: Response of a workflow definition
@@ -175,29 +198,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RestWorkflowDefinition'
-    RestWorkflowSessionTime:
-      type: object
-      description: Response of truncated_session_time API of workflows
-      properties:
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        revision:
-          type: string
-          description: revision
-          example: rev-20230101-1
-        sessionTime:
-          type: string
-          description: session time
-          example: '2022-12-31T23:59:00+00:00'
-        timezone:
-          type: string
-          description: timezone
-          example: UTC
-      required:
-      - project
-      - revision
-      - sessionTime
-      - timezone
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

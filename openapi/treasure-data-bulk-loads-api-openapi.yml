@@ -88,6 +88,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
     BulkLoad:
       type: object
@@ -143,26 +163,6 @@ components:
         end_at:
           type: string
           format: date-time
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Resource not found
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   securitySchemes:
     TDAuth:
       type: apiKey

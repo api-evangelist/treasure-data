@@ -122,16 +122,6 @@ paths:
     - url: https://api.ap02.treasuredata.com/v3
     - url: https://api.eu01.treasuredata.com/v3
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   schemas:
     Database:
       type: object
@@ -150,6 +140,14 @@ components:
           format: date-time
         permission:
           type: string
+    DatabaseIdAsString:
+      type: string
+      example: '7'
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
     Database_2:
       title: Database
       description: Database
@@ -215,14 +213,6 @@ components:
               type: boolean
         updated_at:
           $ref: '#/components/schemas/DateTimeAsString'
-    DatabaseIdAsString:
-      type: string
-      example: '7'
-    DateTimeAsString:
-      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
-      example: 2020-12-31 11:22:33 UTC
     DatabaseWithoutIdAndDatatank:
       title: Database
       description: Database
@@ -284,7 +274,23 @@ components:
               type: boolean
         updated_at:
           $ref: '#/components/schemas/DateTimeAsString'
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   parameters:
+    path_database_name:
+      name: database_name
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Database/properties/name'
     require_permissions:
       name: require_permissions
       in: query
@@ -292,12 +298,6 @@ components:
       schema:
         type: string
         pattern: 'true'
-    path_database_name:
-      name: database_name
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Database/properties/name'
   securitySchemes:
     TDAuth:
       type: apiKey
