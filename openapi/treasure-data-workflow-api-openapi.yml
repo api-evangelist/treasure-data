@@ -124,21 +124,6 @@ paths:
       - Workflow
 components:
   schemas:
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
     RestWorkflowSessionTime:
       type: object
       description: Response of truncated_session_time API of workflows
@@ -162,6 +147,13 @@ components:
       - revision
       - sessionTime
       - timezone
+    RestWorkflowDefinitionCollection:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestWorkflowDefinition'
     RestWorkflowDefinition:
       type: object
       description: Response of a workflow definition
@@ -191,13 +183,21 @@ components:
       - project
       - revision
       - timezone
-    RestWorkflowDefinitionCollection:
+    IdAndName:
       type: object
+      description: Name and ID
       properties:
-        workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestWorkflowDefinition'
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - id
+      - name
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

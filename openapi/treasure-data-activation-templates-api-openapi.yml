@@ -170,505 +170,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    JsonApiValidationError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - validation-error
-        status:
-          type: string
-          description: Status code for error
-          enum:
-          - '400'
-        detail:
-          type: string
-          description: Detailed error message
-          example: Name has already been taken
-        source:
-          type: object
-          properties:
-            pointer:
-              type: string
-              description: Pointer to invalid model attribute
-              example: /attributes/id
-          required:
-          - pointer
-        meta:
-          type: object
-          properties:
-            validationCode:
-              type: string
-              description: Detailed validation error code
-              enum:
-              - VIOLATES_UNIQUENESS_CONSTRAINT
-              - IS_TOO_SHORT
-              - IS_TOO_LONG
-              - CANNOT_BE_BLANK
-              - INVALID_FORMAT_OR_ASSOCIATION
-              - COMPOSITE_CONDITION_TOO_FEW_RULES_REFERENCED
-              - COMPOSITE_CONDITION_TOO_FEW_RULE_SETS_REFERENCED
-              - COMPOSITE_CONDITION_MISSING_RULE_IDENTIFIER
-              - COMPOSITE_CONDITION_SYNTAX_ERROR
-              - COMPOSITE_CONDITION_TOO_LONG_ALPHABETICAL_IDENTIFIER
-              - COMPOSITE_CONDITION_TOO_LONG_NUMERICAL_IDENTIFIER
-              - PREDICTIVE_SEGMENT_NOT_YET_SCORED
-              - PREDICTIVE_SEGMENT_NOT_YET_TRAINED
-              - IS_IMMUTABLE
-              - UNKNOWN
-              - TOO_MANY_BEHAVIOR_RULES
-              - INVALID_WINDOW_DURATION
-              - UNDEFINED_ENTRY_CRITERIA
-              - UNDEFINED_MILESTONE
-              - UNDEFINED_ACTIVATION_STEP
-              - UNDEFINED_WAIT_STEP
-              - UNDEFINED_EXIT_CRITERIA
-              - UNDEFINED_DECISION_CONDITION
-              - UNDEFINED_MERGE_POINT
-              - UNUSED_IN_ID_LINK
-              - TOO_MANY_PRIMARY_KNOWN_IDS
-              - TOO_LESS_PRIMARY_KNOWN_IDS
-              - TOO_MANY_RT_SEGMENTS
-          required:
-          - validationCode
-      required:
-      - code
-      - status
-      - detail
-      - source
-      - meta
-    NullValue:
-      type:
-      - object
-      - 'null'
-      additionalProperties: false
-      properties:
-        thisKeyNeverHit:
-          type: string
-    RepeatUnit:
-      type: string
-      description: Setting an activation repetition cycle such as "day" or "week".
-      enum:
-      - none
-      - minute
-      - hour
-      - day
-      - week
-      - month
-      - once
-    RepeatFrequency:
-      type: integer
-      description: 'Setting an activation repeat frequency.
-
-        Currently, it is set only when the repeat unit is "minute". If the repeat unit is "minute", the interval is set in minutes.
-
-        '
-      default: 1
     StartAt:
       type:
       - string
       - 'null'
       format: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
       description: cdp-api will fill some value for old syndications with ScheduleType is not NoneType. '%Y-%M-%DT%h:%m:%s' is expected.
-    ColumnExpression:
-      type: object
-      properties:
-        column:
-          type: string
-        customerGroup:
-          type:
-          - string
-          - 'null'
-        functions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FunctionExpression'
-      required:
-      - column
-    FunctionExpression:
-      oneOf:
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - +
-            - '-'
-            - '*'
-            - /
-          arg:
-            type: number
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - replace
-          search:
-            type: string
-          replacement:
-            type:
-            - string
-            - 'null'
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - substr
-          start:
-            type: number
-          length:
-            type: number
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - regexp_extract
-          pattern:
-            type: string
-          group:
-            type: number
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - day_of_week
-            - from_iso8601_timestamp
-            - ln
-            - elapsed_days
-            - td_ip_to_least_specific_subdivision_name
-            - td_ip_to_country_name
-            - td_ip_to_city_name
-            - td_ip_to_connection_type
-            - td_ip_to_domain
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - cast_as_quantitative
-          default:
-            type: number
-            format: float
-        required:
-        - function
-        - default
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - cast_as_categorical
-          default:
-            type: string
-        required:
-        - function
-        - default
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - cast_as_categorical_array
-        required:
-        - function
-      - type: object
-        properties:
-          function:
-            type: string
-            enum:
-            - if
-          op:
-            type: string
-            enum:
-            - '>'
-            - <
-            - <=
-            - '>='
-            - '='
-            - '!='
-            - is
-            - is\
-            - not
-          right_value:
-            type:
-            - number
-            - 'null'
-          then:
-            type: number
-          else:
-            type: number
-        required:
-        - function
-    JsonApiNotFoundError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - record-not-found-error
-        status:
-          type: string
-          enum:
-          - '404'
-        detail:
-          type: string
-          description: Detailed error message
-          example: Record not found
-      required:
-      - code
-      - status
-      - detail
-    JsonApiConflictError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - conflict-error
-        status:
-          type: string
-          enum:
-          - 409
-        detail:
-          type: string
-          description: Detailed error message
-          example: Deletion SegmentFolder has segments
-        meta:
-          type: object
-          description: Meta information to store conflicting ids. These fields exist only for segment deletion.
-          properties:
-            referencedByPredictiveSegments:
-              type: array
-              items:
-                type: string
-                description: Id of referenced Predictive Segment
-            referencedBySegments:
-              type: array
-              items:
-                type: string
-                description: Id of referenced Segment
-      required:
-      - code
-      - status
-      - detail
-    ActivationTemplateJsonApiResource:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - activation-template
-        attributes:
-          type: object
-          required:
-          - audienceId
-          - name
-          - description
-          - createdAt
-          - updatedAt
-          properties:
-            audienceId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            name:
-              type: string
-            description:
-              type:
-              - string
-              - 'null'
-            kind:
-              type: integer
-              description: '0: batch, 1: batch_journey'
-            allColumns:
-              description: activation all column flag  ('true' means that you use all attribute data)
-              type: boolean
-            columns:
-              oneOf:
-              - $ref: '#/components/schemas/Columns'
-              - $ref: '#/components/schemas/NullValue'
-            scheduleType:
-              $ref: '#/components/schemas/DeprecatedScheduleType'
-            scheduleOption:
-              type:
-              - string
-              - 'null'
-            timezone:
-              type:
-              - string
-              - 'null'
-            startAt:
-              $ref: '#/components/schemas/StartAt'
-            endOn:
-              type:
-              - string
-              - 'null'
-              format: date
-            repeatUnit:
-              $ref: '#/components/schemas/RepeatUnit'
-            repeatFrequency:
-              $ref: '#/components/schemas/RepeatFrequency'
-            repeatSubFrequency:
-              $ref: '#/components/schemas/RepeatSubFrequency'
-            connectionId:
-              type:
-              - string
-              - 'null'
-              pattern: '[1-9][0-9]*'
-            connectorConfig:
-              type:
-              - object
-              - 'null'
-            notifyOn:
-              type: array
-              items:
-                type: string
-                enum:
-                - onSuccess
-                - onFailure
-            emailRecipients:
-              type: array
-              items:
-                description: User ID of td-api. Not CDP-API's one.
-                type: integer
-                format: int64
-            createdAt:
-              type: string
-              format: date-time
-            updatedAt:
-              type: string
-              format: date-time
-            state:
-              type: string
-              enum:
-              - draft
-              - published
-            nestedWorkflowProjectName:
-              type:
-              - string
-              - 'null'
-            nestedWorkflowName:
-              type:
-              - string
-              - 'null'
-            activationActionsEnabled:
-              type: boolean
-            lockEnabled:
-              type: boolean
-            runAfterJourneyRefresh:
-              description: If true, this activation step will be executed immediately after the journey is refreshed. Only available for kind of journey.
-              type:
-              - boolean
-              - 'null'
-            syndicationBehavior:
-              allOf:
-              - $ref: '#/components/schemas/ActivationTemplateSyndicationBehaviorProperties'
-            fieldProperties:
-              $ref: '#/components/schemas/ActivationTemplateFieldProperties'
-            activationCount:
-              type: integer
-              description: Number of related activations
-            journeyCount:
-              type: integer
-              description: Number of related journeys
-            available:
-              type: boolean
-              description: This template is available or not (It contains PBP PII BLOCKED columns or not)
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-            createdBy:
-              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-            updatedBy:
-              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-    EntitiesGetActivationTemplateJsonApiResponse:
-      type: object
-      required:
-      - data
-      - included
-      properties:
-        data:
-          $ref: '#/components/schemas/ActivationTemplateJsonApiResource'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserJsonApiResource'
-    ActivationTemplateFieldProperties:
-      description: activation template field properties
-      type: object
-      properties:
-        locked:
-          $ref: '#/components/schemas/ActivationTemplateFieldPropertiesLocked'
-      required:
-      - locked
-    JsonApiUnprocessableEntityError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - unprocessable-entity-error
-        status:
-          type: string
-          enum:
-          - '422'
-        meta:
-          type:
-          - object
-          - 'null'
-          properties:
-            unprocessableEntityCode:
-              type: string
-              description: Detailed error code
-              enum:
-              - CANNOT_MOVE
-              - CANNOT_BE_JSONAPI
-        detail:
-          type: string
-          description: Detailed error message
-          example: parent_folder id parameter is required
-      required:
-      - code
-      - status
-      - detail
-    DeprecatedScheduleType:
-      type: string
-      deprecated: true
-      description: Deprecated. Old parameter for setting schedule type. See/Use RepeatUnit instead.
-      example: daily
-      enum:
-      - cron
-      - daily
-      - hourly
-      - minutes_interval
-      - monthly
-      - none
-      - weekly
     ActivationTemplateIndexJsonApiResponse:
       type: object
       properties:
@@ -806,30 +313,6 @@ components:
               $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
             updatedBy:
               $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-    Columns:
-      description: 'Syndication column detail. Basic syntax is `{"column": "alias_name", "source": {...}}`. `source` accepts various definitions. See ColumnExpression/StringExpression for details. example value is using ColumnExpression without `function` property.
-
-        '
-      example:
-      - column: alias_name
-        source:
-          column: real_column_name
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: string
-            format: uuid
-          column:
-            type: string
-          source:
-            anyOf:
-            - $ref: '#/components/schemas/ColumnExpression'
-            - $ref: '#/components/schemas/StringExpression'
-        required:
-        - column
-        - source
     JsonApiBadParameterError:
       type: object
       properties:
@@ -871,136 +354,51 @@ components:
       - code
       - status
       - detail
-    UserJsonApiResource:
+    JsonApiUnprocessableEntityError:
       type: object
-      required:
-      - id
-      - type
-      - attributes
       properties:
-        id:
+        code:
           type: string
-          pattern: '[1-9][0-9]*'
-        type:
+          description: Error code in string
+          enum:
+          - unprocessable-entity-error
+        status:
           type: string
           enum:
-          - user
-        attributes:
-          type: object
-          required:
-          - tdUserId
-          - name
-          properties:
-            tdUserId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            name:
-              type: string
-    ActivationTemplateSyndicationBehaviorProperties:
-      type: object
-      properties:
-        columns:
-          $ref: '#/components/schemas/Columns'
-        behaviorTableName:
-          type: string
-          description: Behavior table name which contains behavior records
-          example: purchase_history
-        joinRow:
+          - '422'
+        meta:
           type:
-          - integer
+          - object
           - 'null'
-          description: How much rows would be joined (value is N for Top-N join)
-          example: 3
-        joinStrategy:
+          properties:
+            unprocessableEntityCode:
+              type: string
+              description: Detailed error code
+              enum:
+              - CANNOT_MOVE
+              - CANNOT_BE_JSONAPI
+        detail:
           type: string
-          example: Last
-          enum:
-          - All
-          - First
-          - Last
-          - Top-N
-        formatting:
-          type: string
-          enum:
-          - rows
-          - cols
-        orderBy:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              order:
-                type: string
-                enum:
-                - ascending
-                - descending
-            example:
-              key: purchased_at
-              order: descending
-          example:
-          - key: purchased_at
-            order: descending
-          - key: price
-            order: ascending
-    RepeatSubFrequency:
-      type: array
-      description: 'Parameter for more detailed frequency settings. Values are array of integers.
-
-        Currently, this parameter is only valid for repeat unit "week".
-
-        For multiple days of the week, each value should be 1 to 7.
-
-        1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday, 7: Sunday
-
-        '
-      example:
-      - 1
-      - 5
-      - 6
-      default: []
-      items:
-        type: integer
-        format: int64
-    StringExpression:
-      type: object
-      properties:
-        string:
-          type: string
-        parameters:
-          type: array
-          description: Values for the placeholders ($1, $2, $3, ...) in the string
-          items:
-            oneOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - String
-                string:
-                  type: string
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - Timestamp
-                format:
-                  type: string
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - SegmentName
-                  - SegmentId
-                  - AudienceId
-                  - FunnelName
-                  - StageName
+          description: Detailed error message
+          example: parent_folder id parameter is required
       required:
-      - string
+      - code
+      - status
+      - detail
+    EntitiesActivationTemplateIndexJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivationTemplateIndexJsonApiResponse'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
     JsonApiMaskedValueError:
       type: object
       properties:
@@ -1043,71 +441,95 @@ components:
       - detail
       - source
       - meta
-    RelationshipsUserJsonApiResource:
-      type: object
-      properties:
-        data:
-          type:
-          - object
-          - 'null'
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - user
-    EntitiesActivationTemplateIndexJsonApiResponse:
-      type: object
-      required:
-      - data
-      - included
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivationTemplateIndexJsonApiResponse'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserJsonApiResource'
-    JsonApiPermissionError:
+    JsonApiNotFoundError:
       type: object
       properties:
         code:
           type: string
           description: Error code in string
           enum:
-          - permission-error
+          - record-not-found-error
         status:
           type: string
-          description: Status code for error
           enum:
-          - '403'
+          - '404'
         detail:
           type: string
           description: Detailed error message
-          example: SegmentFolder View Permission Required
-        meta:
-          type: object
-          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
-          properties:
-            permissionCode:
-              type: string
-              description: Detailed validation error code
-              enum:
-              - SEGMENT_FOLDER_VIEW_REQUIRED
-              - SEGMENT_FOLDER_EDIT_REQUIRED
-          required:
-          - permissionCode
+          example: Record not found
       required:
       - code
       - status
       - detail
+    JsonApiValidationError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - validation-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '400'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Name has already been taken
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+              description: Pointer to invalid model attribute
+              example: /attributes/id
+          required:
+          - pointer
+        meta:
+          type: object
+          properties:
+            validationCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - VIOLATES_UNIQUENESS_CONSTRAINT
+              - IS_TOO_SHORT
+              - IS_TOO_LONG
+              - CANNOT_BE_BLANK
+              - INVALID_FORMAT_OR_ASSOCIATION
+              - COMPOSITE_CONDITION_TOO_FEW_RULES_REFERENCED
+              - COMPOSITE_CONDITION_TOO_FEW_RULE_SETS_REFERENCED
+              - COMPOSITE_CONDITION_MISSING_RULE_IDENTIFIER
+              - COMPOSITE_CONDITION_SYNTAX_ERROR
+              - COMPOSITE_CONDITION_TOO_LONG_ALPHABETICAL_IDENTIFIER
+              - COMPOSITE_CONDITION_TOO_LONG_NUMERICAL_IDENTIFIER
+              - PREDICTIVE_SEGMENT_NOT_YET_SCORED
+              - PREDICTIVE_SEGMENT_NOT_YET_TRAINED
+              - IS_IMMUTABLE
+              - UNKNOWN
+              - TOO_MANY_BEHAVIOR_RULES
+              - INVALID_WINDOW_DURATION
+              - UNDEFINED_ENTRY_CRITERIA
+              - UNDEFINED_MILESTONE
+              - UNDEFINED_ACTIVATION_STEP
+              - UNDEFINED_WAIT_STEP
+              - UNDEFINED_EXIT_CRITERIA
+              - UNDEFINED_DECISION_CONDITION
+              - UNDEFINED_MERGE_POINT
+              - UNUSED_IN_ID_LINK
+              - TOO_MANY_PRIMARY_KNOWN_IDS
+              - TOO_LESS_PRIMARY_KNOWN_IDS
+              - TOO_MANY_RT_SEGMENTS
+          required:
+          - validationCode
+      required:
+      - code
+      - status
+      - detail
+      - source
+      - meta
     ActivationTemplateJsonApiParameters:
       type: object
       properties:
@@ -1189,39 +611,14 @@ components:
       - name
       - connectionId
       - state
-    RelationshipsFolderJsonApiResource:
-      type: object
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
       properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - folder-segment
-    EntitiesActivationTemplateUpdateRepresentation:
-      type: object
-      properties:
-        id:
+        thisKeyNeverHit:
           type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - activation-template
-        attributes:
-          $ref: '#/components/schemas/ActivationTemplateJsonApiParameters'
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
     ActivationTemplateFieldPropertiesLocked:
       description: activation template field properties locked
       type: object
@@ -1300,9 +697,612 @@ components:
           type: boolean
         lockEditSequentialActivation:
           type: boolean
+    RepeatSubFrequency:
+      type: array
+      description: 'Parameter for more detailed frequency settings. Values are array of integers.
+
+        Currently, this parameter is only valid for repeat unit "week".
+
+        For multiple days of the week, each value should be 1 to 7.
+
+        1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday, 7: Sunday
+
+        '
+      example:
+      - 1
+      - 5
+      - 6
+      default: []
+      items:
+        type: integer
+        format: int64
+    ColumnExpression:
+      type: object
+      properties:
+        column:
+          type: string
+        customerGroup:
+          type:
+          - string
+          - 'null'
+        functions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FunctionExpression'
+      required:
+      - column
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    RepeatUnit:
+      type: string
+      description: Setting an activation repetition cycle such as "day" or "week".
+      enum:
+      - none
+      - minute
+      - hour
+      - day
+      - week
+      - month
+      - once
+    EntitiesGetActivationTemplateJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/ActivationTemplateJsonApiResource'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    DeprecatedScheduleType:
+      type: string
+      deprecated: true
+      description: Deprecated. Old parameter for setting schedule type. See/Use RepeatUnit instead.
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
+    ActivationTemplateJsonApiResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - activation-template
+        attributes:
+          type: object
+          required:
+          - audienceId
+          - name
+          - description
+          - createdAt
+          - updatedAt
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            kind:
+              type: integer
+              description: '0: batch, 1: batch_journey'
+            allColumns:
+              description: activation all column flag  ('true' means that you use all attribute data)
+              type: boolean
+            columns:
+              oneOf:
+              - $ref: '#/components/schemas/Columns'
+              - $ref: '#/components/schemas/NullValue'
+            scheduleType:
+              $ref: '#/components/schemas/DeprecatedScheduleType'
+            scheduleOption:
+              type:
+              - string
+              - 'null'
+            timezone:
+              type:
+              - string
+              - 'null'
+            startAt:
+              $ref: '#/components/schemas/StartAt'
+            endOn:
+              type:
+              - string
+              - 'null'
+              format: date
+            repeatUnit:
+              $ref: '#/components/schemas/RepeatUnit'
+            repeatFrequency:
+              $ref: '#/components/schemas/RepeatFrequency'
+            repeatSubFrequency:
+              $ref: '#/components/schemas/RepeatSubFrequency'
+            connectionId:
+              type:
+              - string
+              - 'null'
+              pattern: '[1-9][0-9]*'
+            connectorConfig:
+              type:
+              - object
+              - 'null'
+            notifyOn:
+              type: array
+              items:
+                type: string
+                enum:
+                - onSuccess
+                - onFailure
+            emailRecipients:
+              type: array
+              items:
+                description: User ID of td-api. Not CDP-API's one.
+                type: integer
+                format: int64
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            state:
+              type: string
+              enum:
+              - draft
+              - published
+            nestedWorkflowProjectName:
+              type:
+              - string
+              - 'null'
+            nestedWorkflowName:
+              type:
+              - string
+              - 'null'
+            activationActionsEnabled:
+              type: boolean
+            lockEnabled:
+              type: boolean
+            runAfterJourneyRefresh:
+              description: If true, this activation step will be executed immediately after the journey is refreshed. Only available for kind of journey.
+              type:
+              - boolean
+              - 'null'
+            syndicationBehavior:
+              allOf:
+              - $ref: '#/components/schemas/ActivationTemplateSyndicationBehaviorProperties'
+            fieldProperties:
+              $ref: '#/components/schemas/ActivationTemplateFieldProperties'
+            activationCount:
+              type: integer
+              description: Number of related activations
+            journeyCount:
+              type: integer
+              description: Number of related journeys
+            available:
+              type: boolean
+              description: This template is available or not (It contains PBP PII BLOCKED columns or not)
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    EntitiesActivationTemplateUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - activation-template
+        attributes:
+          $ref: '#/components/schemas/ActivationTemplateJsonApiParameters'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    ActivationTemplateFieldProperties:
+      description: activation template field properties
+      type: object
+      properties:
+        locked:
+          $ref: '#/components/schemas/ActivationTemplateFieldPropertiesLocked'
+      required:
+      - locked
+    ActivationTemplateSyndicationBehaviorProperties:
+      type: object
+      properties:
+        columns:
+          $ref: '#/components/schemas/Columns'
+        behaviorTableName:
+          type: string
+          description: Behavior table name which contains behavior records
+          example: purchase_history
+        joinRow:
+          type:
+          - integer
+          - 'null'
+          description: How much rows would be joined (value is N for Top-N join)
+          example: 3
+        joinStrategy:
+          type: string
+          example: Last
+          enum:
+          - All
+          - First
+          - Last
+          - Top-N
+        formatting:
+          type: string
+          enum:
+          - rows
+          - cols
+        orderBy:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              order:
+                type: string
+                enum:
+                - ascending
+                - descending
+            example:
+              key: purchased_at
+              order: descending
+          example:
+          - key: purchased_at
+            order: descending
+          - key: price
+            order: ascending
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    FunctionExpression:
+      oneOf:
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - +
+            - '-'
+            - '*'
+            - /
+          arg:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - replace
+          search:
+            type: string
+          replacement:
+            type:
+            - string
+            - 'null'
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - substr
+          start:
+            type: number
+          length:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - regexp_extract
+          pattern:
+            type: string
+          group:
+            type: number
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - day_of_week
+            - from_iso8601_timestamp
+            - ln
+            - elapsed_days
+            - td_ip_to_least_specific_subdivision_name
+            - td_ip_to_country_name
+            - td_ip_to_city_name
+            - td_ip_to_connection_type
+            - td_ip_to_domain
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_quantitative
+          default:
+            type: number
+            format: float
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical
+          default:
+            type: string
+        required:
+        - function
+        - default
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - cast_as_categorical_array
+        required:
+        - function
+      - type: object
+        properties:
+          function:
+            type: string
+            enum:
+            - if
+          op:
+            type: string
+            enum:
+            - '>'
+            - <
+            - <=
+            - '>='
+            - '='
+            - '!='
+            - is
+            - is\
+            - not
+          right_value:
+            type:
+            - number
+            - 'null'
+          then:
+            type: number
+          else:
+            type: number
+        required:
+        - function
+    JsonApiConflictError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - conflict-error
+        status:
+          type: string
+          enum:
+          - 409
+        detail:
+          type: string
+          description: Detailed error message
+          example: Deletion SegmentFolder has segments
+        meta:
+          type: object
+          description: Meta information to store conflicting ids. These fields exist only for segment deletion.
+          properties:
+            referencedByPredictiveSegments:
+              type: array
+              items:
+                type: string
+                description: Id of referenced Predictive Segment
+            referencedBySegments:
+              type: array
+              items:
+                type: string
+                description: Id of referenced Segment
+      required:
+      - code
+      - status
+      - detail
+    StringExpression:
+      type: object
+      properties:
+        string:
+          type: string
+        parameters:
+          type: array
+          description: Values for the placeholders ($1, $2, $3, ...) in the string
+          items:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - String
+                string:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Timestamp
+                format:
+                  type: string
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - SegmentName
+                  - SegmentId
+                  - AudienceId
+                  - FunnelName
+                  - StageName
+      required:
+      - string
+    RepeatFrequency:
+      type: integer
+      description: 'Setting an activation repeat frequency.
+
+        Currently, it is set only when the repeat unit is "minute". If the repeat unit is "minute", the interval is set in minutes.
+
+        '
+      default: 1
+    Columns:
+      description: 'Syndication column detail. Basic syntax is `{"column": "alias_name", "source": {...}}`. `source` accepts various definitions. See ColumnExpression/StringExpression for details. example value is using ColumnExpression without `function` property.
+
+        '
+      example:
+      - column: alias_name
+        source:
+          column: real_column_name
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          column:
+            type: string
+          source:
+            anyOf:
+            - $ref: '#/components/schemas/ColumnExpression'
+            - $ref: '#/components/schemas/StringExpression'
+        required:
+        - column
+        - source
+    JsonApiPermissionError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - permission-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '403'
+        detail:
+          type: string
+          description: Detailed error message
+          example: SegmentFolder View Permission Required
+        meta:
+          type: object
+          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
+          properties:
+            permissionCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - SEGMENT_FOLDER_VIEW_REQUIRED
+              - SEGMENT_FOLDER_EDIT_REQUIRED
+          required:
+          - permissionCode
+      required:
+      - code
+      - status
+      - detail
   responses:
-    JsonApiUnprocessableRequest:
-      description: The specified resource has unprocessable entities
+    JsonApiForbiddenRequest:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
       content:
         application/json:
           schema:
@@ -1311,7 +1311,23 @@ components:
               errors:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JsonApiUnprocessableEntityError'
+                  $ref: '#/components/schemas/JsonApiPermissionError'
+            required:
+            - errors
+    JsonApiBadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/JsonApiBadParameterError'
+                  - $ref: '#/components/schemas/JsonApiMaskedValueError'
+                  - $ref: '#/components/schemas/JsonApiValidationError'
             required:
             - errors
     JsonApiConflictRequest:
@@ -1367,8 +1383,8 @@ components:
                   $ref: '#/components/schemas/JsonApiConflictError'
             required:
             - errors
-    JsonApiForbiddenRequest:
-      description: Requested resource or action is not allowed because you don't have sufficient permissions
+    JsonApiNotFoundRequest:
+      description: The specified resource is not found
       content:
         application/json:
           schema:
@@ -1377,11 +1393,11 @@ components:
               errors:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JsonApiPermissionError'
+                  $ref: '#/components/schemas/JsonApiNotFoundError'
             required:
             - errors
-    JsonApiBadRequest:
-      description: Given parameters are not valid
+    JsonApiUnprocessableRequest:
+      description: The specified resource has unprocessable entities
       content:
         application/json:
           schema:
@@ -1390,10 +1406,7 @@ components:
               errors:
                 type: array
                 items:
-                  oneOf:
-                  - $ref: '#/components/schemas/JsonApiBadParameterError'
-                  - $ref: '#/components/schemas/JsonApiMaskedValueError'
-                  - $ref: '#/components/schemas/JsonApiValidationError'
+                  $ref: '#/components/schemas/JsonApiUnprocessableEntityError'
             required:
             - errors
     ServerError:
@@ -1416,19 +1429,6 @@ components:
             required:
             - status
             - error
-    JsonApiNotFoundRequest:
-      description: The specified resource is not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  $ref: '#/components/schemas/JsonApiNotFoundError'
-            required:
-            - errors
   parameters:
     ParentSegmentId:
       name: parentSegmentId

@@ -695,30 +695,6 @@ paths:
     - url: https://api.ap02.treasuredata.com/v3
     - url: https://api.eu01.treasuredata.com/v3
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Resource not found
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    5XX:
-      description: Server Error
-    4XX:
-      description: Client Error
   schemas:
     Table:
       type: object
@@ -737,114 +713,6 @@ components:
           format: date-time
         estimated_storage_size:
           type: integer
-    TableReference:
-      title: Table reference
-      type: object
-      additionalProperties: false
-      required:
-      - database
-      - table
-      - type
-      properties:
-        database:
-          $ref: '#/components/schemas/Database/properties/name'
-        table:
-          $ref: '#/components/schemas/Table/properties/name'
-        type:
-          $ref: '#/components/schemas/Table/properties/type'
-    DeletedTable:
-      title: Deleted Table
-      description: A deleted recoverable table
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      - name
-      - database_id
-      - database_name
-      - deleted_at
-      - created_at
-      properties:
-        id:
-          $ref: '#/components/schemas/TableId'
-        name:
-          $ref: '#/components/schemas/Table/properties/name'
-        database_id:
-          type: integer
-          example: 42
-        database_name:
-          $ref: '#/components/schemas/Database/properties/name'
-        deleted_at:
-          description: when the table was deleted
-          $ref: '#/components/schemas/DateTimeAsString'
-        created_at:
-          description: when the table was created
-          $ref: '#/components/schemas/DateTimeAsString'
-    Database:
-      title: Database
-      description: Database
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - created_at
-      - delete_protected
-      - name
-      - organization
-      - permission
-      - updated_at
-      properties:
-        count:
-          description: ???
-          type: integer
-          example: 5
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        delete_protected:
-          description: wheter the database is delete protected
-          type: boolean
-          example: true
-        datatank:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/DatabaseIdAsString'
-        name:
-          description: database name
-          type: string
-          example: Alpha
-        organization:
-          description: the organization
-          type:
-          - string
-          - 'null'
-          example: Treasure Data
-        permission:
-          description: permissions
-          type:
-          - string
-          - 'null'
-        database_permissions:
-          description: permissions
-          type: object
-          additionalProperties: true
-          properties:
-            edit:
-              description: edit permission for database
-              type: boolean
-            delete:
-              description: delete permission for database
-              type: boolean
-            query:
-              description: query permission for database
-              type: boolean
-            import:
-              description: import permission for database
-              type: boolean
-            download:
-              description: download permission for database
-              type: boolean
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
     Table_2:
       title: Table
       description: Table
@@ -918,34 +786,97 @@ components:
           example: log
         updated_at:
           $ref: '#/components/schemas/DateTimeAsString'
-    TransferTableResponse:
-      type: object
-      properties:
-        database_name:
-          type: string
-        table_name:
-          type: string
-    TableSchemaAsString:
-      description: A JSON serialization of the Table Schema
-      type: string
-      example: '[["name", "string", "first_name"], ["creation_date", "long"]]'
-    ColumnSchema:
+    DeletedTablesWithCursor:
+      title: Deleted Tables with Cursor
+      description: A paginated list of deleted tables
       type: object
       additionalProperties: false
       required:
-      - key
-      - type
-      - name
+      - tables
+      - cursor_id
       properties:
-        key:
-          type: string
-          example: age
-        type:
-          type: string
-          example: integer
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeletedTable'
+        cursor_id:
+          description: ID of the last table in this page; pass as cursor_id to get the next page, or null if this is the last page
+          type:
+          - integer
+          - 'null'
+          example: 456
+    IdempotentKey:
+      type: string
+    DateTimeISO8601:
+      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
+      example: '2020-12-31T11:22:33Z'
+    Database:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: ???
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: wheter the database is delete protected
+          type: boolean
+          example: true
+        datatank:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/DatabaseIdAsString'
         name:
+          description: database name
           type: string
-          example: age
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
     TableSchemaAsArray:
       type: array
       items:
@@ -956,23 +887,6 @@ components:
         - first_name
       - - creation_date
         - long
-    DateTimeISO8601:
-      description: Datetime in ISO 8601 format (`2020-12-31T11:22:33-05:00` or `2020-12-31T11:22:33Z` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(([+-]\d{2}:\d{2})|Z)
-      example: '2020-12-31T11:22:33Z'
-    ColumnSchemaAsArray:
-      description: An array with (in order) `[name, type, alias, description]` of a column. `Alias` and `description` are optional.
-      type: array
-      minItems: 2
-      maxItems: 4
-      items:
-        type: string
-      example:
-      - name
-      - string
-      - first_name
-      - User's name column
     RecoveredTable:
       title: Recovered Table
       description: Recovered table; call GET /table/show/{database}/{table} for full details including schema
@@ -1016,6 +930,57 @@ components:
           $ref: '#/components/schemas/Table/properties/delete_protected'
         type:
           $ref: '#/components/schemas/Table/properties/type'
+    TableReference:
+      title: Table reference
+      type: object
+      additionalProperties: false
+      required:
+      - database
+      - table
+      - type
+      properties:
+        database:
+          $ref: '#/components/schemas/Database/properties/name'
+        table:
+          $ref: '#/components/schemas/Table/properties/name'
+        type:
+          $ref: '#/components/schemas/Table/properties/type'
+    TransferTableResponse:
+      type: object
+      properties:
+        database_name:
+          type: string
+        table_name:
+          type: string
+    ColumnSchema:
+      type: object
+      additionalProperties: false
+      required:
+      - key
+      - type
+      - name
+      properties:
+        key:
+          type: string
+          example: age
+        type:
+          type: string
+          example: integer
+        name:
+          type: string
+          example: age
+    ColumnSchemaAsArray:
+      description: An array with (in order) `[name, type, alias, description]` of a column. `Alias` and `description` are optional.
+      type: array
+      minItems: 2
+      maxItems: 4
+      items:
+        type: string
+      example:
+      - name
+      - string
+      - first_name
+      - User's name column
     AnyValue:
       description: Can be any value, including `null`.
       anyOf:
@@ -1029,25 +994,38 @@ components:
         items:
           $ref: '#/components/schemas/AnyValue'
       - type: object
-    DeletedTablesWithCursor:
-      title: Deleted Tables with Cursor
-      description: A paginated list of deleted tables
+    TableSchemaAsString:
+      description: A JSON serialization of the Table Schema
+      type: string
+      example: '[["name", "string", "first_name"], ["creation_date", "long"]]'
+    DeletedTable:
+      title: Deleted Table
+      description: A deleted recoverable table
       type: object
       additionalProperties: false
       required:
-      - tables
-      - cursor_id
+      - id
+      - name
+      - database_id
+      - database_name
+      - deleted_at
+      - created_at
       properties:
-        tables:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeletedTable'
-        cursor_id:
-          description: ID of the last table in this page; pass as cursor_id to get the next page, or null if this is the last page
-          type:
-          - integer
-          - 'null'
-          example: 456
+        id:
+          $ref: '#/components/schemas/TableId'
+        name:
+          $ref: '#/components/schemas/Table/properties/name'
+        database_id:
+          type: integer
+          example: 42
+        database_name:
+          $ref: '#/components/schemas/Database/properties/name'
+        deleted_at:
+          description: when the table was deleted
+          $ref: '#/components/schemas/DateTimeAsString'
+        created_at:
+          description: when the table was created
+          $ref: '#/components/schemas/DateTimeAsString'
     DateTimeAsString:
       description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
       type: string
@@ -1056,18 +1034,31 @@ components:
     TableId:
       type: integer
       example: 11
-    IdempotentKey:
-      type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    5XX:
+      description: Server Error
+    4XX:
+      description: Client Error
   parameters:
-    header_authorization_TD1:
-      name: Authorization
-      description: TD1 Authorization Header
-      in: header
-      required: false
-      schema:
-        type: string
-        pattern: ^TD1 [0-9a-f/]+$
-        example: TD1 123/456789xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     path_table_name:
       name: table_name
       in: path
@@ -1080,6 +1071,15 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Database/properties/name'
+    header_authorization_TD1:
+      name: Authorization
+      description: TD1 Authorization Header
+      in: header
+      required: false
+      schema:
+        type: string
+        pattern: ^TD1 [0-9a-f/]+$
+        example: TD1 123/456789xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   securitySchemes:
     TDAuth:
       type: apiKey

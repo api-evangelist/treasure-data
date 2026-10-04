@@ -263,53 +263,6 @@ paths:
       - Pool
 components:
   schemas:
-    RestPoolRuleWorkflowTypeCondition:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the condition.
-          enum:
-          - invocation_type
-          - project_name
-          - workflow_name
-          - workflow_type
-        values:
-          type: array
-          description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
-          items:
-            type: string
-            description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
-            enum:
-            - ab_test
-            - audience
-            - customer_journey
-            - engage
-            - predictive_scoring
-            - realtime
-            - segment_insights
-            - syndication
-      required:
-      - type
-      - values
-    RestPoolCreateRequest:
-      type: object
-      properties:
-        concurrencyLimit:
-          type: integer
-          format: int32
-          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
-          example: 10
-          minimum: 1
-        name:
-          type: string
-          description: Name of the pool. This name must be unique within the account.
-          example: activation
-          maxLength: 256
-          minLength: 1
-      required:
-      - concurrencyLimit
-      - name
     RestPoolRuleInvocationTypeCondition:
       type: object
       properties:
@@ -331,61 +284,6 @@ components:
             - on_demand
             - scheduled
       required:
-      - type
-      - values
-    RestPool:
-      type: object
-      properties:
-        concurrencyLimit:
-          type: integer
-          format: int32
-          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
-          example: 10
-          minimum: 1
-        default:
-          type: boolean
-          description: Whether the pool is the default pool.
-          example: true
-        id:
-          type: string
-          description: ID of the pool.
-          example: '42'
-          minimum: 1
-        name:
-          type: string
-          description: Name of the pool. This name must be unique within the account.
-          example: activation
-          maxLength: 256
-          minLength: 1
-      required:
-      - concurrencyLimit
-      - default
-      - id
-      - name
-    RestPoolRuleWorkflowNameCondition:
-      type: object
-      properties:
-        operator:
-          type: string
-          description: Operator to use for matching the workflow name.
-          enum:
-          - starts_with
-        type:
-          type: string
-          description: Type of the condition.
-          enum:
-          - invocation_type
-          - project_name
-          - workflow_name
-          - workflow_type
-        values:
-          type: array
-          description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
-          items:
-            type: string
-            description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
-      required:
-      - operator
       - type
       - values
     RestPoolRuleProjectNameCondition:
@@ -440,6 +338,140 @@ components:
       - conditions
       - poolId
       - priority
+    RestPoolRuleUpdateRequest:
+      type: object
+      properties:
+        conditions:
+          type: array
+          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
+          items:
+            $ref: '#/components/schemas/RestPoolRuleCondition'
+          maxItems: 2
+          minItems: 1
+        poolId:
+          type: string
+          description: ID of the pool that this rule assigns attempts to.
+          example: '42'
+          minimum: 1
+        priority:
+          type: integer
+          format: int32
+          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
+          example: 10
+          maximum: 10000
+          minimum: 1
+    RestPoolRuleWorkflowNameCondition:
+      type: object
+      properties:
+        operator:
+          type: string
+          description: Operator to use for matching the workflow name.
+          enum:
+          - starts_with
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+          items:
+            type: string
+            description: Values to match against the workflow name. If multiple values are provided, the condition is met if the workflow name matches one of the provided values.
+      required:
+      - operator
+      - type
+      - values
+    RestPoolRuleWorkflowTypeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the condition.
+          enum:
+          - invocation_type
+          - project_name
+          - workflow_name
+          - workflow_type
+        values:
+          type: array
+          description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
+          items:
+            type: string
+            description: Workflow types to match against. If multiple values are provided, the condition is met if the workflow type is one of the provided workflow types.
+            enum:
+            - ab_test
+            - audience
+            - customer_journey
+            - engage
+            - predictive_scoring
+            - realtime
+            - segment_insights
+            - syndication
+      required:
+      - type
+      - values
+    RestPoolCreateRequest:
+      type: object
+      properties:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
+      required:
+      - concurrencyLimit
+      - name
+    RestPoolCollection:
+      type: object
+      properties:
+        pools:
+          type: array
+          description: List of pools.
+          items:
+            $ref: '#/components/schemas/RestPool'
+      required:
+      - pools
+    RestPoolRuleCollection:
+      type: object
+      properties:
+        poolRules:
+          type: array
+          description: List of pool rules.
+          items:
+            $ref: '#/components/schemas/RestPoolRule'
+      required:
+      - poolRules
+    RestPoolRuleCondition:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+      - $ref: '#/components/schemas/RestPoolRuleProjectNameCondition'
+      - $ref: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+      - $ref: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+      discriminator:
+        mapping:
+          invocation_type: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
+          project_name: '#/components/schemas/RestPoolRuleProjectNameCondition'
+          workflow_name: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
+          workflow_type: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+      - type
     RestPoolRule:
       type: object
       properties:
@@ -472,48 +504,6 @@ components:
       - id
       - poolId
       - priority
-    RestPoolRuleUpdateRequest:
-      type: object
-      properties:
-        conditions:
-          type: array
-          description: Conditions that must be met for the rule to assign an attempt to a pool. If multiple conditions are specified, all conditions must be met.
-          items:
-            $ref: '#/components/schemas/RestPoolRuleCondition'
-          maxItems: 2
-          minItems: 1
-        poolId:
-          type: string
-          description: ID of the pool that this rule assigns attempts to.
-          example: '42'
-          minimum: 1
-        priority:
-          type: integer
-          format: int32
-          description: Priority of the rule. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority.
-          example: 10
-          maximum: 10000
-          minimum: 1
-    RestPoolCollection:
-      type: object
-      properties:
-        pools:
-          type: array
-          description: List of pools.
-          items:
-            $ref: '#/components/schemas/RestPool'
-      required:
-      - pools
-    RestPoolRuleCollection:
-      type: object
-      properties:
-        poolRules:
-          type: array
-          description: List of pool rules.
-          items:
-            $ref: '#/components/schemas/RestPoolRule'
-      required:
-      - poolRules
     RestPoolUpdateRequest:
       type: object
       properties:
@@ -529,25 +519,35 @@ components:
           example: activation
           maxLength: 256
           minLength: 1
-    RestPoolRuleCondition:
+    RestPool:
       type: object
-      anyOf:
-      - $ref: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
-      - $ref: '#/components/schemas/RestPoolRuleProjectNameCondition'
-      - $ref: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
-      - $ref: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
-      discriminator:
-        mapping:
-          invocation_type: '#/components/schemas/RestPoolRuleInvocationTypeCondition'
-          project_name: '#/components/schemas/RestPoolRuleProjectNameCondition'
-          workflow_name: '#/components/schemas/RestPoolRuleWorkflowNameCondition'
-          workflow_type: '#/components/schemas/RestPoolRuleWorkflowTypeCondition'
-        propertyName: type
       properties:
-        type:
+        concurrencyLimit:
+          type: integer
+          format: int32
+          description: Maximum number of concurrent attempts that can run in this pool. Total concurrency limit of all pools cannot exceed the account's concurrency limit.
+          example: 10
+          minimum: 1
+        default:
+          type: boolean
+          description: Whether the pool is the default pool.
+          example: true
+        id:
           type: string
+          description: ID of the pool.
+          example: '42'
+          minimum: 1
+        name:
+          type: string
+          description: Name of the pool. This name must be unique within the account.
+          example: activation
+          maxLength: 256
+          minLength: 1
       required:
-      - type
+      - concurrencyLimit
+      - default
+      - id
+      - name
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

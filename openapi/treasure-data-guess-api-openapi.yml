@@ -61,32 +61,74 @@ paths:
       operationId: postV1Guess
       x-operation-id-source: derived
 components:
+  responses:
+    '401':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: API Key isn't set on the request
+              message: API Key isn't set on the request
+    '403':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: Forbidden
+              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              title: Internal Server Error
+              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              title: Not Found
+              message: No route matches [GET] "/abc".
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              title: Parameter Error
+              message: Data validation error, verify fields and try again.
   schemas:
-    AdvancedConfigs:
-      type: array
-      description: "The DWH Integration advanced configs. The configs contain array of \nof table configs which combine with the basic configs will be used to create Connector Bulkload Session.\n"
-      items:
-        type: object
-        properties:
-          target_table:
-            description: The name of the TD table to import data into.
-            type: string
-          config:
-            title: Advanced Config
-            description: 'The configuration which will merge with the basic_configs to form a complete Connector configuration for Bulkload job.
-
-              Some of the config from the basic_configs can declare here to override the basic_configs.
-
-              '
-            type: object
-            discriminator:
-              propertyName: type
-              mapping:
-                snowflake: '#/components/schemas/advanced'
-                databricks: '#/components/schemas/advanced-2'
-            oneOf:
-            - $ref: '#/components/schemas/snowflake/properties/advanced'
-            - $ref: '#/components/schemas/databricks/properties/advanced'
+    BasicConfigs:
+      type: object
+      description: The basic configs of the DWH Integration.
+      discriminator:
+        propertyName: type
+        mapping:
+          snowflake: '#/components/schemas/basic'
+          databricks: '#/components/schemas/basic-2'
+      oneOf:
+      - $ref: '#/components/schemas/snowflake/properties/basic'
+      - $ref: '#/components/schemas/databricks/properties/basic'
     snowflake:
       type: object
       title: Snowflake
@@ -177,21 +219,26 @@ components:
                 - insert_null
                 - ignore_row
                 default: fail_job
-    GuessResult:
-      type: object
-      description: The result of Guess operation
-      properties:
-        basic_configs:
-          $ref: '#/components/schemas/BasicConfigs'
-        advanced_configs:
-          $ref: '#/components/schemas/AdvancedConfigs'
-      additionalProperties: false
-    Advanced:
+    Error:
       type: object
       properties:
-        type:
+        code:
+          type: integer
+          description: The HTTP status code
+        title:
           type: string
-          description: Connector type, e.g. snowflake, redshift
+          description: The error title
+        message:
+          description: The error message
+          anyOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        detail:
+          description: Any extra infomation of the error
+          type: object
+          additionalProperties: true
+      additionalProperties: false
     databricks:
       type: object
       title: Databricks
@@ -278,42 +325,6 @@ components:
                 - number
                 - boolean
                 - 'null'
-    BasicConfigs:
-      type: object
-      description: The basic configs of the DWH Integration.
-      discriminator:
-        propertyName: type
-        mapping:
-          snowflake: '#/components/schemas/basic'
-          databricks: '#/components/schemas/basic-2'
-      oneOf:
-      - $ref: '#/components/schemas/snowflake/properties/basic'
-      - $ref: '#/components/schemas/databricks/properties/basic'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code
-        title:
-          type: string
-          description: The error title
-        message:
-          description: The error message
-          anyOf:
-          - type: string
-          - type: object
-            additionalProperties: true
-        detail:
-          description: Any extra infomation of the error
-          type: object
-          additionalProperties: true
-      additionalProperties: false
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
     Basic:
       type: object
       properties:
@@ -326,62 +337,51 @@ components:
       required:
       - type
       - td_authentication_id
-  responses:
-    '401':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: API Key isn't set on the request
-              message: API Key isn't set on the request
-    '403':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: Forbidden
-              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              title: Not Found
-              message: No route matches [GET] "/abc".
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              title: Parameter Error
-              message: Data validation error, verify fields and try again.
-    '500':
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              title: Internal Server Error
-              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    GuessResult:
+      type: object
+      description: The result of Guess operation
+      properties:
+        basic_configs:
+          $ref: '#/components/schemas/BasicConfigs'
+        advanced_configs:
+          $ref: '#/components/schemas/AdvancedConfigs'
+      additionalProperties: false
+    Advanced:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Connector type, e.g. snowflake, redshift
+    AdvancedConfigs:
+      type: array
+      description: "The DWH Integration advanced configs. The configs contain array of \nof table configs which combine with the basic configs will be used to create Connector Bulkload Session.\n"
+      items:
+        type: object
+        properties:
+          target_table:
+            description: The name of the TD table to import data into.
+            type: string
+          config:
+            title: Advanced Config
+            description: 'The configuration which will merge with the basic_configs to form a complete Connector configuration for Bulkload job.
+
+              Some of the config from the basic_configs can declare here to override the basic_configs.
+
+              '
+            type: object
+            discriminator:
+              propertyName: type
+              mapping:
+                snowflake: '#/components/schemas/advanced'
+                databricks: '#/components/schemas/advanced-2'
+            oneOf:
+            - $ref: '#/components/schemas/snowflake/properties/advanced'
+            - $ref: '#/components/schemas/databricks/properties/advanced'
   securitySchemes:
     apiKey:
       type: apiKey

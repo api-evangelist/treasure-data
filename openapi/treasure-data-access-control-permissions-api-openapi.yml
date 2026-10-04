@@ -93,26 +93,6 @@ paths:
                 $ref: '#/components/schemas/AccessControlPermissions'
 components:
   schemas:
-    AccessControlColumnPermission:
-      type: object
-      additionalProperties: false
-      required:
-      - tags
-      properties:
-        tags:
-          type: array
-          items:
-            type: string
-        except:
-          type:
-          - boolean
-          - 'null'
-        masking:
-          type:
-          - string
-          - 'null'
-          enum:
-          - hash
     AccessControlPermissions:
       title: Access Control Permissions
       type: object
@@ -523,6 +503,26 @@ components:
                 type: string
                 description: ID of the Audience (MasterSegmentConfig) to grant raw data access
                 example: '123'
+    AccessControlColumnPermission:
+      type: object
+      additionalProperties: false
+      required:
+      - tags
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        except:
+          type:
+          - boolean
+          - 'null'
+        masking:
+          type:
+          - string
+          - 'null'
+          enum:
+          - hash
     AccessControlPolicyId:
       type: integer
       example: 67

@@ -200,6 +200,22 @@ paths:
                 $ref: '#/components/schemas/AccessControlPolicy'
 components:
   schemas:
+    CreateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          required:
+          - name
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
     AccessControlPolicy:
       title: Access Control Policy
       type: object
@@ -225,39 +241,9 @@ components:
           description: The number of users which the policy attaches to
           type: integer
           example: 3
-    UpdateAccessControlPoliciesRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy_ids
-      properties:
-        policy_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - '1'
-          - '2'
-          - '42'
     UserId:
       type: integer
       example: 123
-    CreateAccessControlPolicyRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy
-      properties:
-        policy:
-          type: object
-          additionalProperties: false
-          required:
-          - name
-          properties:
-            name:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
-            description:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
     UpdateAccessControlPolicyRequest:
       type: object
       additionalProperties: false
@@ -272,12 +258,26 @@ components:
               $ref: '#/components/schemas/AccessControlPolicy/properties/name'
             description:
               $ref: '#/components/schemas/AccessControlPolicy/properties/description'
-    AccessControlPolicyId:
-      type: integer
-      example: 67
+    UpdateAccessControlPoliciesRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy_ids
+      properties:
+        policy_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - '1'
+          - '2'
+          - '42'
     AccountId:
       type: integer
       example: 123
+    AccessControlPolicyId:
+      type: integer
+      example: 67
   parameters:
     path_user_id:
       name: user_id

@@ -170,6 +170,52 @@ paths:
       - Attempt
 components:
   schemas:
+    Resume:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/ResumeFrom'
+      - $ref: '#/components/schemas/ResumeFailed'
+      description: 'Configuration to resume an attempt. {"mode": "failed", "attemptId": "12345"} or {"mode": "from", "attemptId": "12345", "from": "+t1"}'
+      discriminator:
+        mapping:
+          failed: '#/components/schemas/ResumeFailed'
+          from: '#/components/schemas/ResumeFrom'
+        propertyName: mode
+      properties:
+        mode:
+          type: string
+          description: 'mode: "from" or "failed"'
+          enum:
+          - from
+          - failed
+          example: failed
+      required:
+      - attemptId
+      - mode
+    ResumeFailed:
+      type: object
+      description: Configuration to resume an attempt from the failed task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        mode:
+          type: string
+          description: '"failed" (fixed value)'
+          enum:
+          - from
+          - failed
+      required:
+      - attemptId
+      - mode
+    RestTaskCollection:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestTask'
     RestSessionAttemptRequest:
       type: object
       description: Request body for new attempt
@@ -207,6 +253,27 @@ components:
       required:
       - params
       - sessionTime
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    NameOptionalId:
+      type: object
+      description: Name and optional ID
+      properties:
+        id:
+          type: string
+          description: ID
+          example: '123456'
+        name:
+          type: string
+          description: name
+          example: abcdefg
+      required:
+      - name
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -294,66 +361,6 @@ components:
       - status
       - success
       - workflow
-    RestTaskCollection:
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestTask'
-    ResumeFrom:
-      type: object
-      description: Configuration to resume an attempt from the specified task
-      properties:
-        attemptId:
-          type: string
-          description: attemptId
-          example: '12345'
-        from:
-          type: string
-          description: the task name to resume
-        mode:
-          type: string
-          description: '"from" (fixed value)'
-          enum:
-          - from
-          - failed
-      required:
-      - attemptId
-      - from
-      - mode
-    ResumeFailed:
-      type: object
-      description: Configuration to resume an attempt from the failed task
-      properties:
-        attemptId:
-          type: string
-          description: attemptId
-          example: '12345'
-        mode:
-          type: string
-          description: '"failed" (fixed value)'
-          enum:
-          - from
-          - failed
-      required:
-      - attemptId
-      - mode
-    IdAndName:
-      type: object
-      description: Name and ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - id
-      - name
     RestTask:
       type: object
       description: Response of a task
@@ -432,31 +439,30 @@ components:
       - storeParams
       - updatedAt
       - upstreams
-    Resume:
+    ResumeFrom:
       type: object
-      anyOf:
-      - $ref: '#/components/schemas/ResumeFrom'
-      - $ref: '#/components/schemas/ResumeFailed'
-      description: 'Configuration to resume an attempt. {"mode": "failed", "attemptId": "12345"} or {"mode": "from", "attemptId": "12345", "from": "+t1"}'
-      discriminator:
-        mapping:
-          failed: '#/components/schemas/ResumeFailed'
-          from: '#/components/schemas/ResumeFrom'
-        propertyName: mode
+      description: Configuration to resume an attempt from the specified task
       properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        from:
+          type: string
+          description: the task name to resume
         mode:
           type: string
-          description: 'mode: "from" or "failed"'
+          description: '"from" (fixed value)'
           enum:
           - from
           - failed
-          example: failed
       required:
       - attemptId
+      - from
       - mode
-    NameOptionalId:
+    IdAndName:
       type: object
-      description: Name and optional ID
+      description: Name and ID
       properties:
         id:
           type: string
@@ -467,14 +473,8 @@ components:
           description: name
           example: abcdefg
       required:
+      - id
       - name
-    RestSessionAttemptCollection:
-      type: object
-      properties:
-        attempts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

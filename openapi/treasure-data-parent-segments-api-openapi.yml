@@ -144,25 +144,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ParentSegmentJsonApiResource'
-    ScheduleType:
-      type: string
-      example: daily
-      enum:
-      - cron
-      - daily
-      - hourly
-      - minutes_interval
-      - monthly
-      - none
-      - weekly
-    NullValue:
-      type:
-      - object
-      - 'null'
-      additionalProperties: false
-      properties:
-        thisKeyNeverHit:
-          type: string
     User:
       type: object
       properties:
@@ -174,22 +155,14 @@ components:
           pattern: '[1-9][0-9]*'
         name:
           type: string
-    RelationshipsFolderJsonApiResource:
-      type: object
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
       properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - folder-segment
+        thisKeyNeverHit:
+          type: string
     SegmentFolderReadRepresentation:
       type: object
       properties:
@@ -228,6 +201,17 @@ components:
           oneOf:
           - $ref: '#/components/schemas/User'
           - $ref: '#/components/schemas/NullValue'
+    ScheduleType:
+      type: string
+      example: daily
+      enum:
+      - cron
+      - daily
+      - hourly
+      - minutes_interval
+      - monthly
+      - none
+      - weekly
     ParentSegmentJsonApiResource:
       type: object
       required:
@@ -306,6 +290,22 @@ components:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
             parentSegmentFolder:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
   securitySchemes:
     TdApikeyAuth:
       type: apiKey

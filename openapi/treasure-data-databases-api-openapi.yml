@@ -143,11 +143,67 @@ components:
     DatabaseIdAsString:
       type: string
       example: '7'
-    DateTimeAsString:
-      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
-      type: string
-      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
-      example: 2020-12-31 11:22:33 UTC
+    DatabaseWithoutIdAndDatatank:
+      title: Database
+      description: Database
+      type: object
+      additionalProperties: false
+      required:
+      - count
+      - created_at
+      - delete_protected
+      - name
+      - organization
+      - permission
+      - updated_at
+      properties:
+        count:
+          description: the number of records in the database
+          type: integer
+          example: 5
+        created_at:
+          $ref: '#/components/schemas/DateTimeAsString'
+        delete_protected:
+          description: whether the database is delete protected
+          type: boolean
+          example: true
+        name:
+          description: database name
+          type: string
+          example: Alpha
+        organization:
+          description: the organization
+          type:
+          - string
+          - 'null'
+          example: Treasure Data
+        permission:
+          description: permissions
+          type:
+          - string
+          - 'null'
+        database_permissions:
+          description: permissions
+          type: object
+          additionalProperties: true
+          properties:
+            edit:
+              description: edit permission for database
+              type: boolean
+            delete:
+              description: delete permission for database
+              type: boolean
+            query:
+              description: query permission for database
+              type: boolean
+            import:
+              description: import permission for database
+              type: boolean
+            download:
+              description: download permission for database
+              type: boolean
+        updated_at:
+          $ref: '#/components/schemas/DateTimeAsString'
     Database_2:
       title: Database
       description: Database
@@ -213,67 +269,11 @@ components:
               type: boolean
         updated_at:
           $ref: '#/components/schemas/DateTimeAsString'
-    DatabaseWithoutIdAndDatatank:
-      title: Database
-      description: Database
-      type: object
-      additionalProperties: false
-      required:
-      - count
-      - created_at
-      - delete_protected
-      - name
-      - organization
-      - permission
-      - updated_at
-      properties:
-        count:
-          description: the number of records in the database
-          type: integer
-          example: 5
-        created_at:
-          $ref: '#/components/schemas/DateTimeAsString'
-        delete_protected:
-          description: whether the database is delete protected
-          type: boolean
-          example: true
-        name:
-          description: database name
-          type: string
-          example: Alpha
-        organization:
-          description: the organization
-          type:
-          - string
-          - 'null'
-          example: Treasure Data
-        permission:
-          description: permissions
-          type:
-          - string
-          - 'null'
-        database_permissions:
-          description: permissions
-          type: object
-          additionalProperties: true
-          properties:
-            edit:
-              description: edit permission for database
-              type: boolean
-            delete:
-              description: delete permission for database
-              type: boolean
-            query:
-              description: query permission for database
-              type: boolean
-            import:
-              description: import permission for database
-              type: boolean
-            download:
-              description: download permission for database
-              type: boolean
-        updated_at:
-          $ref: '#/components/schemas/DateTimeAsString'
+    DateTimeAsString:
+      description: Datetime in custom format (`2020-12-31 11:22:33 -0500` or `2020-12-31 11:22:33 UTC` for UTC)
+      type: string
+      pattern: \d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s(([+-]\d{2}\d{2})|UTC)
+      example: 2020-12-31 11:22:33 UTC
   responses:
     Unauthorized:
       description: Authentication required or API key invalid

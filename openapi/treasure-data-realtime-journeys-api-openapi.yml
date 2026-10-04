@@ -940,32 +940,227 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    partial_realtime_journey.yaml-RealtimeSettingAttributes:
+    partial_realtime_journey.yaml-RealtimeJourneyABTestVariantsJsonApiResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - realtimeJourneyABTestVariant
+        attributes:
+          type: object
+          required:
+          - realtimeJourneyId
+          - realtimeJourneyStageId
+          - name
+          - location
+          properties:
+            name:
+              type: string
+            location:
+              type: string
+            realtimeJourneyId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            realtimeJourneyName:
+              type: string
+            realtimeJourneyStageId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            realtimeJourneyStageName:
+              type: string
+            realtimeJourneyStepId:
+              type: string
+            realtimeJourneyStepName:
+              type: string
+            realtimeJourneyStepVariantId:
+              type: string
+            realtimeJourneyStepVariantName:
+              type: string
+            realtimejourneyState:
+              type: string
+              enum:
+              - draft
+              - launched
+            realtimejourneyPaused:
+              type: boolean
+    partial_pagination.yaml-PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            nextPage:
+              type:
+              - string
+              - 'null'
+              description: The path part of URL of the next page
+          required:
+          - nextPage
+      required:
+      - data
+      - pagination
+    partial_realtime_journey.yaml-RealtimeJourneyAttributes:
       type: object
       required:
-      - keyColumns
-      - eventTables
-      - batchAttributes
-      - extLookupKey
+      - audienceId
+      - segmentFolderId
+      - name
+      - description
+      - goal
+      - realtimeJourneyStages
+      - reentryMode
       properties:
-        keyColumns:
-          type: array
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeKeyColumn'
-        eventTables:
-          type: array
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeEventTable'
-        batchAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeBatchAttribute'
-        extLookupKey:
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        segmentFolderId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+        description:
           type:
           - string
           - 'null'
-          description: one of the attribute of the audience. It can be null at first but once set it cannot be null again.
+        goal:
+          anyOf:
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteriaWithTarget'
+          - type:
+            - object
+            - 'null'
+            additionalProperties: false
+        realtimeJourneyStages:
+          type: array
+          minLength: 1
+          maxLength: 8
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStageAttributes'
+        reentryMode:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyReentryMode'
       additionalProperties: false
+    partial_realtime_journey.yaml-MergeStep:
+      type: object
+      required:
+      - type
+      - next
+      properties:
+        type:
+          enum:
+          - Merge
+        next:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeListAttributeAggregation:
+      type: object
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
+        aggregationType:
+          type: string
+          enum:
+          - first
+          - last
+          - sum
+          - min
+          - max
+          - distinct_list
+        column:
+          type: string
+    partial_realtime_journey.yaml-RealtimeJourneyDuplicateJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: source journey id
+        type:
+          type: string
+          enum:
+          - journey
+        attributes:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    partial_realtime_journey.yaml-RealtimeSingleAttributes:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - single
+          realtimeKeyEventId:
+            type: string
+          filterRule:
+            type: object
+          valueColumn:
+            type: string
+          dataType:
+            type: string
+            enum:
+            - number
+            - string
+          duration:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+          backfill:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
+    partial_realtime_journey.yaml-RealtimeJourneyCriteriaWithTarget:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
+      - type:
+        - object
+        - 'null'
+        properties:
+          target:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
+    partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria:
+      type: object
+      properties:
+        keyEventId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        keyEventFilters:
+          type: object
+          description: 'TODO: something like ION?'
+          properties:
+            todo:
+              type: string
+    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpLinkResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - realtime-journey-jump-link
     partial_realtime_journey.yaml-RealtimeKeyEventAttributes:
       type: object
       required:
@@ -985,46 +1180,60 @@ components:
           properties:
             todo:
               type: string
-    partial_realtime_journey.yaml-JumpStep:
+    partial_realtime_journey.yaml-RealtimeJourneyActivationStepAttributes:
       type: object
       required:
-      - type
+      - connectionId
+      - connectorType
+      - connector
       properties:
-        type:
-          enum:
-          - Jump
         name:
           type: string
         description:
           type:
           - string
           - 'null'
-        target:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeImportedAttributes:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - imported
-    partial_realtime_journey.yaml-RealtimeAttributeDurationSetting:
+        stepUuid:
+          type: string
+        connectionId:
+          type: string
+        connectorType:
+          type: string
+        connector:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeActivationParameters'
+    partial_realtime_journey.yaml-RealtimeDecisionPointBranch:
       type: object
       properties:
-        value:
-          type: integer
-        unit:
+        id:
           type: string
-          enum:
-          - hour
-          - day
-          - minute
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        profileCriteria:
+          anyOf:
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
+          - type:
+            - object
+            - 'null'
+            description: for draft
+        excludedPath:
+          type: boolean
+        next:
+          type:
+          - string
+          - 'null'
       required:
-      - value
-      - unit
+      - id
+      - name
+      - profileCriteria
+      - excludedPath
+      - next
+      additionalProperties: false
     partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes:
       type: object
       properties:
@@ -1087,51 +1296,172 @@ components:
       - backfill
       - subDurations
       additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyJumpTarget:
-      type:
-      - object
-      - 'null'
-      properties:
-        realtimeJourneyId:
-          type: string
-        realtimeJourneyStageId:
-          type: string
-        confirmed:
-          type: boolean
-      required:
-      - realtimeJourneyId
-      - realtimeJourneyStageId
-      - confirmed
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeAttributeAttributes:
-      oneOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeImportedAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSingleAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes'
-      discriminator:
-        propertyName: type
-        mapping:
-          imported: '#/components/schemas/partial_realtime_journey.yaml-RealtimeImportedAttributes'
-          single: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSingleAttributes'
-          list: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributes'
-          counter: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributes'
-          lookupCatalog: '#/components/schemas/partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes'
-    partial_realtime_journey.yaml-RealtimeJourneyActivationStepResource:
+    partial_realtime_journey.yaml-RealtimeActivationParameters:
       type: object
+      properties:
+        exportJson:
+          type:
+          - string
+          - 'null'
+        exportAdvancedJson:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpLinksMeta:
+      type: object
+      properties:
+        targetStageInfo:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              destinationRealtimeJourneyName:
+                type:
+                - string
+                - 'null'
+              destinationRealtimeJourneyStageName:
+                type:
+                - string
+                - 'null'
+              destinationSegmentFolderName:
+                type:
+                - string
+                - 'null'
+              deleted:
+                type: boolean
+              deletedByTdUserId:
+                type:
+                - string
+                - 'null'
+              deletedByTdUserName:
+                type:
+                - string
+                - 'null'
+            required:
+            - destinationRealtimeJourneyName
+            - destinationRealtimeJourneyStageName
+            - destinationSegmentFolderName
+            - deleted
+            - deletedByTdUserId
+            - deletedByTdUserName
+            additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyReentryMode:
+      type: string
+      enum:
+      - no_reentry
+      - reentry_unless_goal_achieved
+      - reentry_always
+    partial_realtime_journey.yaml-RealtimeJourneyWaitStep:
+      type: object
+      required:
+      - type
+      - waitStep
+      - waitStepUnit
+      properties:
+        type:
+          type: string
+          enum:
+          - WaitStep
+        waitStep:
+          type: integer
+        waitStepUnit:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+        next:
+          type: string
+    partial_realtime_journey.yaml-RealtimeJourneyReadonlyAttributes:
+      type: object
+      required:
+      - state
+      - createdAt
+      - updatedAt
+      - paused
+      - pausedAt
+      - launchedAt
+      properties:
+        state:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyState'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        paused:
+          type: boolean
+        pausedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        launchedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyActivationStep:
+      type: object
+      required:
+      - type
+      - journeyActivationStepId
+      properties:
+        type:
+          enum:
+          - TriggeredActivation
+        journeyActivationStepId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        next:
+          type: string
+    partial_realtime_journey.yaml-RealtimeJourneyStageAttributes:
+      type: object
+      required:
+      - name
       properties:
         id:
           type: string
           pattern: '[1-9][0-9]*'
-        type:
+        name:
           type: string
-          enum:
-          - realtime-journey-activation-step
-        attributes:
+        description:
+          type: string
+        steps:
           allOf:
-          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStepAttributes'
-          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStepReadonlyAttributes'
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStep'
+          - example:
+              58AB9022-B48D-430A-A879-2E13D08CD2C1:
+                type: WaitStep
+                name: Wait 1 hour
+                waitStep: 1
+                waitStepUnit: hour
+                next: 428CA341-3C3E-4D38-8D88-A035CE83A1FF
+              428CA341-3C3E-4D38-8D88-A035CE83A1FF:
+                type: TriggeredActivation
+                name: Send mail
+                journeyActivationStepId: '123'
+        rootStep:
+          type:
+          - string
+          - 'null'
+          example: 58AB9022-B48D-430A-A879-2E13D08CD2C1
+        entryCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
+        milestone:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
+        exitCriterias:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStaleCriteria'
+            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCustomExitCriteria'
+        orderIndex:
+          type: integer
+      additionalProperties: false
     partial_realtime_journey.yaml-RealtimeJourneyResource:
       type: object
       properties:
@@ -1196,6 +1526,146 @@ components:
               - data
               - meta
           additionalProperties: false
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting:
+      oneOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
+      discriminator:
+        propertyName: type
+        mapping:
+          const: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
+          field: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
+    partial_realtime_journey.yaml-RealtimeSetting:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            pattern: '[1-9][0-9]*'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSettingAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSettingReadonlyAttributes'
+    partial_realtime_journey.yaml-EndStep:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          enum:
+          - End
+    partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - lookupCatalog
+          lookupCatalogTableName:
+            type: string
+          lookupCatalogColumns:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                dataType:
+                  type: string
+              required:
+              - name
+              - dataType
+          lookupKeys:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                type:
+                  type: string
+              required:
+              - id
+              - type
+    ColumnType:
+      type: string
+      description: Type of the column
+      enum:
+      - string
+      - number
+      - timestamp
+      - date
+      - string_array
+      - number_array
+      - boolean
+    partial_realtime_journey.yaml-RealtimeCounterAttributes:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - counter
+          realtimeKeyEventId:
+            type: string
+          filterRule:
+            type: object
+          counterType:
+            type: string
+            enum:
+            - sliding
+            - total
+            default: sliding
+          increment:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting'
+          duration:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+          backfill:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
+          subDurations:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  identifier:
+                    type: string
+                required:
+                - name
+                - identifier
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - field
+        value:
+          type: string
+      required:
+      - type
+      - value
+      additionalProperties: false
     partial_realtime_journey.yaml-RealtimeKeyColumn:
       type: object
       required:
@@ -1215,88 +1685,36 @@ components:
         internal:
           type: boolean
       additionalProperties: false
-    partial_realtime_journey.yaml-EntitiesGetRealtimeJourneyABTestVariantsJsonApiResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyABTestVariantsJsonApiResource'
-    RelationshipsFolderJsonApiResource:
-      type: object
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - folder-segment
-    partial_realtime_journey.yaml-RealtimeDecisionPointStep:
-      type: object
-      required:
-      - type
-      - branches
-      properties:
-        type:
-          enum:
-          - DecisionPoint
-        branches:
-          type: array
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeDecisionPointBranch'
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - field
-        value:
-          type: string
-      required:
-      - type
-      - value
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeListAttributeAggregation:
+    partial_realtime_journey.yaml-RealtimeJourneyCustomExitCriteria:
       type: object
       properties:
         name:
-          type: string
-        identifier:
-          type: string
-        aggregationType:
-          type: string
-          enum:
-          - first
-          - last
-          - sum
-          - min
-          - max
-          - distinct_list
+          type:
+          - string
+          - 'null'
+        keyEventCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria'
+        profileCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
+        target:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
+      required:
+      - name
+      - keyEventCriteria
+      - profileCriteria
+      - target
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeBatchAttribute:
+      type: object
+      properties:
         column:
           type: string
-    partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting:
-      type:
-      - object
-      - 'null'
-      properties:
-        attributeIdentifier:
-          type: string
-        timestampIdentifier:
-          type: string
+        name:
+          type:
+          - string
+          - 'null'
       required:
-      - attributeIdentifier
-      - timestampIdentifier
+      - column
       additionalProperties: false
     partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes:
       type: object
@@ -1354,66 +1772,160 @@ components:
       - actions
       - aggregations
       additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeSetting:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            pattern: '[1-9][0-9]*'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSettingAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSettingReadonlyAttributes'
-    partial_realtime_journey.yaml-RealtimeJourneyWaitStep:
+    partial_realtime_journey.yaml-RealtimeJourneyStageDetailAttributes:
       type: object
       required:
-      - type
-      - waitStep
-      - waitStepUnit
-      properties:
-        type:
-          type: string
-          enum:
-          - WaitStep
-        waitStep:
-          type: integer
-        waitStepUnit:
-          type: string
-          enum:
-          - minute
-          - hour
-          - day
-        next:
-          type: string
-    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting:
-      oneOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
-      discriminator:
-        propertyName: type
-        mapping:
-          const: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst'
-          field: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingField'
-    partial_realtime_journey.yaml-RealtimeJourneyStep:
-      type: object
-      additionalProperties:
-        oneOf:
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyWaitStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeDecisionPointStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-MergeStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-JumpStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-EndStep'
-        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeABTest'
-    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpLinkResource:
-      type: object
+      - name
       properties:
         id:
           type: string
-          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeABTestVariant:
+      type: object
+      required:
+      - id
+      - name
+      - percentage
+      - isControlGroup
+      - next
+      properties:
+        id:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+        isControlGroup:
+          type:
+          - boolean
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeAttributeAttributes:
+      oneOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeImportedAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSingleAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes'
+      discriminator:
+        propertyName: type
+        mapping:
+          imported: '#/components/schemas/partial_realtime_journey.yaml-RealtimeImportedAttributes'
+          single: '#/components/schemas/partial_realtime_journey.yaml-RealtimeSingleAttributes'
+          list: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributes'
+          counter: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributes'
+          lookupCatalog: '#/components/schemas/partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes'
+    partial_realtime_journey.yaml-RealtimeJourneyDetailAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        realtimeJourneyStages:
+          type: array
+          minLength: 1
+          maxLength: 8
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStageDetailAttributes'
+    partial_realtime_journey.yaml-JumpStep:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          enum:
+          - Jump
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        target:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeAttributesBase:
+      type: object
+      required:
+      - name
+      - identifier
+      - type
+      properties:
+        name:
+          type: string
+        identifier:
+          type: string
         type:
           type: string
+        description:
+          type:
+          - string
+          - 'null'
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    partial_realtime_journey.yaml-RealtimeListAttributeFields:
+      type: array
+      items:
+        type: string
+        minLength: 1
+    partial_realtime_journey.yaml-RealtimeListAttributeAggregations:
+      type: array
+      items:
+        $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeAggregation'
+    partial_realtime_journey.yaml-RealtimeAttributeDurationSetting:
+      type: object
+      properties:
+        value:
+          type: integer
+        unit:
+          type: string
           enum:
-          - realtime-journey-jump-link
+          - hour
+          - day
+          - minute
+      required:
+      - value
+      - unit
+    partial_realtime_journey.yaml-RealtimeListAttributeActions:
+      type: array
+      items:
+        type: object
+        properties:
+          action:
+            type: string
+            enum:
+            - delete_item
+            - clear
+          realtimeKeyEventId:
+            type: string
+          filterRule:
+            type: object
+        required:
+        - action
+        - realtimeKeyEventId
+        - filterRule
+        additionalProperties: false
     partial_realtime_journey.yaml-RealtimeEventTable:
       type: object
       properties:
@@ -1425,253 +1937,129 @@ components:
       - database
       - table
       additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeListAttributes:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - list
-          realtimeKeyEventId:
-            type: string
-          filterRule:
-            type: object
-          idColumn:
-            type: string
-          fields:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeFields'
-          duration:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
-          maxItems:
-            type: number
-            format: int64
-          actions:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeActions'
-          aggregations:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeAggregations'
-    partial_realtime_journey.yaml-RealtimeJourneyStageAttributes:
+    partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes:
       type: object
-      required:
-      - name
       properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
         name:
           type: string
-        description:
+        identifier:
           type: string
-        steps:
-          allOf:
-          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStep'
-          - example:
-              58AB9022-B48D-430A-A879-2E13D08CD2C1:
-                type: WaitStep
-                name: Wait 1 hour
-                waitStep: 1
-                waitStepUnit: hour
-                next: 428CA341-3C3E-4D38-8D88-A035CE83A1FF
-              428CA341-3C3E-4D38-8D88-A035CE83A1FF:
-                type: TriggeredActivation
-                name: Send mail
-                journeyActivationStepId: '123'
-        rootStep:
+        description:
           type:
           - string
           - 'null'
-          example: 58AB9022-B48D-430A-A879-2E13D08CD2C1
-        entryCriteria:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
-        milestone:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
-        exitCriterias:
-          type: array
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStaleCriteria'
-            - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCustomExitCriteria'
-        orderIndex:
-          type: integer
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeSingleAttributes:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - single
-          realtimeKeyEventId:
-            type: string
-          filterRule:
-            type: object
-          valueColumn:
-            type: string
-          dataType:
-            type: string
-            enum:
-            - number
-            - string
-          duration:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
-          backfill:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
-    partial_realtime_journey.yaml-RealtimeJourneyABTestVariantsJsonApiResource:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
         type:
           type: string
           enum:
-          - realtimeJourneyABTestVariant
-        attributes:
+          - single
+        notation:
+          type: string
+        realtimeKeyEventId:
+          type: string
+        sensitive:
+          type: boolean
+          enum:
+          - true
+          - false
+        filterRule:
           type: object
-          required:
-          - realtimeJourneyId
-          - realtimeJourneyStageId
-          - name
-          - location
-          properties:
-            name:
-              type: string
-            location:
-              type: string
-            realtimeJourneyId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            realtimeJourneyName:
-              type: string
-            realtimeJourneyStageId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            realtimeJourneyStageName:
-              type: string
-            realtimeJourneyStepId:
-              type: string
-            realtimeJourneyStepName:
-              type: string
-            realtimeJourneyStepVariantId:
-              type: string
-            realtimeJourneyStepVariantName:
-              type: string
-            realtimejourneyState:
-              type: string
-              enum:
-              - draft
-              - launched
-            realtimejourneyPaused:
-              type: boolean
-    partial_realtime_journey.yaml-RealtimeJourneyCriteria:
-      type:
-      - object
-      - 'null'
-      properties:
-        name:
+        valueColumn:
           type: string
-        description:
-          type: string
-        keyEventCriteria:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria'
-        profileCriteria:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
-        acceptUnknownProfiles:
-          type:
-          - boolean
-          - 'null'
-      required:
-      - name
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeSettingReadonlyAttributes:
-      type: object
-      required:
-      - status
-      - statusDetailed
-      properties:
-        status:
+        dataType:
           type: string
           enum:
-          - initialized
-          - updating
-          - ok
-          - inconsistent
-          - not_initialized
-        statusDetailed:
-          type:
-          - object
-          - 'null'
-          description: Detailed status information from realtime-api
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyDuplicateJsonApiResource:
-      type: object
+          - number
+          - string
+        duration:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+        backfill:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
       required:
-      - id
+      - name
+      - identifier
       - type
-      - attributes
-      - relationships
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-          description: source journey id
-        type:
-          type: string
-          enum:
-          - journey
-        attributes:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-    ColumnType:
-      type: string
-      description: Type of the column
-      enum:
-      - string
-      - number
-      - timestamp
-      - date
-      - string_array
-      - number_array
-      - boolean
-    partial_realtime_journey.yaml-RealtimeJourneyActivationStepAttributes:
+      - notation
+      - realtimeKeyEventId
+      - filterRule
+      - valueColumn
+      - dataType
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeKeyEventColumn:
       type: object
+      properties:
+        queryAs:
+          type: string
+        dataColumn:
+          type: string
+        dataType:
+          $ref: '#/components/schemas/ColumnType'
       required:
-      - connectionId
-      - connectorType
-      - connector
+      - queryAs
+      - dataColumn
+      - dataType
+      additionalProperties: false
+    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpFromsMeta:
+      type: array
+      items:
+        type: object
+        properties:
+          sourceJourneyId:
+            type: string
+          sourceJourneyName:
+            type: string
+          sourceJourneyState:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyState'
+          sourceJourneyStageId:
+            type:
+            - string
+            - 'null'
+            description: null only when jump from goal
+          sourceJourneyStageName:
+            type:
+            - string
+            - 'null'
+            description: null only when jump from goal
+          sourceJourneyFolderId:
+            type: string
+          sourceJourneyFolderName:
+            type: string
+          targetJourneyStageId:
+            type: string
+          jumpFrom:
+            type: string
+            enum:
+            - exit_criteria
+            - jump_step
+            - goal
+          jumpName:
+            type: string
+        additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeImportedAttributes:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - imported
+    partial_realtime_journey.yaml-RealtimeJourneyStaleCriteria:
+      type: object
       properties:
         name:
-          type: string
-        description:
           type:
           - string
           - 'null'
-        stepUuid:
+        unit:
           type: string
-        connectionId:
-          type: string
-        connectorType:
-          type: string
-        connector:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeActivationParameters'
-    partial_realtime_journey.yaml-RealtimeJourneyReentryMode:
-      type: string
-      enum:
-      - no_reentry
-      - reentry_unless_goal_achieved
-      - reentry_always
+          enum:
+          - minute
+          - hour
+          - day
+        exitAfter:
+          type: integer
+          minimum: 1
+      additionalProperties: false
     partial_realtime_journey.yaml-RealtimeJourneyActivationStepReadonlyAttributes:
       type: object
       properties:
@@ -1684,67 +2072,6 @@ components:
           - 'null'
           pattern: '[1-9][0-9]*'
           description: null until used in the RT Journey
-    partial_realtime_journey.yaml-RealtimeLookupCatalogAttributes:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - lookupCatalog
-          lookupCatalogTableName:
-            type: string
-          lookupCatalogColumns:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                dataType:
-                  type: string
-              required:
-              - name
-              - dataType
-          lookupKeys:
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                type:
-                  type: string
-              required:
-              - id
-              - type
-    partial_realtime_journey.yaml-RealtimeActivationParameters:
-      type: object
-      properties:
-        exportJson:
-          type:
-          - string
-          - 'null'
-        exportAdvancedJson:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    partial_realtime_journey.yaml-MergeStep:
-      type: object
-      required:
-      - type
-      - next
-      properties:
-        type:
-          enum:
-          - Merge
-        next:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes:
       type: object
       properties:
@@ -1796,21 +2123,47 @@ components:
       - dataType
       - notation
       additionalProperties: false
-    User:
-      type: object
+    partial_realtime_journey.yaml-RealtimeJourneyState:
+      type: string
+      enum:
+      - draft
+      - launched
+    partial_realtime_journey.yaml-RealtimeJourneyJumpTarget:
+      type:
+      - object
+      - 'null'
       properties:
-        id:
+        realtimeJourneyId:
           type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
+        realtimeJourneyStageId:
           type: string
-          pattern: '[1-9][0-9]*'
+        confirmed:
+          type: boolean
+      required:
+      - realtimeJourneyId
+      - realtimeJourneyStageId
+      - confirmed
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyCriteria:
+      type:
+      - object
+      - 'null'
+      properties:
         name:
           type: string
-    partial_realtime_journey.yaml-RealtimeListAttributeAggregations:
-      type: array
-      items:
-        $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeAggregation'
+        description:
+          type: string
+        keyEventCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria'
+        profileCriteria:
+          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
+        acceptUnknownProfiles:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - name
+      additionalProperties: false
     partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes:
       type: object
       properties:
@@ -1863,485 +2216,15 @@ components:
       - lookupCatalogColumns
       - lookupKeys
       additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyCriteriaWithTarget:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteria'
-      - type:
-        - object
-        - 'null'
-        properties:
-          target:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
-    partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria:
-      type: object
-      properties:
-        keyEventId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        keyEventFilters:
-          type: object
-          description: 'TODO: something like ION?'
-          properties:
-            todo:
-              type: string
-    partial_realtime_journey.yaml-RealtimeBatchAttribute:
-      type: object
-      properties:
-        column:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-      required:
-      - column
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeABTestVariant:
+    partial_realtime_journey.yaml-EntitiesGetRealtimeJourneyABTestVariantsJsonApiResponse:
       type: object
       required:
-      - id
-      - name
-      - percentage
-      - isControlGroup
-      - next
-      properties:
-        id:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-        isControlGroup:
-          type:
-          - boolean
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeDecisionPointBranch:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        profileCriteria:
-          anyOf:
-          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
-          - type:
-            - object
-            - 'null'
-            description: for draft
-        excludedPath:
-          type: boolean
-        next:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      - profileCriteria
-      - excludedPath
-      - next
-      additionalProperties: false
-    partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-        identifier:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-          enum:
-          - single
-        notation:
-          type: string
-        realtimeKeyEventId:
-          type: string
-        sensitive:
-          type: boolean
-          enum:
-          - true
-          - false
-        filterRule:
-          type: object
-        valueColumn:
-          type: string
-        dataType:
-          type: string
-          enum:
-          - number
-          - string
-        duration:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
-        backfill:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
-      required:
-      - name
-      - identifier
-      - type
-      - notation
-      - realtimeKeyEventId
-      - filterRule
-      - valueColumn
-      - dataType
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyActivationStep:
-      type: object
-      required:
-      - type
-      - journeyActivationStepId
-      properties:
-        type:
-          enum:
-          - TriggeredActivation
-        journeyActivationStepId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        next:
-          type: string
-    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpFromsMeta:
-      type: array
-      items:
-        type: object
-        properties:
-          sourceJourneyId:
-            type: string
-          sourceJourneyName:
-            type: string
-          sourceJourneyState:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyState'
-          sourceJourneyStageId:
-            type:
-            - string
-            - 'null'
-            description: null only when jump from goal
-          sourceJourneyStageName:
-            type:
-            - string
-            - 'null'
-            description: null only when jump from goal
-          sourceJourneyFolderId:
-            type: string
-          sourceJourneyFolderName:
-            type: string
-          targetJourneyStageId:
-            type: string
-          jumpFrom:
-            type: string
-            enum:
-            - exit_criteria
-            - jump_step
-            - goal
-          jumpName:
-            type: string
-        additionalProperties: false
-    partial_pagination.yaml-PaginatedResponse:
-      type: object
+      - data
       properties:
         data:
           type: array
           items:
-            type: object
-        pagination:
-          type: object
-          properties:
-            nextPage:
-              type:
-              - string
-              - 'null'
-              description: The path part of URL of the next page
-          required:
-          - nextPage
-      required:
-      - data
-      - pagination
-    partial_realtime_journey.yaml-ParentSegmentRealtimeAttributeAttributes:
-      oneOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
-      discriminator:
-        propertyName: type
-        mapping:
-          single: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
-          list: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
-          counter: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
-          imported: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
-          lookupCatalog: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
-    partial_realtime_journey.yaml-RealtimeListAttributeFields:
-      type: array
-      items:
-        type: string
-        minLength: 1
-    partial_realtime_journey.yaml-RealtimeCounterAttributes:
-      allOf:
-      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - counter
-          realtimeKeyEventId:
-            type: string
-          filterRule:
-            type: object
-          counterType:
-            type: string
-            enum:
-            - sliding
-            - total
-            default: sliding
-          increment:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSetting'
-          duration:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
-          backfill:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting'
-          subDurations:
-            type: array
-            items:
-              allOf:
-              - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
-              - type: object
-                properties:
-                  name:
-                    type: string
-                  identifier:
-                    type: string
-                required:
-                - name
-                - identifier
-    partial_realtime_journey.yaml-RealtimeKeyEventColumn:
-      type: object
-      properties:
-        queryAs:
-          type: string
-        dataColumn:
-          type: string
-        dataType:
-          $ref: '#/components/schemas/ColumnType'
-      required:
-      - queryAs
-      - dataColumn
-      - dataType
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyStaleCriteria:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        unit:
-          type: string
-          enum:
-          - minute
-          - hour
-          - day
-        exitAfter:
-          type: integer
-          minimum: 1
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyState:
-      type: string
-      enum:
-      - draft
-      - launched
-    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - const
-        value:
-          type: number
-          format: int
-          minimum: 1
-      required:
-      - type
-      - value
-      additionalProperties: false
-    partial_realtime_journey.yaml-RelationshipsRealtimeJourneyJumpLinksMeta:
-      type: object
-      properties:
-        targetStageInfo:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              destinationRealtimeJourneyName:
-                type:
-                - string
-                - 'null'
-              destinationRealtimeJourneyStageName:
-                type:
-                - string
-                - 'null'
-              destinationSegmentFolderName:
-                type:
-                - string
-                - 'null'
-              deleted:
-                type: boolean
-              deletedByTdUserId:
-                type:
-                - string
-                - 'null'
-              deletedByTdUserName:
-                type:
-                - string
-                - 'null'
-            required:
-            - destinationRealtimeJourneyName
-            - destinationRealtimeJourneyStageName
-            - destinationSegmentFolderName
-            - deleted
-            - deletedByTdUserId
-            - deletedByTdUserName
-            additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeAttributesBase:
-      type: object
-      required:
-      - name
-      - identifier
-      - type
-      properties:
-        name:
-          type: string
-        identifier:
-          type: string
-        type:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        createdBy:
-          $ref: '#/components/schemas/User'
-        updatedBy:
-          $ref: '#/components/schemas/User'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-    partial_realtime_journey.yaml-RealtimeJourneyDetailAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        realtimeJourneyStages:
-          type: array
-          minLength: 1
-          maxLength: 8
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStageDetailAttributes'
-    partial_realtime_journey.yaml-RealtimeJourneyCustomExitCriteria:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        keyEventCriteria:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyKeyEventCriteria'
-        profileCriteria:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAndBatchIon'
-        target:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyJumpTarget'
-      required:
-      - name
-      - keyEventCriteria
-      - profileCriteria
-      - target
-      additionalProperties: false
-    partial_realtime_journey.yaml-EndStep:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          enum:
-          - End
-    partial_realtime_journey.yaml-RealtimeJourneyAttributes:
-      type: object
-      required:
-      - audienceId
-      - segmentFolderId
-      - name
-      - description
-      - goal
-      - realtimeJourneyStages
-      - reentryMode
-      properties:
-        audienceId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        segmentFolderId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        goal:
-          anyOf:
-          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyCriteriaWithTarget'
-          - type:
-            - object
-            - 'null'
-            additionalProperties: false
-        realtimeJourneyStages:
-          type: array
-          minLength: 1
-          maxLength: 8
-          items:
-            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyStageAttributes'
-        reentryMode:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyReentryMode'
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyStageDetailAttributes:
-      type: object
-      required:
-      - name
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeAndBatchIon:
-      type: object
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyABTestVariantsJsonApiResource'
     partial_realtime_journey.yaml-RealtimeABTest:
       type: object
       required:
@@ -2366,69 +2249,209 @@ components:
           - boolean
           - 'null'
       additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeListAttributeActions:
-      type: array
-      items:
-        type: object
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    partial_realtime_journey.yaml-RealtimeJourneyActivationStepResource:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - realtime-journey-activation-step
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStepAttributes'
+          - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStepReadonlyAttributes'
+    partial_realtime_journey.yaml-RealtimeListAttributes:
+      allOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributesBase'
+      - type: object
         properties:
-          action:
+          type:
             type: string
             enum:
-            - delete_item
-            - clear
+            - list
           realtimeKeyEventId:
             type: string
           filterRule:
             type: object
-        required:
-        - action
-        - realtimeKeyEventId
-        - filterRule
-        additionalProperties: false
-    partial_realtime_journey.yaml-RealtimeJourneyReadonlyAttributes:
+          idColumn:
+            type: string
+          fields:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeFields'
+          duration:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeAttributeDurationSetting'
+          maxItems:
+            type: number
+            format: int64
+          actions:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeActions'
+          aggregations:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeListAttributeAggregations'
+    partial_realtime_journey.yaml-RealtimeCounterAttributeIncrementSettingConst:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - const
+        value:
+          type: number
+          format: int
+          minimum: 1
+      required:
+      - type
+      - value
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeJourneyStep:
+      type: object
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyWaitStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyActivationStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeDecisionPointStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-MergeStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-JumpStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-EndStep'
+        - $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeABTest'
+    partial_realtime_journey.yaml-RealtimeSettingReadonlyAttributes:
       type: object
       required:
-      - state
-      - createdAt
-      - updatedAt
-      - paused
-      - pausedAt
-      - launchedAt
+      - status
+      - statusDetailed
       properties:
-        state:
-          $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeJourneyState'
-        createdAt:
+        status:
           type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        paused:
-          type: boolean
-        pausedAt:
+          enum:
+          - initialized
+          - updating
+          - ok
+          - inconsistent
+          - not_initialized
+        statusDetailed:
           type:
-          - string
+          - object
           - 'null'
-          format: date-time
-        launchedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
+          description: Detailed status information from realtime-api
       additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeSettingAttributes:
+      type: object
+      required:
+      - keyColumns
+      - eventTables
+      - batchAttributes
+      - extLookupKey
+      properties:
+        keyColumns:
+          type: array
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeKeyColumn'
+        eventTables:
+          type: array
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeEventTable'
+        batchAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeBatchAttribute'
+        extLookupKey:
+          type:
+          - string
+          - 'null'
+          description: one of the attribute of the audience. It can be null at first but once set it cannot be null again.
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeDecisionPointStep:
+      type: object
+      required:
+      - type
+      - branches
+      properties:
+        type:
+          enum:
+          - DecisionPoint
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/partial_realtime_journey.yaml-RealtimeDecisionPointBranch'
+      additionalProperties: false
+    partial_realtime_journey.yaml-RealtimeAttributeBackfillSetting:
+      type:
+      - object
+      - 'null'
+      properties:
+        attributeIdentifier:
+          type: string
+        timestampIdentifier:
+          type: string
+      required:
+      - attributeIdentifier
+      - timestampIdentifier
+      additionalProperties: false
+    partial_realtime_journey.yaml-ParentSegmentRealtimeAttributeAttributes:
+      oneOf:
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
+      - $ref: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
+      discriminator:
+        propertyName: type
+        mapping:
+          single: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeSingleAttributeAttributes'
+          list: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeListAttributeAttributes'
+          counter: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeCounterAttributeAttributes'
+          imported: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeImportedAttributeAttributes'
+          lookupCatalog: '#/components/schemas/partial_realtime_journey.yaml-ParentSegmentRealtimeLookupCatalogAttributeAttributes'
+    partial_realtime_journey.yaml-RealtimeAndBatchIon:
+      type: object
   parameters:
-    partial_realtime_journey.yaml-RealtimeJourneyActivationStepId:
-      name: realtimeJourneyActivationStepId
+    partial_realtime_journey.yaml-RealtimeKeyEventId:
+      name: realtimeKeyEventId
       in: path
-      description: Realtime JourneyActivationStep ID
+      description: Realtime Key Event ID
       required: true
       schema:
         type: integer
         format: int64
-    AudienceId:
-      name: audienceId
+    ParentSegmentId:
+      name: parentSegmentId
       in: path
-      description: Audience ID
+      description: Parent Segment ID (audience id)
+      required: true
+      schema:
+        type: integer
+        format: int64
+    partial_pagination.yaml-PageAfter:
+      name: page[after]
+      in: query
+      description: A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.
+      required: false
+      schema:
+        type: string
+    partial_realtime_journey.yaml-RealtimeJourneyId:
+      name: realtimeJourneyId
+      in: path
+      description: Realtime Journey ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    partial_realtime_journey.yaml-RealtimeJourneyActivationStepId:
+      name: realtimeJourneyActivationStepId
+      in: path
+      description: Realtime JourneyActivationStep ID
       required: true
       schema:
         type: integer
@@ -2457,33 +2480,10 @@ components:
       required: false
       schema:
         type: string
-    partial_pagination.yaml-PageAfter:
-      name: page[after]
-      in: query
-      description: A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.
-      required: false
-      schema:
-        type: string
-    partial_realtime_journey.yaml-RealtimeKeyEventId:
-      name: realtimeKeyEventId
+    AudienceId:
+      name: audienceId
       in: path
-      description: Realtime Key Event ID
-      required: true
-      schema:
-        type: integer
-        format: int64
-    ParentSegmentId:
-      name: parentSegmentId
-      in: path
-      description: Parent Segment ID (audience id)
-      required: true
-      schema:
-        type: integer
-        format: int64
-    partial_realtime_journey.yaml-RealtimeJourneyId:
-      name: realtimeJourneyId
-      in: path
-      description: Realtime Journey ID
+      description: Audience ID
       required: true
       schema:
         type: integer

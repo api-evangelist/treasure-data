@@ -259,17 +259,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    JobIssueResponse:
-      type: object
-      properties:
-        job_id:
-          type: string
-          description: Unique identifier of the submitted job
-        type:
-          type: string
-          description: Query type (presto or hive)
-        database:
-          type: string
     BulkImport:
       type: object
       properties:
@@ -297,6 +286,17 @@ components:
           type: integer
         error_parts:
           type: integer
+    JobIssueResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          description: Unique identifier of the submitted job
+        type:
+          type: string
+          description: Query type (presto or hive)
+        database:
+          type: string
   responses:
     NotFound:
       description: Resource not found

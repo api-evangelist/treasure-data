@@ -787,26 +787,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EntitiesGetPredictiveSegmentModelScoresJsonApiResult:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - predictive-segment-model-score
-            attributes:
-              type: object
-              properties:
-                positives:
-                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
-                negatives:
-                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
     PredictiveSegmentExecutionJsonApiResource:
       required:
       - id
@@ -823,6 +803,28 @@ components:
           - execution-predictive-segment
         attributes:
           $ref: '#/components/schemas/PredictiveSegmentExecutionCore'
+    EntitiesGetPredictiveSegmentModelColumnsJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model
+            attributes:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
     PredictiveSegmentParameters:
       type: object
       properties:
@@ -865,6 +867,212 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
+    EntitiesGetPredictiveSegmentExecutionJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/PredictiveSegmentExecutionJsonApiResource'
+    JsonApiNotFoundError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - record-not-found-error
+        status:
+          type: string
+          enum:
+          - '404'
+        detail:
+          type: string
+          description: Detailed error message
+          example: Record not found
+      required:
+      - code
+      - status
+      - detail
+    JsonApiPermissionError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code in string
+          enum:
+          - permission-error
+        status:
+          type: string
+          description: Status code for error
+          enum:
+          - '403'
+        detail:
+          type: string
+          description: Detailed error message
+          example: SegmentFolder View Permission Required
+        meta:
+          type: object
+          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
+          properties:
+            permissionCode:
+              type: string
+              description: Detailed validation error code
+              enum:
+              - SEGMENT_FOLDER_VIEW_REQUIRED
+              - SEGMENT_FOLDER_EDIT_REQUIRED
+          required:
+          - permissionCode
+      required:
+      - code
+      - status
+      - detail
+    EntitiesPredictiveSegmentUpdateRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - predictive-segment
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            baseSegmentId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            segmentId:
+              type: integer
+              format: int64
+            scoredSegmentId:
+              type:
+              - integer
+              - 'null'
+              format: int64
+            gradeThresholds:
+              $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+            categoricalAsColumnNames:
+              type: array
+              items:
+                type: string
+            categoricalArrayAsColumnNames:
+              type: array
+              items:
+                type: string
+            quantitativeAsColumnNames:
+              type: array
+              items:
+                type: string
+            preprocess:
+              type: array
+              description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    PredictiveSegmentExecution:
+      allOf:
+      - $ref: '#/components/schemas/Execution'
+      - type: object
+        properties:
+          predictiveSegmentId:
+            type: string
+            format: integer
+    ExecutionCore:
+      type: object
+      required:
+      - workflowId
+      - workflowSessionId
+      - createdAt
+      - finishedAt
+      - status
+      properties:
+        workflowId:
+          type: string
+          pattern: '[1-9][0-9]*|0'
+        workflowSessionId:
+          type: string
+          pattern: '[1-9][0-9]*'
+        createdAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type: string
+          enum:
+          - success
+          - canceled
+          - error
+          - canceling
+          - blocked
+          - queued
+          - running
+    RelationshipsFolderJsonApiResource:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - folder-segment
+    EntitiesGetPredictiveSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/PredictiveSegmentJsonApiResourceAttr'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserJsonApiResource'
+    EntitiesGetPredictiveSegmentModelScoresJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model-score
+            attributes:
+              type: object
+              properties:
+                positives:
+                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
+                negatives:
+                  $ref: '#/components/schemas/PredictiveSegmentModelScoreHistogram'
     Error:
       type: object
       properties:
@@ -875,6 +1083,82 @@ components:
       required:
       - code
       - message
+    PredictiveSegmentAccuracy:
+      type:
+      - number
+      - 'null'
+      format: double
+      minimum: 0
+      maximum: 100
+      description: Accuracy for trained model evaluated on initial training.
+    PredictiveSegmentGradeThresholds:
+      type: array
+      minItems: 3
+      maxItems: 3
+      description: Given the items [a, b, c], they must meet the condition `a >= b >= c`
+      example:
+      - 75
+      - 50
+      - 25
+      items:
+        type: number
+        format: double
+        minimum: 0
+        maximum: 100
+    UserJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - user
+        attributes:
+          type: object
+          required:
+          - tdUserId
+          - name
+          properties:
+            tdUserId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+    EntitiesGetPredictiveSegmentModelFeaturesJsonApiResult:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - predictive-segment-model
+            attributes:
+              type: object
+              properties:
+                features:
+                  type: array
+                  items:
+                    type: array
+                    description: a tuple of feature name and its weight. A feature name can be column name or 'column_name#category_name'. Feature weight is importance of the feature and can be positive and negative (absolute value is matter).
+                    example:
+                    - td_ip_subdivision_names#Maharashtra
+                    - 0.4376903474330902
+                    items:
+                      oneOf:
+                      - type: string
+                      - type: number
+                        format: float
     FunctionExpression:
       oneOf:
       - type: object
@@ -1003,121 +1287,16 @@ components:
             type: number
         required:
         - function
-    JsonApiNotFoundError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - record-not-found-error
-        status:
-          type: string
-          enum:
-          - '404'
-        detail:
-          type: string
-          description: Detailed error message
-          example: Record not found
-      required:
-      - code
-      - status
-      - detail
-    PredictiveSegmentJsonApiResourceAttr:
-      properties:
-        audienceId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        baseSegmentId:
-          type:
-          - string
-          - 'null'
-          pattern: '[1-9][0-9]*'
-        segmentId:
-          type: string
-          pattern: '[1-9][0-9]*'
-        scoredSegmentId:
-          type:
-          - string
-          - 'null'
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        categoricalAsColumnNames:
-          type: array
-          items:
+    Execution:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - workflowAttemptId
+        properties:
+          workflowAttemptId:
             type: string
-        categoricalArrayAsColumnNames:
-          type: array
-          items:
-            type: string
-        quantitativeAsColumnNames:
-          type: array
-          items:
-            type: string
-        accuracy:
-          $ref: '#/components/schemas/PredictiveSegmentAccuracy'
-        areaUnderRocCurve:
-          $ref: '#/components/schemas/PredictiveSegmentAreaUnderRocCurve'
-        gradeThresholds:
-          $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        modelUpdatedAt:
-          type: string
-          format: date-time
-    EntitiesGetPredictiveSegmentModelFeaturesJsonApiResult:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - predictive-segment-model
-            attributes:
-              type: object
-              properties:
-                features:
-                  type: array
-                  items:
-                    type: array
-                    description: a tuple of feature name and its weight. A feature name can be column name or 'column_name#category_name'. Feature weight is importance of the feature and can be positive and negative (absolute value is matter).
-                    example:
-                    - td_ip_subdivision_names#Maharashtra
-                    - 0.4376903474330902
-                    items:
-                      oneOf:
-                      - type: string
-                      - type: number
-                        format: float
-    PredictiveSegmentModelScoreHistogram:
-      type: array
-      items:
-        type: array
-        items:
-          oneOf:
-          - type: string
-          - type: integer
-        minLength: 2
-        maxLength: 2
-      example:
-      - - '1'
-        - 300
-      - - '2'
-        - 200
+            pattern: '[1-9][0-9]*'
     PredictiveSegment:
       type: object
       properties:
@@ -1170,34 +1349,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    PredictiveSegmentRule:
-      type: object
-      properties:
-        categoricalAsColumnNames:
-          type: array
-          items:
-            type: string
-        categoricalArrayAsColumnNames:
-          type: array
-          items:
-            type: string
-        quantitativeAsColumnNames:
-          type: array
-          items:
-            type: string
-        preprocess:
-          type: array
-          description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
-    EntitiesGetPredictiveSegmentExecutionJsonApiResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/PredictiveSegmentExecutionJsonApiResource'
     PredictiveSegmentAreaUnderRocCurve:
       type:
       - number
@@ -1206,152 +1357,21 @@ components:
       minimum: 0
       maximum: 1
       description: Evaluation score for the model. See also https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve
-    UserJsonApiResource:
-      type: object
-      required:
-      - id
-      - type
-      - attributes
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - user
-        attributes:
-          type: object
-          required:
-          - tdUserId
-          - name
-          properties:
-            tdUserId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            name:
-              type: string
-    EntitiesPredictiveSegmentUpdateRepresentation:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - predictive-segment
-        attributes:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type:
-              - string
-              - 'null'
-            baseSegmentId:
-              type:
-              - integer
-              - 'null'
-              format: int64
-            segmentId:
-              type: integer
-              format: int64
-            scoredSegmentId:
-              type:
-              - integer
-              - 'null'
-              format: int64
-            gradeThresholds:
-              $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
-            categoricalAsColumnNames:
-              type: array
-              items:
-                type: string
-            categoricalArrayAsColumnNames:
-              type: array
-              items:
-                type: string
-            quantitativeAsColumnNames:
-              type: array
-              items:
-                type: string
-            preprocess:
-              type: array
-              description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
-              minItems: 1
-              items:
-                $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-    PredictiveSegmentExecutionCore:
-      allOf:
-      - $ref: '#/components/schemas/ExecutionCore'
-      - type: object
-        required:
-        - predictiveSegmentId
-        properties:
-          predictiveSegmentId:
-            type: string
-            pattern: '[1-9][0-9]*'
-    PredictiveSegmentGradeThresholds:
+    PredictiveSegmentModelScoreHistogram:
       type: array
-      minItems: 3
-      maxItems: 3
-      description: Given the items [a, b, c], they must meet the condition `a >= b >= c`
-      example:
-      - 75
-      - 50
-      - 25
       items:
-        type: number
-        format: double
-        minimum: 0
-        maximum: 100
-    Execution:
-      allOf:
-      - $ref: '#/components/schemas/ExecutionCore'
-      - type: object
-        required:
-        - workflowAttemptId
-        properties:
-          workflowAttemptId:
-            type: string
-            pattern: '[1-9][0-9]*'
-    EntitiesGetPredictiveSegmentModelColumnsJsonApiResult:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - predictive-segment-model
-            attributes:
-              type: object
-              properties:
-                columns:
-                  type: array
-                  items:
-                    type: array
-                    items:
-                      type: string
-    PredictiveSegmentAccuracy:
-      type:
-      - number
-      - 'null'
-      format: double
-      minimum: 0
-      maximum: 100
-      description: Accuracy for trained model evaluated on initial training.
+        type: array
+        items:
+          oneOf:
+          - type: string
+          - type: integer
+        minLength: 2
+        maxLength: 2
+      example:
+      - - '1'
+        - 300
+      - - '2'
+        - 200
     PredictiveSegmentPreprocessItem:
       type: object
       properties:
@@ -1371,51 +1391,67 @@ components:
       required:
       - column
       - source
-    ExecutionCore:
-      type: object
-      required:
-      - workflowId
-      - workflowSessionId
-      - createdAt
-      - finishedAt
-      - status
+    PredictiveSegmentExecutionCore:
+      allOf:
+      - $ref: '#/components/schemas/ExecutionCore'
+      - type: object
+        required:
+        - predictiveSegmentId
+        properties:
+          predictiveSegmentId:
+            type: string
+            pattern: '[1-9][0-9]*'
+    PredictiveSegmentJsonApiResourceAttr:
       properties:
-        workflowId:
-          type: string
-          pattern: '[1-9][0-9]*|0'
-        workflowSessionId:
+        audienceId:
           type: string
           pattern: '[1-9][0-9]*'
-        createdAt:
-          type: string
-          format: date-time
-        finishedAt:
+        baseSegmentId:
           type:
           - string
           - 'null'
-          format: date-time
-        status:
+          pattern: '[1-9][0-9]*'
+        segmentId:
           type: string
-          enum:
-          - success
-          - canceled
-          - error
-          - canceling
-          - blocked
-          - queued
-          - running
-    EntitiesGetPredictiveSegmentJsonApiResponse:
-      type: object
-      required:
-      - data
-      - included
-      properties:
-        data:
-          $ref: '#/components/schemas/PredictiveSegmentJsonApiResourceAttr'
-        included:
+          pattern: '[1-9][0-9]*'
+        scoredSegmentId:
+          type:
+          - string
+          - 'null'
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        categoricalAsColumnNames:
           type: array
           items:
-            $ref: '#/components/schemas/UserJsonApiResource'
+            type: string
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        accuracy:
+          $ref: '#/components/schemas/PredictiveSegmentAccuracy'
+        areaUnderRocCurve:
+          $ref: '#/components/schemas/PredictiveSegmentAreaUnderRocCurve'
+        gradeThresholds:
+          $ref: '#/components/schemas/PredictiveSegmentGradeThresholds'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        modelUpdatedAt:
+          type: string
+          format: date-time
     EntitiesSegmentPredictiveSegmentGuessRuleAsyncJsonApiResult:
       type: object
       properties:
@@ -1439,76 +1475,28 @@ components:
                   - success
                 rule:
                   $ref: '#/components/schemas/PredictiveSegmentRule'
-    JsonApiPermissionError:
+    PredictiveSegmentRule:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code in string
-          enum:
-          - permission-error
-        status:
-          type: string
-          description: Status code for error
-          enum:
-          - '403'
-        detail:
-          type: string
-          description: Detailed error message
-          example: SegmentFolder View Permission Required
-        meta:
-          type: object
-          description: Meta info for storing permissionCode. Note that in some cases, meta can be null.
-          properties:
-            permissionCode:
-              type: string
-              description: Detailed validation error code
-              enum:
-              - SEGMENT_FOLDER_VIEW_REQUIRED
-              - SEGMENT_FOLDER_EDIT_REQUIRED
-          required:
-          - permissionCode
-      required:
-      - code
-      - status
-      - detail
-    RelationshipsFolderJsonApiResource:
-      type: object
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - folder-segment
-    PredictiveSegmentExecution:
-      allOf:
-      - $ref: '#/components/schemas/Execution'
-      - type: object
-        properties:
-          predictiveSegmentId:
+        categoricalAsColumnNames:
+          type: array
+          items:
             type: string
-            format: integer
+        categoricalArrayAsColumnNames:
+          type: array
+          items:
+            type: string
+        quantitativeAsColumnNames:
+          type: array
+          items:
+            type: string
+        preprocess:
+          type: array
+          description: Definition of preprocess. All of `$item.column` must be specified in one of categoricalAsColumnNames, categoricalArrayAsColumnNames, or quantitativeAsColumnNames.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PredictiveSegmentPreprocessItem'
   responses:
-    ClientError:
-      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     JsonApiForbiddenRequest:
       description: Requested resource or action is not allowed because you don't have sufficient permissions
       content:
@@ -1522,6 +1510,37 @@ components:
                   $ref: '#/components/schemas/JsonApiPermissionError'
             required:
             - errors
+    BadRequest:
+      description: Given parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    JsonApiNotFoundRequest:
+      description: The specified resource is not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiNotFoundError'
+            required:
+            - errors
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     ServerError:
       description: System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.
       content:
@@ -1542,8 +1561,8 @@ components:
             required:
             - status
             - error
-    BadRequest:
-      description: Given parameters are not valid
+    NotFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
@@ -1554,25 +1573,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    JsonApiNotFoundRequest:
-      description: The specified resource is not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  $ref: '#/components/schemas/JsonApiNotFoundError'
-            required:
-            - errors
   securitySchemes:
     TdApikeyAuth:
       type: apiKey

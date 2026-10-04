@@ -222,15 +222,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SSOUserResponse:
-      type: object
-      properties:
-        first_name:
-          type: string
-        email:
-          type: string
-        identifier:
-          type: string
     SSOSettingRequest:
       type: object
       properties:
@@ -244,16 +235,6 @@ components:
               - string
               - 'null'
             cert:
-              type: string
-    SSOUserRequest:
-      type: object
-      properties:
-        sso_setting:
-          type: object
-          properties:
-            user_email:
-              type: string
-            identifier:
               type: string
     SSOSettingResponse:
       type: object
@@ -274,6 +255,25 @@ components:
             updated_at:
               type: string
               format: date-time
+    SSOUserRequest:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            user_email:
+              type: string
+            identifier:
+              type: string
+    SSOUserResponse:
+      type: object
+      properties:
+        first_name:
+          type: string
+        email:
+          type: string
+        identifier:
+          type: string
   responses:
     Unauthorized:
       description: Authentication required or API key invalid

@@ -589,6 +589,143 @@ components:
                 type: string
                 description: ID of the Audience (MasterSegmentConfig) to grant raw data access
                 example: '123'
+    AccessControlPolicy:
+      title: Access Control Policy
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_id
+      - name
+      properties:
+        id:
+          $ref: '#/components/schemas/AccessControlPolicyId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        name:
+          description: Policy's name
+          type: string
+          example: some_policy
+        description:
+          description: Policy's description
+          type: string
+          example: written about the policy
+        user_count:
+          description: The number of users which the policy attaches to
+          type: integer
+          example: 3
+    User:
+      title: User
+      description: User
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - account_owner
+      - administrator
+      - created_at
+      - email
+      - first_name
+      - gravatar_url
+      - last_name
+      - phone
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        account_owner:
+          description: whether the user is Account owner or not
+          type: boolean
+          example: true
+        administrator:
+          description: whether the user is Administrator or not
+          type: boolean
+          example: true
+        created_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        email:
+          description: the email user uses to log in
+          type: string
+          format: email
+          example: td@example.com
+        first_name:
+          description: first name
+          type:
+          - string
+          - 'null'
+          example: Treasure
+        gravatar_url:
+          description: gravatar url
+          type: string
+          example: http://foo
+        identifier:
+          $ref: '#/components/schemas/SSOIdentifier'
+        full_qualified_identifier:
+          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
+        setting_name:
+          $ref: '#/components/schemas/SSOSettingName'
+        last_name:
+          description: last name
+          type:
+          - string
+          - 'null'
+          example: Data
+        name:
+          description: user's full name or email
+          type: string
+          example: Treasure Data
+        organization:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+        phone:
+          description: phone number
+          type:
+          - string
+          - 'null'
+          example: (650) 469-3644
+        roles:
+          deprecated: true
+          type: array
+          items:
+            type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTimeISO8601'
+        delegated_admin:
+          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
+          type: boolean
+          example: true
+        delegated_policy_groups:
+          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+        policy_group_tags:
+          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
+          type: array
+          items:
+            type: string
+    UserId:
+      type: integer
+      example: 123
+    AccessControlProfileOptionUpdateRequest:
+      title: Access Control Profile Option Update Request
+      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: string
+    AccessControlProfileOptions:
+      title: Access Control Profile Options
+      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
+      type: object
+      additionalProperties:
+        type:
+        - string
+        - 'null'
     AccessControlUnpaidPermissions:
       title: Access Control Permissions
       type: object
@@ -698,34 +835,40 @@ components:
                 - view
                 - full
                 - template_access
-    AccessControlPolicy:
-      title: Access Control Policy
+    AccountId:
+      type: integer
+      example: 123
+    UpdateAccessControlPolicyUsersRequest:
       type: object
       additionalProperties: false
       required:
-      - id
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccessControlUserReference:
+      title: Access Control User Reference
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
       - account_id
+      - email
       - name
       properties:
-        id:
-          $ref: '#/components/schemas/AccessControlPolicyId'
+        user_id:
+          $ref: '#/components/schemas/UserId'
         account_id:
           $ref: '#/components/schemas/AccountId'
+        email:
+          $ref: '#/components/schemas/User/properties/email'
         name:
-          description: Policy's name
-          type: string
-          example: some_policy
-        description:
-          description: Policy's description
-          type: string
-          example: written about the policy
-        user_count:
-          description: The number of users which the policy attaches to
-          type: integer
-          example: 3
-    UserId:
-      type: integer
-      example: 123
+          $ref: '#/components/schemas/User/properties/name'
     AccessControlUser:
       title: Access Control User
       type: object
@@ -745,149 +888,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccessControlPolicy'
-    UpdateAccessControlPolicyUsersRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-    AccessControlPolicyId:
-      type: integer
-      example: 67
-    User:
-      title: User
-      description: User
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      - account_owner
-      - administrator
-      - created_at
-      - email
-      - first_name
-      - gravatar_url
-      - last_name
-      - phone
-      - updated_at
-      properties:
-        id:
-          $ref: '#/components/schemas/UserId'
-        account_owner:
-          description: whether the user is Account owner or not
-          type: boolean
-          example: true
-        administrator:
-          description: whether the user is Administrator or not
-          type: boolean
-          example: true
-        created_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        email:
-          description: the email user uses to log in
-          type: string
-          format: email
-          example: td@example.com
-        first_name:
-          description: first name
-          type:
-          - string
-          - 'null'
-          example: Treasure
-        gravatar_url:
-          description: gravatar url
-          type: string
-          example: http://foo
-        identifier:
-          $ref: '#/components/schemas/SSOIdentifier'
-        full_qualified_identifier:
-          $ref: '#/components/schemas/SSOFullQualifiedIdentifier'
-        setting_name:
-          $ref: '#/components/schemas/SSOSettingName'
-        last_name:
-          description: last name
-          type:
-          - string
-          - 'null'
-          example: Data
-        name:
-          description: user's full name or email
-          type: string
-          example: Treasure Data
-        organization:
-          deprecated: true
-          type:
-          - string
-          - 'null'
-        phone:
-          description: phone number
-          type:
-          - string
-          - 'null'
-          example: (650) 469-3644
-        roles:
-          deprecated: true
-          type: array
-          items:
-            type: string
-        updated_at:
-          $ref: '#/components/schemas/DateTimeISO8601'
-        delegated_admin:
-          description: whether the user is a Delegated Admin or not. This attribute is available if the account enables the delegated-admin feature flag.
-          type: boolean
-          example: true
-        delegated_policy_groups:
-          description: The list of policy groups this user manages as delegated admin. This attribute is available if the account enables the delegated-admin feature flag.
-          type: array
-          items:
-            type: string
-        policy_group_tags:
-          description: The list of tag names belonging to this user. This attribute is available if the account enables the delegated-admin feature flag.
-          type: array
-          items:
-            type: string
-    AccessControlProfileOptionUpdateRequest:
-      title: Access Control Profile Option Update Request
-      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    AccessControlProfileOptions:
-      title: Access Control Profile Options
-      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
-      type: object
-      additionalProperties:
-        type:
-        - string
-        - 'null'
-    AccountId:
-      type: integer
-      example: 123
-    AccessControlUserReference:
-      title: Access Control User Reference
-      type: object
-      additionalProperties: false
-      required:
-      - user_id
-      - account_id
-      - email
-      - name
-      properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        email:
-          $ref: '#/components/schemas/User/properties/email'
-        name:
-          $ref: '#/components/schemas/User/properties/name'
   parameters:
     path_user_id:
       name: user_id
