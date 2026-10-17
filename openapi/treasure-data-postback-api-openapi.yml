@@ -96,12 +96,6 @@ paths:
       - Postback
 components:
   responses:
-    '200':
-      description: Success.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AllResponse'
     '413':
       description: Payload Too Large (request body exceeds 1,048,064 bytes)
       content:
@@ -116,6 +110,12 @@ components:
             $ref: '#/components/schemas/AllResponse'
     '400':
       description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AllResponse'
+    '200':
+      description: Success.
       content:
         application/json:
           schema:

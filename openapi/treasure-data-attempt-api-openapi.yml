@@ -170,6 +170,23 @@ paths:
       - Attempt
 components:
   schemas:
+    ResumeFailed:
+      type: object
+      description: Configuration to resume an attempt from the failed task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        mode:
+          type: string
+          description: '"failed" (fixed value)'
+          enum:
+          - from
+          - failed
+      required:
+      - attemptId
+      - mode
     Resume:
       type: object
       anyOf:
@@ -192,88 +209,6 @@ components:
       required:
       - attemptId
       - mode
-    ResumeFailed:
-      type: object
-      description: Configuration to resume an attempt from the failed task
-      properties:
-        attemptId:
-          type: string
-          description: attemptId
-          example: '12345'
-        mode:
-          type: string
-          description: '"failed" (fixed value)'
-          enum:
-          - from
-          - failed
-      required:
-      - attemptId
-      - mode
-    RestTaskCollection:
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestTask'
-    RestSessionAttemptRequest:
-      type: object
-      description: Request body for new attempt
-      properties:
-        allowQueueing:
-          type: boolean
-          description: Whether an attempt can be queued when the maximum attempt limit is reached.
-        params:
-          type: object
-          description: parameters as json
-          example:
-            key1: 12345
-        projectName:
-          type: string
-          description: project name. workflowId or (projectName and workflowName) are required
-          example: project-a
-        resume:
-          $ref: '#/components/schemas/Resume'
-        retryAttemptName:
-          type: string
-          description: unique attempt name for retry
-        sessionTime:
-          type: string
-          format: date-time
-          description: session time
-          example: '2023-08-17T18:56:24+09:00'
-        workflowId:
-          type: string
-          description: workflow ID. workflowId or (projectName and workflowName) are required
-          example: '123456'
-        workflowName:
-          type: string
-          description: workflow name. workflowId or (projectName and workflowName) are required
-          example: workflow-a
-      required:
-      - params
-      - sessionTime
-    RestSessionAttemptCollection:
-      type: object
-      properties:
-        attempts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
-    NameOptionalId:
-      type: object
-      description: Name and optional ID
-      properties:
-        id:
-          type: string
-          description: ID
-          example: '123456'
-        name:
-          type: string
-          description: name
-          example: abcdefg
-      required:
-      - name
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -361,6 +296,34 @@ components:
       - status
       - success
       - workflow
+    RestSessionAttemptCollection:
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSessionAttempt'
+    ResumeFrom:
+      type: object
+      description: Configuration to resume an attempt from the specified task
+      properties:
+        attemptId:
+          type: string
+          description: attemptId
+          example: '12345'
+        from:
+          type: string
+          description: the task name to resume
+        mode:
+          type: string
+          description: '"from" (fixed value)'
+          enum:
+          - from
+          - failed
+      required:
+      - attemptId
+      - from
+      - mode
     RestTask:
       type: object
       description: Response of a task
@@ -439,27 +402,57 @@ components:
       - storeParams
       - updatedAt
       - upstreams
-    ResumeFrom:
+    NameOptionalId:
       type: object
-      description: Configuration to resume an attempt from the specified task
+      description: Name and optional ID
       properties:
-        attemptId:
+        id:
           type: string
-          description: attemptId
-          example: '12345'
-        from:
+          description: ID
+          example: '123456'
+        name:
           type: string
-          description: the task name to resume
-        mode:
-          type: string
-          description: '"from" (fixed value)'
-          enum:
-          - from
-          - failed
+          description: name
+          example: abcdefg
       required:
-      - attemptId
-      - from
-      - mode
+      - name
+    RestSessionAttemptRequest:
+      type: object
+      description: Request body for new attempt
+      properties:
+        allowQueueing:
+          type: boolean
+          description: Whether an attempt can be queued when the maximum attempt limit is reached.
+        params:
+          type: object
+          description: parameters as json
+          example:
+            key1: 12345
+        projectName:
+          type: string
+          description: project name. workflowId or (projectName and workflowName) are required
+          example: project-a
+        resume:
+          $ref: '#/components/schemas/Resume'
+        retryAttemptName:
+          type: string
+          description: unique attempt name for retry
+        sessionTime:
+          type: string
+          format: date-time
+          description: session time
+          example: '2023-08-17T18:56:24+09:00'
+        workflowId:
+          type: string
+          description: workflow ID. workflowId or (projectName and workflowName) are required
+          example: '123456'
+        workflowName:
+          type: string
+          description: workflow name. workflowId or (projectName and workflowName) are required
+          example: workflow-a
+      required:
+      - params
+      - sessionTime
     IdAndName:
       type: object
       description: Name and ID
@@ -475,6 +468,13 @@ components:
       required:
       - id
       - name
+    RestTaskCollection:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestTask'
   securitySchemes:
     ApiKeyAuth:
       scheme: TD1

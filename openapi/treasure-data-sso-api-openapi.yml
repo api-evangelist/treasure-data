@@ -221,6 +221,16 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
     SSOSettingRequest:
       type: object
@@ -236,25 +246,6 @@ components:
               - 'null'
             cert:
               type: string
-    SSOSettingResponse:
-      type: object
-      properties:
-        sso_setting:
-          type: object
-          properties:
-            cert:
-              type: string
-            identity_provider_name:
-              type: string
-            sign_in_endpoint:
-              type: string
-            sign_out_endpoint:
-              type: string
-            strategy:
-              type: string
-            updated_at:
-              type: string
-              format: date-time
     SSOUserRequest:
       type: object
       properties:
@@ -274,16 +265,25 @@ components:
           type: string
         identifier:
           type: string
-  responses:
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
+    SSOSettingResponse:
+      type: object
+      properties:
+        sso_setting:
+          type: object
+          properties:
+            cert:
+              type: string
+            identity_provider_name:
+              type: string
+            sign_in_endpoint:
+              type: string
+            sign_out_endpoint:
+              type: string
+            strategy:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
   securitySchemes:
     TDAuth:
       type: apiKey

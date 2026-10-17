@@ -125,6 +125,12 @@ paths:
                 $ref: '#/components/schemas/AccessControlPolicyGroupPolicies'
 components:
   schemas:
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    AccessControlPolicyGroupId:
+      type: integer
+      example: 10
     AccessControlPolicyGroupPolicies:
       title: Access Control Policy Group Policies
       type: object
@@ -137,6 +143,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AccessControlPolicyId'
+    AccessControlPolicyGroupTaggableName:
+      type: string
+      description: Policy Group's taggable name
+      example: some_policy_group
     AccessControlPolicyGroup:
       title: Access Control Policy Group
       type: object
@@ -182,16 +192,9 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/AccessControlPolicyGroup/properties/name'
-    AccessControlPolicyGroupTaggableName:
-      type: string
-      description: Policy Group's taggable name
-      example: some_policy_group
     AccountId:
       type: integer
       example: 123
-    AccessControlPolicyId:
-      type: integer
-      example: 67
     UpdateAccessControlPolicyGroupRequest:
       type: object
       additionalProperties: false
@@ -210,9 +213,6 @@ components:
       properties:
         policy_ids:
           $ref: '#/components/schemas/AccessControlPolicyGroupPolicies/properties/policy_ids'
-    AccessControlPolicyGroupId:
-      type: integer
-      example: 10
   parameters:
     path_access_control_policy_group_id_or_taggable_name:
       name: policy_group_id_or_taggable_name

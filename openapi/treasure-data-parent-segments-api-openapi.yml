@@ -137,70 +137,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EntitiesGetParentSegmentJsonApiResponse:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        name:
-          type: string
-    NullValue:
-      type:
-      - object
-      - 'null'
-      additionalProperties: false
-      properties:
-        thisKeyNeverHit:
-          type: string
-    SegmentFolderReadRepresentation:
-      type: object
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        audienceId:
-          type: string
-          pattern: '[1-9][0-9]*'
-          description: 'ID of the parent audience. For composable folders this carries
-
-            the composable audience id; the complete-vs-composable
-
-            discriminator lives on the parent audience entity, not on the
-
-            folder.
-
-            '
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        createdBy:
-          oneOf:
-          - $ref: '#/components/schemas/User'
-          - $ref: '#/components/schemas/NullValue'
-        updatedBy:
-          oneOf:
-          - $ref: '#/components/schemas/User'
-          - $ref: '#/components/schemas/NullValue'
     ScheduleType:
       type: string
       example: daily
@@ -212,6 +148,14 @@ components:
       - monthly
       - none
       - weekly
+    NullValue:
+      type:
+      - object
+      - 'null'
+      additionalProperties: false
+      properties:
+        thisKeyNeverHit:
+          type: string
     ParentSegmentJsonApiResource:
       type: object
       required:
@@ -290,6 +234,62 @@ components:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
             parentSegmentFolder:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+    SegmentFolderReadRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        audienceId:
+          type: string
+          pattern: '[1-9][0-9]*'
+          description: 'ID of the parent audience. For composable folders this carries
+
+            the composable audience id; the complete-vs-composable
+
+            discriminator lives on the parent audience entity, not on the
+
+            folder.
+
+            '
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
+        updatedBy:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/NullValue'
+    EntitiesGetParentSegmentJsonApiResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ParentSegmentJsonApiResource'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
     RelationshipsFolderJsonApiResource:
       type: object
       properties:

@@ -171,14 +171,6 @@ paths:
                   settings:
                     type: object
 components:
-  parameters:
-    path_connection_name:
-      name: connection_name
-      description: the connection name
-      required: true
-      in: path
-      schema:
-        $ref: '#/components/schemas/Connection/properties/name'
   schemas:
     Connection:
       title: Connection
@@ -193,6 +185,14 @@ components:
       description: the connection id
       type: integer
       example: 17
+  parameters:
+    path_connection_name:
+      name: connection_name
+      description: the connection name
+      required: true
+      in: path
+      schema:
+        $ref: '#/components/schemas/Connection/properties/name'
   securitySchemes:
     ApiKeyAuth:
       type: http

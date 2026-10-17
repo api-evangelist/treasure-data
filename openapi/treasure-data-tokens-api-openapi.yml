@@ -323,145 +323,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    TokenJsonApiResource:
-      type: object
-      required:
-      - id
-      - type
-      - attributes
-      - relationships
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        type:
-          type: string
-          enum:
-          - token
-        attributes:
-          type: object
-          required:
-          - name
-          - attributeColumns
-          properties:
-            audienceId:
-              type: string
-              pattern: '[1-9][0-9]*'
-            name:
-              type: string
-            token:
-              description: UUID of the token
-              type: string
-              format: uuid
-            description:
-              type: string
-            keyColumn:
-              description: A key column name to fetch the information of a customer.
-              example: td_client_id
-              type: string
-            attributeColumns:
-              description: associated attribute column names.
-              example:
-              - gender
-              - country
-              type: array
-              items:
-                type: string
-            createdAt:
-              type: string
-              format: date-time
-            updatedAt:
-              type: string
-              format: date-time
-        relationships:
-          type: object
-          properties:
-            segments:
-              $ref: '#/components/schemas/RelationshipsSegmentJsonApiResource'
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-            createdBy:
-              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-            updatedBy:
-              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
-    RelationshipsBatchSegmentJsonApiResource:
-      type: object
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - segment-batch
-    EntitiesGetTokenJsonApiResponse:
-      type: object
-      required:
-      - data
-      - included
-      properties:
-        data:
-          $ref: '#/components/schemas/TokenJsonApiResource'
-        included:
-          type: array
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/UserJsonApiResource'
-            - $ref: '#/components/schemas/BatchSegmentSummaryJsonApiResource'
-            - $ref: '#/components/schemas/RealtimeSegmentSummaryJsonApiResource'
-            - $ref: '#/components/schemas/FunnelStageSegmentSummaryJsonApiResource'
-    Token:
-      type: object
-      properties:
-        id:
-          type: string
-          format: integer
-        audienceId:
-          type: string
-          format: integer
-        token:
-          description: UUID of the token
-          type: string
-          format: uuid
-        description:
-          type: string
-        keyColumn:
-          description: A key column name to fetch the information of a customer.
-          example: td_client_id
-          type: string
-        segments:
-          description: associated segments
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentSummary'
-        attributeColumns:
-          description: associated attribute column names.
-          example:
-          - gender
-          - country
-          type: array
-          items:
-            type: string
-        v2:
-          description: whether the token is v2 or not
-          example: true
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        createdBy:
-          $ref: '#/components/schemas/User'
-        updatedBy:
-          $ref: '#/components/schemas/User'
     RelationshipsRealtimeSegmentJsonApiResource:
       type: object
       properties:
@@ -478,6 +339,78 @@ components:
               type: string
               enum:
               - segment-realtime
+    BatchSegmentSummaryJsonApiResource:
+      allOf:
+      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - segment-batch
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        td_user_id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        name:
+          type: string
+    SegmentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        realtime:
+          type: boolean
+          deprecated: true
+          description: use `kind` instead
+        kind:
+          type: integer
+          description: '0: batch, 1: realtime, 2: funnel_stage'
+        description:
+          type: string
+        segmentFolderId:
+          type: integer
+          format: int64
+        population:
+          type: integer
+          format: int64
+          description: The population of the segment
+    RelationshipsUserJsonApiResource:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - user
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
     RelationshipsSegmentJsonApiResource:
       type: object
       properties:
@@ -487,43 +420,65 @@ components:
             oneOf:
             - $ref: '#/components/schemas/RelationshipsBatchSegmentJsonApiResource'
             - $ref: '#/components/schemas/RelationshipsRealtimeSegmentJsonApiResource'
-    TokenParameters:
+    RelationshipsBatchSegmentJsonApiResource:
       type: object
       properties:
-        description:
-          description: description
-          example: description
-          type: string
-        token:
-          description: UUID of the token
-          type: string
-          format: uuid
-        keyColumn:
-          description: A key column name to fetch the information of a customer.
-          example: td_client_id
-          type: string
-        segments:
-          description: associated segments
-          example:
-          - id: 1234
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                format: int64
-        attributeColumns:
-          description: associated attribute column names. Max the number of attribute columns is 5. You must specify empty array if you don't need attributes.
-          example:
-          - gender
-          - country
-          type: array
-          items:
+        data:
+          type: object
+          required:
+          - id
+          - type
+          properties:
+            id:
+              type: string
+              pattern: '[1-9][0-9]*'
+            type:
+              type: string
+              enum:
+              - segment-batch
+    FunnelStageSegmentSummaryJsonApiResource:
+      allOf:
+      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
+      - type: object
+        properties:
+          type:
             type: string
+            enum:
+            - segment-funnel-stage
+    SegmentSummaryJsonApiResource:
+      type: object
       required:
-      - keyColumn
-      - attributeColumns
+      - id
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        attributes:
+          type:
+          - object
+          - 'null'
+          description: If user doesn't have a permission for the resource, attributes field doesn't exist.
+          required:
+          - name
+          - description
+          - population
+          properties:
+            name:
+              type: string
+            description:
+              type:
+              - string
+              - 'null'
+            population:
+              type:
+              - number
+              - 'null'
+        relationships:
+          type: object
+          properties:
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
     EntitiesTokenUpdateRepresentation:
       type: object
       required:
@@ -594,31 +549,44 @@ components:
                         - segment-funnel-stage
             parentFolder:
               $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
-    SegmentSummary:
+    TokenParameters:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        realtime:
-          type: boolean
-          deprecated: true
-          description: use `kind` instead
-        kind:
-          type: integer
-          description: '0: batch, 1: realtime, 2: funnel_stage'
         description:
+          description: description
+          example: description
           type: string
-        segmentFolderId:
-          type: integer
-          format: int64
-        population:
-          type: integer
-          format: int64
-          description: The population of the segment
-    BatchSegmentSummaryJsonApiResource:
+        token:
+          description: UUID of the token
+          type: string
+          format: uuid
+        keyColumn:
+          description: A key column name to fetch the information of a customer.
+          example: td_client_id
+          type: string
+        segments:
+          description: associated segments
+          example:
+          - id: 1234
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+        attributeColumns:
+          description: associated attribute column names. Max the number of attribute columns is 5. You must specify empty array if you don't need attributes.
+          example:
+          - gender
+          - country
+          type: array
+          items:
+            type: string
+      required:
+      - keyColumn
+      - attributeColumns
+    RealtimeSegmentSummaryJsonApiResource:
       allOf:
       - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
       - type: object
@@ -626,7 +594,7 @@ components:
           type:
             type: string
             enum:
-            - segment-batch
+            - segment-realtime
     RelationshipsFolderJsonApiResource:
       type: object
       properties:
@@ -643,36 +611,129 @@ components:
               type: string
               enum:
               - folder-segment
-    Error:
+    EntitiesGetTokenJsonApiResponse:
       type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
       required:
-      - code
-      - message
-    User:
+      - data
+      - included
+      properties:
+        data:
+          $ref: '#/components/schemas/TokenJsonApiResource'
+        included:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/UserJsonApiResource'
+            - $ref: '#/components/schemas/BatchSegmentSummaryJsonApiResource'
+            - $ref: '#/components/schemas/RealtimeSegmentSummaryJsonApiResource'
+            - $ref: '#/components/schemas/FunnelStageSegmentSummaryJsonApiResource'
+    Token:
       type: object
       properties:
         id:
           type: string
-          pattern: '[1-9][0-9]*'
-        td_user_id:
+          format: integer
+        audienceId:
           type: string
-          pattern: '[1-9][0-9]*'
-        name:
+          format: integer
+        token:
+          description: UUID of the token
           type: string
-    RealtimeSegmentSummaryJsonApiResource:
-      allOf:
-      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
-      - type: object
-        properties:
-          type:
+          format: uuid
+        description:
+          type: string
+        keyColumn:
+          description: A key column name to fetch the information of a customer.
+          example: td_client_id
+          type: string
+        segments:
+          description: associated segments
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentSummary'
+        attributeColumns:
+          description: associated attribute column names.
+          example:
+          - gender
+          - country
+          type: array
+          items:
             type: string
-            enum:
-            - segment-realtime
+        v2:
+          description: whether the token is v2 or not
+          example: true
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/User'
+        updatedBy:
+          $ref: '#/components/schemas/User'
+    TokenJsonApiResource:
+      type: object
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      properties:
+        id:
+          type: string
+          pattern: '[1-9][0-9]*'
+        type:
+          type: string
+          enum:
+          - token
+        attributes:
+          type: object
+          required:
+          - name
+          - attributeColumns
+          properties:
+            audienceId:
+              type: string
+              pattern: '[1-9][0-9]*'
+            name:
+              type: string
+            token:
+              description: UUID of the token
+              type: string
+              format: uuid
+            description:
+              type: string
+            keyColumn:
+              description: A key column name to fetch the information of a customer.
+              example: td_client_id
+              type: string
+            attributeColumns:
+              description: associated attribute column names.
+              example:
+              - gender
+              - country
+              type: array
+              items:
+                type: string
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+        relationships:
+          type: object
+          properties:
+            segments:
+              $ref: '#/components/schemas/RelationshipsSegmentJsonApiResource'
+            parentFolder:
+              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
+            createdBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
+            updatedBy:
+              $ref: '#/components/schemas/RelationshipsUserJsonApiResource'
     UserJsonApiResource:
       type: object
       required:
@@ -698,82 +759,33 @@ components:
               pattern: '[1-9][0-9]*'
             name:
               type: string
-    FunnelStageSegmentSummaryJsonApiResource:
-      allOf:
-      - $ref: '#/components/schemas/SegmentSummaryJsonApiResource'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - segment-funnel-stage
-    RelationshipsUserJsonApiResource:
-      type: object
-      properties:
-        data:
-          type:
-          - object
-          - 'null'
-          required:
-          - id
-          - type
-          properties:
-            id:
-              type: string
-              pattern: '[1-9][0-9]*'
-            type:
-              type: string
-              enum:
-              - user
-    SegmentSummaryJsonApiResource:
-      type: object
-      required:
-      - id
-      - relationships
-      properties:
-        id:
-          type: string
-          pattern: '[1-9][0-9]*'
-        attributes:
-          type:
-          - object
-          - 'null'
-          description: If user doesn't have a permission for the resource, attributes field doesn't exist.
-          required:
-          - name
-          - description
-          - population
-          properties:
-            name:
-              type: string
-            description:
-              type:
-              - string
-              - 'null'
-            population:
-              type:
-              - number
-              - 'null'
-        relationships:
-          type: object
-          properties:
-            parentFolder:
-              $ref: '#/components/schemas/RelationshipsFolderJsonApiResource'
   responses:
+    Forbidden:
+      description: Requested resource or action is not allowed because you don't have sufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Given parameters are not valid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
+    ClientError:
+      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ClientError:
-      description: There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.
       content:
         application/json:
           schema:
@@ -798,18 +810,6 @@ components:
             required:
             - status
             - error
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Requested resource or action is not allowed because you don't have sufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     TdApikeyAuth:
       type: apiKey

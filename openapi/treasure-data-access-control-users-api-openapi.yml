@@ -179,6 +179,19 @@ paths:
                   $ref: '#/components/schemas/AccessControlUser'
 components:
   schemas:
+    AccessControlPolicyId:
+      type: integer
+      example: 67
+    UpdateAccessControlPolicyUsersRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserId'
     AccessControlPermissions:
       title: Access Control Permissions
       type: object
@@ -614,6 +627,35 @@ components:
           description: The number of users which the policy attaches to
           type: integer
           example: 3
+    AccessControlUserReference:
+      title: Access Control User Reference
+      type: object
+      additionalProperties: false
+      required:
+      - user_id
+      - account_id
+      - email
+      - name
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        account_id:
+          $ref: '#/components/schemas/AccountId'
+        email:
+          $ref: '#/components/schemas/User/properties/email'
+        name:
+          $ref: '#/components/schemas/User/properties/name'
+    AccessControlProfileOptions:
+      title: Access Control Profile Options
+      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
+      type: object
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+    UserId:
+      type: integer
+      example: 123
     User:
       title: User
       description: User
@@ -706,26 +748,9 @@ components:
           type: array
           items:
             type: string
-    UserId:
+    AccountId:
       type: integer
       example: 123
-    AccessControlProfileOptionUpdateRequest:
-      title: Access Control Profile Option Update Request
-      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
-      type: object
-      required:
-      - value
-      properties:
-        value:
-          type: string
-    AccessControlProfileOptions:
-      title: Access Control Profile Options
-      description: A map of profile option keys to their resolved values. A value is null when the option is unset and has no default. Returned both by the list endpoint (all keys) and by the single-option endpoint (one key).
-      type: object
-      additionalProperties:
-        type:
-        - string
-        - 'null'
     AccessControlUnpaidPermissions:
       title: Access Control Permissions
       type: object
@@ -835,40 +860,15 @@ components:
                 - view
                 - full
                 - template_access
-    AccountId:
-      type: integer
-      example: 123
-    UpdateAccessControlPolicyUsersRequest:
+    AccessControlProfileOptionUpdateRequest:
+      title: Access Control Profile Option Update Request
+      description: The value to set for the profile option (e.g. "full_access" for treasure_ai_studio).
       type: object
-      additionalProperties: false
       required:
-      - user_ids
+      - value
       properties:
-        user_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserId'
-    AccessControlPolicyId:
-      type: integer
-      example: 67
-    AccessControlUserReference:
-      title: Access Control User Reference
-      type: object
-      additionalProperties: false
-      required:
-      - user_id
-      - account_id
-      - email
-      - name
-      properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
-        account_id:
-          $ref: '#/components/schemas/AccountId'
-        email:
-          $ref: '#/components/schemas/User/properties/email'
-        name:
-          $ref: '#/components/schemas/User/properties/name'
+        value:
+          type: string
     AccessControlUser:
       title: Access Control User
       type: object
@@ -889,18 +889,18 @@ components:
           items:
             $ref: '#/components/schemas/AccessControlPolicy'
   parameters:
-    path_user_id:
-      name: user_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UserId'
     path_access_control_policy_id:
       name: policy_id
       in: path
       required: true
       schema:
         $ref: '#/components/schemas/AccessControlPolicyId'
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
   securitySchemes:
     ApiKeyAuth:
       type: http

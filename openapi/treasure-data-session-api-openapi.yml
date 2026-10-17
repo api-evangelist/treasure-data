@@ -101,39 +101,6 @@ paths:
       - Session
 components:
   schemas:
-    RestSession:
-      type: object
-      description: Response of a session
-      properties:
-        id:
-          type: string
-          description: session ID
-          example: '123456'
-        lastAttempt:
-          $ref: '#/components/schemas/Attempt'
-        project:
-          $ref: '#/components/schemas/IdAndName'
-        sessionTime:
-          type: string
-          description: session time
-          example: '2022-12-31T23:59:00+00:00'
-        sessionUuid:
-          type: string
-          format: uuid
-        workflow:
-          $ref: '#/components/schemas/NameOptionalId'
-      required:
-      - id
-      - project
-      - sessionTime
-      - workflow
-    RestSessionAttemptCollection:
-      type: object
-      properties:
-        attempts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RestSessionAttempt'
     RestSessionAttempt:
       type: object
       description: Response of an attempt
@@ -221,13 +188,13 @@ components:
       - status
       - success
       - workflow
-    RestSessionCollection:
+    RestSessionAttemptCollection:
       type: object
       properties:
-        sessions:
+        attempts:
           type: array
           items:
-            $ref: '#/components/schemas/RestSession'
+            $ref: '#/components/schemas/RestSessionAttempt'
     NameOptionalId:
       type: object
       description: Name and optional ID
@@ -242,6 +209,39 @@ components:
           example: abcdefg
       required:
       - name
+    RestSessionCollection:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestSession'
+    RestSession:
+      type: object
+      description: Response of a session
+      properties:
+        id:
+          type: string
+          description: session ID
+          example: '123456'
+        lastAttempt:
+          $ref: '#/components/schemas/Attempt'
+        project:
+          $ref: '#/components/schemas/IdAndName'
+        sessionTime:
+          type: string
+          description: session time
+          example: '2022-12-31T23:59:00+00:00'
+        sessionUuid:
+          type: string
+          format: uuid
+        workflow:
+          $ref: '#/components/schemas/NameOptionalId'
+      required:
+      - id
+      - project
+      - sessionTime
+      - workflow
     IdAndName:
       type: object
       description: Name and ID

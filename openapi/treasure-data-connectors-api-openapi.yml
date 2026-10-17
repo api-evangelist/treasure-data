@@ -39,14 +39,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    Connector:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
   responses:
     Unauthorized:
       description: Authentication required or API key invalid
@@ -57,6 +49,14 @@ components:
             properties:
               error:
                 type: string
+  schemas:
+    Connector:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
   securitySchemes:
     TDAuth:
       type: apiKey

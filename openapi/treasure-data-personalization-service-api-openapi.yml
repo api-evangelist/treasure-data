@@ -89,6 +89,53 @@ paths:
       - Personalization Service
 components:
   schemas:
+    requestErrorResponse:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: 'Error Code for engineer identification. The following are used:
+
+            <pre>
+
+            3000: RT token was not provided (WP13n-Token header).
+
+            3001: RT token is not in configuration.
+
+            3002: RT token account conflicts with Authed user account.
+
+            3003: RT token is in an invalid format.
+
+            3004: Invalid event object.
+
+            3005: Request origin not in IP whitelist.
+
+            3006: Invalid token type. Token type is not matching the one in the configuration.
+
+            3007: Invalid or missing Origin.
+
+            3008: Request method is required.
+
+            3009: Unsupported method.
+
+            </pre>'
+          enum:
+          - 3000
+          - 3001
+          - 3002
+          - 3003
+          - 3004
+          - 3005
+          - 3006
+          - 3007
+          - 3008
+          - 3009
+        message:
+          type: string
+          description: General explanation for users
     serverErrorResponse:
       type: object
       required:
@@ -154,53 +201,6 @@ components:
           - 3012
           - 3013
           - 9999
-        message:
-          type: string
-          description: General explanation for users
-    requestErrorResponse:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: 'Error Code for engineer identification. The following are used:
-
-            <pre>
-
-            3000: RT token was not provided (WP13n-Token header).
-
-            3001: RT token is not in configuration.
-
-            3002: RT token account conflicts with Authed user account.
-
-            3003: RT token is in an invalid format.
-
-            3004: Invalid event object.
-
-            3005: Request origin not in IP whitelist.
-
-            3006: Invalid token type. Token type is not matching the one in the configuration.
-
-            3007: Invalid or missing Origin.
-
-            3008: Request method is required.
-
-            3009: Unsupported method.
-
-            </pre>'
-          enum:
-          - 3000
-          - 3001
-          - 3002
-          - 3003
-          - 3004
-          - 3005
-          - 3006
-          - 3007
-          - 3008
-          - 3009
         message:
           type: string
           description: General explanation for users

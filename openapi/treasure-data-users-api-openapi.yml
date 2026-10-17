@@ -309,6 +309,26 @@ paths:
     - url: https://api.ap02.treasuredata.com/v3
     - url: https://api.eu01.treasuredata.com/v3
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or API key invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Resource not found
   schemas:
     User:
       type: object
@@ -457,26 +477,6 @@ components:
           type: array
           items:
             type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                example: Resource not found
-    Unauthorized:
-      description: Authentication required or API key invalid
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   parameters:
     path_user_email:
       name: user_email

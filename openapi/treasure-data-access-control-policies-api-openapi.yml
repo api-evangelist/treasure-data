@@ -200,22 +200,9 @@ paths:
                 $ref: '#/components/schemas/AccessControlPolicy'
 components:
   schemas:
-    CreateAccessControlPolicyRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy
-      properties:
-        policy:
-          type: object
-          additionalProperties: false
-          required:
-          - name
-          properties:
-            name:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
-            description:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    AccessControlPolicyId:
+      type: integer
+      example: 67
     AccessControlPolicy:
       title: Access Control Policy
       type: object
@@ -241,23 +228,6 @@ components:
           description: The number of users which the policy attaches to
           type: integer
           example: 3
-    UserId:
-      type: integer
-      example: 123
-    UpdateAccessControlPolicyRequest:
-      type: object
-      additionalProperties: false
-      required:
-      - policy
-      properties:
-        policy:
-          type: object
-          additionalProperties: false
-          properties:
-            name:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
-            description:
-              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
     UpdateAccessControlPoliciesRequest:
       type: object
       additionalProperties: false
@@ -272,25 +242,55 @@ components:
           - '1'
           - '2'
           - '42'
+    UpdateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
+    UserId:
+      type: integer
+      example: 123
     AccountId:
       type: integer
       example: 123
-    AccessControlPolicyId:
-      type: integer
-      example: 67
+    CreateAccessControlPolicyRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - policy
+      properties:
+        policy:
+          type: object
+          additionalProperties: false
+          required:
+          - name
+          properties:
+            name:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/name'
+            description:
+              $ref: '#/components/schemas/AccessControlPolicy/properties/description'
   parameters:
-    path_user_id:
-      name: user_id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UserId'
     path_access_control_policy_id:
       name: policy_id
       in: path
       required: true
       schema:
         $ref: '#/components/schemas/AccessControlPolicyId'
+    path_user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
   securitySchemes:
     ApiKeyAuth:
       type: http

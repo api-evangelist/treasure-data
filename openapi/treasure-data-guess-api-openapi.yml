@@ -61,183 +61,21 @@ paths:
       operationId: postV1Guess
       x-operation-id-source: derived
 components:
-  responses:
-    '401':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: API Key isn't set on the request
-              message: API Key isn't set on the request
-    '403':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 401
-              title: Forbidden
-              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
-    '500':
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              title: Internal Server Error
-              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              title: Not Found
-              message: No route matches [GET] "/abc".
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              title: Parameter Error
-              message: Data validation error, verify fields and try again.
   schemas:
-    BasicConfigs:
-      type: object
-      description: The basic configs of the DWH Integration.
-      discriminator:
-        propertyName: type
-        mapping:
-          snowflake: '#/components/schemas/basic'
-          databricks: '#/components/schemas/basic-2'
-      oneOf:
-      - $ref: '#/components/schemas/snowflake/properties/basic'
-      - $ref: '#/components/schemas/databricks/properties/basic'
-    snowflake:
-      type: object
-      title: Snowflake
-      properties:
-        basic:
-          type: object
-          description: The parameters for the Snowflake connector
-          title: Snowflake basic config
-          allOf:
-          - $ref: '#/components/schemas/Basic'
-          - properties:
-              role:
-                title: Role Name
-                type: string
-                description: Specify the role name, Leave blank to use default role.
-              warehouse:
-                title: Snowflake Warehouse
-                description: The Snowflake data Warehouse to use for the connection, e.g. "COMPUTE_WH"
-                type: string
-              db:
-                title: Snowflake Database
-                type: string
-              schema:
-                title: Schema, e.g. "PUBLIC"
-                description: The schema to use for the connection
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector
-                type: boolean
-                default: false
-          required:
-          - warehouse
-          - db
-          - schema
-        advanced:
-          type: object
-          description: The parameters for the Snowflake connector
-          allOf:
-          - $ref: '#/components/schemas/Advanced'
-          - properties:
-              source_type:
-                title: Source Type
-                description: Specify the import type, either via a table/view or via a query.
-                type: string
-                enum:
-                - table_view
-                - query
-                default: table_views
-              query:
-                title: SELECT Query
-                description: 'Use with (source_type: query) to specify a custom query for importng.'
-                type: string
-              select:
-                title: Columns to return
-                description: 'Comma-separated list of columns to SELECT. Use with (source_type: table_view) to query for columns'
-                type: string
-                default: '*'
-              table:
-                title: Source Table/View
-                description: 'The table/view to import from. Use with (source_type: table_view)'
-                type: string
-              where:
-                title: WHERE Condition
-                description: Specify a WHERE condition to filter the data
-                type: string
-              order_by:
-                title: ORDER By Columns
-                description: Specify the columns to order the data by
-                type: string
-              incremental:
-                title: Incremental Loading?
-                description: Enable incremental loading for this connector?
-                type: boolean
-                default: false
-              incremental_columns:
-                title: Incremental Column(s)
-                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
-                type: array
-                items:
-                  type: string
-              invalid_value_option:
-                title: Invalid Value Handling Mode
-                description: Specify how to handle invalid data values.
-                type: string
-                enum:
-                - fail_job
-                - insert_null
-                - ignore_row
-                default: fail_job
-    Error:
+    Advanced:
       type: object
       properties:
-        code:
-          type: integer
-          description: The HTTP status code
-        title:
+        type:
           type: string
-          description: The error title
-        message:
-          description: The error message
-          anyOf:
-          - type: string
-          - type: object
-            additionalProperties: true
-        detail:
-          description: Any extra infomation of the error
-          type: object
-          additionalProperties: true
+          description: Connector type, e.g. snowflake, redshift
+    GuessResult:
+      type: object
+      description: The result of Guess operation
+      properties:
+        basic_configs:
+          $ref: '#/components/schemas/BasicConfigs'
+        advanced_configs:
+          $ref: '#/components/schemas/AdvancedConfigs'
       additionalProperties: false
     databricks:
       type: object
@@ -337,26 +175,116 @@ components:
       required:
       - type
       - td_authentication_id
-    ErrorResponse:
+    Error:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    GuessResult:
-      type: object
-      description: The result of Guess operation
-      properties:
-        basic_configs:
-          $ref: '#/components/schemas/BasicConfigs'
-        advanced_configs:
-          $ref: '#/components/schemas/AdvancedConfigs'
-      additionalProperties: false
-    Advanced:
-      type: object
-      properties:
-        type:
+        code:
+          type: integer
+          description: The HTTP status code
+        title:
           type: string
-          description: Connector type, e.g. snowflake, redshift
+          description: The error title
+        message:
+          description: The error message
+          anyOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        detail:
+          description: Any extra infomation of the error
+          type: object
+          additionalProperties: true
+      additionalProperties: false
+    snowflake:
+      type: object
+      title: Snowflake
+      properties:
+        basic:
+          type: object
+          description: The parameters for the Snowflake connector
+          title: Snowflake basic config
+          allOf:
+          - $ref: '#/components/schemas/Basic'
+          - properties:
+              role:
+                title: Role Name
+                type: string
+                description: Specify the role name, Leave blank to use default role.
+              warehouse:
+                title: Snowflake Warehouse
+                description: The Snowflake data Warehouse to use for the connection, e.g. "COMPUTE_WH"
+                type: string
+              db:
+                title: Snowflake Database
+                type: string
+              schema:
+                title: Schema, e.g. "PUBLIC"
+                description: The schema to use for the connection
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector
+                type: boolean
+                default: false
+          required:
+          - warehouse
+          - db
+          - schema
+        advanced:
+          type: object
+          description: The parameters for the Snowflake connector
+          allOf:
+          - $ref: '#/components/schemas/Advanced'
+          - properties:
+              source_type:
+                title: Source Type
+                description: Specify the import type, either via a table/view or via a query.
+                type: string
+                enum:
+                - table_view
+                - query
+                default: table_views
+              query:
+                title: SELECT Query
+                description: 'Use with (source_type: query) to specify a custom query for importng.'
+                type: string
+              select:
+                title: Columns to return
+                description: 'Comma-separated list of columns to SELECT. Use with (source_type: table_view) to query for columns'
+                type: string
+                default: '*'
+              table:
+                title: Source Table/View
+                description: 'The table/view to import from. Use with (source_type: table_view)'
+                type: string
+              where:
+                title: WHERE Condition
+                description: Specify a WHERE condition to filter the data
+                type: string
+              order_by:
+                title: ORDER By Columns
+                description: Specify the columns to order the data by
+                type: string
+              incremental:
+                title: Incremental Loading?
+                description: Enable incremental loading for this connector?
+                type: boolean
+                default: false
+              incremental_columns:
+                title: Incremental Column(s)
+                description: "List of column(s) to incremental on. Only timestamp and numeric columns are accepted. \nIf not set, it will try to find and use the primary keys\n"
+                type: array
+                items:
+                  type: string
+              invalid_value_option:
+                title: Invalid Value Handling Mode
+                description: Specify how to handle invalid data values.
+                type: string
+                enum:
+                - fail_job
+                - insert_null
+                - ignore_row
+                default: fail_job
     AdvancedConfigs:
       type: array
       description: "The DWH Integration advanced configs. The configs contain array of \nof table configs which combine with the basic configs will be used to create Connector Bulkload Session.\n"
@@ -382,6 +310,78 @@ components:
             oneOf:
             - $ref: '#/components/schemas/snowflake/properties/advanced'
             - $ref: '#/components/schemas/databricks/properties/advanced'
+    BasicConfigs:
+      type: object
+      description: The basic configs of the DWH Integration.
+      discriminator:
+        propertyName: type
+        mapping:
+          snowflake: '#/components/schemas/basic'
+          databricks: '#/components/schemas/basic-2'
+      oneOf:
+      - $ref: '#/components/schemas/snowflake/properties/basic'
+      - $ref: '#/components/schemas/databricks/properties/basic'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+  responses:
+    '403':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: Forbidden
+              message: Access to the requested resource is forbidden. You do not have the necessary permissions.
+    '401':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 401
+              title: API Key isn't set on the request
+              message: API Key isn't set on the request
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              title: Internal Server Error
+              message: LINK, accepted HTTP methods are OPTIONS, GET, HEAD, POST, PUT, DELETE and PATCH.
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              title: Parameter Error
+              message: Data validation error, verify fields and try again.
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              title: Not Found
+              message: No route matches [GET] "/abc".
   securitySchemes:
     apiKey:
       type: apiKey
