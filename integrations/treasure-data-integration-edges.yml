@@ -23,6 +23,7 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- https://cran.r-project.org/web/packages/packages.rds
 summary: null
 marketplace_apps: []
 edges:
@@ -153,4 +154,34 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: CRAN
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (R)
+  evidence: https://cran.r-project.org/package=RTD
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: CRAN (packages.rds, the public package metadata table)
+    spec_file: null
+    language: R
+    packages:
+    - name: RTD
+      version: 0.4.2
+      title: Simple TD API Client
+      released: '2025-12-08'
+      released_field: Published
+      lapsed: false
+      page: https://cran.r-project.org/package=RTD
+      repo_leg: github-org:treasure-data
+      publisher_leg: github-org:treasure-data
+      matched_by: github-org
+    current: true
+    signal_note: 'an official R package on CRAN: distribution, not an integration; lapsed = no release in 24 months'
+    detected_by: sweep-cran-r-packages.py
+    detected: '2026-10-22'
+  detected_by: sweep-cran-r-packages.py
+  first_seen: '2026-10-22'
 templates: []
