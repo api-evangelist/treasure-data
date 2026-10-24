@@ -1,0 +1,628 @@
+{
+  "info": {
+    "_postman_id": "f6060dc7-5f3f-44b5-a065-c26bc297358a",
+    "name": "llm-api Image Generator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:35:24.000Z",
+    "updatedAt": "2026-10-22T02:35:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f6060dc7-5f3f-44b5-a065-c26bc297358a"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "image_generators",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "4114d5bf-ed6b-4ac4-8a4a-231d1222531e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c7bbe288-18cd-4e5f-9424-286d53c60afe",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7dab2f86-6047-4200-95c3-4193e270a1cd",
+                      "name": "Image generator deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/image_generators/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "image_generators",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:35:25.000Z",
+                      "updatedAt": "2026-10-22T02:35:25.000Z",
+                      "uid": "35240-7dab2f86-6047-4200-95c3-4193e270a1cd"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-4114d5bf-ed6b-4ac4-8a4a-231d1222531e"
+                },
+                {
+                  "name": "show",
+                  "id": "9b5002a8-85f0-4386-bfd6-fefbddf5ad6d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d21c826a-8047-46b8-b009-52fe986d1767",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f0da36bb-3f32-47b0-a124-9c95c9c46398",
+                      "name": "returns the details of a specific image_generator",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/image_generators/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "image_generators",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:25.000Z",
+                      "updatedAt": "2026-10-22T02:35:25.000Z",
+                      "uid": "35240-f0da36bb-3f32-47b0-a124-9c95c9c46398"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-9b5002a8-85f0-4386-bfd6-fefbddf5ad6d"
+                },
+                {
+                  "name": "update",
+                  "id": "e53ebfe0-21bb-427d-8443-6c12678c50c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "48915eb0-449d-4d4f-83f8-8752d41564b2",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "68b6f07c-fef3-4a90-a81a-409e24ac5258",
+                      "name": "updates the image_generator",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/image_generators/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "image_generators",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:25.000Z",
+                      "updatedAt": "2026-10-22T02:35:25.000Z",
+                      "uid": "35240-68b6f07c-fef3-4a90-a81a-409e24ac5258"
+                    },
+                    {
+                      "id": "43ed513c-aa3a-45de-8db3-5cf405088cc9",
+                      "name": "PATCH /api/image_generators rejects {\"updatedAt\":1}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/image_generators/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "image_generators",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:25.000Z",
+                      "updatedAt": "2026-10-22T02:35:25.000Z",
+                      "uid": "35240-43ed513c-aa3a-45de-8db3-5cf405088cc9"
+                    },
+                    {
+                      "id": "64a69111-046f-4cab-b30c-ca349d201f96",
+                      "name": "PATCH /api/image_generators rejects {\"imageReturnMode\":null}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/image_generators/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "image_generators",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:25.000Z",
+                      "updatedAt": "2026-10-22T02:35:25.000Z",
+                      "uid": "35240-64a69111-046f-4cab-b30c-ca349d201f96"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-e53ebfe0-21bb-427d-8443-6c12678c50c1"
+                }
+              ],
+              "id": "d7d44bd2-bf82-49fa-9700-2934ea9f5537",
+              "createdAt": "2026-10-22T02:35:25.000Z",
+              "updatedAt": "2026-10-22T02:35:25.000Z",
+              "uid": "35240-d7d44bd2-bf82-49fa-9700-2934ea9f5537"
+            },
+            {
+              "name": "create",
+              "id": "aacc1531-9b8b-4db4-9743-c9b7547b5e34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/image_generators",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "image_generators"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0b2c67a2-6de1-482f-adfa-e279980f8e0d",
+                  "name": "creates a new ImageGenerator",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-0b2c67a2-6de1-482f-adfa-e279980f8e0d"
+                },
+                {
+                  "id": "94e3e51d-e736-4d85-b3cb-81dbea4f6b5d",
+                  "name": "POST /api/image_generators rejects {\"updatedAt\":1}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-94e3e51d-e736-4d85-b3cb-81dbea4f6b5d"
+                },
+                {
+                  "id": "77f882f6-734e-44f5-810e-e17c12488cb2",
+                  "name": "POST /api/image_generators rejects {\"imageReturnMode\":null}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"imageModelType\": \"<string>\",\n      \"imageReturnMode\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/image_generators",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "image_generators"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:25.000Z",
+                  "updatedAt": "2026-10-22T02:35:25.000Z",
+                  "uid": "35240-77f882f6-734e-44f5-810e-e17c12488cb2"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:25.000Z",
+              "updatedAt": "2026-10-22T02:35:25.000Z",
+              "uid": "35240-aacc1531-9b8b-4db4-9743-c9b7547b5e34"
+            }
+          ],
+          "id": "25af79f1-280d-4b1c-b76e-89cb4972a168",
+          "createdAt": "2026-10-22T02:35:25.000Z",
+          "updatedAt": "2026-10-22T02:35:25.000Z",
+          "uid": "35240-25af79f1-280d-4b1c-b76e-89cb4972a168"
+        }
+      ],
+      "id": "ce2864d1-7f52-496e-abc7-cf4467994c5b",
+      "createdAt": "2026-10-22T02:35:25.000Z",
+      "updatedAt": "2026-10-22T02:35:25.000Z",
+      "uid": "35240-ce2864d1-7f52-496e-abc7-cf4467994c5b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

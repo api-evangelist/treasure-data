@@ -1,173 +1,497 @@
 {
+  "info": {
+    "_postman_id": "b0b1cd1f-6151-48e9-be39-d086ee369190",
+    "name": "Treasure Data Databases API",
+    "description": "Operations tagged Databases across 2 of this provider's published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:06.000Z",
+    "updatedAt": "2026-10-22T02:32:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b0b1cd1f-6151-48e9-be39-d086ee369190"
+  },
   "item": [
     {
-      "id": "a486f17f-98a2-4b33-bc0e-ac8b6b6e3a08",
-      "name": "Databases",
-      "description": {
-        "content": "Manage Treasure Data databases",
-        "type": "text/plain"
-      },
+      "name": "database",
       "item": [
         {
-          "id": "791f6147-1cb5-48da-b870-fa8d96f7c874",
-          "name": "List databases",
-          "request": {
-            "name": "List databases",
-            "description": {
-              "content": "Returns a list of all databases in the account.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "database",
-                "list"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list",
+          "item": [
             {
-              "id": "78752b49-b4f2-4848-a53e-9ee1ff99711d",
-              "name": "List of databases",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "database",
-                    "list"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+              "name": "List databases",
+              "id": "ffb2143c-0b2f-4aa1-ada3-5b9a1bba4cbf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
                     },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"databases\": [\n    {\n      \"name\": \"string\",\n      \"count\": 9043,\n      \"created_at\": \"1997-11-05T17:06:31.272Z\",\n      \"updated_at\": \"2021-04-26T03:31:59.992Z\",\n      \"permission\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"count\": 9635,\n      \"created_at\": \"1950-02-22T12:05:08.653Z\",\n      \"updated_at\": \"2012-07-14T00:08:28.654Z\",\n      \"permission\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9ec7e065-e644-41a6-b800-13694e308978",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "database",
-                    "list"
-                  ],
+                  "raw": "{{baseUrl}}/database/list",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "database",
+                    "list"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns a list of all databases in the account."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "b01d37b4-1af5-43af-bb4f-6bba34db1949",
+                  "name": "List of databases",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/database/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "database",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"databases\": [\n    {\n      \"name\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"permission\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"permission\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:32:07.000Z",
+                  "updatedAt": "2026-10-22T02:32:07.000Z",
+                  "uid": "35240-b01d37b4-1af5-43af-bb4f-6bba34db1949"
+                },
+                {
+                  "id": "92ada637-d81b-4d0f-8392-ebb4eb44af3a",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/database/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "database",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:07.000Z",
+                  "updatedAt": "2026-10-22T02:32:07.000Z",
+                  "uid": "35240-92ada637-d81b-4d0f-8392-ebb4eb44af3a"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:32:07.000Z",
+              "updatedAt": "2026-10-22T02:32:07.000Z",
+              "uid": "35240-ffb2143c-0b2f-4aa1-ada3-5b9a1bba4cbf"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "92198814-fd50-4dc3-8cea-7016cef560ed",
+          "createdAt": "2026-10-22T02:32:07.000Z",
+          "updatedAt": "2026-10-22T02:32:07.000Z",
+          "uid": "35240-92198814-fd50-4dc3-8cea-7016cef560ed"
+        },
+        {
+          "name": "show",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "Get database",
+                  "id": "3d929e2d-e173-45c6-8025-8190f1a2e65f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/database/show/:database_name?require_permissions=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "database",
+                        "show",
+                        ":database_name"
+                      ],
+                      "query": [
+                        {
+                          "key": "require_permissions",
+                          "value": "true"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2197880-0840-44b6-9d1d-454ba0e25c9f",
+                          "key": "database_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a specified database."
+                  },
+                  "response": [
+                    {
+                      "id": "649d27ba-7639-4ce8-b0bb-22e47dcb3c3c",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/database/show/:database_name?require_permissions=true",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "database",
+                            "show",
+                            ":database_name"
+                          ],
+                          "query": [
+                            {
+                              "key": "require_permissions",
+                              "value": "true"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"count\": \"<integer>\",\n  \"created_at\": \"3627-36-01\u200607:19:60\u2005UTC\",\n  \"delete_protected\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"organization\": \"<string,null>\",\n  \"permission\": \"<string,null>\",\n  \"updated_at\": \"5712-04-62\u200283:02:96\u1680UTC\",\n  \"datatank\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"database_permissions\": {\n    \"edit\": \"<boolean>\",\n    \"delete\": \"<boolean>\",\n    \"query\": \"<boolean>\",\n    \"import\": \"<boolean>\",\n    \"download\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:32:07.000Z",
+                      "updatedAt": "2026-10-22T02:32:07.000Z",
+                      "uid": "35240-649d27ba-7639-4ce8-b0bb-22e47dcb3c3c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:07.000Z",
+                  "updatedAt": "2026-10-22T02:32:07.000Z",
+                  "uid": "35240-3d929e2d-e173-45c6-8025-8190f1a2e65f"
+                }
+              ],
+              "id": "810d7ab2-bcf9-4031-9f63-db0fedbecae1",
+              "createdAt": "2026-10-22T02:32:07.000Z",
+              "updatedAt": "2026-10-22T02:32:07.000Z",
+              "uid": "35240-810d7ab2-bcf9-4031-9f63-db0fedbecae1"
+            }
+          ],
+          "id": "705594fb-da1c-4a75-afac-0f6131b07542",
+          "createdAt": "2026-10-22T02:32:07.000Z",
+          "updatedAt": "2026-10-22T02:32:07.000Z",
+          "uid": "35240-705594fb-da1c-4a75-afac-0f6131b07542"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "Create database",
+                  "id": "7ed286b1-cb84-4367-b404-7ce9e9c8b475",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/database/create/:database_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "database",
+                        "create",
+                        ":database_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b0a4697c-6cf6-41a5-bd07-0af1eba55e3a",
+                          "key": "database_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Creates a database."
+                  },
+                  "response": [
+                    {
+                      "id": "24c0c451-1baa-44ea-9fbd-086cefa6de13",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/database/create/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "database",
+                            "create",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"database\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:07.000Z",
+                      "updatedAt": "2026-10-22T02:32:07.000Z",
+                      "uid": "35240-24c0c451-1baa-44ea-9fbd-086cefa6de13"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:07.000Z",
+                  "updatedAt": "2026-10-22T02:32:07.000Z",
+                  "uid": "35240-7ed286b1-cb84-4367-b404-7ce9e9c8b475"
+                }
+              ],
+              "id": "c10ddb77-5904-45e4-8f36-d8707604c883",
+              "createdAt": "2026-10-22T02:32:07.000Z",
+              "updatedAt": "2026-10-22T02:32:07.000Z",
+              "uid": "35240-c10ddb77-5904-45e4-8f36-d8707604c883"
+            }
+          ],
+          "id": "247eadc5-2313-4b7e-9ec2-67f1417327e1",
+          "createdAt": "2026-10-22T02:32:07.000Z",
+          "updatedAt": "2026-10-22T02:32:07.000Z",
+          "uid": "35240-247eadc5-2313-4b7e-9ec2-67f1417327e1"
+        },
+        {
+          "name": "delete",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "Delete database",
+                  "id": "35b1d11b-ad65-4a78-9ae5-7b81ae14a966",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/database/delete/:database_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "database",
+                        "delete",
+                        ":database_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e5f17e1f-2946-4d64-bebd-dddbe2e43083",
+                          "key": "database_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a specified database."
+                  },
+                  "response": [
+                    {
+                      "id": "e8ec8401-6aae-4ab4-9842-a1060e13c4d7",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/database/delete/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "database",
+                            "delete",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"database\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:07.000Z",
+                      "updatedAt": "2026-10-22T02:32:07.000Z",
+                      "uid": "35240-e8ec8401-6aae-4ab4-9842-a1060e13c4d7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:07.000Z",
+                  "updatedAt": "2026-10-22T02:32:07.000Z",
+                  "uid": "35240-35b1d11b-ad65-4a78-9ae5-7b81ae14a966"
+                }
+              ],
+              "id": "76d93d09-ea25-4abd-a218-302de2694c63",
+              "createdAt": "2026-10-22T02:32:07.000Z",
+              "updatedAt": "2026-10-22T02:32:07.000Z",
+              "uid": "35240-76d93d09-ea25-4abd-a218-302de2694c63"
+            }
+          ],
+          "id": "d6b4fccf-c043-48ad-b5e3-fa93989d914a",
+          "createdAt": "2026-10-22T02:32:07.000Z",
+          "updatedAt": "2026-10-22T02:32:07.000Z",
+          "uid": "35240-d6b4fccf-c043-48ad-b5e3-fa93989d914a"
         }
       ],
-      "event": []
+      "id": "0101064f-8210-47b6-aadf-f037509cdad1",
+      "createdAt": "2026-10-22T02:32:07.000Z",
+      "updatedAt": "2026-10-22T02:32:07.000Z",
+      "uid": "35240-0101064f-8210-47b6-aadf-f037509cdad1"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authorization"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "cabe6f23-907c-4cb1-9064-f8d7b2cca424",
-    "name": "Treasure Data TD Bulk Import Databases API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,0 +1,2431 @@
+{
+  "info": {
+    "_postman_id": "91eb11b8-e48c-4daa-91b3-d74dd9304bd0",
+    "name": "Treasure Data Project API",
+    "description": "Operations tagged Project across 2 of this provider's published API definitions: treasure-data-llm-api-openapi.yml, treasure-data-project-api-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:35.000Z",
+    "updatedAt": "2026-10-22T02:36:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91eb11b8-e48c-4daa-91b3-d74dd9304bd0"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "projects",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "archive",
+                  "item": [
+                    {
+                      "name": "Download a project archive file",
+                      "id": "0e288b00-f797-4752-a1ef-8a299c99ee31",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/archive?revision=<string>&direct_download=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "archive"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) use a given revision of a project instead of the latest revision",
+                              "key": "revision",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "enable returning direct download handle",
+                              "key": "direct_download",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e4f23739-32d2-4e7b-bd67-9c663335140f",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) project id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "89618daa-073a-48f2-bd4b-a274e2a5a968",
+                          "name": "archive of files of a project.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/archive?revision=<string>&direct_download=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "archive"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) use a given revision of a project instead of the latest revision",
+                                  "key": "revision",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "enable returning direct download handle",
+                                  "key": "direct_download",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-89618daa-073a-48f2-bd4b-a274e2a5a968"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-0e288b00-f797-4752-a1ef-8a299c99ee31"
+                    }
+                  ],
+                  "id": "73b70301-0a6b-414a-8f45-1fb14b442f86",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-73b70301-0a6b-414a-8f45-1fb14b442f86"
+                },
+                {
+                  "name": "revisions",
+                  "item": [
+                    {
+                      "name": "List revisions of a project",
+                      "id": "4b5e855c-8584-41f6-9336-59bc13231934",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/revisions?last_id=<integer>&name=<string>&page[after]=<string>&page[size]=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "revisions"
+                          ],
+                          "query": [
+                            {
+                              "description": "deprecated - do not use",
+                              "key": "last_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "revision name",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "cursor to next page",
+                              "key": "page[after]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "page size",
+                              "key": "page[size]",
+                              "value": "100"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "cab48881-19da-4bfc-a0a9-d111eaa7b7ff",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "16d7ac4a-007f-4564-b1d9-014f5b9955d8",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/revisions?last_id=<integer>&name=<string>&page[after]=<string>&page[size]=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "revisions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "deprecated - do not use",
+                                  "key": "last_id",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "revision name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "cursor to next page",
+                                  "key": "page[after]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "page size",
+                                  "key": "page[size]",
+                                  "value": "100"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"pagination\": {\n    \"nextPage\": \"<string>\"\n  },\n  \"revisions\": [\n    {\n      \"archiveType\": \"<string>\",\n      \"revision\": \"<string>\",\n      \"archiveMd5\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"userInfo\": {}\n    },\n    {\n      \"archiveType\": \"<string>\",\n      \"revision\": \"<string>\",\n      \"archiveMd5\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"userInfo\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-16d7ac4a-007f-4564-b1d9-014f5b9955d8"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-4b5e855c-8584-41f6-9336-59bc13231934"
+                    }
+                  ],
+                  "id": "dc406904-1096-4e7b-a4d3-b9f52e0140c3",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-dc406904-1096-4e7b-a4d3-b9f52e0140c3"
+                },
+                {
+                  "name": "schedules",
+                  "item": [
+                    {
+                      "name": "List schedules of a project with filters",
+                      "id": "bca714f0-ff59-4d7a-a1c0-da7c58effd54",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/schedules?workflow=<string>&last_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "schedules"
+                          ],
+                          "query": [
+                            {
+                              "description": "exact matching filter on workflow name",
+                              "key": "workflow",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List schedules whose ID is greater than this ID for pagination. Schedules are returned in ascending order by ID.",
+                              "key": "last_id",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "46e299a8-0f56-4648-8182-fd8da88aee57",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) project id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9da7b032-78f0-4326-95b6-252655372988",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/schedules?workflow=<string>&last_id=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "schedules"
+                              ],
+                              "query": [
+                                {
+                                  "description": "exact matching filter on workflow name",
+                                  "key": "workflow",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List schedules whose ID is greater than this ID for pagination. Schedules are returned in ascending order by ID.",
+                                  "key": "last_id",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"schedules\": [\n    {\n      \"id\": \"<string>\",\n      \"nextRunTime\": \"<dateTime>\",\n      \"nextScheduleTime\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"workflow\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"disabledAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"nextRunTime\": \"<dateTime>\",\n      \"nextScheduleTime\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"workflow\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"disabledAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-9da7b032-78f0-4326-95b6-252655372988"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-bca714f0-ff59-4d7a-a1c0-da7c58effd54"
+                    }
+                  ],
+                  "id": "829c8dbf-7700-4c85-a404-83d36a0a4687",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-829c8dbf-7700-4c85-a404-83d36a0a4687"
+                },
+                {
+                  "name": "secrets",
+                  "item": [
+                    {
+                      "name": "{key}",
+                      "item": [
+                        {
+                          "name": "Delete a secret from a project",
+                          "id": "f605f1c7-3135-4ed2-bf8e-43cb56c6df3c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/secrets/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "secrets",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "948276df-dc45-46ee-9262-971ecf910c7a",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) project id"
+                                },
+                                {
+                                  "id": "1dea52a8-1fac-4247-82b3-d452488d0efe",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) secret key"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "45e155a2-d532-4608-9277-7330f33d629e",
+                              "name": "Treasure Workflow never returns content",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/projects/:id/secrets/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "projects",
+                                    ":id",
+                                    "secrets",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-22T02:36:36.000Z",
+                              "updatedAt": "2026-10-22T02:36:36.000Z",
+                              "uid": "35240-45e155a2-d532-4608-9277-7330f33d629e"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-f605f1c7-3135-4ed2-bf8e-43cb56c6df3c"
+                        },
+                        {
+                          "name": "Set a secret to a project",
+                          "id": "049d37e6-7181-4036-a7a0-cc8dcec59d92",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"value\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/secrets/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "secrets",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "02128083-9980-4ad7-beba-6fa6dc2b35d5",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) project id"
+                                },
+                                {
+                                  "id": "cafc1923-6e7a-436a-ac63-4bfd98553330",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) secret key"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "8003c401-2ab7-4b6d-af1b-f0df71efeb4e",
+                              "name": "Treasure Workflow never returns content",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"value\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/projects/:id/secrets/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "projects",
+                                    ":id",
+                                    "secrets",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-22T02:36:36.000Z",
+                              "updatedAt": "2026-10-22T02:36:36.000Z",
+                              "uid": "35240-8003c401-2ab7-4b6d-af1b-f0df71efeb4e"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-049d37e6-7181-4036-a7a0-cc8dcec59d92"
+                        }
+                      ],
+                      "id": "f27e7cbe-9962-40f0-84bc-cb39b6b7189b",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-f27e7cbe-9962-40f0-84bc-cb39b6b7189b"
+                    },
+                    {
+                      "name": "List secret keys of a project",
+                      "id": "80add1b0-b69c-48a0-a736-fbf27997f7c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/secrets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "secrets"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9ea27369-78d0-4b30-a426-efc24ccf73bf",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) project id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ebf76c67-76ce-476a-880d-dc3d3a8184e8",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/secrets",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "secrets"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"secrets\": [\n    {\n      \"key\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-ebf76c67-76ce-476a-880d-dc3d3a8184e8"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-80add1b0-b69c-48a0-a736-fbf27997f7c9"
+                    }
+                  ],
+                  "id": "73e28a22-0f8f-4fe5-9b3a-e5023dda18a7",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-73e28a22-0f8f-4fe5-9b3a-e5023dda18a7"
+                },
+                {
+                  "name": "sessions",
+                  "item": [
+                    {
+                      "name": "List sessions of a project with filters",
+                      "id": "adce23b1-860f-4ca3-af61-18d416a8f5c6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/sessions?workflow=<string>&last_id=<long>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "sessions"
+                          ],
+                          "query": [
+                            {
+                              "description": "exact matching filter on workflow name",
+                              "key": "workflow",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.",
+                              "key": "last_id",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "number of sessions to return",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7f49387f-4816-4691-9307-cb77d1b89eab",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) project id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "15fe944b-1f82-417b-8d43-3a57f73f59ef",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/sessions?workflow=<string>&last_id=<long>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "sessions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "exact matching filter on workflow name",
+                                  "key": "workflow",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.",
+                                  "key": "last_id",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "number of sessions to return",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"sessions\": [\n    {\n      \"id\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"sessionTime\": \"<string>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"lastAttempt\": {\n        \"cancelRequested\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"done\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"params\": {},\n        \"status\": \"killed\",\n        \"success\": \"<boolean>\",\n        \"finishedAt\": \"<dateTime>\",\n        \"poolId\": \"<string>\",\n        \"retryAttemptName\": \"<string>\"\n      },\n      \"sessionUuid\": \"<uuid>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"sessionTime\": \"<string>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"lastAttempt\": {\n        \"cancelRequested\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"done\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"params\": {},\n        \"status\": \"error\",\n        \"success\": \"<boolean>\",\n        \"finishedAt\": \"<dateTime>\",\n        \"poolId\": \"<string>\",\n        \"retryAttemptName\": \"<string>\"\n      },\n      \"sessionUuid\": \"<uuid>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-15fe944b-1f82-417b-8d43-3a57f73f59ef"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-adce23b1-860f-4ca3-af61-18d416a8f5c6"
+                    }
+                  ],
+                  "id": "2c092a58-ac72-405f-be76-a576d07c979c",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-2c092a58-ac72-405f-be76-a576d07c979c"
+                },
+                {
+                  "name": "workflows",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get workflow by name",
+                          "id": "a10e3c5a-266e-4fa1-a128-cd3386ffcad1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/workflows/:name?revision=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "workflows",
+                                ":name"
+                              ],
+                              "query": [
+                                {
+                                  "key": "revision",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "29533b4b-7f15-4bc9-8356-668b458ee303",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "218d84c6-a283-43ed-9650-3e8aa4406ffe",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c73e2822-73a5-4054-b920-b8816497d829",
+                              "name": "default response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/projects/:id/workflows/:name?revision=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "projects",
+                                    ":id",
+                                    "workflows",
+                                    ":name"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "revision",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"revision\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"config\": {}\n}",
+                              "createdAt": "2026-10-22T02:36:36.000Z",
+                              "updatedAt": "2026-10-22T02:36:36.000Z",
+                              "uid": "35240-c73e2822-73a5-4054-b920-b8816497d829"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-a10e3c5a-266e-4fa1-a128-cd3386ffcad1"
+                        }
+                      ],
+                      "id": "009ebe2b-1814-459f-97ff-dfaf8d7474bc",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-009ebe2b-1814-459f-97ff-dfaf8d7474bc"
+                    },
+                    {
+                      "name": "List workflows of a project with filters",
+                      "id": "a0891ab9-f3ea-4bb4-a34e-df33101870e7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id/workflows?revision=<string>&name=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id",
+                            "workflows"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) use a given revision of the project instead of the latest revision",
+                              "key": "revision",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "exact matching filter on workflow name",
+                              "key": "name",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b87d889e-6832-44dc-bfa1-681751cf2b32",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) project id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a1f8c3a3-d66b-4719-9b24-f84dee80d4ad",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/projects/:id/workflows?revision=<string>&name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "projects",
+                                ":id",
+                                "workflows"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) use a given revision of the project instead of the latest revision",
+                                  "key": "revision",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "exact matching filter on workflow name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"workflows\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"revision\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"config\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"revision\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"config\": {}\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:36:36.000Z",
+                          "updatedAt": "2026-10-22T02:36:36.000Z",
+                          "uid": "35240-a1f8c3a3-d66b-4719-9b24-f84dee80d4ad"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-a0891ab9-f3ea-4bb4-a34e-df33101870e7"
+                    }
+                  ],
+                  "id": "2edb5ec0-8745-49fd-a2a6-16c17ca94095",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-2edb5ec0-8745-49fd-a2a6-16c17ca94095"
+                },
+                {
+                  "name": "destroy",
+                  "id": "eb7dc649-cf57-4a47-ad19-689784994ebe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7bfdc9cc-1b9c-40ec-8a3d-1d463b016d01",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "68cc87a0-be6e-4eee-96c7-4d4b023199ff",
+                      "name": "Project deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-68cc87a0-be6e-4eee-96c7-4d4b023199ff"
+                    },
+                    {
+                      "id": "847b2c14-f3de-4b0d-b9d1-a73bd4b30ea9",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-847b2c14-f3de-4b0d-b9d1-a73bd4b30ea9"
+                    },
+                    {
+                      "id": "e11996f2-bc4f-4e16-9472-bd9318f80288",
+                      "name": "Forbidden - insufficient permissions to delete this project",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-e11996f2-bc4f-4e16-9472-bd9318f80288"
+                    },
+                    {
+                      "id": "c8164865-62fd-4d28-abdc-65e477dfec1b",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-c8164865-62fd-4d28-abdc-65e477dfec1b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-eb7dc649-cf57-4a47-ad19-689784994ebe"
+                },
+                {
+                  "name": "show",
+                  "id": "3af5c6c6-887f-4dad-b8fb-7c93dccc710f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id?include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "51d81bab-ecfe-4254-b95d-723e3677f0e4",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "442c1ed2-7046-46dd-9a01-8da517fd935e",
+                      "name": "allows GET /api/projects/:id",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": {},\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useParentSegment\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\",\n      \"isManaged\": \"<boolean>\",\n      \"managedType\": \"<string>\"\n    },\n    \"relationships\": {\n      \"formInterfaces\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      },\n      \"chatInterfaces\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"createdAt\": \"<string,null>\",\n        \"updatedAt\": \"<string,null>\",\n        \"projectId\": \"<string,null>\",\n        \"agentId\": \"<string,null>\",\n        \"promptTemplate\": \"<string,null>\",\n        \"formJsonSchema\": \"<string,null>\",\n        \"formUiSchema\": {},\n        \"useTextResource\": \"<boolean,null>\",\n        \"starterMessage\": \"<string,null>\",\n        \"textInputEnabled\": \"<boolean,null>\",\n        \"textInputAgentId\": {},\n        \"isManaged\": \"<boolean,null>\",\n        \"chatInterfaceButtons\": \"<array,null>\",\n        \"email\": \"<string,null>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": {\n        \"project\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"createdAt\": \"<string,null>\",\n        \"updatedAt\": \"<string,null>\",\n        \"projectId\": \"<string,null>\",\n        \"agentId\": \"<string,null>\",\n        \"promptTemplate\": \"<string,null>\",\n        \"formJsonSchema\": \"<string,null>\",\n        \"formUiSchema\": {},\n        \"useTextResource\": \"<boolean,null>\",\n        \"starterMessage\": \"<string,null>\",\n        \"textInputEnabled\": \"<boolean,null>\",\n        \"textInputAgentId\": {},\n        \"isManaged\": \"<boolean,null>\",\n        \"chatInterfaceButtons\": \"<array,null>\",\n        \"email\": \"<string,null>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": null\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-442c1ed2-7046-46dd-9a01-8da517fd935e"
+                    },
+                    {
+                      "id": "c8f2fa16-9aa1-4ed3-a4d4-89e2a3b91000",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-c8f2fa16-9aa1-4ed3-a4d4-89e2a3b91000"
+                    },
+                    {
+                      "id": "450f9ee0-df55-47d0-a029-6962371531e5",
+                      "name": "GET /api/projects/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-450f9ee0-df55-47d0-a029-6962371531e5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-3af5c6c6-887f-4dad-b8fb-7c93dccc710f"
+                },
+                {
+                  "name": "update",
+                  "id": "983fba84-1069-40b1-b155-7f9b56ae2f78",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eafac913-25b2-441f-9a8c-89a7ef4807d3",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "eca9513d-bf70-484c-9389-a3473896820b",
+                      "name": "updates a project with and toggles the managed RuntimeTextResourceKnowledgeBase",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useParentSegment\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\",\n      \"isManaged\": \"<boolean>\",\n      \"managedType\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-eca9513d-bf70-484c-9389-a3473896820b"
+                    },
+                    {
+                      "id": "7ba933e6-7f65-4e6f-9032-289d192a9f93",
+                      "name": "rejects PATCH /api/projects/:id",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-7ba933e6-7f65-4e6f-9032-289d192a9f93"
+                    },
+                    {
+                      "id": "191b50b6-6ddf-4375-a521-b54a48fd4ab0",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-191b50b6-6ddf-4375-a521-b54a48fd4ab0"
+                    },
+                    {
+                      "id": "7934743b-8f86-48e3-b3c7-d9a88d133806",
+                      "name": "PATCH /api/projects/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-7934743b-8f86-48e3-b3c7-d9a88d133806"
+                    },
+                    {
+                      "id": "016926bb-581a-4550-8d11-d80958cc2300",
+                      "name": "PATCH /api/projects rejects {\"description\":\"<BASE64_CONTENT>\"}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/projects/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "projects",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:36.000Z",
+                      "updatedAt": "2026-10-22T02:36:36.000Z",
+                      "uid": "35240-016926bb-581a-4550-8d11-d80958cc2300"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-983fba84-1069-40b1-b155-7f9b56ae2f78"
+                }
+              ],
+              "id": "8f44a549-0288-4dde-a513-d3cba11d752b",
+              "createdAt": "2026-10-22T02:36:36.000Z",
+              "updatedAt": "2026-10-22T02:36:36.000Z",
+              "uid": "35240-8f44a549-0288-4dde-a513-d3cba11d752b"
+            },
+            {
+              "name": "index",
+              "id": "67aefd12-212b-4d34-9af9-44908cd75aa3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/projects?filter[fulltext]=<string>&filter[hasInterfaces]=<string>&filter[has_form_interfaces]=<string>&filter[is_managed]=<string>&filter[manage_type]=<string>&include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[fulltext]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[hasInterfaces]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[has_form_interfaces]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[is_managed]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[manage_type]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "2aed076c-0959-4b67-b7a0-3b1b16431d15",
+                  "name": "allows GET /api/projects",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects?filter[fulltext]=<string>&filter[hasInterfaces]=<string>&filter[has_form_interfaces]=<string>&filter[is_managed]=<string>&filter[manage_type]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[fulltext]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[hasInterfaces]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[has_form_interfaces]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[is_managed]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[manage_type]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": {},\n        \"useRuntimeTextResource\": \"<boolean>\",\n        \"useParentSegment\": \"<boolean>\",\n        \"useWorkflowExecutor\": \"<boolean>\",\n        \"isManaged\": \"<boolean>\",\n        \"managedType\": \"<string>\"\n      },\n      \"relationships\": {\n        \"overview\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"formInterfaces\": {\n          \"data\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            }\n          ]\n        },\n        \"chatInterfaces\": {\n          \"data\": []\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": {},\n        \"useRuntimeTextResource\": \"<boolean>\",\n        \"useParentSegment\": \"<boolean>\",\n        \"useWorkflowExecutor\": \"<boolean>\",\n        \"isManaged\": \"<boolean>\",\n        \"managedType\": \"<string>\"\n      },\n      \"relationships\": {\n        \"overview\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"formInterfaces\": {\n          \"data\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            }\n          ]\n        },\n        \"chatInterfaces\": {\n          \"data\": []\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"firstAgentName\": \"<string>\",\n        \"firstIntegrationServiceType\": \"<string>\",\n        \"firstKnowledgeBaseName\": \"<string>\",\n        \"totalAgentCount\": \"<integer>\",\n        \"totalIntegrationCount\": \"<integer>\",\n        \"totalKnowledgeBaseCount\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string,null>\",\n        \"promptTemplate\": \"<string,null>\",\n        \"formJsonSchema\": \"<string,null>\",\n        \"formUiSchema\": {},\n        \"useTextResource\": \"<boolean,null>\",\n        \"starterMessage\": \"<string,null>\",\n        \"textInputEnabled\": \"<boolean,null>\",\n        \"textInputAgentId\": {},\n        \"isManaged\": \"<boolean,null>\",\n        \"chatInterfaceButtons\": \"<array,null>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": {\n        \"project\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"firstAgentName\": \"<string>\",\n        \"firstIntegrationServiceType\": \"<string>\",\n        \"firstKnowledgeBaseName\": \"<string>\",\n        \"totalAgentCount\": \"<integer>\",\n        \"totalIntegrationCount\": \"<integer>\",\n        \"totalKnowledgeBaseCount\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string,null>\",\n        \"promptTemplate\": \"<string,null>\",\n        \"formJsonSchema\": \"<string,null>\",\n        \"formUiSchema\": {},\n        \"useTextResource\": \"<boolean,null>\",\n        \"starterMessage\": \"<string,null>\",\n        \"textInputEnabled\": \"<boolean,null>\",\n        \"textInputAgentId\": {},\n        \"isManaged\": \"<boolean,null>\",\n        \"chatInterfaceButtons\": \"<array,null>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": {\n        \"project\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-2aed076c-0959-4b67-b7a0-3b1b16431d15"
+                },
+                {
+                  "id": "06ec7392-23cb-4e9e-b16d-a3143c1c877f",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects?filter[fulltext]=<string>&filter[hasInterfaces]=<string>&filter[has_form_interfaces]=<string>&filter[is_managed]=<string>&filter[manage_type]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[fulltext]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[hasInterfaces]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[has_form_interfaces]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[is_managed]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[manage_type]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-06ec7392-23cb-4e9e-b16d-a3143c1c877f"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:36.000Z",
+              "updatedAt": "2026-10-22T02:36:36.000Z",
+              "uid": "35240-67aefd12-212b-4d34-9af9-44908cd75aa3"
+            },
+            {
+              "name": "create",
+              "id": "f7e536d9-9f8f-41ce-b755-9df81b557c37",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5a6400a8-5c5a-4737-a105-bc3cca415dca",
+                  "name": "creates a project with useWorkflowExecutor set to true",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useParentSegment\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\",\n      \"isManaged\": \"<boolean>\",\n      \"managedType\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-5a6400a8-5c5a-4737-a105-bc3cca415dca"
+                },
+                {
+                  "id": "b0da76f7-8a48-47ea-9100-7fbd6a745a30",
+                  "name": "rejects POST /api/projects",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-b0da76f7-8a48-47ea-9100-7fbd6a745a30"
+                },
+                {
+                  "id": "53ce1aad-334e-474c-abc6-18c260eb1287",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-53ce1aad-334e-474c-abc6-18c260eb1287"
+                },
+                {
+                  "id": "27f6409f-9662-48d1-a5c0-b4a8ae1108b5",
+                  "name": "Validation error - invalid or conflicting parameters provided",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"useRuntimeTextResource\": \"<boolean>\",\n      \"useWorkflowExecutor\": \"<boolean>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-27f6409f-9662-48d1-a5c0-b4a8ae1108b5"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:36.000Z",
+              "updatedAt": "2026-10-22T02:36:36.000Z",
+              "uid": "35240-f7e536d9-9f8f-41ce-b755-9df81b557c37"
+            },
+            {
+              "name": "Upload a project archive as a new project or a new revision of an existing\u2026",
+              "id": "6a30a398-71cb-475b-9018-34aa35c42975",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Length",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/gzip"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "file",
+                  "file": {}
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/projects?project=<string>&revision=<string>&schedule_from=<string>&clear_schedule=<string>&clear_schedule=<string>&clear_schedule_all=false&skip_schedule=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) project name",
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) revision",
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "start scheduling of new workflows from the given time instead of current time",
+                      "key": "schedule_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "clear_schedule",
+                      "key": "clear_schedule",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "clear_schedule",
+                      "key": "clear_schedule",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "clear_schedule_all",
+                      "key": "clear_schedule_all",
+                      "value": "false"
+                    },
+                    {
+                      "description": "skip schedules to current time for workflows whose schedule definition changed. Ignored when clear_schedule or clear_schedule_all is specified.",
+                      "key": "skip_schedule",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c023eccc-eb39-441e-8bb4-b736de414969",
+                  "name": "default response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Length",
+                        "value": "<long>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/gzip"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "file",
+                      "file": {}
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/projects?project=<string>&revision=<string>&schedule_from=<string>&clear_schedule=<string>&clear_schedule_all=false&skip_schedule=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "projects"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) project name",
+                          "key": "project",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) revision",
+                          "key": "revision",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "start scheduling of new workflows from the given time instead of current time",
+                          "key": "schedule_from",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "clear_schedule",
+                          "key": "clear_schedule",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "clear_schedule_all",
+                          "key": "clear_schedule_all",
+                          "value": "false"
+                        },
+                        {
+                          "description": "skip schedules to current time for workflows whose schedule definition changed. Ignored when clear_schedule or clear_schedule_all is specified.",
+                          "key": "skip_schedule",
+                          "value": "true"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"archiveType\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"revision\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"archiveMd5\": \"<string>\",\n  \"deletedAt\": \"<dateTime>\",\n  \"metadata\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:36.000Z",
+                  "updatedAt": "2026-10-22T02:36:36.000Z",
+                  "uid": "35240-c023eccc-eb39-441e-8bb4-b736de414969"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:36.000Z",
+              "updatedAt": "2026-10-22T02:36:36.000Z",
+              "uid": "35240-6a30a398-71cb-475b-9018-34aa35c42975"
+            }
+          ],
+          "id": "03967141-7925-4b92-836e-a4574e095d86",
+          "createdAt": "2026-10-22T02:36:36.000Z",
+          "updatedAt": "2026-10-22T02:36:36.000Z",
+          "uid": "35240-03967141-7925-4b92-836e-a4574e095d86"
+        }
+      ],
+      "id": "5fb63ec9-59b4-4294-ac4a-cc14d073174e",
+      "createdAt": "2026-10-22T02:36:36.000Z",
+      "updatedAt": "2026-10-22T02:36:36.000Z",
+      "uid": "35240-5fb63ec9-59b4-4294-ac4a-cc14d073174e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

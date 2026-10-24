@@ -1,0 +1,424 @@
+{
+  "info": {
+    "_postman_id": "72568a23-ea20-4f59-bb29-6a0147ad2938",
+    "name": "api-v2 Postback API",
+    "description": "This spec is for Postback API v2 (records.in.treasuredata.com)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:54.000Z",
+    "updatedAt": "2026-10-22T02:32:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-72568a23-ea20-4f59-bb29-6a0147ad2938"
+  },
+  "item": [
+    {
+      "name": "postback",
+      "item": [
+        {
+          "name": "v3",
+          "item": [
+            {
+              "name": "event",
+              "item": [
+                {
+                  "name": "{database_name}",
+                  "item": [
+                    {
+                      "name": "{table_name}",
+                      "item": [
+                        {
+                          "name": "POST Postback API v2",
+                          "id": "1cb38a7f-2671-4773-9259-31acc2d4cfda",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cillum4\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/postback/v3/event/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "postback",
+                                "v3",
+                                "event",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8856da23-90fc-4f89-b818-5f3257b45c74",
+                                  "key": "database_name",
+                                  "value": "<string>",
+                                  "description": "(Required) Name of the database the table is in. Name may contain letters, numbers or _ ."
+                                },
+                                {
+                                  "id": "40c1076a-9535-44a3-b590-2162fe63d0ce",
+                                  "key": "table_name",
+                                  "value": "<string>",
+                                  "description": "(Required) Name of the table to log data to. Name may contain letters, numbers or _ ."
+                                }
+                              ]
+                            },
+                            "description": "Send data in POST payload to the v2 Postback endpoint.\n\nAuthentication is **header-only**. Provide one of:\n1. `Authorization: TD1 `\n2. `X-TD-Write-Key: `\n\nURL-path keys (`?td_write_key=...`) accepted by the legacy endpoint are **not** supported here. If both headers are sent, `Authorization` takes precedence.\n\nNote: Requests with an invalid API key return a 200 HTTP status code. This behavior is intentional and ensures a fast response, preventing ingestion from being canceled due to slow response. After the response is returned, the endpoint performs asynchronous validations. If the API key is invalid, an authentication failure will be raised despite the initial 200 status.\n\nMaximum request body size is 1,048,064 bytes; larger payloads are rejected with `413`."
+                          },
+                          "response": [
+                            {
+                              "id": "904dc323-4d9e-411a-b035-b18e0ab8f2fd",
+                              "name": "Success.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cillum4\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/postback/v3/event/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "postback",
+                                    "v3",
+                                    "event",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Content-Type\": \"<string>\",\n  \"Date\": \"<dateTime>\",\n  \"Strict-Transport-Security\": \"<string>\",\n  \"Content-Length\": \"<integer>\",\n  \"Connection\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:54.000Z",
+                              "updatedAt": "2026-10-22T02:32:54.000Z",
+                              "uid": "35240-904dc323-4d9e-411a-b035-b18e0ab8f2fd"
+                            },
+                            {
+                              "id": "88fe52fe-9cc6-4201-8914-96ef01813957",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cillum4\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/postback/v3/event/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "postback",
+                                    "v3",
+                                    "event",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Content-Type\": \"<string>\",\n  \"Date\": \"<dateTime>\",\n  \"Strict-Transport-Security\": \"<string>\",\n  \"Content-Length\": \"<integer>\",\n  \"Connection\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:54.000Z",
+                              "updatedAt": "2026-10-22T02:32:54.000Z",
+                              "uid": "35240-88fe52fe-9cc6-4201-8914-96ef01813957"
+                            },
+                            {
+                              "id": "2b3ca8ac-be6a-45f9-a4ba-589392d211cf",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cillum4\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/postback/v3/event/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "postback",
+                                    "v3",
+                                    "event",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Content-Type\": \"<string>\",\n  \"Date\": \"<dateTime>\",\n  \"Strict-Transport-Security\": \"<string>\",\n  \"Content-Length\": \"<integer>\",\n  \"Connection\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:54.000Z",
+                              "updatedAt": "2026-10-22T02:32:54.000Z",
+                              "uid": "35240-2b3ca8ac-be6a-45f9-a4ba-589392d211cf"
+                            },
+                            {
+                              "id": "322923af-941b-4c12-afa0-1cc4a55ea215",
+                              "name": "Payload Too Large (request body exceeds 1,048,064 bytes)",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cillum4\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/postback/v3/event/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "postback",
+                                    "v3",
+                                    "event",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Request Entity Too Large",
+                              "code": 413,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Content-Type\": \"<string>\",\n  \"Date\": \"<dateTime>\",\n  \"Strict-Transport-Security\": \"<string>\",\n  \"Content-Length\": \"<integer>\",\n  \"Connection\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:54.000Z",
+                              "updatedAt": "2026-10-22T02:32:54.000Z",
+                              "uid": "35240-322923af-941b-4c12-afa0-1cc4a55ea215"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:32:54.000Z",
+                          "updatedAt": "2026-10-22T02:32:54.000Z",
+                          "uid": "35240-1cb38a7f-2671-4773-9259-31acc2d4cfda"
+                        }
+                      ],
+                      "id": "096184ca-6172-4c9c-9fe0-6c3d3bdc8103",
+                      "createdAt": "2026-10-22T02:32:54.000Z",
+                      "updatedAt": "2026-10-22T02:32:54.000Z",
+                      "uid": "35240-096184ca-6172-4c9c-9fe0-6c3d3bdc8103"
+                    }
+                  ],
+                  "id": "22aa2bc9-0714-4f8d-92a8-3a71c4e199e7",
+                  "createdAt": "2026-10-22T02:32:54.000Z",
+                  "updatedAt": "2026-10-22T02:32:54.000Z",
+                  "uid": "35240-22aa2bc9-0714-4f8d-92a8-3a71c4e199e7"
+                }
+              ],
+              "id": "b6d0dafe-81b4-4a24-b42d-8c32d35000e1",
+              "createdAt": "2026-10-22T02:32:54.000Z",
+              "updatedAt": "2026-10-22T02:32:54.000Z",
+              "uid": "35240-b6d0dafe-81b4-4a24-b42d-8c32d35000e1"
+            }
+          ],
+          "id": "76463330-b022-46dc-bd64-793e163f1cf7",
+          "createdAt": "2026-10-22T02:32:54.000Z",
+          "updatedAt": "2026-10-22T02:32:54.000Z",
+          "uid": "35240-76463330-b022-46dc-bd64-793e163f1cf7"
+        }
+      ],
+      "id": "8d50e524-965e-4592-aea8-9d83b8ff24d8",
+      "createdAt": "2026-10-22T02:32:54.000Z",
+      "updatedAt": "2026-10-22T02:32:54.000Z",
+      "uid": "35240-8d50e524-965e-4592-aea8-9d83b8ff24d8"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us01"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{region}}.records.in.treasuredata.com"
+    }
+  ]
+}

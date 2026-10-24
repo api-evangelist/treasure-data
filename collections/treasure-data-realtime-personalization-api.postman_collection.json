@@ -1,0 +1,1665 @@
+{
+  "info": {
+    "_postman_id": "a9daeb53-5fbe-45a1-afcc-45207a5864cd",
+    "name": "cdp-api Realtime Personalization API",
+    "description": "All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under \"/entities\".",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:57.000Z",
+    "updatedAt": "2026-10-22T02:36:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a9daeb53-5fbe-45a1-afcc-45207a5864cd"
+  },
+  "item": [
+    {
+      "name": "audiences",
+      "item": [
+        {
+          "name": "{audienceId}",
+          "item": [
+            {
+              "name": "realtime_personalization_services",
+              "item": [
+                {
+                  "name": "{realtimePersonalizationServiceId}",
+                  "item": [
+                    {
+                      "name": "tokens",
+                      "item": [
+                        {
+                          "name": "{tokenId}",
+                          "item": [
+                            {
+                              "name": "Delete the specified Realtime Personalization Token",
+                              "id": "cfc1d0ec-209e-480a-93fe-c2680faa0619",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId/tokens/:tokenId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "realtime_personalization_services",
+                                    ":realtimePersonalizationServiceId",
+                                    "tokens",
+                                    ":tokenId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "23ba317d-de4d-4f0c-84ce-9bd54bacdb2b",
+                                      "key": "audienceId",
+                                      "value": "<long>",
+                                      "description": "(Required) Audience ID"
+                                    },
+                                    {
+                                      "id": "36cf3eab-e617-4563-a711-e9de15bc621b",
+                                      "key": "realtimePersonalizationServiceId",
+                                      "value": "<long>",
+                                      "description": "(Required) Realtime Personalization Service ID"
+                                    },
+                                    {
+                                      "id": "6d354c52-8039-4068-93e1-a94c92228c73",
+                                      "key": "tokenId",
+                                      "value": "<long>",
+                                      "description": "(Required) Realtime Personalization Token ID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "6b68395c-bd5f-42b4-ac98-1300e835ba63",
+                                  "name": "A Realtime Personalization Token for the Audience",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId/tokens/:tokenId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "audiences",
+                                        ":audienceId",
+                                        "realtime_personalization_services",
+                                        ":realtimePersonalizationServiceId",
+                                        "tokens",
+                                        ":tokenId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "audienceId"
+                                        },
+                                        {
+                                          "key": "realtimePersonalizationServiceId"
+                                        },
+                                        {
+                                          "key": "tokenId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"value\": \"<string,null>\",\n  \"allowedIps\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-10-22T02:36:58.000Z",
+                                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                                  "uid": "35240-6b68395c-bd5f-42b4-ac98-1300e835ba63"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T02:36:58.000Z",
+                              "updatedAt": "2026-10-22T02:36:58.000Z",
+                              "uid": "35240-cfc1d0ec-209e-480a-93fe-c2680faa0619"
+                            }
+                          ],
+                          "id": "65cc9d72-a84f-42f9-9987-0358fb7e4650",
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-65cc9d72-a84f-42f9-9987-0358fb7e4650"
+                        },
+                        {
+                          "name": "Create a new Personalization Token",
+                          "id": "95cec3e5-1aea-4e6f-a206-780dcdc7f387",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"allowedIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId/tokens",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "realtime_personalization_services",
+                                ":realtimePersonalizationServiceId",
+                                "tokens"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b9401cf1-ca64-44b8-9777-ed6ff3d90115",
+                                  "key": "audienceId",
+                                  "value": "<long>",
+                                  "description": "(Required) Audience ID"
+                                },
+                                {
+                                  "id": "bb0bc2fe-9c2e-4dcb-bf6a-9ac3b5e59136",
+                                  "key": "realtimePersonalizationServiceId",
+                                  "value": "<long>",
+                                  "description": "(Required) Realtime Personalization Service ID"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "8604e104-ea91-44f3-ac87-bc617b379960",
+                              "name": "The created Token",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"allowedIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId/tokens",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "realtime_personalization_services",
+                                    ":realtimePersonalizationServiceId",
+                                    "tokens"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "realtimePersonalizationServiceId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"value\": \"<string,null>\",\n  \"allowedIps\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-10-22T02:36:58.000Z",
+                              "updatedAt": "2026-10-22T02:36:58.000Z",
+                              "uid": "35240-8604e104-ea91-44f3-ac87-bc617b379960"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-95cec3e5-1aea-4e6f-a206-780dcdc7f387"
+                        }
+                      ],
+                      "id": "8f5f6926-928e-45d3-8d72-3778151eac53",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-8f5f6926-928e-45d3-8d72-3778151eac53"
+                    },
+                    {
+                      "name": "Return the specified Realtime Personalization Service",
+                      "id": "a849e4a7-3d35-4a24-8a00-81288ff107aa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "realtime_personalization_services",
+                            ":realtimePersonalizationServiceId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6b5bad49-0947-4ab4-8c16-71155c112492",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Audience ID"
+                            },
+                            {
+                              "id": "6e44b2d0-7ae5-4905-8d06-358d5f873e79",
+                              "key": "realtimePersonalizationServiceId",
+                              "value": "<long>",
+                              "description": "(Required) Realtime Personalization Service ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "efeb3965-8916-4048-8fb1-e09b91a43cd8",
+                          "name": "The specified Realtime Personalization Service",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "realtime_personalization_services",
+                                ":realtimePersonalizationServiceId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "realtimePersonalizationServiceId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"tokens\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"createdBy\": {\n    \"id\": \"37584254179\",\n    \"td_user_id\": \"3268643\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"2521263\",\n    \"td_user_id\": \"5663485\",\n    \"name\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-efeb3965-8916-4048-8fb1-e09b91a43cd8"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-a849e4a7-3d35-4a24-8a00-81288ff107aa"
+                    },
+                    {
+                      "name": "Edit the specified Realtime Personalization Service",
+                      "id": "f123541c-55ef-4235-8cdf-d59ac38a2ca5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "realtime_personalization_services",
+                            ":realtimePersonalizationServiceId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "61493bca-c1b2-4232-98db-516d099a5a2f",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Audience ID"
+                            },
+                            {
+                              "id": "ac4ed1cf-165e-48ca-beb8-0f8f18e6159a",
+                              "key": "realtimePersonalizationServiceId",
+                              "value": "<long>",
+                              "description": "(Required) Realtime Personalization Service ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5e725534-356f-4070-b63f-0d4cb5b4e16c",
+                          "name": "A Realtime Key Events for the Audience",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "realtime_personalization_services",
+                                ":realtimePersonalizationServiceId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "realtimePersonalizationServiceId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"tokens\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"createdBy\": {\n    \"id\": \"37584254179\",\n    \"td_user_id\": \"3268643\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"2521263\",\n    \"td_user_id\": \"5663485\",\n    \"name\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-5e725534-356f-4070-b63f-0d4cb5b4e16c"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-f123541c-55ef-4235-8cdf-d59ac38a2ca5"
+                    },
+                    {
+                      "name": "Delete the specified Realtime Personalization Service",
+                      "id": "204842b7-9030-4df2-9d01-a2fa65522e7e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "realtime_personalization_services",
+                            ":realtimePersonalizationServiceId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "87b1b13c-fd52-44dd-a24d-4b2cf8d59b28",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Audience ID"
+                            },
+                            {
+                              "id": "2594f052-147d-4c7a-b605-e621dc6a7195",
+                              "key": "realtimePersonalizationServiceId",
+                              "value": "<long>",
+                              "description": "(Required) Realtime Personalization Service ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9509e6db-e0ba-49b8-9e4a-5a1dc9cdfd7a",
+                          "name": "A Realtime Personalization Service for the Audience",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services/:realtimePersonalizationServiceId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "realtime_personalization_services",
+                                ":realtimePersonalizationServiceId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "realtimePersonalizationServiceId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"tokens\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"createdBy\": {\n    \"id\": \"37584254179\",\n    \"td_user_id\": \"3268643\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"2521263\",\n    \"td_user_id\": \"5663485\",\n    \"name\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-9509e6db-e0ba-49b8-9e4a-5a1dc9cdfd7a"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-204842b7-9030-4df2-9d01-a2fa65522e7e"
+                    }
+                  ],
+                  "id": "e7fe7e29-40db-488c-9b09-01a0e016387f",
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-e7fe7e29-40db-488c-9b09-01a0e016387f"
+                },
+                {
+                  "name": "Return a list of Realtime Personalization Services for the Audience",
+                  "id": "0d0cab4c-2ed2-428e-9493-0c3b717b389a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services?page[after]=<string>&page[size]=100&sorted_by=<string>&name_include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "realtime_personalization_services"
+                      ],
+                      "query": [
+                        {
+                          "description": "A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.",
+                          "key": "page[after]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of results to return per page",
+                          "key": "page[size]",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Specify the sort order in the format foo:asc or foo:desc.",
+                          "key": "sorted_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "filter by the resource's name",
+                          "key": "name_include",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "0bbeab85-d9f5-4e0f-b8c1-75e115495682",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Audience ID"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "463ff21d-c512-44b1-b504-f72e4587abbb",
+                      "name": "A list of Realtime Key Events for the Audience",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services?page[after]=<string>&page[size]=100&sorted_by=<string>&name_include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "realtime_personalization_services"
+                          ],
+                          "query": [
+                            {
+                              "description": "A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.",
+                              "key": "page[after]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of results to return per page",
+                              "key": "page[size]",
+                              "value": "100"
+                            },
+                            {
+                              "description": "Specify the sort order in the format foo:asc or foo:desc.",
+                              "key": "sorted_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter by the resource's name",
+                              "key": "name_include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"description\": \"<string,null>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"public\": \"<boolean>\",\n      \"tokens\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string,null>\",\n          \"allowedIps\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string,null>\",\n          \"allowedIps\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"createdBy\": {\n        \"id\": \"75090\",\n        \"td_user_id\": \"48681023\",\n        \"name\": \"<string>\"\n      },\n      \"updatedBy\": {\n        \"id\": \"8\",\n        \"td_user_id\": \"43830269992\",\n        \"name\": \"<string>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"description\": \"<string,null>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"public\": \"<boolean>\",\n      \"tokens\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string,null>\",\n          \"allowedIps\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string,null>\",\n          \"allowedIps\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"createdBy\": {\n        \"id\": \"609277688\",\n        \"td_user_id\": \"84249449866\",\n        \"name\": \"<string>\"\n      },\n      \"updatedBy\": {\n        \"id\": \"85726726\",\n        \"td_user_id\": \"564641\",\n        \"name\": \"<string>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"pagination\": {\n    \"nextPage\": \"<string,null>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-463ff21d-c512-44b1-b504-f72e4587abbb"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-0d0cab4c-2ed2-428e-9493-0c3b717b389a"
+                },
+                {
+                  "name": "Create a Realtime Personalization Service for the Audience",
+                  "id": "74b9f40d-f7b8-41b5-a593-f364eb8f2bc3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"public\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "realtime_personalization_services"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7652f1a0-1622-4120-985f-b69991cd5b82",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Audience ID"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "52aaaf40-6a04-4ec0-a415-b34194ff9db7",
+                      "name": "A Realtime Personalization Service for the Audience",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"public\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/realtime_personalization_services",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "realtime_personalization_services"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"tokens\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"value\": \"<string,null>\",\n      \"allowedIps\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"createdBy\": {\n    \"id\": \"37584254179\",\n    \"td_user_id\": \"3268643\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"2521263\",\n    \"td_user_id\": \"5663485\",\n    \"name\": \"<string>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-52aaaf40-6a04-4ec0-a415-b34194ff9db7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-74b9f40d-f7b8-41b5-a593-f364eb8f2bc3"
+                }
+              ],
+              "id": "ffad513e-28b1-4223-b9d1-b32f94025deb",
+              "createdAt": "2026-10-22T02:36:58.000Z",
+              "updatedAt": "2026-10-22T02:36:58.000Z",
+              "uid": "35240-ffad513e-28b1-4223-b9d1-b32f94025deb"
+            }
+          ],
+          "id": "71d1d7f3-9a57-4875-824f-2213ff61fe4e",
+          "createdAt": "2026-10-22T02:36:58.000Z",
+          "updatedAt": "2026-10-22T02:36:58.000Z",
+          "uid": "35240-71d1d7f3-9a57-4875-824f-2213ff61fe4e"
+        }
+      ],
+      "id": "10cc7556-b195-483c-9fe7-3c0fe1e4f8dd",
+      "createdAt": "2026-10-22T02:36:58.000Z",
+      "updatedAt": "2026-10-22T02:36:58.000Z",
+      "uid": "35240-10cc7556-b195-483c-9fe7-3c0fe1e4f8dd"
+    },
+    {
+      "name": "entities",
+      "item": [
+        {
+          "name": "realtime_personalizations",
+          "item": [
+            {
+              "name": "{realtimePersonalizationId}",
+              "item": [
+                {
+                  "name": "Get a realtime personalization",
+                  "id": "2b7ed778-bcf1-4573-bbb3-3a2d05064368",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "realtime_personalizations",
+                        ":realtimePersonalizationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f41239ea-e3b4-4c90-becd-b83c71cf580d",
+                          "key": "realtimePersonalizationId",
+                          "value": "<long>",
+                          "description": "(Required) Realtime Personalization ID"
+                        }
+                      ]
+                    },
+                    "description": "Get a realtime personalization."
+                  },
+                  "response": [
+                    {
+                      "id": "d61a95c5-8e0d-4f33-9089-84a6467cd275",
+                      "name": "Returns a realtime personalization",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "realtime_personalizations",
+                            ":realtimePersonalizationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "realtimePersonalizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"realtime-personalization\",\n    \"attributes\": {\n      \"createdAt\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"name\": \"<string>\",\n      \"sections\": [\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"4900468\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        },\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"47\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\",\n      \"audienceId\": \"638647069\",\n      \"referencingRealtimeAttributes\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"hour\"\n            },\n            \"backfill\": null\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"day\"\n            },\n            \"backfill\": {\n              \"attributeIdentifier\": \"<string>\",\n              \"timestampIdentifier\": \"<string>\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"createdBy\": {\n        \"id\": \"9311210\",\n        \"td_user_id\": \"99\",\n        \"name\": \"<string>\"\n      },\n      \"updatedBy\": {\n        \"id\": \"67623\",\n        \"td_user_id\": \"9617203661\",\n        \"name\": \"<string>\"\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"44758749\",\n          \"type\": \"folder-segment\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-d61a95c5-8e0d-4f33-9089-84a6467cd275"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-2b7ed778-bcf1-4573-bbb3-3a2d05064368"
+                },
+                {
+                  "name": "Update a realtime personalization",
+                  "id": "1b420218-fb2d-43c5-8e73-b6323c7914f1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"sections\": [\n      {\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"497403581\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"id\": \"<string>\",\n        \"includeSensitive\": true,\n        \"name\": \"<string>\",\n        \"payload\": \"<object,null>\"\n      },\n      {\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"33794366\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"id\": \"<string>\",\n        \"includeSensitive\": true,\n        \"name\": \"<string>\",\n        \"payload\": \"<object,null>\"\n      }\n    ],\n    \"audienceId\": \"98679\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "realtime_personalizations",
+                        ":realtimePersonalizationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d5417e33-68cb-4959-807d-51e11103f48b",
+                          "key": "realtimePersonalizationId",
+                          "value": "<long>",
+                          "description": "(Required) Realtime Personalization ID"
+                        }
+                      ]
+                    },
+                    "description": "Update a realtime personalization."
+                  },
+                  "response": [
+                    {
+                      "id": "5bd2c362-dcef-4fb0-9508-6b3e4c2c6a50",
+                      "name": "Returns a realtime personalization",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"sections\": [\n      {\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"497403581\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"id\": \"<string>\",\n        \"includeSensitive\": true,\n        \"name\": \"<string>\",\n        \"payload\": \"<object,null>\"\n      },\n      {\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"33794366\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"id\": \"<string>\",\n        \"includeSensitive\": true,\n        \"name\": \"<string>\",\n        \"payload\": \"<object,null>\"\n      }\n    ],\n    \"audienceId\": \"98679\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "realtime_personalizations",
+                            ":realtimePersonalizationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "realtimePersonalizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"realtime-personalization\",\n    \"attributes\": {\n      \"createdAt\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"name\": \"<string>\",\n      \"sections\": [\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"4900468\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        },\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"47\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\",\n      \"audienceId\": \"638647069\",\n      \"referencingRealtimeAttributes\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"hour\"\n            },\n            \"backfill\": null\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"day\"\n            },\n            \"backfill\": {\n              \"attributeIdentifier\": \"<string>\",\n              \"timestampIdentifier\": \"<string>\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"createdBy\": {\n        \"id\": \"9311210\",\n        \"td_user_id\": \"99\",\n        \"name\": \"<string>\"\n      },\n      \"updatedBy\": {\n        \"id\": \"67623\",\n        \"td_user_id\": \"9617203661\",\n        \"name\": \"<string>\"\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"44758749\",\n          \"type\": \"folder-segment\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-5bd2c362-dcef-4fb0-9508-6b3e4c2c6a50"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-1b420218-fb2d-43c5-8e73-b6323c7914f1"
+                },
+                {
+                  "name": "Delete realtime personalization entity",
+                  "id": "e43c82f9-9131-4655-80bd-79d7114b8317",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "realtime_personalizations",
+                        ":realtimePersonalizationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7a709704-c297-4191-ae31-bbad89c71016",
+                          "key": "realtimePersonalizationId",
+                          "value": "<long>",
+                          "description": "(Required) Realtime Personalization ID"
+                        }
+                      ]
+                    },
+                    "description": "Delete a realtime personalization entity."
+                  },
+                  "response": [
+                    {
+                      "id": "97ceabad-cb70-42a3-a1ff-3edd6a893944",
+                      "name": "Empty if deletion is successful",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/realtime_personalizations/:realtimePersonalizationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "realtime_personalizations",
+                            ":realtimePersonalizationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "realtimePersonalizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-97ceabad-cb70-42a3-a1ff-3edd6a893944"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-e43c82f9-9131-4655-80bd-79d7114b8317"
+                }
+              ],
+              "id": "5e3f8efe-8612-41c3-9626-89d3be00f1f4",
+              "createdAt": "2026-10-22T02:36:58.000Z",
+              "updatedAt": "2026-10-22T02:36:58.000Z",
+              "uid": "35240-5e3f8efe-8612-41c3-9626-89d3be00f1f4"
+            },
+            {
+              "name": "Create a realtime personalization",
+              "id": "ec4a8d9a-235c-4cbf-8844-73477a32d030",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"audienceId\": \"8086225\",\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"63718453157\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"payload\": \"<object,null>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"79849\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"payload\": \"<object,null>\"\n      }\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"143\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/entities/realtime_personalizations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "entities",
+                    "realtime_personalizations"
+                  ]
+                },
+                "description": "Create a realtime personalization."
+              },
+              "response": [
+                {
+                  "id": "f786772d-3a6c-415b-892f-4282f7bdb334",
+                  "name": "Returns a realtime personalization",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"audienceId\": \"8086225\",\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"63718453157\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"payload\": \"<object,null>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"entryCriteria\": {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"keyEventCriteria\": {\n            \"keyEventId\": \"79849\",\n            \"keyEventFilters\": {\n              \"todo\": \"<string>\"\n            }\n          },\n          \"profileCriteria\": {},\n          \"acceptUnknownProfiles\": \"<boolean,null>\"\n        },\n        \"payload\": \"<object,null>\"\n      }\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"143\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/realtime_personalizations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "realtime_personalizations"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"realtime-personalization\",\n    \"attributes\": {\n      \"createdAt\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"name\": \"<string>\",\n      \"sections\": [\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"4900468\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        },\n        {\n          \"entryCriteria\": {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"keyEventCriteria\": {\n              \"keyEventId\": \"47\",\n              \"keyEventFilters\": {\n                \"todo\": \"<string>\"\n              }\n            },\n            \"profileCriteria\": {},\n            \"acceptUnknownProfiles\": \"<boolean,null>\"\n          },\n          \"id\": \"<string>\",\n          \"includeSensitive\": false,\n          \"name\": \"<string>\",\n          \"payload\": \"<object,null>\"\n        }\n      ],\n      \"updatedAt\": \"<dateTime>\",\n      \"audienceId\": \"638647069\",\n      \"referencingRealtimeAttributes\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"hour\"\n            },\n            \"backfill\": null\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"realtime-attribute\",\n          \"attributes\": {\n            \"name\": \"<string>\",\n            \"identifier\": \"<string>\",\n            \"type\": \"single\",\n            \"notation\": \"<string>\",\n            \"realtimeKeyEventId\": \"<string>\",\n            \"filterRule\": {},\n            \"valueColumn\": \"<string>\",\n            \"dataType\": \"string\",\n            \"description\": \"<string,null>\",\n            \"sensitive\": false,\n            \"duration\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"day\"\n            },\n            \"backfill\": {\n              \"attributeIdentifier\": \"<string>\",\n              \"timestampIdentifier\": \"<string>\"\n            }\n          }\n        }\n      ]\n    },\n    \"relationships\": {\n      \"createdBy\": {\n        \"id\": \"9311210\",\n        \"td_user_id\": \"99\",\n        \"name\": \"<string>\"\n      },\n      \"updatedBy\": {\n        \"id\": \"67623\",\n        \"td_user_id\": \"9617203661\",\n        \"name\": \"<string>\"\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"44758749\",\n          \"type\": \"folder-segment\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-f786772d-3a6c-415b-892f-4282f7bdb334"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:58.000Z",
+              "updatedAt": "2026-10-22T02:36:58.000Z",
+              "uid": "35240-ec4a8d9a-235c-4cbf-8844-73477a32d030"
+            }
+          ],
+          "id": "9e6e561b-1036-4650-a213-976132be3d33",
+          "createdAt": "2026-10-22T02:36:58.000Z",
+          "updatedAt": "2026-10-22T02:36:58.000Z",
+          "uid": "35240-9e6e561b-1036-4650-a213-976132be3d33"
+        },
+        {
+          "name": "parent_segments",
+          "item": [
+            {
+              "name": "{parentSegmentId}",
+              "item": [
+                {
+                  "name": "realtime_personalizations",
+                  "item": [
+                    {
+                      "name": "Retrieve a list of realtime personalizations under the Parent Segment",
+                      "id": "33b6f4da-9cb4-47b7-8536-7624aad30145",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/realtime_personalizations?page[size]=100&page[after]=<string>&permissions=view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "parent_segments",
+                            ":parentSegmentId",
+                            "realtime_personalizations"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of results to return per page",
+                              "key": "page[size]",
+                              "value": "100"
+                            },
+                            {
+                              "description": "A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.",
+                              "key": "page[after]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter by the resource's permission. Default to 'view'",
+                              "key": "permissions",
+                              "value": "view"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "8bd35df8-2ce8-4fe9-8875-27bbbbf73c31",
+                              "key": "parentSegmentId",
+                              "value": "<long>",
+                              "description": "(Required) Parent Segment ID (audience id)"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2926f64b-fff8-45b7-8a1f-5a73ce525308",
+                          "name": "Returns a list of realtime personalizations under the Parent Segment",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/realtime_personalizations?page[size]=100&page[after]=<string>&permissions=view",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "entities",
+                                "parent_segments",
+                                ":parentSegmentId",
+                                "realtime_personalizations"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The maximum number of results to return per page",
+                                  "key": "page[size]",
+                                  "value": "100"
+                                },
+                                {
+                                  "description": "A string to fetch more page. The next value should be present at the pagination.nextPage in the previous response if more pages exist.",
+                                  "key": "page[after]",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "filter by the resource's permission. Default to 'view'",
+                                  "key": "permissions",
+                                  "value": "view"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "parentSegmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"realtime-personalization\",\n      \"attributes\": {\n        \"createdAt\": \"<dateTime>\",\n        \"description\": \"<string,null>\",\n        \"name\": \"<string>\",\n        \"sections\": [\n          {\n            \"entryCriteria\": {\n              \"name\": \"<string>\",\n              \"description\": \"<string>\",\n              \"keyEventCriteria\": {\n                \"keyEventId\": \"122\",\n                \"keyEventFilters\": {\n                  \"todo\": \"<string>\"\n                }\n              },\n              \"profileCriteria\": {},\n              \"acceptUnknownProfiles\": \"<boolean,null>\"\n            },\n            \"id\": \"<string>\",\n            \"includeSensitive\": true,\n            \"name\": \"<string>\",\n            \"payload\": \"<object,null>\"\n          },\n          {\n            \"entryCriteria\": {\n              \"name\": \"<string>\",\n              \"description\": \"<string>\",\n              \"keyEventCriteria\": {\n                \"keyEventId\": \"98924365488\",\n                \"keyEventFilters\": {\n                  \"todo\": \"<string>\"\n                }\n              },\n              \"profileCriteria\": {},\n              \"acceptUnknownProfiles\": \"<boolean,null>\"\n            },\n            \"id\": \"<string>\",\n            \"includeSensitive\": true,\n            \"name\": \"<string>\",\n            \"payload\": \"<object,null>\"\n          }\n        ],\n        \"updatedAt\": \"<dateTime>\",\n        \"audienceId\": \"37385894901\",\n        \"referencingRealtimeAttributes\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"realtime-attribute\",\n            \"attributes\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"type\": \"single\",\n              \"notation\": \"<string>\",\n              \"realtimeKeyEventId\": \"<string>\",\n              \"filterRule\": {},\n              \"valueColumn\": \"<string>\",\n              \"dataType\": \"number\",\n              \"description\": \"<string,null>\",\n              \"sensitive\": false,\n              \"duration\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"day\"\n              },\n              \"backfill\": null\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"realtime-attribute\",\n            \"attributes\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"type\": \"single\",\n              \"notation\": \"<string>\",\n              \"realtimeKeyEventId\": \"<string>\",\n              \"filterRule\": {},\n              \"valueColumn\": \"<string>\",\n              \"dataType\": \"string\",\n              \"description\": \"<string,null>\",\n              \"sensitive\": true,\n              \"duration\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"hour\"\n              },\n              \"backfill\": null\n            }\n          }\n        ]\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"id\": \"81\",\n          \"td_user_id\": \"24363\",\n          \"name\": \"<string>\"\n        },\n        \"updatedBy\": {\n          \"id\": \"6729197298\",\n          \"td_user_id\": \"9\",\n          \"name\": \"<string>\"\n        },\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"8\",\n            \"type\": \"folder-segment\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"realtime-personalization\",\n      \"attributes\": {\n        \"createdAt\": \"<dateTime>\",\n        \"description\": \"<string,null>\",\n        \"name\": \"<string>\",\n        \"sections\": [\n          {\n            \"entryCriteria\": {\n              \"name\": \"<string>\",\n              \"description\": \"<string>\",\n              \"keyEventCriteria\": {\n                \"keyEventId\": \"300592\",\n                \"keyEventFilters\": {\n                  \"todo\": \"<string>\"\n                }\n              },\n              \"profileCriteria\": {},\n              \"acceptUnknownProfiles\": \"<boolean,null>\"\n            },\n            \"id\": \"<string>\",\n            \"includeSensitive\": true,\n            \"name\": \"<string>\",\n            \"payload\": \"<object,null>\"\n          },\n          {\n            \"entryCriteria\": {\n              \"name\": \"<string>\",\n              \"description\": \"<string>\",\n              \"keyEventCriteria\": {\n                \"keyEventId\": \"7696249922\",\n                \"keyEventFilters\": {\n                  \"todo\": \"<string>\"\n                }\n              },\n              \"profileCriteria\": {},\n              \"acceptUnknownProfiles\": \"<boolean,null>\"\n            },\n            \"id\": \"<string>\",\n            \"includeSensitive\": true,\n            \"name\": \"<string>\",\n            \"payload\": \"<object,null>\"\n          }\n        ],\n        \"updatedAt\": \"<dateTime>\",\n        \"audienceId\": \"3223\",\n        \"referencingRealtimeAttributes\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"realtime-attribute\",\n            \"attributes\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"type\": \"single\",\n              \"notation\": \"<string>\",\n              \"realtimeKeyEventId\": \"<string>\",\n              \"filterRule\": {},\n              \"valueColumn\": \"<string>\",\n              \"dataType\": \"number\",\n              \"description\": \"<string,null>\",\n              \"sensitive\": true,\n              \"duration\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"hour\"\n              },\n              \"backfill\": {\n                \"attributeIdentifier\": \"<string>\",\n                \"timestampIdentifier\": \"<string>\"\n              }\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"realtime-attribute\",\n            \"attributes\": {\n              \"name\": \"<string>\",\n              \"identifier\": \"<string>\",\n              \"type\": \"single\",\n              \"notation\": \"<string>\",\n              \"realtimeKeyEventId\": \"<string>\",\n              \"filterRule\": {},\n              \"valueColumn\": \"<string>\",\n              \"dataType\": \"number\",\n              \"description\": \"<string,null>\",\n              \"sensitive\": true,\n              \"duration\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"hour\"\n              },\n              \"backfill\": {\n                \"attributeIdentifier\": \"<string>\",\n                \"timestampIdentifier\": \"<string>\"\n              }\n            }\n          }\n        ]\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"id\": \"321650\",\n          \"td_user_id\": \"13422\",\n          \"name\": \"<string>\"\n        },\n        \"updatedBy\": {\n          \"id\": \"9472281757\",\n          \"td_user_id\": \"98\",\n          \"name\": \"<string>\"\n        },\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"93606692181\",\n            \"type\": \"folder-segment\"\n          }\n        }\n      }\n    }\n  ],\n  \"pagination\": {\n    \"nextPage\": \"<string,null>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:36:58.000Z",
+                          "updatedAt": "2026-10-22T02:36:58.000Z",
+                          "uid": "35240-2926f64b-fff8-45b7-8a1f-5a73ce525308"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:36:58.000Z",
+                      "updatedAt": "2026-10-22T02:36:58.000Z",
+                      "uid": "35240-33b6f4da-9cb4-47b7-8536-7624aad30145"
+                    }
+                  ],
+                  "id": "d6a67ee7-adb9-4ebe-8634-217ac5b02b20",
+                  "createdAt": "2026-10-22T02:36:58.000Z",
+                  "updatedAt": "2026-10-22T02:36:58.000Z",
+                  "uid": "35240-d6a67ee7-adb9-4ebe-8634-217ac5b02b20"
+                }
+              ],
+              "id": "d1984039-5955-4432-bcd1-14c490928261",
+              "createdAt": "2026-10-22T02:36:58.000Z",
+              "updatedAt": "2026-10-22T02:36:58.000Z",
+              "uid": "35240-d1984039-5955-4432-bcd1-14c490928261"
+            }
+          ],
+          "id": "189cdca7-fbf1-4e27-8225-e6d558b0470f",
+          "createdAt": "2026-10-22T02:36:58.000Z",
+          "updatedAt": "2026-10-22T02:36:58.000Z",
+          "uid": "35240-189cdca7-fbf1-4e27-8225-e6d558b0470f"
+        }
+      ],
+      "id": "d60b0c70-f602-494b-b335-81286c9dc15b",
+      "createdAt": "2026-10-22T02:36:58.000Z",
+      "updatedAt": "2026-10-22T02:36:58.000Z",
+      "uid": "35240-d60b0c70-f602-494b-b335-81286c9dc15b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-cdp.treasuredata.com"
+    }
+  ]
+}

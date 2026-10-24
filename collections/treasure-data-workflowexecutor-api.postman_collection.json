@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "15fb8960-142e-42a0-84f5-32ef1a5e286b",
+    "name": "llm-api Workflow Executor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:38:05.000Z",
+    "updatedAt": "2026-10-22T02:38:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-15fb8960-142e-42a0-84f5-32ef1a5e286b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "workflow_executors",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "show",
+                  "id": "ba618ed3-e1a9-48d9-9e3e-da786f154be3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/workflow_executors/:id?include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "workflow_executors",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e4d30a0e-98da-46a1-8ee8-b23a8aa4c923",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "15632236-f8e1-47a1-b22c-fc94b65b55f8",
+                      "name": "includes by created_by and updated_by",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/workflow_executors/:id?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "workflow_executors",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"tdAccountId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"createdByUserId\": \"<string>\",\n      \"updatedByUserId\": \"<string>\"\n    },\n    \"relationships\": {\n      \"createdBy\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\"\n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:38:05.000Z",
+                      "updatedAt": "2026-10-22T02:38:05.000Z",
+                      "uid": "35240-15632236-f8e1-47a1-b22c-fc94b65b55f8"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:38:05.000Z",
+                  "updatedAt": "2026-10-22T02:38:05.000Z",
+                  "uid": "35240-ba618ed3-e1a9-48d9-9e3e-da786f154be3"
+                }
+              ],
+              "id": "4dfd04c2-0382-4c4e-92ac-93189bb91113",
+              "createdAt": "2026-10-22T02:38:05.000Z",
+              "updatedAt": "2026-10-22T02:38:05.000Z",
+              "uid": "35240-4dfd04c2-0382-4c4e-92ac-93189bb91113"
+            }
+          ],
+          "id": "1a379666-5517-442f-8b68-e887b841e5d6",
+          "createdAt": "2026-10-22T02:38:05.000Z",
+          "updatedAt": "2026-10-22T02:38:05.000Z",
+          "uid": "35240-1a379666-5517-442f-8b68-e887b841e5d6"
+        }
+      ],
+      "id": "33e0c4c1-45b3-4aa2-b1cc-ab7b2548802e",
+      "createdAt": "2026-10-22T02:38:05.000Z",
+      "updatedAt": "2026-10-22T02:38:05.000Z",
+      "uid": "35240-33e0c4c1-45b3-4aa2-b1cc-ab7b2548802e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

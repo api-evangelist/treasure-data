@@ -1,761 +1,1987 @@
 {
+  "info": {
+    "_postman_id": "7dcdb56f-5f4c-4fe8-b3a9-65e70bfc8984",
+    "name": "Treasure Data Jobs API",
+    "description": "Operations tagged Jobs across 2 of this provider's published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:14.000Z",
+    "updatedAt": "2026-10-22T02:32:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7dcdb56f-5f4c-4fe8-b3a9-65e70bfc8984"
+  },
   "item": [
     {
-      "id": "6e1ce3a9-79ec-4c58-97cb-8fa40a0fedd6",
-      "name": "Jobs",
-      "description": {
-        "content": "Submit and manage query jobs",
-        "type": "text/plain"
-      },
+      "name": "job",
       "item": [
         {
-          "id": "0381a70f-32b5-4f97-a542-4f95e05d7c59",
-          "name": "Issue a Presto query job",
-          "request": {
-            "name": "Issue a Presto query job",
-            "description": {
-              "content": "Submits a Presto SQL query against the specified database.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "job",
-                "issue",
-                "presto",
-                ":database_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "database_name",
-                  "description": "(Required) Name of the database to query"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "query",
-                  "value": "<string>",
-                  "description": "(Required) SQL query string"
-                },
-                {
-                  "disabled": false,
-                  "key": "result",
-                  "value": "<string>",
-                  "description": "Result output connector URI"
-                },
-                {
-                  "disabled": false,
-                  "key": "priority",
-                  "value": "<integer>",
-                  "description": "Job priority (-2 to 2)"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "issue",
+          "item": [
             {
-              "id": "4c9e1982-5fa3-4f13-8975-f813286e11f8",
-              "name": "Job issued successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "job",
-                    "issue",
-                    "presto",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database to query"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) SQL query string",
-                        "type": "text/plain"
-                      },
-                      "key": "query",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Result output connector URI",
-                        "type": "text/plain"
-                      },
-                      "key": "result",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Job priority (-2 to 2)",
-                        "type": "text/plain"
-                      },
-                      "key": "priority",
-                      "value": "<integer>"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "presto",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{database_name}",
+                  "item": [
+                    {
+                      "name": "Issue a Presto query job",
+                      "id": "7fdb0063-9be8-4819-9b94-cbc203cdbebe",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) SQL query string",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Result output connector URI",
+                              "key": "result",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job priority (-2 to 2)",
+                              "key": "priority",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job/issue/presto/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "issue",
+                            "presto",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ecab0ec2-a47c-4980-9e5c-1399f06574e2",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) Name of the database to query"
+                            }
+                          ]
+                        },
+                        "description": "Submits a Presto SQL query against the specified database."
+                      },
+                      "response": [
+                        {
+                          "id": "d714214e-8d93-4067-bb63-92404dd95af4",
+                          "name": "Job issued successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) SQL query string",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Result output connector URI",
+                                  "key": "result",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Job priority (-2 to 2)",
+                                  "key": "priority",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/job/issue/presto/:database_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "job",
+                                "issue",
+                                "presto",
+                                ":database_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"job_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"database\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-d714214e-8d93-4067-bb63-92404dd95af4"
+                        },
+                        {
+                          "id": "7876237a-ff27-4e40-a0d2-1198535f4804",
+                          "name": "Authentication required or API key invalid",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) SQL query string",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Result output connector URI",
+                                  "key": "result",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Job priority (-2 to 2)",
+                                  "key": "priority",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/job/issue/presto/:database_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "job",
+                                "issue",
+                                "presto",
+                                ":database_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-7876237a-ff27-4e40-a0d2-1198535f4804"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-7fdb0063-9be8-4819-9b94-cbc203cdbebe"
+                    }
+                  ],
+                  "id": "122fc163-defa-4ee1-b791-e1a08fdb93ae",
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-122fc163-defa-4ee1-b791-e1a08fdb93ae"
                 }
               ],
-              "body": "{\n  \"job_id\": \"string\",\n  \"type\": \"string\",\n  \"database\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "3ecbe503-71dc-49e2-8f0f-e7df0688b15c",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-3ecbe503-71dc-49e2-8f0f-e7df0688b15c"
             },
             {
-              "id": "6958de04-4d1c-4585-b943-05d34574366b",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "job",
-                    "issue",
-                    "presto",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database to query"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) SQL query string",
-                        "type": "text/plain"
-                      },
-                      "key": "query",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Result output connector URI",
-                        "type": "text/plain"
-                      },
-                      "key": "result",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Job priority (-2 to 2)",
-                        "type": "text/plain"
-                      },
-                      "key": "priority",
-                      "value": "<integer>"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "hive",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{database_name}",
+                  "item": [
+                    {
+                      "name": "Issue a Hive query job",
+                      "id": "e1914e9b-fadc-49b3-868f-dd30eb80c31b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) HiveQL query string",
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Result output connector URI",
+                              "key": "result",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job priority (-2 to 2)",
+                              "key": "priority",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job/issue/hive/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "issue",
+                            "hive",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2deb1b56-087f-49e5-9002-556c44aaf2fc",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) Name of the database to query"
+                            }
+                          ]
+                        },
+                        "description": "Submits a Hive query against the specified database."
+                      },
+                      "response": [
+                        {
+                          "id": "0f4d8e45-7c4b-4ea8-b0a5-46dc47c8e140",
+                          "name": "Job issued successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) HiveQL query string",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Result output connector URI",
+                                  "key": "result",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Job priority (-2 to 2)",
+                                  "key": "priority",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/job/issue/hive/:database_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "job",
+                                "issue",
+                                "hive",
+                                ":database_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"job_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"database\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-0f4d8e45-7c4b-4ea8-b0a5-46dc47c8e140"
+                        },
+                        {
+                          "id": "10b9de83-99eb-4412-833b-b1ea46be15a9",
+                          "name": "Authentication required or API key invalid",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) HiveQL query string",
+                                  "key": "query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Result output connector URI",
+                                  "key": "result",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Job priority (-2 to 2)",
+                                  "key": "priority",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/job/issue/hive/:database_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "job",
+                                "issue",
+                                "hive",
+                                ":database_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-10b9de83-99eb-4412-833b-b1ea46be15a9"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-e1914e9b-fadc-49b3-868f-dd30eb80c31b"
+                    }
+                  ],
+                  "id": "73cc49f3-5f79-4ecb-aa47-e0767400fc9d",
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-73cc49f3-5f79-4ecb-aa47-e0767400fc9d"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "8f75ea1b-19c9-4947-aa60-12bbe9495a33",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-8f75ea1b-19c9-4947-aa60-12bbe9495a33"
+            },
+            {
+              "name": "{job_type}",
+              "item": [
+                {
+                  "name": "{database_name}",
+                  "item": [
+                    {
+                      "name": "Create job",
+                      "id": "6d62c411-9a4d-4d76-a91a-615d037d4124",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"query\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"result\": \"<string>\",\n  \"retry_limit\": \"<integer>\",\n  \"pool_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job/issue/:job_type/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "issue",
+                            ":job_type",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "eb8fa424-87fc-42e5-9b4c-025eca8fee73",
+                              "key": "job_type",
+                              "value": "<string>",
+                              "description": "(Required) the job type"
+                            },
+                            {
+                              "id": "6d07158e-8f16-4ef3-98a4-d12e25e8eee8",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Creates a job of a given type under a specified database."
+                      },
+                      "response": [
+                        {
+                          "id": "de6f7f0b-0751-400b-a971-6cd6d545f977",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"result\": \"<string>\",\n  \"retry_limit\": \"<integer>\",\n  \"pool_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/job/issue/:job_type/:database_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "job",
+                                "issue",
+                                ":job_type",
+                                ":database_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "job_type"
+                                },
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"job\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"database\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-de6f7f0b-0751-400b-a971-6cd6d545f977"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-6d62c411-9a4d-4d76-a91a-615d037d4124"
+                    }
+                  ],
+                  "id": "4018bff9-a82b-4987-8e1c-6f816c3240ac",
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-4018bff9-a82b-4987-8e1c-6f816c3240ac"
+                }
+              ],
+              "id": "a5279b01-7902-4ec0-9037-0b1b45b2f141",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-a5279b01-7902-4ec0-9037-0b1b45b2f141"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "7719f91f-47e3-42ef-96ad-2625cfcd47ba",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-7719f91f-47e3-42ef-96ad-2625cfcd47ba"
         },
         {
-          "id": "23905c0b-3726-43af-ab75-5afbf00d3d19",
-          "name": "Issue a Hive query job",
-          "request": {
-            "name": "Issue a Hive query job",
-            "description": {
-              "content": "Submits a Hive query against the specified database.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "job",
-                "issue",
-                "hive",
-                ":database_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "database_name",
-                  "description": "(Required) Name of the database to query"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "query",
-                  "value": "<string>",
-                  "description": "(Required) HiveQL query string"
-                },
-                {
-                  "disabled": false,
-                  "key": "result",
-                  "value": "<string>",
-                  "description": "Result output connector URI"
-                },
-                {
-                  "disabled": false,
-                  "key": "priority",
-                  "value": "<integer>",
-                  "description": "Job priority (-2 to 2)"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "result",
+          "item": [
             {
-              "id": "04a7711a-e750-4571-92bf-98da5d988886",
-              "name": "Job issued successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "job",
-                    "issue",
-                    "hive",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database to query"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) HiveQL query string",
-                        "type": "text/plain"
-                      },
-                      "key": "query",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Result output connector URI",
-                        "type": "text/plain"
-                      },
-                      "key": "result",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Job priority (-2 to 2)",
-                        "type": "text/plain"
-                      },
-                      "key": "priority",
-                      "value": "<integer>"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{job_id}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Get job results",
+                  "id": "4ec2e3a2-4edc-402d-a3c1-e24cd44e1555",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/result/:job_id?format=msgpack",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "result",
+                        ":job_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for results",
+                          "key": "format",
+                          "value": "msgpack"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c9ab2ca6-b1cd-4c28-bcf3-9500b0edb9fd",
+                          "key": "job_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the job"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the results of a completed query job."
+                  },
+                  "response": [
+                    {
+                      "id": "d9095777-8e46-4b9f-ade1-4b1cece604cc",
+                      "name": "Job results",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/result/:job_id?format=msgpack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "result",
+                            ":job_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for results",
+                              "key": "format",
+                              "value": "msgpack"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-d9095777-8e46-4b9f-ade1-4b1cece604cc"
+                    },
+                    {
+                      "id": "033fd63a-e3ee-4453-b290-b4e40473119d",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/result/:job_id?format=msgpack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "result",
+                            ":job_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for results",
+                              "key": "format",
+                              "value": "msgpack"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-033fd63a-e3ee-4453-b290-b4e40473119d"
+                    },
+                    {
+                      "id": "f0d9d913-e6d6-4bfa-93da-ee87b3a19ad4",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/result/:job_id?format=msgpack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "result",
+                            ":job_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for results",
+                              "key": "format",
+                              "value": "msgpack"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-f0d9d913-e6d6-4bfa-93da-ee87b3a19ad4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-4ec2e3a2-4edc-402d-a3c1-e24cd44e1555"
                 }
               ],
-              "body": "{\n  \"job_id\": \"string\",\n  \"type\": \"string\",\n  \"database\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "47e77286-eb4a-43f5-b6c4-faf30b16f557",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "job",
-                    "issue",
-                    "hive",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database to query"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) HiveQL query string",
-                        "type": "text/plain"
-                      },
-                      "key": "query",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Result output connector URI",
-                        "type": "text/plain"
-                      },
-                      "key": "result",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Job priority (-2 to 2)",
-                        "type": "text/plain"
-                      },
-                      "key": "priority",
-                      "value": "<integer>"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "7f10fc01-c58e-4140-9f2e-9fb452df887b",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-7f10fc01-c58e-4140-9f2e-9fb452df887b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "5f4e2a4b-31ce-42ae-b32e-731b73510985",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-5f4e2a4b-31ce-42ae-b32e-731b73510985"
         },
         {
-          "id": "3d56d626-5853-4922-bed5-123cbb519ec6",
-          "name": "Get job results",
-          "request": {
-            "name": "Get job results",
-            "description": {
-              "content": "Retrieves the results of a completed query job.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "job",
-                "result",
-                ":job_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "format",
-                  "value": "<string>",
-                  "description": "Output format for results"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "job_id",
-                  "description": "(Required) Unique identifier of the job"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list",
+          "item": [
             {
-              "id": "5c994f26-d745-4551-bba1-765f253065d1",
-              "name": "Job results",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "job",
-                    "result",
-                    ":job_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "format",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "job_id",
-                      "description": "(Required) Unique identifier of the job"
-                    }
-                  ]
-                },
+              "name": "Get jobs",
+              "id": "d5856ac2-4dd9-41ef-bab5-eb51cbd84a38",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "837d6280-a0fe-43e9-9e88-9144d79c94f7",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "job",
-                    "result",
-                    ":job_id"
-                  ],
+                  "raw": "{{baseUrl}}/job/list",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "format",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "job_id",
-                      "description": "(Required) Unique identifier of the job"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eb580138-e7cd-4130-9d6f-58a8b6867189",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "job",
-                    "result",
-                    ":job_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "format",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "job_id",
-                      "description": "(Required) Unique identifier of the job"
-                    }
+                    "list"
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieves a list of jobs."
               },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "788ce5ec-b998-4214-8821-ebbc8056f717",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobs\": [\n    {\n      \"cpu_time\": \"<integer,null>\",\n      \"created_at\": \"6885-04-24\ufeff13:90:09\u1680-6310\",\n      \"database\": \"<string,null>\",\n      \"duration\": \"<integer,null>\",\n      \"end_at\": \"8253-36-77\u180e25:12:80\u2005-5339\",\n      \"hive_result_schema\": \"<string,null>\",\n      \"job_id\": \"<string>\",\n      \"linked_result_export_job_id\": \"<integer>\",\n      \"num_records\": \"<integer,null>\",\n      \"organization\": \"<string,null>\",\n      \"priority\": \"<integer>\",\n      \"query\": \"<string,null>\",\n      \"result_export_target_job_id\": \"<integer>\",\n      \"result_size\": \"<integer,null>\",\n      \"retry_limit\": 0,\n      \"start_at\": \"5129-14-56\u180e34:54:60\u2008UTC\",\n      \"status\": \"error\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"9416-41-83\u200516:34:19\u2028UTC\",\n      \"url\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"result\": \"<string>\"\n    },\n    {\n      \"cpu_time\": \"<integer,null>\",\n      \"created_at\": \"2713-65-55 50:08:31\\u000b-0877\",\n      \"database\": \"<string,null>\",\n      \"duration\": \"<integer,null>\",\n      \"end_at\": \"7683-11-83\ufeff62:89:99\u2005UTC\",\n      \"hive_result_schema\": \"<string,null>\",\n      \"job_id\": \"<string>\",\n      \"linked_result_export_job_id\": \"<integer>\",\n      \"num_records\": \"<integer,null>\",\n      \"organization\": \"<string,null>\",\n      \"priority\": \"<integer>\",\n      \"query\": \"<string,null>\",\n      \"result_export_target_job_id\": \"<integer>\",\n      \"result_size\": \"<integer,null>\",\n      \"retry_limit\": 0,\n      \"start_at\": \"9873-82-93\u200886:31:87\u3000-0825\",\n      \"status\": \"running\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"6489-21-31\\u000b89:49:23\u2003-3796\",\n      \"url\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"result\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"from\": \"<integer,null>\",\n  \"to\": \"<integer,null>\"\n}",
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-788ce5ec-b998-4214-8821-ebbc8056f717"
                 }
               ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-d5856ac2-4dd9-41ef-bab5-eb51cbd84a38"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "640d3aa2-74dc-4e0d-a819-2c108f182216",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-640d3aa2-74dc-4e0d-a819-2c108f182216"
+        },
+        {
+          "name": "show",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "Get job",
+                  "id": "b03dcdb5-ecde-4e2d-bea1-9a4da0d11da3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/show/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "show",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "44062102-6890-484f-ab28-4c87482e6b17",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) the job id"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of jobs with specified job id."
+                  },
+                  "response": [
+                    {
+                      "id": "9e3dc7f9-cc1a-4fba-b914-b1099100a22b",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/show/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "show",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"cpu_time\": \"<integer,null>\",\n  \"created_at\": \"8414-28-14\u202910:79:25\u1680-2384\",\n  \"database\": \"<string,null>\",\n  \"debug\": {\n    \"cmdout\": \"<string,null>\",\n    \"stderr\": \"<string,null>\"\n  },\n  \"duration\": \"<integer,null>\",\n  \"end_at\": \"6947-50-76\u200388:73:38\u2002UTC\",\n  \"hive_result_schema\": \"<string,null>\",\n  \"job_id\": \"<string>\",\n  \"linked_result_export_job_id\": \"<integer>\",\n  \"num_records\": \"<integer,null>\",\n  \"organization\": \"<string,null>\",\n  \"priority\": \"<integer>\",\n  \"query\": \"<string,null>\",\n  \"result_export_target_job_id\": \"<integer>\",\n  \"result_size\": \"<integer,null>\",\n  \"retry_limit\": 0,\n  \"start_at\": \"7656-47-85\u200796:37:13\ufeff-6098\",\n  \"status\": \"error\",\n  \"type\": \"<string>\",\n  \"updated_at\": \"1507-93-24\u205f20:96:40\u3000+0470\",\n  \"url\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"result\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-9e3dc7f9-cc1a-4fba-b914-b1099100a22b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-b03dcdb5-ecde-4e2d-bea1-9a4da0d11da3"
+                }
+              ],
+              "id": "3a0242a3-7f66-482e-adec-3b2309cbb63e",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-3a0242a3-7f66-482e-adec-3b2309cbb63e"
+            }
+          ],
+          "id": "63d0ab59-2437-48c5-a2de-077bd45c7826",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-63d0ab59-2437-48c5-a2de-077bd45c7826"
+        },
+        {
+          "name": "status",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "Get job status by id",
+                  "id": "82f1fff4-c3ac-4979-b9e5-6744b7f4c536",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/status/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "status",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "605739f0-2f44-4095-b8ad-91edfd3dfeb6",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) the job id"
+                        }
+                      ]
+                    },
+                    "description": "Show the status information of the given job id at last execution as well as other related information."
+                  },
+                  "response": [
+                    {
+                      "id": "f983339f-f681-49d4-a9cd-cbb60697bf0c",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/status/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "status",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"job_id\": \"<string>\",\n  \"cpu_time\": \"<integer,null>\",\n  \"created_at\": \"4463-21-61\u202885:84:82\\t+2271\",\n  \"duration\": \"<integer,null>\",\n  \"end_at\": \"2460-13-93\u200415:73:12\u2002UTC\",\n  \"num_records\": \"<integer,null>\",\n  \"result_size\": \"<integer,null>\",\n  \"start_at\": \"6724-96-43\ufeff62:62:79\\rUTC\",\n  \"status\": \"success\",\n  \"updated_at\": \"4040-18-74\\r07:46:77\ufeff+9421\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-f983339f-f681-49d4-a9cd-cbb60697bf0c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-82f1fff4-c3ac-4979-b9e5-6744b7f4c536"
+                }
+              ],
+              "id": "293208a8-c3a9-4ee0-97fc-371d0995dd01",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-293208a8-c3a9-4ee0-97fc-371d0995dd01"
+            }
+          ],
+          "id": "5514ab5a-012e-45d0-9afa-6d1fdfb9f72b",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-5514ab5a-012e-45d0-9afa-6d1fdfb9f72b"
+        },
+        {
+          "name": "status_by_domain_key",
+          "item": [
+            {
+              "name": "{domain_key}",
+              "item": [
+                {
+                  "name": "Get job status by domain_key",
+                  "id": "e5f9f260-d789-4edf-b368-6e5e80ff77a0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/status_by_domain_key/:domain_key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "status_by_domain_key",
+                        ":domain_key"
+                      ],
+                      "variable": [
+                        {
+                          "id": "776399fb-fa57-4315-b103-3877649b4f8a",
+                          "key": "domain_key",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Checks the status of a job using the domain key."
+                  },
+                  "response": [
+                    {
+                      "id": "0ff28378-dae0-4e0c-b1bf-3fd58865014b",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/status_by_domain_key/:domain_key",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "status_by_domain_key",
+                            ":domain_key"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain_key"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"job_id\": \"<string>\",\n  \"cpu_time\": \"<integer,null>\",\n  \"created_at\": \"4463-21-61\u202885:84:82\\t+2271\",\n  \"duration\": \"<integer,null>\",\n  \"end_at\": \"2460-13-93\u200415:73:12\u2002UTC\",\n  \"num_records\": \"<integer,null>\",\n  \"result_size\": \"<integer,null>\",\n  \"start_at\": \"6724-96-43\ufeff62:62:79\\rUTC\",\n  \"status\": \"success\",\n  \"updated_at\": \"4040-18-74\\r07:46:77\ufeff+9421\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-0ff28378-dae0-4e0c-b1bf-3fd58865014b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-e5f9f260-d789-4edf-b368-6e5e80ff77a0"
+                }
+              ],
+              "id": "00224ce3-2afc-4d30-a254-8d4f5da56040",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-00224ce3-2afc-4d30-a254-8d4f5da56040"
+            }
+          ],
+          "id": "ecf1fd1c-60b1-40ae-993a-4e27d4e9b1cc",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-ecf1fd1c-60b1-40ae-993a-4e27d4e9b1cc"
+        },
+        {
+          "name": "statistics",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "Get job statistics by id",
+                  "id": "1b19f7ce-0619-42cb-aef0-684ead93994f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/statistics/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "statistics",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "710b915b-e07b-4bcd-8f48-9a0f4ed0f4c6",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) the job id"
+                        }
+                      ]
+                    },
+                    "description": "Show the statistics of the job, including records inserted."
+                  },
+                  "response": [
+                    {
+                      "id": "b8cdd6cc-e145-442c-acb8-13e2ba0c0d49",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/statistics/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "statistics",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"records_inserted\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-b8cdd6cc-e145-442c-acb8-13e2ba0c0d49"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-1b19f7ce-0619-42cb-aef0-684ead93994f"
+                }
+              ],
+              "id": "b7563662-49e5-4f66-a18d-1dc5730a7597",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-b7563662-49e5-4f66-a18d-1dc5730a7597"
+            }
+          ],
+          "id": "a8fd5035-7141-4b91-a881-dd266baa7f11",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-a8fd5035-7141-4b91-a881-dd266baa7f11"
+        },
+        {
+          "name": "kill",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "kill job by id",
+                  "id": "64d1a4f2-4687-4036-8999-296ca58f7c3e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/job/kill/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "kill",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6bbd04f8-ee41-468d-9e4a-ad00e1a9eaef",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) the job id"
+                        }
+                      ]
+                    },
+                    "description": "Stops a specified job ID."
+                  },
+                  "response": [
+                    {
+                      "id": "808268af-2bb9-432e-9d4e-1a54eaab000b",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/job/kill/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "kill",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-808268af-2bb9-432e-9d4e-1a54eaab000b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-64d1a4f2-4687-4036-8999-296ca58f7c3e"
+                }
+              ],
+              "id": "3c1d97cc-b494-46f5-bf3f-294676541ee4",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-3c1d97cc-b494-46f5-bf3f-294676541ee4"
+            }
+          ],
+          "id": "74ca3ea3-0972-4b07-9c00-7ac3467fae12",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-74ca3ea3-0972-4b07-9c00-7ac3467fae12"
+        },
+        {
+          "name": "result_export",
+          "item": [
+            {
+              "name": "{job_id}",
+              "item": [
+                {
+                  "name": "Set result export",
+                  "id": "060c1c8e-4a91-453f-a283-8665f7b29946",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "domain_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "pool_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "priority",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "retry_limit",
+                          "value": "0"
+                        },
+                        {
+                          "key": "scheduled_time",
+                          "value": "5695-57-73T54:17:39-22:44"
+                        },
+                        {
+                          "key": "target_job_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "result_connection_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "result",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "database",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "table",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/job/result_export/:job_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "job",
+                        "result_export",
+                        ":job_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a2f8beae-5d89-4e89-b935-ee8d4bea890b",
+                          "key": "job_id",
+                          "value": "<integer>",
+                          "description": "(Required) the job id"
+                        }
+                      ]
+                    },
+                    "description": "Sets the results of a specified job ID."
+                  },
+                  "response": [
+                    {
+                      "id": "84957a82-0a39-45e7-aee0-c0f5419b4b6e",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "domain_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "pool_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "priority",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "retry_limit",
+                              "value": "0"
+                            },
+                            {
+                              "key": "scheduled_time",
+                              "value": "5695-57-73T54:17:39-22:44"
+                            },
+                            {
+                              "key": "target_job_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "result_connection_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "result",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "database",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "table",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/job/result_export/:job_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "job",
+                            "result_export",
+                            ":job_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "job_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"cpu_time\": \"<integer,null>\",\n  \"created_at\": \"8414-28-14\u202910:79:25\u1680-2384\",\n  \"database\": \"<string,null>\",\n  \"debug\": {\n    \"cmdout\": \"<string,null>\",\n    \"stderr\": \"<string,null>\"\n  },\n  \"duration\": \"<integer,null>\",\n  \"end_at\": \"6947-50-76\u200388:73:38\u2002UTC\",\n  \"hive_result_schema\": \"<string,null>\",\n  \"job_id\": \"<string>\",\n  \"linked_result_export_job_id\": \"<integer>\",\n  \"num_records\": \"<integer,null>\",\n  \"organization\": \"<string,null>\",\n  \"priority\": \"<integer>\",\n  \"query\": \"<string,null>\",\n  \"result_export_target_job_id\": \"<integer>\",\n  \"result_size\": \"<integer,null>\",\n  \"retry_limit\": 0,\n  \"start_at\": \"7656-47-85\u200796:37:13\ufeff-6098\",\n  \"status\": \"error\",\n  \"type\": \"<string>\",\n  \"updated_at\": \"1507-93-24\u205f20:96:40\u3000+0470\",\n  \"url\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"result\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-84957a82-0a39-45e7-aee0-c0f5419b4b6e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-060c1c8e-4a91-453f-a283-8665f7b29946"
+                }
+              ],
+              "id": "185fda34-a02b-4f74-8ae4-0af32fb969c8",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-185fda34-a02b-4f74-8ae4-0af32fb969c8"
+            }
+          ],
+          "id": "e3865bb8-7daa-4581-953e-3edbf879913f",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-e3865bb8-7daa-4581-953e-3edbf879913f"
         }
       ],
-      "event": []
+      "id": "b73dc7b9-84a1-4025-9e28-da25a2346eb8",
+      "createdAt": "2026-10-22T02:32:14.000Z",
+      "updatedAt": "2026-10-22T02:32:14.000Z",
+      "uid": "35240-b73dc7b9-84a1-4025-9e28-da25a2346eb8"
+    },
+    {
+      "name": "export",
+      "item": [
+        {
+          "name": "run",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Create export job",
+                      "id": "6e5809b1-a3e8-4049-85d3-ac54b32defcf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "access_key_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "assume_role",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "bucket",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "domain_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "encryption",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "file_format",
+                              "value": "jsonl.gz"
+                            },
+                            {
+                              "key": "file_prefix",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "from",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "pool_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "secret_access_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage_type",
+                              "value": "s3"
+                            },
+                            {
+                              "key": "to",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/export/run/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "export",
+                            "run",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "21c665d4-b239-448c-978c-a69937c5846c",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "941c92c5-ea8e-4288-8bdb-241677d9776f",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Creates an export job."
+                      },
+                      "response": [
+                        {
+                          "id": "2807091b-b50c-48e9-b156-0426ce7deb27",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "access_key_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "assume_role",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "bucket",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "domain_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "encryption",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "file_format",
+                                  "value": "jsonl.gz"
+                                },
+                                {
+                                  "key": "file_prefix",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "from",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "pool_name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "secret_access_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage_type",
+                                  "value": "s3"
+                                },
+                                {
+                                  "key": "to",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/export/run/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "export",
+                                "run",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"job\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"database\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:14.000Z",
+                          "updatedAt": "2026-10-22T02:32:14.000Z",
+                          "uid": "35240-2807091b-b50c-48e9-b156-0426ce7deb27"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:14.000Z",
+                      "updatedAt": "2026-10-22T02:32:14.000Z",
+                      "uid": "35240-6e5809b1-a3e8-4049-85d3-ac54b32defcf"
+                    }
+                  ],
+                  "id": "41c29b0c-0a26-43ce-b907-dd08aad5d6dd",
+                  "createdAt": "2026-10-22T02:32:14.000Z",
+                  "updatedAt": "2026-10-22T02:32:14.000Z",
+                  "uid": "35240-41c29b0c-0a26-43ce-b907-dd08aad5d6dd"
+                }
+              ],
+              "id": "fa50d190-c9ec-451b-8320-ee4e413e8c06",
+              "createdAt": "2026-10-22T02:32:14.000Z",
+              "updatedAt": "2026-10-22T02:32:14.000Z",
+              "uid": "35240-fa50d190-c9ec-451b-8320-ee4e413e8c06"
+            }
+          ],
+          "id": "c1389c55-b1b2-4924-b388-b022b03b0a74",
+          "createdAt": "2026-10-22T02:32:14.000Z",
+          "updatedAt": "2026-10-22T02:32:14.000Z",
+          "uid": "35240-c1389c55-b1b2-4924-b388-b022b03b0a74"
+        }
+      ],
+      "id": "b4e64db1-941a-437b-bfb0-0e2e1ff981fd",
+      "createdAt": "2026-10-22T02:32:14.000Z",
+      "updatedAt": "2026-10-22T02:32:14.000Z",
+      "uid": "35240-b4e64db1-941a-437b-bfb0-0e2e1ff981fd"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authorization"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "d2e6bc23-94a5-49d4-9ba6-7aa61b3d964c",
-    "name": "Treasure Data TD Bulk Import Jobs API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

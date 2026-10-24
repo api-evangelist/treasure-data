@@ -1,0 +1,2697 @@
+{
+  "info": {
+    "_postman_id": "a797a59b-52c5-4f1a-b7ee-38ba1b65bcb7",
+    "name": "cdp-api Tokens API",
+    "description": "All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under \"/entities\".",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:39.000Z",
+    "updatedAt": "2026-10-22T02:37:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a797a59b-52c5-4f1a-b7ee-38ba1b65bcb7"
+  },
+  "item": [
+    {
+      "name": "audiences",
+      "item": [
+        {
+          "name": "{audienceId}",
+          "item": [
+            {
+              "name": "tokens",
+              "item": [
+                {
+                  "name": "{tokenId}",
+                  "item": [
+                    {
+                      "name": "Retrieve Profiles API token by ID",
+                      "id": "512b802f-9d26-4aa8-8c27-0cc1a3902418",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens",
+                            ":tokenId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "38b83145-b45f-47b6-8089-d72ceba56c59",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master Segment ID of the token"
+                            },
+                            {
+                              "id": "776c7da0-804f-44da-9bc3-6cb900e5125a",
+                              "key": "tokenId",
+                              "value": "<long>",
+                              "description": "(Required) ID of Token to return"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a specific Profiles API token by its identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "34414177-0f38-4647-8874-34b48ae2a955",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"audienceId\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"keyColumn\": \"<string>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"realtime\": \"<boolean>\",\n      \"kind\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"segmentFolderId\": \"<long>\",\n      \"population\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"realtime\": \"<boolean>\",\n      \"kind\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"segmentFolderId\": \"<long>\",\n      \"population\": \"<long>\"\n    }\n  ],\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"v2\": \"<boolean>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"5874513\",\n    \"td_user_id\": \"22050850\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"58\",\n    \"td_user_id\": \"965393\",\n    \"name\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-34414177-0f38-4647-8874-34b48ae2a955"
+                        },
+                        {
+                          "id": "960d20fd-895d-4457-a397-0aec68e25534",
+                          "name": "Given parameters are not valid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-960d20fd-895d-4457-a397-0aec68e25534"
+                        },
+                        {
+                          "id": "f11c8a3f-70e0-46e6-93a5-4f46ba9a461b",
+                          "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-f11c8a3f-70e0-46e6-93a5-4f46ba9a461b"
+                        },
+                        {
+                          "id": "6f83af06-0efd-4727-85e0-2bd4725af2e0",
+                          "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-6f83af06-0efd-4727-85e0-2bd4725af2e0"
+                        },
+                        {
+                          "id": "6f64ddb7-b24d-4dd1-80b2-ca1a14643efd",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-6f64ddb7-b24d-4dd1-80b2-ca1a14643efd"
+                        },
+                        {
+                          "id": "3244eb2e-ddd6-4952-ae98-d844b4bda3fc",
+                          "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-3244eb2e-ddd6-4952-ae98-d844b4bda3fc"
+                        },
+                        {
+                          "id": "660d88ec-fd8c-4eb2-895d-f064617a0b96",
+                          "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-660d88ec-fd8c-4eb2-895d-f064617a0b96"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-512b802f-9d26-4aa8-8c27-0cc1a3902418"
+                    },
+                    {
+                      "name": "Update Profiles API token (legacy)",
+                      "id": "da0fddfb-a228-4e28-ade2-a7af0678fa86",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens",
+                            ":tokenId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8944a7f0-f694-45bc-8437-bd92e97fdf7f",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master Segment ID of the token"
+                            },
+                            {
+                              "id": "f1090096-a6ed-48f1-8f70-24681374d0f3",
+                              "key": "tokenId",
+                              "value": "<long>",
+                              "description": "(Required) ID of Token to return"
+                            }
+                          ]
+                        },
+                        "description": "Update a Profiles API token.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                      },
+                      "response": [
+                        {
+                          "id": "0a0a2e19-4bab-4afa-bb98-5459923df902",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"audienceId\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"keyColumn\": \"<string>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"realtime\": \"<boolean>\",\n      \"kind\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"segmentFolderId\": \"<long>\",\n      \"population\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"name\": \"<string>\",\n      \"realtime\": \"<boolean>\",\n      \"kind\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"segmentFolderId\": \"<long>\",\n      \"population\": \"<long>\"\n    }\n  ],\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"v2\": \"<boolean>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"5874513\",\n    \"td_user_id\": \"22050850\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"58\",\n    \"td_user_id\": \"965393\",\n    \"name\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-0a0a2e19-4bab-4afa-bb98-5459923df902"
+                        },
+                        {
+                          "id": "367a7bfb-e419-4471-988e-b46a5b04aafb",
+                          "name": "Given parameters are not valid",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-367a7bfb-e419-4471-988e-b46a5b04aafb"
+                        },
+                        {
+                          "id": "26eeb648-57a2-478f-b2e9-90d254219da1",
+                          "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-26eeb648-57a2-478f-b2e9-90d254219da1"
+                        },
+                        {
+                          "id": "be1f5cea-f616-4782-8780-f440eb5e8492",
+                          "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-be1f5cea-f616-4782-8780-f440eb5e8492"
+                        },
+                        {
+                          "id": "a5d74eea-279c-4668-8229-5bb4bf1313c2",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-a5d74eea-279c-4668-8229-5bb4bf1313c2"
+                        },
+                        {
+                          "id": "8b225af9-7087-4f9a-9d7d-26d89462bec0",
+                          "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-8b225af9-7087-4f9a-9d7d-26d89462bec0"
+                        },
+                        {
+                          "id": "f4517b85-1b37-4b02-8334-8e75363b2916",
+                          "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-f4517b85-1b37-4b02-8334-8e75363b2916"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-da0fddfb-a228-4e28-ade2-a7af0678fa86"
+                    },
+                    {
+                      "name": "Delete a Profiles API token (legacy)",
+                      "id": "355df2b3-cf6b-47a0-93a8-302df2a3e935",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens",
+                            ":tokenId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bcfd81e2-56f1-48e1-b8dc-f9b4ca2c4610",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master Segment ID of the token"
+                            },
+                            {
+                              "id": "39cceeea-7f6e-40ab-b467-620fd2764e15",
+                              "key": "tokenId",
+                              "value": "<long>",
+                              "description": "(Required) ID of Token to return"
+                            }
+                          ]
+                        },
+                        "description": "Delete a Profiles API token.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                      },
+                      "response": [
+                        {
+                          "id": "1eb94460-4cfe-4c4d-b77c-2e8bd321ca61",
+                          "name": "Given parameters are not valid",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-1eb94460-4cfe-4c4d-b77c-2e8bd321ca61"
+                        },
+                        {
+                          "id": "c886c826-cd6d-41cb-a4b7-3e4f9d493d90",
+                          "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-c886c826-cd6d-41cb-a4b7-3e4f9d493d90"
+                        },
+                        {
+                          "id": "b80a376f-c1f0-477c-9567-a9d6407c7fbc",
+                          "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-b80a376f-c1f0-477c-9567-a9d6407c7fbc"
+                        },
+                        {
+                          "id": "add8aabf-ba7a-4e0d-867a-fa9125109df9",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-add8aabf-ba7a-4e0d-867a-fa9125109df9"
+                        },
+                        {
+                          "id": "dc4f7c9e-d2a1-4f8c-b8ef-b7c362e673f1",
+                          "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-dc4f7c9e-d2a1-4f8c-b8ef-b7c362e673f1"
+                        },
+                        {
+                          "id": "ec84d238-e59a-42ac-a8ca-b1dca2ee3a99",
+                          "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/tokens/:tokenId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "tokens",
+                                ":tokenId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "tokenId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:37:40.000Z",
+                          "updatedAt": "2026-10-22T02:37:40.000Z",
+                          "uid": "35240-ec84d238-e59a-42ac-a8ca-b1dca2ee3a99"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-355df2b3-cf6b-47a0-93a8-302df2a3e935"
+                    }
+                  ],
+                  "id": "11beb92b-29d4-474e-879b-9d0abb27adbc",
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-11beb92b-29d4-474e-879b-9d0abb27adbc"
+                },
+                {
+                  "name": "Retrieve list of Profile API tokens",
+                  "id": "ae070e4e-8d51-4ea4-a156-5e6b0a4c967f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "tokens"
+                      ],
+                      "variable": [
+                        {
+                          "id": "30f09032-8f72-4889-876d-efb24bdd35e0",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Master Segment ID of the token"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of Profile API tokens associated with a parent segment ID."
+                  },
+                  "response": [
+                    {
+                      "id": "abe7ded8-541f-4f17-bd8c-80e408d189c5",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"audienceId\": \"<string>\",\n    \"token\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"segments\": [\n      {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"realtime\": \"<boolean>\",\n        \"kind\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"segmentFolderId\": \"<long>\",\n        \"population\": \"<long>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"realtime\": \"<boolean>\",\n        \"kind\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"segmentFolderId\": \"<long>\",\n        \"population\": \"<long>\"\n      }\n    ],\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"v2\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"324686368\",\n      \"td_user_id\": \"82217743\",\n      \"name\": \"<string>\"\n    },\n    \"updatedBy\": {\n      \"id\": \"5448\",\n      \"td_user_id\": \"8658607781\",\n      \"name\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"audienceId\": \"<string>\",\n    \"token\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"segments\": [\n      {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"realtime\": \"<boolean>\",\n        \"kind\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"segmentFolderId\": \"<long>\",\n        \"population\": \"<long>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"realtime\": \"<boolean>\",\n        \"kind\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"segmentFolderId\": \"<long>\",\n        \"population\": \"<long>\"\n      }\n    ],\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"v2\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"447\",\n      \"td_user_id\": \"880500227\",\n      \"name\": \"<string>\"\n    },\n    \"updatedBy\": {\n      \"id\": \"16\",\n      \"td_user_id\": \"3044\",\n      \"name\": \"<string>\"\n    }\n  }\n]",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-abe7ded8-541f-4f17-bd8c-80e408d189c5"
+                    },
+                    {
+                      "id": "47ff6355-06f5-41ac-bb4e-ff141e91cb5d",
+                      "name": "Given parameters are not valid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-47ff6355-06f5-41ac-bb4e-ff141e91cb5d"
+                    },
+                    {
+                      "id": "21d4b8eb-4eb3-4d0a-b41a-1c8a39cbf526",
+                      "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-21d4b8eb-4eb3-4d0a-b41a-1c8a39cbf526"
+                    },
+                    {
+                      "id": "3d30e9ed-f3d5-44e9-9773-2943610b6175",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-3d30e9ed-f3d5-44e9-9773-2943610b6175"
+                    },
+                    {
+                      "id": "b5caf4c6-0995-448e-89f8-0c66849be702",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-b5caf4c6-0995-448e-89f8-0c66849be702"
+                    },
+                    {
+                      "id": "f302c389-e97b-4c85-8841-b6e7c6ecb85c",
+                      "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-f302c389-e97b-4c85-8841-b6e7c6ecb85c"
+                    },
+                    {
+                      "id": "f978ab8d-d1dc-4793-a52c-034003f3ba82",
+                      "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-f978ab8d-d1dc-4793-a52c-034003f3ba82"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-ae070e4e-8d51-4ea4-a156-5e6b0a4c967f"
+                },
+                {
+                  "name": "Create new Profiles API token (legacy)",
+                  "id": "bfaf13d7-5c6b-46bd-ba9b-89f8f1fe72ce",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "tokens"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7423633d-7d8f-4ce5-8ea2-edd740b9318b",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Master Segment ID of the token"
+                        }
+                      ]
+                    },
+                    "description": "Create a new Profiles API token.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                  },
+                  "response": [
+                    {
+                      "id": "056aa8da-6008-44a2-8f52-643599f72de6",
+                      "name": "Given parameters are not valid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-056aa8da-6008-44a2-8f52-643599f72de6"
+                    },
+                    {
+                      "id": "43462a58-42b7-484d-b738-459daf999c57",
+                      "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-43462a58-42b7-484d-b738-459daf999c57"
+                    },
+                    {
+                      "id": "99b078aa-d540-4956-a174-253c525ec5a3",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-99b078aa-d540-4956-a174-253c525ec5a3"
+                    },
+                    {
+                      "id": "ed49ff64-fef1-4472-9bd7-1db7cc70007b",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-ed49ff64-fef1-4472-9bd7-1db7cc70007b"
+                    },
+                    {
+                      "id": "cc156e51-51d2-4e1c-8792-dc792b45dc26",
+                      "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-cc156e51-51d2-4e1c-8792-dc792b45dc26"
+                    },
+                    {
+                      "id": "c388e2d9-6099-4345-8cdf-a5b520ec431a",
+                      "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"keyColumn\": \"<string>\",\n  \"attributeColumns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"token\": \"<uuid>\",\n  \"segments\": [\n    {\n      \"id\": \"<long>\"\n    },\n    {\n      \"id\": \"<long>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "tokens"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-c388e2d9-6099-4345-8cdf-a5b520ec431a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-bfaf13d7-5c6b-46bd-ba9b-89f8f1fe72ce"
+                }
+              ],
+              "id": "be03524c-9c39-4cd0-a5e9-390e6364dafe",
+              "createdAt": "2026-10-22T02:37:40.000Z",
+              "updatedAt": "2026-10-22T02:37:40.000Z",
+              "uid": "35240-be03524c-9c39-4cd0-a5e9-390e6364dafe"
+            }
+          ],
+          "id": "9011926c-c2bf-4e8b-aadb-43299d004131",
+          "createdAt": "2026-10-22T02:37:40.000Z",
+          "updatedAt": "2026-10-22T02:37:40.000Z",
+          "uid": "35240-9011926c-c2bf-4e8b-aadb-43299d004131"
+        }
+      ],
+      "id": "57c29aab-9656-4f6a-ac57-12516ab2ca4e",
+      "createdAt": "2026-10-22T02:37:40.000Z",
+      "updatedAt": "2026-10-22T02:37:40.000Z",
+      "uid": "35240-57c29aab-9656-4f6a-ac57-12516ab2ca4e"
+    },
+    {
+      "name": "entities",
+      "item": [
+        {
+          "name": "tokens",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Retrieve Profiles API token by ID",
+                  "id": "5821fabe-1533-4efe-80af-0ad617a61291",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fb17ec89-deb5-4153-b4ca-3f470113dbc0",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Token ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the specified Profiles API token."
+                  },
+                  "response": [
+                    {
+                      "id": "b4b67b74-1a0b-4d96-a3b6-b682a10b54c4",
+                      "name": "Returns a token by ID",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"6\",\n    \"type\": \"token\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"attributeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"audienceId\": \"197457\",\n      \"token\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"keyColumn\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"segments\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"524428\",\n              \"type\": \"segment-batch\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"88937698314\",\n              \"type\": \"segment-batch\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"9070\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": null\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"20\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"558\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"761\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"36065747785\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-b4b67b74-1a0b-4d96-a3b6-b682a10b54c4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-5821fabe-1533-4efe-80af-0ad617a61291"
+                },
+                {
+                  "name": "Update Profiles API token",
+                  "id": "0f400fb3-f129-4db2-af5b-475ac47e8a92",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"95\",\n  \"type\": \"token\",\n  \"attributes\": {\n    \"name\": \"o\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"65\",\n        \"type\": \"folder-segment\"\n      }\n    },\n    \"segments\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0802b853-45cc-4239-a3f4-b50fafe66dd0",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Token to update"
+                        }
+                      ]
+                    },
+                    "description": "Update a Profiles API token."
+                  },
+                  "response": [
+                    {
+                      "id": "773aa0f3-73ab-4336-9bf8-a6d33c4eb1a9",
+                      "name": "Update a token",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"95\",\n  \"type\": \"token\",\n  \"attributes\": {\n    \"name\": \"o\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"65\",\n        \"type\": \"folder-segment\"\n      }\n    },\n    \"segments\": null\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"6\",\n    \"type\": \"token\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"attributeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"audienceId\": \"197457\",\n      \"token\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"keyColumn\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"segments\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"524428\",\n              \"type\": \"segment-batch\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"88937698314\",\n              \"type\": \"segment-batch\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"9070\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": null\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"20\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"558\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"761\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"36065747785\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-773aa0f3-73ab-4336-9bf8-a6d33c4eb1a9"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-0f400fb3-f129-4db2-af5b-475ac47e8a92"
+                },
+                {
+                  "name": "Delete Profiles API token",
+                  "id": "c67b2147-8b73-4925-8754-81068085032f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5e08519-02f1-49fc-90e0-dad9c3488ddc",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Delete a token"
+                        }
+                      ]
+                    },
+                    "description": "Delete the specified Profiles API token."
+                  },
+                  "response": [
+                    {
+                      "id": "8178a825-69e0-4b82-8f02-43922fba6dcd",
+                      "name": "Delete a token",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"6\",\n    \"type\": \"token\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"attributeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"audienceId\": \"197457\",\n      \"token\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"keyColumn\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"segments\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"524428\",\n              \"type\": \"segment-batch\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"88937698314\",\n              \"type\": \"segment-batch\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"9070\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": null\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"20\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"558\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"761\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"36065747785\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:40.000Z",
+                      "updatedAt": "2026-10-22T02:37:40.000Z",
+                      "uid": "35240-8178a825-69e0-4b82-8f02-43922fba6dcd"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-c67b2147-8b73-4925-8754-81068085032f"
+                }
+              ],
+              "id": "60708aef-8c06-44d3-b8e4-e57f50f6eb92",
+              "createdAt": "2026-10-22T02:37:40.000Z",
+              "updatedAt": "2026-10-22T02:37:40.000Z",
+              "uid": "35240-60708aef-8c06-44d3-b8e4-e57f50f6eb92"
+            },
+            {
+              "name": "Create Profiles API token",
+              "id": "384aec50-a62a-465d-a2d9-c070c6ed69ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"95\",\n  \"type\": \"token\",\n  \"attributes\": {\n    \"name\": \"o\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"65\",\n        \"type\": \"folder-segment\"\n      }\n    },\n    \"segments\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/entities/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "entities",
+                    "tokens"
+                  ]
+                },
+                "description": "Create a Profiles API token."
+              },
+              "response": [
+                {
+                  "id": "a070f1f3-01b6-45f7-a901-c1b1f4864861",
+                  "name": "Succeeded to create a Token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"95\",\n  \"type\": \"token\",\n  \"attributes\": {\n    \"name\": \"o\",\n    \"description\": \"<string>\",\n    \"keyColumn\": \"<string>\",\n    \"attributeColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"65\",\n        \"type\": \"folder-segment\"\n      }\n    },\n    \"segments\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "tokens"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.treasuredata.v1+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"6\",\n    \"type\": \"token\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"attributeColumns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"audienceId\": \"197457\",\n      \"token\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"keyColumn\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"relationships\": {\n      \"segments\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"524428\",\n              \"type\": \"segment-batch\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"88937698314\",\n              \"type\": \"segment-batch\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"9070\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": null\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"20\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"558\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"761\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"36065747785\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:40.000Z",
+                  "updatedAt": "2026-10-22T02:37:40.000Z",
+                  "uid": "35240-a070f1f3-01b6-45f7-a901-c1b1f4864861"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:40.000Z",
+              "updatedAt": "2026-10-22T02:37:40.000Z",
+              "uid": "35240-384aec50-a62a-465d-a2d9-c070c6ed69ee"
+            }
+          ],
+          "id": "f6f22a21-a8f0-4bf6-a925-a8f9860d6354",
+          "createdAt": "2026-10-22T02:37:40.000Z",
+          "updatedAt": "2026-10-22T02:37:40.000Z",
+          "uid": "35240-f6f22a21-a8f0-4bf6-a925-a8f9860d6354"
+        }
+      ],
+      "id": "5d1893ad-5fd0-4288-9d28-742cb30ebcb4",
+      "createdAt": "2026-10-22T02:37:40.000Z",
+      "updatedAt": "2026-10-22T02:37:40.000Z",
+      "uid": "35240-5d1893ad-5fd0-4288-9d28-742cb30ebcb4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-cdp.treasuredata.com"
+    }
+  ]
+}

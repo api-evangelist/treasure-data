@@ -1,0 +1,359 @@
+{
+  "info": {
+    "_postman_id": "0b24a12b-28d8-46ea-9e71-6dcfd875143c",
+    "name": "Personalization Service API",
+    "description": "Service to ingest single events and request personalization offers from\nReal-Time engines.\n\n### Versioning\nEndpoint versions are defined through content-type. Use\n`Accept: application/vnd.treasuredata.v1+json` to specify version 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:03.000Z",
+    "updatedAt": "2026-10-22T02:36:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0b24a12b-28d8-46ea-9e71-6dcfd875143c"
+  },
+  "item": [
+    {
+      "name": "{database}",
+      "item": [
+        {
+          "name": "{table}",
+          "item": [
+            {
+              "name": "Get offers for server request",
+              "id": "9b97a880-596a-42c1-aab7-7fce04eae165",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:database/:table",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":database",
+                    ":table"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b19a5eb3-92fa-41e2-a6ce-9e7142bed0e1",
+                      "key": "database",
+                      "value": "li2aras1a4cq6mj8jpy3z8fr4aps5m499gdnlcz0r859ma89rb390iphn2_ka3_v1o2ecggmzunj9ya3_pvcbtdc_xo01_tq1hoot",
+                      "description": "(Required) name of the destination database"
+                    },
+                    {
+                      "id": "9fc2693b-83a3-4d53-9619-419b3c67e110",
+                      "key": "table",
+                      "value": "li2aras1a4cq6mj8jpy3z8fr4aps5m499gdnlcz0r859ma89rb390iphn2_ka3_v1o2ecggmzunj9ya3_pvcbtdc_xo01_tq1hoot",
+                      "description": "(Required) name of the destination table"
+                    }
+                  ]
+                },
+                "description": "Ingest an event and receive personalization response from RT engine."
+              },
+              "response": [
+                {
+                  "id": "2a51b67b-0212-4234-8f18-0bd825dd608b",
+                  "name": "Successful ingestion",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"time\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:database/:table",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":database",
+                        ":table"
+                      ],
+                      "variable": [
+                        {
+                          "key": "database"
+                        },
+                        {
+                          "key": "table"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:04.000Z",
+                  "updatedAt": "2026-10-22T02:36:04.000Z",
+                  "uid": "35240-2a51b67b-0212-4234-8f18-0bd825dd608b"
+                },
+                {
+                  "id": "f1209ee3-6b46-442a-95cf-451ec5617052",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"time\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:database/:table",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":database",
+                        ":table"
+                      ],
+                      "variable": [
+                        {
+                          "key": "database"
+                        },
+                        {
+                          "key": "table"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": 3008,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:04.000Z",
+                  "updatedAt": "2026-10-22T02:36:04.000Z",
+                  "uid": "35240-f1209ee3-6b46-442a-95cf-451ec5617052"
+                },
+                {
+                  "id": "1c7155ab-ae7f-474b-95df-8eb882c5b1d5",
+                  "name": "Too Many Requests",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"time\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:database/:table",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":database",
+                        ":table"
+                      ],
+                      "variable": [
+                        {
+                          "key": "database"
+                        },
+                        {
+                          "key": "table"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": 2013,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:04.000Z",
+                  "updatedAt": "2026-10-22T02:36:04.000Z",
+                  "uid": "35240-1c7155ab-ae7f-474b-95df-8eb882c5b1d5"
+                },
+                {
+                  "id": "9a208318-1bb0-4710-bde2-6cc0f1eea774",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"time\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:database/:table",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":database",
+                        ":table"
+                      ],
+                      "variable": [
+                        {
+                          "key": "database"
+                        },
+                        {
+                          "key": "table"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": 2001,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:04.000Z",
+                  "updatedAt": "2026-10-22T02:36:04.000Z",
+                  "uid": "35240-9a208318-1bb0-4710-bde2-6cc0f1eea774"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:04.000Z",
+              "updatedAt": "2026-10-22T02:36:04.000Z",
+              "uid": "35240-9b97a880-596a-42c1-aab7-7fce04eae165"
+            }
+          ],
+          "id": "9b0ca3da-7471-472d-b113-b282caf541ff",
+          "createdAt": "2026-10-22T02:36:04.000Z",
+          "updatedAt": "2026-10-22T02:36:04.000Z",
+          "uid": "35240-9b0ca3da-7471-472d-b113-b282caf541ff"
+        }
+      ],
+      "id": "ecff791f-7020-4e27-8eda-e7ba2ab7a61d",
+      "createdAt": "2026-10-22T02:36:04.000Z",
+      "updatedAt": "2026-10-22T02:36:04.000Z",
+      "uid": "35240-ecff791f-7020-4e27-8eda-e7ba2ab7a61d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://us01.p13n.in.treasuredata.com"
+    }
+  ]
+}

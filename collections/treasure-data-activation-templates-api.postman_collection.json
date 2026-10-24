@@ -1,0 +1,1538 @@
+{
+  "info": {
+    "_postman_id": "e1282f8a-37c3-452a-98b4-2cefcca38c0e",
+    "name": "cdp-api Activation Templates API",
+    "description": "All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under \"/entities\".",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:37.000Z",
+    "updatedAt": "2026-10-22T02:33:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1282f8a-37c3-452a-98b4-2cefcca38c0e"
+  },
+  "item": [
+    {
+      "name": "entities",
+      "item": [
+        {
+          "name": "activation_templates",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get an Activation Template",
+                  "id": "9dcc1758-7132-4380-9eba-6c29966b89d9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6e90005b-cb5c-4af5-974a-579c4058118f",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Activation Template ID"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "75617cf4-20dc-43e1-bc5d-9b799b23be39",
+                      "name": "Returns an activation template by ID",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"34\",\n    \"type\": \"activation-template\",\n    \"attributes\": {\n      \"audienceId\": \"2074825421\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"kind\": \"<integer>\",\n      \"allColumns\": \"<boolean>\",\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"scheduleType\": \"cron\",\n      \"scheduleOption\": \"<string,null>\",\n      \"timezone\": \"<string,null>\",\n      \"startAt\": \"<string,null>\",\n      \"endOn\": \"<string,null-date>\",\n      \"repeatUnit\": \"month\",\n      \"repeatFrequency\": 1,\n      \"connectionId\": \"2013\",\n      \"connectorConfig\": \"<object,null>\",\n      \"notifyOn\": [\n        \"onSuccess\",\n        \"onSuccess\"\n      ],\n      \"emailRecipients\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"state\": \"draft\",\n      \"nestedWorkflowProjectName\": \"<string,null>\",\n      \"nestedWorkflowName\": \"<string,null>\",\n      \"activationActionsEnabled\": \"<boolean>\",\n      \"lockEnabled\": \"<boolean>\",\n      \"runAfterJourneyRefresh\": \"<boolean,null>\",\n      \"syndicationBehavior\": {\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"behaviorTableName\": \"<string>\",\n        \"joinRow\": \"<integer,null>\",\n        \"joinStrategy\": \"Top-N\",\n        \"formatting\": \"rows\",\n        \"orderBy\": [\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          }\n        ]\n      },\n      \"fieldProperties\": {\n        \"locked\": {\n          \"allColumns\": \"<boolean>\",\n          \"columns\": {},\n          \"connectionId\": \"<boolean>\",\n          \"connectorConfig\": \"<object,null>\",\n          \"activationActionsEnabled\": \"<boolean>\",\n          \"syndicationBehavior\": null,\n          \"lockAddColumn\": \"<boolean>\",\n          \"lockAddString\": \"<boolean>\",\n          \"lockAddBehavior\": \"<boolean>\",\n          \"lockEditSchedule\": \"<boolean>\",\n          \"lockEditNotification\": \"<boolean>\",\n          \"lockEditWorkflowExecution\": \"<boolean>\",\n          \"lockEditSequentialActivation\": \"<boolean>\"\n        }\n      },\n      \"activationCount\": \"<integer>\",\n      \"journeyCount\": \"<integer>\",\n      \"available\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"6743335468\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"326875664\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": {\n          \"id\": \"480001\",\n          \"type\": \"user\"\n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"7\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"9088605\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-75617cf4-20dc-43e1-bc5d-9b799b23be39"
+                    },
+                    {
+                      "id": "2b1a06fd-1662-4665-90d1-574f0dd21022",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-2b1a06fd-1662-4665-90d1-574f0dd21022"
+                    },
+                    {
+                      "id": "2ef61e0d-2e69-413c-a1b9-6b7dfe9b2895",
+                      "name": "The specified resource is not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-2ef61e0d-2e69-413c-a1b9-6b7dfe9b2895"
+                    },
+                    {
+                      "id": "b83beb3e-da2a-464a-bed4-c0398098ca7d",
+                      "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-b83beb3e-da2a-464a-bed4-c0398098ca7d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:37.000Z",
+                  "updatedAt": "2026-10-22T02:33:37.000Z",
+                  "uid": "35240-9dcc1758-7132-4380-9eba-6c29966b89d9"
+                },
+                {
+                  "name": "Update an Activation Template",
+                  "id": "645ad40c-cff2-4d61-941f-6c06c6697bb7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d3f9e948-5950-4fbf-93c7-804e7992f51f",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Activation Template to update"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0b051493-4adf-47fd-9700-f8ef7e2d185c",
+                      "name": "Updated Activation Template",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"34\",\n    \"type\": \"activation-template\",\n    \"attributes\": {\n      \"audienceId\": \"2074825421\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"kind\": \"<integer>\",\n      \"allColumns\": \"<boolean>\",\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"scheduleType\": \"cron\",\n      \"scheduleOption\": \"<string,null>\",\n      \"timezone\": \"<string,null>\",\n      \"startAt\": \"<string,null>\",\n      \"endOn\": \"<string,null-date>\",\n      \"repeatUnit\": \"month\",\n      \"repeatFrequency\": 1,\n      \"connectionId\": \"2013\",\n      \"connectorConfig\": \"<object,null>\",\n      \"notifyOn\": [\n        \"onSuccess\",\n        \"onSuccess\"\n      ],\n      \"emailRecipients\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"state\": \"draft\",\n      \"nestedWorkflowProjectName\": \"<string,null>\",\n      \"nestedWorkflowName\": \"<string,null>\",\n      \"activationActionsEnabled\": \"<boolean>\",\n      \"lockEnabled\": \"<boolean>\",\n      \"runAfterJourneyRefresh\": \"<boolean,null>\",\n      \"syndicationBehavior\": {\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"behaviorTableName\": \"<string>\",\n        \"joinRow\": \"<integer,null>\",\n        \"joinStrategy\": \"Top-N\",\n        \"formatting\": \"rows\",\n        \"orderBy\": [\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          }\n        ]\n      },\n      \"fieldProperties\": {\n        \"locked\": {\n          \"allColumns\": \"<boolean>\",\n          \"columns\": {},\n          \"connectionId\": \"<boolean>\",\n          \"connectorConfig\": \"<object,null>\",\n          \"activationActionsEnabled\": \"<boolean>\",\n          \"syndicationBehavior\": null,\n          \"lockAddColumn\": \"<boolean>\",\n          \"lockAddString\": \"<boolean>\",\n          \"lockAddBehavior\": \"<boolean>\",\n          \"lockEditSchedule\": \"<boolean>\",\n          \"lockEditNotification\": \"<boolean>\",\n          \"lockEditWorkflowExecution\": \"<boolean>\",\n          \"lockEditSequentialActivation\": \"<boolean>\"\n        }\n      },\n      \"activationCount\": \"<integer>\",\n      \"journeyCount\": \"<integer>\",\n      \"available\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"6743335468\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"326875664\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": {\n          \"id\": \"480001\",\n          \"type\": \"user\"\n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"7\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"9088605\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-0b051493-4adf-47fd-9700-f8ef7e2d185c"
+                    },
+                    {
+                      "id": "e55c0c97-f32b-491a-9fe5-d876460689ce",
+                      "name": "Given parameters are not valid",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"SHOULD_BE_ARRAY\"\n      }\n    },\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"INVALID_FORMAT\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-e55c0c97-f32b-491a-9fe5-d876460689ce"
+                    },
+                    {
+                      "id": "8e8e6b53-f4a9-4966-9043-9ff349d03e07",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-8e8e6b53-f4a9-4966-9043-9ff349d03e07"
+                    },
+                    {
+                      "id": "2bd181ae-fac8-4b59-a379-a8bd6d29e901",
+                      "name": "The specified resource is not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-2bd181ae-fac8-4b59-a379-a8bd6d29e901"
+                    },
+                    {
+                      "id": "cdfad89e-b85f-4233-8025-74fddbc82768",
+                      "name": "The specified resource has unprocessable entities",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"unprocessable-entity-error\",\n      \"status\": \"422\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"unprocessableEntityCode\": \"CANNOT_BE_JSONAPI\"\n      }\n    },\n    {\n      \"code\": \"unprocessable-entity-error\",\n      \"status\": \"422\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"unprocessableEntityCode\": \"CANNOT_MOVE\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-cdfad89e-b85f-4233-8025-74fddbc82768"
+                    },
+                    {
+                      "id": "f868d312-64ee-4bc5-95b4-04e5d8604006",
+                      "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-f868d312-64ee-4bc5-95b4-04e5d8604006"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:37.000Z",
+                  "updatedAt": "2026-10-22T02:33:37.000Z",
+                  "uid": "35240-645ad40c-cff2-4d61-941f-6c06c6697bb7"
+                },
+                {
+                  "name": "Delete an Activation Template",
+                  "id": "01265cbb-0d43-4b14-83a2-015567281316",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "76915310-8658-4b88-8a35-e2c688e142ba",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Activation Template to delete"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "326bf639-5068-44d6-a716-18059c1ddc64",
+                      "name": "Deleted Activation Template",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"34\",\n    \"type\": \"activation-template\",\n    \"attributes\": {\n      \"audienceId\": \"2074825421\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"kind\": \"<integer>\",\n      \"allColumns\": \"<boolean>\",\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"scheduleType\": \"cron\",\n      \"scheduleOption\": \"<string,null>\",\n      \"timezone\": \"<string,null>\",\n      \"startAt\": \"<string,null>\",\n      \"endOn\": \"<string,null-date>\",\n      \"repeatUnit\": \"month\",\n      \"repeatFrequency\": 1,\n      \"connectionId\": \"2013\",\n      \"connectorConfig\": \"<object,null>\",\n      \"notifyOn\": [\n        \"onSuccess\",\n        \"onSuccess\"\n      ],\n      \"emailRecipients\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"state\": \"draft\",\n      \"nestedWorkflowProjectName\": \"<string,null>\",\n      \"nestedWorkflowName\": \"<string,null>\",\n      \"activationActionsEnabled\": \"<boolean>\",\n      \"lockEnabled\": \"<boolean>\",\n      \"runAfterJourneyRefresh\": \"<boolean,null>\",\n      \"syndicationBehavior\": {\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"behaviorTableName\": \"<string>\",\n        \"joinRow\": \"<integer,null>\",\n        \"joinStrategy\": \"Top-N\",\n        \"formatting\": \"rows\",\n        \"orderBy\": [\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          }\n        ]\n      },\n      \"fieldProperties\": {\n        \"locked\": {\n          \"allColumns\": \"<boolean>\",\n          \"columns\": {},\n          \"connectionId\": \"<boolean>\",\n          \"connectorConfig\": \"<object,null>\",\n          \"activationActionsEnabled\": \"<boolean>\",\n          \"syndicationBehavior\": null,\n          \"lockAddColumn\": \"<boolean>\",\n          \"lockAddString\": \"<boolean>\",\n          \"lockAddBehavior\": \"<boolean>\",\n          \"lockEditSchedule\": \"<boolean>\",\n          \"lockEditNotification\": \"<boolean>\",\n          \"lockEditWorkflowExecution\": \"<boolean>\",\n          \"lockEditSequentialActivation\": \"<boolean>\"\n        }\n      },\n      \"activationCount\": \"<integer>\",\n      \"journeyCount\": \"<integer>\",\n      \"available\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"6743335468\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"326875664\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": {\n          \"id\": \"480001\",\n          \"type\": \"user\"\n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"7\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"9088605\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-326bf639-5068-44d6-a716-18059c1ddc64"
+                    },
+                    {
+                      "id": "43e15c5f-c5af-4b29-8081-04cabae639c7",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-43e15c5f-c5af-4b29-8081-04cabae639c7"
+                    },
+                    {
+                      "id": "7b66ea94-fd70-4175-962c-2c496d96863b",
+                      "name": "The specified resource is not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-7b66ea94-fd70-4175-962c-2c496d96863b"
+                    },
+                    {
+                      "id": "ceeda678-f95c-4e68-863b-01e47cffbd5c",
+                      "name": "The specified resource conflicts; having dependent segments, referencing segments, etc.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"id\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"deletion\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"referencedBySegments\": [\n    {\n      \"id\": \"27\"\n    },\n    {\n      \"id\": \"61400\"\n    }\n  ],\n  \"referencedByPredictiveSegments\": [\n    {\n      \"id\": \"71596978\"\n    },\n    {\n      \"id\": \"2843113\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-ceeda678-f95c-4e68-863b-01e47cffbd5c"
+                    },
+                    {
+                      "id": "57bd54ea-c2e5-407e-9db2-788c04fcb9f0",
+                      "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/activation_templates/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "activation_templates",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:38.000Z",
+                      "updatedAt": "2026-10-22T02:33:38.000Z",
+                      "uid": "35240-57bd54ea-c2e5-407e-9db2-788c04fcb9f0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:37.000Z",
+                  "updatedAt": "2026-10-22T02:33:37.000Z",
+                  "uid": "35240-01265cbb-0d43-4b14-83a2-015567281316"
+                }
+              ],
+              "id": "5a2a4b13-0298-4f85-af46-db691802da1d",
+              "createdAt": "2026-10-22T02:33:37.000Z",
+              "updatedAt": "2026-10-22T02:33:37.000Z",
+              "uid": "35240-5a2a4b13-0298-4f85-af46-db691802da1d"
+            },
+            {
+              "name": "Create an Activation Template",
+              "id": "f197f985-7777-4afd-88d9-cb4933def0fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/entities/activation_templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "entities",
+                    "activation_templates"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f05fef08-debb-4124-a20b-fd2cc197f564",
+                  "name": "Created Activation Template",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"34\",\n    \"type\": \"activation-template\",\n    \"attributes\": {\n      \"audienceId\": \"2074825421\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"kind\": \"<integer>\",\n      \"allColumns\": \"<boolean>\",\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"scheduleType\": \"cron\",\n      \"scheduleOption\": \"<string,null>\",\n      \"timezone\": \"<string,null>\",\n      \"startAt\": \"<string,null>\",\n      \"endOn\": \"<string,null-date>\",\n      \"repeatUnit\": \"month\",\n      \"repeatFrequency\": 1,\n      \"connectionId\": \"2013\",\n      \"connectorConfig\": \"<object,null>\",\n      \"notifyOn\": [\n        \"onSuccess\",\n        \"onSuccess\"\n      ],\n      \"emailRecipients\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"state\": \"draft\",\n      \"nestedWorkflowProjectName\": \"<string,null>\",\n      \"nestedWorkflowName\": \"<string,null>\",\n      \"activationActionsEnabled\": \"<boolean>\",\n      \"lockEnabled\": \"<boolean>\",\n      \"runAfterJourneyRefresh\": \"<boolean,null>\",\n      \"syndicationBehavior\": {\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"behaviorTableName\": \"<string>\",\n        \"joinRow\": \"<integer,null>\",\n        \"joinStrategy\": \"Top-N\",\n        \"formatting\": \"rows\",\n        \"orderBy\": [\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"order\": \"descending\"\n          }\n        ]\n      },\n      \"fieldProperties\": {\n        \"locked\": {\n          \"allColumns\": \"<boolean>\",\n          \"columns\": {},\n          \"connectionId\": \"<boolean>\",\n          \"connectorConfig\": \"<object,null>\",\n          \"activationActionsEnabled\": \"<boolean>\",\n          \"syndicationBehavior\": null,\n          \"lockAddColumn\": \"<boolean>\",\n          \"lockAddString\": \"<boolean>\",\n          \"lockAddBehavior\": \"<boolean>\",\n          \"lockEditSchedule\": \"<boolean>\",\n          \"lockEditNotification\": \"<boolean>\",\n          \"lockEditWorkflowExecution\": \"<boolean>\",\n          \"lockEditSequentialActivation\": \"<boolean>\"\n        }\n      },\n      \"activationCount\": \"<integer>\",\n      \"journeyCount\": \"<integer>\",\n      \"available\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"6743335468\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"326875664\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": {\n          \"id\": \"480001\",\n          \"type\": \"user\"\n        }\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"7\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"9088605\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:38.000Z",
+                  "updatedAt": "2026-10-22T02:33:38.000Z",
+                  "uid": "35240-f05fef08-debb-4124-a20b-fd2cc197f564"
+                },
+                {
+                  "id": "c28c4f87-5237-4f8e-955e-e7779564a250",
+                  "name": "Given parameters are not valid",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"SHOULD_BE_ARRAY\"\n      }\n    },\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"INVALID_FORMAT\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:38.000Z",
+                  "updatedAt": "2026-10-22T02:33:38.000Z",
+                  "uid": "35240-c28c4f87-5237-4f8e-955e-e7779564a250"
+                },
+                {
+                  "id": "15f986d3-910c-4874-88ed-e94dc3a3fd93",
+                  "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:38.000Z",
+                  "updatedAt": "2026-10-22T02:33:38.000Z",
+                  "uid": "35240-15f986d3-910c-4874-88ed-e94dc3a3fd93"
+                },
+                {
+                  "id": "6e5cb70c-3383-4c0a-a368-5ebc8626edce",
+                  "name": "The specified resource is not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:38.000Z",
+                  "updatedAt": "2026-10-22T02:33:38.000Z",
+                  "uid": "35240-6e5cb70c-3383-4c0a-a368-5ebc8626edce"
+                },
+                {
+                  "id": "eab2cc2f-3983-4a65-a0af-537ce199dc08",
+                  "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"49\",\n  \"type\": \"activation-template\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"connectionId\": \"<long>\",\n    \"state\": \"published\",\n    \"description\": \"<string>\",\n    \"kind\": \"<integer>\",\n    \"allColumns\": \"<boolean>\",\n    \"columns\": [\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"column\": \"<string>\",\n        \"source\": {\n          \"column\": \"<string>\",\n          \"customerGroup\": \"<string,null>\",\n          \"functions\": \"<array,null>\"\n        },\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"scheduleType\": \"weekly\",\n    \"scheduleOption\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"startAt\": \"<string,null>\",\n    \"endOn\": \"<string,null-date>\",\n    \"repeatUnit\": \"minute\",\n    \"repeatFrequency\": 1,\n    \"connectorConfig\": \"<object,null>\",\n    \"notifyOn\": [\n      \"onFailure\",\n      \"onFailure\"\n    ],\n    \"emailRecipients\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"nestedWorkflowProjectName\": \"<string,null>\",\n    \"nestedWorkflowName\": \"<string,null>\",\n    \"lockEnabled\": \"<boolean>\",\n    \"runAfterJourneyRefresh\": \"<boolean>\",\n    \"syndicationBehavior\": {\n      \"columns\": [\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        },\n        {\n          \"column\": \"<string>\",\n          \"source\": {\n            \"column\": \"<string>\",\n            \"customerGroup\": \"<string,null>\",\n            \"functions\": \"<array,null>\"\n          },\n          \"id\": \"<uuid>\"\n        }\n      ],\n      \"behaviorTableName\": \"<string>\",\n      \"joinRow\": \"<integer,null>\",\n      \"joinStrategy\": \"Top-N\",\n      \"formatting\": \"rows\",\n      \"orderBy\": [\n        {\n          \"key\": \"<string>\",\n          \"order\": \"descending\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"order\": \"ascending\"\n        }\n      ]\n    },\n    \"fieldProperties\": {\n      \"locked\": {\n        \"allColumns\": \"<boolean>\",\n        \"columns\": {},\n        \"connectionId\": \"<boolean>\",\n        \"connectorConfig\": \"<object,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"syndicationBehavior\": null,\n        \"lockAddColumn\": \"<boolean>\",\n        \"lockAddString\": \"<boolean>\",\n        \"lockAddBehavior\": \"<boolean>\",\n        \"lockEditSchedule\": \"<boolean>\",\n        \"lockEditNotification\": \"<boolean>\",\n        \"lockEditWorkflowExecution\": \"<boolean>\",\n        \"lockEditSequentialActivation\": \"<boolean>\"\n      }\n    }\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"6\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/activation_templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "activation_templates"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:33:38.000Z",
+                  "updatedAt": "2026-10-22T02:33:38.000Z",
+                  "uid": "35240-eab2cc2f-3983-4a65-a0af-537ce199dc08"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:37.000Z",
+              "updatedAt": "2026-10-22T02:33:37.000Z",
+              "uid": "35240-f197f985-7777-4afd-88d9-cb4933def0fd"
+            }
+          ],
+          "id": "b3fdf4f2-2458-4407-a5bf-e4392426eecd",
+          "createdAt": "2026-10-22T02:33:37.000Z",
+          "updatedAt": "2026-10-22T02:33:37.000Z",
+          "uid": "35240-b3fdf4f2-2458-4407-a5bf-e4392426eecd"
+        },
+        {
+          "name": "parent_segments",
+          "item": [
+            {
+              "name": "{parentSegmentId}",
+              "item": [
+                {
+                  "name": "activation_templates",
+                  "item": [
+                    {
+                      "name": "Returns list of Activation Templates by an audience (parent segment)",
+                      "id": "0e5700f4-b749-4dd4-a6c1-e5558d908b7e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/activation_templates?availableBySegmentId=<long>&kind=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "parent_segments",
+                            ":parentSegmentId",
+                            "activation_templates"
+                          ],
+                          "query": [
+                            {
+                              "description": "Segment ID to detect template availability",
+                              "key": "availableBySegmentId",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "If kind is specified, returns Activations Templates have same one only.",
+                              "key": "kind",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "84f88ea0-4dd8-4be5-9946-10b16c8a8d6a",
+                              "key": "parentSegmentId",
+                              "value": "<long>",
+                              "description": "(Required) Parent Segment ID (audience id)"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "19d9c65c-834f-46cc-b234-20413d0c030e",
+                          "name": "Returns a list of Activation Templates.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/activation_templates?availableBySegmentId=<long>&kind=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "entities",
+                                "parent_segments",
+                                ":parentSegmentId",
+                                "activation_templates"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Segment ID to detect template availability",
+                                  "key": "availableBySegmentId",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "If kind is specified, returns Activations Templates have same one only.",
+                                  "key": "kind",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "parentSegmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"84799048\",\n      \"type\": \"activation-template\",\n      \"attributes\": {\n        \"audienceId\": \"7\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"kind\": \"<integer>\",\n        \"allColumns\": \"<boolean>\",\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"scheduleType\": \"monthly\",\n        \"scheduleOption\": \"<string,null>\",\n        \"timezone\": \"<string,null>\",\n        \"startAt\": \"<string,null>\",\n        \"endOn\": \"<string,null-date>\",\n        \"repeatUnit\": \"hour\",\n        \"repeatFrequency\": 1,\n        \"connectionId\": \"974335\",\n        \"connectorConfig\": \"<object,null>\",\n        \"notifyOn\": [\n          \"onFailure\",\n          \"onSuccess\"\n        ],\n        \"emailRecipients\": [\n          \"<long>\",\n          \"<long>\"\n        ],\n        \"state\": \"draft\",\n        \"nestedWorkflowProjectName\": \"<string,null>\",\n        \"nestedWorkflowName\": \"<string,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"lockEnabled\": \"<boolean>\",\n        \"runAfterJourneyRefresh\": \"<boolean,null>\",\n        \"syndicationBehavior\": {\n          \"columns\": [\n            {\n              \"column\": \"<string>\",\n              \"source\": {\n                \"column\": \"<string>\",\n                \"customerGroup\": \"<string,null>\",\n                \"functions\": \"<array,null>\"\n              },\n              \"id\": \"<uuid>\"\n            },\n            {\n              \"column\": \"<string>\",\n              \"source\": {\n                \"column\": \"<string>\",\n                \"customerGroup\": \"<string,null>\",\n                \"functions\": \"<array,null>\"\n              },\n              \"id\": \"<uuid>\"\n            }\n          ],\n          \"behaviorTableName\": \"<string>\",\n          \"joinRow\": \"<integer,null>\",\n          \"joinStrategy\": \"Last\",\n          \"formatting\": \"cols\",\n          \"orderBy\": [\n            {\n              \"key\": \"<string>\",\n              \"order\": \"ascending\"\n            },\n            {\n              \"key\": \"<string>\",\n              \"order\": \"descending\"\n            }\n          ]\n        },\n        \"fieldProperties\": {\n          \"locked\": {\n            \"allColumns\": \"<boolean>\",\n            \"columns\": {},\n            \"connectionId\": \"<boolean>\",\n            \"connectorConfig\": \"<object,null>\",\n            \"activationActionsEnabled\": \"<boolean>\",\n            \"syndicationBehavior\": null,\n            \"lockAddColumn\": \"<boolean>\",\n            \"lockAddString\": \"<boolean>\",\n            \"lockAddBehavior\": \"<boolean>\",\n            \"lockEditSchedule\": \"<boolean>\",\n            \"lockEditNotification\": \"<boolean>\",\n            \"lockEditWorkflowExecution\": \"<boolean>\",\n            \"lockEditSequentialActivation\": \"<boolean>\"\n          }\n        },\n        \"activationCount\": \"<integer>\",\n        \"available\": \"<boolean>\",\n        \"availableBySegment\": \"<boolean>\",\n        \"availableByStep\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"99480076534\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": null\n        },\n        \"updatedBy\": {\n          \"data\": null\n        }\n      }\n    },\n    {\n      \"id\": \"6538\",\n      \"type\": \"activation-template\",\n      \"attributes\": {\n        \"audienceId\": \"307373152\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"kind\": \"<integer>\",\n        \"allColumns\": \"<boolean>\",\n        \"columns\": [\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          },\n          {\n            \"column\": \"<string>\",\n            \"source\": {\n              \"column\": \"<string>\",\n              \"customerGroup\": \"<string,null>\",\n              \"functions\": \"<array,null>\"\n            },\n            \"id\": \"<uuid>\"\n          }\n        ],\n        \"scheduleType\": \"minutes_interval\",\n        \"scheduleOption\": \"<string,null>\",\n        \"timezone\": \"<string,null>\",\n        \"startAt\": \"<string,null>\",\n        \"endOn\": \"<string,null-date>\",\n        \"repeatUnit\": \"once\",\n        \"repeatFrequency\": 1,\n        \"connectionId\": \"76316\",\n        \"connectorConfig\": \"<object,null>\",\n        \"notifyOn\": [\n          \"onFailure\",\n          \"onSuccess\"\n        ],\n        \"emailRecipients\": [\n          \"<long>\",\n          \"<long>\"\n        ],\n        \"state\": \"draft\",\n        \"nestedWorkflowProjectName\": \"<string,null>\",\n        \"nestedWorkflowName\": \"<string,null>\",\n        \"activationActionsEnabled\": \"<boolean>\",\n        \"lockEnabled\": \"<boolean>\",\n        \"runAfterJourneyRefresh\": \"<boolean,null>\",\n        \"syndicationBehavior\": {\n          \"columns\": [\n            {\n              \"column\": \"<string>\",\n              \"source\": {\n                \"column\": \"<string>\",\n                \"customerGroup\": \"<string,null>\",\n                \"functions\": \"<array,null>\"\n              },\n              \"id\": \"<uuid>\"\n            },\n            {\n              \"column\": \"<string>\",\n              \"source\": {\n                \"column\": \"<string>\",\n                \"customerGroup\": \"<string,null>\",\n                \"functions\": \"<array,null>\"\n              },\n              \"id\": \"<uuid>\"\n            }\n          ],\n          \"behaviorTableName\": \"<string>\",\n          \"joinRow\": \"<integer,null>\",\n          \"joinStrategy\": \"Last\",\n          \"formatting\": \"rows\",\n          \"orderBy\": [\n            {\n              \"key\": \"<string>\",\n              \"order\": \"ascending\"\n            },\n            {\n              \"key\": \"<string>\",\n              \"order\": \"descending\"\n            }\n          ]\n        },\n        \"fieldProperties\": {\n          \"locked\": {\n            \"allColumns\": \"<boolean>\",\n            \"columns\": {},\n            \"connectionId\": \"<boolean>\",\n            \"connectorConfig\": \"<object,null>\",\n            \"activationActionsEnabled\": \"<boolean>\",\n            \"syndicationBehavior\": null,\n            \"lockAddColumn\": \"<boolean>\",\n            \"lockAddString\": \"<boolean>\",\n            \"lockAddBehavior\": \"<boolean>\",\n            \"lockEditSchedule\": \"<boolean>\",\n            \"lockEditNotification\": \"<boolean>\",\n            \"lockEditWorkflowExecution\": \"<boolean>\",\n            \"lockEditSequentialActivation\": \"<boolean>\"\n          }\n        },\n        \"activationCount\": \"<integer>\",\n        \"available\": \"<boolean>\",\n        \"availableBySegment\": \"<boolean>\",\n        \"availableByStep\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"2525\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": null\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"id\": \"528\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"8799\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"53867885657\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"617036\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"8427606\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:38.000Z",
+                          "updatedAt": "2026-10-22T02:33:38.000Z",
+                          "uid": "35240-19d9c65c-834f-46cc-b234-20413d0c030e"
+                        },
+                        {
+                          "id": "5dad5450-049b-42bc-af3f-d4cf11b37d02",
+                          "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/activation_templates?availableBySegmentId=<long>&kind=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "entities",
+                                "parent_segments",
+                                ":parentSegmentId",
+                                "activation_templates"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Segment ID to detect template availability",
+                                  "key": "availableBySegmentId",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "If kind is specified, returns Activations Templates have same one only.",
+                                  "key": "kind",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "parentSegmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:38.000Z",
+                          "updatedAt": "2026-10-22T02:33:38.000Z",
+                          "uid": "35240-5dad5450-049b-42bc-af3f-d4cf11b37d02"
+                        },
+                        {
+                          "id": "bed76d74-63c2-40b3-a917-4ac6866a08f9",
+                          "name": "The specified resource is not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/activation_templates?availableBySegmentId=<long>&kind=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "entities",
+                                "parent_segments",
+                                ":parentSegmentId",
+                                "activation_templates"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Segment ID to detect template availability",
+                                  "key": "availableBySegmentId",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "If kind is specified, returns Activations Templates have same one only.",
+                                  "key": "kind",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "parentSegmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:38.000Z",
+                          "updatedAt": "2026-10-22T02:33:38.000Z",
+                          "uid": "35240-bed76d74-63c2-40b3-a917-4ac6866a08f9"
+                        },
+                        {
+                          "id": "356ce12c-24e2-4b08-92ac-e444fbdc8589",
+                          "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/entities/parent_segments/:parentSegmentId/activation_templates?availableBySegmentId=<long>&kind=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "entities",
+                                "parent_segments",
+                                ":parentSegmentId",
+                                "activation_templates"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Segment ID to detect template availability",
+                                  "key": "availableBySegmentId",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "If kind is specified, returns Activations Templates have same one only.",
+                                  "key": "kind",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "parentSegmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:33:38.000Z",
+                          "updatedAt": "2026-10-22T02:33:38.000Z",
+                          "uid": "35240-356ce12c-24e2-4b08-92ac-e444fbdc8589"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:37.000Z",
+                      "updatedAt": "2026-10-22T02:33:37.000Z",
+                      "uid": "35240-0e5700f4-b749-4dd4-a6c1-e5558d908b7e"
+                    }
+                  ],
+                  "id": "ab18de0a-53f3-4655-b3e4-950aff35b141",
+                  "createdAt": "2026-10-22T02:33:37.000Z",
+                  "updatedAt": "2026-10-22T02:33:37.000Z",
+                  "uid": "35240-ab18de0a-53f3-4655-b3e4-950aff35b141"
+                }
+              ],
+              "id": "bd4176e3-95f3-42da-b690-a7140b53e2db",
+              "createdAt": "2026-10-22T02:33:37.000Z",
+              "updatedAt": "2026-10-22T02:33:37.000Z",
+              "uid": "35240-bd4176e3-95f3-42da-b690-a7140b53e2db"
+            }
+          ],
+          "id": "aec661b8-eb6a-4035-b9ef-d85b060c92d7",
+          "createdAt": "2026-10-22T02:33:37.000Z",
+          "updatedAt": "2026-10-22T02:33:37.000Z",
+          "uid": "35240-aec661b8-eb6a-4035-b9ef-d85b060c92d7"
+        }
+      ],
+      "id": "293d44c3-3f8e-4e31-80ba-768b18c7e4ba",
+      "createdAt": "2026-10-22T02:33:37.000Z",
+      "updatedAt": "2026-10-22T02:33:37.000Z",
+      "uid": "35240-293d44c3-3f8e-4e31-80ba-768b18c7e4ba"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-cdp.treasuredata.com"
+    }
+  ]
+}

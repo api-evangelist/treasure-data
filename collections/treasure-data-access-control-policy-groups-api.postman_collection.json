@@ -1,0 +1,693 @@
+{
+  "info": {
+    "_postman_id": "dae5e693-2344-4333-9f01-d71c2fd9d1df",
+    "name": "Treasure Data Access Control - Policy Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:14.000Z",
+    "updatedAt": "2026-10-22T02:33:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dae5e693-2344-4333-9f01-d71c2fd9d1df"
+  },
+  "item": [
+    {
+      "name": "access_control",
+      "item": [
+        {
+          "name": "policy_groups",
+          "item": [
+            {
+              "name": "{policy_group_id_or_taggable_name}",
+              "item": [
+                {
+                  "name": "policies",
+                  "item": [
+                    {
+                      "name": "Get an Access Control Policy Group's Policies",
+                      "id": "bc26c3a8-690e-4422-9b93-9167545d789b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name/policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policy_groups",
+                            ":policy_group_id_or_taggable_name",
+                            "policies"
+                          ],
+                          "variable": [
+                            {
+                              "id": "47e4628a-8177-43d3-b169-8a811f2c3c08",
+                              "key": "policy_group_id_or_taggable_name",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the list of the specified policy group's policies."
+                      },
+                      "response": [
+                        {
+                          "id": "7d9cb91f-cf3b-46f9-a21e-1804e2ab6ae7",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name/policies",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policy_groups",
+                                ":policy_group_id_or_taggable_name",
+                                "policies"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_group_id_or_taggable_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"policy_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:15.000Z",
+                          "updatedAt": "2026-10-22T02:33:15.000Z",
+                          "uid": "35240-7d9cb91f-cf3b-46f9-a21e-1804e2ab6ae7"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:15.000Z",
+                      "updatedAt": "2026-10-22T02:33:15.000Z",
+                      "uid": "35240-bc26c3a8-690e-4422-9b93-9167545d789b"
+                    },
+                    {
+                      "name": "Update an Access Control Policy Group's Policies",
+                      "id": "8b794126-abb8-4c68-9c38-bb27627079c8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"policy_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name/policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policy_groups",
+                            ":policy_group_id_or_taggable_name",
+                            "policies"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b785bcf7-2b83-42e1-ae18-d42f3fada272",
+                              "key": "policy_group_id_or_taggable_name",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates the policies attached to a policy group."
+                      },
+                      "response": [
+                        {
+                          "id": "d2b997c2-c335-4d36-b9ea-ab6ee3f63047",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"policy_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name/policies",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policy_groups",
+                                ":policy_group_id_or_taggable_name",
+                                "policies"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_group_id_or_taggable_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"policy_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:15.000Z",
+                          "updatedAt": "2026-10-22T02:33:15.000Z",
+                          "uid": "35240-d2b997c2-c335-4d36-b9ea-ab6ee3f63047"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:15.000Z",
+                      "updatedAt": "2026-10-22T02:33:15.000Z",
+                      "uid": "35240-8b794126-abb8-4c68-9c38-bb27627079c8"
+                    }
+                  ],
+                  "id": "fe858e9f-ad57-4753-b04a-890f4cdb256c",
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-fe858e9f-ad57-4753-b04a-890f4cdb256c"
+                },
+                {
+                  "name": "Get an Access Control Policy Group",
+                  "id": "3c1456d3-f5f7-44f1-968e-97f869087d3f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policy_groups",
+                        ":policy_group_id_or_taggable_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3694a750-fced-469d-9495-b86455be83f5",
+                          "key": "policy_group_id_or_taggable_name",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves information about the specified policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "96de3b3d-c456-43f6-9c26-ca1b05244157",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policy_groups",
+                            ":policy_group_id_or_taggable_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_group_id_or_taggable_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"taggable_name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"policy_count\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T02:33:15.000Z",
+                      "updatedAt": "2026-10-22T02:33:15.000Z",
+                      "uid": "35240-96de3b3d-c456-43f6-9c26-ca1b05244157"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-3c1456d3-f5f7-44f1-968e-97f869087d3f"
+                },
+                {
+                  "name": "Update an Access Control Policy Group",
+                  "id": "2ef11f6a-9fc8-4132-b103-ad5f58ebfd9e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policy_groups",
+                        ":policy_group_id_or_taggable_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6191158a-0235-4c65-b27f-4d2a9fc4067b",
+                          "key": "policy_group_id_or_taggable_name",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates information related to a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "62f38ba1-99bd-4f1f-a24e-7c79c882556a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policy_groups",
+                            ":policy_group_id_or_taggable_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_group_id_or_taggable_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"taggable_name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"policy_count\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T02:33:15.000Z",
+                      "updatedAt": "2026-10-22T02:33:15.000Z",
+                      "uid": "35240-62f38ba1-99bd-4f1f-a24e-7c79c882556a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-2ef11f6a-9fc8-4132-b103-ad5f58ebfd9e"
+                },
+                {
+                  "name": "Delete an Access Control Policy Group",
+                  "id": "c3136b7c-5cc1-485a-b7b8-faa3e02b0e82",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policy_groups",
+                        ":policy_group_id_or_taggable_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a21474c9-0155-4b7a-a3c8-291ee93ea48f",
+                          "key": "policy_group_id_or_taggable_name",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "19a0ba3a-2a79-4897-ab4f-cbe93b420caa",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policy_groups/:policy_group_id_or_taggable_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policy_groups",
+                            ":policy_group_id_or_taggable_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_group_id_or_taggable_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:33:15.000Z",
+                      "updatedAt": "2026-10-22T02:33:15.000Z",
+                      "uid": "35240-19a0ba3a-2a79-4897-ab4f-cbe93b420caa"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-c3136b7c-5cc1-485a-b7b8-faa3e02b0e82"
+                }
+              ],
+              "id": "4da55c31-fcf0-4066-aa6d-aba0d4f04cce",
+              "createdAt": "2026-10-22T02:33:15.000Z",
+              "updatedAt": "2026-10-22T02:33:15.000Z",
+              "uid": "35240-4da55c31-fcf0-4066-aa6d-aba0d4f04cce"
+            },
+            {
+              "name": "get Access Control Policy Groups",
+              "id": "2bf61e00-c975-451b-85a4-588af938ec63",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access_control/policy_groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access_control",
+                    "policy_groups"
+                  ]
+                },
+                "description": "Retrieves a list of policy groups."
+              },
+              "response": [
+                {
+                  "id": "98151abf-9a58-4d1d-a58a-7d76196f3707",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policy_groups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policy_groups"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"taggable_name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"policy_count\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"taggable_name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"policy_count\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-98151abf-9a58-4d1d-a58a-7d76196f3707"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:15.000Z",
+              "updatedAt": "2026-10-22T02:33:15.000Z",
+              "uid": "35240-2bf61e00-c975-451b-85a4-588af938ec63"
+            },
+            {
+              "name": "Create an Access Control Policy Group",
+              "id": "eb99b172-a522-4d1b-858a-f7cc0d78bbf8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access_control/policy_groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access_control",
+                    "policy_groups"
+                  ]
+                },
+                "description": "Creates a policy group."
+              },
+              "response": [
+                {
+                  "id": "d5ba9754-6d58-4c13-abe0-428787941a76",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policy_groups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policy_groups"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"taggable_name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"policy_count\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T02:33:15.000Z",
+                  "updatedAt": "2026-10-22T02:33:15.000Z",
+                  "uid": "35240-d5ba9754-6d58-4c13-abe0-428787941a76"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:15.000Z",
+              "updatedAt": "2026-10-22T02:33:15.000Z",
+              "uid": "35240-eb99b172-a522-4d1b-858a-f7cc0d78bbf8"
+            }
+          ],
+          "id": "cb655daa-6e75-4933-a0f6-6c475cd82a91",
+          "createdAt": "2026-10-22T02:33:15.000Z",
+          "updatedAt": "2026-10-22T02:33:15.000Z",
+          "uid": "35240-cb655daa-6e75-4933-a0f6-6c475cd82a91"
+        }
+      ],
+      "id": "a797bdb0-fbf8-4074-a61e-4ee7364ca19b",
+      "createdAt": "2026-10-22T02:33:15.000Z",
+      "updatedAt": "2026-10-22T02:33:15.000Z",
+      "uid": "35240-a797bdb0-fbf8-4074-a61e-4ee7364ca19b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

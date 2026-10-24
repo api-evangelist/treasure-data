@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "3cfcd70f-167f-4079-b615-eda8d2224043",
+    "name": "Treasure Workflow Log API",
+    "description": "Treasure Workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:35:45.000Z",
+    "updatedAt": "2026-10-22T02:35:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3cfcd70f-167f-4079-b615-eda8d2224043"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "logs",
+          "item": [
+            {
+              "name": "{attempt_id}",
+              "item": [
+                {
+                  "name": "files",
+                  "item": [
+                    {
+                      "name": "{file_name}",
+                      "item": [
+                        {
+                          "name": "Download a log file",
+                          "id": "eb552abe-1d4a-4ecb-b017-2f249e594692",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/gzip"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/logs/:attempt_id/files/:file_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "logs",
+                                ":attempt_id",
+                                "files",
+                                ":file_name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "71b307e2-c5a9-4a39-8fca-6bfbb97078a3",
+                                  "key": "attempt_id",
+                                  "value": "<long>",
+                                  "description": "(Required) attempt id"
+                                },
+                                {
+                                  "id": "b6dc726f-6e2f-4390-b08b-926bac7ec338",
+                                  "key": "file_name",
+                                  "value": "<string>",
+                                  "description": "(Required) log file name"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "4d6d2c7c-98fd-4746-bdc5-77995a67ac85",
+                              "name": "default response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/gzip"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/logs/:attempt_id/files/:file_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "logs",
+                                    ":attempt_id",
+                                    "files",
+                                    ":file_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "attempt_id"
+                                    },
+                                    {
+                                      "key": "file_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/gzip"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-10-22T02:35:46.000Z",
+                              "updatedAt": "2026-10-22T02:35:46.000Z",
+                              "uid": "35240-4d6d2c7c-98fd-4746-bdc5-77995a67ac85"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:35:46.000Z",
+                          "updatedAt": "2026-10-22T02:35:46.000Z",
+                          "uid": "35240-eb552abe-1d4a-4ecb-b017-2f249e594692"
+                        }
+                      ],
+                      "id": "a408f67c-314e-443f-9d1a-4be81e97bcbc",
+                      "createdAt": "2026-10-22T02:35:46.000Z",
+                      "updatedAt": "2026-10-22T02:35:46.000Z",
+                      "uid": "35240-a408f67c-314e-443f-9d1a-4be81e97bcbc"
+                    },
+                    {
+                      "name": "List log files of an attempt with filters",
+                      "id": "9a0f4a7e-e7cb-49b8-86a2-0ad06b4065dd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/logs/:attempt_id/files?task=<string>&direct_download=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "logs",
+                            ":attempt_id",
+                            "files"
+                          ],
+                          "query": [
+                            {
+                              "description": "partial prefix match filter on task name",
+                              "key": "task",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "enable returning direct download handle",
+                              "key": "direct_download",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "f1672403-a35c-4dbd-af4b-0290cada939f",
+                              "key": "attempt_id",
+                              "value": "<long>",
+                              "description": "(Required) attempt id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "59f9dc2b-ab3a-4e11-9a53-7126c33579d2",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/logs/:attempt_id/files?task=<string>&direct_download=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "logs",
+                                ":attempt_id",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "partial prefix match filter on task name",
+                                  "key": "task",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "enable returning direct download handle",
+                                  "key": "direct_download",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "attempt_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"files\": [\n    {\n      \"agentId\": \"<string>\",\n      \"direct\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"fileSize\": \"<long>\",\n      \"fileTime\": \"<dateTime>\",\n      \"fileTimestamp\": \"<dateTime>\",\n      \"taskName\": \"<string>\"\n    },\n    {\n      \"agentId\": \"<string>\",\n      \"direct\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"fileSize\": \"<long>\",\n      \"fileTime\": \"<dateTime>\",\n      \"fileTimestamp\": \"<dateTime>\",\n      \"taskName\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:35:46.000Z",
+                          "updatedAt": "2026-10-22T02:35:46.000Z",
+                          "uid": "35240-59f9dc2b-ab3a-4e11-9a53-7126c33579d2"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:35:46.000Z",
+                      "updatedAt": "2026-10-22T02:35:46.000Z",
+                      "uid": "35240-9a0f4a7e-e7cb-49b8-86a2-0ad06b4065dd"
+                    }
+                  ],
+                  "id": "0f22cb24-c0e7-4b14-8c82-eb667a0dd8da",
+                  "createdAt": "2026-10-22T02:35:46.000Z",
+                  "updatedAt": "2026-10-22T02:35:46.000Z",
+                  "uid": "35240-0f22cb24-c0e7-4b14-8c82-eb667a0dd8da"
+                }
+              ],
+              "id": "fef8c928-4bee-42c1-9a4b-2f22784e158f",
+              "createdAt": "2026-10-22T02:35:46.000Z",
+              "updatedAt": "2026-10-22T02:35:46.000Z",
+              "uid": "35240-fef8c928-4bee-42c1-9a4b-2f22784e158f"
+            }
+          ],
+          "id": "adf7696a-983c-46e0-bdcd-da87a274111e",
+          "createdAt": "2026-10-22T02:35:46.000Z",
+          "updatedAt": "2026-10-22T02:35:46.000Z",
+          "uid": "35240-adf7696a-983c-46e0-bdcd-da87a274111e"
+        }
+      ],
+      "id": "f0af61ad-4e92-4b0a-ac59-fdce1912ed09",
+      "createdAt": "2026-10-22T02:35:46.000Z",
+      "updatedAt": "2026-10-22T02:35:46.000Z",
+      "uid": "35240-f0af61ad-4e92-4b0a-ac59-fdce1912ed09"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-workflow.treasuredata.com"
+    }
+  ]
+}

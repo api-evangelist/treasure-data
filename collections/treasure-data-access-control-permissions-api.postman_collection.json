@@ -1,0 +1,468 @@
+{
+  "info": {
+    "_postman_id": "8569ffc1-6661-43e1-87da-d3f7ea6da9ba",
+    "name": "Treasure Data Access Control - Permissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:01.000Z",
+    "updatedAt": "2026-10-22T02:33:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8569ffc1-6661-43e1-87da-d3f7ea6da9ba"
+  },
+  "item": [
+    {
+      "name": "access_control",
+      "item": [
+        {
+          "name": "policies",
+          "item": [
+            {
+              "name": "{policy_id}",
+              "item": [
+                {
+                  "name": "column_permissions",
+                  "item": [
+                    {
+                      "name": "Show Column Permissions",
+                      "id": "3ddbfc17-7551-4ba7-a72f-9f00bb8f1070",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/column_permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "column_permissions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e2723ba1-55f7-41a1-b809-eb418731d117",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Shows column permission by policy ID."
+                      },
+                      "response": [
+                        {
+                          "id": "83b9c21f-ab7b-4f19-b726-02dd2dcb8d3a",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/column_permissions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "column_permissions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": \"<boolean,null>\",\n    \"masking\": \"hash\"\n  },\n  {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": \"<boolean,null>\",\n    \"masking\": \"hash\"\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:01.000Z",
+                          "updatedAt": "2026-10-22T02:33:01.000Z",
+                          "uid": "35240-83b9c21f-ab7b-4f19-b726-02dd2dcb8d3a"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:01.000Z",
+                      "updatedAt": "2026-10-22T02:33:01.000Z",
+                      "uid": "35240-3ddbfc17-7551-4ba7-a72f-9f00bb8f1070"
+                    },
+                    {
+                      "name": "Update Column Permissions",
+                      "id": "414970b7-7b28-46ff-93a1-fdab2c162738",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"column_permissions\": [\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"except\": \"<boolean,null>\",\n      \"masking\": \"hash\"\n    },\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"except\": \"<boolean,null>\",\n      \"masking\": \"hash\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/column_permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "column_permissions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0150a789-a550-4c15-8bbb-2da5a5a3dae8",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates column permissions by policy ID."
+                      },
+                      "response": [
+                        {
+                          "id": "65c409de-83ed-46ed-96d0-a9d42c406c2a",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"column_permissions\": [\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"except\": \"<boolean,null>\",\n      \"masking\": \"hash\"\n    },\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"except\": \"<boolean,null>\",\n      \"masking\": \"hash\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/column_permissions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "column_permissions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": \"<boolean,null>\",\n    \"masking\": \"hash\"\n  },\n  {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": \"<boolean,null>\",\n    \"masking\": \"hash\"\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:01.000Z",
+                          "updatedAt": "2026-10-22T02:33:01.000Z",
+                          "uid": "35240-65c409de-83ed-46ed-96d0-a9d42c406c2a"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:01.000Z",
+                      "updatedAt": "2026-10-22T02:33:01.000Z",
+                      "uid": "35240-414970b7-7b28-46ff-93a1-fdab2c162738"
+                    }
+                  ],
+                  "id": "33a7c248-215f-481a-ab20-6223a360fe36",
+                  "createdAt": "2026-10-22T02:33:01.000Z",
+                  "updatedAt": "2026-10-22T02:33:01.000Z",
+                  "uid": "35240-33a7c248-215f-481a-ab20-6223a360fe36"
+                },
+                {
+                  "name": "permissions",
+                  "item": [
+                    {
+                      "name": "Show Policy Permissions",
+                      "id": "f687f147-7450-4252-81b3-5919c211146f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "permissions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8e6df443-4052-44fd-8930-6c74d5876158",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Shows policy permissions by policy ID."
+                      },
+                      "response": [
+                        {
+                          "id": "d6039879-0a9a-48c5-846f-6843a26699d7",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/permissions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "permissions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"run\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"WorkflowProjectLevel\": [\n    {\n      \"operation\": \"view\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"operation\": \"run\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"WorkflowRestrictedOperators\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"PersonalizationStudio\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"owner_manage\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentColumn\": [\n    {\n      \"operation\": \"view_clear\",\n      \"column_identifiers\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_pii\",\n      \"column_identifiers\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentAllColumns\": [\n    {\n      \"operation\": \"blocked_only_for_migration_purpose\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_clear\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"CookieConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"Profiles\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ProfilesApiToken\": [\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"Authentications\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"use\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"Sources\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"restricted\"\n    }\n  ],\n  \"Destinations\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"Databases\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"UniversalConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControls\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControl\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"Journeys\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Journey\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"LlmProject\": [\n    {\n      \"operation\": \"edit\",\n      \"project_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"publish_internal_integration\",\n      \"project_id\": \"<string>\"\n    }\n  ],\n  \"RawDataAccess\": [\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:01.000Z",
+                          "updatedAt": "2026-10-22T02:33:01.000Z",
+                          "uid": "35240-d6039879-0a9a-48c5-846f-6843a26699d7"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:01.000Z",
+                      "updatedAt": "2026-10-22T02:33:01.000Z",
+                      "uid": "35240-f687f147-7450-4252-81b3-5919c211146f"
+                    },
+                    {
+                      "name": "Update Policy Permissions",
+                      "id": "64b89123-cb53-4557-b223-c7bad7bb2bf9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"run\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"WorkflowProjectLevel\": [\n    {\n      \"operation\": \"view\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"operation\": \"run\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"WorkflowRestrictedOperators\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"PersonalizationStudio\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"owner_manage\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentColumn\": [\n    {\n      \"operation\": \"view_clear\",\n      \"column_identifiers\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_pii\",\n      \"column_identifiers\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentAllColumns\": [\n    {\n      \"operation\": \"blocked_only_for_migration_purpose\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_clear\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"CookieConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"Profiles\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ProfilesApiToken\": [\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"Authentications\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"use\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"Sources\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"restricted\"\n    }\n  ],\n  \"Destinations\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"Databases\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"UniversalConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControls\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControl\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"Journeys\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Journey\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"LlmProject\": [\n    {\n      \"operation\": \"edit\",\n      \"project_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"publish_internal_integration\",\n      \"project_id\": \"<string>\"\n    }\n  ],\n  \"RawDataAccess\": [\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "permissions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "78f812e0-0181-4681-8c4d-0781d0f15ccd",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates policy permissions."
+                      },
+                      "response": [
+                        {
+                          "id": "b73417ca-04ba-4320-8888-432930b5979e",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"run\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"WorkflowProjectLevel\": [\n    {\n      \"operation\": \"view\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"operation\": \"run\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"WorkflowRestrictedOperators\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"PersonalizationStudio\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"owner_manage\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentColumn\": [\n    {\n      \"operation\": \"view_clear\",\n      \"column_identifiers\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_pii\",\n      \"column_identifiers\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentAllColumns\": [\n    {\n      \"operation\": \"blocked_only_for_migration_purpose\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_clear\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"CookieConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"Profiles\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ProfilesApiToken\": [\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"Authentications\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"use\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"Sources\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"restricted\"\n    }\n  ],\n  \"Destinations\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"Databases\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"UniversalConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControls\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControl\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"Journeys\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Journey\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"LlmProject\": [\n    {\n      \"operation\": \"edit\",\n      \"project_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"publish_internal_integration\",\n      \"project_id\": \"<string>\"\n    }\n  ],\n  \"RawDataAccess\": [\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/permissions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "permissions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"run\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"WorkflowProjectLevel\": [\n    {\n      \"operation\": \"view\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"operation\": \"run\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"WorkflowRestrictedOperators\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"PersonalizationStudio\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"owner_manage\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentColumn\": [\n    {\n      \"operation\": \"view_clear\",\n      \"column_identifiers\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_pii\",\n      \"column_identifiers\": \"<string>\"\n    }\n  ],\n  \"MasterSegmentAllColumns\": [\n    {\n      \"operation\": \"blocked_only_for_migration_purpose\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view_clear\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"CookieConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"Profiles\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ProfilesApiToken\": [\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"full\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"Authentications\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"use\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"Sources\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"restricted\"\n    }\n  ],\n  \"Destinations\": [\n    {\n      \"operation\": \"restricted\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"Databases\": [\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    },\n    {\n      \"operation\": \"owner_manage\",\n      \"ids\": \"<string>\"\n    }\n  ],\n  \"UniversalConsent\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControls\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"TrafficControl\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"Journeys\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Journey\": [\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"LlmProject\": [\n    {\n      \"operation\": \"edit\",\n      \"project_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"publish_internal_integration\",\n      \"project_id\": \"<string>\"\n    }\n  ],\n  \"RawDataAccess\": [\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"query\",\n      \"audience_id\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:33:01.000Z",
+                          "updatedAt": "2026-10-22T02:33:01.000Z",
+                          "uid": "35240-b73417ca-04ba-4320-8888-432930b5979e"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:01.000Z",
+                      "updatedAt": "2026-10-22T02:33:01.000Z",
+                      "uid": "35240-64b89123-cb53-4557-b223-c7bad7bb2bf9"
+                    }
+                  ],
+                  "id": "16a5195d-c7e9-485a-8ade-b251107b8260",
+                  "createdAt": "2026-10-22T02:33:01.000Z",
+                  "updatedAt": "2026-10-22T02:33:01.000Z",
+                  "uid": "35240-16a5195d-c7e9-485a-8ade-b251107b8260"
+                }
+              ],
+              "id": "1d0a4a50-a76d-4d63-b4f5-9f01b227317f",
+              "createdAt": "2026-10-22T02:33:01.000Z",
+              "updatedAt": "2026-10-22T02:33:01.000Z",
+              "uid": "35240-1d0a4a50-a76d-4d63-b4f5-9f01b227317f"
+            }
+          ],
+          "id": "02a0dacd-81ba-4bfa-97d5-05453474cfe6",
+          "createdAt": "2026-10-22T02:33:01.000Z",
+          "updatedAt": "2026-10-22T02:33:01.000Z",
+          "uid": "35240-02a0dacd-81ba-4bfa-97d5-05453474cfe6"
+        }
+      ],
+      "id": "1554b4b9-e230-4c92-b08a-c7e5d26bd9f4",
+      "createdAt": "2026-10-22T02:33:01.000Z",
+      "updatedAt": "2026-10-22T02:33:01.000Z",
+      "uid": "35240-1554b4b9-e230-4c92-b08a-c7e5d26bd9f4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

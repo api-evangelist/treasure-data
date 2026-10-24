@@ -1,0 +1,1028 @@
+{
+  "info": {
+    "_postman_id": "9d5fa2e6-4334-4053-8d9f-1240edb62dad",
+    "name": "llm-api Text Resource API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:34.000Z",
+    "updatedAt": "2026-10-22T02:37:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9d5fa2e6-4334-4053-8d9f-1240edb62dad"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "text_resources",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "2217f683-2a1c-4685-8761-b94313b89fce",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c32d1580-8621-4cb7-ad78-6df14f2a4e2e",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c698e3a4-ddb6-4356-8915-d9d3e858c144",
+                      "name": "Text resource deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-c698e3a4-ddb6-4356-8915-d9d3e858c144"
+                    },
+                    {
+                      "id": "2e62c18d-a733-4da1-a34e-3caf92117222",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-2e62c18d-a733-4da1-a34e-3caf92117222"
+                    },
+                    {
+                      "id": "398f0fea-b001-4e6d-9ac3-57d187618932",
+                      "name": "Text resource not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-398f0fea-b001-4e6d-9ac3-57d187618932"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-2217f683-2a1c-4685-8761-b94313b89fce"
+                },
+                {
+                  "name": "show",
+                  "id": "4933238a-adb5-4a71-a18b-e4de81aed719",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1d4139aa-7c97-480d-80cd-5c568f0f88c8",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ec5525d5-fc8d-47b8-8ace-4664fe7dd7c4",
+                      "name": "returns the details of a specific text_resource",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-ec5525d5-fc8d-47b8-8ace-4664fe7dd7c4"
+                    },
+                    {
+                      "id": "ac4bab6b-ce09-4ded-b462-12424ca094d2",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-ac4bab6b-ce09-4ded-b462-12424ca094d2"
+                    },
+                    {
+                      "id": "23f233d6-773e-4346-aa79-ad37e46ac5be",
+                      "name": "GET /api/text_resources/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-23f233d6-773e-4346-aa79-ad37e46ac5be"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-4933238a-adb5-4a71-a18b-e4de81aed719"
+                },
+                {
+                  "name": "update",
+                  "id": "fb7e977f-1d51-4ba8-8c40-91e775aa9d50",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f87b97db-2f77-491f-9955-ca3583a0dd96",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3a02dc9d-8013-4f6b-a98f-7bd215675721",
+                      "name": "updates a text_resource",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-3a02dc9d-8013-4f6b-a98f-7bd215675721"
+                    },
+                    {
+                      "id": "cb4789ba-899d-4cc0-8ee5-f8100625fe50",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-cb4789ba-899d-4cc0-8ee5-f8100625fe50"
+                    },
+                    {
+                      "id": "839ea2fd-402e-424e-90d3-fe914ad60e78",
+                      "name": "PATCH /api/text_resources/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-839ea2fd-402e-424e-90d3-fe914ad60e78"
+                    },
+                    {
+                      "id": "def41b66-3ddc-4cf2-a445-c163a0d133b4",
+                      "name": "PATCH /api/text_resources rejects {\"text\":\"<BASE64_CONTENT>\"}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_resources/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_resources",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:34.000Z",
+                      "updatedAt": "2026-10-22T02:37:34.000Z",
+                      "uid": "35240-def41b66-3ddc-4cf2-a445-c163a0d133b4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-fb7e977f-1d51-4ba8-8c40-91e775aa9d50"
+                }
+              ],
+              "id": "e74fbb5f-d553-4941-aeb3-bb4c254d35e2",
+              "createdAt": "2026-10-22T02:37:34.000Z",
+              "updatedAt": "2026-10-22T02:37:34.000Z",
+              "uid": "35240-e74fbb5f-d553-4941-aeb3-bb4c254d35e2"
+            },
+            {
+              "name": "index",
+              "id": "5dcd9772-3898-4651-be06-1436329483f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/text_resources?filter[fulltext]=<string>&filter[name]=<string>&include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "text_resources"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[fulltext]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "bbd53cbd-c5b2-4579-996e-ef623d090974",
+                  "name": "includes by created_by and updated_by",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources?filter[fulltext]=<string>&filter[name]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[fulltext]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"text\": \"<string>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"text\": \"<string>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-bbd53cbd-c5b2-4579-996e-ef623d090974"
+                },
+                {
+                  "id": "0371126b-1ab5-4f09-b908-5c81790c9005",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources?filter[fulltext]=<string>&filter[name]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[fulltext]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-0371126b-1ab5-4f09-b908-5c81790c9005"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:34.000Z",
+              "updatedAt": "2026-10-22T02:37:34.000Z",
+              "uid": "35240-5dcd9772-3898-4651-be06-1436329483f0"
+            },
+            {
+              "name": "create",
+              "id": "029cd20d-3e1e-4c1b-8f57-901c52e8d909",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/text_resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "text_resources"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e212b047-fd0a-4218-bb55-c301a5137afe",
+                  "name": "creates a new text_resource",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-e212b047-fd0a-4218-bb55-c301a5137afe"
+                },
+                {
+                  "id": "87a993e5-71e8-4341-b936-a44fcba4f1a3",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-87a993e5-71e8-4341-b936-a44fcba4f1a3"
+                },
+                {
+                  "id": "f59dd439-d30f-41a0-ac9d-7406a538e988",
+                  "name": "POST /api/text_resources rejects {\"text\":\"<BASE64_CONTENT>\"}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_resources",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_resources"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:34.000Z",
+                  "updatedAt": "2026-10-22T02:37:34.000Z",
+                  "uid": "35240-f59dd439-d30f-41a0-ac9d-7406a538e988"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:34.000Z",
+              "updatedAt": "2026-10-22T02:37:34.000Z",
+              "uid": "35240-029cd20d-3e1e-4c1b-8f57-901c52e8d909"
+            }
+          ],
+          "id": "65aa2c4b-53ce-4a39-95c2-332c7c0c52b2",
+          "createdAt": "2026-10-22T02:37:34.000Z",
+          "updatedAt": "2026-10-22T02:37:34.000Z",
+          "uid": "35240-65aa2c4b-53ce-4a39-95c2-332c7c0c52b2"
+        }
+      ],
+      "id": "ce5b03e7-654d-43f9-9bed-baa3aea38486",
+      "createdAt": "2026-10-22T02:37:34.000Z",
+      "updatedAt": "2026-10-22T02:37:34.000Z",
+      "uid": "35240-ce5b03e7-654d-43f9-9bed-baa3aea38486"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

@@ -1,0 +1,1158 @@
+{
+  "info": {
+    "_postman_id": "a0d5cb70-44be-434a-b42f-bca97da13919",
+    "name": "llm-api Prompt API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:45.000Z",
+    "updatedAt": "2026-10-22T02:36:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a0d5cb70-44be-434a-b42f-bca97da13919"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "prompts",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "3147e0e4-69f5-477e-a211-57ceaf69f28d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eea6e0bd-4427-46ff-9be6-175c47e10c82",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "6dc5ddd3-4920-4ee7-ab20-0718b37d311e",
+                      "name": "Prompt deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-6dc5ddd3-4920-4ee7-ab20-0718b37d311e"
+                    },
+                    {
+                      "id": "0360db5e-3196-4ab9-b02c-d965ffe1555b",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-0360db5e-3196-4ab9-b02c-d965ffe1555b"
+                    },
+                    {
+                      "id": "6c9d2c5b-e550-4181-9690-acb5fa08a997",
+                      "name": "Forbidden - insufficient permissions to access this resource",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-6c9d2c5b-e550-4181-9690-acb5fa08a997"
+                    },
+                    {
+                      "id": "7be3ff15-1158-4f74-b46f-15d660ba072f",
+                      "name": "Prompt not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-7be3ff15-1158-4f74-b46f-15d660ba072f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:45.000Z",
+                  "updatedAt": "2026-10-22T02:36:45.000Z",
+                  "uid": "35240-3147e0e4-69f5-477e-a211-57ceaf69f28d"
+                },
+                {
+                  "name": "show",
+                  "id": "3443f795-9327-4c71-bb9f-0adb4fbb078e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "baa61ff0-3563-4b5d-bbac-806a5e6c9cd5",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "06b77850-0868-478b-9e84-9a33623d2846",
+                      "name": "Prompt details and configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"template\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"jsonSchemaHint\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-06b77850-0868-478b-9e84-9a33623d2846"
+                    },
+                    {
+                      "id": "12e1ede7-003c-4adc-a743-1b6e511efa63",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-12e1ede7-003c-4adc-a743-1b6e511efa63"
+                    },
+                    {
+                      "id": "34978966-21dd-409f-a790-f7def8622c58",
+                      "name": "Prompt not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-34978966-21dd-409f-a790-f7def8622c58"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:45.000Z",
+                  "updatedAt": "2026-10-22T02:36:45.000Z",
+                  "uid": "35240-3443f795-9327-4c71-bb9f-0adb4fbb078e"
+                },
+                {
+                  "name": "update",
+                  "id": "9992a914-07e4-4071-b258-e3ac74ef24c8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2720e5c2-d3f3-4dcf-83b3-0875ec7f67c1",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e17781c9-4713-4cbd-a3b0-f8634d4fc6a3",
+                      "name": "Prompt updated successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"template\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"jsonSchemaHint\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-e17781c9-4713-4cbd-a3b0-f8634d4fc6a3"
+                    },
+                    {
+                      "id": "f4a51559-c4d8-4bb9-b112-d8f61f4b9836",
+                      "name": "rejects PATCH /api/prompts/:id",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-f4a51559-c4d8-4bb9-b112-d8f61f4b9836"
+                    },
+                    {
+                      "id": "586a5c92-2866-4e06-8ea2-dcfec5db7c5d",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-586a5c92-2866-4e06-8ea2-dcfec5db7c5d"
+                    },
+                    {
+                      "id": "6b320192-b235-4d02-9d65-db8cfa6a08bf",
+                      "name": "PATCH /api/prompts/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-6b320192-b235-4d02-9d65-db8cfa6a08bf"
+                    },
+                    {
+                      "id": "6623fe1b-ea57-417f-8265-665821ce2521",
+                      "name": "rejects updating agent_id",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"template\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/prompts/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "prompts",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:46.000Z",
+                      "updatedAt": "2026-10-22T02:36:46.000Z",
+                      "uid": "35240-6623fe1b-ea57-417f-8265-665821ce2521"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:45.000Z",
+                  "updatedAt": "2026-10-22T02:36:45.000Z",
+                  "uid": "35240-9992a914-07e4-4071-b258-e3ac74ef24c8"
+                }
+              ],
+              "id": "3baf8846-0210-414c-b6c6-a01b7b607dcf",
+              "createdAt": "2026-10-22T02:36:45.000Z",
+              "updatedAt": "2026-10-22T02:36:45.000Z",
+              "uid": "35240-3baf8846-0210-414c-b6c6-a01b7b607dcf"
+            },
+            {
+              "name": "index",
+              "id": "4ab8a890-b05b-49e5-97db-000294ac3064",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/prompts?include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "prompts"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a429a46f-7595-462b-b542-c23bcca41d91",
+                  "name": "allows GET /api/prompts",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"template\": \"<string>\",\n        \"isManaged\": \"<boolean>\",\n        \"jsonSchemaHint\": \"<string>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"template\": \"<string>\",\n        \"isManaged\": \"<boolean>\",\n        \"jsonSchemaHint\": \"<string>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-a429a46f-7595-462b-b542-c23bcca41d91"
+                },
+                {
+                  "id": "ddc37725-8613-44a8-971d-dfaced446c51",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-ddc37725-8613-44a8-971d-dfaced446c51"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:45.000Z",
+              "updatedAt": "2026-10-22T02:36:45.000Z",
+              "uid": "35240-4ab8a890-b05b-49e5-97db-000294ac3064"
+            },
+            {
+              "name": "create",
+              "id": "a375923f-36fc-4f95-a5f7-ce44345ef1e0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"template\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"systemPrompt\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/prompts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "prompts"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "26071de8-2ecf-45d0-b4c3-0de93b19131e",
+                  "name": "Prompt created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"template\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"systemPrompt\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"template\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"jsonSchemaHint\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-26071de8-2ecf-45d0-b4c3-0de93b19131e"
+                },
+                {
+                  "id": "2a26c03c-a140-43fb-85bb-8fd3fbb663d4",
+                  "name": "rejects POST /api/prompts",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"template\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"systemPrompt\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-2a26c03c-a140-43fb-85bb-8fd3fbb663d4"
+                },
+                {
+                  "id": "93de4b34-c00d-4b05-8b72-ec6c0682ffeb",
+                  "name": "Unauthorized - authentication credentials are missing or invalid",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"template\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"systemPrompt\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-93de4b34-c00d-4b05-8b72-ec6c0682ffeb"
+                },
+                {
+                  "id": "52bed96d-8d1f-4bb0-ba4d-859292abb641",
+                  "name": "POST /api/prompts rejects {\"systemPrompt\":\"<BASE64_CONTENT>\"}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"template\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"systemPrompt\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/prompts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "prompts"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:46.000Z",
+                  "updatedAt": "2026-10-22T02:36:46.000Z",
+                  "uid": "35240-52bed96d-8d1f-4bb0-ba4d-859292abb641"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:45.000Z",
+              "updatedAt": "2026-10-22T02:36:45.000Z",
+              "uid": "35240-a375923f-36fc-4f95-a5f7-ce44345ef1e0"
+            }
+          ],
+          "id": "0f5c50ff-7700-4eae-b3cb-8fb70c731143",
+          "createdAt": "2026-10-22T02:36:45.000Z",
+          "updatedAt": "2026-10-22T02:36:45.000Z",
+          "uid": "35240-0f5c50ff-7700-4eae-b3cb-8fb70c731143"
+        }
+      ],
+      "id": "0d79e0bd-c4b2-4ba9-823e-3adcc2028847",
+      "createdAt": "2026-10-22T02:36:45.000Z",
+      "updatedAt": "2026-10-22T02:36:45.000Z",
+      "uid": "35240-0d79e0bd-c4b2-4ba9-823e-3adcc2028847"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "info": {
+    "_postman_id": "4fccbd0c-4220-4600-8371-c5c4fc2f6b68",
+    "name": "llm-api Chat Attachment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:34:22.000Z",
+    "updatedAt": "2026-10-22T02:34:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4fccbd0c-4220-4600-8371-c5c4fc2f6b68"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "chat_attachments",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "cbce062d-5016-4cdb-bdbc-372af27ee0d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_attachments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_attachments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ac53ea17-d9bd-4e4e-bd2f-c6a1ff5b06c9",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a2d84095-593b-4b6f-8132-d650ff3c2b28",
+                      "name": "Chat attachment successfully deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_attachments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_attachments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:34:22.000Z",
+                      "updatedAt": "2026-10-22T02:34:22.000Z",
+                      "uid": "35240-a2d84095-593b-4b6f-8132-d650ff3c2b28"
+                    },
+                    {
+                      "id": "48485f0e-5555-4a89-88d9-579a376c96b1",
+                      "name": "Forbidden - insufficient permissions to delete this resource",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_attachments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_attachments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:34:22.000Z",
+                      "updatedAt": "2026-10-22T02:34:22.000Z",
+                      "uid": "35240-48485f0e-5555-4a89-88d9-579a376c96b1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:22.000Z",
+                  "updatedAt": "2026-10-22T02:34:22.000Z",
+                  "uid": "35240-cbce062d-5016-4cdb-bdbc-372af27ee0d2"
+                },
+                {
+                  "name": "show",
+                  "id": "60de1635-a438-4b49-a2d9-e4566fd6ef60",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_attachments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_attachments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e6f9ac0e-08cf-476f-8a48-6ce4a5390e1c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5315c22d-dced-4b02-ace6-4c454b86b94d",
+                      "name": "returns the specific chat attachment",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_attachments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_attachments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"chatId\": \"<string>\",\n      \"attachmentIndex\": \"<integer>\",\n      \"attachmentType\": \"<string>\",\n      \"contentFormatMode\": \"<string>\",\n      \"inputFieldName\": {},\n      \"contentType\": \"<string>\",\n      \"imageWidth\": \"<integer>\",\n      \"imageHeight\": \"<integer>\",\n      \"pdfPageCount\": {},\n      \"binaryBase64\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:34:22.000Z",
+                      "updatedAt": "2026-10-22T02:34:22.000Z",
+                      "uid": "35240-5315c22d-dced-4b02-ace6-4c454b86b94d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:22.000Z",
+                  "updatedAt": "2026-10-22T02:34:22.000Z",
+                  "uid": "35240-60de1635-a438-4b49-a2d9-e4566fd6ef60"
+                }
+              ],
+              "id": "f8757c8d-5280-40d9-a83c-bb7a516ed57e",
+              "createdAt": "2026-10-22T02:34:22.000Z",
+              "updatedAt": "2026-10-22T02:34:22.000Z",
+              "uid": "35240-f8757c8d-5280-40d9-a83c-bb7a516ed57e"
+            },
+            {
+              "name": "index",
+              "id": "71c78ad1-8b2c-44b4-a05c-5ecd2ffca551",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat_attachments?filter[attachment_type]=<string>&filter[chat_id]=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat_attachments"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[attachment_type]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[chat_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "03fd5793-6b65-432a-a3a9-cc69cfbaa6d5",
+                  "name": "sorts by attachment_index",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_attachments?filter[attachment_type]=<string>&filter[chat_id]=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_attachments"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[attachment_type]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[chat_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"chatId\": \"<string>\",\n        \"attachmentIndex\": \"<integer>\",\n        \"attachmentType\": \"<string>\",\n        \"contentFormatMode\": \"<string>\",\n        \"inputFieldName\": {},\n        \"contentType\": \"<string>\",\n        \"imageWidth\": \"<integer>\",\n        \"imageHeight\": \"<integer>\",\n        \"pdfPageCount\": {},\n        \"binaryBase64\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"chatId\": \"<string>\",\n        \"attachmentIndex\": \"<integer>\",\n        \"attachmentType\": \"<string>\",\n        \"contentFormatMode\": \"<string>\",\n        \"inputFieldName\": {},\n        \"contentType\": \"<string>\",\n        \"imageWidth\": \"<integer>\",\n        \"imageHeight\": \"<integer>\",\n        \"pdfPageCount\": {},\n        \"binaryBase64\": \"<string>\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:34:22.000Z",
+                  "updatedAt": "2026-10-22T02:34:22.000Z",
+                  "uid": "35240-03fd5793-6b65-432a-a3a9-cc69cfbaa6d5"
+                }
+              ],
+              "createdAt": "2026-10-22T02:34:22.000Z",
+              "updatedAt": "2026-10-22T02:34:22.000Z",
+              "uid": "35240-71c78ad1-8b2c-44b4-a05c-5ecd2ffca551"
+            },
+            {
+              "name": "create",
+              "id": "e12a99fb-8fa6-4e81-8649-d27433cf1698",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"chatId\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"inputFieldName\": \"<string>\",\n      \"binaryBase64\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat_attachments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat_attachments"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "994d8c57-c3f6-4f62-a7a7-c89c37aaff37",
+                  "name": "Chat attachment successfully created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"chatId\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"inputFieldName\": \"<string>\",\n      \"binaryBase64\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_attachments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_attachments"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"chatId\": \"<string>\",\n      \"attachmentIndex\": \"<integer>\",\n      \"attachmentType\": \"<string>\",\n      \"contentFormatMode\": \"<string>\",\n      \"inputFieldName\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"imageWidth\": \"<integer>\",\n      \"imageHeight\": \"<integer>\",\n      \"pdfPageCount\": {},\n      \"binaryBase64\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:34:22.000Z",
+                  "updatedAt": "2026-10-22T02:34:22.000Z",
+                  "uid": "35240-994d8c57-c3f6-4f62-a7a7-c89c37aaff37"
+                },
+                {
+                  "id": "6f0e1045-ca59-49f6-924e-0f45210a0449",
+                  "name": "returns validation error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"chatId\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"inputFieldName\": \"<string>\",\n      \"binaryBase64\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_attachments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_attachments"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\",\n        \"originalType\": \"<string,null>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\",\n        \"originalType\": \"<string,null>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:34:22.000Z",
+                  "updatedAt": "2026-10-22T02:34:22.000Z",
+                  "uid": "35240-6f0e1045-ca59-49f6-924e-0f45210a0449"
+                }
+              ],
+              "createdAt": "2026-10-22T02:34:22.000Z",
+              "updatedAt": "2026-10-22T02:34:22.000Z",
+              "uid": "35240-e12a99fb-8fa6-4e81-8649-d27433cf1698"
+            }
+          ],
+          "id": "915ff188-08e3-4636-aa4a-09c174b78b82",
+          "createdAt": "2026-10-22T02:34:22.000Z",
+          "updatedAt": "2026-10-22T02:34:22.000Z",
+          "uid": "35240-915ff188-08e3-4636-aa4a-09c174b78b82"
+        }
+      ],
+      "id": "22ef81c0-9a6b-487f-9cb9-c478f3298498",
+      "createdAt": "2026-10-22T02:34:22.000Z",
+      "updatedAt": "2026-10-22T02:34:22.000Z",
+      "uid": "35240-22ef81c0-9a6b-487f-9cb9-c478f3298498"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

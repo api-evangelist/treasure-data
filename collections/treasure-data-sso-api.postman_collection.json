@@ -1,1293 +1,1384 @@
 {
+  "info": {
+    "_postman_id": "9c0b521b-10a1-4439-acd5-897f15714b1d",
+    "name": "Treasure Data TD SSO API",
+    "description": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:21.000Z",
+    "updatedAt": "2026-10-22T02:32:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9c0b521b-10a1-4439-acd5-897f15714b1d"
+  },
   "item": [
     {
-      "id": "6be07228-16c9-4476-87ef-cb5d2977e2ea",
-      "name": "SSO",
-      "description": {
-        "content": "Identity federation and SSO settings",
-        "type": "text/plain"
-      },
+      "name": "account",
       "item": [
         {
-          "id": "21b19f33-a6c7-4db6-9ecd-418860467bbc",
-          "name": "Get SSO settings",
-          "request": {
-            "name": "Get SSO settings",
-            "description": {
-              "content": "Gets account settings for their SSO configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "account",
-                "sso_setting"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "sso_setting",
+          "item": [
             {
-              "id": "d6043fa7-54da-4c34-a7ec-173e5c2cca11",
-              "name": "SSO settings",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+              "name": "Get SSO settings",
+              "id": "28a8bb2b-5266-4b6c-bbd5-1f5dc9d6d1ea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"sso_setting\": {\n    \"cert\": \"string\",\n    \"identity_provider_name\": \"string\",\n    \"sign_in_endpoint\": \"string\",\n    \"sign_out_endpoint\": \"string\",\n    \"strategy\": \"string\",\n    \"updated_at\": \"2000-09-16T18:01:22.629Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8031dd19-0c92-4fe2-949c-7a1f9015527e",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "55eb1526-e97b-49a2-b90f-9fc5cf6fc08a",
-          "name": "Create SSO settings",
-          "request": {
-            "name": "Create SSO settings",
-            "description": {
-              "content": "Allows admin to create and configure an IdP for an account.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "account",
-                "sso_setting"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "44c4b0b1-36ef-400d-8086-e1c4e3d4e50a",
-              "name": "SSO settings created",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
+                  "raw": "{{baseUrl}}/account/sso_setting",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "account",
+                    "sso_setting"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                "description": "Gets account settings for their SSO configuration."
+              },
+              "response": [
+                {
+                  "id": "9b4b2f7e-83c8-4db7-ab58-627b870a04ce",
+                  "name": "SSO settings",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"sso_setting\": {\n    \"cert\": \"<string>\",\n    \"identity_provider_name\": \"<string>\",\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"strategy\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-9b4b2f7e-83c8-4db7-ab58-627b870a04ce"
+                },
+                {
+                  "id": "450e0f8b-1385-4740-9596-f02783fbb490",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-450e0f8b-1385-4740-9596-f02783fbb490"
+                }
+              ],
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-28a8bb2b-5266-4b6c-bbd5-1f5dc9d6d1ea"
+            },
+            {
+              "name": "Create SSO settings",
+              "id": "ac6c3302-cf23-435f-9ee0-8864842349a7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"sso_setting\": {\n    \"cert\": \"string\",\n    \"identity_provider_name\": \"string\",\n    \"sign_in_endpoint\": \"string\",\n    \"sign_out_endpoint\": \"string\",\n    \"strategy\": \"string\",\n    \"updated_at\": \"2000-09-16T18:01:22.629Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dc93f146-5ae2-4606-8a0b-091d84e279f6",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
+                  "raw": "{{baseUrl}}/account/sso_setting",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "account",
+                    "sso_setting"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                "description": "Allows admin to create and configure an IdP for an account."
+              },
+              "response": [
+                {
+                  "id": "61947787-4a94-4683-bf91-fc7d5817e026",
+                  "name": "SSO settings created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
                     }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "92fe67c1-8bc1-4db4-b2ac-a8a42df378e1",
-          "name": "Update SSO settings",
-          "request": {
-            "name": "Update SSO settings",
-            "description": {
-              "content": "Allows admin to make updates to an IdP account setting.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "account",
-                "sso_setting"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "df3ff8a8-345f-4514-80e6-ae8311311851",
-              "name": "SSO settings updated",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"sso_setting\": {\n    \"cert\": \"<string>\",\n    \"identity_provider_name\": \"<string>\",\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"strategy\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-61947787-4a94-4683-bf91-fc7d5817e026"
+                },
+                {
+                  "id": "6102e010-cdb2-48f2-a546-93259fc3d1d1",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-6102e010-cdb2-48f2-a546-93259fc3d1d1"
+                }
+              ],
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-ac6c3302-cf23-435f-9ee0-8864842349a7"
+            },
+            {
+              "name": "Update SSO settings",
+              "id": "e0a07632-9586-446d-ae09-1ee21c49958f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"sso_setting\": {\n    \"cert\": \"string\",\n    \"identity_provider_name\": \"string\",\n    \"sign_in_endpoint\": \"string\",\n    \"sign_out_endpoint\": \"string\",\n    \"strategy\": \"string\",\n    \"updated_at\": \"2000-09-16T18:01:22.629Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "13ac16df-db3c-428b-b1ef-bef4515b9f2c",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                  "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "90edb1ac-c41c-477d-aea6-67420bf5e869",
-          "name": "Delete SSO settings",
-          "request": {
-            "name": "Delete SSO settings",
-            "description": {
-              "content": "Allows admin to delete an IdP account setting.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "account",
-                "sso_setting"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4fdf2e08-b233-463f-b36d-cd6a1f95aa90",
-              "name": "SSO settings deleted",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "account",
-                    "sso_setting"
-                  ],
+                  "raw": "{{baseUrl}}/account/sso_setting",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "account",
+                    "sso_setting"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                "description": "Allows admin to make updates to an IdP account setting."
+              },
+              "response": [
+                {
+                  "id": "6d84f177-01f0-4e4b-bb3a-0310e871ba14",
+                  "name": "SSO settings updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"sso_setting\": {\n    \"cert\": \"<string>\",\n    \"identity_provider_name\": \"<string>\",\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string>\",\n    \"strategy\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-6d84f177-01f0-4e4b-bb3a-0310e871ba14"
+                },
+                {
+                  "id": "731825e5-5535-4c24-8c1d-652625992954",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"sign_in_endpoint\": \"<string>\",\n    \"sign_out_endpoint\": \"<string,null>\",\n    \"cert\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-731825e5-5535-4c24-8c1d-652625992954"
+                }
+              ],
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-e0a07632-9586-446d-ae09-1ee21c49958f"
+            },
+            {
+              "name": "Delete SSO settings",
+              "id": "287aa839-6cc7-4f1f-b4ed-ff301178a2fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "25b6b44b-a30a-4f78-a23c-e97ea0165e9e",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/account/sso_setting",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "account",
                     "sso_setting"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
+                "description": "Allows admin to delete an IdP account setting."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "6df79254-cc86-45e6-81c0-08334d228432",
+                  "name": "SSO settings deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-6df79254-cc86-45e6-81c0-08334d228432"
+                },
+                {
+                  "id": "1c31791f-f68a-45ea-b6e1-aa133aada210",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/account/sso_setting",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "account",
+                        "sso_setting"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:22.000Z",
+                  "updatedAt": "2026-10-22T02:32:22.000Z",
+                  "uid": "35240-1c31791f-f68a-45ea-b6e1-aa133aada210"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-287aa839-6cc7-4f1f-b4ed-ff301178a2fd"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "89624903-eb10-48c4-b64a-f2fdc4da14c7",
-          "name": "Create user with SSO",
-          "request": {
-            "name": "Create user with SSO",
-            "description": {
-              "content": "Allows the admin to create a user with SSO authentication.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "create_with_sso",
-                ":user_first_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "user_first_name",
-                  "description": "(Required) First name of the new user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "dbbaff64-4947-4b47-ba2c-918e279fe5ac",
-              "name": "User created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "create_with_sso",
-                    ":user_first_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_first_name",
-                      "description": "(Required) First name of the new user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1401774e-02fe-455a-a959-67f451053a8a",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "create_with_sso",
-                    ":user_first_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_first_name",
-                      "description": "(Required) First name of the new user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "87e0f052-a87b-4c81-bbeb-292513fead74",
-          "name": "Enforce SSO for user",
-          "request": {
-            "name": "Enforce SSO for user",
-            "description": {
-              "content": "Allows admin to make it mandatory for a user to login with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "enforce_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "b2983f00-0f70-494a-887c-63ebcaf95e7f",
-              "name": "SSO enforced",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enforce_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7e2c414c-792e-411f-952e-f881f68dcb8f",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enforce_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ad804980-6027-4539-b61d-013de40d6fe4",
-          "name": "Enable SSO for user",
-          "request": {
-            "name": "Enable SSO for user",
-            "description": {
-              "content": "Allows admin to permit a user to login with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "enable_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "baa223d2-0b64-4851-a5b0-ae7b04fe54eb",
-              "name": "SSO enabled",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dce6844b-f7f8-41c2-a712-b7dfb90e16a7",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "43ddfd2c-40a1-4d53-aef0-c1cf62a7e8d9",
-          "name": "Disable SSO for user",
-          "request": {
-            "name": "Disable SSO for user",
-            "description": {
-              "content": "Allows admin to prohibit a user from logging in with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "disable_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "50274e09-8187-416b-b6d2-09c2710b7995",
-              "name": "SSO disabled",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "disable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ae454985-7e0e-4759-9a2f-775f83b6ab5e",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "disable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "38299ffd-23cd-4d8a-ac13-5c090a4c6e65",
+          "createdAt": "2026-10-22T02:32:21.000Z",
+          "updatedAt": "2026-10-22T02:32:21.000Z",
+          "uid": "35240-38299ffd-23cd-4d8a-ac13-5c090a4c6e65"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "809ddb00-c986-4ddb-91f9-22d6f7f2868c",
+      "createdAt": "2026-10-22T02:32:21.000Z",
+      "updatedAt": "2026-10-22T02:32:21.000Z",
+      "uid": "35240-809ddb00-c986-4ddb-91f9-22d6f7f2868c"
+    },
     {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "name": "user",
+      "item": [
+        {
+          "name": "create_with_sso",
+          "item": [
+            {
+              "name": "{user_first_name}",
+              "item": [
+                {
+                  "name": "Create user with SSO",
+                  "id": "ed95ff23-2b27-428d-9b0b-a3d1e9d4ae84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "create_with_sso",
+                        ":user_first_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "55788ab7-73e8-4a48-914d-b0b896140d30",
+                          "key": "user_first_name",
+                          "value": "<string>",
+                          "description": "(Required) First name of the new user"
+                        }
+                      ]
+                    },
+                    "description": "Allows the admin to create a user with SSO authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "a296a2b3-e55c-493b-9583-92b35d60b4b5",
+                      "name": "User created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "create_with_sso",
+                            ":user_first_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_first_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-a296a2b3-e55c-493b-9583-92b35d60b4b5"
+                    },
+                    {
+                      "id": "26680d5d-1185-4a1f-b44c-d289a4c87cb5",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "create_with_sso",
+                            ":user_first_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_first_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-26680d5d-1185-4a1f-b44c-d289a4c87cb5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:21.000Z",
+                  "updatedAt": "2026-10-22T02:32:21.000Z",
+                  "uid": "35240-ed95ff23-2b27-428d-9b0b-a3d1e9d4ae84"
+                }
+              ],
+              "id": "09bb2765-7014-4e1b-afb6-aa5b1150d117",
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-09bb2765-7014-4e1b-afb6-aa5b1150d117"
+            }
+          ],
+          "id": "33c93326-77f0-4161-bd14-2185188c00ed",
+          "createdAt": "2026-10-22T02:32:21.000Z",
+          "updatedAt": "2026-10-22T02:32:21.000Z",
+          "uid": "35240-33c93326-77f0-4161-bd14-2185188c00ed"
+        },
+        {
+          "name": "enforce_sso",
+          "item": [
+            {
+              "name": "{user_email}",
+              "item": [
+                {
+                  "name": "Enforce SSO for user",
+                  "id": "e8289223-1301-4e88-8d40-9e4e19a240da",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "enforce_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6cb6641f-7d0e-4e2f-8c26-fec4f7a2e9a9",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to make it mandatory for a user to login with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "10356624-3208-456b-8ab5-57eb42052ce8",
+                      "name": "SSO enforced",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enforce_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-10356624-3208-456b-8ab5-57eb42052ce8"
+                    },
+                    {
+                      "id": "687dea7e-8b13-44d1-836e-1e96910569f4",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enforce_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-687dea7e-8b13-44d1-836e-1e96910569f4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:21.000Z",
+                  "updatedAt": "2026-10-22T02:32:21.000Z",
+                  "uid": "35240-e8289223-1301-4e88-8d40-9e4e19a240da"
+                }
+              ],
+              "id": "b0d33849-52f8-4e0b-82b6-d9698dae5db2",
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-b0d33849-52f8-4e0b-82b6-d9698dae5db2"
+            }
+          ],
+          "id": "dc19f77a-1838-4339-97c3-dd3142900945",
+          "createdAt": "2026-10-22T02:32:21.000Z",
+          "updatedAt": "2026-10-22T02:32:21.000Z",
+          "uid": "35240-dc19f77a-1838-4339-97c3-dd3142900945"
+        },
+        {
+          "name": "enable_sso",
+          "item": [
+            {
+              "name": "{user_email}",
+              "item": [
+                {
+                  "name": "Enable SSO for user",
+                  "id": "5e4558d0-201f-4cd8-8fab-146cc045cc43",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "enable_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bcf04a3f-f7f9-4ed8-a895-aafbea6c3086",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to permit a user to login with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "f2fd58a2-bcaa-4690-bb72-bcc60113751d",
+                      "name": "SSO enabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-f2fd58a2-bcaa-4690-bb72-bcc60113751d"
+                    },
+                    {
+                      "id": "dcd78020-8499-47c3-b496-ca0888c925bb",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-dcd78020-8499-47c3-b496-ca0888c925bb"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:21.000Z",
+                  "updatedAt": "2026-10-22T02:32:21.000Z",
+                  "uid": "35240-5e4558d0-201f-4cd8-8fab-146cc045cc43"
+                }
+              ],
+              "id": "28fec1cf-7218-46af-9d73-0e871470369d",
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-28fec1cf-7218-46af-9d73-0e871470369d"
+            }
+          ],
+          "id": "624b8508-0fd0-4930-b48f-d6db91c37536",
+          "createdAt": "2026-10-22T02:32:21.000Z",
+          "updatedAt": "2026-10-22T02:32:21.000Z",
+          "uid": "35240-624b8508-0fd0-4930-b48f-d6db91c37536"
+        },
+        {
+          "name": "disable_sso",
+          "item": [
+            {
+              "name": "{user_email}",
+              "item": [
+                {
+                  "name": "Disable SSO for user",
+                  "id": "754e4cef-8d36-4fef-b171-3999b58f91c3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "disable_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4882f0e7-4b6f-468d-8f78-d0418629ac1f",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to prohibit a user from logging in with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "0ffbc1d1-207f-4c09-a10d-0753f367c1a8",
+                      "name": "SSO disabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "disable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-0ffbc1d1-207f-4c09-a10d-0753f367c1a8"
+                    },
+                    {
+                      "id": "fdac7026-e732-4b68-b98f-45451dbe66ba",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "disable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:22.000Z",
+                      "updatedAt": "2026-10-22T02:32:22.000Z",
+                      "uid": "35240-fdac7026-e732-4b68-b98f-45451dbe66ba"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:21.000Z",
+                  "updatedAt": "2026-10-22T02:32:21.000Z",
+                  "uid": "35240-754e4cef-8d36-4fef-b171-3999b58f91c3"
+                }
+              ],
+              "id": "d77bbe8a-b44e-4d12-89ff-791ea4253213",
+              "createdAt": "2026-10-22T02:32:21.000Z",
+              "updatedAt": "2026-10-22T02:32:21.000Z",
+              "uid": "35240-d77bbe8a-b44e-4d12-89ff-791ea4253213"
+            }
+          ],
+          "id": "83bb1cea-328e-46a0-acaf-f2dad8ecdc54",
+          "createdAt": "2026-10-22T02:32:21.000Z",
+          "updatedAt": "2026-10-22T02:32:21.000Z",
+          "uid": "35240-83bb1cea-328e-46a0-acaf-f2dad8ecdc54"
+        }
+      ],
+      "id": "2f5cb3c1-cbc4-4a34-8686-6c0f4f704a69",
+      "createdAt": "2026-10-22T02:32:21.000Z",
+      "updatedAt": "2026-10-22T02:32:21.000Z",
+      "uid": "35240-2f5cb3c1-cbc4-4a34-8686-6c0f4f704a69"
     }
   ],
   "auth": {
@@ -1295,25 +1386,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e7654e3e-4142-4f3a-80c4-fe05795dfb18",
-    "name": "Treasure Data TD Bulk Import SSO API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  }
+  ]
 }

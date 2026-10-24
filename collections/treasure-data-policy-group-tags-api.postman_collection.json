@@ -1,0 +1,425 @@
+{
+  "info": {
+    "_postman_id": "f5ba5a55-5ea0-489d-aa2a-8e1745cb0ce6",
+    "name": "Treasure Data Policy Group Tags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:11.000Z",
+    "updatedAt": "2026-10-22T02:36:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f5ba5a55-5ea0-489d-aa2a-8e1745cb0ce6"
+  },
+  "item": [
+    {
+      "name": "policy_group_tags",
+      "item": [
+        {
+          "name": "{tag}",
+          "item": [
+            {
+              "name": "delegated_admins",
+              "item": [
+                {
+                  "name": "Get the delegated admins of a policy group",
+                  "id": "3822fb17-5495-45eb-954a-5fc4f79841ad",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/policy_group_tags/:tag/delegated_admins",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policy_group_tags",
+                        ":tag",
+                        "delegated_admins"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5c8bfcf1-4125-4f9d-84b1-2e6cb7e1976f",
+                          "key": "tag",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of delegated admin user ids that manage a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "1f4f3401-a6d7-4999-9741-d1dc7855f4a8",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/policy_group_tags/:tag/delegated_admins",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "policy_group_tags",
+                            ":tag",
+                            "delegated_admins"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tag"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:12.000Z",
+                      "updatedAt": "2026-10-22T02:36:12.000Z",
+                      "uid": "35240-1f4f3401-a6d7-4999-9741-d1dc7855f4a8"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:12.000Z",
+                  "updatedAt": "2026-10-22T02:36:12.000Z",
+                  "uid": "35240-3822fb17-5495-45eb-954a-5fc4f79841ad"
+                },
+                {
+                  "name": "Update the delegated admins of a policy group",
+                  "id": "5475fbf1-993a-403e-9656-0d569ed61323",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/policy_group_tags/:tag/delegated_admins",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policy_group_tags",
+                        ":tag",
+                        "delegated_admins"
+                      ],
+                      "variable": [
+                        {
+                          "id": "86e57abb-b074-4617-823a-18ca4bff7cf3",
+                          "key": "tag",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Tags a list of delegated admin user ids to manage a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "8154d159-6c32-4fa9-889e-27d362497add",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/policy_group_tags/:tag/delegated_admins",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "policy_group_tags",
+                            ":tag",
+                            "delegated_admins"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tag"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:12.000Z",
+                      "updatedAt": "2026-10-22T02:36:12.000Z",
+                      "uid": "35240-8154d159-6c32-4fa9-889e-27d362497add"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:12.000Z",
+                  "updatedAt": "2026-10-22T02:36:12.000Z",
+                  "uid": "35240-5475fbf1-993a-403e-9656-0d569ed61323"
+                }
+              ],
+              "id": "8a801d8c-5c4a-4532-bb9e-249591254b17",
+              "createdAt": "2026-10-22T02:36:12.000Z",
+              "updatedAt": "2026-10-22T02:36:12.000Z",
+              "uid": "35240-8a801d8c-5c4a-4532-bb9e-249591254b17"
+            },
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "Get the users of a policy group",
+                  "id": "20fafef9-dba7-4d6d-a3cb-2d1cffb87b90",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/policy_group_tags/:tag/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policy_group_tags",
+                        ":tag",
+                        "users"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b83c958e-db84-498c-a217-93d31211278c",
+                          "key": "tag",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of user ids that are tagged with a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "7dadd912-53e1-4db8-a14c-b0afffb2e810",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/policy_group_tags/:tag/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "policy_group_tags",
+                            ":tag",
+                            "users"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tag"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:12.000Z",
+                      "updatedAt": "2026-10-22T02:36:12.000Z",
+                      "uid": "35240-7dadd912-53e1-4db8-a14c-b0afffb2e810"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:12.000Z",
+                  "updatedAt": "2026-10-22T02:36:12.000Z",
+                  "uid": "35240-20fafef9-dba7-4d6d-a3cb-2d1cffb87b90"
+                },
+                {
+                  "name": "Update the users of a policy group",
+                  "id": "0eb8cf53-372d-4846-a432-6c1a209b62dc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/policy_group_tags/:tag/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policy_group_tags",
+                        ":tag",
+                        "users"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8fd05eb5-abd8-47a2-b44e-5aea4ffae311",
+                          "key": "tag",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Tags a list of user ids with a policy group."
+                  },
+                  "response": [
+                    {
+                      "id": "3fcbb0e2-e781-41cb-86d9-b921a2f75417",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/policy_group_tags/:tag/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "policy_group_tags",
+                            ":tag",
+                            "users"
+                          ],
+                          "variable": [
+                            {
+                              "key": "tag"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:12.000Z",
+                      "updatedAt": "2026-10-22T02:36:12.000Z",
+                      "uid": "35240-3fcbb0e2-e781-41cb-86d9-b921a2f75417"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:12.000Z",
+                  "updatedAt": "2026-10-22T02:36:12.000Z",
+                  "uid": "35240-0eb8cf53-372d-4846-a432-6c1a209b62dc"
+                }
+              ],
+              "id": "f8d2a545-4e64-409b-8375-15968be0a4c6",
+              "createdAt": "2026-10-22T02:36:12.000Z",
+              "updatedAt": "2026-10-22T02:36:12.000Z",
+              "uid": "35240-f8d2a545-4e64-409b-8375-15968be0a4c6"
+            }
+          ],
+          "id": "f7f35664-5df0-4070-bcec-f7b7e9ca0858",
+          "createdAt": "2026-10-22T02:36:12.000Z",
+          "updatedAt": "2026-10-22T02:36:12.000Z",
+          "uid": "35240-f7f35664-5df0-4070-bcec-f7b7e9ca0858"
+        }
+      ],
+      "id": "587b9095-897a-4972-bd7e-b94ef50c42c4",
+      "createdAt": "2026-10-22T02:36:12.000Z",
+      "updatedAt": "2026-10-22T02:36:12.000Z",
+      "uid": "35240-587b9095-897a-4972-bd7e-b94ef50c42c4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

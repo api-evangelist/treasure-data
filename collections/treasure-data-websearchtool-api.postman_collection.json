@@ -1,0 +1,628 @@
+{
+  "info": {
+    "_postman_id": "9b7bf8c0-4a0f-4ddd-899d-24ea48ce767e",
+    "name": "llm-api Web Search Tool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:38:00.000Z",
+    "updatedAt": "2026-10-22T02:38:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9b7bf8c0-4a0f-4ddd-899d-24ea48ce767e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "web_search_tools",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "bc777ebd-f67f-4a85-94d3-2da1928ae043",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d0900286-e9c3-4087-a220-f84281985f33",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "564fd411-4b64-4380-a5c7-6b155aed1329",
+                      "name": "Web search tool successfully deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "web_search_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:38:00.000Z",
+                      "updatedAt": "2026-10-22T02:38:00.000Z",
+                      "uid": "35240-564fd411-4b64-4380-a5c7-6b155aed1329"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-bc777ebd-f67f-4a85-94d3-2da1928ae043"
+                },
+                {
+                  "name": "show",
+                  "id": "6f5facc4-2521-4aa0-b55a-67a2b8012d13",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4c85d41a-3f5c-4691-9fee-8cd0727c3bb7",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "17904656-84f7-48fb-a135-b899896364b1",
+                      "name": "returns the details of a specific web_search_tool",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "web_search_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"high\",\n      \"userLocation\": null,\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isManaged\": \"<boolean>\",\n      \"systemPrompt\": \"<string,null>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:38:00.000Z",
+                      "updatedAt": "2026-10-22T02:38:00.000Z",
+                      "uid": "35240-17904656-84f7-48fb-a135-b899896364b1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-6f5facc4-2521-4aa0-b55a-67a2b8012d13"
+                },
+                {
+                  "name": "update",
+                  "id": "1a7e2618-af1a-4621-b2d2-2d0eb1350a26",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": null\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "98c94b3b-ca3f-4442-bcc9-8f01bc0e88b2",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f8fc22ed-1229-4460-8780-12195cd1578b",
+                      "name": "updates the web_search_tool",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": null\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "web_search_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"high\",\n      \"userLocation\": null,\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isManaged\": \"<boolean>\",\n      \"systemPrompt\": \"<string,null>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:38:00.000Z",
+                      "updatedAt": "2026-10-22T02:38:00.000Z",
+                      "uid": "35240-f8fc22ed-1229-4460-8780-12195cd1578b"
+                    },
+                    {
+                      "id": "5632efa8-0fad-4000-a6ff-e0bec54a7d3f",
+                      "name": "PATCH /api/web_search_tools rejects {\"updatedAt\":1}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": null\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "web_search_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:38:00.000Z",
+                      "updatedAt": "2026-10-22T02:38:00.000Z",
+                      "uid": "35240-5632efa8-0fad-4000-a6ff-e0bec54a7d3f"
+                    },
+                    {
+                      "id": "3da87dbf-be5a-463d-b710-75dc09082b9c",
+                      "name": "PATCH /api/web_search_tools rejects {\"filters\":{}}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": null\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/web_search_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "web_search_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:38:00.000Z",
+                      "updatedAt": "2026-10-22T02:38:00.000Z",
+                      "uid": "35240-3da87dbf-be5a-463d-b710-75dc09082b9c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-1a7e2618-af1a-4621-b2d2-2d0eb1350a26"
+                }
+              ],
+              "id": "cfa53492-0649-48df-92a8-ccf15292b527",
+              "createdAt": "2026-10-22T02:38:00.000Z",
+              "updatedAt": "2026-10-22T02:38:00.000Z",
+              "uid": "35240-cfa53492-0649-48df-92a8-ccf15292b527"
+            },
+            {
+              "name": "create",
+              "id": "58f74d33-1daa-4906-b6d7-d07307086451",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/web_search_tools",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "web_search_tools"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3cf4f8ac-fd85-4051-b26d-e767eefd0769",
+                  "name": "creates a new WebSearchTool",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"high\",\n      \"userLocation\": null,\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isManaged\": \"<boolean>\",\n      \"systemPrompt\": \"<string,null>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-3cf4f8ac-fd85-4051-b26d-e767eefd0769"
+                },
+                {
+                  "id": "9d996faf-3af8-4b8e-b181-13ea966e7075",
+                  "name": "POST /api/web_search_tools rejects {\"updatedAt\":1}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-9d996faf-3af8-4b8e-b181-13ea966e7075"
+                },
+                {
+                  "id": "803fbd33-3b5a-4470-b674-e3868ab0e909",
+                  "name": "POST /api/web_search_tools rejects {\"filters\":{}}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"modelType\": \"gpt-5-mini\",\n      \"searchContextSize\": \"low\",\n      \"userLocation\": {\n        \"type\": \"approximate\",\n        \"country\": \"<string>\",\n        \"city\": \"<string>\",\n        \"region\": \"<string>\",\n        \"timezone\": \"<string>\"\n      },\n      \"systemPrompt\": \"<string,null>\",\n      \"filters\": {\n        \"allowed_domains\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/web_search_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "web_search_tools"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:38:00.000Z",
+                  "updatedAt": "2026-10-22T02:38:00.000Z",
+                  "uid": "35240-803fbd33-3b5a-4470-b674-e3868ab0e909"
+                }
+              ],
+              "createdAt": "2026-10-22T02:38:00.000Z",
+              "updatedAt": "2026-10-22T02:38:00.000Z",
+              "uid": "35240-58f74d33-1daa-4906-b6d7-d07307086451"
+            }
+          ],
+          "id": "64bbc740-4cd8-4b45-8c31-8839c2e599d4",
+          "createdAt": "2026-10-22T02:38:00.000Z",
+          "updatedAt": "2026-10-22T02:38:00.000Z",
+          "uid": "35240-64bbc740-4cd8-4b45-8c31-8839c2e599d4"
+        }
+      ],
+      "id": "c119b237-7ae6-472a-b730-d695f4d768bc",
+      "createdAt": "2026-10-22T02:38:00.000Z",
+      "updatedAt": "2026-10-22T02:38:00.000Z",
+      "uid": "35240-c119b237-7ae6-472a-b730-d695f4d768bc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

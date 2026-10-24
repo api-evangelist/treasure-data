@@ -1,0 +1,251 @@
+{
+  "info": {
+    "_postman_id": "2cd8e770-4fb0-4444-83db-0e53faef208c",
+    "name": "llm-api Util API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:55.000Z",
+    "updatedAt": "2026-10-22T02:37:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2cd8e770-4fb0-4444-83db-0e53faef208c"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "util",
+          "item": [
+            {
+              "name": "convert_segment_rule",
+              "item": [
+                {
+                  "name": "convert_segment_rule",
+                  "id": "b42f0c46-6596-4e16-9de4-e45be6923715",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"simplifiedIonRule\": {\n    \"conditions\": \"sint \"\n  },\n  \"parent_segment_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/util/convert_segment_rule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "util",
+                        "convert_segment_rule"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a9bf77b9-8db1-4399-8003-f6035490f187",
+                      "name": "creates a rule with only base segment references using AND logic",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"simplifiedIonRule\": {\n    \"conditions\": \"sint \"\n  },\n  \"parent_segment_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/util/convert_segment_rule",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "util",
+                            "convert_segment_rule"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"fullIonRule\": {\n    \"conditions\": [\n      {\n        \"conditions\": [\n          {\n            \"exclude\": \"<boolean>\",\n            \"type\": \"<string>\",\n            \"arrayMatching\": {},\n            \"leftValue\": {\n              \"name\": \"<string>\"\n            },\n            \"operator\": null,\n            \"id\": \"<string,null>\"\n          },\n          {\n            \"exclude\": \"<boolean>\",\n            \"type\": \"<string>\",\n            \"arrayMatching\": {},\n            \"leftValue\": null,\n            \"operator\": {},\n            \"id\": \"<string,null>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      },\n      {\n        \"conditions\": [\n          {\n            \"exclude\": \"<boolean>\",\n            \"type\": \"<string>\",\n            \"arrayMatching\": {},\n            \"leftValue\": {\n              \"name\": \"<string>\"\n            },\n            \"id\": \"<string,null>\"\n          },\n          {\n            \"exclude\": \"<boolean>\",\n            \"type\": \"<string>\",\n            \"arrayMatching\": {},\n            \"leftValue\": null,\n            \"operator\": null,\n            \"id\": \"<string,null>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:56.000Z",
+                      "updatedAt": "2026-10-22T02:37:56.000Z",
+                      "uid": "35240-a9bf77b9-8db1-4399-8003-f6035490f187"
+                    },
+                    {
+                      "id": "145d6445-70c2-43f6-acba-309c07273cae",
+                      "name": "Bad request - invalid input parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"simplifiedIonRule\": {\n    \"conditions\": \"sint \"\n  },\n  \"parent_segment_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/util/convert_segment_rule",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "util",
+                            "convert_segment_rule"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:56.000Z",
+                      "updatedAt": "2026-10-22T02:37:56.000Z",
+                      "uid": "35240-145d6445-70c2-43f6-acba-309c07273cae"
+                    },
+                    {
+                      "id": "f1d73b91-3d6d-4868-811e-0a357bef1fdd",
+                      "name": "Validation error - invalid or missing parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"simplifiedIonRule\": {\n    \"conditions\": \"sint \"\n  },\n  \"parent_segment_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/util/convert_segment_rule",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "util",
+                            "convert_segment_rule"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:56.000Z",
+                      "updatedAt": "2026-10-22T02:37:56.000Z",
+                      "uid": "35240-f1d73b91-3d6d-4868-811e-0a357bef1fdd"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:56.000Z",
+                  "updatedAt": "2026-10-22T02:37:56.000Z",
+                  "uid": "35240-b42f0c46-6596-4e16-9de4-e45be6923715"
+                }
+              ],
+              "id": "071c16cb-84a9-42c4-8b9e-a280ae28bb66",
+              "createdAt": "2026-10-22T02:37:56.000Z",
+              "updatedAt": "2026-10-22T02:37:56.000Z",
+              "uid": "35240-071c16cb-84a9-42c4-8b9e-a280ae28bb66"
+            }
+          ],
+          "id": "4ba10e65-0121-4eb4-ae86-1afef67d4a2b",
+          "createdAt": "2026-10-22T02:37:56.000Z",
+          "updatedAt": "2026-10-22T02:37:56.000Z",
+          "uid": "35240-4ba10e65-0121-4eb4-ae86-1afef67d4a2b"
+        }
+      ],
+      "id": "6e9db9e7-d8b8-412d-ab54-8bc87165963d",
+      "createdAt": "2026-10-22T02:37:56.000Z",
+      "updatedAt": "2026-10-22T02:37:56.000Z",
+      "uid": "35240-6e9db9e7-d8b8-412d-ab54-8bc87165963d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

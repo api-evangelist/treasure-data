@@ -1,0 +1,1875 @@
+{
+  "info": {
+    "_postman_id": "c190cbba-946a-4bd1-bd62-122ed8f857c4",
+    "name": "cdp-api Folders API",
+    "description": "All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under \"/entities\".",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:34:54.000Z",
+    "updatedAt": "2026-10-22T02:34:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c190cbba-946a-4bd1-bd62-122ed8f857c4"
+  },
+  "item": [
+    {
+      "name": "audiences",
+      "item": [
+        {
+          "name": "{audienceId}",
+          "item": [
+            {
+              "name": "folders",
+              "item": [
+                {
+                  "name": "{folderId}",
+                  "item": [
+                    {
+                      "name": "put_in",
+                      "item": [
+                        {
+                          "name": "Move segment into folder (legacy)",
+                          "id": "e57cd508-d969-4885-8c8e-0ecfd3015de0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "folders",
+                                ":folderId",
+                                "put_in"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b0ebe1f2-20a1-491f-b2c5-6c422f4479bb",
+                                  "key": "audienceId",
+                                  "value": "<long>",
+                                  "description": "(Required) Master segment ID"
+                                },
+                                {
+                                  "id": "3009ad20-5221-4fdf-bbc7-b58382e2cf83",
+                                  "key": "folderId",
+                                  "value": "<long>",
+                                  "description": "(Required) Segment folder to put segments in"
+                                }
+                              ]
+                            },
+                            "description": "Move a segment or segments into an existing folder.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                          },
+                          "response": [
+                            {
+                              "id": "a0e79c63-1715-4df3-a5c7-4d1aac9385ed",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-a0e79c63-1715-4df3-a5c7-4d1aac9385ed"
+                            },
+                            {
+                              "id": "92219798-4ab6-41b7-8ca7-8f414dc7527a",
+                              "name": "Given parameters are not valid",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-92219798-4ab6-41b7-8ca7-8f414dc7527a"
+                            },
+                            {
+                              "id": "2fb513ec-4a7a-4c29-88a5-21f69e4d41da",
+                              "name": "Unauthorized; You don't provide valid credentials. Maybe you didn't specify valid TD's Master API Key as 'TD1 {Your TD Master API Key}'.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-2fb513ec-4a7a-4c29-88a5-21f69e4d41da"
+                            },
+                            {
+                              "id": "8d0d42c2-aa28-43b2-b624-3f0b778d5cdf",
+                              "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-8d0d42c2-aa28-43b2-b624-3f0b778d5cdf"
+                            },
+                            {
+                              "id": "1ab9f420-d7fa-4275-866f-8c60ebd977e3",
+                              "name": "The specified resource was not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-1ab9f420-d7fa-4275-866f-8c60ebd977e3"
+                            },
+                            {
+                              "id": "1104b2bd-91e3-434c-92a4-85dabc895a74",
+                              "name": "There is a high possibility of error of the authentication system. Please check the contents and authority of the key. Please contact the TD support team if you do not resolve it.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-1104b2bd-91e3-434c-92a4-85dabc895a74"
+                            },
+                            {
+                              "id": "5a420ba7-1726-4586-87d4-29d653a0b9cf",
+                              "name": "System error. Because there is a possibility of a temporary error due to network trouble and so on, we recommend several times retry on request side. Please contact the TD support team if you do not resolve it.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId/put_in",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "audiences",
+                                    ":audienceId",
+                                    "folders",
+                                    ":folderId",
+                                    "put_in"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "audienceId"
+                                    },
+                                    {
+                                      "key": "folderId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<long>\",\n  \"error\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:34:55.000Z",
+                              "updatedAt": "2026-10-22T02:34:55.000Z",
+                              "uid": "35240-5a420ba7-1726-4586-87d4-29d653a0b9cf"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:34:55.000Z",
+                          "updatedAt": "2026-10-22T02:34:55.000Z",
+                          "uid": "35240-e57cd508-d969-4885-8c8e-0ecfd3015de0"
+                        }
+                      ],
+                      "id": "fb289b88-0481-4ba5-8820-af4fca21d102",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-fb289b88-0481-4ba5-8820-af4fca21d102"
+                    },
+                    {
+                      "name": "Retrieve single segment folder",
+                      "id": "68bfcb38-c179-4c65-ad0c-9a2cd36b650e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "folders",
+                            ":folderId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "55d74b53-860c-4ab9-b3bc-744d71c53df9",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master segment ID"
+                            },
+                            {
+                              "id": "5e37c9a4-7cbb-40c2-9b39-544c6f95d866",
+                              "key": "folderId",
+                              "value": "<long>",
+                              "description": "(Required) Segment Folder ID"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single segment folder based on a parent segment identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "6b9fdbf2-401f-470f-b283-bec26c7b6451",
+                          "name": "Retrieves a single segment folder.\n\nN.B. that `createdAt` can be `null`, meaning that it is not known\nwhich user created the folder.\n\nN.B. that `updatedAt` can be `null`, meaning that is is not known\nwhich user last updated the folder.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "folders",
+                                ":folderId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "folderId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"5871\",\n  \"audienceId\": \"458\",\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"216333054\",\n    \"td_user_id\": \"1258688\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"9968\",\n    \"td_user_id\": \"63203376487\",\n    \"name\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:34:55.000Z",
+                          "updatedAt": "2026-10-22T02:34:55.000Z",
+                          "uid": "35240-6b9fdbf2-401f-470f-b283-bec26c7b6451"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-68bfcb38-c179-4c65-ad0c-9a2cd36b650e"
+                    },
+                    {
+                      "name": "Update segment folder (legacy)",
+                      "id": "c753dbea-5982-4199-9483-978e7a7553a9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "folders",
+                            ":folderId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d4358e5d-69fa-4fd4-9cda-b106355fac1a",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master segment ID"
+                            },
+                            {
+                              "id": "0679d613-8ba3-492f-bacc-f82a35d6184a",
+                              "key": "folderId",
+                              "value": "<long>",
+                              "description": "(Required) Segment folder to update"
+                            }
+                          ]
+                        },
+                        "description": "Update a segment folder.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                      },
+                      "response": [
+                        {
+                          "id": "622eab22-1ce5-4046-bb84-66e8c332abfd",
+                          "name": "Retrieves the segment folder which was updated\n\nN.B. that `createdAt` can be `null`, meaning that it is not known\nwhich user created the folder.\n",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "folders",
+                                ":folderId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "folderId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"5871\",\n  \"audienceId\": \"458\",\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"216333054\",\n    \"td_user_id\": \"1258688\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"9968\",\n    \"td_user_id\": \"63203376487\",\n    \"name\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:34:55.000Z",
+                          "updatedAt": "2026-10-22T02:34:55.000Z",
+                          "uid": "35240-622eab22-1ce5-4046-bb84-66e8c332abfd"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-c753dbea-5982-4199-9483-978e7a7553a9"
+                    },
+                    {
+                      "name": "Delete segment folder (legacy)",
+                      "id": "6e53bd36-3ded-41e2-8ce1-0550b460c984",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "folders",
+                            ":folderId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "80f0b14a-b5a6-4e36-84e2-edcfb1f14630",
+                              "key": "audienceId",
+                              "value": "<long>",
+                              "description": "(Required) Master segment ID"
+                            },
+                            {
+                              "id": "de30bc5e-ad9b-4587-93ef-8a0c6dc56092",
+                              "key": "folderId",
+                              "value": "<long>",
+                              "description": "(Required) Segment folder to update"
+                            }
+                          ]
+                        },
+                        "description": "Delete a segment folder.\n\n_This endpoint is for Audience Studio legacy. For the latest Audience Studio, contact your Customer Success Representative._"
+                      },
+                      "response": [
+                        {
+                          "id": "7cc9dff0-0807-421d-b62b-64d994820162",
+                          "name": "The segment folder was deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/audiences/:audienceId/folders/:folderId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "audiences",
+                                ":audienceId",
+                                "folders",
+                                ":folderId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "audienceId"
+                                },
+                                {
+                                  "key": "folderId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T02:34:55.000Z",
+                          "updatedAt": "2026-10-22T02:34:55.000Z",
+                          "uid": "35240-7cc9dff0-0807-421d-b62b-64d994820162"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-6e53bd36-3ded-41e2-8ce1-0550b460c984"
+                    }
+                  ],
+                  "id": "a57a6b4d-e5c7-46d9-93ac-f6196f79f0c5",
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-a57a6b4d-e5c7-46d9-93ac-f6196f79f0c5"
+                },
+                {
+                  "name": "Create new segment folder",
+                  "id": "b6641230-0d27-4162-a443-a385ad76567b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/folders",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "folders"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ab09732d-135c-4c51-ae3a-e28bc415b4cf",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Master segment ID"
+                        }
+                      ]
+                    },
+                    "description": "Create a new parent segment folder."
+                  },
+                  "response": [
+                    {
+                      "id": "7c2452f1-e771-499a-ab1c-48b658892061",
+                      "name": "Returns the segment folder which was created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/folders",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "folders"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"5871\",\n  \"audienceId\": \"458\",\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"createdBy\": {\n    \"id\": \"216333054\",\n    \"td_user_id\": \"1258688\",\n    \"name\": \"<string>\"\n  },\n  \"updatedBy\": {\n    \"id\": \"9968\",\n    \"td_user_id\": \"63203376487\",\n    \"name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-7c2452f1-e771-499a-ab1c-48b658892061"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-b6641230-0d27-4162-a443-a385ad76567b"
+                }
+              ],
+              "id": "83e30a16-e134-48fa-b3e7-f55325c00f59",
+              "createdAt": "2026-10-22T02:34:55.000Z",
+              "updatedAt": "2026-10-22T02:34:55.000Z",
+              "uid": "35240-83e30a16-e134-48fa-b3e7-f55325c00f59"
+            }
+          ],
+          "id": "674a70eb-854d-45bf-87c4-5e3f2ab3aee2",
+          "createdAt": "2026-10-22T02:34:55.000Z",
+          "updatedAt": "2026-10-22T02:34:55.000Z",
+          "uid": "35240-674a70eb-854d-45bf-87c4-5e3f2ab3aee2"
+        }
+      ],
+      "id": "1798edc4-448e-43be-b148-4b653abd9f8d",
+      "createdAt": "2026-10-22T02:34:55.000Z",
+      "updatedAt": "2026-10-22T02:34:55.000Z",
+      "uid": "35240-1798edc4-448e-43be-b148-4b653abd9f8d"
+    },
+    {
+      "name": "entities",
+      "item": [
+        {
+          "name": "by-folder",
+          "item": [
+            {
+              "name": "{folderId}",
+              "item": [
+                {
+                  "name": "Retrieve list of objects under specified folder",
+                  "id": "bb0fc9c5-e8d9-475f-ab31-17d6374ff8e4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/by-folder/:folderId?depth=<long>&with_rule=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "by-folder",
+                        ":folderId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Depth of retrieved folders",
+                          "key": "depth",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Set false to ignore the segment rule",
+                          "key": "with_rule",
+                          "value": "true"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "28b61a47-7c4a-471e-bf40-de32ee52ddc4",
+                          "key": "folderId",
+                          "value": "<long>",
+                          "description": "(Required) Segment Folder ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of objects under a specified folder, including child folders, segments, batch segments, predictive scoring models, funnels, Profile API tokens and Journeys."
+                  },
+                  "response": [
+                    {
+                      "id": "0b22be8e-905d-41b6-bfe3-5984c681abe4",
+                      "name": "Returns a list of entities under the specified folder. The specified folder is also included.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/by-folder/:folderId?depth=<long>&with_rule=true",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "by-folder",
+                            ":folderId"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Depth of retrieved folders",
+                              "key": "depth",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "Set false to ignore the segment rule",
+                              "key": "with_rule",
+                              "value": "true"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "folderId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"5\",\n      \"type\": \"folder-segment\",\n      \"attributes\": {\n        \"audienceId\": \"9339001\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"permissions\": {\n          \"view\": \"<boolean>\",\n          \"edit\": \"<boolean>\"\n        },\n        \"enrichments\": \"<object,null>\",\n        \"rule\": \"<object,null>\"\n      },\n      \"relationships\": {\n        \"children\": {\n          \"data\": [\n            {\n              \"data\": {\n                \"id\": \"41873667140\",\n                \"type\": \"journey\"\n              }\n            },\n            {\n              \"data\": {\n                \"id\": \"1230732\",\n                \"type\": \"funnel\"\n              }\n            }\n          ]\n        },\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"474507229\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"id\": \"286818\",\n            \"type\": \"user\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"id\": \"113191\",\n            \"type\": \"user\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"490\",\n      \"type\": \"folder-segment\",\n      \"attributes\": {\n        \"audienceId\": \"58878008942\",\n        \"name\": \"<string>\",\n        \"description\": \"<string,null>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"permissions\": {\n          \"view\": \"<boolean>\",\n          \"edit\": \"<boolean>\"\n        },\n        \"enrichments\": \"<object,null>\",\n        \"rule\": \"<object,null>\"\n      },\n      \"relationships\": {\n        \"children\": {\n          \"data\": [\n            {\n              \"data\": {\n                \"id\": \"9055438910\",\n                \"type\": \"segment-batch\"\n              }\n            },\n            {\n              \"data\": {\n                \"id\": \"465317725\",\n                \"type\": \"predictive-segment\"\n              }\n            }\n          ]\n        },\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"8222975493\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"id\": \"641001076\",\n            \"type\": \"user\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": null\n        }\n      }\n    }\n  ],\n  \"included\": [\n    {\n      \"id\": \"9958\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"2969837470\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"4\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"21\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-0b22be8e-905d-41b6-bfe3-5984c681abe4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-bb0fc9c5-e8d9-475f-ab31-17d6374ff8e4"
+                }
+              ],
+              "id": "bca39d3a-c9b7-4766-928c-a534d3fa2a5b",
+              "createdAt": "2026-10-22T02:34:55.000Z",
+              "updatedAt": "2026-10-22T02:34:55.000Z",
+              "uid": "35240-bca39d3a-c9b7-4766-928c-a534d3fa2a5b"
+            }
+          ],
+          "id": "7799cb70-48c2-454f-b9b8-1175672f21eb",
+          "createdAt": "2026-10-22T02:34:55.000Z",
+          "updatedAt": "2026-10-22T02:34:55.000Z",
+          "uid": "35240-7799cb70-48c2-454f-b9b8-1175672f21eb"
+        },
+        {
+          "name": "folders",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Retrieve folder by ID",
+                  "id": "470cc5f0-3823-47a1-b80a-9bba9cc006bd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "120a2228-22ac-46a3-97b5-31619582b07a",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Folder ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a folder by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "1a8b1e10-8989-449c-b46c-1d0755a57026",
+                      "name": "Returns a folder by ID.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"7607149506\",\n    \"type\": \"folder-segment\",\n    \"attributes\": {\n      \"audienceId\": \"8134\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"permissions\": {\n        \"view\": \"<boolean>\",\n        \"edit\": \"<boolean>\"\n      },\n      \"enrichments\": \"<object,null>\",\n      \"rule\": \"<object,null>\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"48608364\",\n              \"type\": \"funnel\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"5369020\",\n              \"type\": \"segment-realtime\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"53794\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"6370088261\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"6454471271\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"8\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"28\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"5135249706\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-1a8b1e10-8989-449c-b46c-1d0755a57026"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-470cc5f0-3823-47a1-b80a-9bba9cc006bd"
+                },
+                {
+                  "name": "Update folder",
+                  "id": "c9a5783e-974b-4d6d-ba18-e81d0f5225ad",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"8140394101\",\n  \"type\": \"folder-segment\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\"\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"874673560\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c0b427d9-ccc4-4a8b-8d6e-fcfa930e7a44",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Folder to update"
+                        }
+                      ]
+                    },
+                    "description": "Update a folder by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "02c841ee-a1ee-441c-9839-5b9146d18ba5",
+                      "name": "Folder to update",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"8140394101\",\n  \"type\": \"folder-segment\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\"\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"874673560\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"7607149506\",\n    \"type\": \"folder-segment\",\n    \"attributes\": {\n      \"audienceId\": \"8134\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"permissions\": {\n        \"view\": \"<boolean>\",\n        \"edit\": \"<boolean>\"\n      },\n      \"enrichments\": \"<object,null>\",\n      \"rule\": \"<object,null>\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"48608364\",\n              \"type\": \"funnel\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"5369020\",\n              \"type\": \"segment-realtime\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"53794\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"6370088261\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"6454471271\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"8\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"28\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"5135249706\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-02c841ee-a1ee-441c-9839-5b9146d18ba5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-c9a5783e-974b-4d6d-ba18-e81d0f5225ad"
+                },
+                {
+                  "name": "Delete folder",
+                  "id": "4cd72cff-e465-4f6f-b233-facae8b20405",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/folders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "folders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "752756f6-96fc-422d-bb77-48d878d8499e",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) Delete a folder"
+                        }
+                      ]
+                    },
+                    "description": "Delete a folder by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "108dce67-c083-4e44-8121-c369ab37a52f",
+                      "name": "Delete a folder",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"7607149506\",\n    \"type\": \"folder-segment\",\n    \"attributes\": {\n      \"audienceId\": \"8134\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"permissions\": {\n        \"view\": \"<boolean>\",\n        \"edit\": \"<boolean>\"\n      },\n      \"enrichments\": \"<object,null>\",\n      \"rule\": \"<object,null>\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"48608364\",\n              \"type\": \"funnel\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"5369020\",\n              \"type\": \"segment-realtime\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"53794\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"6370088261\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"6454471271\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"8\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"28\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"5135249706\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-108dce67-c083-4e44-8121-c369ab37a52f"
+                    },
+                    {
+                      "id": "02189bea-9a87-4a32-8bf0-1e1c7251e393",
+                      "name": "Given parameters are not valid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"INVALID_FORMAT\"\n      }\n    },\n    {\n      \"code\": \"bad-parameter-error\",\n      \"status\": \"400\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"meta\": {\n        \"parameterCode\": \"SHOULD_BE_ARRAY\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-02189bea-9a87-4a32-8bf0-1e1c7251e393"
+                    },
+                    {
+                      "id": "63a6cfe3-ffe7-4497-a6c8-ec21fcd72983",
+                      "name": "Requested resource or action is not allowed because you don't have sufficient permissions",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_VIEW_REQUIRED\"\n      }\n    },\n    {\n      \"code\": \"permission-error\",\n      \"status\": \"403\",\n      \"detail\": \"<string>\",\n      \"meta\": {\n        \"permissionCode\": \"SEGMENT_FOLDER_EDIT_REQUIRED\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-63a6cfe3-ffe7-4497-a6c8-ec21fcd72983"
+                    },
+                    {
+                      "id": "b9f71850-d748-4c29-890d-5c6d82b812c9",
+                      "name": "The specified resource is not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"record-not-found-error\",\n      \"status\": \"404\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-b9f71850-d748-4c29-890d-5c6d82b812c9"
+                    },
+                    {
+                      "id": "a3bf5f6a-7a72-4df8-8618-dc78ae45606a",
+                      "name": "The specified resource conflicts; having dependent segments, referencing segments, etc.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/folders/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "folders",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {\n    \"id\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"deletion\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"referencedBySegments\": [\n    {\n      \"id\": \"1\"\n    },\n    {\n      \"id\": \"695361099\"\n    }\n  ],\n  \"referencedByPredictiveSegments\": [\n    {\n      \"id\": \"409335\"\n    },\n    {\n      \"id\": \"73\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:55.000Z",
+                      "updatedAt": "2026-10-22T02:34:55.000Z",
+                      "uid": "35240-a3bf5f6a-7a72-4df8-8618-dc78ae45606a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-4cd72cff-e465-4f6f-b233-facae8b20405"
+                }
+              ],
+              "id": "f29c0798-bcec-4628-99a0-ebf2319be9f8",
+              "createdAt": "2026-10-22T02:34:55.000Z",
+              "updatedAt": "2026-10-22T02:34:55.000Z",
+              "uid": "35240-f29c0798-bcec-4628-99a0-ebf2319be9f8"
+            },
+            {
+              "name": "Create folder",
+              "id": "54498887-4d05-4bd9-bd02-9903b05fbf3a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"8140394101\",\n  \"type\": \"folder-segment\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\"\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"874673560\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/entities/folders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "entities",
+                    "folders"
+                  ]
+                },
+                "description": "Create a new folder."
+              },
+              "response": [
+                {
+                  "id": "f370459b-f16a-4931-8d8d-e9fe86a3990f",
+                  "name": "Create a folder",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"8140394101\",\n  \"type\": \"folder-segment\",\n  \"attributes\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\"\n  },\n  \"relationships\": {\n    \"parentFolder\": {\n      \"data\": {\n        \"id\": \"874673560\",\n        \"type\": \"folder-segment\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/folders",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "folders"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.treasuredata.v1+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"7607149506\",\n    \"type\": \"folder-segment\",\n    \"attributes\": {\n      \"audienceId\": \"8134\",\n      \"name\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"permissions\": {\n        \"view\": \"<boolean>\",\n        \"edit\": \"<boolean>\"\n      },\n      \"enrichments\": \"<object,null>\",\n      \"rule\": \"<object,null>\"\n    },\n    \"relationships\": {\n      \"children\": {\n        \"data\": [\n          {\n            \"data\": {\n              \"id\": \"48608364\",\n              \"type\": \"funnel\"\n            }\n          },\n          {\n            \"data\": {\n              \"id\": \"5369020\",\n              \"type\": \"segment-realtime\"\n            }\n          }\n        ]\n      },\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"53794\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"createdBy\": {\n        \"data\": {\n          \"id\": \"6370088261\",\n          \"type\": \"user\"\n        }\n      },\n      \"updatedBy\": {\n        \"data\": null\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"id\": \"6454471271\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"8\",\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"28\",\n      \"type\": \"user\",\n      \"attributes\": {\n        \"tdUserId\": \"5135249706\",\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:34:55.000Z",
+                  "updatedAt": "2026-10-22T02:34:55.000Z",
+                  "uid": "35240-f370459b-f16a-4931-8d8d-e9fe86a3990f"
+                }
+              ],
+              "createdAt": "2026-10-22T02:34:55.000Z",
+              "updatedAt": "2026-10-22T02:34:55.000Z",
+              "uid": "35240-54498887-4d05-4bd9-bd02-9903b05fbf3a"
+            }
+          ],
+          "id": "e51a39a7-1cd1-4483-aef6-890939b9eaf9",
+          "createdAt": "2026-10-22T02:34:55.000Z",
+          "updatedAt": "2026-10-22T02:34:55.000Z",
+          "uid": "35240-e51a39a7-1cd1-4483-aef6-890939b9eaf9"
+        }
+      ],
+      "id": "bc78e0fc-a3b8-4b95-93c4-32d84b6e11e2",
+      "createdAt": "2026-10-22T02:34:55.000Z",
+      "updatedAt": "2026-10-22T02:34:55.000Z",
+      "uid": "35240-bc78e0fc-a3b8-4b95-93c4-32d84b6e11e2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-cdp.treasuredata.com"
+    }
+  ]
+}

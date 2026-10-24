@@ -1,0 +1,1159 @@
+{
+  "info": {
+    "_postman_id": "bbcf8924-9439-4861-b1e7-cb26fc9b6409",
+    "name": "Treasure Data Access Control - Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:07.000Z",
+    "updatedAt": "2026-10-22T02:33:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bbcf8924-9439-4861-b1e7-cb26fc9b6409"
+  },
+  "item": [
+    {
+      "name": "access_control",
+      "item": [
+        {
+          "name": "policies",
+          "item": [
+            {
+              "name": "{policy_id}",
+              "item": [
+                {
+                  "name": "users",
+                  "item": [
+                    {
+                      "name": "{user_id}",
+                      "item": [
+                        {
+                          "name": "Attach",
+                          "id": "ece479cb-cfef-4a43-a855-58659f5614db",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/users/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "users",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bd17eb80-c597-4b9d-b665-8e1430a360ba",
+                                  "key": "policy_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "628340bb-7f21-4a77-9492-113c6df949ca",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "This operation attaches a policy to a user."
+                          },
+                          "response": [
+                            {
+                              "id": "d436a93b-5e25-4cce-a7dc-f3f97638da49",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/policies/:policy_id/users/:user_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "policies",
+                                    ":policy_id",
+                                    "users",
+                                    ":user_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "policy_id"
+                                    },
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                              "createdAt": "2026-10-22T02:33:08.000Z",
+                              "updatedAt": "2026-10-22T02:33:08.000Z",
+                              "uid": "35240-d436a93b-5e25-4cce-a7dc-f3f97638da49"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-ece479cb-cfef-4a43-a855-58659f5614db"
+                        },
+                        {
+                          "name": "Detach",
+                          "id": "ce5dcc80-c120-43d3-9912-4aa1342813ef",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/users/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "users",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a9f1df76-09d8-4a5c-913c-6b82aea1c1c1",
+                                  "key": "policy_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "268f2bfe-a107-427b-9c2b-a9a7def0d979",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Detaches a user from a policy."
+                          },
+                          "response": [
+                            {
+                              "id": "21617b41-9a74-4cd6-a691-718db99d4b43",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/policies/:policy_id/users/:user_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "policies",
+                                    ":policy_id",
+                                    "users",
+                                    ":user_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "policy_id"
+                                    },
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                              "createdAt": "2026-10-22T02:33:08.000Z",
+                              "updatedAt": "2026-10-22T02:33:08.000Z",
+                              "uid": "35240-21617b41-9a74-4cd6-a691-718db99d4b43"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-ce5dcc80-c120-43d3-9912-4aa1342813ef"
+                        }
+                      ],
+                      "id": "a444f937-cb76-4779-b7ea-4b402983c7bd",
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-a444f937-cb76-4779-b7ea-4b402983c7bd"
+                    }
+                  ],
+                  "id": "c7c07f65-f77f-4f1b-b4a3-534d50d25cd5",
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-c7c07f65-f77f-4f1b-b4a3-534d50d25cd5"
+                },
+                {
+                  "name": "Get an Access Control Policy",
+                  "id": "e64d58f8-0329-4e1d-835e-5104bda9eff6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7d94f3fe-decd-4b73-a14a-b7b6531461e4",
+                          "key": "policy_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves information about the specified policy."
+                  },
+                  "response": [
+                    {
+                      "id": "9c834343-57c5-4607-90c6-5f039e1210bf",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-9c834343-57c5-4607-90c6-5f039e1210bf"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-e64d58f8-0329-4e1d-835e-5104bda9eff6"
+                },
+                {
+                  "name": "Update an Access Control Policy",
+                  "id": "8baff322-4f18-4f00-8f91-be08f86de13d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"policy\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d8bdeb69-393c-4f88-811a-bdadeec36162",
+                          "key": "policy_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates information related to a policy."
+                  },
+                  "response": [
+                    {
+                      "id": "a678cc3c-265b-4f82-a105-92bcf55516c3",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"policy\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-a678cc3c-265b-4f82-a105-92bcf55516c3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-8baff322-4f18-4f00-8f91-be08f86de13d"
+                },
+                {
+                  "name": "Delete an Access Control Policy",
+                  "id": "879ca3f2-96c3-4d72-987c-e173e627a6fc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "062ad546-3854-47e6-85e5-fbbc75f5f74a",
+                          "key": "policy_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a policy."
+                  },
+                  "response": [
+                    {
+                      "id": "2f2858d3-5bc2-4339-963c-62aeed6b3ba9",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "policy_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-2f2858d3-5bc2-4339-963c-62aeed6b3ba9"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-879ca3f2-96c3-4d72-987c-e173e627a6fc"
+                }
+              ],
+              "id": "cfae3d58-f619-4991-9ca6-c82ec5d2399a",
+              "createdAt": "2026-10-22T02:33:08.000Z",
+              "updatedAt": "2026-10-22T02:33:08.000Z",
+              "uid": "35240-cfae3d58-f619-4991-9ca6-c82ec5d2399a"
+            },
+            {
+              "name": "get Access Control Policies",
+              "id": "df7674ee-7235-439f-91df-1737778cb26b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access_control/policies?column_permission_tag=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access_control",
+                    "policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "Return only policies that refer to the specified tag",
+                      "key": "column_permission_tag",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of policies."
+              },
+              "response": [
+                {
+                  "id": "87c26097-464f-4531-b132-062770814311",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policies?column_permission_tag=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policies"
+                      ],
+                      "query": [
+                        {
+                          "description": "Return only policies that refer to the specified tag",
+                          "key": "column_permission_tag",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  }\n]",
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-87c26097-464f-4531-b132-062770814311"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:08.000Z",
+              "updatedAt": "2026-10-22T02:33:08.000Z",
+              "uid": "35240-df7674ee-7235-439f-91df-1737778cb26b"
+            },
+            {
+              "name": "Create an Access Control Policy",
+              "id": "372ba5ac-8b93-4fa6-9134-b96b18a102f7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policy\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access_control/policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access_control",
+                    "policies"
+                  ]
+                },
+                "description": "Creates a policy."
+              },
+              "response": [
+                {
+                  "id": "f8cd697e-78f8-435a-bffc-a4ebc2e1e60f",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"policy\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/policies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "policies"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-f8cd697e-78f8-435a-bffc-a4ebc2e1e60f"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:08.000Z",
+              "updatedAt": "2026-10-22T02:33:08.000Z",
+              "uid": "35240-372ba5ac-8b93-4fa6-9134-b96b18a102f7"
+            }
+          ],
+          "id": "cc3a744f-0eb3-4fcc-b39d-da5e734363b2",
+          "createdAt": "2026-10-22T02:33:08.000Z",
+          "updatedAt": "2026-10-22T02:33:08.000Z",
+          "uid": "35240-cc3a744f-0eb3-4fcc-b39d-da5e734363b2"
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "policies",
+                  "item": [
+                    {
+                      "name": "{policy_id}",
+                      "item": [
+                        {
+                          "name": "Attach a policy to a user",
+                          "id": "5deb6183-153d-46bd-876d-f42ebc5ce085",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/policies/:policy_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "policies",
+                                ":policy_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "af6d57f8-afd0-4eee-9c95-b9cdc360cde7",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6ce2e719-845d-49a3-8be1-52ec9e27b079",
+                                  "key": "policy_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Attaches a policy to a user."
+                          },
+                          "response": [
+                            {
+                              "id": "0f1df3e0-3a19-46d5-9bad-e3e869464cc8",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/users/:user_id/policies/:policy_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "users",
+                                    ":user_id",
+                                    "policies",
+                                    ":policy_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "policy_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                              "createdAt": "2026-10-22T02:33:08.000Z",
+                              "updatedAt": "2026-10-22T02:33:08.000Z",
+                              "uid": "35240-0f1df3e0-3a19-46d5-9bad-e3e869464cc8"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-5deb6183-153d-46bd-876d-f42ebc5ce085"
+                        },
+                        {
+                          "name": "Detach a Policy from a User",
+                          "id": "b715ce45-3b02-4733-9d54-e56184c991ef",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/policies/:policy_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "policies",
+                                ":policy_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0051603b-cdbf-4d51-ad78-474952794dd8",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "4b0389bf-46e0-4dfa-9193-685f911924c0",
+                                  "key": "policy_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Detaches a policy from a user."
+                          },
+                          "response": [
+                            {
+                              "id": "1bf1893a-1d83-4677-832b-5bb5f884576f",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/users/:user_id/policies/:policy_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "users",
+                                    ":user_id",
+                                    "policies",
+                                    ":policy_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "policy_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_count\": \"<integer>\"\n}",
+                              "createdAt": "2026-10-22T02:33:08.000Z",
+                              "updatedAt": "2026-10-22T02:33:08.000Z",
+                              "uid": "35240-1bf1893a-1d83-4677-832b-5bb5f884576f"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-b715ce45-3b02-4733-9d54-e56184c991ef"
+                        }
+                      ],
+                      "id": "c245434b-0ee5-4788-a918-be1f6f09a207",
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-c245434b-0ee5-4788-a918-be1f6f09a207"
+                    },
+                    {
+                      "name": "get User Policies",
+                      "id": "90214379-4cb0-494e-b1b3-79808c857419",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/users/:user_id/policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "users",
+                            ":user_id",
+                            "policies"
+                          ],
+                          "variable": [
+                            {
+                              "id": "087cf16b-680a-4957-9b90-ccf857550644",
+                              "key": "user_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of policies by user."
+                      },
+                      "response": [
+                        {
+                          "id": "47f724ad-ffbc-4413-96cd-e58532916209",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/policies",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "policies"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-47f724ad-ffbc-4413-96cd-e58532916209"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-90214379-4cb0-494e-b1b3-79808c857419"
+                    },
+                    {
+                      "name": "Update User Policies",
+                      "id": "90c39685-92cb-419f-a7fa-49743269560d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"policy_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/users/:user_id/policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "users",
+                            ":user_id",
+                            "policies"
+                          ],
+                          "variable": [
+                            {
+                              "id": "56090328-6e5c-4d99-93fc-f8d8a63a004c",
+                              "key": "user_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates policies by user ID."
+                      },
+                      "response": [
+                        {
+                          "id": "a3ba9aae-33b8-4a1e-ac42-0c06fa9f7b78",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"policy_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/policies",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "policies"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"user_count\": \"<integer>\"\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:08.000Z",
+                          "updatedAt": "2026-10-22T02:33:08.000Z",
+                          "uid": "35240-a3ba9aae-33b8-4a1e-ac42-0c06fa9f7b78"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:08.000Z",
+                      "updatedAt": "2026-10-22T02:33:08.000Z",
+                      "uid": "35240-90c39685-92cb-419f-a7fa-49743269560d"
+                    }
+                  ],
+                  "id": "f8988fa3-2312-4914-afc0-950f08dd2d21",
+                  "createdAt": "2026-10-22T02:33:08.000Z",
+                  "updatedAt": "2026-10-22T02:33:08.000Z",
+                  "uid": "35240-f8988fa3-2312-4914-afc0-950f08dd2d21"
+                }
+              ],
+              "id": "05966a64-a870-42dd-9820-e4ac5a4be468",
+              "createdAt": "2026-10-22T02:33:08.000Z",
+              "updatedAt": "2026-10-22T02:33:08.000Z",
+              "uid": "35240-05966a64-a870-42dd-9820-e4ac5a4be468"
+            }
+          ],
+          "id": "fd74a9ce-27f8-4152-816d-55c938fde8f5",
+          "createdAt": "2026-10-22T02:33:08.000Z",
+          "updatedAt": "2026-10-22T02:33:08.000Z",
+          "uid": "35240-fd74a9ce-27f8-4152-816d-55c938fde8f5"
+        }
+      ],
+      "id": "d216e738-6c50-4e77-912e-ba4cb9558d0f",
+      "createdAt": "2026-10-22T02:33:08.000Z",
+      "updatedAt": "2026-10-22T02:33:08.000Z",
+      "uid": "35240-d216e738-6c50-4e77-912e-ba4cb9558d0f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

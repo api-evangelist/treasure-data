@@ -1,0 +1,1714 @@
+{
+  "info": {
+    "_postman_id": "99fd47a3-728e-442e-9635-88ae7e9e4375",
+    "name": "Treasure Workflow Pool API",
+    "description": "Treasure Workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:16.000Z",
+    "updatedAt": "2026-10-22T02:36:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-99fd47a3-728e-442e-9635-88ae7e9e4375"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "pool_rules",
+          "item": [
+            {
+              "name": "{poolRuleId}",
+              "item": [
+                {
+                  "name": "Delete a pool rule",
+                  "id": "e0e64b8c-1105-4be4-bab2-e2be5c8977cd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules",
+                        ":poolRuleId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e5417902-0ed7-49f0-a599-516658cf86e5",
+                          "key": "poolRuleId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete a pool rule."
+                  },
+                  "response": [
+                    {
+                      "id": "23379aaf-5510-4d30-b3b5-356a2a1407c4",
+                      "name": "Pool rule deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-23379aaf-5510-4d30-b3b5-356a2a1407c4"
+                    },
+                    {
+                      "id": "637fe843-abf4-428c-a49b-033e1f346b28",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-637fe843-abf4-428c-a49b-033e1f346b28"
+                    },
+                    {
+                      "id": "8be073a7-626e-4f39-bc97-e2feaf3bad76",
+                      "name": "Pool rule not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-8be073a7-626e-4f39-bc97-e2feaf3bad76"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-e0e64b8c-1105-4be4-bab2-e2be5c8977cd"
+                },
+                {
+                  "name": "Get a pool rule",
+                  "id": "c0df373b-720d-482b-96b2-dc64fa12a21f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules",
+                        ":poolRuleId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3de16ab0-58eb-46eb-96b5-5107f02ead6d",
+                          "key": "poolRuleId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get a pool rule."
+                  },
+                  "response": [
+                    {
+                      "id": "f70ebd09-0f5b-4c6f-af0f-a19ec0acb4ee",
+                      "name": "Pool rule",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-f70ebd09-0f5b-4c6f-af0f-a19ec0acb4ee"
+                    },
+                    {
+                      "id": "04acc25e-b08f-4429-80ee-6a27fcd573a7",
+                      "name": "Pool rule not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-04acc25e-b08f-4429-80ee-6a27fcd573a7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-c0df373b-720d-482b-96b2-dc64fa12a21f"
+                },
+                {
+                  "name": "Update a pool rule",
+                  "id": "8002ca6a-0552-413d-bfdb-48fbc3e04b0f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"on_demand\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules",
+                        ":poolRuleId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "085f1fee-2718-4453-b04e-f8ed56358008",
+                          "key": "poolRuleId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Update a rule that assigns an attempt to a pool based on conditions."
+                  },
+                  "response": [
+                    {
+                      "id": "c2b3c4b7-e934-42ff-bffb-d77bbf68c51c",
+                      "name": "Pool rule updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"on_demand\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-c2b3c4b7-e934-42ff-bffb-d77bbf68c51c"
+                    },
+                    {
+                      "id": "6deeb312-049e-4f41-a27d-407f13255e21",
+                      "name": "Invalid request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"on_demand\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-6deeb312-049e-4f41-a27d-407f13255e21"
+                    },
+                    {
+                      "id": "510bf99c-ccaa-4913-afa1-307b4af404b2",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"on_demand\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-510bf99c-ccaa-4913-afa1-307b4af404b2"
+                    },
+                    {
+                      "id": "51933847-93e1-4278-a9a6-588942040b65",
+                      "name": "Pool rule not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"on_demand\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pool_rules/:poolRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pool_rules",
+                            ":poolRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-51933847-93e1-4278-a9a6-588942040b65"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-8002ca6a-0552-413d-bfdb-48fbc3e04b0f"
+                }
+              ],
+              "id": "e56d779c-78d5-4765-bbc4-31f4e7a03b7c",
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-e56d779c-78d5-4765-bbc4-31f4e7a03b7c"
+            },
+            {
+              "name": "List pool rules",
+              "id": "92af27e3-919e-4559-b109-84a66e7ee68d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pool_rules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pool_rules"
+                  ]
+                },
+                "description": "List pool rules."
+              },
+              "response": [
+                {
+                  "id": "57c075be-c1c9-4aa0-8606-d737462584ef",
+                  "name": "List of pool rules",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"poolRules\": [\n    {\n      \"conditions\": [\n        {\n          \"type\": \"project_name\",\n          \"values\": [\n            \"on_demand\",\n            \"on_demand\"\n          ]\n        }\n      ],\n      \"id\": \"<string>\",\n      \"poolId\": \"<string>\",\n      \"priority\": \"<integer>\"\n    },\n    {\n      \"conditions\": [\n        {\n          \"type\": \"workflow_name\",\n          \"values\": [\n            \"on_demand\",\n            \"on_demand\"\n          ]\n        }\n      ],\n      \"id\": \"<string>\",\n      \"poolId\": \"<string>\",\n      \"priority\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-57c075be-c1c9-4aa0-8606-d737462584ef"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-92af27e3-919e-4559-b109-84a66e7ee68d"
+            },
+            {
+              "name": "Create a pool rule",
+              "id": "cebbdebb-f887-4d02-a928-f5361495a595",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"scheduled\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/pool_rules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pool_rules"
+                  ]
+                },
+                "description": "Create a rule that assigns an attempt to a pool based on conditions. A rule consists of a priority, conditions, and a pool ID. Rules are evaluated in priority order, from the lowest value to the highest value. Multiple rules cannot have the same priority. If all of a rule's conditions are met, an attempt is assigned to its pool. If none of the rules are met, an attempt is assigned to a default pool."
+              },
+              "response": [
+                {
+                  "id": "0390ba2b-3eac-4a0a-ba70-11ed2ab60505",
+                  "name": "Pool rule created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"scheduled\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"on_demand\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-0390ba2b-3eac-4a0a-ba70-11ed2ab60505"
+                },
+                {
+                  "id": "34c4720d-7a25-4ca8-baea-d50f3e27c727",
+                  "name": "Invalid request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"scheduled\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-34c4720d-7a25-4ca8-baea-d50f3e27c727"
+                },
+                {
+                  "id": "03ff599d-dd32-4345-8273-9c2ad75e142b",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"conditions\": [\n    {\n      \"type\": \"project_name\",\n      \"values\": [\n        \"scheduled\",\n        \"scheduled\"\n      ]\n    }\n  ],\n  \"poolId\": \"<string>\",\n  \"priority\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pool_rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pool_rules"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-03ff599d-dd32-4345-8273-9c2ad75e142b"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-cebbdebb-f887-4d02-a928-f5361495a595"
+            }
+          ],
+          "id": "bee0cabb-d911-45cd-9f9b-3a3223615b30",
+          "createdAt": "2026-10-22T02:36:17.000Z",
+          "updatedAt": "2026-10-22T02:36:17.000Z",
+          "uid": "35240-bee0cabb-d911-45cd-9f9b-3a3223615b30"
+        },
+        {
+          "name": "pools",
+          "item": [
+            {
+              "name": "{poolId}",
+              "item": [
+                {
+                  "name": "Delete a pool",
+                  "id": "41c088b4-1a14-4bf5-b696-e51df8816e50",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools/:poolId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools",
+                        ":poolId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "df67444b-eb13-48ec-973f-50c97979b26a",
+                          "key": "poolId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete a pool. You cannot delete a pool if there are any attempts running or queued in the pool, if a pool rule references it, or if it is the default pool. The deleted pool\u2019s concurrency limit is added to the default pool\u2019s concurrency limit."
+                  },
+                  "response": [
+                    {
+                      "id": "58d72637-79aa-44aa-b255-bc68b5be08aa",
+                      "name": "Pool deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"default\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-58d72637-79aa-44aa-b255-bc68b5be08aa"
+                    },
+                    {
+                      "id": "6c737ccb-6878-4373-b79d-1aabdf74f62f",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-6c737ccb-6878-4373-b79d-1aabdf74f62f"
+                    },
+                    {
+                      "id": "d29a1669-1447-418b-a789-ad80b060040b",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-d29a1669-1447-418b-a789-ad80b060040b"
+                    },
+                    {
+                      "id": "f38c7e04-6ccf-47ed-8f47-61a963a7bd4b",
+                      "name": "Pool not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-f38c7e04-6ccf-47ed-8f47-61a963a7bd4b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-41c088b4-1a14-4bf5-b696-e51df8816e50"
+                },
+                {
+                  "name": "Get a pool",
+                  "id": "74d8e534-8fec-4b9e-9625-17eb249ef3b3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools/:poolId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools",
+                        ":poolId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e702d9bb-b2ee-481d-a2d4-b5abc1d5ca2e",
+                          "key": "poolId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get a pool."
+                  },
+                  "response": [
+                    {
+                      "id": "d8e75792-fd99-48cb-a682-40b9154ebc51",
+                      "name": "Pool",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"default\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-d8e75792-fd99-48cb-a682-40b9154ebc51"
+                    },
+                    {
+                      "id": "5dc07f66-2d29-467c-84f1-b2f1092bd0b4",
+                      "name": "Pool not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-5dc07f66-2d29-467c-84f1-b2f1092bd0b4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-74d8e534-8fec-4b9e-9625-17eb249ef3b3"
+                },
+                {
+                  "name": "Update a pool",
+                  "id": "a9cadfd4-a594-46ef-977c-5747b502c061",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools/:poolId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools",
+                        ":poolId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3b0df897-7b01-4411-8984-24c3b3c0dc77",
+                          "key": "poolId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Update a pool with the specified name and concurrency limit. You cannot update the default pool. The default pool\u2019s concurrency limit is adjusted to accommodate the new concurrency limit. A pool\u2019s concurrency limit cannot be reduced if it has more running attempts than its new reduced concurrency limit."
+                  },
+                  "response": [
+                    {
+                      "id": "fdfe09e6-5800-43f9-a1bf-348c7913c742",
+                      "name": "Pool updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"default\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-fdfe09e6-5800-43f9-a1bf-348c7913c742"
+                    },
+                    {
+                      "id": "84807d70-3333-4b5a-9089-361fa08fe37a",
+                      "name": "Invalid request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-84807d70-3333-4b5a-9089-361fa08fe37a"
+                    },
+                    {
+                      "id": "b5dcbce9-5967-4391-87e4-f0fa572ff645",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-b5dcbce9-5967-4391-87e4-f0fa572ff645"
+                    },
+                    {
+                      "id": "bcbc231a-eaa1-4b88-980e-debdebdb3427",
+                      "name": "Pool not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/pools/:poolId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "pools",
+                            ":poolId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "poolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:17.000Z",
+                      "updatedAt": "2026-10-22T02:36:17.000Z",
+                      "uid": "35240-bcbc231a-eaa1-4b88-980e-debdebdb3427"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-a9cadfd4-a594-46ef-977c-5747b502c061"
+                }
+              ],
+              "id": "0ee8449e-4a1b-4e66-b692-152958e607f7",
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-0ee8449e-4a1b-4e66-b692-152958e607f7"
+            },
+            {
+              "name": "List pools",
+              "id": "c4780f03-e05c-406e-a39a-76037e7e37f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/pools",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pools"
+                  ]
+                },
+                "description": "List pools."
+              },
+              "response": [
+                {
+                  "id": "17cdf938-18e4-4987-87f0-cac99cea7fec",
+                  "name": "List of pools",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pools\": [\n    {\n      \"concurrencyLimit\": \"<integer>\",\n      \"default\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"concurrencyLimit\": \"<integer>\",\n      \"default\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-17cdf938-18e4-4987-87f0-cac99cea7fec"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-c4780f03-e05c-406e-a39a-76037e7e37f0"
+            },
+            {
+              "name": "Create a pool",
+              "id": "ee7ef71b-e5df-44a9-9909-7e90ea9d8177",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/pools",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "pools"
+                  ]
+                },
+                "description": "Create a pool with the specified name and concurrency limit. A default pool is created with the account's concurrency limit if it does not exist. The default pool\u2019s concurrency limit is reduced by the new pool\u2019s concurrency limit. You cannot create a pool if the default pool has more running attempts than its new reduced concurrency limit."
+              },
+              "response": [
+                {
+                  "id": "5892ca1c-b59f-43ab-8e35-f052a7e03f33",
+                  "name": "Pool created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"default\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-5892ca1c-b59f-43ab-8e35-f052a7e03f33"
+                },
+                {
+                  "id": "9f5aad83-7c8b-4d9f-9f3d-56dc142b0363",
+                  "name": "Invalid request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-9f5aad83-7c8b-4d9f-9f3d-56dc142b0363"
+                },
+                {
+                  "id": "e80feb44-53ee-4ffc-9e0a-4adc083421a7",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-e80feb44-53ee-4ffc-9e0a-4adc083421a7"
+                },
+                {
+                  "id": "8b9835e7-17c1-4420-a068-571628fdb9b3",
+                  "name": "Pool name is already used",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"concurrencyLimit\": \"<integer>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/pools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "pools"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:36:17.000Z",
+                  "updatedAt": "2026-10-22T02:36:17.000Z",
+                  "uid": "35240-8b9835e7-17c1-4420-a068-571628fdb9b3"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:17.000Z",
+              "updatedAt": "2026-10-22T02:36:17.000Z",
+              "uid": "35240-ee7ef71b-e5df-44a9-9909-7e90ea9d8177"
+            }
+          ],
+          "id": "277055b8-6adc-4074-bd24-b70ee224d21a",
+          "createdAt": "2026-10-22T02:36:17.000Z",
+          "updatedAt": "2026-10-22T02:36:17.000Z",
+          "uid": "35240-277055b8-6adc-4074-bd24-b70ee224d21a"
+        }
+      ],
+      "id": "426b646b-e479-4346-b6c2-eb5f413373a6",
+      "createdAt": "2026-10-22T02:36:17.000Z",
+      "updatedAt": "2026-10-22T02:36:17.000Z",
+      "uid": "35240-426b646b-e479-4346-b6c2-eb5f413373a6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-workflow.treasuredata.com"
+    }
+  ]
+}

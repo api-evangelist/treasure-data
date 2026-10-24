@@ -1,0 +1,416 @@
+{
+  "info": {
+    "_postman_id": "be2c3de9-caee-444e-8955-72ac553aa0ca",
+    "name": "cdp-api Parent Segments API",
+    "description": "All of the CDP APIs are organized around REST - if you've interacted with a RESTful API already, many of the concepts will be familiar to you. All API calls to CDP API should be made to the following endpoints depending on the region. For historical reasons there are REST API endpoints and JSON:API endpoints. JSON:API endpoints are located under \"/entities\".",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:35:57.000Z",
+    "updatedAt": "2026-10-22T02:35:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-be2c3de9-caee-444e-8955-72ac553aa0ca"
+  },
+  "item": [
+    {
+      "name": "audiences",
+      "item": [
+        {
+          "name": "{audienceId}",
+          "item": [
+            {
+              "name": "folders",
+              "item": [
+                {
+                  "name": "Retrieve list of segment folders",
+                  "id": "23db8755-eb38-45d0-b334-5ace3982b9d9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/audiences/:audienceId/folders",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audiences",
+                        ":audienceId",
+                        "folders"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7bf8435a-4ca4-4ddb-94e0-e30f39c7430f",
+                          "key": "audienceId",
+                          "value": "<long>",
+                          "description": "(Required) Master segment ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of segment folders based on a parent segment's identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "f15e5758-a53c-496f-ab0d-93bfe03943e1",
+                      "name": "Retrieves a list of segment folders.\n\nN.B. that `createdAt` can be `null`, meaning that it is not known\nwhich user created the folder.\n\nN.B. that `updatedAt` can be `null`, meaning that is is not known\nwhich user last updated the folder.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/audiences/:audienceId/folders",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "audiences",
+                            ":audienceId",
+                            "folders"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"47147\",\n    \"audienceId\": \"8460155864\",\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"560457\",\n      \"td_user_id\": \"3740\",\n      \"name\": \"<string>\"\n    },\n    \"updatedBy\": {\n      \"id\": \"77517304\",\n      \"td_user_id\": \"6885195656\",\n      \"name\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"658\",\n    \"audienceId\": \"3609847\",\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"createdBy\": {\n      \"id\": \"61183125409\",\n      \"td_user_id\": \"7467437789\",\n      \"name\": \"<string>\"\n    },\n    \"updatedBy\": {\n      \"id\": \"4149682515\",\n      \"td_user_id\": \"871901\",\n      \"name\": \"<string>\"\n    }\n  }\n]",
+                      "createdAt": "2026-10-22T02:35:57.000Z",
+                      "updatedAt": "2026-10-22T02:35:57.000Z",
+                      "uid": "35240-f15e5758-a53c-496f-ab0d-93bfe03943e1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:57.000Z",
+                  "updatedAt": "2026-10-22T02:35:57.000Z",
+                  "uid": "35240-23db8755-eb38-45d0-b334-5ace3982b9d9"
+                }
+              ],
+              "id": "381c819a-4ea2-4dfa-8e9b-2738632ac362",
+              "createdAt": "2026-10-22T02:35:57.000Z",
+              "updatedAt": "2026-10-22T02:35:57.000Z",
+              "uid": "35240-381c819a-4ea2-4dfa-8e9b-2738632ac362"
+            }
+          ],
+          "id": "487b97a8-ef52-4d6b-ad05-fc9276f6feba",
+          "createdAt": "2026-10-22T02:35:57.000Z",
+          "updatedAt": "2026-10-22T02:35:57.000Z",
+          "uid": "35240-487b97a8-ef52-4d6b-ad05-fc9276f6feba"
+        }
+      ],
+      "id": "95cd028e-4c40-46a4-941f-663dadab0a5b",
+      "createdAt": "2026-10-22T02:35:57.000Z",
+      "updatedAt": "2026-10-22T02:35:57.000Z",
+      "uid": "35240-95cd028e-4c40-46a4-941f-663dadab0a5b"
+    },
+    {
+      "name": "master_segments",
+      "item": [
+        {
+          "name": "Retrieve audience data",
+          "id": "e0d84160-5b41-42b6-9749-493a3d85a835",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/master_segments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "master_segments"
+              ]
+            },
+            "description": "Retrieve the audiences for which the current user can view its produced data e.g. segments, profiles, activations."
+          },
+          "response": [
+            {
+              "id": "a6478858-ea2e-41bc-991c-30b78aebeba2",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/master_segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "master_segments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"population\": \"<number,null>\",\n    \"updatedAt\": \"<string>\",\n    \"updatedBy\": {\n      \"id\": \"891319\",\n      \"td_user_id\": \"38904164\",\n      \"name\": \"<string>\"\n    },\n    \"matrixUpdatedAt\": \"<string,null>\",\n    \"scheduleType\": \"none\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"population\": \"<number,null>\",\n    \"updatedAt\": \"<string>\",\n    \"updatedBy\": {\n      \"id\": \"3835\",\n      \"td_user_id\": \"40369691\",\n      \"name\": \"<string>\"\n    },\n    \"matrixUpdatedAt\": \"<string,null>\",\n    \"scheduleType\": \"monthly\"\n  }\n]",
+              "createdAt": "2026-10-22T02:35:57.000Z",
+              "updatedAt": "2026-10-22T02:35:57.000Z",
+              "uid": "35240-a6478858-ea2e-41bc-991c-30b78aebeba2"
+            }
+          ],
+          "createdAt": "2026-10-22T02:35:57.000Z",
+          "updatedAt": "2026-10-22T02:35:57.000Z",
+          "uid": "35240-e0d84160-5b41-42b6-9749-493a3d85a835"
+        }
+      ],
+      "id": "12b35084-2311-4159-9693-675454d64f28",
+      "createdAt": "2026-10-22T02:35:57.000Z",
+      "updatedAt": "2026-10-22T02:35:57.000Z",
+      "uid": "35240-12b35084-2311-4159-9693-675454d64f28"
+    },
+    {
+      "name": "entities",
+      "item": [
+        {
+          "name": "parent_segments",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Retrieve parent segment by ID",
+                  "id": "646b8876-ba28-44bb-a8fe-415cda757089",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/parent_segments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "parent_segments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "38d1c6de-1aaa-4d63-9476-db8850fd016d",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) ID of an audience (parent segment) to return"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve an parent segment by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "bceff7c3-b035-4763-a1cf-b1df4fffc605",
+                      "name": "Returns an audience (parent segment).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.treasuredata.v1+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/entities/parent_segments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "entities",
+                            "parent_segments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.treasuredata.v1+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"193\",\n    \"type\": \"parentSegment\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"matrixUpdatedAt\": \"<string,null-date-time>\",\n      \"population\": \"<number,null>\",\n      \"scheduleType\": \"daily\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"v4Id\": \"<number>\",\n      \"timezone\": \"UTC\",\n      \"allowActivationBehavior\": false,\n      \"maxActivationBehaviorRow\": 7,\n      \"customerGroup\": null\n    },\n    \"relationships\": {\n      \"parentFolder\": {\n        \"data\": {\n          \"id\": \"25425\",\n          \"type\": \"folder-segment\"\n        }\n      },\n      \"parentSegmentFolder\": {\n        \"data\": {\n          \"id\": \"362\",\n          \"type\": \"folder-segment\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:57.000Z",
+                      "updatedAt": "2026-10-22T02:35:57.000Z",
+                      "uid": "35240-bceff7c3-b035-4763-a1cf-b1df4fffc605"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:57.000Z",
+                  "updatedAt": "2026-10-22T02:35:57.000Z",
+                  "uid": "35240-646b8876-ba28-44bb-a8fe-415cda757089"
+                }
+              ],
+              "id": "752fdc8f-cd42-49ea-a2db-aef82ce6ecc1",
+              "createdAt": "2026-10-22T02:35:57.000Z",
+              "updatedAt": "2026-10-22T02:35:57.000Z",
+              "uid": "35240-752fdc8f-cd42-49ea-a2db-aef82ce6ecc1"
+            },
+            {
+              "name": "Retrieve list of parent segments",
+              "id": "f52a1891-7507-4261-afd8-267e3c7e836b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.treasuredata.v1+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/entities/parent_segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "entities",
+                    "parent_segments"
+                  ]
+                },
+                "description": "Retrieve a list of parent segments."
+              },
+              "response": [
+                {
+                  "id": "0a0dca37-2ee8-4c8b-828d-3b90ab705406",
+                  "name": "Returns a list of audiences (parent segments).",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.treasuredata.v1+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/entities/parent_segments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "entities",
+                        "parent_segments"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.treasuredata.v1+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"data\": {\n      \"id\": \"12812003\",\n      \"type\": \"parentSegment\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"matrixUpdatedAt\": \"<string,null-date-time>\",\n        \"population\": \"<number,null>\",\n        \"scheduleType\": \"weekly\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"v4Id\": \"<number>\",\n        \"timezone\": \"UTC\",\n        \"allowActivationBehavior\": false,\n        \"maxActivationBehaviorRow\": 7,\n        \"customerGroup\": null\n      },\n      \"relationships\": {\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"9461998\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"parentSegmentFolder\": {\n          \"data\": {\n            \"id\": \"68\",\n            \"type\": \"folder-segment\"\n          }\n        }\n      }\n    }\n  },\n  {\n    \"data\": {\n      \"id\": \"24943331343\",\n      \"type\": \"parentSegment\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"matrixUpdatedAt\": \"<string,null-date-time>\",\n        \"population\": \"<number,null>\",\n        \"scheduleType\": \"monthly\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"v4Id\": \"<number>\",\n        \"timezone\": \"UTC\",\n        \"allowActivationBehavior\": false,\n        \"maxActivationBehaviorRow\": 7,\n        \"customerGroup\": null\n      },\n      \"relationships\": {\n        \"parentFolder\": {\n          \"data\": {\n            \"id\": \"9615\",\n            \"type\": \"folder-segment\"\n          }\n        },\n        \"parentSegmentFolder\": {\n          \"data\": {\n            \"id\": \"7316\",\n            \"type\": \"folder-segment\"\n          }\n        }\n      }\n    }\n  }\n]",
+                  "createdAt": "2026-10-22T02:35:57.000Z",
+                  "updatedAt": "2026-10-22T02:35:57.000Z",
+                  "uid": "35240-0a0dca37-2ee8-4c8b-828d-3b90ab705406"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:57.000Z",
+              "updatedAt": "2026-10-22T02:35:57.000Z",
+              "uid": "35240-f52a1891-7507-4261-afd8-267e3c7e836b"
+            }
+          ],
+          "id": "c64969e0-3ed4-40d6-b93e-8a22f15f44bb",
+          "createdAt": "2026-10-22T02:35:57.000Z",
+          "updatedAt": "2026-10-22T02:35:57.000Z",
+          "uid": "35240-c64969e0-3ed4-40d6-b93e-8a22f15f44bb"
+        }
+      ],
+      "id": "f4d6494f-5943-464d-a171-a086abfd2cb2",
+      "createdAt": "2026-10-22T02:35:57.000Z",
+      "updatedAt": "2026-10-22T02:35:57.000Z",
+      "uid": "35240-f4d6494f-5943-464d-a171-a086abfd2cb2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-cdp.treasuredata.com"
+    }
+  ]
+}

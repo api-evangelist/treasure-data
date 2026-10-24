@@ -1,0 +1,948 @@
+{
+  "info": {
+    "_postman_id": "30630a84-bed6-4ff3-ad95-b583652d7c90",
+    "name": "Treasure Data Schedules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:11.000Z",
+    "updatedAt": "2026-10-22T02:37:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-30630a84-bed6-4ff3-ad95-b583652d7c90"
+  },
+  "item": [
+    {
+      "name": "schedule",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "Get schedules",
+              "id": "e4e6c6b4-7d20-423c-bc2f-f3f62c53efe2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/schedule/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "schedule",
+                    "list"
+                  ]
+                },
+                "description": "Gets a list of schedules."
+              },
+              "response": [
+                {
+                  "id": "ad593952-a0a4-4c9f-a123-e4a7268d745c",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/schedule/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "schedule",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"schedules\": [\n    {\n      \"created_at\": \"6950-48-69T16:80:16-94:27\",\n      \"cron\": \"<string,null>\",\n      \"database\": \"<string>\",\n      \"delay\": \"<integer,null>\",\n      \"name\": \"<string>\",\n      \"query\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"engine_version\": \"<string>\",\n      \"executing_user_id\": \"<integer>\",\n      \"priority\": \"<integer>\",\n      \"retry_limit\": \"<integer>\"\n    },\n    {\n      \"created_at\": \"8199-70-52T83:50:04+69:12\",\n      \"cron\": \"<string,null>\",\n      \"database\": \"<string>\",\n      \"delay\": \"<integer,null>\",\n      \"name\": \"<string>\",\n      \"query\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"engine_version\": \"<string>\",\n      \"executing_user_id\": \"<integer>\",\n      \"priority\": \"<integer>\",\n      \"retry_limit\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-ad593952-a0a4-4c9f-a123-e4a7268d745c"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-e4e6c6b4-7d20-423c-bc2f-f3f62c53efe2"
+            }
+          ],
+          "id": "97ac8485-a147-43ee-bc1c-c47eb07376f8",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-97ac8485-a147-43ee-bc1c-c47eb07376f8"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "{schedule_name}",
+              "item": [
+                {
+                  "name": "Create schedule",
+                  "id": "49f73b8c-48ed-49f4-b3a6-f48b038d952a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "database",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "cron",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "key": "delay",
+                          "value": "<integer,null>"
+                        },
+                        {
+                          "key": "executing_user_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "engine_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "pool_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "priority",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "retry_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "result",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "timezone",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/schedule/create/:schedule_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "schedule",
+                        "create",
+                        ":schedule_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9827a0f0-634c-42ab-a495-5d58998ca863",
+                          "key": "schedule_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Creates a schedule."
+                  },
+                  "response": [
+                    {
+                      "id": "e0a0bba2-969b-449d-8ea4-011240b632fa",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "database",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "cron",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "key": "delay",
+                              "value": "<integer,null>"
+                            },
+                            {
+                              "key": "executing_user_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "engine_version",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "pool_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "priority",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "retry_limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "result",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "timezone",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/schedule/create/:schedule_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "schedule",
+                            "create",
+                            ":schedule_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "schedule_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"created_at\": \"3165-25-13T32:23:40Z\",\n  \"cron\": \"<string,null>\",\n  \"database\": \"<string>\",\n  \"delay\": \"<integer,null>\",\n  \"name\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"type\": \"<string>\",\n  \"user_name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:12.000Z",
+                      "updatedAt": "2026-10-22T02:37:12.000Z",
+                      "uid": "35240-e0a0bba2-969b-449d-8ea4-011240b632fa"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-49f73b8c-48ed-49f4-b3a6-f48b038d952a"
+                }
+              ],
+              "id": "9ef19d1d-a3e2-478b-9e3c-166886912a23",
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-9ef19d1d-a3e2-478b-9e3c-166886912a23"
+            }
+          ],
+          "id": "d7cdec1b-8ae6-4686-b854-03b08738cd66",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-d7cdec1b-8ae6-4686-b854-03b08738cd66"
+        },
+        {
+          "name": "delete",
+          "item": [
+            {
+              "name": "{schedule_name}",
+              "item": [
+                {
+                  "name": "Delete schedule",
+                  "id": "c13e5b3f-1389-450a-8158-7ba185cd9358",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/schedule/delete/:schedule_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "schedule",
+                        "delete",
+                        ":schedule_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1a3103a4-1352-4609-b73c-51381b6a756c",
+                          "key": "schedule_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a specified schedule."
+                  },
+                  "response": [
+                    {
+                      "id": "6034c7a4-00b7-4e91-9aa5-29eebe7f1be5",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/schedule/delete/:schedule_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "schedule",
+                            "delete",
+                            ":schedule_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "schedule_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"created_at\": \"3165-25-13T32:23:40Z\",\n  \"cron\": \"<string,null>\",\n  \"database\": \"<string>\",\n  \"delay\": \"<integer,null>\",\n  \"name\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"type\": \"<string>\",\n  \"user_name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:12.000Z",
+                      "updatedAt": "2026-10-22T02:37:12.000Z",
+                      "uid": "35240-6034c7a4-00b7-4e91-9aa5-29eebe7f1be5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-c13e5b3f-1389-450a-8158-7ba185cd9358"
+                }
+              ],
+              "id": "2bc78344-6856-4b49-82b4-0f7cf4df2799",
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-2bc78344-6856-4b49-82b4-0f7cf4df2799"
+            }
+          ],
+          "id": "ef6b5f1c-7d41-46f2-945f-43d7cf29be0b",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-ef6b5f1c-7d41-46f2-945f-43d7cf29be0b"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "{schedule_name}",
+              "item": [
+                {
+                  "name": "Update schedule",
+                  "id": "193b4799-b130-406e-b246-2a20a9d60bcb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "cron",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "database name",
+                          "key": "database",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "delay",
+                          "value": "<integer,null>"
+                        },
+                        {
+                          "key": "executing_user_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "the version of the query engine for the query, can be a version release name (e.g 'stable') or version number (e.g '0.205')",
+                          "key": "engine_version",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "resource pool name",
+                          "key": "pool_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "priority",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "retry_limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "url of the result",
+                          "key": "result",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "timezone",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "type",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/schedule/update/:schedule_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "schedule",
+                        "update",
+                        ":schedule_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "57db0a01-0db1-4cdd-b587-5c717d636e44",
+                          "key": "schedule_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates a schedule."
+                  },
+                  "response": [
+                    {
+                      "id": "271c5415-1c7a-4c6e-84a7-74af4c30f7ab",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "cron",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "database name",
+                              "key": "database",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "delay",
+                              "value": "<integer,null>"
+                            },
+                            {
+                              "key": "executing_user_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "the version of the query engine for the query, can be a version release name (e.g 'stable') or version number (e.g '0.205')",
+                              "key": "engine_version",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "resource pool name",
+                              "key": "pool_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "priority",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "retry_limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "url of the result",
+                              "key": "result",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "timezone",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "type",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/schedule/update/:schedule_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "schedule",
+                            "update",
+                            ":schedule_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "schedule_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"created_at\": \"3165-25-13T32:23:40Z\",\n  \"cron\": \"<string,null>\",\n  \"database\": \"<string>\",\n  \"delay\": \"<integer,null>\",\n  \"name\": \"<string>\",\n  \"query\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"type\": \"<string>\",\n  \"user_name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:37:12.000Z",
+                      "updatedAt": "2026-10-22T02:37:12.000Z",
+                      "uid": "35240-271c5415-1c7a-4c6e-84a7-74af4c30f7ab"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-193b4799-b130-406e-b246-2a20a9d60bcb"
+                }
+              ],
+              "id": "9418a604-3270-430a-bec5-6ee85cceddb5",
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-9418a604-3270-430a-bec5-6ee85cceddb5"
+            }
+          ],
+          "id": "3fa3c8d9-df99-4ef3-b616-e83e16a02410",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-3fa3c8d9-df99-4ef3-b616-e83e16a02410"
+        },
+        {
+          "name": "run",
+          "item": [
+            {
+              "name": "{schedule_name}",
+              "item": [
+                {
+                  "name": "{schedule_time}",
+                  "item": [
+                    {
+                      "name": "Run schedule",
+                      "id": "4cefe6df-50ea-4712-a7ed-dfa8fcb5a688",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "num",
+                              "value": "1"
+                            },
+                            {
+                              "key": "domain_key",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/schedule/run/:schedule_name/:schedule_time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "schedule",
+                            "run",
+                            ":schedule_name",
+                            ":schedule_time"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1b86c569-117b-4936-8873-19f18e4710f9",
+                              "key": "schedule_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "ae504d7b-42bb-407d-97e1-15b34c51e115",
+                              "key": "schedule_time",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Schedules a run."
+                      },
+                      "response": [
+                        {
+                          "id": "eadc6847-d34b-4071-bab8-06efe8b38b26",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "num",
+                                  "value": "1"
+                                },
+                                {
+                                  "key": "domain_key",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/schedule/run/:schedule_name/:schedule_time",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "schedule",
+                                "run",
+                                ":schedule_name",
+                                ":schedule_time"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "schedule_name"
+                                },
+                                {
+                                  "key": "schedule_time"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"jobs\": [\n    {\n      \"job_id\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"scheduled_at\": \"5226-70-09\ufeff66:84:62\u2001UTC\"\n    },\n    {\n      \"job_id\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"scheduled_at\": \"7420-67-83\u202830:31:56\u202fUTC\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:37:12.000Z",
+                          "updatedAt": "2026-10-22T02:37:12.000Z",
+                          "uid": "35240-eadc6847-d34b-4071-bab8-06efe8b38b26"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:37:12.000Z",
+                      "updatedAt": "2026-10-22T02:37:12.000Z",
+                      "uid": "35240-4cefe6df-50ea-4712-a7ed-dfa8fcb5a688"
+                    }
+                  ],
+                  "id": "4f5fa28c-db12-496e-b109-d5436bbee423",
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-4f5fa28c-db12-496e-b109-d5436bbee423"
+                }
+              ],
+              "id": "0cc4cdc2-831d-4d33-841b-aa504d91515a",
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-0cc4cdc2-831d-4d33-841b-aa504d91515a"
+            }
+          ],
+          "id": "13caaf1b-1f39-49fb-948a-d19d88a8ef64",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-13caaf1b-1f39-49fb-948a-d19d88a8ef64"
+        },
+        {
+          "name": "history",
+          "item": [
+            {
+              "name": "{schedule_name}",
+              "item": [
+                {
+                  "name": "Get execution history",
+                  "id": "1b1dff5c-f98d-4210-83db-696c902ff9b8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/schedule/history/:schedule_name?from=0&to=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "schedule",
+                        "history",
+                        ":schedule_name"
+                      ],
+                      "query": [
+                        {
+                          "key": "from",
+                          "value": "0"
+                        },
+                        {
+                          "key": "to",
+                          "value": "20"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9361d92d-1d6e-4902-b4ee-d205ae1c5b59",
+                          "key": "schedule_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Gets a history of scheduled executions by name."
+                  },
+                  "response": [
+                    {
+                      "id": "34d04996-1166-4fcd-9585-831def19a775",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/schedule/history/:schedule_name?from=0&to=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "schedule",
+                            "history",
+                            ":schedule_name"
+                          ],
+                          "query": [
+                            {
+                              "key": "from",
+                              "value": "0"
+                            },
+                            {
+                              "key": "to",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "schedule_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"count\": \"<integer>\",\n  \"from\": \"<integer>\",\n  \"to\": \"<integer>\",\n  \"history\": [\n    {\n      \"cpu_time\": \"<integer,null>\",\n      \"created_at\": \"1277-80-66\u200533:59:30\u202fUTC\",\n      \"database\": \"<string,null>\",\n      \"duration\": \"<integer,null>\",\n      \"end_at\": \"1068-63-31\u205f04:97:05\u180eUTC\",\n      \"hive_result_schema\": \"<string,null>\",\n      \"job_id\": \"<string>\",\n      \"linked_result_export_job_id\": \"<integer>\",\n      \"num_records\": \"<integer,null>\",\n      \"organization\": \"<string,null>\",\n      \"priority\": \"<integer>\",\n      \"query\": \"<string,null>\",\n      \"result_export_target_job_id\": \"<integer>\",\n      \"result_size\": \"<integer,null>\",\n      \"retry_limit\": 0,\n      \"scheduled_at\": \"9386-92-90 12:68:56\\u000b+8403\",\n      \"start_at\": \"4418-30-32\u200780:02:02\u205fUTC\",\n      \"status\": \"error\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"5177-30-74\\r66:64:76\u2007-3762\",\n      \"url\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"result\": \"<string>\"\n    },\n    {\n      \"cpu_time\": \"<integer,null>\",\n      \"created_at\": \"5433-48-70\u202925:45:75\u180eUTC\",\n      \"database\": \"<string,null>\",\n      \"duration\": \"<integer,null>\",\n      \"end_at\": \"7060-27-87\\r83:59:06\u2028+3048\",\n      \"hive_result_schema\": \"<string,null>\",\n      \"job_id\": \"<string>\",\n      \"linked_result_export_job_id\": \"<integer>\",\n      \"num_records\": \"<integer,null>\",\n      \"organization\": \"<string,null>\",\n      \"priority\": \"<integer>\",\n      \"query\": \"<string,null>\",\n      \"result_export_target_job_id\": \"<integer>\",\n      \"result_size\": \"<integer,null>\",\n      \"retry_limit\": 0,\n      \"scheduled_at\": \"8142-41-74\u200899:10:18\u2009+1014\",\n      \"start_at\": \"8279-46-42\u202810:56:18\\rUTC\",\n      \"status\": \"killed\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"8097-31-99\u200a99:79:27\u2005-0812\",\n      \"url\": \"<string>\",\n      \"user_name\": \"<string>\",\n      \"result\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:12.000Z",
+                      "updatedAt": "2026-10-22T02:37:12.000Z",
+                      "uid": "35240-34d04996-1166-4fcd-9585-831def19a775"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:12.000Z",
+                  "updatedAt": "2026-10-22T02:37:12.000Z",
+                  "uid": "35240-1b1dff5c-f98d-4210-83db-696c902ff9b8"
+                }
+              ],
+              "id": "cfc82fb6-f15b-4c4c-af91-039d51c287ae",
+              "createdAt": "2026-10-22T02:37:12.000Z",
+              "updatedAt": "2026-10-22T02:37:12.000Z",
+              "uid": "35240-cfc82fb6-f15b-4c4c-af91-039d51c287ae"
+            }
+          ],
+          "id": "8f672051-dfeb-49b1-9706-3ce6f4f56b36",
+          "createdAt": "2026-10-22T02:37:12.000Z",
+          "updatedAt": "2026-10-22T02:37:12.000Z",
+          "uid": "35240-8f672051-dfeb-49b1-9706-3ce6f4f56b36"
+        }
+      ],
+      "id": "1b9d4506-f02b-47b3-adf0-8e2ef7dc01fb",
+      "createdAt": "2026-10-22T02:37:12.000Z",
+      "updatedAt": "2026-10-22T02:37:12.000Z",
+      "uid": "35240-1b9d4506-f02b-47b3-adf0-8e2ef7dc01fb"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

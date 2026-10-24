@@ -1,0 +1,534 @@
+{
+  "info": {
+    "_postman_id": "d826d9a6-0fbb-4b2a-90c5-e7dd6b3872bd",
+    "name": "llm-api Action API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:30.000Z",
+    "updatedAt": "2026-10-22T02:33:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d826d9a6-0fbb-4b2a-90c5-e7dd6b3872bd"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "actions",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "slack",
+                  "item": [
+                    {
+                      "name": "slack",
+                      "id": "d56e9225-cd48-4905-94d2-4cccf8031e3f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) Slack response URL for posting delayed responses",
+                              "key": "response_url",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) User input text from Slack command",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The Slack slash command that triggered this action",
+                              "key": "command",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/actions/:id/slack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "actions",
+                            ":id",
+                            "slack"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fa70e56d-bd56-4545-bfa9-ce136d14de3c",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "7cf9fc98-c439-4ce1-8a96-b6caa3bf769e",
+                          "name": "Slack response containing either empty text for ephemeral mode or JSON for in-channel mode",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) Slack response URL for posting delayed responses",
+                                  "key": "response_url",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) User input text from Slack command",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The Slack slash command that triggered this action",
+                                  "key": "command",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/actions/:id/slack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "actions",
+                                ":id",
+                                "slack"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"response_type\": \"in_channel\",\n  \"text\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:33:31.000Z",
+                          "updatedAt": "2026-10-22T02:33:31.000Z",
+                          "uid": "35240-7cf9fc98-c439-4ce1-8a96-b6caa3bf769e"
+                        },
+                        {
+                          "id": "f900daed-8d29-4411-9833-c04d02e4b4f0",
+                          "name": "Unauthorized - invalid timestamp or signature",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) Slack response URL for posting delayed responses",
+                                  "key": "response_url",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) User input text from Slack command",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The Slack slash command that triggered this action",
+                                  "key": "command",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/actions/:id/slack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "actions",
+                                ":id",
+                                "slack"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:33:31.000Z",
+                          "updatedAt": "2026-10-22T02:33:31.000Z",
+                          "uid": "35240-f900daed-8d29-4411-9833-c04d02e4b4f0"
+                        },
+                        {
+                          "id": "57fdb510-f2e4-4d60-b464-32627edfc90f",
+                          "name": "Not Found - integration type is not slack or action not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) Slack response URL for posting delayed responses",
+                                  "key": "response_url",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) User input text from Slack command",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The Slack slash command that triggered this action",
+                                  "key": "command",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/actions/:id/slack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "actions",
+                                ":id",
+                                "slack"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:33:31.000Z",
+                          "updatedAt": "2026-10-22T02:33:31.000Z",
+                          "uid": "35240-57fdb510-f2e4-4d60-b464-32627edfc90f"
+                        },
+                        {
+                          "id": "620bdcb6-9354-4db5-bb88-562385f15079",
+                          "name": "Too Many Requests - rate limit exceeded",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) Slack response URL for posting delayed responses",
+                                  "key": "response_url",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) User input text from Slack command",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The Slack slash command that triggered this action",
+                                  "key": "command",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/actions/:id/slack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "actions",
+                                ":id",
+                                "slack"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "Number of seconds to wait before retrying",
+                                "type": "text/plain"
+                              },
+                              "key": "retry-after",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:33:31.000Z",
+                          "updatedAt": "2026-10-22T02:33:31.000Z",
+                          "uid": "35240-620bdcb6-9354-4db5-bb88-562385f15079"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:31.000Z",
+                      "updatedAt": "2026-10-22T02:33:31.000Z",
+                      "uid": "35240-d56e9225-cd48-4905-94d2-4cccf8031e3f"
+                    }
+                  ],
+                  "id": "79402c46-0b6e-475e-9c0b-1ecf3bc74224",
+                  "createdAt": "2026-10-22T02:33:31.000Z",
+                  "updatedAt": "2026-10-22T02:33:31.000Z",
+                  "uid": "35240-79402c46-0b6e-475e-9c0b-1ecf3bc74224"
+                }
+              ],
+              "id": "b95b64a5-6197-42e0-a2e9-b9301cfad68e",
+              "createdAt": "2026-10-22T02:33:31.000Z",
+              "updatedAt": "2026-10-22T02:33:31.000Z",
+              "uid": "35240-b95b64a5-6197-42e0-a2e9-b9301cfad68e"
+            },
+            {
+              "name": "index",
+              "id": "140c617a-bfcc-4e18-b1c4-c677a04be8ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/actions?filter[parent_segment_id]=<integer>&filter[project_id]=<string>&filter[prompt_id]=<string>&filter[service_type]=<string>&filter[skip_managed]=true&filter[ui_tags]=<string>&page[limit]=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "actions"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[parent_segment_id]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[project_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[prompt_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[service_type]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[skip_managed]",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter[ui_tags]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[limit]",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7b85e255-255b-4055-8fc4-d59327eee8eb",
+                  "name": "List of actions filtered by UI tags",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/actions?filter[parent_segment_id]=<integer>&filter[project_id]=<string>&filter[prompt_id]=<string>&filter[service_type]=<string>&filter[skip_managed]=true&filter[ui_tags]=<string>&page[limit]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "actions"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[parent_segment_id]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[prompt_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[service_type]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[skip_managed]",
+                          "value": "true"
+                        },
+                        {
+                          "key": "filter[ui_tags]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page[limit]",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"chat\": \"<string,null>\"\n      },\n      \"attributes\": {\n        \"integrationId\": \"<string>\",\n        \"promptId\": \"<string>\",\n        \"chatWidgetType\": \"<string,null>\",\n        \"chatWidgetLabel\": \"<string,null>\",\n        \"webhookTextUrl\": \"<string,null>\",\n        \"slackRequestUrl\": \"<string,null>\",\n        \"uiTags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"chat\": \"<string,null>\"\n      },\n      \"attributes\": {\n        \"integrationId\": \"<string>\",\n        \"promptId\": \"<string>\",\n        \"chatWidgetType\": \"<string,null>\",\n        \"chatWidgetLabel\": \"<string,null>\",\n        \"webhookTextUrl\": \"<string,null>\",\n        \"slackRequestUrl\": \"<string,null>\",\n        \"uiTags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\",\n    \"next\": \"<string>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:33:31.000Z",
+                  "updatedAt": "2026-10-22T02:33:31.000Z",
+                  "uid": "35240-7b85e255-255b-4055-8fc4-d59327eee8eb"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:31.000Z",
+              "updatedAt": "2026-10-22T02:33:31.000Z",
+              "uid": "35240-140c617a-bfcc-4e18-b1c4-c677a04be8ca"
+            }
+          ],
+          "id": "b527194d-e0e7-4584-8c54-c4bdb985424b",
+          "createdAt": "2026-10-22T02:33:31.000Z",
+          "updatedAt": "2026-10-22T02:33:31.000Z",
+          "uid": "35240-b527194d-e0e7-4584-8c54-c4bdb985424b"
+        }
+      ],
+      "id": "d52540e0-fdad-4b48-83a6-6fd6e62f250e",
+      "createdAt": "2026-10-22T02:33:31.000Z",
+      "updatedAt": "2026-10-22T02:33:31.000Z",
+      "uid": "35240-d52540e0-fdad-4b48-83a6-6fd6e62f250e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

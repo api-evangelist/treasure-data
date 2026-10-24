@@ -1,0 +1,1138 @@
+{
+  "info": {
+    "_postman_id": "15d5b32a-9f1c-42dd-9af3-328796ad1313",
+    "name": "llm-api Chat Interface API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:34:28.000Z",
+    "updatedAt": "2026-10-22T02:34:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-15d5b32a-9f1c-42dd-9af3-328796ad1313"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "chat_interfaces",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "968a2a4f-0e87-454a-b47b-302364eb0d0a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e56efa8f-eb86-4458-b23b-ef3f10659a74",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "02c6a0b3-1c71-45a9-a96f-5c529d1772f5",
+                      "name": "Chat interface deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-02c6a0b3-1c71-45a9-a96f-5c529d1772f5"
+                    },
+                    {
+                      "id": "9098b142-9f24-452b-9957-52dd187e2a27",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-9098b142-9f24-452b-9957-52dd187e2a27"
+                    },
+                    {
+                      "id": "0dd655ef-7ee2-4978-9086-52632ab30352",
+                      "name": "Chat interface not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-0dd655ef-7ee2-4978-9086-52632ab30352"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-968a2a4f-0e87-454a-b47b-302364eb0d0a"
+                },
+                {
+                  "name": "show",
+                  "id": "3bb74787-b659-4f4e-909c-6de0b22ffa3c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "07e1f338-7a70-43f8-b0a5-2873c4872853",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "76c79b61-3709-4cbd-8c24-bc5b0d242506",
+                      "name": "Chat interface details and configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"starterMessage\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-76c79b61-3709-4cbd-8c24-bc5b0d242506"
+                    },
+                    {
+                      "id": "49cd2220-dabf-419b-947b-e20fc2a6b682",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-49cd2220-dabf-419b-947b-e20fc2a6b682"
+                    },
+                    {
+                      "id": "3e19d00b-f770-45a7-a7c1-a40560d7717c",
+                      "name": "Chat interface not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-3e19d00b-f770-45a7-a7c1-a40560d7717c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-3bb74787-b659-4f4e-909c-6de0b22ffa3c"
+                },
+                {
+                  "name": "update",
+                  "id": "ee76874d-df94-445c-b775-fd5517e79bb4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5a83d55-6747-441d-a25a-f8ea87469bd6",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "33e67eee-100a-4a17-8ece-6c29b2ab4f13",
+                      "name": "Chat interface updated successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"starterMessage\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-33e67eee-100a-4a17-8ece-6c29b2ab4f13"
+                    },
+                    {
+                      "id": "3cc21425-6cd3-4c84-b686-0fb90a60b577",
+                      "name": "PATCH /api/chat_interfaces rejects {\"createdAt\":1}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-3cc21425-6cd3-4c84-b686-0fb90a60b577"
+                    },
+                    {
+                      "id": "ff82440d-1dff-48fd-bff3-9bd50b7a0002",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-ff82440d-1dff-48fd-bff3-9bd50b7a0002"
+                    },
+                    {
+                      "id": "407be08e-733e-48e0-803f-c8898be29df3",
+                      "name": "Chat interface not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-407be08e-733e-48e0-803f-c8898be29df3"
+                    },
+                    {
+                      "id": "0175abb7-d4f7-4574-8f37-4eb7927f1102",
+                      "name": "validates button label length when updating",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/chat_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "chat_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:34:29.000Z",
+                      "updatedAt": "2026-10-22T02:34:29.000Z",
+                      "uid": "35240-0175abb7-d4f7-4574-8f37-4eb7927f1102"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-ee76874d-df94-445c-b775-fd5517e79bb4"
+                }
+              ],
+              "id": "680cbc6c-cab9-4c07-9892-b5cd788d56c1",
+              "createdAt": "2026-10-22T02:34:29.000Z",
+              "updatedAt": "2026-10-22T02:34:29.000Z",
+              "uid": "35240-680cbc6c-cab9-4c07-9892-b5cd788d56c1"
+            },
+            {
+              "name": "index",
+              "id": "a163e0f5-c49f-45bf-8fda-505c0d2561d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat_interfaces"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[project_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a6efd1f8-a713-4b6d-b224-f594b4404550",
+                  "name": "includes by created_by and updated_by",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"starterMessage\": \"<string>\",\n        \"textInputEnabled\": \"<boolean>\",\n        \"textInputAgentId\": \"<string,null>\",\n        \"isManaged\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"starterMessage\": \"<string>\",\n        \"textInputEnabled\": \"<boolean>\",\n        \"textInputAgentId\": \"<string,null>\",\n        \"isManaged\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-a6efd1f8-a713-4b6d-b224-f594b4404550"
+                },
+                {
+                  "id": "3548f172-02d5-4bbb-b2c0-74fc91d3a8d9",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-3548f172-02d5-4bbb-b2c0-74fc91d3a8d9"
+                }
+              ],
+              "createdAt": "2026-10-22T02:34:29.000Z",
+              "updatedAt": "2026-10-22T02:34:29.000Z",
+              "uid": "35240-a163e0f5-c49f-45bf-8fda-505c0d2561d2"
+            },
+            {
+              "name": "create",
+              "id": "14d95612-c0fc-44df-9e0c-4d3775513130",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat_interfaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat_interfaces"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "dedbfa2f-d91e-4052-8abd-ad2dee71746c",
+                  "name": "creates a chat_interface with buttons",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"starterMessage\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"isManaged\": \"<boolean>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-dedbfa2f-d91e-4052-8abd-ad2dee71746c"
+                },
+                {
+                  "id": "e61a0d15-522e-4f94-9ff2-f0a4dcf880a6",
+                  "name": "POST /api/chat_interfaces rejects {\"createdAt\":1}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-e61a0d15-522e-4f94-9ff2-f0a4dcf880a6"
+                },
+                {
+                  "id": "22defa60-9dbf-4ee5-8ed4-dcf40d1848a2",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-22defa60-9dbf-4ee5-8ed4-dcf40d1848a2"
+                },
+                {
+                  "id": "a79417c7-ca3e-4bae-b833-70bf783cbd1f",
+                  "name": "returns button index in validation errors for labels longer than 100 characters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"textInputEnabled\": \"<boolean>\",\n      \"textInputAgentId\": \"<string,null>\",\n      \"chatInterfaceButtons\": [\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        {\n          \"agentId\": \"<string>\",\n          \"label\": \"<string>\",\n          \"prompt\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/chat_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "chat_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:34:29.000Z",
+                  "updatedAt": "2026-10-22T02:34:29.000Z",
+                  "uid": "35240-a79417c7-ca3e-4bae-b833-70bf783cbd1f"
+                }
+              ],
+              "createdAt": "2026-10-22T02:34:29.000Z",
+              "updatedAt": "2026-10-22T02:34:29.000Z",
+              "uid": "35240-14d95612-c0fc-44df-9e0c-4d3775513130"
+            }
+          ],
+          "id": "3c143f3c-7f3e-46a4-974b-69df66a6ad5f",
+          "createdAt": "2026-10-22T02:34:29.000Z",
+          "updatedAt": "2026-10-22T02:34:29.000Z",
+          "uid": "35240-3c143f3c-7f3e-46a4-974b-69df66a6ad5f"
+        }
+      ],
+      "id": "5d51a639-1dfa-4f81-8be2-d7147f577016",
+      "createdAt": "2026-10-22T02:34:29.000Z",
+      "updatedAt": "2026-10-22T02:34:29.000Z",
+      "uid": "35240-5d51a639-1dfa-4f81-8be2-d7147f577016"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

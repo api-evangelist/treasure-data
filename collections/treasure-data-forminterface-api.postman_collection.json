@@ -1,0 +1,1138 @@
+{
+  "info": {
+    "_postman_id": "d81c148f-7a29-4221-bd26-553f8831733f",
+    "name": "llm-api Form Interface API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:35:03.000Z",
+    "updatedAt": "2026-10-22T02:35:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d81c148f-7a29-4221-bd26-553f8831733f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "form_interfaces",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "8d385cb7-e5eb-463e-b4d9-64e3a00f31cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "392646d2-e8b8-4063-9378-0334cce20b38",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a5f44bd2-8383-4898-bc0c-ff7358a537d0",
+                      "name": "Form interface deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-a5f44bd2-8383-4898-bc0c-ff7358a537d0"
+                    },
+                    {
+                      "id": "8f4252c9-99c9-4154-9b53-03098e442226",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-8f4252c9-99c9-4154-9b53-03098e442226"
+                    },
+                    {
+                      "id": "99c5219a-bd78-48ff-a74c-3bc5205bba4b",
+                      "name": "Form interface not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-99c5219a-bd78-48ff-a74c-3bc5205bba4b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-8d385cb7-e5eb-463e-b4d9-64e3a00f31cf"
+                },
+                {
+                  "name": "show",
+                  "id": "905ac3e4-598e-471e-add2-477e9dbe8a5e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9a043f89-2cb5-47c4-a63a-0e53d03c6c3b",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "623aad17-8e5b-4a0b-853a-ed5406ba7fc1",
+                      "name": "Form interface details and configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string,null>\",\n      \"useTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-623aad17-8e5b-4a0b-853a-ed5406ba7fc1"
+                    },
+                    {
+                      "id": "d94cba5b-7dc2-480b-abd6-0b4831c9e9aa",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-d94cba5b-7dc2-480b-abd6-0b4831c9e9aa"
+                    },
+                    {
+                      "id": "b8fe3a41-aaf9-43c5-bd4d-fe38dd26498d",
+                      "name": "Form interface not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-b8fe3a41-aaf9-43c5-bd4d-fe38dd26498d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-905ac3e4-598e-471e-add2-477e9dbe8a5e"
+                },
+                {
+                  "name": "update",
+                  "id": "dcfd2bac-9d91-4636-b02a-28f966f219bd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "98fb930b-0a69-4010-963b-f1cac4cfa8ac",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3bb93b45-31e1-4059-b50a-8371f5d46860",
+                      "name": "Form interface updated successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string,null>\",\n      \"useTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-3bb93b45-31e1-4059-b50a-8371f5d46860"
+                    },
+                    {
+                      "id": "8093d947-def1-4e88-9fa8-7e75d48c6dae",
+                      "name": "PATCH /api/form_interfaces rejects {\"createdAt\":1}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-8093d947-def1-4e88-9fa8-7e75d48c6dae"
+                    },
+                    {
+                      "id": "55669453-84ff-4710-bce9-f87ae16ef629",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-55669453-84ff-4710-bce9-f87ae16ef629"
+                    },
+                    {
+                      "id": "ca593e68-2d32-45a6-8453-7ba242abb7c5",
+                      "name": "PATCH /api/form_interfaces/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-ca593e68-2d32-45a6-8453-7ba242abb7c5"
+                    },
+                    {
+                      "id": "9264818d-acba-4dae-a77a-f3ada4db7b28",
+                      "name": "Validation error - invalid request body",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/form_interfaces/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "form_interfaces",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:04.000Z",
+                      "updatedAt": "2026-10-22T02:35:04.000Z",
+                      "uid": "35240-9264818d-acba-4dae-a77a-f3ada4db7b28"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-dcfd2bac-9d91-4636-b02a-28f966f219bd"
+                }
+              ],
+              "id": "2f709ffd-43a5-4cf3-9b74-64dc706787d3",
+              "createdAt": "2026-10-22T02:35:04.000Z",
+              "updatedAt": "2026-10-22T02:35:04.000Z",
+              "uid": "35240-2f709ffd-43a5-4cf3-9b74-64dc706787d3"
+            },
+            {
+              "name": "index",
+              "id": "ab571b42-c4c3-4412-be89-6c955da85446",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/form_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "form_interfaces"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[project_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9c7011b5-a5ec-4f37-bd36-72b0a4d2cccb",
+                  "name": "List of form interfaces with input validation applied",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"promptTemplate\": \"<string>\",\n        \"formJsonSchema\": \"<string>\",\n        \"formUiSchema\": \"<string,null>\",\n        \"useTextResource\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"project\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"agentId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"promptTemplate\": \"<string>\",\n        \"formJsonSchema\": \"<string>\",\n        \"formUiSchema\": \"<string,null>\",\n        \"useTextResource\": \"<boolean>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"project\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"description\": {},\n        \"useRuntimeTextResource\": \"<boolean>\",\n        \"useParentSegment\": \"<boolean>\",\n        \"useWorkflowExecutor\": \"<boolean>\",\n        \"isManaged\": \"<boolean>\",\n        \"managedType\": \"<string>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": {\n        \"formInterfaces\": {\n          \"data\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"description\": {},\n        \"useRuntimeTextResource\": \"<boolean>\",\n        \"useParentSegment\": \"<boolean>\",\n        \"useWorkflowExecutor\": \"<boolean>\",\n        \"isManaged\": \"<boolean>\",\n        \"managedType\": \"<string>\"\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"relationships\": {\n        \"formInterfaces\": {\n          \"data\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\"\n            }\n          ]\n        }\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-9c7011b5-a5ec-4f37-bd36-72b0a4d2cccb"
+                },
+                {
+                  "id": "6fea474b-6a41-4b71-993f-5c0b1020449d",
+                  "name": "Unauthorized - authentication credentials are missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces?filter[name]=<string>&filter[project_id]=<string>&include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-6fea474b-6a41-4b71-993f-5c0b1020449d"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:04.000Z",
+              "updatedAt": "2026-10-22T02:35:04.000Z",
+              "uid": "35240-ab571b42-c4c3-4412-be89-6c955da85446"
+            },
+            {
+              "name": "create",
+              "id": "8cf8c23b-4369-4d38-b95d-d6b7099fb97f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/form_interfaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "form_interfaces"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8b73560d-2a59-41d1-a8b4-c52356a954d1",
+                  "name": "Form interface successfully created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string,null>\",\n      \"useTextResource\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-8b73560d-2a59-41d1-a8b4-c52356a954d1"
+                },
+                {
+                  "id": "f1cf2e51-5512-4ff7-bf73-197bfef3392c",
+                  "name": "POST /api/form_interfaces rejects {\"createdAt\":1}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-f1cf2e51-5512-4ff7-bf73-197bfef3392c"
+                },
+                {
+                  "id": "0cd16b06-bc25-41ae-8114-ca498490d87c",
+                  "name": "Unauthorized - authentication credentials are missing or invalid",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-0cd16b06-bc25-41ae-8114-ca498490d87c"
+                },
+                {
+                  "id": "abc407ee-c365-44e1-bd25-97de312a02ff",
+                  "name": "POST /api/form_interfaces rejects {\"formUiSchema\":\"{                                                                                                                                                                                                           ",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"agentId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"promptTemplate\": \"<string>\",\n      \"formJsonSchema\": \"<string>\",\n      \"formUiSchema\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/form_interfaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "form_interfaces"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:04.000Z",
+                  "updatedAt": "2026-10-22T02:35:04.000Z",
+                  "uid": "35240-abc407ee-c365-44e1-bd25-97de312a02ff"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:04.000Z",
+              "updatedAt": "2026-10-22T02:35:04.000Z",
+              "uid": "35240-8cf8c23b-4369-4d38-b95d-d6b7099fb97f"
+            }
+          ],
+          "id": "735b684f-99e4-41b8-b274-a11a391d72f3",
+          "createdAt": "2026-10-22T02:35:04.000Z",
+          "updatedAt": "2026-10-22T02:35:04.000Z",
+          "uid": "35240-735b684f-99e4-41b8-b274-a11a391d72f3"
+        }
+      ],
+      "id": "8ae5cfbf-277b-48ce-a665-15d9799cfc12",
+      "createdAt": "2026-10-22T02:35:04.000Z",
+      "updatedAt": "2026-10-22T02:35:04.000Z",
+      "uid": "35240-8ae5cfbf-277b-48ce-a665-15d9799cfc12"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

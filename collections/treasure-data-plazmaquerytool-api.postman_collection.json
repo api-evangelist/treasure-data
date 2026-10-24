@@ -1,0 +1,721 @@
+{
+  "info": {
+    "_postman_id": "96dd7b05-504c-4b5c-b373-136ef3759803",
+    "name": "llm-api Plazma Query Tool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:36:07.000Z",
+    "updatedAt": "2026-10-22T02:36:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-96dd7b05-504c-4b5c-b373-136ef3759803"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "plazma_query_tools",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "d169d487-6832-4b08-87bf-7f316f94fe85",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "846c8214-6be4-42bd-98ad-01324f5f5278",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a63bd4c5-72e7-446c-88e7-ee23e9e55f43",
+                      "name": "deletes a PlazmaQueryTool",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-a63bd4c5-72e7-446c-88e7-ee23e9e55f43"
+                    },
+                    {
+                      "id": "b5edeed2-f6e0-49bb-90e8-f2f3f855c859",
+                      "name": "returns 404 when trying to delete non-existent PlazmaQueryTool",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-b5edeed2-f6e0-49bb-90e8-f2f3f855c859"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-d169d487-6832-4b08-87bf-7f316f94fe85"
+                },
+                {
+                  "name": "show",
+                  "id": "28339ad5-dd5a-49c1-b4a6-1d407fac6901",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "69cee9f7-e8ff-461c-a75e-fcd5270ff196",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c8e4bf11-3feb-4a07-ac71-ace49e20a26e",
+                      "name": "retrieves a PlazmaQueryTool",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-c8e4bf11-3feb-4a07-ac71-ace49e20a26e"
+                    },
+                    {
+                      "id": "57e97180-90d3-4122-a625-4bffcf628de1",
+                      "name": "returns 404 when PlazmaQueryTool doesn't exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-57e97180-90d3-4122-a625-4bffcf628de1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-28339ad5-dd5a-49c1-b4a6-1d407fac6901"
+                },
+                {
+                  "name": "update",
+                  "id": "8dfbd7ae-a4b9-469b-a79a-ae557dd1ed44",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"maxRows\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ee2e42ac-89df-417f-b207-a7a148659dda",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "57b611c7-d10c-4fbd-897c-895d6b22ffad",
+                      "name": "updates only specified fields",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"maxRows\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-57b611c7-d10c-4fbd-897c-895d6b22ffad"
+                    },
+                    {
+                      "id": "1a6359d2-d3a8-4b4d-8314-5e23d458a05e",
+                      "name": "PATCH /api/plazma_query_tools rejects {\"updatedAt\":1}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"maxRows\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-1a6359d2-d3a8-4b4d-8314-5e23d458a05e"
+                    },
+                    {
+                      "id": "d5a936a3-d3ea-4408-a5b8-66c9b81e6bd4",
+                      "name": "validates updated values",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"maxRows\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/plazma_query_tools/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "plazma_query_tools",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:36:08.000Z",
+                      "updatedAt": "2026-10-22T02:36:08.000Z",
+                      "uid": "35240-d5a936a3-d3ea-4408-a5b8-66c9b81e6bd4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-8dfbd7ae-a4b9-469b-a79a-ae557dd1ed44"
+                }
+              ],
+              "id": "f897ecd5-c4cb-4148-9ada-8f5dc7237294",
+              "createdAt": "2026-10-22T02:36:08.000Z",
+              "updatedAt": "2026-10-22T02:36:08.000Z",
+              "uid": "35240-f897ecd5-c4cb-4148-9ada-8f5dc7237294"
+            },
+            {
+              "name": "create",
+              "id": "414b77ab-a291-4eb0-a681-c0d042b88316",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/plazma_query_tools",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "plazma_query_tools"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1a69cc8d-3ba9-4f09-8b0b-6002e0cce84a",
+                  "name": "creates a new PlazmaQueryTool with minimal parameters (uses defaults)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-1a69cc8d-3ba9-4f09-8b0b-6002e0cce84a"
+                },
+                {
+                  "id": "18b8c2f8-8bf2-4126-ab15-0631a954af96",
+                  "name": "POST /api/plazma_query_tools rejects {\"updatedAt\":1}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-18b8c2f8-8bf2-4126-ab15-0631a954af96"
+                },
+                {
+                  "id": "9347675a-3aa7-4048-b951-03124141f77f",
+                  "name": "POST /api/plazma_query_tools rejects {\"timeoutSeconds\":60.5}",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"maxRows\": \"<integer>\",\n      \"timeoutSeconds\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/plazma_query_tools",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "plazma_query_tools"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:36:08.000Z",
+                  "updatedAt": "2026-10-22T02:36:08.000Z",
+                  "uid": "35240-9347675a-3aa7-4048-b951-03124141f77f"
+                }
+              ],
+              "createdAt": "2026-10-22T02:36:08.000Z",
+              "updatedAt": "2026-10-22T02:36:08.000Z",
+              "uid": "35240-414b77ab-a291-4eb0-a681-c0d042b88316"
+            }
+          ],
+          "id": "e8e9ff13-98dc-4869-88e4-37330b9b8b1f",
+          "createdAt": "2026-10-22T02:36:08.000Z",
+          "updatedAt": "2026-10-22T02:36:08.000Z",
+          "uid": "35240-e8e9ff13-98dc-4869-88e4-37330b9b8b1f"
+        }
+      ],
+      "id": "28bb79bc-2034-46f0-961a-d54aa122974f",
+      "createdAt": "2026-10-22T02:36:08.000Z",
+      "updatedAt": "2026-10-22T02:36:08.000Z",
+      "uid": "35240-28bb79bc-2034-46f0-961a-d54aa122974f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

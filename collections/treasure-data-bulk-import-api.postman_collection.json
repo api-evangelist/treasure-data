@@ -1,1598 +1,1639 @@
 {
+  "info": {
+    "_postman_id": "4a38f4fd-5782-4e89-b180-e21aff01f0ea",
+    "name": "Treasure Data TD Bulk Import API",
+    "description": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:31:44.000Z",
+    "updatedAt": "2026-10-22T02:31:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4a38f4fd-5782-4e89-b180-e21aff01f0ea"
+  },
   "item": [
     {
-      "id": "f2f9b57f-fa69-4ef5-a6bb-cf09ba3adabe",
-      "name": "Bulk Import",
-      "description": {
-        "content": "Bulk data import sessions",
-        "type": "text/plain"
-      },
+      "name": "bulk_import",
       "item": [
         {
-          "id": "2d7833a5-548f-41bb-81b6-8ab74b975cd4",
-          "name": "List bulk import sessions",
-          "request": {
-            "name": "List bulk import sessions",
-            "description": {
-              "content": "Returns the list of available bulk import sessions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "list"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list",
+          "item": [
             {
-              "id": "83224fbc-2660-4f47-b2c8-a81ccef80a63",
-              "name": "List of bulk imports",
-              "originalRequest": {
+              "name": "List bulk import sessions",
+              "id": "680beca3-4e2f-4d49-a708-76ae64b8e638",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/bulk_import/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "bulk_import",
                     "list"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns the list of available bulk import sessions."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "f1766cde-274f-40de-b225-50383183ff48",
+                  "name": "List of bulk imports",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"bulk_imports\": [\n    {\n      \"name\": \"<string>\",\n      \"database\": \"<string>\",\n      \"table\": \"<string>\",\n      \"status\": \"frozen\",\n      \"upload_frozen\": \"<boolean>\",\n      \"job_id\": \"<string>\",\n      \"valid_records\": \"<integer>\",\n      \"error_records\": \"<integer>\",\n      \"valid_parts\": \"<integer>\",\n      \"error_parts\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"database\": \"<string>\",\n      \"table\": \"<string>\",\n      \"status\": \"frozen\",\n      \"upload_frozen\": \"<boolean>\",\n      \"job_id\": \"<string>\",\n      \"valid_records\": \"<integer>\",\n      \"error_records\": \"<integer>\",\n      \"valid_parts\": \"<integer>\",\n      \"error_parts\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-f1766cde-274f-40de-b225-50383183ff48"
+                },
+                {
+                  "id": "88a82eb6-4c0a-487f-b242-3bbdf0d2a4a0",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-88a82eb6-4c0a-487f-b242-3bbdf0d2a4a0"
                 }
               ],
-              "body": "{\n  \"bulk_imports\": [\n    {\n      \"name\": \"string\",\n      \"database\": \"string\",\n      \"table\": \"string\",\n      \"status\": \"frozen\",\n      \"upload_frozen\": true,\n      \"job_id\": \"string\",\n      \"valid_records\": 7839,\n      \"error_records\": 7110,\n      \"valid_parts\": 3397,\n      \"error_parts\": 3844\n    },\n    {\n      \"name\": \"string\",\n      \"database\": \"string\",\n      \"table\": \"string\",\n      \"status\": \"frozen\",\n      \"upload_frozen\": true,\n      \"job_id\": \"string\",\n      \"valid_records\": 5395,\n      \"error_records\": 9790,\n      \"valid_parts\": 5945,\n      \"error_parts\": 7391\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3995f101-e008-4e89-8421-bb841d24545d",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "list"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-680beca3-4e2f-4d49-a708-76ae64b8e638"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "371346c5-1ee0-4ebf-a4fe-204cf27f041b",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-371346c5-1ee0-4ebf-a4fe-204cf27f041b"
         },
         {
-          "id": "627b5f8c-3112-4fc6-8a4a-7d59944d7cbb",
-          "name": "Create bulk import session",
-          "request": {
-            "name": "Create bulk import session",
-            "description": {
-              "content": "Creates a new bulk import session targeting the specified database and table.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "create",
-                ":name",
-                ":database_name",
-                ":table_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "database_name",
-                  "description": "(Required) Target database name"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "table_name",
-                  "description": "(Required) Target table name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "create",
+          "item": [
             {
-              "id": "8fd40f9e-b227-4112-a6e2-27e71a6927d8",
-              "name": "Bulk import session created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "create",
-                    ":name",
-                    ":database_name",
-                    ":table_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Target database name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "table_name",
-                      "description": "(Required) Target table name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{database_name}",
+                  "item": [
+                    {
+                      "name": "{table_name}",
+                      "item": [
+                        {
+                          "name": "Create bulk import session",
+                          "id": "f4ee1ae7-55c3-4fc6-99fc-8d86957de36c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/bulk_import/create/:name/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "bulk_import",
+                                "create",
+                                ":name",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0ccc7650-0d0d-430e-b9b0-2ef1c2d918f5",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) Name of the bulk import session"
+                                },
+                                {
+                                  "id": "15068320-f8ca-47eb-a632-c90188f94172",
+                                  "key": "database_name",
+                                  "value": "<string>",
+                                  "description": "(Required) Target database name"
+                                },
+                                {
+                                  "id": "718409e8-d7e1-42e2-b4c9-2d6675d61a4c",
+                                  "key": "table_name",
+                                  "value": "<string>",
+                                  "description": "(Required) Target table name"
+                                }
+                              ]
+                            },
+                            "description": "Creates a new bulk import session targeting the specified database and table."
+                          },
+                          "response": [
+                            {
+                              "id": "2939e11c-1219-4390-96b8-bc0d60586c80",
+                              "name": "Bulk import session created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/bulk_import/create/:name/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "bulk_import",
+                                    "create",
+                                    ":name",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:31:45.000Z",
+                              "updatedAt": "2026-10-22T02:31:45.000Z",
+                              "uid": "35240-2939e11c-1219-4390-96b8-bc0d60586c80"
+                            },
+                            {
+                              "id": "d78411e4-996e-4208-8e41-aa2e1bad96c4",
+                              "name": "Authentication required or API key invalid",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/bulk_import/create/:name/:database_name/:table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "bulk_import",
+                                    "create",
+                                    ":name",
+                                    ":database_name",
+                                    ":table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "name"
+                                    },
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:31:45.000Z",
+                              "updatedAt": "2026-10-22T02:31:45.000Z",
+                              "uid": "35240-d78411e4-996e-4208-8e41-aa2e1bad96c4"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:31:45.000Z",
+                          "updatedAt": "2026-10-22T02:31:45.000Z",
+                          "uid": "35240-f4ee1ae7-55c3-4fc6-99fc-8d86957de36c"
+                        }
+                      ],
+                      "id": "87fb8faa-bf3d-4a40-92e1-f3e009f60f7a",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-87fb8faa-bf3d-4a40-92e1-f3e009f60f7a"
+                    }
+                  ],
+                  "id": "a8076021-588a-4712-ac5f-d0bd31a1c4bb",
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-a8076021-588a-4712-ac5f-d0bd31a1c4bb"
                 }
               ],
-              "body": "{\n  \"name\": \"string\",\n  \"status\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7117ecfd-3894-48ad-ba8c-9223e3678614",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "create",
-                    ":name",
-                    ":database_name",
-                    ":table_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Target database name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "table_name",
-                      "description": "(Required) Target table name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "c3441974-bf6f-425b-9aff-c1e0fc15c2d5",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-c3441974-bf6f-425b-9aff-c1e0fc15c2d5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "23e2b0d2-e5a3-417e-8f71-a858bd4b0cb3",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-23e2b0d2-e5a3-417e-8f71-a858bd4b0cb3"
         },
         {
-          "id": "acf38eec-7be2-4e00-8bbb-51bbbe450a41",
-          "name": "Show bulk import session",
-          "request": {
-            "name": "Show bulk import session",
-            "description": {
-              "content": "Returns details of the specified bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "show",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "show",
+          "item": [
             {
-              "id": "d7a72b52-a0c4-476a-a1c1-ee564ce1ec9a",
-              "name": "Bulk import details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "show",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Show bulk import session",
+                  "id": "344c99a2-7805-4949-b574-0d8113b398bf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/show/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "show",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5a4023fa-0dab-4036-9b9b-dde63b63debe",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Returns details of the specified bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "4efee954-bacb-49b4-be9d-d5cd79f80241",
+                      "name": "Bulk import details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/show/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "show",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"status\": \"committed\",\n  \"upload_frozen\": \"<boolean>\",\n  \"job_id\": \"<string>\",\n  \"valid_records\": \"<integer>\",\n  \"error_records\": \"<integer>\",\n  \"valid_parts\": \"<integer>\",\n  \"error_parts\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-4efee954-bacb-49b4-be9d-d5cd79f80241"
+                    },
+                    {
+                      "id": "9c2c277d-9817-4e1d-b1b8-ab24305f33f6",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/show/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "show",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-9c2c277d-9817-4e1d-b1b8-ab24305f33f6"
+                    },
+                    {
+                      "id": "b47bbb21-0540-4aea-9831-68335e99d735",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/show/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "show",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-b47bbb21-0540-4aea-9831-68335e99d735"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-344c99a2-7805-4949-b574-0d8113b398bf"
                 }
               ],
-              "body": "{\n  \"name\": \"string\",\n  \"database\": \"string\",\n  \"table\": \"string\",\n  \"status\": \"uploading\",\n  \"upload_frozen\": false,\n  \"job_id\": \"string\",\n  \"valid_records\": 5395,\n  \"error_records\": 5176,\n  \"valid_parts\": 3588,\n  \"error_parts\": 6458\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6dff66cb-c554-4f19-813e-cf1d909b8639",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "show",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ed082abe-7ef0-4c27-b897-b140648e73a7",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "show",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "14bb0d6f-21e0-402e-96a5-774316a15a31",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-14bb0d6f-21e0-402e-96a5-774316a15a31"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "578949d3-8792-4c71-adfb-d1b8403ba0e0",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-578949d3-8792-4c71-adfb-d1b8403ba0e0"
         },
         {
-          "id": "e2c8df4a-244f-4d2e-b34b-64ffef268274",
-          "name": "Upload bulk import part",
-          "request": {
-            "name": "Upload bulk import part",
-            "description": {
-              "content": "Uploads a msgpack.gz file as a part of the bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "upload_part",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/octet-stream"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "file"
-            }
-          },
-          "response": [
+          "name": "upload_part",
+          "item": [
             {
-              "id": "ceb4c036-1d46-4910-b77b-8cfa2dd2b55f",
-              "name": "Part uploaded successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "upload_part",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "file"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d6dd5a93-6d5a-4f97-a64c-bba61d82f953",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "upload_part",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Upload bulk import part",
+                  "id": "157710e1-8daf-4cc7-9b76-1ecd37e29dff",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "file"
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "file",
+                      "file": {}
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/upload_part/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "upload_part",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9b7f6ae8-12f8-4e86-8b56-ffa6b3fe0960",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Uploads a msgpack.gz file as a part of the bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "183bd634-accf-442e-afd8-23efb141fa85",
+                      "name": "Part uploaded successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/upload_part/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "upload_part",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-183bd634-accf-442e-afd8-23efb141fa85"
+                    },
+                    {
+                      "id": "8437872e-6c3c-43e6-9b42-fb6fffa49a14",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/upload_part/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "upload_part",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-8437872e-6c3c-43e6-9b42-fb6fffa49a14"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-157710e1-8daf-4cc7-9b76-1ecd37e29dff"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "48506790-6947-4420-a3ec-320fed593164",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-48506790-6947-4420-a3ec-320fed593164"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4aefce05-6fa7-46e6-88cb-a8f6884ad759",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-4aefce05-6fa7-46e6-88cb-a8f6884ad759"
         },
         {
-          "id": "1a3878da-41c6-47fc-bb52-a461c8458ed3",
-          "name": "List bulk import parts",
-          "request": {
-            "name": "List bulk import parts",
-            "description": {
-              "content": "Returns the list of uploaded parts for the specified bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "list_parts",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list_parts",
+          "item": [
             {
-              "id": "bfe9d06a-adea-4e06-85e1-5e27572e7668",
-              "name": "List of parts",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "list_parts",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "List bulk import parts",
+                  "id": "d47ba2e9-edd6-46ae-9166-4b86e73a5874",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/list_parts/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "list_parts",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "97cf22e3-ed1c-43e0-9a9a-fb07b49b71d1",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Returns the list of uploaded parts for the specified bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "785a33d1-b4ec-42fb-8284-d5e65ba4d80c",
+                      "name": "List of parts",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/list_parts/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "list_parts",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"parts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-785a33d1-b4ec-42fb-8284-d5e65ba4d80c"
+                    },
+                    {
+                      "id": "98aff0d1-cee3-4e01-b3a5-9af044f42ff5",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/list_parts/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "list_parts",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-98aff0d1-cee3-4e01-b3a5-9af044f42ff5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-d47ba2e9-edd6-46ae-9166-4b86e73a5874"
                 }
               ],
-              "body": "{\n  \"parts\": [\n    \"string\",\n    \"string\"\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e3340add-f0a4-4078-8d2f-4cc79544e3ea",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "list_parts",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "f7066f89-4885-4f4e-9aea-fa8be7633bc2",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-f7066f89-4885-4f4e-9aea-fa8be7633bc2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "dd080cb5-c58d-45db-ac02-230441fa4cb9",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-dd080cb5-c58d-45db-ac02-230441fa4cb9"
         },
         {
-          "id": "16a2e6d3-0668-4329-a1a5-715f2b6789e9",
-          "name": "Perform bulk import",
-          "request": {
-            "name": "Perform bulk import",
-            "description": {
-              "content": "Executes the bulk import job for the specified session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "perform",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "perform",
+          "item": [
             {
-              "id": "3fdb82b9-3864-4413-9fd9-c7aec4a1d246",
-              "name": "Bulk import job started",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "perform",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Perform bulk import",
+                  "id": "9e8beae6-aee2-448c-804e-7e31d5000348",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/perform/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "perform",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "19566e3e-2c9c-4649-ae0c-18dfd117a1a3",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Executes the bulk import job for the specified session."
+                  },
+                  "response": [
+                    {
+                      "id": "507904aa-ddb5-46be-94a9-706ef825b34d",
+                      "name": "Bulk import job started",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/perform/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "perform",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"job_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"database\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-507904aa-ddb5-46be-94a9-706ef825b34d"
+                    },
+                    {
+                      "id": "9a70ecee-fa58-43a1-b804-793dd9db2f1a",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/perform/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "perform",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-9a70ecee-fa58-43a1-b804-793dd9db2f1a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-9e8beae6-aee2-448c-804e-7e31d5000348"
                 }
               ],
-              "body": "{\n  \"job_id\": \"string\",\n  \"type\": \"string\",\n  \"database\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c9fcf6c6-083e-4119-aaa1-2afe67ebf496",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "perform",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "3b9fd0b7-e039-4c09-8d81-6f4b43f0036c",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-3b9fd0b7-e039-4c09-8d81-6f4b43f0036c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ae495ddd-945c-41e2-8b5a-65ab1cb2b2f8",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-ae495ddd-945c-41e2-8b5a-65ab1cb2b2f8"
         },
         {
-          "id": "d2f33809-eb9f-40f9-9179-67a8017b18fb",
-          "name": "Commit bulk import",
-          "request": {
-            "name": "Commit bulk import",
-            "description": {
-              "content": "Finalizes the bulk import session and makes data available.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "commit",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "commit",
+          "item": [
             {
-              "id": "8651c605-debf-42f8-86f1-20ec6c2a2a2f",
-              "name": "Bulk import committed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "commit",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "73ebcbf9-bdcf-4bc2-b3ce-356cdcae4d22",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "commit",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Commit bulk import",
+                  "id": "c42e1a88-300f-41db-b1f4-e83c081df5d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/commit/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "commit",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "96eb05c2-164f-4ccf-a3a6-d769881f6704",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Finalizes the bulk import session and makes data available."
+                  },
+                  "response": [
+                    {
+                      "id": "62818ce1-ccb1-4403-9983-ee94ba3367a4",
+                      "name": "Bulk import committed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/commit/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "commit",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-62818ce1-ccb1-4403-9983-ee94ba3367a4"
+                    },
+                    {
+                      "id": "e1173ca8-81eb-4e4e-8065-c0009c77f99d",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/commit/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "commit",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-e1173ca8-81eb-4e4e-8065-c0009c77f99d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-c42e1a88-300f-41db-b1f4-e83c081df5d7"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "6cf5dfc7-a8c0-4826-aad4-4fda906e6fcd",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-6cf5dfc7-a8c0-4826-aad4-4fda906e6fcd"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "f39f8a79-0ad9-4640-81de-20a02aa09cd8",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-f39f8a79-0ad9-4640-81de-20a02aa09cd8"
         },
         {
-          "id": "7644af0b-562b-49db-96d6-def9f3d094c6",
-          "name": "Freeze bulk import session",
-          "request": {
-            "name": "Freeze bulk import session",
-            "description": {
-              "content": "Prevents further uploads to the specified bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "freeze",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "freeze",
+          "item": [
             {
-              "id": "aa1e41cb-a8cb-4352-a7b4-a76b9b09bf4e",
-              "name": "Session frozen",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "freeze",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b67af3ed-faa3-4a83-a08d-bb3657a86fcc",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "freeze",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Freeze bulk import session",
+                  "id": "bb3f6aad-4688-4b26-a2af-d96b14212fda",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/freeze/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "freeze",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "39736af2-7e1a-49e4-99ac-4a96ae51ebaa",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Prevents further uploads to the specified bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "718db8c1-08c2-4b97-97ae-0f05db4999ad",
+                      "name": "Session frozen",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/freeze/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "freeze",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-718db8c1-08c2-4b97-97ae-0f05db4999ad"
+                    },
+                    {
+                      "id": "babf61b9-2c6f-405a-ae4d-875f5e2005d6",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/freeze/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "freeze",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-babf61b9-2c6f-405a-ae4d-875f5e2005d6"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-bb3f6aad-4688-4b26-a2af-d96b14212fda"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "eafa2c33-2ace-4228-a973-ae48310da7fc",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-eafa2c33-2ace-4228-a973-ae48310da7fc"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "328fcc00-83d1-4f3e-bc27-e85015023dc0",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-328fcc00-83d1-4f3e-bc27-e85015023dc0"
         },
         {
-          "id": "e902cb54-3c3d-44e3-8dee-f91300d8e32c",
-          "name": "Unfreeze bulk import session",
-          "request": {
-            "name": "Unfreeze bulk import session",
-            "description": {
-              "content": "Resumes uploads to the specified frozen bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "unfreeze",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "unfreeze",
+          "item": [
             {
-              "id": "c932d786-10b6-446f-b89f-5cddb1b343cd",
-              "name": "Session unfrozen",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "unfreeze",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "e0a39c79-da56-4777-bff2-a9e7fe1c34db",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "unfreeze",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Unfreeze bulk import session",
+                  "id": "fca447dc-db11-492c-9129-fce42c7bc705",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/unfreeze/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "unfreeze",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a049b8f0-fdcf-4262-8564-fc6250aa6267",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Resumes uploads to the specified frozen bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "7aecb772-e50b-4340-9367-2e4c6ac75026",
+                      "name": "Session unfrozen",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/unfreeze/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "unfreeze",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-7aecb772-e50b-4340-9367-2e4c6ac75026"
+                    },
+                    {
+                      "id": "0de083bc-5334-43f2-b19d-75bde160e95d",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/unfreeze/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "unfreeze",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-0de083bc-5334-43f2-b19d-75bde160e95d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-fca447dc-db11-492c-9129-fce42c7bc705"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "4dc8841e-59c9-444d-8b77-1a673006706f",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-4dc8841e-59c9-444d-8b77-1a673006706f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8f98fd3e-93ec-4b5e-81cb-085d702c7487",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-8f98fd3e-93ec-4b5e-81cb-085d702c7487"
         },
         {
-          "id": "f55c6b57-e056-4d41-8609-15c41e9ad79a",
-          "name": "Delete bulk import session",
-          "request": {
-            "name": "Delete bulk import session",
-            "description": {
-              "content": "Removes the specified bulk import session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_import",
-                "delete",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk import session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "delete",
+          "item": [
             {
-              "id": "6e5f1a47-c86c-4188-b5d4-a0d8fc6055f9",
-              "name": "Session deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "delete",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "a3c4d8d3-9d9e-4b01-83a4-7272cba161ff",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_import",
-                    "delete",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk import session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
+                  "name": "Delete bulk import session",
+                  "id": "90270c0b-9a3c-4bf1-beb3-66fb221409e8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_import/delete/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_import",
+                        "delete",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "32b29e88-af90-436a-85d7-5b8b07e206e7",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk import session"
+                        }
+                      ]
+                    },
+                    "description": "Removes the specified bulk import session."
+                  },
+                  "response": [
+                    {
+                      "id": "8c12ced9-3ba2-48f6-84ef-78d91aa0520d",
+                      "name": "Session deleted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/delete/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "delete",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-8c12ced9-3ba2-48f6-84ef-78d91aa0520d"
+                    },
+                    {
+                      "id": "509e5620-0e60-4da0-83df-75566ca95ab0",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_import/delete/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_import",
+                            "delete",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:45.000Z",
+                      "updatedAt": "2026-10-22T02:31:45.000Z",
+                      "uid": "35240-509e5620-0e60-4da0-83df-75566ca95ab0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:45.000Z",
+                  "updatedAt": "2026-10-22T02:31:45.000Z",
+                  "uid": "35240-90270c0b-9a3c-4bf1-beb3-66fb221409e8"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "55c5f4f7-bd9e-49c6-b2bb-c931ffe97526",
+              "createdAt": "2026-10-22T02:31:45.000Z",
+              "updatedAt": "2026-10-22T02:31:45.000Z",
+              "uid": "35240-55c5f4f7-bd9e-49c6-b2bb-c931ffe97526"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d8710a05-4c02-4d89-a63a-45efe78d7c1e",
+          "createdAt": "2026-10-22T02:31:45.000Z",
+          "updatedAt": "2026-10-22T02:31:45.000Z",
+          "uid": "35240-d8710a05-4c02-4d89-a63a-45efe78d7c1e"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "id": "8c9c3d9b-6756-442d-975f-193166e58d1e",
+      "createdAt": "2026-10-22T02:31:45.000Z",
+      "updatedAt": "2026-10-22T02:31:45.000Z",
+      "uid": "35240-8c9c3d9b-6756-442d-975f-193166e58d1e"
     }
   ],
   "auth": {
@@ -1600,25 +1641,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ff95b974-c3df-494f-ad87-62bc3b0e4144",
-    "name": "Treasure Data TD Bulk Import API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  }
+  ]
 }

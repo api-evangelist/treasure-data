@@ -1,0 +1,343 @@
+{
+  "info": {
+    "_postman_id": "d95e6957-ae47-4ef3-91d8-2b529c6b0a98",
+    "name": "Treasure Workflow Session API",
+    "description": "Treasure Workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:23.000Z",
+    "updatedAt": "2026-10-22T02:37:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d95e6957-ae47-4ef3-91d8-2b529c6b0a98"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "sessions",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "attempts",
+                  "item": [
+                    {
+                      "name": "List attempts of a session",
+                      "id": "5b9d2426-3e07-40b7-84ed-7300ace1aa06",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/sessions/:id/attempts?last_id=<long>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "sessions",
+                            ":id",
+                            "attempts"
+                          ],
+                          "query": [
+                            {
+                              "description": "List attempts whose ID is smaller than this ID for pagination. Attempts are returned in descending order by ID.",
+                              "key": "last_id",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "number of attempts to return",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a1d1fee2-4b2e-42b4-9e08-1d59b17f8568",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) session id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a3f3aeed-b740-43cf-a833-18a081482e5b",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/sessions/:id/attempts?last_id=<long>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "sessions",
+                                ":id",
+                                "attempts"
+                              ],
+                              "query": [
+                                {
+                                  "description": "List attempts whose ID is smaller than this ID for pagination. Attempts are returned in descending order by ID.",
+                                  "key": "last_id",
+                                  "value": "<long>"
+                                },
+                                {
+                                  "description": "number of attempts to return",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"attempts\": [\n    {\n      \"cancelRequested\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"done\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"index\": \"<integer>\",\n      \"params\": {},\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"retryAttemptName\": \"<string>\",\n      \"sessionId\": \"<string>\",\n      \"sessionTime\": \"<string>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"status\": \"running\",\n      \"success\": \"<boolean>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"finishedAt\": \"<dateTime>\",\n      \"poolId\": \"<string>\"\n    },\n    {\n      \"cancelRequested\": \"<boolean>\",\n      \"createdAt\": \"<dateTime>\",\n      \"done\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"index\": \"<integer>\",\n      \"params\": {},\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"retryAttemptName\": \"<string>\",\n      \"sessionId\": \"<string>\",\n      \"sessionTime\": \"<string>\",\n      \"sessionUuid\": \"<uuid>\",\n      \"status\": \"canceling\",\n      \"success\": \"<boolean>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"finishedAt\": \"<dateTime>\",\n      \"poolId\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:37:24.000Z",
+                          "updatedAt": "2026-10-22T02:37:24.000Z",
+                          "uid": "35240-a3f3aeed-b740-43cf-a833-18a081482e5b"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:37:24.000Z",
+                      "updatedAt": "2026-10-22T02:37:24.000Z",
+                      "uid": "35240-5b9d2426-3e07-40b7-84ed-7300ace1aa06"
+                    }
+                  ],
+                  "id": "cfe7a527-521d-475d-98da-5e92a4bc8eff",
+                  "createdAt": "2026-10-22T02:37:23.000Z",
+                  "updatedAt": "2026-10-22T02:37:23.000Z",
+                  "uid": "35240-cfe7a527-521d-475d-98da-5e92a4bc8eff"
+                },
+                {
+                  "name": "Get a session",
+                  "id": "8d6d681d-4d08-4e93-b7c1-4c1e654f1dda",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/sessions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "sessions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a3a00165-1806-45e9-8ed1-06601b6dda45",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) session id"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5b517065-c9d5-4d59-921d-fbd778f51dc1",
+                      "name": "default response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/sessions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "sessions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"sessionTime\": \"<string>\",\n  \"workflow\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\"\n  },\n  \"lastAttempt\": {\n    \"cancelRequested\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"done\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"params\": {},\n    \"status\": \"canceling\",\n    \"success\": \"<boolean>\",\n    \"finishedAt\": \"<dateTime>\",\n    \"poolId\": \"<string>\",\n    \"retryAttemptName\": \"<string>\"\n  },\n  \"sessionUuid\": \"<uuid>\"\n}",
+                      "createdAt": "2026-10-22T02:37:24.000Z",
+                      "updatedAt": "2026-10-22T02:37:24.000Z",
+                      "uid": "35240-5b517065-c9d5-4d59-921d-fbd778f51dc1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:24.000Z",
+                  "updatedAt": "2026-10-22T02:37:24.000Z",
+                  "uid": "35240-8d6d681d-4d08-4e93-b7c1-4c1e654f1dda"
+                }
+              ],
+              "id": "55c1db8b-bda2-452a-b3d5-4190a83d62ba",
+              "createdAt": "2026-10-22T02:37:23.000Z",
+              "updatedAt": "2026-10-22T02:37:23.000Z",
+              "uid": "35240-55c1db8b-bda2-452a-b3d5-4190a83d62ba"
+            },
+            {
+              "name": "List sessions",
+              "id": "70e3408a-3512-4c01-953a-aa1263083dbb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/sessions?last_id=<long>&page_size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "sessions"
+                  ],
+                  "query": [
+                    {
+                      "description": "List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.",
+                      "key": "last_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "number of sessions to return",
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e756982a-00d8-4b5f-bed6-a86ce65ff4aa",
+                  "name": "default response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/sessions?last_id=<long>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "sessions"
+                      ],
+                      "query": [
+                        {
+                          "description": "List sessions whose ID is smaller than this ID for pagination. Sessions are returned in descending order by ID.",
+                          "key": "last_id",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "number of sessions to return",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"sessions\": [\n    {\n      \"id\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"sessionTime\": \"<string>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"lastAttempt\": {\n        \"cancelRequested\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"done\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"params\": {},\n        \"status\": \"killed\",\n        \"success\": \"<boolean>\",\n        \"finishedAt\": \"<dateTime>\",\n        \"poolId\": \"<string>\",\n        \"retryAttemptName\": \"<string>\"\n      },\n      \"sessionUuid\": \"<uuid>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"sessionTime\": \"<string>\",\n      \"workflow\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      \"lastAttempt\": {\n        \"cancelRequested\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"done\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"params\": {},\n        \"status\": \"blocked\",\n        \"success\": \"<boolean>\",\n        \"finishedAt\": \"<dateTime>\",\n        \"poolId\": \"<string>\",\n        \"retryAttemptName\": \"<string>\"\n      },\n      \"sessionUuid\": \"<uuid>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:24.000Z",
+                  "updatedAt": "2026-10-22T02:37:24.000Z",
+                  "uid": "35240-e756982a-00d8-4b5f-bed6-a86ce65ff4aa"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:24.000Z",
+              "updatedAt": "2026-10-22T02:37:24.000Z",
+              "uid": "35240-70e3408a-3512-4c01-953a-aa1263083dbb"
+            }
+          ],
+          "id": "aa158ec7-d2e2-4d35-be5e-70e2b81ca03c",
+          "createdAt": "2026-10-22T02:37:23.000Z",
+          "updatedAt": "2026-10-22T02:37:23.000Z",
+          "uid": "35240-aa158ec7-d2e2-4d35-be5e-70e2b81ca03c"
+        }
+      ],
+      "id": "11ce6b8e-01e0-453c-9ebd-8e17ad27a886",
+      "createdAt": "2026-10-22T02:37:23.000Z",
+      "updatedAt": "2026-10-22T02:37:23.000Z",
+      "uid": "35240-11ce6b8e-01e0-453c-9ebd-8e17ad27a886"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-workflow.treasuredata.com"
+    }
+  ]
+}

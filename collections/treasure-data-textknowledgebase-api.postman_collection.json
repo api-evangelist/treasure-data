@@ -1,0 +1,518 @@
+{
+  "info": {
+    "_postman_id": "23299f9e-c1c7-427e-bbde-e4311a897ad1",
+    "name": "llm-api Text Knowledge Base API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:28.000Z",
+    "updatedAt": "2026-10-22T02:37:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-23299f9e-c1c7-427e-bbde-e4311a897ad1"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "text_knowledge_bases",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "07818f19-114f-4d39-8f39-6aa5a0fae296",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_knowledge_bases",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "988e1b54-b122-4f03-b9a2-c0155256e0cc",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7b61876f-6970-4ed4-ad72-ce06871109c4",
+                      "name": "deletes the TextKnowledgeBase",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_knowledge_bases",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:37:29.000Z",
+                      "updatedAt": "2026-10-22T02:37:29.000Z",
+                      "uid": "35240-7b61876f-6970-4ed4-ad72-ce06871109c4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:29.000Z",
+                  "updatedAt": "2026-10-22T02:37:29.000Z",
+                  "uid": "35240-07818f19-114f-4d39-8f39-6aa5a0fae296"
+                },
+                {
+                  "name": "show",
+                  "id": "f3dde051-c8ad-4808-90b1-3f997b288c90",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_knowledge_bases",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "62ebc01a-4aa7-4b43-b271-242a0848aa33",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "01a77124-5b40-45d1-b307-7584c723feed",
+                      "name": "returns the details of a specific TextKnowledgeBase",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_knowledge_bases",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:29.000Z",
+                      "updatedAt": "2026-10-22T02:37:29.000Z",
+                      "uid": "35240-01a77124-5b40-45d1-b307-7584c723feed"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:29.000Z",
+                  "updatedAt": "2026-10-22T02:37:29.000Z",
+                  "uid": "35240-f3dde051-c8ad-4808-90b1-3f997b288c90"
+                },
+                {
+                  "name": "update",
+                  "id": "c35db9a9-89fa-45c1-877d-706cebb4dea8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_knowledge_bases",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7694bb00-5323-485e-81fc-df6f9585dd62",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f658685f-4c1a-4c4f-b820-ab0bb57df456",
+                      "name": "updates the TextKnowledgeBase successfully",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_knowledge_bases",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:29.000Z",
+                      "updatedAt": "2026-10-22T02:37:29.000Z",
+                      "uid": "35240-f658685f-4c1a-4c4f-b820-ab0bb57df456"
+                    },
+                    {
+                      "id": "ccd1616e-be48-4a14-9a3f-25688c4d31ad",
+                      "name": "returns detailed errors for invalid updates",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/text_knowledge_bases/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "text_knowledge_bases",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:37:29.000Z",
+                      "updatedAt": "2026-10-22T02:37:29.000Z",
+                      "uid": "35240-ccd1616e-be48-4a14-9a3f-25688c4d31ad"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:29.000Z",
+                  "updatedAt": "2026-10-22T02:37:29.000Z",
+                  "uid": "35240-c35db9a9-89fa-45c1-877d-706cebb4dea8"
+                }
+              ],
+              "id": "2758d490-8158-42d2-be2f-c35f3171eb0f",
+              "createdAt": "2026-10-22T02:37:29.000Z",
+              "updatedAt": "2026-10-22T02:37:29.000Z",
+              "uid": "35240-2758d490-8158-42d2-be2f-c35f3171eb0f"
+            },
+            {
+              "name": "create",
+              "id": "acade8c7-58ff-4686-aa05-54c389211387",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/text_knowledge_bases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "text_knowledge_bases"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "6186f312-31b7-4362-8e4a-18d2a59226ca",
+                  "name": "creates a new TextKnowledgeBase",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_knowledge_bases",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_knowledge_bases"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:37:29.000Z",
+                  "updatedAt": "2026-10-22T02:37:29.000Z",
+                  "uid": "35240-6186f312-31b7-4362-8e4a-18d2a59226ca"
+                },
+                {
+                  "id": "f839bbe4-79e9-44be-8e23-63f001ee588d",
+                  "name": "returns errors for invalid parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"projectId\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/text_knowledge_bases",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "text_knowledge_bases"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:29.000Z",
+                  "updatedAt": "2026-10-22T02:37:29.000Z",
+                  "uid": "35240-f839bbe4-79e9-44be-8e23-63f001ee588d"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:29.000Z",
+              "updatedAt": "2026-10-22T02:37:29.000Z",
+              "uid": "35240-acade8c7-58ff-4686-aa05-54c389211387"
+            }
+          ],
+          "id": "2ecfdcdc-7600-4be0-b08f-73b4bdfdbb0d",
+          "createdAt": "2026-10-22T02:37:29.000Z",
+          "updatedAt": "2026-10-22T02:37:29.000Z",
+          "uid": "35240-2ecfdcdc-7600-4be0-b08f-73b4bdfdbb0d"
+        }
+      ],
+      "id": "81e139f5-ccfa-4591-b6fe-7ce692252a70",
+      "createdAt": "2026-10-22T02:37:29.000Z",
+      "updatedAt": "2026-10-22T02:37:29.000Z",
+      "uid": "35240-81e139f5-ccfa-4591-b6fe-7ce692252a70"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

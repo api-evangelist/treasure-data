@@ -1,143 +1,141 @@
 {
+  "info": {
+    "_postman_id": "496cf1b2-fa66-47a2-9ab0-51d9d63152df",
+    "name": "Treasure Data TD System API",
+    "description": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:26.000Z",
+    "updatedAt": "2026-10-22T02:32:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-496cf1b2-fa66-47a2-9ab0-51d9d63152df"
+  },
   "item": [
     {
-      "id": "c5df704a-b936-491b-abc9-d7623cb6c4a7",
-      "name": "System",
-      "description": {
-        "content": "System health and status",
-        "type": "text/plain"
-      },
+      "name": "system",
       "item": [
         {
-          "id": "e60a44db-07b4-4fc2-8ce1-ce87b3220b0f",
-          "name": "Check server health",
-          "request": {
-            "name": "Check server health",
-            "description": {
-              "content": "Checks the health status of the API load balancer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "system",
-                "server_status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "server_status",
+          "item": [
             {
-              "id": "fbfb1d15-f926-4784-bc87-a33b514fb632",
-              "name": "Server is healthy",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "system",
-                    "server_status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Check server health",
+              "id": "8766740a-96db-42c0-8f83-e814588682d0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"ok\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "02a6901d-581b-4a28-8c98-611b5fe03619",
-              "name": "Service unavailable",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "system",
-                    "server_status"
-                  ],
+                  "raw": "{{baseUrl}}/system/server_status",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "system",
+                    "server_status"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Checks the health status of the API load balancer."
               },
-              "status": "Service Unavailable",
-              "code": 503,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "9b3c7cd6-8a8f-459e-86a2-c87fbe283834",
+                  "name": "Server is healthy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/system/server_status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "system",
+                        "server_status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:27.000Z",
+                  "updatedAt": "2026-10-22T02:32:27.000Z",
+                  "uid": "35240-9b3c7cd6-8a8f-459e-86a2-c87fbe283834"
+                },
+                {
+                  "id": "b552896e-1857-4e05-ad98-15a9c0c62d7b",
+                  "name": "Service unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/system/server_status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "system",
+                        "server_status"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:32:27.000Z",
+                  "updatedAt": "2026-10-22T02:32:27.000Z",
+                  "uid": "35240-b552896e-1857-4e05-ad98-15a9c0c62d7b"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-22T02:32:27.000Z",
+              "updatedAt": "2026-10-22T02:32:27.000Z",
+              "uid": "35240-8766740a-96db-42c0-8f83-e814588682d0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6bfa2705-2d38-468d-b018-6d5fbe4ee33b",
+          "createdAt": "2026-10-22T02:32:27.000Z",
+          "updatedAt": "2026-10-22T02:32:27.000Z",
+          "uid": "35240-6bfa2705-2d38-468d-b018-6d5fbe4ee33b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "id": "49b5ec35-97f5-484b-b426-777bfa339271",
+      "createdAt": "2026-10-22T02:32:27.000Z",
+      "updatedAt": "2026-10-22T02:32:27.000Z",
+      "uid": "35240-49b5ec35-97f5-484b-b426-777bfa339271"
     }
   ],
   "auth": {
@@ -145,25 +143,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ae2298e5-f780-469d-b2ae-b57c07802310",
-    "name": "Treasure Data TD Bulk Import System API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  }
+  ]
 }

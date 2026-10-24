@@ -1,548 +1,528 @@
 {
+  "info": {
+    "_postman_id": "13bb9c9e-4ec0-4ce2-baad-b64615726ef1",
+    "name": "Treasure Data TD Bulk Loads API",
+    "description": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:31:50.000Z",
+    "updatedAt": "2026-10-22T02:31:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-13bb9c9e-4ec0-4ce2-baad-b64615726ef1"
+  },
   "item": [
     {
-      "id": "47802022-5ee1-4081-a151-aa3b5caea5d2",
-      "name": "Bulk Loads",
-      "description": {
-        "content": "Bulk load sessions from external sources",
-        "type": "text/plain"
-      },
+      "name": "bulk_loads",
       "item": [
         {
-          "id": "8541974e-7cc2-49cd-bd3c-b27d4ab21758",
-          "name": "List bulk load sessions",
-          "request": {
-            "name": "List bulk load sessions",
-            "description": {
-              "content": "Returns the list of available bulk load sessions.",
-              "type": "text/plain"
+          "name": "{name}",
+          "item": [
+            {
+              "name": "jobs",
+              "item": [
+                {
+                  "name": "List bulk load jobs",
+                  "id": "b392c862-d6a9-4273-b9c2-543dd6bc01cd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_loads/:name/jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_loads",
+                        ":name",
+                        "jobs"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2d3be5c-fb53-472a-b829-713864924e3d",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the bulk load session"
+                        }
+                      ]
+                    },
+                    "description": "Lists the executed job history for the specified bulk load session."
+                  },
+                  "response": [
+                    {
+                      "id": "a2a18c6d-ba16-4361-b585-5fc04394de24",
+                      "name": "List of bulk load jobs",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_loads/:name/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_loads",
+                            ":name",
+                            "jobs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"account_id\": \"<integer>\",\n    \"status\": \"<string>\",\n    \"records\": \"<integer>\",\n    \"schema\": \"<string>\",\n    \"job_id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {},\n    \"database\": \"<string>\",\n    \"table\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"start_at\": \"<dateTime>\",\n    \"end_at\": \"<dateTime>\"\n  },\n  {\n    \"account_id\": \"<integer>\",\n    \"status\": \"<string>\",\n    \"records\": \"<integer>\",\n    \"schema\": \"<string>\",\n    \"job_id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {},\n    \"database\": \"<string>\",\n    \"table\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"start_at\": \"<dateTime>\",\n    \"end_at\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-10-22T02:31:51.000Z",
+                      "updatedAt": "2026-10-22T02:31:51.000Z",
+                      "uid": "35240-a2a18c6d-ba16-4361-b585-5fc04394de24"
+                    },
+                    {
+                      "id": "ca3f8772-8e27-49d1-a697-60abfcbb68cc",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_loads/:name/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_loads",
+                            ":name",
+                            "jobs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:51.000Z",
+                      "updatedAt": "2026-10-22T02:31:51.000Z",
+                      "uid": "35240-ca3f8772-8e27-49d1-a697-60abfcbb68cc"
+                    },
+                    {
+                      "id": "c4a51f2c-b25b-4856-a3cf-26cb2c9e5753",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/bulk_loads/:name/jobs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "bulk_loads",
+                            ":name",
+                            "jobs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:31:51.000Z",
+                      "updatedAt": "2026-10-22T02:31:51.000Z",
+                      "uid": "35240-c4a51f2c-b25b-4856-a3cf-26cb2c9e5753"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:31:51.000Z",
+                  "updatedAt": "2026-10-22T02:31:51.000Z",
+                  "uid": "35240-b392c862-d6a9-4273-b9c2-543dd6bc01cd"
+                }
+              ],
+              "id": "ead6a5ad-d52f-49b0-afea-efc9f96479b1",
+              "createdAt": "2026-10-22T02:31:51.000Z",
+              "updatedAt": "2026-10-22T02:31:51.000Z",
+              "uid": "35240-ead6a5ad-d52f-49b0-afea-efc9f96479b1"
             },
+            {
+              "name": "Get bulk load session",
+              "id": "ca54f87a-84b7-4614-9e5f-5ce7798110a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bulk_loads/:name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bulk_loads",
+                    ":name"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f2e3e2a2-babd-46bb-9304-c397b928a690",
+                      "key": "name",
+                      "value": "<string>",
+                      "description": "(Required) Name of the bulk load session"
+                    }
+                  ]
+                },
+                "description": "Retrieves a specific bulk load session by name."
+              },
+              "response": [
+                {
+                  "id": "39313cb1-c884-47d9-a713-2b9e3f7198b0",
+                  "name": "Bulk load session details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_loads/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_loads",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"cron\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"delay\": \"<integer>\",\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"config\": {},\n  \"config_diff\": {}\n}",
+                  "createdAt": "2026-10-22T02:31:51.000Z",
+                  "updatedAt": "2026-10-22T02:31:51.000Z",
+                  "uid": "35240-39313cb1-c884-47d9-a713-2b9e3f7198b0"
+                },
+                {
+                  "id": "c74dd76a-27d9-4ee5-a062-0d0096c3b0ed",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_loads/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_loads",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:31:51.000Z",
+                  "updatedAt": "2026-10-22T02:31:51.000Z",
+                  "uid": "35240-c74dd76a-27d9-4ee5-a062-0d0096c3b0ed"
+                },
+                {
+                  "id": "4cfa01f7-a2b9-4ce1-8a16-585bde4cc1e3",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/bulk_loads/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "bulk_loads",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:31:51.000Z",
+                  "updatedAt": "2026-10-22T02:31:51.000Z",
+                  "uid": "35240-4cfa01f7-a2b9-4ce1-8a16-585bde4cc1e3"
+                }
+              ],
+              "createdAt": "2026-10-22T02:31:51.000Z",
+              "updatedAt": "2026-10-22T02:31:51.000Z",
+              "uid": "35240-ca54f87a-84b7-4614-9e5f-5ce7798110a4"
+            }
+          ],
+          "id": "c496536f-ba31-48a9-a1b2-cd8cc01c0fd6",
+          "createdAt": "2026-10-22T02:31:51.000Z",
+          "updatedAt": "2026-10-22T02:31:51.000Z",
+          "uid": "35240-c496536f-ba31-48a9-a1b2-cd8cc01c0fd6"
+        },
+        {
+          "name": "List bulk load sessions",
+          "id": "ec7d2411-65da-4d88-8426-2ed2814f2a0a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/bulk_loads",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "bulk_loads"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Returns the list of available bulk load sessions."
           },
           "response": [
             {
-              "id": "d18aa6df-f38f-45d2-89c6-bc5d89b606a9",
+              "id": "b7be6176-9c04-497f-ad3a-a2a9a2363d02",
               "name": "List of bulk loads",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/bulk_loads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "bulk_loads"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": 9352,\n    \"name\": \"string\",\n    \"cron\": \"string\",\n    \"timezone\": \"string\",\n    \"delay\": 292,\n    \"database\": \"string\",\n    \"table\": \"string\",\n    \"config\": {},\n    \"config_diff\": {}\n  },\n  {\n    \"id\": 8677,\n    \"name\": \"string\",\n    \"cron\": \"string\",\n    \"timezone\": \"string\",\n    \"delay\": 2430,\n    \"database\": \"string\",\n    \"table\": \"string\",\n    \"config\": {},\n    \"config_diff\": {}\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"cron\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"delay\": \"<integer>\",\n    \"database\": \"<string>\",\n    \"table\": \"<string>\",\n    \"config\": {},\n    \"config_diff\": {}\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"cron\": \"<string>\",\n    \"timezone\": \"<string>\",\n    \"delay\": \"<integer>\",\n    \"database\": \"<string>\",\n    \"table\": \"<string>\",\n    \"config\": {},\n    \"config_diff\": {}\n  }\n]",
+              "createdAt": "2026-10-22T02:31:51.000Z",
+              "updatedAt": "2026-10-22T02:31:51.000Z",
+              "uid": "35240-b7be6176-9c04-497f-ad3a-a2a9a2363d02"
             },
             {
-              "id": "8f83d2dd-dad7-4ba2-b5da-452192cabaa6",
+              "id": "c366f12b-4d97-46f5-8bfa-49246f959302",
               "name": "Authentication required or API key invalid",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/bulk_loads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "bulk_loads"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:31:51.000Z",
+              "updatedAt": "2026-10-22T02:31:51.000Z",
+              "uid": "35240-c366f12b-4d97-46f5-8bfa-49246f959302"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dcabd378-1af0-470f-8b25-7a6241317c41",
-          "name": "Get bulk load session",
-          "request": {
-            "name": "Get bulk load session",
-            "description": {
-              "content": "Retrieves a specific bulk load session by name.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_loads",
-                ":name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk load session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2e63c52a-75a4-4182-8630-c1c44bbf0ece",
-              "name": "Bulk load session details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 5374,\n  \"name\": \"string\",\n  \"cron\": \"string\",\n  \"timezone\": \"string\",\n  \"delay\": 5338,\n  \"database\": \"string\",\n  \"table\": \"string\",\n  \"config\": {},\n  \"config_diff\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "03476690-494d-44bb-8cb2-647b1d636ab3",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ffd152e0-2c19-4b8a-ae87-ac99fbd1dbf8",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "791ea2ce-78b7-4cb9-82ba-b8fbd64810c2",
-          "name": "List bulk load jobs",
-          "request": {
-            "name": "List bulk load jobs",
-            "description": {
-              "content": "Lists the executed job history for the specified bulk load session.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "bulk_loads",
-                ":name",
-                "jobs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "name",
-                  "description": "(Required) Name of the bulk load session"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "69b878f9-a95c-4ef7-b678-eff3c6311f39",
-              "name": "List of bulk load jobs",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name",
-                    "jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"account_id\": 5412,\n    \"status\": \"string\",\n    \"records\": 4901,\n    \"schema\": \"string\",\n    \"job_id\": \"string\",\n    \"type\": \"string\",\n    \"config\": {},\n    \"database\": \"string\",\n    \"table\": \"string\",\n    \"created_at\": \"1989-06-17T19:51:10.339Z\",\n    \"start_at\": \"2006-04-20T14:20:54.822Z\",\n    \"end_at\": \"1976-01-15T01:28:06.943Z\"\n  },\n  {\n    \"account_id\": 4046,\n    \"status\": \"string\",\n    \"records\": 7307,\n    \"schema\": \"string\",\n    \"job_id\": \"string\",\n    \"type\": \"string\",\n    \"config\": {},\n    \"database\": \"string\",\n    \"table\": \"string\",\n    \"created_at\": \"1995-06-11T07:25:40.105Z\",\n    \"start_at\": \"2025-04-24T19:12:17.817Z\",\n    \"end_at\": \"1978-02-25T20:47:50.841Z\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0aea7079-3dc8-4d7e-ade0-8147f1328674",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name",
-                    "jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "39354a1c-4052-45ca-9ec1-793e99548b8e",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "bulk_loads",
-                    ":name",
-                    "jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "name",
-                      "description": "(Required) Name of the bulk load session"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:31:51.000Z",
+          "updatedAt": "2026-10-22T02:31:51.000Z",
+          "uid": "35240-ec7d2411-65da-4d88-8426-2ed2814f2a0a"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "id": "94b7edcc-467e-4b91-aa7c-7dbf6d20376e",
+      "createdAt": "2026-10-22T02:31:51.000Z",
+      "updatedAt": "2026-10-22T02:31:51.000Z",
+      "uid": "35240-94b7edcc-467e-4b91-aa7c-7dbf6d20376e"
     }
   ],
   "auth": {
@@ -550,25 +530,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authorization"
+        "value": "Authorization",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "bc1d5d14-37e3-4a1c-b5aa-5d9a9ce32f68",
-    "name": "Treasure Data TD Bulk Import Bulk Loads API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  }
+  ]
 }

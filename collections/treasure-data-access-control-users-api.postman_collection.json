@@ -1,0 +1,966 @@
+{
+  "info": {
+    "_postman_id": "8ff2b6c0-b62b-41d0-9f62-40424e104073",
+    "name": "Treasure Data Access Control - Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:26.000Z",
+    "updatedAt": "2026-10-22T02:33:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8ff2b6c0-b62b-41d0-9f62-40424e104073"
+  },
+  "item": [
+    {
+      "name": "access_control",
+      "item": [
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "permissions",
+                  "item": [
+                    {
+                      "name": "Update Access Control User Permissions",
+                      "id": "1e79b230-6cfe-404b-8528-36740c19ca02",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"template_access\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/users/:user_id/permissions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "users",
+                            ":user_id",
+                            "permissions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "df359cfd-acd7-4ba5-bbcb-1e7fc7ea1a89",
+                              "key": "user_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates a user's permissions."
+                      },
+                      "response": [
+                        {
+                          "id": "48e759eb-d574-4f34-a344-f7bc2309aeb0",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"WorkflowProject\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"edit\"\n    }\n  ],\n  \"Segmentation\": [\n    {\n      \"operation\": \"full\"\n    },\n    {\n      \"operation\": \"full\"\n    }\n  ],\n  \"MasterSegmentConfigs\": [\n    {\n      \"operation\": \"edit\"\n    },\n    {\n      \"operation\": \"view\"\n    }\n  ],\n  \"MasterSegmentConfig\": [\n    {\n      \"operation\": \"edit\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"SegmentAllFolders\": [\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    },\n    {\n      \"operation\": \"edit\",\n      \"audience_id\": \"<string>\"\n    }\n  ],\n  \"SegmentFolder\": [\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"operation\": \"view\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"ActivationTemplate\": [\n    {\n      \"operation\": \"view\"\n    },\n    {\n      \"operation\": \"template_access\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/permissions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "permissions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_id\": \"<integer>\",\n  \"permissions\": {\n    \"WorkflowProject\": [\n      {\n        \"operation\": \"run\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"Segmentation\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"MasterSegmentConfigs\": [\n      {\n        \"operation\": \"view\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"MasterSegmentConfig\": [\n      {\n        \"operation\": \"edit\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"SegmentAllFolders\": [\n      {\n        \"operation\": \"edit\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"SegmentFolder\": [\n      {\n        \"operation\": \"edit\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"operation\": \"edit\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"ActivationTemplate\": [\n      {\n        \"operation\": \"template_access\"\n      },\n      {\n        \"operation\": \"view\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-22T02:33:27.000Z",
+                          "updatedAt": "2026-10-22T02:33:27.000Z",
+                          "uid": "35240-48e759eb-d574-4f34-a344-f7bc2309aeb0"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:26.000Z",
+                      "updatedAt": "2026-10-22T02:33:26.000Z",
+                      "uid": "35240-1e79b230-6cfe-404b-8528-36740c19ca02"
+                    }
+                  ],
+                  "id": "bd741165-178c-4905-bd1c-7688a8e8a57d",
+                  "createdAt": "2026-10-22T02:33:26.000Z",
+                  "updatedAt": "2026-10-22T02:33:26.000Z",
+                  "uid": "35240-bd741165-178c-4905-bd1c-7688a8e8a57d"
+                },
+                {
+                  "name": "profile_options",
+                  "item": [
+                    {
+                      "name": "{key}",
+                      "item": [
+                        {
+                          "name": "Get Profile Option",
+                          "id": "17637354-1753-4110-8f70-366c704bd800",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "profile_options",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a578d39d-4162-4920-9b53-b3970ad0fbda",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "bf34b4ac-b731-4be9-b39b-b0e59e633f72",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) the profile option key"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the resolved value of a single profile option for the specified user."
+                          },
+                          "response": [
+                            {
+                              "id": "eaaf7844-0ed8-45d1-b7c2-419e783c455b",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "users",
+                                    ":user_id",
+                                    "profile_options",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"sed4e9\": \"<string,null>\",\n  \"fugiat_e\": \"<string,null>\"\n}",
+                              "createdAt": "2026-10-22T02:33:27.000Z",
+                              "updatedAt": "2026-10-22T02:33:27.000Z",
+                              "uid": "35240-eaaf7844-0ed8-45d1-b7c2-419e783c455b"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:26.000Z",
+                          "updatedAt": "2026-10-22T02:33:26.000Z",
+                          "uid": "35240-17637354-1753-4110-8f70-366c704bd800"
+                        },
+                        {
+                          "name": "Set Profile Option",
+                          "id": "a9676ab4-36f8-4fc4-a648-8da4b6d880dc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"value\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "profile_options",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fabd35c8-0e9b-4949-a917-4c8bc75e4662",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "cb95cc51-fd8e-4b0b-b9d3-9370131e2924",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) the profile option key"
+                                }
+                              ]
+                            },
+                            "description": "Sets the value of a profile option for the specified user. Admin only."
+                          },
+                          "response": [
+                            {
+                              "id": "d266d8de-3635-4c23-96d0-c1718332b927",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"value\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "users",
+                                    ":user_id",
+                                    "profile_options",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"sed4e9\": \"<string,null>\",\n  \"fugiat_e\": \"<string,null>\"\n}",
+                              "createdAt": "2026-10-22T02:33:27.000Z",
+                              "updatedAt": "2026-10-22T02:33:27.000Z",
+                              "uid": "35240-d266d8de-3635-4c23-96d0-c1718332b927"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:26.000Z",
+                          "updatedAt": "2026-10-22T02:33:26.000Z",
+                          "uid": "35240-a9676ab4-36f8-4fc4-a648-8da4b6d880dc"
+                        },
+                        {
+                          "name": "Remove Profile Option",
+                          "id": "35fefc6c-692f-455f-99dc-d9f3d50cb956",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "profile_options",
+                                ":key"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6110efa9-471f-40a8-acad-31e36f027665",
+                                  "key": "user_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "c7c97430-5e92-4889-b1d8-8eefff21a299",
+                                  "key": "key",
+                                  "value": "<string>",
+                                  "description": "(Required) the profile option key"
+                                }
+                              ]
+                            },
+                            "description": "Removes a profile option for the specified user, reverting it to the account default. Admin only."
+                          },
+                          "response": [
+                            {
+                              "id": "bc0e5f1a-b2c7-40be-9dfc-61c2f448fa0b",
+                              "name": "No Content",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options/:key",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "access_control",
+                                    "users",
+                                    ":user_id",
+                                    "profile_options",
+                                    ":key"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "key"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-22T02:33:27.000Z",
+                              "updatedAt": "2026-10-22T02:33:27.000Z",
+                              "uid": "35240-bc0e5f1a-b2c7-40be-9dfc-61c2f448fa0b"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:33:26.000Z",
+                          "updatedAt": "2026-10-22T02:33:26.000Z",
+                          "uid": "35240-35fefc6c-692f-455f-99dc-d9f3d50cb956"
+                        }
+                      ],
+                      "id": "9e350d7c-65c3-4b93-86fc-c418ec16d8b9",
+                      "createdAt": "2026-10-22T02:33:26.000Z",
+                      "updatedAt": "2026-10-22T02:33:26.000Z",
+                      "uid": "35240-9e350d7c-65c3-4b93-86fc-c418ec16d8b9"
+                    },
+                    {
+                      "name": "List Profile Options",
+                      "id": "6d89e1e1-cd1a-4614-a4a2-bc700e43b3d4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "users",
+                            ":user_id",
+                            "profile_options"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bf17d11c-d924-411c-96e0-9baa5806a9a4",
+                              "key": "user_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves all profile option keys with their resolved values for the specified user."
+                      },
+                      "response": [
+                        {
+                          "id": "b5ecc8f8-738b-4adb-a8c7-e99409775172",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/users/:user_id/profile_options",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "users",
+                                ":user_id",
+                                "profile_options"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"sed4e9\": \"<string,null>\",\n  \"fugiat_e\": \"<string,null>\"\n}",
+                          "createdAt": "2026-10-22T02:33:27.000Z",
+                          "updatedAt": "2026-10-22T02:33:27.000Z",
+                          "uid": "35240-b5ecc8f8-738b-4adb-a8c7-e99409775172"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:26.000Z",
+                      "updatedAt": "2026-10-22T02:33:26.000Z",
+                      "uid": "35240-6d89e1e1-cd1a-4614-a4a2-bc700e43b3d4"
+                    }
+                  ],
+                  "id": "59c96188-aead-4c91-9d33-01d2fe11c903",
+                  "createdAt": "2026-10-22T02:33:26.000Z",
+                  "updatedAt": "2026-10-22T02:33:26.000Z",
+                  "uid": "35240-59c96188-aead-4c91-9d33-01d2fe11c903"
+                },
+                {
+                  "name": "Get Access Control User",
+                  "id": "6f25f842-fb61-4aaa-89a4-3729dbe08616",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "79e30dbb-0c68-4df9-a38c-816c230d9f77",
+                          "key": "user_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the specified user."
+                  },
+                  "response": [
+                    {
+                      "id": "abb742d3-8959-4790-84e8-d6a84d254e57",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"permissions\": {\n    \"WorkflowProject\": [\n      {\n        \"operation\": \"view\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"WorkflowProjectLevel\": [\n      {\n        \"operation\": \"run\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"WorkflowRestrictedOperators\": [\n      {\n        \"operation\": \"edit\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"Segmentation\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"PersonalizationStudio\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"MasterSegmentConfigs\": [\n      {\n        \"operation\": \"edit\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"MasterSegmentConfig\": [\n      {\n        \"operation\": \"view\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"MasterSegmentColumn\": [\n      {\n        \"operation\": \"view_clear\",\n        \"column_identifiers\": \"<string>\"\n      },\n      {\n        \"operation\": \"view_clear\",\n        \"column_identifiers\": \"<string>\"\n      }\n    ],\n    \"MasterSegmentAllColumns\": [\n      {\n        \"operation\": \"view_pii\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view_clear\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"CookieConsent\": [\n      {\n        \"operation\": \"view\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"SegmentAllFolders\": [\n      {\n        \"operation\": \"edit\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"SegmentFolder\": [\n      {\n        \"operation\": \"edit\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"Profiles\": [\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"ProfilesApiToken\": [\n      {\n        \"operation\": \"full\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"full\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"ActivationTemplate\": [\n      {\n        \"operation\": \"template_access\"\n      },\n      {\n        \"operation\": \"view\"\n      }\n    ],\n    \"Authentications\": [\n      {\n        \"operation\": \"full\",\n        \"ids\": \"<string>\"\n      },\n      {\n        \"operation\": \"full\",\n        \"ids\": \"<string>\"\n      }\n    ],\n    \"Sources\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"Destinations\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"Databases\": [\n      {\n        \"operation\": \"edit\",\n        \"ids\": \"<string>\"\n      },\n      {\n        \"operation\": \"query\",\n        \"ids\": \"<string>\"\n      }\n    ],\n    \"UniversalConsent\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"full\"\n      }\n    ],\n    \"TrafficControls\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"view\"\n      }\n    ],\n    \"TrafficControl\": [\n      {\n        \"operation\": \"full\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"full\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"Journeys\": [\n      {\n        \"operation\": \"full\"\n      },\n      {\n        \"operation\": \"edit\"\n      }\n    ],\n    \"Journey\": [\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"view\",\n        \"audience_id\": \"<string>\"\n      }\n    ],\n    \"LlmProject\": [\n      {\n        \"operation\": \"publish_internal_integration\",\n        \"project_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"chat\",\n        \"project_id\": \"<string>\"\n      }\n    ],\n    \"RawDataAccess\": [\n      {\n        \"operation\": \"query\",\n        \"audience_id\": \"<string>\"\n      },\n      {\n        \"operation\": \"query\",\n        \"audience_id\": \"<string>\"\n      }\n    ]\n  },\n  \"policies\": [\n    {\n      \"id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"user_count\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"user_count\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:27.000Z",
+                      "updatedAt": "2026-10-22T02:33:27.000Z",
+                      "uid": "35240-abb742d3-8959-4790-84e8-d6a84d254e57"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:26.000Z",
+                  "updatedAt": "2026-10-22T02:33:26.000Z",
+                  "uid": "35240-6f25f842-fb61-4aaa-89a4-3729dbe08616"
+                }
+              ],
+              "id": "432b91a2-ad8c-401a-bff2-3c610e6f71a9",
+              "createdAt": "2026-10-22T02:33:26.000Z",
+              "updatedAt": "2026-10-22T02:33:26.000Z",
+              "uid": "35240-432b91a2-ad8c-401a-bff2-3c610e6f71a9"
+            },
+            {
+              "name": "Get Access Control users",
+              "id": "fd9af0ab-09ef-46c3-8748-a5ac41cad496",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access_control/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access_control",
+                    "users"
+                  ]
+                },
+                "description": "Retrieves a list of users and their permissions."
+              },
+              "response": [
+                {
+                  "id": "7f50d214-2fc6-4c4d-9231-e25c8defb5c6",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access_control/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access_control",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"permissions\": {\n      \"WorkflowProject\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"WorkflowProjectLevel\": [\n        {\n          \"operation\": \"run\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"WorkflowRestrictedOperators\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"Segmentation\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"PersonalizationStudio\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"MasterSegmentConfigs\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"MasterSegmentConfig\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentColumn\": [\n        {\n          \"operation\": \"view_pii\",\n          \"column_identifiers\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentAllColumns\": [\n        {\n          \"operation\": \"blocked_only_for_migration_purpose\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"CookieConsent\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"SegmentAllFolders\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"SegmentFolder\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"Profiles\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ProfilesApiToken\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ActivationTemplate\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Authentications\": [\n        {\n          \"operation\": \"owner_manage\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"use_limited\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"Sources\": [\n        {\n          \"operation\": \"restricted\"\n        },\n        {\n          \"operation\": \"restricted\"\n        }\n      ],\n      \"Destinations\": [\n        {\n          \"operation\": \"restricted\"\n        },\n        {\n          \"operation\": \"restricted\"\n        }\n      ],\n      \"Databases\": [\n        {\n          \"operation\": \"owner_manage\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"download\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"UniversalConsent\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"TrafficControls\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"TrafficControl\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"Journeys\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Journey\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"LlmProject\": [\n        {\n          \"operation\": \"edit\",\n          \"project_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"chat\",\n          \"project_id\": \"<string>\"\n        }\n      ],\n      \"RawDataAccess\": [\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        }\n      ]\n    },\n    \"policies\": [\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      }\n    ]\n  },\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"permissions\": {\n      \"WorkflowProject\": [\n        {\n          \"operation\": \"run\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"WorkflowProjectLevel\": [\n        {\n          \"operation\": \"view\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"WorkflowRestrictedOperators\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"Segmentation\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"PersonalizationStudio\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"MasterSegmentConfigs\": [\n        {\n          \"operation\": \"owner_manage\"\n        },\n        {\n          \"operation\": \"owner_manage\"\n        }\n      ],\n      \"MasterSegmentConfig\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentColumn\": [\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentAllColumns\": [\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"CookieConsent\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"SegmentAllFolders\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"SegmentFolder\": [\n        {\n          \"operation\": \"view\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"Profiles\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ProfilesApiToken\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ActivationTemplate\": [\n        {\n          \"operation\": \"template_access\"\n        },\n        {\n          \"operation\": \"template_access\"\n        }\n      ],\n      \"Authentications\": [\n        {\n          \"operation\": \"use_limited\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"Sources\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Destinations\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Databases\": [\n        {\n          \"operation\": \"query\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"download\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"UniversalConsent\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"TrafficControls\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"TrafficControl\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"Journeys\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Journey\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"LlmProject\": [\n        {\n          \"operation\": \"publish_external_integration\",\n          \"project_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"project_id\": \"<string>\"\n        }\n      ],\n      \"RawDataAccess\": [\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        }\n      ]\n    },\n    \"policies\": [\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      }\n    ]\n  }\n]",
+                  "createdAt": "2026-10-22T02:33:27.000Z",
+                  "updatedAt": "2026-10-22T02:33:27.000Z",
+                  "uid": "35240-7f50d214-2fc6-4c4d-9231-e25c8defb5c6"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:26.000Z",
+              "updatedAt": "2026-10-22T02:33:26.000Z",
+              "uid": "35240-fd9af0ab-09ef-46c3-8748-a5ac41cad496"
+            }
+          ],
+          "id": "d497d80d-c172-438a-b46c-d087331aa567",
+          "createdAt": "2026-10-22T02:33:26.000Z",
+          "updatedAt": "2026-10-22T02:33:26.000Z",
+          "uid": "35240-d497d80d-c172-438a-b46c-d087331aa567"
+        },
+        {
+          "name": "policies",
+          "item": [
+            {
+              "name": "{policy_id}",
+              "item": [
+                {
+                  "name": "users",
+                  "item": [
+                    {
+                      "name": "Get Policy users",
+                      "id": "a2bd9cfd-b081-4eb0-8a8f-2202b450e3d7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "users"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a6e947c0-2b57-438f-ade0-d776fa874b49",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of users attached to a policy."
+                      },
+                      "response": [
+                        {
+                          "id": "909d6e72-90b0-4aa5-8e97-bc1543f3be63",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "users"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"email\": \"<email>\",\n    \"name\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:27.000Z",
+                          "updatedAt": "2026-10-22T02:33:27.000Z",
+                          "uid": "35240-909d6e72-90b0-4aa5-8e97-bc1543f3be63"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:26.000Z",
+                      "updatedAt": "2026-10-22T02:33:26.000Z",
+                      "uid": "35240-a2bd9cfd-b081-4eb0-8a8f-2202b450e3d7"
+                    },
+                    {
+                      "name": "Update Policy Users",
+                      "id": "28055df2-ecaa-44dc-9900-0ddbc27aab3f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/access_control/policies/:policy_id/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "access_control",
+                            "policies",
+                            ":policy_id",
+                            "users"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9d742b60-57c7-4f31-9be4-a40fbd425260",
+                              "key": "policy_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates users attached to a policy."
+                      },
+                      "response": [
+                        {
+                          "id": "1e629ac8-316b-4249-b277-201263821103",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/access_control/policies/:policy_id/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "access_control",
+                                "policies",
+                                ":policy_id",
+                                "users"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "policy_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"permissions\": {\n      \"WorkflowProject\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"WorkflowProjectLevel\": [\n        {\n          \"operation\": \"run\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"WorkflowRestrictedOperators\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"Segmentation\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"PersonalizationStudio\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"MasterSegmentConfigs\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"MasterSegmentConfig\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentColumn\": [\n        {\n          \"operation\": \"view_pii\",\n          \"column_identifiers\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentAllColumns\": [\n        {\n          \"operation\": \"blocked_only_for_migration_purpose\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"CookieConsent\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"SegmentAllFolders\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"SegmentFolder\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"Profiles\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ProfilesApiToken\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ActivationTemplate\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Authentications\": [\n        {\n          \"operation\": \"owner_manage\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"use_limited\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"Sources\": [\n        {\n          \"operation\": \"restricted\"\n        },\n        {\n          \"operation\": \"restricted\"\n        }\n      ],\n      \"Destinations\": [\n        {\n          \"operation\": \"restricted\"\n        },\n        {\n          \"operation\": \"restricted\"\n        }\n      ],\n      \"Databases\": [\n        {\n          \"operation\": \"owner_manage\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"download\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"UniversalConsent\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"TrafficControls\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"TrafficControl\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"Journeys\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Journey\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"LlmProject\": [\n        {\n          \"operation\": \"edit\",\n          \"project_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"chat\",\n          \"project_id\": \"<string>\"\n        }\n      ],\n      \"RawDataAccess\": [\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        }\n      ]\n    },\n    \"policies\": [\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      }\n    ]\n  },\n  {\n    \"user_id\": \"<integer>\",\n    \"account_id\": \"<integer>\",\n    \"permissions\": {\n      \"WorkflowProject\": [\n        {\n          \"operation\": \"run\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"WorkflowProjectLevel\": [\n        {\n          \"operation\": \"view\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"WorkflowRestrictedOperators\": [\n        {\n          \"operation\": \"edit\"\n        },\n        {\n          \"operation\": \"edit\"\n        }\n      ],\n      \"Segmentation\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"PersonalizationStudio\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"MasterSegmentConfigs\": [\n        {\n          \"operation\": \"owner_manage\"\n        },\n        {\n          \"operation\": \"owner_manage\"\n        }\n      ],\n      \"MasterSegmentConfig\": [\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentColumn\": [\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_clear\",\n          \"column_identifiers\": \"<string>\"\n        }\n      ],\n      \"MasterSegmentAllColumns\": [\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view_pii\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"CookieConsent\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"SegmentAllFolders\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"SegmentFolder\": [\n        {\n          \"operation\": \"view\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"Profiles\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ProfilesApiToken\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"ActivationTemplate\": [\n        {\n          \"operation\": \"template_access\"\n        },\n        {\n          \"operation\": \"template_access\"\n        }\n      ],\n      \"Authentications\": [\n        {\n          \"operation\": \"use_limited\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"Sources\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Destinations\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Databases\": [\n        {\n          \"operation\": \"query\",\n          \"ids\": \"<string>\"\n        },\n        {\n          \"operation\": \"download\",\n          \"ids\": \"<string>\"\n        }\n      ],\n      \"UniversalConsent\": [\n        {\n          \"operation\": \"full\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"TrafficControls\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"view\"\n        }\n      ],\n      \"TrafficControl\": [\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"view\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"Journeys\": [\n        {\n          \"operation\": \"view\"\n        },\n        {\n          \"operation\": \"full\"\n        }\n      ],\n      \"Journey\": [\n        {\n          \"operation\": \"full\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"edit\",\n          \"audience_id\": \"<string>\"\n        }\n      ],\n      \"LlmProject\": [\n        {\n          \"operation\": \"publish_external_integration\",\n          \"project_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"full\",\n          \"project_id\": \"<string>\"\n        }\n      ],\n      \"RawDataAccess\": [\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        },\n        {\n          \"operation\": \"query\",\n          \"audience_id\": \"<string>\"\n        }\n      ]\n    },\n    \"policies\": [\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"account_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"user_count\": \"<integer>\"\n      }\n    ]\n  }\n]",
+                          "createdAt": "2026-10-22T02:33:27.000Z",
+                          "updatedAt": "2026-10-22T02:33:27.000Z",
+                          "uid": "35240-1e629ac8-316b-4249-b277-201263821103"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:33:26.000Z",
+                      "updatedAt": "2026-10-22T02:33:26.000Z",
+                      "uid": "35240-28055df2-ecaa-44dc-9900-0ddbc27aab3f"
+                    }
+                  ],
+                  "id": "c4751e10-0dad-4cbb-a8a8-b9f6b810b7a4",
+                  "createdAt": "2026-10-22T02:33:26.000Z",
+                  "updatedAt": "2026-10-22T02:33:26.000Z",
+                  "uid": "35240-c4751e10-0dad-4cbb-a8a8-b9f6b810b7a4"
+                }
+              ],
+              "id": "b698b003-be59-4071-9797-26e2f6d9f606",
+              "createdAt": "2026-10-22T02:33:26.000Z",
+              "updatedAt": "2026-10-22T02:33:26.000Z",
+              "uid": "35240-b698b003-be59-4071-9797-26e2f6d9f606"
+            }
+          ],
+          "id": "50cca222-333b-4d3c-89f9-657030d5d076",
+          "createdAt": "2026-10-22T02:33:26.000Z",
+          "updatedAt": "2026-10-22T02:33:26.000Z",
+          "uid": "35240-50cca222-333b-4d3c-89f9-657030d5d076"
+        }
+      ],
+      "id": "3eed171e-f9e2-43d5-a9f3-0016cc5bfd2b",
+      "createdAt": "2026-10-22T02:33:26.000Z",
+      "updatedAt": "2026-10-22T02:33:26.000Z",
+      "uid": "35240-3eed171e-f9e2-43d5-a9f3-0016cc5bfd2b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    }
+  ]
+}

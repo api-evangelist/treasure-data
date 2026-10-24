@@ -1,0 +1,1302 @@
+{
+  "info": {
+    "_postman_id": "9b781c75-66d8-43da-b6e6-35be204b716b",
+    "name": "llm-api Agent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:33:54.000Z",
+    "updatedAt": "2026-10-22T02:33:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9b781c75-66d8-43da-b6e6-35be204b716b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "agents",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "5016f813-1981-495a-8068-fd60a3682284",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "64565319-1dcb-4950-858e-5819069552b7",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "321b7f12-6152-4dae-a27f-1ab7973b6867",
+                      "name": "Agent deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-321b7f12-6152-4dae-a27f-1ab7973b6867"
+                    },
+                    {
+                      "id": "07a10754-e9ec-4059-a47f-5917d7348702",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-07a10754-e9ec-4059-a47f-5917d7348702"
+                    },
+                    {
+                      "id": "6d7d4c06-50ab-4839-bdf6-ac265785c884",
+                      "name": "Forbidden - insufficient permissions to delete this agent",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-6d7d4c06-50ab-4839-bdf6-ac265785c884"
+                    },
+                    {
+                      "id": "a7df39bc-2b7c-4660-b9ee-3f781ad991dc",
+                      "name": "Agent not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-a7df39bc-2b7c-4660-b9ee-3f781ad991dc"
+                    },
+                    {
+                      "id": "68fc15c2-3233-4c79-b1dd-48fd5fdf03ef",
+                      "name": "restricts deletion of an agent if it is referenced by a prompt",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\",\n        \"referencedByTools\": [\n          {\n            \"id\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\"\n          }\n        ],\n        \"referencedByPrompts\": [\n          {\n            \"id\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\",\n        \"referencedByTools\": [\n          {\n            \"id\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\"\n          }\n        ],\n        \"referencedByPrompts\": [\n          {\n            \"id\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-68fc15c2-3233-4c79-b1dd-48fd5fdf03ef"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-5016f813-1981-495a-8068-fd60a3682284"
+                },
+                {
+                  "name": "show",
+                  "id": "80bb4785-8366-4497-9398-e2dbc5f0574d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "04f8fb84-feff-4d35-888f-63f20790ab8a",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e7c0f86d-4793-493e-8ad3-0c5591c48a85",
+                      "name": "Agent details and configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"starterMessage\": \"<string,null>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"reasoningEffort\": \"HIGH\",\n      \"isManaged\": \"<boolean>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"REACT_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string,null>\",\n          \"agentPromptTemplate\": \"<string,null>\",\n          \"toolTargetType\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\",\n          \"targetType\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\",\n          \"targetAgentId\": \"<string,null>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string,null>\",\n          \"agentPromptTemplate\": \"<string,null>\",\n          \"toolTargetType\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\",\n          \"targetType\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\",\n          \"targetAgentId\": \"<string,null>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"functionArgumentsText\": \"<string,null>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"functionArgumentsText\": \"<string,null>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-e7c0f86d-4793-493e-8ad3-0c5591c48a85"
+                    },
+                    {
+                      "id": "f7753958-322b-4159-8368-6aed4b4c54d0",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-f7753958-322b-4159-8368-6aed4b4c54d0"
+                    },
+                    {
+                      "id": "218cf92c-0ded-41c4-9b8b-ae1b09bc75a0",
+                      "name": "Agent not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-218cf92c-0ded-41c4-9b8b-ae1b09bc75a0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-80bb4785-8366-4497-9398-e2dbc5f0574d"
+                },
+                {
+                  "name": "update",
+                  "id": "5499ba32-671b-47c8-babe-9c87d7f6684b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "77e4e65f-6422-4fc8-83c4-6850960d630e",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c767627c-49b7-49ad-8df5-d187d3f32301",
+                      "name": "updates an agent if the modelType to a non-deprecated model_type",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"starterMessage\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"reasoningEffort\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": {},\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": {}\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": {},\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": {}\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-c767627c-49b7-49ad-8df5-d187d3f32301"
+                    },
+                    {
+                      "id": "58205df3-2478-474e-895d-4a2aa2960a6f",
+                      "name": "Forbidden - insufficient permissions to modify this agent",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-58205df3-2478-474e-895d-4a2aa2960a6f"
+                    },
+                    {
+                      "id": "2eb94518-f27c-4beb-853f-f8e102e15096",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-2eb94518-f27c-4beb-853f-f8e102e15096"
+                    },
+                    {
+                      "id": "bbe76795-45fe-49a6-9f17-571692f9ee28",
+                      "name": "Agent not found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-bbe76795-45fe-49a6-9f17-571692f9ee28"
+                    },
+                    {
+                      "id": "9c18b8b5-ad79-4db3-805a-273ec12de7a3",
+                      "name": "PATCH /api/agents rejects {\"temperature\":-2}",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"reasoningEffort\": \"LOW\",\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:33:54.000Z",
+                      "updatedAt": "2026-10-22T02:33:54.000Z",
+                      "uid": "35240-9c18b8b5-ad79-4db3-805a-273ec12de7a3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-5499ba32-671b-47c8-babe-9c87d7f6684b"
+                }
+              ],
+              "id": "638b67d2-8ed3-410c-9bbc-782a29862c0e",
+              "createdAt": "2026-10-22T02:33:54.000Z",
+              "updatedAt": "2026-10-22T02:33:54.000Z",
+              "uid": "35240-638b67d2-8ed3-410c-9bbc-782a29862c0e"
+            },
+            {
+              "name": "index",
+              "id": "823296eb-5559-4695-b9bc-20f6e11988f8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/agents?include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "edc0a649-7b8d-4691-a445-24972afc9446",
+                  "name": "List of available agents for the current user",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"starterMessage\": \"<string,null>\",\n        \"modelType\": \"<string>\",\n        \"maxToolIterations\": \"<integer>\",\n        \"temperature\": \"<float>\",\n        \"reasoningEffort\": \"MINIMAL\",\n        \"isManaged\": \"<boolean>\",\n        \"outputs\": [\n          {\n            \"name\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"jsonSchema\": \"<string>\",\n            \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n            \"artifactContentType\": \"REACT_OUTPUT\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"jsonSchema\": \"<string>\",\n            \"artifactType\": \"PRESENTATION\",\n            \"artifactContentType\": \"REACT_OUTPUT\"\n          }\n        ],\n        \"tools\": [\n          {\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"agentOutputMode\": \"SHOW\",\n            \"agentPromptSchema\": \"<string,null>\",\n            \"agentPromptTemplate\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"inheritChatFiles\": \"<boolean>\",\n            \"targetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\",\n            \"targetAgentId\": \"<string,null>\"\n          },\n          {\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"agentOutputMode\": \"SHOW\",\n            \"agentPromptSchema\": \"<string,null>\",\n            \"agentPromptTemplate\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"inheritChatFiles\": \"<boolean>\",\n            \"targetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\",\n            \"targetAgentId\": \"<string,null>\"\n          }\n        ],\n        \"variables\": [\n          {\n            \"name\": \"<string>\",\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionArgumentsText\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionArgumentsText\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\"\n          }\n        ]\n      },\n      \"relationships\": {\n        \"overview\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"starterMessage\": \"<string,null>\",\n        \"modelType\": \"<string>\",\n        \"maxToolIterations\": \"<integer>\",\n        \"temperature\": \"<float>\",\n        \"reasoningEffort\": \"MINIMAL\",\n        \"isManaged\": \"<boolean>\",\n        \"outputs\": [\n          {\n            \"name\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"jsonSchema\": \"<string>\",\n            \"artifactType\": \"PRESENTATION\",\n            \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"jsonSchema\": \"<string>\",\n            \"artifactType\": \"MARKDOWN_TEXT_OUTPUT\",\n            \"artifactContentType\": \"REACT_OUTPUT\"\n          }\n        ],\n        \"tools\": [\n          {\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"agentOutputMode\": \"SHOW\",\n            \"agentPromptSchema\": \"<string,null>\",\n            \"agentPromptTemplate\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"inheritChatFiles\": \"<boolean>\",\n            \"targetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\",\n            \"targetAgentId\": \"<string,null>\"\n          },\n          {\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionName\": \"<string>\",\n            \"functionDescription\": \"<string,null>\",\n            \"agentOutputMode\": \"SHOW\",\n            \"agentPromptSchema\": \"<string,null>\",\n            \"agentPromptTemplate\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"inheritChatFiles\": \"<boolean>\",\n            \"targetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\",\n            \"targetAgentId\": \"<string,null>\"\n          }\n        ],\n        \"variables\": [\n          {\n            \"name\": \"<string>\",\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionArgumentsText\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"toolTargetId\": \"<string>\",\n            \"targetFunction\": \"<string>\",\n            \"functionArgumentsText\": \"<string,null>\",\n            \"toolTargetType\": \"<string>\",\n            \"targetKnowledgeBaseId\": \"<string,null>\"\n          }\n        ]\n      },\n      \"relationships\": {\n        \"overview\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"firstReferencingAgentName\": \"<string,null>\",\n        \"firstReferencedByAgentName\": \"<string>\",\n        \"firstReferencedByPromptName\": \"<string,null>\",\n        \"totalReferencingAgentCount\": \"<integer>\",\n        \"totalReferencedByAgentCount\": \"<integer>\",\n        \"totalReferencedByPromptCount\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"firstReferencingAgentName\": \"<string,null>\",\n        \"firstReferencedByAgentName\": \"<string>\",\n        \"firstReferencedByPromptName\": \"<string,null>\",\n        \"totalReferencingAgentCount\": \"<integer>\",\n        \"totalReferencedByAgentCount\": \"<integer>\",\n        \"totalReferencedByPromptCount\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-edc0a649-7b8d-4691-a445-24972afc9446"
+                },
+                {
+                  "id": "e2c19e8e-d9af-40ff-a984-9443ec454fa4",
+                  "name": "Authentication credentials are invalid or missing",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-e2c19e8e-d9af-40ff-a984-9443ec454fa4"
+                },
+                {
+                  "id": "284cd46b-6130-4088-b313-db723eacb027",
+                  "name": "User is not authorized to access this resource",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-284cd46b-6130-4088-b313-db723eacb027"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:54.000Z",
+              "updatedAt": "2026-10-22T02:33:54.000Z",
+              "uid": "35240-823296eb-5559-4695-b9bc-20f6e11988f8"
+            },
+            {
+              "name": "create",
+              "id": "e9bd592a-7e2a-4182-9d98-c48bf478cbdf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/agents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "agents"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "049c1e1c-12be-4fc4-ae52-83d8d8b19631",
+                  "name": "Agent successfully created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemPrompt\": \"<string>\",\n      \"starterMessage\": \"<string,null>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"reasoningEffort\": \"HIGH\",\n      \"isManaged\": \"<boolean>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"REACT_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"jsonSchema\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string,null>\",\n          \"agentPromptTemplate\": \"<string,null>\",\n          \"toolTargetType\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\",\n          \"targetType\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\",\n          \"targetAgentId\": \"<string,null>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string,null>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string,null>\",\n          \"agentPromptTemplate\": \"<string,null>\",\n          \"toolTargetType\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\",\n          \"targetType\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\",\n          \"targetAgentId\": \"<string,null>\"\n        }\n      ],\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"functionArgumentsText\": \"<string,null>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"functionArgumentsText\": \"<string,null>\",\n          \"targetKnowledgeBaseId\": \"<string,null>\"\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-049c1e1c-12be-4fc4-ae52-83d8d8b19631"
+                },
+                {
+                  "id": "8fd3308a-e721-45c6-b20c-d5bfddb2c0e8",
+                  "name": "Bad request - invalid agent parameters provided",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-8fd3308a-e721-45c6-b20c-d5bfddb2c0e8"
+                },
+                {
+                  "id": "e136aba9-de8b-4ba6-ac52-9fcacc191be6",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-e136aba9-de8b-4ba6-ac52-9fcacc191be6"
+                },
+                {
+                  "id": "66336d80-39eb-480b-82d5-8310a06361a1",
+                  "name": "Forbidden - cannot reference agents from other users",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-66336d80-39eb-480b-82d5-8310a06361a1"
+                },
+                {
+                  "id": "4b9de2af-9dce-4121-a201-0081a540e2ee",
+                  "name": "Validation error - temperature must be between 0 and 2",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"modelType\": \"<string>\",\n      \"maxToolIterations\": \"<integer>\",\n      \"temperature\": \"<float>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"targetKnowledgeBaseId\": \"<string>\",\n          \"functionArgumentsText\": \"<string>\"\n        }\n      ],\n      \"reasoningEffort\": \"LOW\",\n      \"systemPrompt\": \"<string,null>\",\n      \"starterMessage\": \"<string,null>\",\n      \"outputs\": [\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"REACT_OUTPUT\",\n          \"artifactContentType\": \"IMAGE_ID_OUTPUT\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"jsonSchema\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"artifactType\": \"PRESENTATION\",\n          \"artifactContentType\": \"PRESENTATION\"\n        }\n      ],\n      \"tools\": [\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"RETURN\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        },\n        {\n          \"toolTargetId\": \"<string>\",\n          \"toolTargetType\": \"<string>\",\n          \"targetFunction\": \"<string>\",\n          \"functionName\": \"<string>\",\n          \"functionDescription\": \"<string>\",\n          \"agentOutputMode\": \"SHOW\",\n          \"agentPromptSchema\": \"<string>\",\n          \"agentPromptTemplate\": \"<string>\",\n          \"inheritChatFiles\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "agents"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:33:54.000Z",
+                  "updatedAt": "2026-10-22T02:33:54.000Z",
+                  "uid": "35240-4b9de2af-9dce-4121-a201-0081a540e2ee"
+                }
+              ],
+              "createdAt": "2026-10-22T02:33:54.000Z",
+              "updatedAt": "2026-10-22T02:33:54.000Z",
+              "uid": "35240-e9bd592a-7e2a-4182-9d98-c48bf478cbdf"
+            }
+          ],
+          "id": "51614bf9-e16b-48f1-a759-3749e1a4da07",
+          "createdAt": "2026-10-22T02:33:54.000Z",
+          "updatedAt": "2026-10-22T02:33:54.000Z",
+          "uid": "35240-51614bf9-e16b-48f1-a759-3749e1a4da07"
+        }
+      ],
+      "id": "7c683972-d963-4093-962b-923cfe39e7ae",
+      "createdAt": "2026-10-22T02:33:54.000Z",
+      "updatedAt": "2026-10-22T02:33:54.000Z",
+      "uid": "35240-7c683972-d963-4093-962b-923cfe39e7ae"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

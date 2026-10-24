@@ -1,0 +1,243 @@
+{
+  "info": {
+    "_postman_id": "da4387b8-5b27-4d94-be95-56a9c655eb4f",
+    "name": "llm-api Tool Target API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:37:44.000Z",
+    "updatedAt": "2026-10-22T02:37:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da4387b8-5b27-4d94-be95-56a9c655eb4f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "tool_targets",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "show",
+                  "id": "f23851d5-e19e-4416-a971-35be9ffa732b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tool_targets/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tool_targets",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a7db28c0-63c9-4528-b05b-2a1a307d2eec",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "88c5517e-2e94-483a-818d-f46026980883",
+                      "name": "returns the details of a specific tool target",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tool_targets/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tool_targets",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"text\": \"<string>\",\n      \"isManaged\": \"<boolean>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:37:45.000Z",
+                      "updatedAt": "2026-10-22T02:37:45.000Z",
+                      "uid": "35240-88c5517e-2e94-483a-818d-f46026980883"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:37:45.000Z",
+                  "updatedAt": "2026-10-22T02:37:45.000Z",
+                  "uid": "35240-f23851d5-e19e-4416-a971-35be9ffa732b"
+                }
+              ],
+              "id": "f64dc469-3163-491d-87bd-9b1a32febc12",
+              "createdAt": "2026-10-22T02:37:45.000Z",
+              "updatedAt": "2026-10-22T02:37:45.000Z",
+              "uid": "35240-f64dc469-3163-491d-87bd-9b1a32febc12"
+            },
+            {
+              "name": "index",
+              "id": "25a07421-254e-4c39-9717-67d1e8c2e41d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/tool_targets?filter[name]=<string>&filter[project_id]=<string>&filter[target_type]=<string>&include=<string>&targetType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "tool_targets"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[project_id]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[target_type]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetType",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4a19737c-9937-49c0-b792-e0c13992c72c",
+                  "name": "includes by created_by and updated_by",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tool_targets?filter[name]=<string>&filter[project_id]=<string>&filter[target_type]=<string>&include=<string>&targetType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tool_targets"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[name]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[project_id]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[target_type]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "targetType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"tdDatabaseName\": \"<string,null>\",\n        \"formatType\": \"<string,null>\",\n        \"maxRows\": \"<integer,null>\",\n        \"timeoutSeconds\": \"<integer,null>\",\n        \"isManaged\": \"<boolean,null>\",\n        \"tables\": \"<array,null>\",\n        \"lastJob\": {\n          \"status\": \"<string>\",\n          \"message\": {},\n          \"finishedAt\": {},\n          \"logs\": {}\n        },\n        \"text\": \"<string,null>\",\n        \"tdAccountId\": \"<string,null>\",\n        \"createdByUserId\": \"<string,null>\",\n        \"updatedByUserId\": \"<string,null>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"tdDatabaseName\": \"<string,null>\",\n        \"formatType\": \"<string,null>\",\n        \"maxRows\": \"<integer,null>\",\n        \"timeoutSeconds\": \"<integer,null>\",\n        \"isManaged\": \"<boolean,null>\",\n        \"tables\": \"<array,null>\",\n        \"lastJob\": {\n          \"status\": \"<string>\",\n          \"message\": {},\n          \"finishedAt\": {},\n          \"logs\": {}\n        },\n        \"text\": \"<string,null>\",\n        \"tdAccountId\": \"<string,null>\",\n        \"createdByUserId\": \"<string,null>\",\n        \"updatedByUserId\": \"<string,null>\"\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:37:45.000Z",
+                  "updatedAt": "2026-10-22T02:37:45.000Z",
+                  "uid": "35240-4a19737c-9937-49c0-b792-e0c13992c72c"
+                }
+              ],
+              "createdAt": "2026-10-22T02:37:45.000Z",
+              "updatedAt": "2026-10-22T02:37:45.000Z",
+              "uid": "35240-25a07421-254e-4c39-9717-67d1e8c2e41d"
+            }
+          ],
+          "id": "25109f51-6494-4f00-ab75-2138b906cf9d",
+          "createdAt": "2026-10-22T02:37:45.000Z",
+          "updatedAt": "2026-10-22T02:37:45.000Z",
+          "uid": "35240-25109f51-6494-4f00-ab75-2138b906cf9d"
+        }
+      ],
+      "id": "33c3d828-c7c0-4909-be85-b1926b2da5b6",
+      "createdAt": "2026-10-22T02:37:45.000Z",
+      "updatedAt": "2026-10-22T02:37:45.000Z",
+      "uid": "35240-33c3d828-c7c0-4909-be85-b1926b2da5b6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

@@ -1,1221 +1,1644 @@
 {
+  "info": {
+    "_postman_id": "845683f7-7ece-40a3-892f-385f65922e31",
+    "name": "Treasure Data Users API",
+    "description": "Operations tagged Users across 2 of this provider's published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:39.000Z",
+    "updatedAt": "2026-10-22T02:32:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-845683f7-7ece-40a3-892f-385f65922e31"
+  },
   "item": [
     {
-      "id": "e3e343fc-ef4b-4961-b7ec-9cfdde014951",
-      "name": "Users",
-      "description": {
-        "content": "User management",
-        "type": "text/plain"
-      },
+      "name": "user",
       "item": [
         {
-          "id": "12faf7e6-bd53-48f2-8b90-912a8efa866f",
-          "name": "List users",
-          "request": {
-            "name": "List users",
-            "description": {
-              "content": "Returns the list of users in the account.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "list"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list",
+          "item": [
             {
-              "id": "e6467881-dc98-403e-8a78-c606a191c754",
-              "name": "List of users",
-              "originalRequest": {
+              "name": "List users",
+              "id": "96115009-14a8-48f0-bc21-75506386d097",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/user/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "user",
                     "list"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns the list of users in the account."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "7b0085aa-109c-438a-af1f-12dfa4021015",
+                  "name": "List of users",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"users\": [\n    {\n      \"id\": \"<integer>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"account_owner\": \"<boolean>\",\n      \"administrator\": \"<boolean>\",\n      \"organization\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"gravatar_url\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"identifier\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"name\": \"<string>\",\n      \"account_owner\": \"<boolean>\",\n      \"administrator\": \"<boolean>\",\n      \"organization\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"gravatar_url\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"identifier\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-7b0085aa-109c-438a-af1f-12dfa4021015"
+                },
+                {
+                  "id": "53d6872c-d6fb-407c-a526-657eed39d14c",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-53d6872c-d6fb-407c-a526-657eed39d14c"
                 }
               ],
-              "body": "{\n  \"users\": [\n    {\n      \"id\": 2509,\n      \"email\": \"oUbBtvkL-w@lv.wrs\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"account_owner\": true,\n      \"administrator\": false,\n      \"organization\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1982-04-15T13:53:35.466Z\",\n      \"updated_at\": \"2024-02-26T08:41:08.099Z\",\n      \"gravatar_url\": \"string\",\n      \"phone\": \"string\",\n      \"identifier\": \"string\"\n    },\n    {\n      \"id\": 4949,\n      \"email\": \"eRxqA@TdPYtdzYdrccqoLyBhHvoKA.gviq\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"account_owner\": false,\n      \"administrator\": false,\n      \"organization\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1953-04-06T18:01:44.787Z\",\n      \"updated_at\": \"1967-02-16T16:17:01.475Z\",\n      \"gravatar_url\": \"string\",\n      \"phone\": \"string\",\n      \"identifier\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1bb886dd-03dc-43ad-801f-ccd757bd05e3",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "list"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-96115009-14a8-48f0-bc21-75506386d097"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "2a349db0-30d3-408d-83a6-cae00e48a611",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-2a349db0-30d3-408d-83a6-cae00e48a611"
         },
         {
-          "id": "c2ac3830-5c46-41d3-b054-236d08c88439",
-          "name": "Show current user",
-          "request": {
-            "name": "Show current user",
-            "description": {
-              "content": "Returns information about the currently authenticated user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "show"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "show",
+          "item": [
             {
-              "id": "0290cd17-1c75-463b-a9c2-f17bf5910d81",
-              "name": "Current user details",
-              "originalRequest": {
+              "name": "Show current user",
+              "id": "7c951384-5bc0-4887-8fc7-63d5a27efb1a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/user/show",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "user",
                     "show"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns information about the currently authenticated user."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "c5ce8b95-a3a3-4bc5-9a17-a211b003f0ef",
+                  "name": "Current user details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/show",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "show"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"name\": \"<string>\",\n  \"account_owner\": \"<boolean>\",\n  \"administrator\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"gravatar_url\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-c5ce8b95-a3a3-4bc5-9a17-a211b003f0ef"
+                },
+                {
+                  "id": "d24c0268-0526-42b1-a3d9-6168a42e0234",
+                  "name": "Authentication required or API key invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/show",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "show"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-d24c0268-0526-42b1-a3d9-6168a42e0234"
                 }
               ],
-              "body": "{\n  \"id\": 571,\n  \"email\": \"yaYbgBs0RJoS0d@lOKNbMzvkY.ggg\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"name\": \"string\",\n  \"account_owner\": true,\n  \"administrator\": true,\n  \"organization\": \"string\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"created_at\": \"2013-08-24T17:26:55.328Z\",\n  \"updated_at\": \"1963-09-15T05:58:58.270Z\",\n  \"gravatar_url\": \"string\",\n  \"phone\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a3242a05-dcf2-40a3-8a1d-ecdbdd2018d7",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "show"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-7c951384-5bc0-4887-8fc7-63d5a27efb1a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "1bb25a87-7e07-4a4d-8a35-36d24b864ff8",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-1bb25a87-7e07-4a4d-8a35-36d24b864ff8"
         },
         {
-          "id": "e7943176-cfc9-4641-8800-8750ec99b33c",
-          "name": "Remove a user",
-          "request": {
-            "name": "Remove a user",
-            "description": {
-              "content": "Deletes the specified user account.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "remove",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user to remove"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "remove",
+          "item": [
             {
-              "id": "95e11e62-d4fb-44e3-909c-3f52180d6707",
-              "name": "User removed successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "remove",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user to remove"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{user_email}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Remove a user",
+                  "id": "75aba9bc-ff47-4b20-bce9-df0f7b1e4900",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/remove/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "remove",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "48adba19-31ef-4f5e-82e7-97dad466d19b",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user to remove"
+                        }
+                      ]
+                    },
+                    "description": "Deletes the specified user account."
+                  },
+                  "response": [
+                    {
+                      "id": "ea410a04-aef6-494c-a271-44086ed25f9b",
+                      "name": "User removed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/remove/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "remove",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"email\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-ea410a04-aef6-494c-a271-44086ed25f9b"
+                    },
+                    {
+                      "id": "19315043-eeec-485f-a971-2ed735e6c723",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/remove/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "remove",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-19315043-eeec-485f-a971-2ed735e6c723"
+                    },
+                    {
+                      "id": "493b8bf2-e931-458b-805a-f6032501afee",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/remove/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "remove",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-493b8bf2-e931-458b-805a-f6032501afee"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-75aba9bc-ff47-4b20-bce9-df0f7b1e4900"
                 }
               ],
-              "body": "{\n  \"email\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d49b182c-9836-44be-a57d-466878ce030c",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "remove",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user to remove"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "39a595ab-2069-4873-8ff2-869e06261b9a",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "remove",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user to remove"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "f4ff2788-92c5-4f49-827d-7e546a09677c",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-f4ff2788-92c5-4f49-827d-7e546a09677c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "674c3a2d-f177-4c1f-b69c-061c52247cbc",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-674c3a2d-f177-4c1f-b69c-061c52247cbc"
         },
         {
-          "id": "2444a2c5-8f9d-49f7-8298-e78483fb27e8",
-          "name": "Create user with SSO",
-          "request": {
-            "name": "Create user with SSO",
-            "description": {
-              "content": "Allows the admin to create a user with SSO authentication.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "create_with_sso",
-                ":user_first_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "user_first_name",
-                  "description": "(Required) First name of the new user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "create_with_sso",
+          "item": [
             {
-              "id": "9cdec2a9-5ddc-4bef-b553-dcbfec5c0793",
-              "name": "User created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "create_with_sso",
-                    ":user_first_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_first_name",
-                      "description": "(Required) First name of the new user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{user_first_name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Create user with SSO",
+                  "id": "2696254c-28e0-4eba-be75-b570f6ec3bed",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "create_with_sso",
+                        ":user_first_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1ce8f36e-e421-42d3-ab6f-b91d881e2cba",
+                          "key": "user_first_name",
+                          "value": "<string>",
+                          "description": "(Required) First name of the new user"
+                        }
+                      ]
+                    },
+                    "description": "Allows the admin to create a user with SSO authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "3333a409-b7e7-4376-af21-ec87acaf6ee9",
+                      "name": "User created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "create_with_sso",
+                            ":user_first_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_first_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-3333a409-b7e7-4376-af21-ec87acaf6ee9"
+                    },
+                    {
+                      "id": "ebd19267-10c4-42dc-bd96-ba1a96d74b0d",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/create_with_sso/:user_first_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "create_with_sso",
+                            ":user_first_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_first_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-ebd19267-10c4-42dc-bd96-ba1a96d74b0d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-2696254c-28e0-4eba-be75-b570f6ec3bed"
                 }
               ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fe701608-e496-4712-9ec4-0d9446a4aa3d",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "create_with_sso",
-                    ":user_first_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "user_first_name",
-                      "description": "(Required) First name of the new user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"identifier\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "aed0f154-e94a-4067-9e2e-1827c76b4128",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-aed0f154-e94a-4067-9e2e-1827c76b4128"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "33ff53b9-0448-401a-b3c9-6dcc84e857d8",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-33ff53b9-0448-401a-b3c9-6dcc84e857d8"
         },
         {
-          "id": "c761eea3-0320-48b2-82b9-10e6a18628b3",
-          "name": "Enforce SSO for user",
-          "request": {
-            "name": "Enforce SSO for user",
-            "description": {
-              "content": "Allows admin to make it mandatory for a user to login with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "enforce_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "enforce_sso",
+          "item": [
             {
-              "id": "5ff8c124-dbb1-457d-bae1-347aac495ec7",
-              "name": "SSO enforced",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enforce_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{user_email}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Enforce SSO for user",
+                  "id": "379b34b2-ab3e-40e6-9a7e-8dd4cc5702f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "enforce_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "212b22d0-b4d5-4394-b9bf-ea39e0882642",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to make it mandatory for a user to login with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "1b48da6a-de09-418a-9402-cf28eb9cbbce",
+                      "name": "SSO enforced",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enforce_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-1b48da6a-de09-418a-9402-cf28eb9cbbce"
+                    },
+                    {
+                      "id": "7e4e3515-7210-4003-899e-c554f5596234",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enforce_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enforce_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-7e4e3515-7210-4003-899e-c554f5596234"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-379b34b2-ab3e-40e6-9a7e-8dd4cc5702f4"
                 }
               ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "04162754-f7f7-44d7-ad0b-aecf59ee892d",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enforce_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "61c2f4d3-55b4-4aef-a763-38d8df293722",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-61c2f4d3-55b4-4aef-a763-38d8df293722"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8875c82f-50a8-4c5d-8341-24f282caf024",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-8875c82f-50a8-4c5d-8341-24f282caf024"
         },
         {
-          "id": "7f9ff768-3e01-4061-a820-a892eb373311",
-          "name": "Enable SSO for user",
-          "request": {
-            "name": "Enable SSO for user",
-            "description": {
-              "content": "Allows admin to permit a user to login with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "enable_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "enable_sso",
+          "item": [
             {
-              "id": "86dcae2c-bc16-46a4-9c9d-8cf674eae64d",
-              "name": "SSO enabled",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{user_email}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Enable SSO for user",
+                  "id": "d93abfaf-66d8-4f71-a410-0d841b38a9d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "enable_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "79292b86-7155-403f-8375-5ba295a3846e",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to permit a user to login with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "a1da543d-daba-453f-9e59-6560b5ea84ea",
+                      "name": "SSO enabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-a1da543d-daba-453f-9e59-6560b5ea84ea"
+                    },
+                    {
+                      "id": "25972c0d-e4b1-4e43-a791-4c6c7137690e",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/enable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "enable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-25972c0d-e4b1-4e43-a791-4c6c7137690e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-d93abfaf-66d8-4f71-a410-0d841b38a9d0"
                 }
               ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8bb91e91-0f7d-4f3b-bb0a-fa4bc0acf6f7",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "enable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\",\n    \"identifier\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "fd2991b0-83aa-4a7a-850d-b4cf3e926da1",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-fd2991b0-83aa-4a7a-850d-b4cf3e926da1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "534326a1-c8ff-4669-8c6c-8ecd7952bdde",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-534326a1-c8ff-4669-8c6c-8ecd7952bdde"
         },
         {
-          "id": "36ef7f32-b3c2-47e1-8a88-b021e6cc0cb0",
-          "name": "Disable SSO for user",
-          "request": {
-            "name": "Disable SSO for user",
-            "description": {
-              "content": "Allows admin to prohibit a user from logging in with SSO.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "user",
-                "disable_sso",
-                ":user_email"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<email>",
-                  "key": "user_email",
-                  "description": "(Required) Email address of the user"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "disable_sso",
+          "item": [
             {
-              "id": "c1bd1e05-1ea3-4b48-9494-80196663f3c5",
-              "name": "SSO disabled",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "disable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{user_email}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Disable SSO for user",
+                  "id": "d76fd642-3be8-4ab8-aeb7-8a8d2d5af3ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "disable_sso",
+                        ":user_email"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d2ca4347-fe00-46d4-bf39-b942d02b5d90",
+                          "key": "user_email",
+                          "value": "<email>",
+                          "description": "(Required) Email address of the user"
+                        }
+                      ]
+                    },
+                    "description": "Allows admin to prohibit a user from logging in with SSO."
+                  },
+                  "response": [
+                    {
+                      "id": "359b7564-8925-40e1-95fe-07ef6be7b628",
+                      "name": "SSO disabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "disable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"identifier\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-359b7564-8925-40e1-95fe-07ef6be7b628"
+                    },
+                    {
+                      "id": "f19b3268-47d4-47b0-9de8-4a1592075b5d",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user/disable_sso/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "disable_sso",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_email"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-f19b3268-47d4-47b0-9de8-4a1592075b5d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-d76fd642-3be8-4ab8-aeb7-8a8d2d5af3ea"
                 }
               ],
-              "body": "{\n  \"first_name\": \"string\",\n  \"email\": \"string\",\n  \"identifier\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a668b518-f7f4-49de-a9d4-e2b75c97e574",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "user",
-                    "disable_sso",
-                    ":user_email"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<email>",
-                      "key": "user_email",
-                      "description": "(Required) Email address of the user"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"sso_setting\": {\n    \"user_email\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "4d535092-3cd9-4a47-a7b2-4af3e67a6bc0",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-4d535092-3cd9-4a47-a7b2-4af3e67a6bc0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "47c95ed1-47bd-47e9-b0c0-86c12d863992",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-47c95ed1-47bd-47e9-b0c0-86c12d863992"
+        },
+        {
+          "name": "delegated_admin",
+          "item": [
+            {
+              "name": "add",
+              "item": [
+                {
+                  "name": "{user_email}",
+                  "item": [
+                    {
+                      "name": "Promote a user to a delegated Admin",
+                      "id": "c0de305a-e39e-4a1c-9340-90de6e3445e1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/delegated_admin/add/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "delegated_admin",
+                            "add",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ad40ff52-f431-4785-9305-b64f0bb7a42e",
+                              "key": "user_email",
+                              "value": "<email>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Promotes a user to a delegated admin."
+                      },
+                      "response": [
+                        {
+                          "id": "41918c13-b545-448a-84c3-3ded23a6f260",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/user/delegated_admin/add/:user_email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "user",
+                                "delegated_admin",
+                                "add",
+                                ":user_email"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_email"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_email\": \"<email>\",\n  \"delegated_admin\": \"<boolean>\"\n}",
+                          "createdAt": "2026-10-22T02:32:40.000Z",
+                          "updatedAt": "2026-10-22T02:32:40.000Z",
+                          "uid": "35240-41918c13-b545-448a-84c3-3ded23a6f260"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-c0de305a-e39e-4a1c-9340-90de6e3445e1"
+                    }
+                  ],
+                  "id": "99ffde7d-8258-45c9-bab8-ef6d1b14bfb6",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-99ffde7d-8258-45c9-bab8-ef6d1b14bfb6"
+                }
+              ],
+              "id": "0c001eed-55fd-46dc-bcf1-c70306a348f1",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-0c001eed-55fd-46dc-bcf1-c70306a348f1"
+            },
+            {
+              "name": "remove",
+              "item": [
+                {
+                  "name": "{user_email}",
+                  "item": [
+                    {
+                      "name": "Demote a user from a delegated admin",
+                      "id": "1375e99f-3984-4f0e-b644-ee393af6b4d2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/delegated_admin/remove/:user_email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "delegated_admin",
+                            "remove",
+                            ":user_email"
+                          ],
+                          "variable": [
+                            {
+                              "id": "12543895-b36a-430a-b934-165e00bc03f9",
+                              "key": "user_email",
+                              "value": "<email>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Demotes a user from a delegated admin."
+                      },
+                      "response": [
+                        {
+                          "id": "68726942-64c8-4961-afd6-16e8f655e733",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/user/delegated_admin/remove/:user_email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "user",
+                                "delegated_admin",
+                                "remove",
+                                ":user_email"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_email"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_email\": \"<email>\",\n  \"delegated_admin\": \"<boolean>\"\n}",
+                          "createdAt": "2026-10-22T02:32:40.000Z",
+                          "updatedAt": "2026-10-22T02:32:40.000Z",
+                          "uid": "35240-68726942-64c8-4961-afd6-16e8f655e733"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:40.000Z",
+                      "updatedAt": "2026-10-22T02:32:40.000Z",
+                      "uid": "35240-1375e99f-3984-4f0e-b644-ee393af6b4d2"
+                    }
+                  ],
+                  "id": "81ba463f-b189-4fb4-8143-73fb206f992c",
+                  "createdAt": "2026-10-22T02:32:40.000Z",
+                  "updatedAt": "2026-10-22T02:32:40.000Z",
+                  "uid": "35240-81ba463f-b189-4fb4-8143-73fb206f992c"
+                }
+              ],
+              "id": "85a76e40-0eb2-4b31-b92b-65f896c88d56",
+              "createdAt": "2026-10-22T02:32:40.000Z",
+              "updatedAt": "2026-10-22T02:32:40.000Z",
+              "uid": "35240-85a76e40-0eb2-4b31-b92b-65f896c88d56"
+            }
+          ],
+          "id": "f68a68b6-5703-42df-8d6d-26c83efa8b72",
+          "createdAt": "2026-10-22T02:32:40.000Z",
+          "updatedAt": "2026-10-22T02:32:40.000Z",
+          "uid": "35240-f68a68b6-5703-42df-8d6d-26c83efa8b72"
         }
       ],
-      "event": []
+      "id": "3a93a2ca-2429-4a53-b298-d6fc8c6215b8",
+      "createdAt": "2026-10-22T02:32:40.000Z",
+      "updatedAt": "2026-10-22T02:32:40.000Z",
+      "uid": "35240-3a93a2ca-2429-4a53-b298-d6fc8c6215b8"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authorization"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "006252c5-b41a-41e7-bc71-791547f90db6",
-    "name": "Treasure Data TD Bulk Import Users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

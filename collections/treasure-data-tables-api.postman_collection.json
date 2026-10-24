@@ -1,253 +1,2728 @@
 {
+  "info": {
+    "_postman_id": "00e20045-daf0-4bbf-9833-63e0c4987142",
+    "name": "Treasure Data Tables API",
+    "description": "Operations tagged Tables across 2 of this provider's published API definitions: treasure-data-td-api-openapi.yml, treasure-data-td-api-v3-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:32.000Z",
+    "updatedAt": "2026-10-22T02:32:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-00e20045-daf0-4bbf-9833-63e0c4987142"
+  },
   "item": [
     {
-      "id": "b5a8fd68-dc55-4f68-a015-59b24a525898",
-      "name": "Tables",
-      "description": {
-        "content": "Manage tables within databases",
-        "type": "text/plain"
-      },
+      "name": "table",
       "item": [
         {
-          "id": "f760d7a1-ff81-40dd-ac23-c3f235c088d1",
-          "name": "List tables in a database",
-          "request": {
-            "name": "List tables in a database",
-            "description": {
-              "content": "Returns a list of all tables within the specified database.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "table",
-                "list",
-                ":database_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "database_name",
-                  "description": "(Required) Name of the database"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "list",
+          "item": [
             {
-              "id": "f6885048-f2b6-4dea-83e4-3a9dbb0dd113",
-              "name": "List of tables",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "table",
-                    "list",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{database_name}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "List tables in a database",
+                  "id": "e65a073e-f1da-4511-92d7-1d6a43b4b54f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/list/:database_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        "list",
+                        ":database_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "165df210-5877-478e-9182-c9b4b1fca76e",
+                          "key": "database_name",
+                          "value": "<string>",
+                          "description": "(Required) Name of the database"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of all tables within the specified database."
+                  },
+                  "response": [
+                    {
+                      "id": "3df3e16f-0010-4b51-a143-f9992959a0df",
+                      "name": "List of tables",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/list/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "list",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"estimated_storage_size\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"estimated_storage_size\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-3df3e16f-0010-4b51-a143-f9992959a0df"
+                    },
+                    {
+                      "id": "de905ee6-4672-4131-8e4d-b9aaa9731b57",
+                      "name": "Authentication required or API key invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/list/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "list",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-de905ee6-4672-4131-8e4d-b9aaa9731b57"
+                    },
+                    {
+                      "id": "7ede9eac-392c-41a7-aefd-f60d61487a4c",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/list/:database_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "list",
+                            ":database_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "database_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-7ede9eac-392c-41a7-aefd-f60d61487a4c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-e65a073e-f1da-4511-92d7-1d6a43b4b54f"
                 }
               ],
-              "body": "{\n  \"tables\": [\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"count\": 2434,\n      \"created_at\": \"2005-05-23T16:28:06.404Z\",\n      \"updated_at\": \"2019-04-14T17:21:48.146Z\",\n      \"estimated_storage_size\": 9069\n    },\n    {\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"count\": 1995,\n      \"created_at\": \"1947-10-28T15:45:51.686Z\",\n      \"updated_at\": \"1956-07-17T03:05:12.712Z\",\n      \"estimated_storage_size\": 9316\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "09834832-2ce0-4344-a1bf-c5cc7f2315b8",
-              "name": "Authentication required or API key invalid",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "table",
-                    "list",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d1869417-ffcc-4435-8b15-61cb70f0ea60",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "table",
-                    "list",
-                    ":database_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "database_name",
-                      "description": "(Required) Name of the database"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "5d2b9740-f1c2-49cc-a1f9-ab7d69b0bca4",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-5d2b9740-f1c2-49cc-a1f9-ab7d69b0bca4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "bb4874e7-071c-4c72-bbf7-0270f661ed6c",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-bb4874e7-071c-4c72-bbf7-0270f661ed6c"
+        },
+        {
+          "name": "show",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Get table",
+                      "id": "14c6daa3-4c68-4790-8db4-e58aa4ef9f65",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/show/:database_name/:table_name?include_descriptions=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "show",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes table descriptions and column descriptions in the schema field",
+                              "key": "include_descriptions",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d831bb6b-709b-4ca0-98f4-d1e7efb1dba8",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "a02ac2dd-d1fc-41bd-8573-a3925de0fd3b",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Shows a table according to specified database and table."
+                      },
+                      "response": [
+                        {
+                          "id": "0ed26cf9-330f-4c90-b2c5-97f201d03c30",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/show/:database_name/:table_name?include_descriptions=false",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "show",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "When true, includes table descriptions and column descriptions in the schema field",
+                                  "key": "include_descriptions",
+                                  "value": "false"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"count\": \"<integer>\",\n  \"counter_updated_at\": \"<string,null>\",\n  \"created_at\": \"1376-42-68\\r22:85:38\u2006UTC\",\n  \"delete_protected\": \"<boolean>\",\n  \"estimated_storage_size\": \"<integer>\",\n  \"expire_days\": \"<integer,null>\",\n  \"include_v\": \"<boolean>\",\n  \"last_log_timestamp\": \"<integer,null>\",\n  \"name\": \"<string>\",\n  \"schema\": \"<string>\",\n  \"type\": \"log\",\n  \"updated_at\": \"5404-10-97\u300047:49:55\u2001+6161\",\n  \"description\": \"<string,null>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-0ed26cf9-330f-4c90-b2c5-97f201d03c30"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-14c6daa3-4c68-4790-8db4-e58aa4ef9f65"
+                    }
+                  ],
+                  "id": "e03d2227-d5bb-446e-a72a-d4df593282a8",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-e03d2227-d5bb-446e-a72a-d4df593282a8"
+                }
+              ],
+              "id": "b629cb5a-61b9-4ce3-90bc-864c487c2dd3",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-b629cb5a-61b9-4ce3-90bc-864c487c2dd3"
+            }
+          ],
+          "id": "5950df4a-4169-442a-84c1-52b2d0201933",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-5950df4a-4169-442a-84c1-52b2d0201933"
+        },
+        {
+          "name": "delete",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Delete table",
+                      "id": "b9672183-dbd6-4a5a-8c39-62d075589ee4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/delete/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "delete",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "528ac5f4-61d6-4b91-b590-af3b639a0dfb",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "539db473-6e2e-49dd-92d3-d3759aadb04a",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Deletes specified table."
+                      },
+                      "response": [
+                        {
+                          "id": "87079160-3492-4c0f-a5f4-588cf5f6cb15",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/delete/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "delete",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-87079160-3492-4c0f-a5f4-588cf5f6cb15"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-b9672183-dbd6-4a5a-8c39-62d075589ee4"
+                    }
+                  ],
+                  "id": "47a2e52b-e057-42b1-8c75-7d4cb31bdffc",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-47a2e52b-e057-42b1-8c75-7d4cb31bdffc"
+                }
+              ],
+              "id": "1cf7e7ca-cee7-453c-80c7-c2702143836b",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-1cf7e7ca-cee7-453c-80c7-c2702143836b"
+            }
+          ],
+          "id": "7c206d4f-02f7-4db2-afb9-3ddad04e61e7",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-7c206d4f-02f7-4db2-afb9-3ddad04e61e7"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "{table_type}",
+                      "item": [
+                        {
+                          "name": "Create table with specified type",
+                          "id": "92b73b46-796d-4d9f-941d-1af98fa9bb71",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/create/:database_name/:table_name/:table_type?idempotent_key=<string>&source_table=<string>&including_properties=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "create",
+                                ":database_name",
+                                ":table_name",
+                                ":table_type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "A unique key to ensure idempotency of requests",
+                                  "key": "idempotent_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Name of an existing table to copy metadata from",
+                                  "key": "source_table",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "When true, distribution and other properties will be copied from source_table",
+                                  "key": "including_properties",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9057ddc2-90bd-415d-ae61-e1eb1975a1d9",
+                                  "key": "database_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "31d3f30e-ce8a-4dbe-a8ab-62c52a48901f",
+                                  "key": "table_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5a3b145b-79eb-4cc9-9376-d103f15817c5",
+                                  "key": "table_type",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Creates a table of a specified type. Currently only 'log' is supported as table_type. This endpoint supports creating tables with schema, options, and can copy properties from existing tables. Schema can include column descriptions in the format `[name, type, alias, description]`."
+                          },
+                          "response": [
+                            {
+                              "id": "786442a3-4f0d-4d25-9091-836a2890d6c3",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/x-www-form-urlencoded"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "urlencoded",
+                                  "urlencoded": [
+                                    {
+                                      "key": "value",
+                                      "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                                    },
+                                    {
+                                      "key": "schema",
+                                      "value": "<string>,<string>"
+                                    },
+                                    {
+                                      "key": "schema",
+                                      "value": "<string>,<string>"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/table/create/:database_name/:table_name/:table_type?idempotent_key=<string>&source_table=<string>&including_properties=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "table",
+                                    "create",
+                                    ":database_name",
+                                    ":table_name",
+                                    ":table_type"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "A unique key to ensure idempotency of requests",
+                                      "key": "idempotent_key",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Name of an existing table to copy metadata from",
+                                      "key": "source_table",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "When true, distribution and other properties will be copied from source_table",
+                                      "key": "including_properties",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name"
+                                    },
+                                    {
+                                      "key": "table_type"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:33.000Z",
+                              "updatedAt": "2026-10-22T02:32:33.000Z",
+                              "uid": "35240-786442a3-4f0d-4d25-9091-836a2890d6c3"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-92b73b46-796d-4d9f-941d-1af98fa9bb71"
+                        }
+                      ],
+                      "id": "031a8f95-f7c1-4fa6-a641-400e45c28ba9",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-031a8f95-f7c1-4fa6-a641-400e45c28ba9"
+                    },
+                    {
+                      "name": "Create table",
+                      "id": "368ab599-eadb-415e-b1d4-d2f178fc9dc4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/create/:database_name/:table_name?idempotent_key=<string>&source_table=<string>&including_properties=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "create",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "query": [
+                            {
+                              "description": "A unique key to ensure idempotency of requests",
+                              "key": "idempotent_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Name of an existing table to copy metadata from",
+                              "key": "source_table",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "When true, distribution and other properties will be copied from source_table",
+                              "key": "including_properties",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a5e7f2cf-d8f3-4c8b-8ee9-3b9ac40c88b8",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "7bc40be7-e2c8-4b80-8a89-68acfe55b6c6",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Creates a table with default type 'log'. This endpoint offers the same functionality as the typed endpoint but without explicitly specifying the table type. Schema can include column descriptions in the format `[name, type, alias, description]`."
+                      },
+                      "response": [
+                        {
+                          "id": "1f2cab41-0529-4d2c-831e-5968e92e6cf4",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/create/:database_name/:table_name?idempotent_key=<string>&source_table=<string>&including_properties=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "create",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "A unique key to ensure idempotency of requests",
+                                  "key": "idempotent_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Name of an existing table to copy metadata from",
+                                  "key": "source_table",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "When true, distribution and other properties will be copied from source_table",
+                                  "key": "including_properties",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-1f2cab41-0529-4d2c-831e-5968e92e6cf4"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-368ab599-eadb-415e-b1d4-d2f178fc9dc4"
+                    }
+                  ],
+                  "id": "f883379c-7ff0-42f1-acb3-bf829cbe6f9c",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-f883379c-7ff0-42f1-acb3-bf829cbe6f9c"
+                }
+              ],
+              "id": "0f8ad5c1-080d-40ea-a1fa-70ed75677115",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-0f8ad5c1-080d-40ea-a1fa-70ed75677115"
+            }
+          ],
+          "id": "8061e7c1-2c2e-4ee6-8f39-5652c8a812d9",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-8061e7c1-2c2e-4ee6-8f39-5652c8a812d9"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Update table",
+                      "id": "e4755639-2389-4fa6-96da-e53fe01225fd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "detect_schema",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "value",
+                              "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                            },
+                            {
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "key": "ignore_duplicate_schema",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "whether to override a possible existing table in case of updating the name",
+                              "key": "overwrite",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/update/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "update",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6cf35aae-9b4c-44b7-9083-2fdf0ec60a70",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "deecd9db-21f9-4c2c-aefc-0d8e94e0d7a9",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates a table."
+                      },
+                      "response": [
+                        {
+                          "id": "bcb2605a-880e-413e-ae65-8faf2a613489",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "detect_schema",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "reference #/components/schemas/Table/properties/description not found in the OpenAPI spec"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "key": "ignore_duplicate_schema",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "whether to override a possible existing table in case of updating the name",
+                                  "key": "overwrite",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/update/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "update",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-bcb2605a-880e-413e-ae65-8faf2a613489"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-e4755639-2389-4fa6-96da-e53fe01225fd"
+                    }
+                  ],
+                  "id": "d70d9cec-fe0d-4445-a8c2-662eb6c3f967",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-d70d9cec-fe0d-4445-a8c2-662eb6c3f967"
+                }
+              ],
+              "id": "a5513974-12af-4a5d-ba5b-1d5596705970",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-a5513974-12af-4a5d-ba5b-1d5596705970"
+            }
+          ],
+          "id": "8fde3d7b-7233-4864-9307-e624ca6d9d18",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-8fde3d7b-7233-4864-9307-e624ca6d9d18"
+        },
+        {
+          "name": "rename",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{current_table_name}",
+                  "item": [
+                    {
+                      "name": "{new_table_name}",
+                      "item": [
+                        {
+                          "name": "Rename table",
+                          "id": "a0d62278-799b-4fb5-9cff-ecaa1f22a431",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/rename/:database_name/:current_table_name/:new_table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "rename",
+                                ":database_name",
+                                ":current_table_name",
+                                ":new_table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d7be889e-9e75-4c45-b26d-2d073bc04757",
+                                  "key": "database_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "dbd7e9c5-1b85-4e9c-bbcf-95fff65c485b",
+                                  "key": "current_table_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9fdb649d-2c09-4650-845a-36c70263492f",
+                                  "key": "new_table_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Renames a specified table."
+                          },
+                          "response": [
+                            {
+                              "id": "fdc5c453-613f-43cf-8492-62b3452b5e15",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/table/rename/:database_name/:current_table_name/:new_table_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "table",
+                                    "rename",
+                                    ":database_name",
+                                    ":current_table_name",
+                                    ":new_table_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "current_table_name"
+                                    },
+                                    {
+                                      "key": "new_table_name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:33.000Z",
+                              "updatedAt": "2026-10-22T02:32:33.000Z",
+                              "uid": "35240-fdc5c453-613f-43cf-8492-62b3452b5e15"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-a0d62278-799b-4fb5-9cff-ecaa1f22a431"
+                        }
+                      ],
+                      "id": "fc2ba018-fba8-4eee-a0e8-c99ba1ab209b",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-fc2ba018-fba8-4eee-a0e8-c99ba1ab209b"
+                    }
+                  ],
+                  "id": "0739d682-7a27-4f0e-8323-b7cfd4320fec",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-0739d682-7a27-4f0e-8323-b7cfd4320fec"
+                }
+              ],
+              "id": "cb617006-c98d-4465-a66e-eb168adeafc3",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-cb617006-c98d-4465-a66e-eb168adeafc3"
+            }
+          ],
+          "id": "6e55dac1-5fb9-42e2-89dc-378ef84ddde5",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-6e55dac1-5fb9-42e2-89dc-378ef84ddde5"
+        },
+        {
+          "name": "swap",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name_1}",
+                  "item": [
+                    {
+                      "name": "{table_name_2}",
+                      "item": [
+                        {
+                          "name": "Swap tables",
+                          "id": "73fb337c-4e3e-473f-aaa1-db9e30a9a5ee",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/swap/:database_name/:table_name_1/:table_name_2",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "swap",
+                                ":database_name",
+                                ":table_name_1",
+                                ":table_name_2"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "76fd2f2a-e151-43b7-a0fb-06575d868c86",
+                                  "key": "database_name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6542b0a2-b2e7-4534-a470-75bdbc6eec84",
+                                  "key": "table_name_1",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a5331fea-e6e7-420b-a39d-e754d9187aa5",
+                                  "key": "table_name_2",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Swaps specified tables."
+                          },
+                          "response": [
+                            {
+                              "id": "6d07c81d-4f99-4a6e-ae9b-404e98954ec4",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/table/swap/:database_name/:table_name_1/:table_name_2",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "table",
+                                    "swap",
+                                    ":database_name",
+                                    ":table_name_1",
+                                    ":table_name_2"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "database_name"
+                                    },
+                                    {
+                                      "key": "table_name_1"
+                                    },
+                                    {
+                                      "key": "table_name_2"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"database\": \"<string>\",\n  \"table1\": \"<string>\",\n  \"table2\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:32:33.000Z",
+                              "updatedAt": "2026-10-22T02:32:33.000Z",
+                              "uid": "35240-6d07c81d-4f99-4a6e-ae9b-404e98954ec4"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-73fb337c-4e3e-473f-aaa1-db9e30a9a5ee"
+                        }
+                      ],
+                      "id": "72ced9fe-906c-4742-b24f-f62224b1ab81",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-72ced9fe-906c-4742-b24f-f62224b1ab81"
+                    }
+                  ],
+                  "id": "8f904352-f1d6-41d1-ae96-93ec4f8f7264",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-8f904352-f1d6-41d1-ae96-93ec4f8f7264"
+                }
+              ],
+              "id": "2ecbd746-418f-47fc-8cf4-ca431d70f61f",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-2ecbd746-418f-47fc-8cf4-ca431d70f61f"
+            }
+          ],
+          "id": "acdfe76a-d6a0-46e0-b0c3-884b8666209b",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-acdfe76a-d6a0-46e0-b0c3-884b8666209b"
+        },
+        {
+          "name": "tail",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}{path_format}",
+                  "item": [
+                    {
+                      "name": "Tail table",
+                      "id": "dd2ec38c-b23e-4a97-97d3-66953130f835",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/tail/:database_name/{{table_name}}{{path_format}}?format=msgpack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "tail",
+                            ":database_name",
+                            "{{table_name}}{{path_format}}"
+                          ],
+                          "query": [
+                            {
+                              "key": "format",
+                              "value": "msgpack"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "86e38f13-ed4c-4239-b8bb-a72ae34dc59d",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Shows the last record in a table."
+                      },
+                      "response": [
+                        {
+                          "id": "2e5d09e6-75e4-42d1-a1ab-8b87c6bcc6b9",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/tail/:database_name/{{table_name}}{{path_format}}?format=msgpack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "tail",
+                                ":database_name",
+                                "{{table_name}}{{path_format}}"
+                              ],
+                              "query": [
+                                {
+                                  "key": "format",
+                                  "value": "msgpack"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string,null>\",\n  \"<string,null>\"\n]",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-2e5d09e6-75e4-42d1-a1ab-8b87c6bcc6b9"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-dd2ec38c-b23e-4a97-97d3-66953130f835"
+                    }
+                  ],
+                  "id": "56a39a1a-85d9-4187-8459-f37999a3d49c",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-56a39a1a-85d9-4187-8459-f37999a3d49c"
+                }
+              ],
+              "id": "db0403c1-7f29-4e57-be23-0691c3f99fba",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-db0403c1-7f29-4e57-be23-0691c3f99fba"
+            }
+          ],
+          "id": "98865323-8593-43ba-8ad8-981e8eb04b2c",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-98865323-8593-43ba-8ad8-981e8eb04b2c"
+        },
+        {
+          "name": "distribution",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Get table distribution",
+                      "id": "bfcceff9-d1ad-4d14-a4b9-ccb9b446660c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/table/distribution/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "distribution",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8748dcf6-d5dc-4092-aa9e-108bf79a15f7",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "4b6ed0c3-8836-4824-82f5-c9956f41559b",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a table distribution."
+                      },
+                      "response": [
+                        {
+                          "id": "133ec87d-7997-4fac-8b71-eb1ac2927430",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/table/distribution/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "distribution",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"bucket_count\": \"<integer>\",\n  \"partition_function\": \"<string>\",\n  \"columns\": [\n    {\n      \"key\": \"<string>\",\n      \"type\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"type\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-133ec87d-7997-4fac-8b71-eb1ac2927430"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-bfcceff9-d1ad-4d14-a4b9-ccb9b446660c"
+                    }
+                  ],
+                  "id": "a84e9d0c-a0dc-4b98-8fce-a3d9dc673f3d",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-a84e9d0c-a0dc-4b98-8fce-a3d9dc673f3d"
+                }
+              ],
+              "id": "07062c2f-6bed-44ea-9e4c-3330ffb1c693",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-07062c2f-6bed-44ea-9e4c-3330ffb1c693"
+            }
+          ],
+          "id": "0fee0fde-4a8a-4b75-a090-a0bd05699a9c",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-0fee0fde-4a8a-4b75-a090-a0bd05699a9c"
+        },
+        {
+          "name": "change_database",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Change database",
+                      "id": "514081da-84c5-4877-a3ff-be6b1e5d39d1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) database name",
+                              "key": "dest_database_name",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/change_database/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "change_database",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a0c90796-19d8-4129-bccd-9010184a5fb9",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "5859bfed-1a06-4592-859f-69efbbc3e6da",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Changes to the specified table database."
+                      },
+                      "response": [
+                        {
+                          "id": "c421ed05-2ecd-4c2d-9b04-304bb3f37684",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) database name",
+                                  "key": "dest_database_name",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/change_database/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "change_database",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-c421ed05-2ecd-4c2d-9b04-304bb3f37684"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-514081da-84c5-4877-a3ff-be6b1e5d39d1"
+                    }
+                  ],
+                  "id": "736e2d0b-ad93-4e28-a228-b8b683c2a849",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-736e2d0b-ad93-4e28-a228-b8b683c2a849"
+                }
+              ],
+              "id": "35bc07e0-71c5-4eda-b7ed-e067ed78308b",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-35bc07e0-71c5-4eda-b7ed-e067ed78308b"
+            }
+          ],
+          "id": "935f66cd-2136-48e3-9a74-4b3d81565f0d",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-935f66cd-2136-48e3-9a74-4b3d81565f0d"
+        },
+        {
+          "name": "transfer",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Transfer table to a different account",
+                      "id": "cae0c584-aa10-4237-b431-4413d21b33bc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) database name",
+                              "key": "dest_database_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "dest_table_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "idempotent_key",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/transfer/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "transfer",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "70f1cdf5-7074-4a0c-bd28-487bb8e606c8",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "3bf77d62-a0ae-4069-9ac8-f559a38012e3",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Transfer the specified table to a different account. (Limited Access)"
+                      },
+                      "response": [
+                        {
+                          "id": "e88ebe45-9bcc-45ff-b3cb-49805f07fea8",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) database name",
+                                  "key": "dest_database_name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "dest_table_name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "idempotent_key",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/transfer/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "transfer",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database_name\": \"<string>\",\n  \"table_name\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-e88ebe45-9bcc-45ff-b3cb-49805f07fea8"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-cae0c584-aa10-4237-b431-4413d21b33bc"
+                    }
+                  ],
+                  "id": "9387e505-7b8d-4715-a354-10f34feec99a",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-9387e505-7b8d-4715-a354-10f34feec99a"
+                }
+              ],
+              "id": "5ffb1cf3-3893-415c-899f-908f4b1bfe2b",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-5ffb1cf3-3893-415c-899f-908f4b1bfe2b"
+            }
+          ],
+          "id": "df3d5e0d-fe14-4d29-8db7-419759d01158",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-df3d5e0d-fe14-4d29-8db7-419759d01158"
+        },
+        {
+          "name": "append-schema",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Append table schema",
+                      "id": "dd281d0f-99a3-4a82-96bd-4fc1ff84434e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) ",
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/append-schema/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "append-schema",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ed6b16aa-407d-4cf1-8ee4-6013fe7ff066",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "d290f66e-822a-4ba5-b098-b0569fa7fe74",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Appends the specified table schema."
+                      },
+                      "response": [
+                        {
+                          "id": "8bb183b6-8442-4f44-a089-238bba22cbeb",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/append-schema/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "append-schema",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-8bb183b6-8442-4f44-a089-238bba22cbeb"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-dd281d0f-99a3-4a82-96bd-4fc1ff84434e"
+                    }
+                  ],
+                  "id": "abf36bf7-3442-473a-bfe2-7f80b9c6f51b",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-abf36bf7-3442-473a-bfe2-7f80b9c6f51b"
+                }
+              ],
+              "id": "75210961-136c-4614-bb1f-c87507ae7014",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-75210961-136c-4614-bb1f-c87507ae7014"
+            }
+          ],
+          "id": "b209f425-5194-4b8c-9000-bc298d66b408",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-b209f425-5194-4b8c-9000-bc298d66b408"
+        },
+        {
+          "name": "update-schema",
+          "item": [
+            {
+              "name": "{database_name}",
+              "item": [
+                {
+                  "name": "{table_name}",
+                  "item": [
+                    {
+                      "name": "Update table schema",
+                      "id": "f356996a-ae92-434f-9633-04baa82ee4cb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) ",
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "schema",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "ignore_duplicate_schema",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "detect_schema",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "include_v",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "expire_days",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "overwrite",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/update-schema/:database_name/:table_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "update-schema",
+                            ":database_name",
+                            ":table_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4e1afbe7-181d-48f7-a171-abb3503699a4",
+                              "key": "database_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "bc44215e-0248-4c72-a132-986407d984ef",
+                              "key": "table_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates the specified table schema. Schema can include column descriptions in the format `[name, type, alias, description]`."
+                      },
+                      "response": [
+                        {
+                          "id": "69ed98b5-1e56-4184-9888-da547112c2f1",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "schema",
+                                  "value": "<string>,<string>"
+                                },
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "ignore_duplicate_schema",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "detect_schema",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "include_v",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "expire_days",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "overwrite",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/table/update-schema/:database_name/:table_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "table",
+                                "update-schema",
+                                ":database_name",
+                                ":table_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "database_name"
+                                },
+                                {
+                                  "key": "table_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"database\": \"<string>\",\n  \"table\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:33.000Z",
+                          "updatedAt": "2026-10-22T02:32:33.000Z",
+                          "uid": "35240-69ed98b5-1e56-4184-9888-da547112c2f1"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-f356996a-ae92-434f-9633-04baa82ee4cb"
+                    }
+                  ],
+                  "id": "a7912c65-529c-487d-994e-aa5f2fee7568",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-a7912c65-529c-487d-994e-aa5f2fee7568"
+                }
+              ],
+              "id": "338fed84-730c-45fd-baa8-a2a79d50d1ff",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-338fed84-730c-45fd-baa8-a2a79d50d1ff"
+            }
+          ],
+          "id": "ac93a1d1-a689-4ecf-b817-989d9949a375",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-ac93a1d1-a689-4ecf-b817-989d9949a375"
+        },
+        {
+          "name": "deleted",
+          "item": [
+            {
+              "name": "List deleted tables",
+              "id": "fa404011-09e5-4b06-a441-29256c998deb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/table/deleted?cursor_id=<integer>&page_size=25&database_id=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "table",
+                    "deleted"
+                  ],
+                  "query": [
+                    {
+                      "description": "ID of the last table from the previous page; omit for the first page",
+                      "key": "cursor_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of tables to return per page",
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Filter deleted tables by database ID",
+                      "key": "database_id",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of deleted recoverable tables for the authenticated account."
+              },
+              "response": [
+                {
+                  "id": "c0ec2ee2-1e74-428d-9d28-886aced52a7e",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/table/deleted?cursor_id=<integer>&page_size=25&database_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        "deleted"
+                      ],
+                      "query": [
+                        {
+                          "description": "ID of the last table from the previous page; omit for the first page",
+                          "key": "cursor_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of tables to return per page",
+                          "key": "page_size",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Filter deleted tables by database ID",
+                          "key": "database_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tables\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"database_id\": \"<integer>\",\n      \"database_name\": \"<string>\",\n      \"deleted_at\": \"3288-62-39\u200338:46:12\u2006UTC\",\n      \"created_at\": \"5361-65-14\u200937:16:82\u2006UTC\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"database_id\": \"<integer>\",\n      \"database_name\": \"<string>\",\n      \"deleted_at\": \"3336-99-72\u200151:24:98\u2001+9360\",\n      \"created_at\": \"7728-43-16\u200961:96:30\u2006UTC\"\n    }\n  ],\n  \"cursor_id\": \"<integer,null>\"\n}",
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-c0ec2ee2-1e74-428d-9d28-886aced52a7e"
+                }
+              ],
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-fa404011-09e5-4b06-a441-29256c998deb"
+            }
+          ],
+          "id": "e8b38f63-a1e1-468c-88ef-fcb4488ece5b",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-e8b38f63-a1e1-468c-88ef-fcb4488ece5b"
+        },
+        {
+          "name": "recover",
+          "item": [
+            {
+              "name": "{table_id}",
+              "item": [
+                {
+                  "name": "Recover deleted table",
+                  "id": "a673c8da-b419-4d26-b002-1715ad8dbd0d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"table_name\": \"<string>\",\n  \"database_name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/table/recover/:table_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "table",
+                        "recover",
+                        ":table_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0cf58f94-4616-417d-a4b6-33c5cc5ea44a",
+                          "key": "table_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Recovers a deleted table. If the parent database is also deleted, with proper permissions it will be recovered automatically."
+                  },
+                  "response": [
+                    {
+                      "id": "2253e1bf-47c2-4cb9-8e3b-eda8e6443023",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"table_name\": \"<string>\",\n  \"database_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/recover/:table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "recover",
+                            ":table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"count\": \"<integer>\",\n  \"counter_updated_at\": {\n    \"value\": \"reference #/components/schemas/Table/properties/counter_updated_at not found in the OpenAPI spec\"\n  },\n  \"created_at\": \"4604-91-99\u200152:40:14\ufeff+4362\",\n  \"delete_protected\": {\n    \"value\": \"reference #/components/schemas/Table/properties/delete_protected not found in the OpenAPI spec\"\n  },\n  \"estimated_storage_size\": \"<integer>\",\n  \"expire_days\": {\n    \"value\": \"reference #/components/schemas/Table/properties/expire_days not found in the OpenAPI spec\"\n  },\n  \"include_v\": {\n    \"value\": \"reference #/components/schemas/Table/properties/include_v not found in the OpenAPI spec\"\n  },\n  \"last_log_timestamp\": {\n    \"value\": \"reference #/components/schemas/Table/properties/last_log_timestamp not found in the OpenAPI spec\"\n  },\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"updated_at\": \"6636-28-17\u168045:65:01\u2007+0041\"\n}",
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-2253e1bf-47c2-4cb9-8e3b-eda8e6443023"
+                    },
+                    {
+                      "id": "c0c8380c-c0c6-4487-bc9e-f611e03a2cbd",
+                      "name": "Client Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"table_name\": \"<string>\",\n  \"database_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/recover/:table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "recover",
+                            ":table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-c0c8380c-c0c6-4487-bc9e-f611e03a2cbd"
+                    },
+                    {
+                      "id": "8fd26c34-5c7a-4833-a19d-fb52ea5940d3",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"table_name\": \"<string>\",\n  \"database_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/table/recover/:table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "table",
+                            "recover",
+                            ":table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:32:33.000Z",
+                      "updatedAt": "2026-10-22T02:32:33.000Z",
+                      "uid": "35240-8fd26c34-5c7a-4833-a19d-fb52ea5940d3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:33.000Z",
+                  "updatedAt": "2026-10-22T02:32:33.000Z",
+                  "uid": "35240-a673c8da-b419-4d26-b002-1715ad8dbd0d"
+                }
+              ],
+              "id": "a3ec56c5-9699-4269-b472-45e6e6590452",
+              "createdAt": "2026-10-22T02:32:33.000Z",
+              "updatedAt": "2026-10-22T02:32:33.000Z",
+              "uid": "35240-a3ec56c5-9699-4269-b472-45e6e6590452"
+            }
+          ],
+          "id": "72248cf7-bf85-4859-b922-5f9515e7967f",
+          "createdAt": "2026-10-22T02:32:33.000Z",
+          "updatedAt": "2026-10-22T02:32:33.000Z",
+          "uid": "35240-72248cf7-bf85-4859-b922-5f9515e7967f"
         }
       ],
-      "event": []
+      "id": "6b2d8fd0-4996-499a-b9a9-e173d8f545fb",
+      "createdAt": "2026-10-22T02:32:33.000Z",
+      "updatedAt": "2026-10-22T02:32:33.000Z",
+      "uid": "35240-6b2d8fd0-4996-499a-b9a9-e173d8f545fb"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.treasuredata.com/v3",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api.treasuredata.com/v3"
+    },
+    {
+      "key": "table_name",
+      "value": "<string>"
+    },
+    {
+      "key": "path_format",
+      "value": ".msgpack"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authorization"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "398e81d3-d3c5-4682-bf05-845a1a2cd909",
-    "name": "Treasure Data TD Bulk Import Tables API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Core REST API for managing databases, tables, jobs, bulk imports, connectors, and users within the Treasure Data Customer Data Platform. Supports Presto and Hive query execution on big data warehouses.\n",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

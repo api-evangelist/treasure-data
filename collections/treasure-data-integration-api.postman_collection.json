@@ -1,0 +1,1158 @@
+{
+  "info": {
+    "_postman_id": "13521da5-7a99-46ae-b388-981d2a75b37e",
+    "name": "llm-api Integration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:35:29.000Z",
+    "updatedAt": "2026-10-22T02:35:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-13521da5-7a99-46ae-b388-981d2a75b37e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "integrations",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "destroy",
+                  "id": "76aa7486-1ea3-4df1-9a01-6aca1ed4f15d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "58ea4261-abf6-4819-bd25-98f65c73e8fe",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8892e116-5e74-4adc-9b96-232cd946b60b",
+                      "name": "Integration deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-8892e116-5e74-4adc-9b96-232cd946b60b"
+                    },
+                    {
+                      "id": "eb6c1790-49c4-428d-ada0-e2f2dcf1ecda",
+                      "name": "Unauthorized - authentication credentials are missing or invalid",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-eb6c1790-49c4-428d-ada0-e2f2dcf1ecda"
+                    },
+                    {
+                      "id": "90a0ed02-2fc6-42d9-b7df-4e90993e7d8e",
+                      "name": "Forbidden - insufficient permissions to delete this integration",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-90a0ed02-2fc6-42d9-b7df-4e90993e7d8e"
+                    },
+                    {
+                      "id": "50bcd0e5-5be2-445f-a8fe-19d6e8feafb3",
+                      "name": "Integration not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-50bcd0e5-5be2-445f-a8fe-19d6e8feafb3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-76aa7486-1ea3-4df1-9a01-6aca1ed4f15d"
+                },
+                {
+                  "name": "show",
+                  "id": "8a90e9ec-4424-49cf-ad0b-ce931d4d5ce4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ded9c2fe-f9c5-4a2e-a88f-2f8af9b377d1",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c808fe06-a262-4d91-bf1e-20364fb6d961",
+                      "name": "allows GET /api/integrations/:id",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"serviceType\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": {},\n          \"chatWidgetLabel\": {},\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"webhookTextUrl\": \"<string>\",\n          \"slackRequestUrl\": {}\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": {},\n          \"chatWidgetLabel\": {},\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"webhookTextUrl\": \"<string>\",\n          \"slackRequestUrl\": {}\n        }\n      ],\n      \"webhookAuthorizationUsername\": \"<string,null>\",\n      \"webhookAuthorizationPassword\": \"<string,null>\",\n      \"webhookAuthorizationHeader\": \"<string>\",\n      \"webhookCorsOrigins\": \"<array,null>\",\n      \"slackSigningSecret\": \"<string,null>\",\n      \"slackMessageMode\": \"<string>\",\n      \"chatIgnoreManagedActions\": \"<boolean>\",\n      \"chatWelcomeMessage\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-c808fe06-a262-4d91-bf1e-20364fb6d961"
+                    },
+                    {
+                      "id": "8fa007be-5270-49ae-8908-8c99fb59bc14",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-8fa007be-5270-49ae-8908-8c99fb59bc14"
+                    },
+                    {
+                      "id": "983d107c-6b5a-4475-aeb7-fcc6c69fd8f0",
+                      "name": "GET /api/integrations/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-983d107c-6b5a-4475-aeb7-fcc6c69fd8f0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-8a90e9ec-4424-49cf-ad0b-ce931d4d5ce4"
+                },
+                {
+                  "name": "update",
+                  "id": "effcb9b0-a98e-4978-9375-82b4e0768740",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1a50cc6a-0aef-4adb-b8f3-78da872acbca",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "54f31b2c-1a2e-44f2-a500-28bf56a09c58",
+                      "name": "updates an integration's updated_at field when actions are updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"serviceType\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": {},\n          \"chatWidgetLabel\": {},\n          \"webhookTextUrl\": \"<string>\",\n          \"slackRequestUrl\": {}\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": {},\n          \"chatWidgetLabel\": {},\n          \"webhookTextUrl\": \"<string>\",\n          \"slackRequestUrl\": {}\n        }\n      ],\n      \"webhookAuthorizationUsername\": \"<string,null>\",\n      \"webhookAuthorizationPassword\": \"<string,null>\",\n      \"webhookAuthorizationHeader\": \"<string>\",\n      \"webhookCorsOrigins\": {},\n      \"slackSigningSecret\": \"<string,null>\",\n      \"slackMessageMode\": \"<string>\",\n      \"chatIgnoreManagedActions\": \"<boolean>\",\n      \"chatWelcomeMessage\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-54f31b2c-1a2e-44f2-a500-28bf56a09c58"
+                    },
+                    {
+                      "id": "416571e5-4e97-41f5-91d2-1e5e265c49fa",
+                      "name": "rejects PATCH /api/integrations/:id",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-416571e5-4e97-41f5-91d2-1e5e265c49fa"
+                    },
+                    {
+                      "id": "350b5df0-1995-421a-baa3-bd3637446154",
+                      "name": "Rejected by 401",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-350b5df0-1995-421a-baa3-bd3637446154"
+                    },
+                    {
+                      "id": "e9d72eea-26d5-4330-bcc2-f3c28fb8f8fa",
+                      "name": "PATCH /api/integrations/:id returns 404 Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-e9d72eea-26d5-4330-bcc2-f3c28fb8f8fa"
+                    },
+                    {
+                      "id": "aaf35a26-3579-401f-b0c8-341eb2f6c07e",
+                      "name": "rejects duplicated unique name",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"slackSigningSecret\": \"<string>\",\n      \"slackMessageMode\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\"\n        },\n        {\n          \"promptId\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/integrations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "integrations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/vnd.api+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:35:29.000Z",
+                      "updatedAt": "2026-10-22T02:35:29.000Z",
+                      "uid": "35240-aaf35a26-3579-401f-b0c8-341eb2f6c07e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-effcb9b0-a98e-4978-9375-82b4e0768740"
+                }
+              ],
+              "id": "9a96699a-cc7c-42b5-88e4-7dc90d9c2ce3",
+              "createdAt": "2026-10-22T02:35:29.000Z",
+              "updatedAt": "2026-10-22T02:35:29.000Z",
+              "uid": "35240-9a96699a-cc7c-42b5-88e4-7dc90d9c2ce3"
+            },
+            {
+              "name": "index",
+              "id": "29c9d624-e3a4-48e3-9db7-e92516a66e33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/integrations?include=<string>&sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "integrations"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "875a703f-ba24-40bb-bb51-13f7ef0c5e4d",
+                  "name": "allows GET /api/integrations",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"isManaged\": \"<boolean>\",\n        \"serviceType\": \"<string>\",\n        \"webhookAuthorizationUsername\": \"<string,null>\",\n        \"webhookAuthorizationPassword\": \"<string,null>\",\n        \"webhookAuthorizationHeader\": \"<string>\",\n        \"webhookCorsOrigins\": \"<array,null>\",\n        \"slackSigningSecret\": \"<string,null>\",\n        \"slackMessageMode\": \"<string>\",\n        \"chatIgnoreManagedActions\": \"<boolean>\",\n        \"chatWelcomeMessage\": {}\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"attributes\": {\n        \"createdAt\": \"<string>\",\n        \"updatedAt\": \"<string>\",\n        \"projectId\": \"<string>\",\n        \"isManaged\": \"<boolean>\",\n        \"serviceType\": \"<string>\",\n        \"webhookAuthorizationUsername\": \"<string,null>\",\n        \"webhookAuthorizationPassword\": \"<string,null>\",\n        \"webhookAuthorizationHeader\": \"<string>\",\n        \"webhookCorsOrigins\": \"<array,null>\",\n        \"slackSigningSecret\": \"<string,null>\",\n        \"slackMessageMode\": \"<string>\",\n        \"chatIgnoreManagedActions\": \"<boolean>\",\n        \"chatWelcomeMessage\": {}\n      },\n      \"relationships\": {\n        \"createdBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        },\n        \"updatedBy\": {\n          \"data\": {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\"\n  },\n  \"links\": {\n    \"first\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"included\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-875a703f-ba24-40bb-bb51-13f7ef0c5e4d"
+                },
+                {
+                  "id": "44e57b14-2d26-46e8-b3f6-540c3e832acb",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations?include=<string>&sort=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "sort",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-44e57b14-2d26-46e8-b3f6-540c3e832acb"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:29.000Z",
+              "updatedAt": "2026-10-22T02:35:29.000Z",
+              "uid": "35240-29c9d624-e3a4-48e3-9db7-e92516a66e33"
+            },
+            {
+              "name": "create",
+              "id": "5ad4a8c0-3c3b-4983-8278-08441ea948da",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/integrations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "integrations"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1c95c13d-d751-420e-902a-f04ab0db2be9",
+                  "name": "Integration successfully created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"attributes\": {\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"isManaged\": \"<boolean>\",\n      \"serviceType\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string,null>\",\n          \"chatWidgetLabel\": {},\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"webhookTextUrl\": \"<string,null>\",\n          \"slackRequestUrl\": {}\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string,null>\",\n          \"chatWidgetLabel\": {},\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"webhookTextUrl\": \"<string,null>\",\n          \"slackRequestUrl\": {}\n        }\n      ],\n      \"webhookAuthorizationUsername\": \"<string,null>\",\n      \"webhookAuthorizationPassword\": \"<string,null>\",\n      \"webhookAuthorizationHeader\": \"<string>\",\n      \"webhookCorsOrigins\": {},\n      \"slackSigningSecret\": {},\n      \"slackMessageMode\": \"<string>\",\n      \"chatIgnoreManagedActions\": \"<boolean>\",\n      \"chatWelcomeMessage\": {}\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-1c95c13d-d751-420e-902a-f04ab0db2be9"
+                },
+                {
+                  "id": "de0c148f-49b7-4c79-ac22-18c81734e3ac",
+                  "name": "rejects POST /api/integrations",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-de0c148f-49b7-4c79-ac22-18c81734e3ac"
+                },
+                {
+                  "id": "7c5e6c1a-28b4-4ab6-ae96-80e56b3a55ac",
+                  "name": "Rejected by 401",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-7c5e6c1a-28b4-4ab6-ae96-80e56b3a55ac"
+                },
+                {
+                  "id": "71a2c42d-d35f-43b1-bbcd-341dad2c696d",
+                  "name": "Validation error - invalid action configuration provided",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"serviceType\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"actions\": [\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"promptId\": \"<string>\",\n          \"chatWidgetType\": \"<string>\",\n          \"uiTags\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/integrations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "integrations"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/vnd.api+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"code\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"validationCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:35:29.000Z",
+                  "updatedAt": "2026-10-22T02:35:29.000Z",
+                  "uid": "35240-71a2c42d-d35f-43b1-bbcd-341dad2c696d"
+                }
+              ],
+              "createdAt": "2026-10-22T02:35:29.000Z",
+              "updatedAt": "2026-10-22T02:35:29.000Z",
+              "uid": "35240-5ad4a8c0-3c3b-4983-8278-08441ea948da"
+            }
+          ],
+          "id": "9354e59b-6936-468f-a980-a6f91ffa1254",
+          "createdAt": "2026-10-22T02:35:29.000Z",
+          "updatedAt": "2026-10-22T02:35:29.000Z",
+          "uid": "35240-9354e59b-6936-468f-a980-a6f91ffa1254"
+        }
+      ],
+      "id": "9b8512f8-1e98-475e-9085-01ad44ea7b3e",
+      "createdAt": "2026-10-22T02:35:29.000Z",
+      "updatedAt": "2026-10-22T02:35:29.000Z",
+      "uid": "35240-9b8512f8-1e98-475e-9085-01ad44ea7b3e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://llm-api.treasuredata.com"
+    }
+  ]
+}

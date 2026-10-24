@@ -1,0 +1,373 @@
+{
+  "info": {
+    "_postman_id": "551eb87e-6385-4ad4-8687-b2d704cf7f2a",
+    "name": "Treasure Workflow API",
+    "description": "Treasure Workflow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:32:50.000Z",
+    "updatedAt": "2026-10-22T02:32:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-551eb87e-6385-4ad4-8687-b2d704cf7f2a"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "workflows",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "truncated_session_time",
+                  "item": [
+                    {
+                      "name": "Get truncated local time based on the time zone of a workflow",
+                      "id": "e5d0c86f-e57d-47d0-bf4c-63bba53d32ec",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/workflows/:id/truncated_session_time?session_time=<string>&mode=hour",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "workflows",
+                            ":id",
+                            "truncated_session_time"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) session time to be truncated",
+                              "key": "session_time",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "truncation mode - second, minute, hour, day, schedule, or next_schedule",
+                              "key": "mode",
+                              "value": "hour"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c08ce91f-7b2c-4a96-b81b-90b2f72bc64a",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) workflow id"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "de296848-62a1-492e-9d7e-fd9fbdcebe5e",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/workflows/:id/truncated_session_time?session_time=<string>&mode=hour",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "workflows",
+                                ":id",
+                                "truncated_session_time"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) session time to be truncated",
+                                  "key": "session_time",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "truncation mode - second, minute, hour, day, schedule, or next_schedule",
+                                  "key": "mode",
+                                  "value": "hour"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"revision\": \"<string>\",\n  \"sessionTime\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:32:50.000Z",
+                          "updatedAt": "2026-10-22T02:32:50.000Z",
+                          "uid": "35240-de296848-62a1-492e-9d7e-fd9fbdcebe5e"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:32:50.000Z",
+                      "updatedAt": "2026-10-22T02:32:50.000Z",
+                      "uid": "35240-e5d0c86f-e57d-47d0-bf4c-63bba53d32ec"
+                    }
+                  ],
+                  "id": "812224f4-242e-400e-9beb-5da1dfd1ce26",
+                  "createdAt": "2026-10-22T02:32:50.000Z",
+                  "updatedAt": "2026-10-22T02:32:50.000Z",
+                  "uid": "35240-812224f4-242e-400e-9beb-5da1dfd1ce26"
+                },
+                {
+                  "name": "Get a workflow",
+                  "id": "9c2147ae-cd15-474d-9a31-b4e6a0dd17b5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/workflows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "workflows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "43c441c0-1b94-4602-92e1-0e28b2988a7f",
+                          "key": "id",
+                          "value": "<long>",
+                          "description": "(Required) workflow id"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5ad7ee6f-1e92-4a7f-9cad-7b4d5c7cbdd0",
+                      "name": "default response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/workflows/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "workflows",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"revision\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"config\": {}\n}",
+                      "createdAt": "2026-10-22T02:32:50.000Z",
+                      "updatedAt": "2026-10-22T02:32:50.000Z",
+                      "uid": "35240-5ad7ee6f-1e92-4a7f-9cad-7b4d5c7cbdd0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:32:50.000Z",
+                  "updatedAt": "2026-10-22T02:32:50.000Z",
+                  "uid": "35240-9c2147ae-cd15-474d-9a31-b4e6a0dd17b5"
+                }
+              ],
+              "id": "a82f3353-ff4c-4b13-a3f8-a7c2882064b9",
+              "createdAt": "2026-10-22T02:32:50.000Z",
+              "updatedAt": "2026-10-22T02:32:50.000Z",
+              "uid": "35240-a82f3353-ff4c-4b13-a3f8-a7c2882064b9"
+            },
+            {
+              "name": "List workflows",
+              "id": "f8bebf14-007d-4cc9-b46f-e57d60377fe4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/workflows?last_id=<long>&count=<integer>&order=asc&name_pattern=<string>&search_project_name=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "workflows"
+                  ],
+                  "query": [
+                    {
+                      "description": "pagination. return workflows which id are greater than last_id with order 'asc', which id are less than the last_id with order 'desc'",
+                      "key": "last_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "number of workflows to return",
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Sort order. 'asc' or 'desc'",
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "description": "name pattern to be partially matched",
+                      "key": "name_pattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "name pattern to be partially matched",
+                      "key": "search_project_name",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "03500c40-04b3-4324-b0db-64de91a321b5",
+                  "name": "default response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/workflows?last_id=<long>&count=<integer>&order=asc&name_pattern=<string>&search_project_name=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "workflows"
+                      ],
+                      "query": [
+                        {
+                          "description": "pagination. return workflows which id are greater than last_id with order 'asc', which id are less than the last_id with order 'desc'",
+                          "key": "last_id",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "number of workflows to return",
+                          "key": "count",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. 'asc' or 'desc'",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "name pattern to be partially matched",
+                          "key": "name_pattern",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "name pattern to be partially matched",
+                          "key": "search_project_name",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"workflows\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"revision\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"config\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"project\": {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"revision\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"config\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:32:50.000Z",
+                  "updatedAt": "2026-10-22T02:32:50.000Z",
+                  "uid": "35240-03500c40-04b3-4324-b0db-64de91a321b5"
+                }
+              ],
+              "createdAt": "2026-10-22T02:32:50.000Z",
+              "updatedAt": "2026-10-22T02:32:50.000Z",
+              "uid": "35240-f8bebf14-007d-4cc9-b46f-e57d60377fe4"
+            }
+          ],
+          "id": "9fc56ce6-5c9a-4ef8-82fa-e7bd1f48ee7c",
+          "createdAt": "2026-10-22T02:32:50.000Z",
+          "updatedAt": "2026-10-22T02:32:50.000Z",
+          "uid": "35240-9fc56ce6-5c9a-4ef8-82fa-e7bd1f48ee7c"
+        }
+      ],
+      "id": "a1c40721-e5d8-4919-966b-dec36eb53892",
+      "createdAt": "2026-10-22T02:32:50.000Z",
+      "updatedAt": "2026-10-22T02:32:50.000Z",
+      "uid": "35240-a1c40721-e5d8-4919-966b-dec36eb53892"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-workflow.treasuredata.com"
+    }
+  ]
+}
